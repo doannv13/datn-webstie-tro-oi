@@ -17,6 +17,8 @@
 
     <!-- icons -->
     <link href="{{asset('be/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet" type="text/css" />
+
 
 </head>
 
@@ -25,7 +27,6 @@
 
 <!-- Begin page -->
 <div id="wrapper">
-
 
     <!-- Topbar Start -->
         @include('admin.layouts.partials.topbar')
