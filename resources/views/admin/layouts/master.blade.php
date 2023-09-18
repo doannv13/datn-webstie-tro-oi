@@ -28,6 +28,8 @@
 <!-- Begin page -->
 <div id="wrapper">
 
+
+    {{ test() }}
     <!-- Topbar Start -->
         @include('admin.layouts.partials.topbar')
     <!-- end Topbar -->
