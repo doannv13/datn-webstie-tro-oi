@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryPostController extends Controller
 {
@@ -42,18 +43,12 @@ class CategoryPostController extends Controller
 
             $model->fill($request->all());
             $model->save();
-            $notification = array(
-                "message" => "Thêm danh mục bài viết thành công",
-                "alert-type" => "success",
-            );
-            return to_route('categorypost.index')->with($notification);
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('categorypost.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Thêm danh mục bài viết thất bại",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -87,18 +82,12 @@ class CategoryPostController extends Controller
 
             $model->fill($request->all());
             $model->save();
-            $notification = array(
-                "message" => "Cập nhật danh mục bài viết thành công",
-                "alert-type" => "success",
-            );
-            return to_route('categorypost.index')->with($notification);
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('categorypost.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Cập nhật danh mục bài viết thất bại",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -122,10 +111,13 @@ class CategoryPostController extends Controller
     {
         try {
             $categorypost->delete();
-            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công']);
+            Toastr::success('Thao tác thành công', 'Thành công');
+
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+            Toastr::error('Thao tác đã được hủy', 'Hủy');
+            return back();
         }
     }
 
@@ -142,10 +134,12 @@ class CategoryPostController extends Controller
         try {
             $categorypost = CategoryPost::where('id', $id);
             $categorypost->forceDelete();
-            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Category deleted successfully']);
+            toastr()->success('Thao tác thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+            toastr()->error('Thao tác không thành công');
+            return back();
         }
     }
 
@@ -155,10 +149,12 @@ class CategoryPostController extends Controller
         $model->restore();
         $categorypost_deleted = CategoryPost::onlyTrashed()->get();
         if (count($categorypost_deleted) == 0) {
+            Toastr::error('Thao tác không thành công', 'Không thành công');
 
-            return redirect()->route('categorypost.index')->with('success', 'Thao tác thành công');
+            return redirect()->route('categorypost.deleted');
         } else {
-            return redirect()->route('categorypost.deleted')->with('success', 'Thao tác thành công');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return redirect()->route('categorypost.deleted');
         }
     }
 
