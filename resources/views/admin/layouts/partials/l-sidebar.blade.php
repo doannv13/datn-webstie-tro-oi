@@ -137,16 +137,16 @@
                 <li>
                     <a href="#contacts" data-bs-toggle="collapse">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span> Contacts </span>
+                        <span> Mã giảm giá </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="contacts">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="contacts-list.html">Members List</a>
+                                <a href="{{ route('coupon.create') }}">Thêm mã giảm giá</a>
                             </li>
                             <li>
-                                <a href="contacts-profile.html">Profile</a>
+                                <a href="{{ route('coupon.deleted') }}">Thùng rác</a>
                             </li>
                         </ul>
                     </div>
