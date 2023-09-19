@@ -84,7 +84,7 @@
                                 <a href="{{route('services.create')}}">Thêm Dịch Vụ</a>
                             </li>
                             <li>
-                                <a href="{{route('deleted-services')}}">Thùng Rác</a>
+                                <a href="{{route('services.deleted')}}">Thùng Rác</a>
                             </li>
                         </ul>
                     </div>

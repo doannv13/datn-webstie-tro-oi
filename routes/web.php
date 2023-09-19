@@ -30,10 +30,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
-Route::get('deleted-services', [ServicesController::class, 'deleted'])->name('deleted-services');
-Route::delete('permanently-services/{id}', [ServicesController::class, 'permanentlyDelete'])->name('permanently-delete-services');
-Route::get('restore-services/{id}', [ServicesController::class, 'restore'])->name('restore-services');
-
+Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
+Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
+Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
 // mã giảm giá
 Route::resource('coupon', CouponController::class);
 // Route::prefix('coupon')->name('coupon.')->group(function () {

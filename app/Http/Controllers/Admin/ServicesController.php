@@ -81,7 +81,6 @@ class ServicesController extends Controller
     public function update(ServicesRequest $request, string $id)
     {
         //
-
         try {
             $model = Services::query()->findOrFail($id);
             $model->fill($request->all());
@@ -130,7 +129,13 @@ class ServicesController extends Controller
             $model = Services::where('id', $id);
             $model->forceDelete();
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công']);
-            return redirect()->route('deleted-services')->with('success', 'Thao tác thành công');
+            // return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
+            $services_deleted = Services::onlyTrashed()->get();
+            if (count($services_deleted) == 0) {
+                return redirect()->route('services.index')->with('success', 'Thao tác thành công');
+            } else {
+                return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
+            }
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -145,7 +150,7 @@ class ServicesController extends Controller
         if (count($services_deleted) == 0) {
             return redirect()->route('services.index')->with('success', 'Thao tác thành công');
         } else {
-            return redirect()->route('deleted-services')->with('success', 'Thao tác thành công');
+            return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
         }
     }
 }

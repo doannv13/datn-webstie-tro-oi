@@ -9,8 +9,7 @@
                     <div class="responsive-table-plugin">
                         <div class="table-rep-plugin">
                             <div class="table-responsive" data-pattern="priority-columns">
-                                <button class="btn"><a class="btn btn-info" href="{{ route('services.create') }}">Thêm</a></button>
-                                <button class="btn mx-1"><a class="btn btn-info" href="{{ route('deleted-services') }}">Thùng rác</a></button>
+                               
                                 @if ($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     <p>{{ $message }}</p>
@@ -22,7 +21,7 @@
                                             <th>STT</th>
                                             <th>Tên Gói</th>
                                             <th>Giá</th>
-                                            <th>Ngày</th>
+                                            <th>Số Ngày</th>
                                             <th>Mô Tả</th>
                                             <th></th>
                                         </tr>

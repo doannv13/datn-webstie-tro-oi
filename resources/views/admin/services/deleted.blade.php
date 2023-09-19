@@ -9,7 +9,7 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
-                                <button class="btn"><a class="btn btn-info" href="{{ route('services.index') }}">Danh sách</a></button>
+                               
                                 @if ($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     <p>{{ $message }}</p>
@@ -21,9 +21,9 @@
                                             <th>STT</th>
                                             <th>Tên Gói</th>
                                             <th>Giá</th>
-                                            <th>Ngày</th>
+                                            <th>Số Ngày</th>
                                             <th>Mô Tả</th>
-                                            <th> Hành Động</th>
+                                            <th></th>
                                                 
                                             </tr>
                                         </thead>
@@ -37,11 +37,11 @@
                                                     
                                                     <td>{{ $value->description }}</td>
                                                   
-                                                    <td class="d-flex"><a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('restore-services', $value->id) }}"
+                                                    <td class="d-flex"><a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services.restore', $value->id) }}"
                                                             class="btn btn-primary"><i
                                                                 class="fa-solid fa-trash-arrow-up"></i></a>
                                                            
-                                                        <form action="{{ route('permanently-delete-services', $value->id) }}"
+                                                        <form action="{{ route('services.permanently.delete', $value->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
