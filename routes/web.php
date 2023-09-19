@@ -32,14 +32,6 @@ Route::get('dashboard', function () {
 // Setting
 Route::resource('setting', SettingController::class);
 
-//Coupon
-Route::resource('coupon', CouponController::class);
-// Route::prefix('coupon')->name('coupon.')->group(function () {
-    Route::get('deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
-    Route::delete('permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
-    Route::get('restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
-// });
-
 //Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
 Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
@@ -49,14 +41,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
-Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
-Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
-Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
+Route::get('services/deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
+Route::delete('services/permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
+Route::get('services/restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
 
 // mã giảm giá
 Route::resource('coupon', CouponController::class);
 // Route::prefix('coupon')->name('coupon.')->group(function () {
-    Route::get('coupon-deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
-    Route::delete('coupon-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
-    Route::get('coupon-restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
+    Route::get('coupon/deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
+    Route::delete('coupon/permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
+    Route::get('coupon/restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
 // });
