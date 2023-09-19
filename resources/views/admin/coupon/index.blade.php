@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+    Mã giảm giá
+@endsection
 @section('content')
     <!-- Start Content-->
     <div class="container-fluid">
@@ -9,48 +12,59 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
+                                    @if (session('msg'))
+                                        @if (session('msg')['success'])
+                                            <div class="alert alert-success">{{ session('msg')['message'] }}</div>
+                                        @else
+                                            <div class="alert alert-danger">{{ session('msg')['message'] }}</div>
+                                        @endif
+                                    @endif
                                     <table id="tech-companies-1" class="table table-striped" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th data-priority="1">Name</th>
-                                                <th data-priority="3">Type</th>
-                                                <th data-priority="1">Value</th>
-                                                <th data-priority="3">Quantity</th>
-                                                <th data-priority="3">Description</th>
-                                                <th data-priority="6">Start Date</th>
-                                                <th data-priority="6">End Date</th>
-                                                <th data-priority="6"> <a class="btn btn-info"
-                                                        href="{{ route('coupon.create') }}">Thêm</a>
-                                                    <a href="{{ route('coupon.deleted') }}">Danh sách</a>
-                                                </th>
+                                                <th style="width:5%">STT</th>
+                                                <th data-priority="1">Tên</th>
+                                                <th data-priority="3">Kiểu</th>
+                                                <th data-priority="1">Giá trị</th>
+                                                <th data-priority="3">Số lượng</th>
+                                                <th data-priority="3">Mô tả</th>
+                                                <th data-priority="3">Trạng thái</th>
+                                                <th data-priority="6">Bắt đầu</th>
+                                                <th data-priority="6">Kết thúc</th>
+                                                <th data-priority="6">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @foreach ($data as $key => $value)
-                                                <tr>
-                                                    <th>{{ $key + 1 }}</th>
-                                                    <th>{{ $value->name }}</th>
-                                                    <th>{{ $value->type }}</th>
-                                                    <th>{{ $value->value }}</th>
-                                                    <th>{{ $value->quantity }}</th>
-                                                    <th>{{ $value->description }}</th>
-                                                    <th>{{ $value->start_date }}</th>
-                                                    <th>{{ $value->end_date }}</th>
-                                                    <th class="d-flex"><a href="{{ route('coupon.edit', $value->id) }}"
-                                                            class="btn btn-primary me-2"><i
-                                                                class="fa-solid fa-pen-to-square"></i></a>
-                                                        <form action="{{ route('coupon.destroy', $value->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger" onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                                <i class="fa-solid fa-trash fs-4 text-light"></i>
-                                                            </button>
-                                                        </form>
-                                                    </th>
-                                                </tr>
-                                            @endforeach
+
+                                        @foreach ($data as $key => $value)
+                                            <tr>
+                                                <th>{{ $key + 1 }}</th>
+                                                <th>{{ $value->name }}</th>
+                                                <th>{{ $value->type }}</th>
+                                                <th>{{ $value->value }}</th>
+                                                <th>{{ $value->quantity }}</th>
+                                                <th>{{ substr($value->description, 0, 20) }}</th>
+                                                <th>{!! $value->status == 'inactive'
+                                                    ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
+                                                    : '<button class="btn btn-primary">Kích hoạt</button>' !!}
+                                                </th>
+                                                <th>{{ $value->start_date }}</th>
+                                                <th>{{ $value->end_date }}</th>
+                                                <th class="d-flex"><a href="{{ route('coupon.edit', $value->id) }}"
+                                                        class="btn btn-primary me-1"><i
+                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                    <form action="{{ route('coupon.destroy', $value->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger"
+                                                            onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                            <i class="fa-solid fa-trash fs-4 text-light"></i>
+                                                        </button>
+                                                    </form>
+                                                </th>
+                                            </tr>
+                                        @endforeach
+
                                         </tbody>
                                     </table>
                                 </div> <!-- end .table-responsive -->
@@ -68,10 +82,11 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
     <script>
         new DataTable('#tech-companies-1');
-        @if (Session::has('message'))
+    </script>
+    <script>
+        if (Session::has('message')) {
             let type = "{{ Session::get('alert-type', 'info') }}"
             switch (type) {
                 case 'info':
@@ -90,6 +105,6 @@
                     toastr.error(" {{ Session::get('message') }} ");
                     break;
             }
-        @endif
+        }
     </script>
 @endpush

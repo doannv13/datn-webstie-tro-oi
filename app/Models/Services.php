@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Coupon extends Model
+class Services extends Model
 {
-    use HasFactory, SoftDeletes;
-    // protected $dateFormat = 'U';
+    use HasFactory,SoftDeletes;
     protected $fillable = [
         'name',
-        'type',
-        'value',
-        'quantity',
+        'price',
+        'date_number',
         'description',
-        'status',
-        'start_date',
-        'end_date'
     ];
     public $timestamps = true;
 }

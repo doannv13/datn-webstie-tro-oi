@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('type');
-            $table->string('value');
+            $table->enum('type', ['percent', 'price'])->default('percent');
+            $table->integer('value');
             $table->integer('quantity');
             $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->timestamps();
             $table->softDeletes();
         });
