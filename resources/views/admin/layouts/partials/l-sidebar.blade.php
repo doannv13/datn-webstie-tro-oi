@@ -7,7 +7,7 @@
 
             <img src="{{asset('be/assets/images/users/user-1.jpg')}}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
             <div class="dropdown">
-                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">Nowak Helme</a>
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
@@ -67,7 +67,29 @@
                         <span class="badge bg-success rounded-pill float-end">9+</span>
                         <span> Dashboard </span>
                     </a>
+
                 </li>
+                <li>
+                    <a href="#sidebarTasks" data-bs-toggle="collapse">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span> Dịch Vụ </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('services.index')}}">Danh Sách</a>
+                            </li>
+                            <li>
+                                <a href="{{route('services.create')}}">Thêm Dịch Vụ</a>
+                            </li>
+                            <li>
+                                <a href="{{route('deleted-services')}}">Thùng Rác</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
 
                 <li class="menu-title mt-2">Apps</li>
 
@@ -103,23 +125,7 @@
                     </div>
                 </li>
 
-                <li>
-                    <a href="#sidebarTasks" data-bs-toggle="collapse">
-                        <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Tasks </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarTasks">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="task-kanban-board.html">Kanban Board</a>
-                            </li>
-                            <li>
-                                <a href="task-details.html">Details</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                
 
                 <li>
                     <a href="apps-projects.html">
