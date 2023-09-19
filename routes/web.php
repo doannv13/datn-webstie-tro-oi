@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CouponController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,11 @@ Route::get('dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::resource('coupon', CouponController::class);
+// Route::prefix('coupon')->name('coupon.')->group(function () {
+    Route::get('deleted', [CouponController::class, 'deleted'])->name('deleted');
+    Route::delete('permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('permanently-delete');
+    Route::get('restore/{id}', [CouponController::class, 'restore'])->name('restore');
+// });
