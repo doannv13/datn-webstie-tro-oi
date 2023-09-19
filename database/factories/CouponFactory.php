@@ -18,7 +18,7 @@ class CouponFactory extends Factory
     protected $model = Coupon::class;
     public function definition(): array
     {
-        
+
         return [
             'name' => $this->faker->name(),
             'type' => $this->faker->randomElement(['Percentage', 'Fixed']),

@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coupons', function (Blueprint $table) {
+        Schema::create('category_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->enum('type', ['percent', 'price'])->default('percent');
-            $table->integer('value');
-            $table->integer('quantity');
-            $table->text('description');
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
-            $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->enum('status',['active','inactive'])->default('inactive');
+            $table->string('slug');
+            $table->text('description')->nullable();;
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coupons');
+        Schema::dropIfExists('category_posts');
     }
 };

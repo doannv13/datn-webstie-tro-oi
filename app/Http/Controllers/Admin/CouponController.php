@@ -37,17 +37,17 @@ class CouponController extends Controller
             $model->fill($request->all());
             $model->save();
             $notification = array(
-                "message" => "Add coupon successfully",
-                "alert-type" => "success",
+                "message" => "Thêm mã giảm giá thành công",
+                "msg" => "success",
             );
-            return to_route('coupon.index')->with($notification);
+            return to_route('coupon.index')->with('msg', ['success' => true, 'message' => 'Thêm mã giảm giá thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             $notification = array(
                 "message" => "Add coupon unsuccessfully",
                 "alert-type" => "error",
             );
-            return back()->with($notification);
+            return back()->with('msg', ['success' => true, 'message' => 'Thêm mã giảm giá thất bại']);
         }
     }
 
@@ -78,17 +78,17 @@ class CouponController extends Controller
             $model->fill($request->all());
             $model->save();
             $notification = array(
-                "message" => "Add coupon successfully",
-                "alert-type" => "success",
+                "message" => "Sửa mã giảm giá thành công",
+                "msg" => "success",
             );
-            return to_route('coupon.index')->with($notification);
+            return to_route('coupon.index')->with('msg', ['success' => true, 'message' => 'Sửa mã giảm giá thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             $notification = array(
                 "message" => "Add coupon unsuccessfully",
                 "alert-type" => "error",
             );
-            return back()->with($notification);
+            return back()->with('msg', ['success' => true, 'message' => 'Sửa mã giảm giá thất bại']);
         }
     }
 
@@ -99,7 +99,7 @@ class CouponController extends Controller
     {
         try {
             $coupon->delete();
-            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Category deleted successfully']);
+            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Mã giảm giá được thêm vào thùng rác thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -117,7 +117,7 @@ class CouponController extends Controller
         try {
             $coupon = Coupon::where('id', $id);
             $coupon->forceDelete();
-            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Category deleted successfully']);
+            return redirect()->back()->with('msg', ['success' => false, 'message' => 'Xoá mã giảm giá thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -126,8 +126,13 @@ class CouponController extends Controller
 
     public function restore(String $id)
     {
-        $restore = Coupon::query()->onlyTrashed()->findOrFail($id);
-        $restore->restore();
-        return redirect()->back();
+        try {
+            $restore = Coupon::query()->onlyTrashed()->findOrFail($id);
+            $restore->restore();
+            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Khôi phục mã giảm giá thành công']);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+        }
     }
 }
