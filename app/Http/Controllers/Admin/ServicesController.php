@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Services;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ServicesRequest;
 
 class ServicesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -30,15 +33,10 @@ class ServicesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ServicesRequest $request)
     {
         //
-        $request->validate([
-            'name' => ['required','unique:services','min:6'],
-            'price' => ['required','numeric','gte:1000'],
-            'date_number' => ['required','numeric','gte:1'],
-            'description' => ['required','min:5','max:999'],
-        ]);
+
         try {
             $model = new Services();
             $model->fill($request->all());
@@ -48,7 +46,7 @@ class ServicesController extends Controller
                 "alert-type" => "success",
             );
             // return redirect()->route('services.index')->with($notification);
-            return redirect()->route('services.index')->with('success','Thêm dịch vụ thành công');
+            return redirect()->route('services.index')->with('success', 'Thêm dịch vụ thành công');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             $notification = array(
@@ -80,15 +78,10 @@ class ServicesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ServicesRequest $request, string $id)
     {
         //
-        $request->validate([
-            'name' => ['required','unique:services,name,' . $id],
-            'price' => ['required','numeric','gte:1000'],
-            'date_number' => ['required','numeric','gte:1'],
-            'description' => ['required','min:5','max:999'],
-        ]);
+
         try {
             $model = Services::query()->findOrFail($id);
             $model->fill($request->all());
@@ -98,7 +91,7 @@ class ServicesController extends Controller
                 "alert-type" => "success",
             );
             // return redirect()->route('services.index')->with($notification);
-            return redirect()->route('services.index')->with('success','Sửa dịch vụ thành công');
+            return redirect()->route('services.index')->with('success', 'Sửa dịch vụ thành công');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             $notification = array(
@@ -119,7 +112,7 @@ class ServicesController extends Controller
             $model = Services::query()->findOrFail($id);
             $model->delete();
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác  thành công']);
-            return redirect()->route('services.index')->with('success','Thao tác thành công');
+            return redirect()->route('services.index')->with('success', 'Thao tác thành công');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -137,7 +130,7 @@ class ServicesController extends Controller
             $model = Services::where('id', $id);
             $model->forceDelete();
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công']);
-            return redirect()->route('deleted-services')->with('success','Thao tác thành công');
+            return redirect()->route('deleted-services')->with('success', 'Thao tác thành công');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -149,10 +142,10 @@ class ServicesController extends Controller
         $model = Services::query()->onlyTrashed()->findOrFail($id);
         $model->restore();
         $services_deleted = Services::onlyTrashed()->get();
-        if(count($services_deleted)==0){
-            return redirect()->route('services.index')->with('success','Thao tác thành công');
-        }else{
-        return redirect()->route('deleted-services')->with('success','Thao tác thành công');
+        if (count($services_deleted) == 0) {
+            return redirect()->route('services.index')->with('success', 'Thao tác thành công');
+        } else {
+            return redirect()->route('deleted-services')->with('success', 'Thao tác thành công');
         }
     }
 }

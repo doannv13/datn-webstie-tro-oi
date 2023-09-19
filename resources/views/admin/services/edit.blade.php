@@ -18,6 +18,7 @@
                                 <form action="{{ route('services.update',$services_one->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
+                                    <input type="text" value="{{$services_one->id}}" name="id" hidden>
                                     <div class="mb-3">
                                         <label for="simpleinput" class="form-label">Tên Gói</label>
                                         <input type="text" name="name" value="{{$services_one->name}}" id="simpleinput"

@@ -107,15 +107,6 @@
     <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- App js-->
-    <script src="{{ asset('be/assets/js/app.min.js') }}"></script>
-
-
-    <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-    @stack('scripts')
-
-
-    <!-- App js-->
     <script src="{{asset('be/assets/js/app.min.js')}}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>

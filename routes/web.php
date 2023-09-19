@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\ServicesController;
-use App\Models\Services;
-
+use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +29,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // dịch vụ
-Route::resource('services',\App\Http\Controllers\ServicesController::class);
+Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
 Route::get('deleted-services', [ServicesController::class, 'deleted'])->name('deleted-services');
 Route::delete('permanently-services/{id}', [ServicesController::class, 'permanentlyDelete'])->name('permanently-delete-services');
 Route::get('restore-services/{id}', [ServicesController::class, 'restore'])->name('restore-services');
