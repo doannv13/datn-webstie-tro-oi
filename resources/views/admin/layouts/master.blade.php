@@ -12,9 +12,9 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
 
+
     <!-- Plugins css -->
     <link href="{{ asset('be/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
-
 
     <!-- App css -->
 
@@ -39,6 +39,7 @@
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     {{-- <link rel="stylesheet" href="{{ asset('be/assets/libs/toastr/build/toastr.min.css') }}"> --}}
     {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> --}}
+
 
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />

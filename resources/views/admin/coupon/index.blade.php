@@ -64,6 +64,7 @@
                                                 </th>
                                             </tr>
                                         @endforeach
+
                                         </tbody>
                                     </table>
                                 </div> <!-- end .table-responsive -->
