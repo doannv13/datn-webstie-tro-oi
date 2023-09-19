@@ -17,10 +17,21 @@
     <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- icons -->
+
+    <link href="{{asset('be/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Data table -->
+    <link href="{{asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+
+
     <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     {{-- <link rel="stylesheet" href="{{ asset('be/assets/libs/toastr/build/toastr.min.css') }}"> --}}
     {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> --}}
+
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
@@ -29,17 +40,19 @@
         rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
+
 </head>
 
 <!-- body start -->
+
 
 <body class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid"
     data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default'
     data-sidebar-user='true'>
 
+
     <!-- Begin page -->
     <div id="wrapper">
-
         <!-- Topbar Start -->
         @include('admin.layouts.partials.topbar')
         <!-- end Topbar -->
@@ -83,6 +96,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- Vendor -->
+
     <script src="{{ asset('be/assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/simplebar/simplebar.min.js') }}"></script>
@@ -102,13 +116,11 @@
     <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- App js-->
-    <script src="{{ asset('be/assets/js/app.min.js') }}"></script>
-
-
+    <script src="{{asset('be/assets/js/app.min.js')}}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
     @stack('scripts')
-
 </body>
+
 
 </html>
