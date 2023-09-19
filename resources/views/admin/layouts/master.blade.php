@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="utf-8" />
@@ -9,90 +10,97 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('be/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
 
     <!-- App css -->
 
-    <link href="{{asset('be/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- icons -->
-    <link href="{{asset('be/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet" type="text/css" />
-
-
+    <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
+    {{-- <link rel="stylesheet" href="{{ asset('be/assets/libs/toastr/build/toastr.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> --}}
 </head>
 
 <!-- body start -->
-<body class="loading" data-layout-color="light"  data-layout-mode="default" data-layout-size="fluid" data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default' data-sidebar-user='true'>
 
-<!-- Begin page -->
-<div id="wrapper">
+<body class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid"
+    data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default'
+    data-sidebar-user='true'>
 
+    <!-- Begin page -->
+    <div id="wrapper">
 
-    {{ test() }}
-    <!-- Topbar Start -->
+        <!-- Topbar Start -->
         @include('admin.layouts.partials.topbar')
-    <!-- end Topbar -->
+        <!-- end Topbar -->
 
-    <!-- ========== Left Sidebar Start ========== -->
+        <!-- ========== Left Sidebar Start ========== -->
         @include('admin.layouts.partials.l-sidebar')
-    <!-- Left Sidebar End -->
+        <!-- Left Sidebar End -->
 
-    <!-- ============================================================== -->
-    <!-- Start Page Content here -->
-    <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
 
-    <div class="content-page">
-        <div class="content">
+        <div class="content-page">
+            <div class="content">
 
-            <!-- Start Content-->
+                <!-- Start Content-->
                 @yield('content')
-            <!-- content -->
-        </div>
+                <!-- content -->
+            </div>
 
-        <!-- Footer Start -->
+            <!-- Footer Start -->
             @include('admin.layouts.partials.footer')
-        <!-- end Footer -->
+            <!-- end Footer -->
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+
+
+        <!-- ============================================================== -->
+
 
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page content -->
+    <!-- END wrapper -->
 
-
-    <!-- ============================================================== -->
-
-
-</div>
-<!-- END wrapper -->
-
-<!-- Right Sidebar -->
+    <!-- Right Sidebar -->
     @include('admin.layouts.partials.r-sidebar')
-<!-- /Right-bar -->
+    <!-- /Right-bar -->
 
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-<!-- Vendor -->
-<script src="{{asset('be/assets/libs/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/simplebar/simplebar.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/node-waves/waves.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/feather-icons/feather.min.js')}}"></script>
+    <!-- Vendor -->
+    <script src="{{ asset('be/assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/feather-icons/feather.min.js') }}"></script>
 
-<!-- knob plugin -->
-<script src="{{asset('be/assets/libs/jquery-knob/jquery.knob.min.js')}}"></script>
+    <!-- knob plugin -->
+    <script src="{{ asset('be/assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 
-<!--Morris Chart-->
-<script src="{{asset('be/assets/libs/morris.js06/morris.min.js')}}"></script>
-<script src="{{asset('be/assets/libs/raphael/raphael.min.js')}}"></script>
+    <!--Morris Chart-->
+    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
 
-<!-- Dashboar init js-->
-<script src="{{asset('be/assets/js/pages/dashboard.init.js')}}"></script>
+    <!-- Dashboar init js-->
+    <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
 
-<!-- App js-->
-<script src="{{asset('be/assets/js/app.min.js')}}"></script>
+    <!-- App js-->
+    <script src="{{ asset('be/assets/js/app.min.js') }}"></script>
+
+
+    <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    @stack('scripts')
 
 </body>
+
 </html>
