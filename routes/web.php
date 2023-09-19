@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,10 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
-Auth::routes();
+// Auth::routes();
+Route::resource('setting', SettingController::class);
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // dịch vụ
