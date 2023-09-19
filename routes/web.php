@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +28,7 @@ Route::get('dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 // dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
 Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
@@ -40,4 +41,32 @@ Route::resource('coupon', CouponController::class);
     Route::delete('permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('permanently-delete');
     Route::get('restore/{id}', [CouponController::class, 'restore'])->name('restore');
 // });
+//quản lí người dùng
+Route::resource('users',UserController::class);
+Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
+Route::delete('user_permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('user_permanently_delete');
+Route::get('user_restore/{id}', [UserController::class, 'restore'])->name('user_restore');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//phân quyền start
+Route::group(['middleware' => 'checkRole:vendor'], function () {
+    // route dành cho vendor ở đây
+});
+Route::group(['middleware' => 'checkRole:admin'], function () {
+    // route dành cho admin ở đây
+});
+
+//phân quyền end
