@@ -9,46 +9,46 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
                                     <table id="tech-companies-1" class="table table-striped" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th data-priority="1">Name</th>
-                                                <th data-priority="3">Type</th>
-                                                <th data-priority="1">Value</th>
-                                                <th data-priority="3">Quantity</th>
-                                                <th data-priority="3">Description</th>
-                                                <th data-priority="6">Start Date</th>
-                                                <th data-priority="6">End Date</th>
-                                                <th data-priority="6"> <a class="btn btn-info"
-                                                        href="{{ route('coupon.create') }}">Thêm</a>
-                                                    <a href="{{ route('coupon.deleted') }}">Danh sách</a>
+                                                <th>Tên</th>
+                                                <th>Slug</th>
+                                                <th>Mô tả</th>
+                                                <th>Trạng thái</th>
+                                                <th>
+                                                    <a class="btn btn-info"
+                                                        href="{{ route('categorypost.create') }}">Thêm</a>
+                                                    <a href="{{ route('categorypost.deleted') }}">Danh sách</a>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($data as $key => $value)
                                                 <tr>
-                                                    <th>{{ $key + 1 }}</th>
-                                                    <th>{{ $value->name }}</th>
-                                                    <th>{{ $value->type }}</th>
-                                                    <th>{{ $value->value }}</th>
-                                                    <th>{{ $value->quantity }}</th>
-                                                    <th>{{ $value->description }}</th>
-                                                    <th>{{ $value->start_date }}</th>
-                                                    <th>{{ $value->end_date }}</th>
-                                                    <th class="d-flex"><a href="{{ route('coupon.edit', $value->id) }}"
-                                                            class="btn btn-primary me-2"><i
-                                                                class="fa-solid fa-pen-to-square"></i></a>
-                                                        <form action="{{ route('coupon.destroy', $value->id) }}"
-                                                            method="post">
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $value->name }}</td>
+                                                    <td>{{ $value->slug }}</td>
+                                                    <td>{{ $value->description }}</td>
+                                                    <td>{{ $value->status }}</td>
+                                                    <td class="flex  text-center">
+                                                        <a href="{{ route('categorypost.edit', $value->id) }}" class="btn btn-primary">
+                                                            <i class="fa-solid fa-pen-to-square"></i></a>
+                                                        <form action="{{ route('categorypost.destroy', $value->id) }}"
+                                                              method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-danger" onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
                                                                 <i class="fa-solid fa-trash fs-4 text-light"></i>
                                                             </button>
                                                         </form>
-                                                    </th>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

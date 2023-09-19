@@ -29,9 +29,18 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+
+//Coupon
 Route::resource('coupon', CouponController::class);
 // Route::prefix('coupon')->name('coupon.')->group(function () {
-    Route::get('deleted', [CouponController::class, 'deleted'])->name('deleted');
-    Route::delete('permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('permanently-delete');
-    Route::get('restore/{id}', [CouponController::class, 'restore'])->name('restore');
+    Route::get('deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
+    Route::delete('permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
+    Route::get('restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
 // });
+
+
+//Post
+Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
+Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
+Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
+Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');

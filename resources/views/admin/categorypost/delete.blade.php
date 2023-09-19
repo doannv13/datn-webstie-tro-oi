@@ -9,18 +9,20 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
                                     <table id="tech-companies-1" class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th data-priority="1">Name</th>
-                                                <th data-priority="3">Type</th>
-                                                <th data-priority="1">Value</th>
-                                                <th data-priority="3">Quantity</th>
-                                                <th data-priority="3">Description</th>
-                                                <th data-priority="6">Start Date</th>
-                                                <th data-priority="6">End Date</th>
-                                                <th><a class="btn btn-info" href="{{ route('coupon.index') }}">Danh sách</a>
+                                                <th>Tên</th>
+                                                <th>Slug</th>
+                                                <th>Mô tả</th>
+                                                <th>Trạng thái</th>
+                                                <th><a class="btn btn-info" href="{{ route('categorypost.index') }}">Danh sách</a>
                                                 </th>
 
                                             </tr>
@@ -30,16 +32,13 @@
                                                 <tr>
                                                     <th>{{ $key + 1 }}</th>
                                                     <th>{{ $value->name }}</th>
-                                                    <th>{{ $value->type }}</th>
-                                                    <th>{{ $value->value }}</th>
-                                                    <th>{{ $value->quantity }}</th>
+                                                    <th>{{ $value->slug }}</th>
                                                     <th>{{ $value->description }}</th>
-                                                    <th>{{ $value->start_date }}</th>
-                                                    <th>{{ $value->end_date }}</th>
-                                                    <th class="d-flex"><a href="{{ route('coupon.restore', $value->id) }}"
+                                                    <th>{{ $value->status }}</th>
+                                                    <th class="d-flex"><a href="{{ route('categorypost.restore', $value->id) }}"
                                                             class="btn btn-primary me-2"><i
                                                                 class="fa-solid fa-trash-arrow-up"></i></a>
-                                                        <form action="{{ route('coupon.permanently-delete', $value->id) }}"
+                                                        <form action="{{ route('categorypost.permanently-delete', $value->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
