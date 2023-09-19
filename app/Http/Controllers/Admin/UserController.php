@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -38,20 +39,16 @@ class UserController extends Controller
         try {
             $model = new User();
             $model->fill($request->all());
-            $notification = array(
-                "message" => "Thêm mới người dùng thành công",
-                "alert-type" => "success",
-            );
             if ($request->hasFile('avatar')) {
                 $model->avatar=upload_file(OBJECT_USER,$request->file('avatar'));
             }
             $model->save();
-            toastr()->success('Thêm tài khoản thành công!');
-            return to_route('users.index')->with('status', Response::HTTP_OK);
+            toastr()->success('Thêm tài khoản thành công!','Thành công');
+            return to_route('users.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Thêm tài khoản thất bại!');
-            return back()->with('status', Response::HTTP_BAD_REQUEST);
+            toastr()->error('Thêm tài khoản thất bại!','Thất bại');
+            return back();
         }
     }
     /**
@@ -90,12 +87,12 @@ class UserController extends Controller
             if($request->hasFile('new_avatar')){
                 delete_file($request->old_avatar);
             }
-            toastr()->success('Sửa thông tin tài khoản thành công!');
-            return to_route('users.index')->with('status', Response::HTTP_OK);
+            toastr()->success('Sửa thông tin tài khoản thành công!','Thành công');
+            return to_route('users.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Sửa thông tin tài khoản thất bại!');
-            return back()->with('status', Response::HTTP_BAD_REQUEST);
+            toastr()->error('Sửa thông tin tài khoản thất bại!','Thất Bại');
+            return back();
         }
     }
 
@@ -106,12 +103,12 @@ class UserController extends Controller
     {
         try {
             $user->delete();
-            toastr()->success('Chuyển tài khoản vào kho lưu trữ thành công!');
-            return redirect()->back()->with('status', Response::HTTP_OK);
+            toastr()->success('Chuyển tài khoản vào kho lưu trữ thành công!','Thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Xóa tài khoản thất bại!');
-            return back()->with('status', Response::HTTP_BAD_REQUEST);
+            toastr()->error('Xóa tài khoản thất bại!', 'Thất bại');
+            return back();
         }
     }
 
@@ -133,12 +130,12 @@ class UserController extends Controller
             if ($data->image) {
                 delete_file($data->image);
         }
-            toastr()->success('Xóa tài khoản thành công!');
-            return redirect()->back()->with('status', Response::HTTP_OK);
+            toastr()->success('Xóa tài khoản thành công!','Thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Xóa tài khoản thất bại!');
-            return back()->with('status', Response::HTTP_BAD_REQUEST);
+            toastr()->error('Xóa tài khoản thất bại!','Thất bại');
+            return back();
         }
     }
 
@@ -146,13 +143,13 @@ class UserController extends Controller
         try {
         $data = User::onlyTrashed()->find($id);
         $data->restore();
-        toastr()->success('Khôi phục tài khoản thành công!');
-        return redirect()->back()->with('status', Response::HTTP_OK);;
+        toastr()->success('Khôi phục tài khoản thành công!','Thành công');
+        return redirect()->back();
         }
         catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Cập nhật cài đặt thất bại!');
-            return back()->with('status', Response::HTTP_BAD_REQUEST);
+            toastr()->error('Cập nhật cài đặt thất bại!','Thất bại');
+            return back();
         }
     }
 }
