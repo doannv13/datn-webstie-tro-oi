@@ -31,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('coupon', CouponController::class);
 // Route::prefix('coupon')->name('coupon.')->group(function () {
-    Route::get('deleted', [CouponController::class, 'deleted'])->name('deleted');
-    Route::delete('permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('permanently-delete');
-    Route::get('restore/{id}', [CouponController::class, 'restore'])->name('restore');
+    Route::get('coupon-deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
+    Route::delete('coupon-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
+    Route::get('coupon-restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
 // });
