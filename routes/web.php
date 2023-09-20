@@ -1,12 +1,11 @@
 <?php
 
 
-use App\Http\Controllers\Admin\CategoryRoomController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 /*
