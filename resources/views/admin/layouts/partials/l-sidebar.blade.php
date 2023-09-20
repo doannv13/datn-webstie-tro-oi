@@ -76,26 +76,47 @@
 
                 </li>
                 <li class="menu-title mt-2">Danh mục </li>
-                <li>
-                    <a href="{{asset('./be/#email')}}" data-bs-toggle="collapse">
-                        <i class="fe-folder-minus"></i>
-                        <span>Danh mục phòng </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="email">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{route('categoryrooms.create')}}">Thêm mới</a>
-                            </li>
-                            <li>
-                                <a href="{{route('categoryrooms.index')}}">Danh sach </a>
-                            </li>
-                            <li>
-                                <a href="{{route('categoryrooms.deleted')}}">Thùng rác</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                    <li>
+                        <a href="{{asset('./be/#dmp')}}" data-bs-toggle="collapse">
+                            <i class="fe-folder-minus"></i>
+                            <span>Danh mục phòng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="dmp">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{route('categoryrooms.create')}}">- Thêm mới</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('categoryrooms.index')}}">- Danh sách </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('categoryrooms.deleted')}}">- Thùng rác</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="{{asset('./be/#dmbv')}}" data-bs-toggle="collapse">
+                            <i class="fe-folder-minus"></i>
+                            <span>Danh mục bài viết </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="dmbv">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{route('categorypost.create')}}">- Thêm mới</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('categorypost.index')}}">- Danh sách </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('categorypost.deleted')}}">- Thùng rác</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
@@ -127,7 +148,7 @@
                         </ul>
                     </div>
                 </li>
-                
+
                 <li>
                     <a href="{{asset('./be/#email')}}" data-bs-toggle="collapse">
                         <i class="mdi mdi-email-outline"></i>
