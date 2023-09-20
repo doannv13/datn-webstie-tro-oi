@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\FacilityController;
+use Database\Factories\FacilityFactory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 Route::get('home', function () {
     return view('admin.layouts.master');
 });
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
+
+Route::resource('facilities', FacilityController::class);
+
+
+Route::get('list-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
+
+Route::delete('facilities/permanently/{id}', [FacilityController::class, 'permanentlyDelete'])->name('facilities-permanently-delete');
+
+Route::get('restore/{id}', [FacilityController::class, 'restore'])->name('facilities-restore');
 
 Auth::routes();
 
