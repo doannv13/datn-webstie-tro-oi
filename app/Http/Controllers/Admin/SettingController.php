@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Response;
+use Yoeunes\Toastr\Facades\Toastr;
 
 
 
@@ -18,7 +19,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $data = Setting::query()->findOrFail(1);
+        $data = Setting::query()->first();
         return view('admin.setting.edit', compact('data'));
     }
 
@@ -57,9 +58,9 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SettingRequest $request, string $id)
+    public function update(SettingRequest $request, $id)
     {
-        $data = Setting::query()->findOrFail(1);
+        $data = Setting::query()->first();
         try {
             $oldImg = $data->logo; // Lưu ảnh cũ
 
@@ -76,13 +77,13 @@ class SettingController extends Controller
             if (\request()->hasFile('logo') && $oldImg) {
                 delete_file($oldImg);
             }
-            toastr()->success('Cập nhật cài đặt thành công!');
+            Toastr::success('Cập nhật cài đặt thành công', 'Thành công');
 
             return back()
                 ->with('status', Response::HTTP_OK);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
-            toastr()->error('Cập nhật cài đặt thất bại!');
+            Toastr::success('Cập nhật cài đặt thất bại', 'Thất bại');
 
             return back()
                 ->with('status', Response::HTTP_BAD_REQUEST);

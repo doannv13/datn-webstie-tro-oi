@@ -17,8 +17,13 @@
                                         <label for="image" class="form-label">Logo</label>
                                         <input id="image" type="file" class="form-control" name="logo"
                                             accept="image/*"><br>
-                                        <img id="image_preview" src="{{ asset($data->logo) }}" alt="" width="100px"
-                                            height="100px">
+                                        @if ($data->logo && asset($data->logo))
+                                            <img id="image_preview" src="{{ asset($data->logo) }}" alt=""
+                                                width="100px" height="100px">
+                                        @else
+                                            <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
+                                                width="100px" height="100px">
+                                        @endif
                                         @error('logo')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -26,7 +31,7 @@
                                     <div class="mb-3">
                                         <label for="example-email" class="form-label">Điện thoại hỗ trợ</label>
                                         <input type="text" name="support_phone" class="form-control"
-                                        value="{{ old('support_phone', $data->support_phone ?? '') }}">
+                                            value="{{ old('support_phone', $data->support_phone ?? '') }}">
                                         @error('support_phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
