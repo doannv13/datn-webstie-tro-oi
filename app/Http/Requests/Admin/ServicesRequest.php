@@ -23,7 +23,7 @@ class ServicesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:4|unique:services,name,' . $this->id,
+            'name' => 'required|min:4|max:20|unique:services,name,' . $this->id,
             'price' => ['required', 'numeric', 'gte:1000'],
             'date_number' => ['required', 'numeric', 'gte:1'],
             'description' => ['required', 'min:5', 'max:999'],
@@ -35,6 +35,7 @@ class ServicesRequest extends FormRequest
             // name
             "name.required" => "Tên không được để trống",
             "name.min" => "Số kí tự phải lớn hơn 4",
+            "name.max" => "Số kí tự phải nhỏ hơn 20",
             "name.unique" => "Tên dịch vụ không được trùng",
             // price
             "price.required"=>"Giá dịch vụ không được để trống",
@@ -48,8 +49,6 @@ class ServicesRequest extends FormRequest
             "description.required"=>"Mô tả không được để trống",
             "description.min"=>"Số kí tự phải lớn hơn 5",
             "description.max"=>"Số kí tự phải nhỏ hơn 999",
-            
-
         ];
     }
 }

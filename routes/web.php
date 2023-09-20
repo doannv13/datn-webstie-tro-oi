@@ -25,12 +25,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('home', function () {
+//ADMIN
+Route::get('home-admin', function () {
     return view('admin.layouts.master');
 });
 Route::get('dashboard', function () {
     return view('admin.dashboard');
+});
+
+//CLIENT
+Route::get('home-client', function () {
+    return view('client.layouts.master');
+});
+Route::get('trang-chu', function () {
+    return view('client.layouts.home'); // Trang chủ
 });
 
 // Category Home
@@ -60,10 +68,12 @@ Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPos
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Dịch vụ
-Route::resource('services', \App\Http\Controllers\Admin\ServicesController::class);
+
+Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
 Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
 Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
 Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
+
 
 // Mã giảm giá
 Route::resource('coupon', CouponController::class);
