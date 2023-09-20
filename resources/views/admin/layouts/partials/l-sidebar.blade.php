@@ -5,9 +5,15 @@
         <!-- User box -->
         <div class="user-box text-center">
 
-            <img src="{{asset('be/assets/images/users/user-1.jpg')}}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+            <img src="{{ asset('be/assets/images/users/user-1.jpg') }}" alt="user-img" title="Mat Helme"
+                class="rounded-circle img-thumbnail avatar-md">
             <div class="dropdown">
-                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">Nowak Helme</a>
+
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"
+                    aria-expanded="false">Nowak Helme</a>
+
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
+
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
@@ -67,59 +73,64 @@
                         <span class="badge bg-success rounded-pill float-end">9+</span>
                         <span> Dashboard </span>
                     </a>
+
                 </li>
-
-                <li class="menu-title mt-2">Apps</li>
-
-                <li>
-                    <a href="apps-calendar.html">
-                        <i class="mdi mdi-calendar-blank-outline"></i>
-                        <span> Calendar </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="apps-chat.html">
-                        <i class="mdi mdi-forum-outline"></i>
-                        <span> Chat </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#email" data-bs-toggle="collapse">
-                        <i class="mdi mdi-email-outline"></i>
-                        <span> Email </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="email">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="email-inbox.html">Inbox</a>
-                            </li>
-                            <li>
-                                <a href="email-templates.html">Email Templates</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
                 <li>
                     <a href="#sidebarTasks" data-bs-toggle="collapse">
                         <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Tasks </span>
+                        <span> Dịch Vụ </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarTasks">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="task-kanban-board.html">Kanban Board</a>
+                                <a href="{{route('services.index')}}">Danh Sách</a>
                             </li>
                             <li>
-                                <a href="task-details.html">Details</a>
+                                <a href="{{route('services.create')}}">Thêm Dịch Vụ</a>
+                            </li>
+                            <li>
+                                <a href="{{route('services.deleted')}}">Thùng Rác</a>
                             </li>
                         </ul>
                     </div>
                 </li>
+                
+                <li>
+                    <a href="#email" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span> Người dùng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="email">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('users.create') }}">Thêm mới người dùng</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}">Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#email" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span> Cài đặt </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="email">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('setting.index')}}">Giao diện người dùng</a>
+                                <a href="email-inbox.html">Inbox</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
 
                 <li>
                     <a href="apps-projects.html">
@@ -131,16 +142,16 @@
                 <li>
                     <a href="#contacts" data-bs-toggle="collapse">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span> Contacts </span>
+                        <span> Mã giảm giá </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="contacts">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="contacts-list.html">Members List</a>
+                                <a href="{{ route('coupon.create') }}">Thêm mã giảm giá</a>
                             </li>
                             <li>
-                                <a href="contacts-profile.html">Profile</a>
+                                <a href="{{ route('coupon.deleted') }}">Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -529,6 +540,7 @@
                                         </li>
                                     </ul>
                                 </div>
+
                             </li>
                         </ul>
                     </div>
