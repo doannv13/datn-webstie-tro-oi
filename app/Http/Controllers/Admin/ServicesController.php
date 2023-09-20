@@ -116,8 +116,8 @@ class ServicesController extends Controller
     }
     public function deleted()
     {
-            // $services_deleted = Services::onlyTrashed()->get();
-            return view('admin.services.deleted', );
+            $services_deleted = Services::onlyTrashed()->get();
+            return view('admin.services.deleted', compact('services_deleted'));
     }
 
     public function permanentlyDelete(String $id)

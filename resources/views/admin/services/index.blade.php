@@ -57,9 +57,6 @@
 </div> <!-- container -->
 @endsection
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
 <script>
     new DataTable('#tech-companies-1');
 </script>

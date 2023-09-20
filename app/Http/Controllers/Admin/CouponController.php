@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CouponRequest;
 use App\Models\Coupon;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -36,18 +37,12 @@ class CouponController extends Controller
             $model = new Coupon();
             $model->fill($request->all());
             $model->save();
-            $notification = array(
-                "message" => "Thêm mã giảm giá thành công",
-                "msg" => "success",
-            );
-            return to_route('coupon.index')->with('msg', ['success' => true, 'message' => 'Thêm mã giảm giá thành công']);
+            Toastr::success('Thêm mã giảm giá thành công', 'Thành công');
+            return to_route('coupon.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Add coupon unsuccessfully",
-                "alert-type" => "error",
-            );
-            return back()->with('msg', ['success' => true, 'message' => 'Thêm mã giảm giá thất bại']);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -77,18 +72,12 @@ class CouponController extends Controller
             $model = Coupon::query()->findOrFail($id);
             $model->fill($request->all());
             $model->save();
-            $notification = array(
-                "message" => "Sửa mã giảm giá thành công",
-                "msg" => "success",
-            );
-            return to_route('coupon.index')->with('msg', ['success' => true, 'message' => 'Sửa mã giảm giá thành công']);
+            Toastr::success('Sửa mã giảm giá thành công', 'Thành công');
+            return to_route('coupon.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Add coupon unsuccessfully",
-                "alert-type" => "error",
-            );
-            return back()->with('msg', ['success' => true, 'message' => 'Sửa mã giảm giá thất bại']);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -99,10 +88,13 @@ class CouponController extends Controller
     {
         try {
             $coupon->delete();
-            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Mã giảm giá được thêm vào thùng rác thành công']);
+            Toastr::success('Mã giảm giá được thêm vào thùng rác thành công', 'Thành công');
+
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -117,10 +109,13 @@ class CouponController extends Controller
         try {
             $coupon = Coupon::where('id', $id);
             $coupon->forceDelete();
-            return redirect()->back()->with('msg', ['success' => false, 'message' => 'Xoá mã giảm giá thành công']);
+            Toastr::success('Xoá mã giảm giá thành công', 'Thành công');
+
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -129,10 +124,12 @@ class CouponController extends Controller
         try {
             $restore = Coupon::query()->onlyTrashed()->findOrFail($id);
             $restore->restore();
-            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Khôi phục mã giảm giá thành công']);
+            Toastr::success('Khôi phục mã giảm giá thành công', 'Thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 }
