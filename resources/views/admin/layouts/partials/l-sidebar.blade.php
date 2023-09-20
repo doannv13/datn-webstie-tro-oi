@@ -96,6 +96,23 @@
                     </div>
                 </li>
                 
+                <li>
+                    <a href="#email" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span> Người dùng </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="email">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('users.create') }}">Thêm mới người dùng</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}">Danh sách</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li>
                     <a href="#email" data-bs-toggle="collapse">
@@ -106,18 +123,14 @@
                     <div class="collapse" id="email">
                         <ul class="nav-second-level">
                             <li>
-
                                 <a href="{{route('setting.index')}}">Giao diện người dùng</a>
                                 <a href="email-inbox.html">Inbox</a>
-                            </li>
-                            <li>
-                                <a href="email-templates.html">Email Templates</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                
+
 
                 <li>
                     <a href="apps-projects.html">
