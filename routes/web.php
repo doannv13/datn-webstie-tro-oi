@@ -41,7 +41,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
-Route::get('services/deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
+Route::get('services/deleted', [ServicesController::class, 'deleted'])->name('services.deleted.at');
 Route::delete('services/permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
 Route::get('services/restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
 

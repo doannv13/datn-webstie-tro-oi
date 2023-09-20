@@ -90,7 +90,7 @@
                                 <a href="{{route('services.create')}}">Thêm Dịch Vụ</a>
                             </li>
                             <li>
-                                <a href="{{route('services.deleted')}}">Thùng Rác</a>
+                                <a href="{{route('services.deleted.at')}}">Thùng Rác</a>
                             </li>
                         </ul>
                     </div>
