@@ -1,11 +1,12 @@
 <?php
 
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 /*
@@ -59,15 +60,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
-Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
-Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
-Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
+Route::get('services/deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
+Route::delete('services/permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
+Route::get('services/restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
 
 // Mã giảm giá
 Route::resource('coupon', CouponController::class);
-Route::get('coupon-deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
-Route::delete('coupon-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
-Route::get('coupon-restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
+Route::get('coupon/deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
+Route::delete('coupon/permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
+Route::get('coupon/restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
 
 //Quản lý người dùng
 Route::resource('users',UserController::class);

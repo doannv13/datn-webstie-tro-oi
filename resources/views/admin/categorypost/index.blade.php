@@ -60,8 +60,3 @@
 
     </div> <!-- container -->
 @endsection
-@push('scripts')
-     <script>
-        new DataTable('#tech-companies-1');
-    </script>
-@endpush

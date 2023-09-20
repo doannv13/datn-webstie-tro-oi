@@ -26,6 +26,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                    @if(count($data)>0)
                                         @foreach ($data as $key => $value )
                                             <tr class="">
                                                 <td><b>{{$key+1}}</b></td>
@@ -49,6 +50,11 @@
 
                                             </tr>
                                         @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7"><b>Chưa có bản ghi</b></td>
+                                        </tr>
+                                    @endif
                                         </tbody>
                                     </table>
                                 </div> <!-- end .table-responsive -->
@@ -65,8 +71,3 @@
 
 </div> <!-- content -->
 @endsection
-@push('scripts')
-    <script>
-        new DataTable('#tech-companies-1');
-    </script>
-@endpush
