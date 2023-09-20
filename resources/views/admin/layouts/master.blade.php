@@ -19,11 +19,11 @@
     <!-- App css -->
 
 
-    <link href="{{asset('be/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
-    <script src="{{asset('be/assets/libs/jquery/jquery.min.js')}}"></script>
+    <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <script src="{{ asset('be/assets/libs/jquery/jquery.min.js') }}"></script>
     {{-- <script src="{{asset('be/assets/libs/jquery/jquery.min.js')}}"></script> --}}
-    <script src="{{asset('be/assets/libs/toastr/build/toastr.min.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('be/assets/css/toastr.css')}}">
+    <script src="{{ asset('be/assets/libs/toastr/build/toastr.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('be/assets/css/toastr.css') }}">
     <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- icons -->
@@ -32,29 +32,30 @@
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
 
 
-    <link href="{{asset('be/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="{{asset('be/assets/images/favicon.ico')}}">
+    <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
 
 
-    <link href="{{asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
 
 </head>
 
 <!-- body start -->
 
 
+{{-- class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid"
+data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default'
+data-sidebar-user='true' --}}
 
-
-
-<body class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid"
-    data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default'
-    data-sidebar-user='true'>
-
-
+<body>
     <!-- Begin page -->
     <div id="wrapper">
 
@@ -76,7 +77,7 @@
             <div class="content">
 
                 <!-- Start Content-->
-                
+
                 @yield('content')
                 <!-- content -->
             </div>
@@ -108,7 +109,7 @@
     <script src="{{ asset('be/assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/feather-icons/feather.min.js') }}"></script>
- <!-- knob plugin -->
+    <!-- knob plugin -->
     <script src="{{ asset('be/assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 
     <!--Morris Chart-->
@@ -116,38 +117,35 @@
     <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
 
 
-{{-- load ảnh --}}
-<script>
-    $(function(){
-      function readURL(input, selector){
-        if(input.files && input.files[0]){
-          let reader = new FileReader();
+    {{-- load ảnh --}}
+    <script>
+        $(function() {
+            function readURL(input, selector) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
 
-          reader.onload = function(e){
-            $(selector).attr('src', e.target.result);
-          };
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-      $("#image").change(function(){
-        console.log(123);
-        readURL(this, '#image_preview');
-      });
-    })
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-
-
+                    reader.onload = function(e) {
+                        $(selector).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#image").change(function() {
+                console.log(123);
+                readURL(this, '#image_preview');
+            });
+        })
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
     <!-- Dashboar init js-->
     <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
 
 
     <!-- Plugins js -->
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
-
-
+    <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>
-

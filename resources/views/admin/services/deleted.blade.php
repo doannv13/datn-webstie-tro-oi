@@ -23,8 +23,7 @@
                                             <th>Giá</th>
                                             <th>Số Ngày</th>
                                             <th>Mô Tả</th>
-                                            <th></th>
-                                                
+                                            <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>

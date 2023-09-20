@@ -12,13 +12,6 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
-                                    @if (session('msg'))
-                                        @if (session('msg')['success'])
-                                            <div class="alert alert-success">{{ session('msg')['message'] }}</div>
-                                        @else
-                                            <div class="alert alert-danger">{{ session('msg')['message'] }}</div>
-                                        @endif
-                                    @endif
                                     <table id="tech-companies-1" class="table table-striped">
                                         <thead>
                                             <tr>
