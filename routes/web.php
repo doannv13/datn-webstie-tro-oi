@@ -35,7 +35,7 @@ Route::get('dashboard', function () {
 Route::get('home-client', function () {
     return view('client.layouts.master');
 });
-Route::get('home-client', function () {
+Route::get('trang-chu', function () {
     return view('client.layouts.home'); // Trang chủ
 });
 
