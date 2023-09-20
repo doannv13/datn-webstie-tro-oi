@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryRoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,11 @@ Route::get('home', function () {
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('categoryrooms', CategoryRoomController::class);
+// Route::prefix('coupon')->name('coupon.')->group(function () {
+Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
+Route::delete('permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('categoryrooms.permanently-delete');
+Route::get('restore/{id}', [CategoryRoomController::class, 'restore'])->name('restore');
+// });

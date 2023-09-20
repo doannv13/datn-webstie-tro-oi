@@ -18,7 +18,24 @@
     <!-- icons -->
     <link href="{{asset('be/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{asset('be/assets/images/favicon.ico')}}">
 
+    <!-- third party css -->
+    <link href="{{asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
+    <link href="{{asset('be/assets/libs/mohithg-switchery/switchery.min.css')}}}" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    {{--Switchery--}}
+    <script src="{{asset('be/assets/libs/mohithg-switchery/switchery.min.js')}}"></script>
+    <link href="{{asset('be/assets/libs/mohithg-switchery/switchery.min.css')}}}" rel="stylesheet" type="text/css" />
+    {{--Switchery end--}}
+    <link href="{{asset('be/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- icons -->
+    <link href="{{asset('be/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -29,7 +46,6 @@
 <div id="wrapper">
 
 
-    {{ test() }}
     <!-- Topbar Start -->
         @include('admin.layouts.partials.topbar')
     <!-- end Topbar -->
@@ -44,7 +60,6 @@
 
     <div class="content-page">
         <div class="content">
-
             <!-- Start Content-->
                 @yield('content')
             <!-- content -->
@@ -93,6 +108,9 @@
 
 <!-- App js-->
 <script src="{{asset('be/assets/js/app.min.js')}}"></script>
+<script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+@stack('scripts')
 
 </body>
 </html>
