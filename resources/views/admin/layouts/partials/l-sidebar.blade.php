@@ -127,7 +127,7 @@
                         </ul>
                     </div>
                 </li>
-                
+
                 <li>
                     <a href="{{asset('./be/#email')}}" data-bs-toggle="collapse">
                         <i class="mdi mdi-email-outline"></i>

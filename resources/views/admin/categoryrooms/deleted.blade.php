@@ -33,10 +33,10 @@
                                                 </div>{{$item->status}}</td>
                                             <td>{{$item->description}}</td>
                                             <th data-priority="6" class="d-flex p-4 gap-2">
-                                                <a href="{{ route('restore', $item->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('categoryrooms.restore',$item->id) }}" class="btn btn-primary">
                                                     <i class="fa-solid fa-trash-arrow-up mx-2 fs-4"></i></i>
                                                 </a>
-                                                <form action="{{ route('categoryrooms.permanently-delete', $item->id) }}"
+                                                <form action="{{ route('categoryrooms.permanently-delete',$item->id) }}"
                                                       method="post">
                                                     @csrf
                                                     @method('delete')

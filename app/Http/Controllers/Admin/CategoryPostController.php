@@ -156,6 +156,7 @@ class CategoryPostController extends Controller
             Toastr::success('Thao tác thành công', 'Thành công');
             return redirect()->route('categorypost.deleted');
         }
+
     }
 
 }

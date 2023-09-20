@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 /*
@@ -34,19 +33,15 @@ Route::get('dashboard', function () {
 
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
-Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
+Route::get('categoryrooms-deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
 Route::delete('permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('categoryrooms.permanently-delete');
-Route::get('restore/{id}', [CategoryRoomController::class, 'restore'])->name('restore');
-
-
+Route::get('categoryrooms/restore/{id}', [CategoryRoomController::class, 'restore'])->name('categoryrooms.restore');
 
 // Facility
 Route::resource('facilities', FacilityController::class);
 Route::get('list-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
 Route::delete('facilities/permanently/{id}', [FacilityController::class, 'permanentlyDelete'])->name('facilities-permanently-delete');
 Route::get('restore/{id}', [FacilityController::class, 'restore'])->name('facilities-restore');
-Auth::routes();
-
 
 // Setting
 Route::resource('setting', SettingController::class);
@@ -60,34 +55,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
-Route::get('services/deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
+Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
 Route::delete('services/permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
 Route::get('services/restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
 
 // Mã giảm giá
 Route::resource('coupon', CouponController::class);
-Route::get('coupon/deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
+Route::get('coupon-deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
 Route::delete('coupon/permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
 Route::get('coupon/restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
 
 //Quản lý người dùng
 Route::resource('users',UserController::class);
-Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
+Route::get('user-deleted', [UserController::class, 'deleted'])->name('user_deleted');
 Route::delete('user_permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('user_permanently_delete');
 Route::get('user_restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //phân quyền start

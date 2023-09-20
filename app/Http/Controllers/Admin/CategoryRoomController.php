@@ -8,6 +8,7 @@ use App\Models\CategoryRoom;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryRoomController extends Controller
 {
@@ -26,6 +27,7 @@ class CategoryRoomController extends Controller
     public function create()
     {
         return view('admin.categoryrooms.create');
+
     }
 
 
@@ -78,18 +80,12 @@ class CategoryRoomController extends Controller
             $data->slug = $slug;
             $data->fill($request->all());
             $data->save();
-//            $notification = array(
-//                "message" => "Cập nhật danh mục thành công",
-//                "alert-type" => "success",
-//            );
-            return to_route('categoryrooms.index')->with('success', 'Cập nhật dịch vụ thành công');
+           Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('categoryrooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Cập nhật danh mục thất bại",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -102,9 +98,12 @@ class CategoryRoomController extends Controller
         try {
             $categoryRoom = CategoryRoom::query()->findOrFail($id);
             $categoryRoom->delete();
-            return redirect()->route('categoryrooms.index')->with('success', 'Chuyển vào thùng rác thành công');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('categoryrooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+
         }
     }
 
@@ -119,20 +118,27 @@ class CategoryRoomController extends Controller
         try {
             $model = CategoryRoom::where('id', $id);
             $model->forceDelete();
-            return redirect()->route('categoryrooms.index')->with('success', 'Xóa danh mục thành công');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('categoryrooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
         }
     }
 
     public function restore(string $id)
     {
-        try {
-            $model = CategoryRoom::query()->onlyTrashed()->findOrFail($id);
-            $model->restore();
-            return redirect()->route('categoryrooms.index')->with('success', 'Khôi phục danh mục thành công');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
+        $model = CategoryRoom::query()->withTrashed()->findOrFail($id);
+        $model->restore();
+        $categoryrooms_deleted = CategoryRoom::onlyTrashed()->get();
+        if (count($categoryrooms_deleted) == 0) {
+            Toastr::error('Khôi phục không thành công', 'Không thành công');
+
+            return redirect()->route('categoryrooms_deleted');
+        } else {
+            Toastr::success('Khôi phục thành công', 'Thành công');
+            return redirect()->route('categoryrooms.deleted');
         }
+
     }
 }
