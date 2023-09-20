@@ -138,6 +138,7 @@
     <script src="{{ asset('input-mask/jquery.inputmask.js') }}"></script>
     <script src="{{ asset('input-mask/jquery.inputmask.date.extensions.js') }}"></script>
 
+    @stack('scripts')
 
     <script>
         $(function() {
