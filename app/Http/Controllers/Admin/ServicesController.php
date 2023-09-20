@@ -149,6 +149,7 @@ class ServicesController extends Controller
         $services_deleted = Services::onlyTrashed()->get();
         if (count($services_deleted) == 0) {
             return redirect()->route('services.index')->with('success', 'Thao tác thành công');
+            Toastr::success('Thao tác thành công','Thành công');
         } else {
             return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
         }

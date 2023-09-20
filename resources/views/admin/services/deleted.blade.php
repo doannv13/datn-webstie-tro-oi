@@ -37,7 +37,7 @@
                                                     
                                                     <td>{{ $value->description }}</td>
                                                   
-                                                    <td class="d-flex"><a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services.restore', $value->id) }}"
+                                                    <td class="text-center"><a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services.restore', $value->id) }}"
                                                             class="btn btn-primary"><i
                                                                 class="fa-solid fa-trash-arrow-up"></i></a>
                                                            

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name',255)->unique();
             $table->integer('price');
             $table->integer('date_number');
-            $table->string('description');
+            $table->string('description', 999);
             $table->softDeletes();
             $table->timestamps();
         });
