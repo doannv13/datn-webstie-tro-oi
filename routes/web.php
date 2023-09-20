@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\Admin\CategoryRoomController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
@@ -30,6 +32,14 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
+// Category Home
+Route::resource('categoryrooms', CategoryRoomController::class);
+Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
+Route::delete('permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('categoryrooms.permanently-delete');
+Route::get('restore/{id}', [CategoryRoomController::class, 'restore'])->name('restore');
+
+
+
 // Facility
 Route::resource('facilities', FacilityController::class);
 Route::get('list-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
@@ -56,11 +66,10 @@ Route::get('services/restore/{id}', [ServicesController::class, 'restore'])->nam
 
 // Mã giảm giá
 Route::resource('coupon', CouponController::class);
-// Route::prefix('coupon')->name('coupon.')->group(function () {
-    Route::get('coupon/deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
-    Route::delete('coupon/permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
-    Route::get('coupon/restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
-// });
+Route::get('coupon/deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
+Route::delete('coupon/permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
+Route::get('coupon/restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
+
 //Quản lý người dùng
 Route::resource('users',UserController::class);
 Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
@@ -90,3 +99,4 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
 });
 
 //phân quyền end
+
