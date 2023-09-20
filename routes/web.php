@@ -23,12 +23,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('home', function () {
+//ADMIN
+Route::get('home-admin', function () {
     return view('admin.layouts.master');
 });
 Route::get('dashboard', function () {
     return view('admin.dashboard');
+});
+
+//CLIENT
+Route::get('home-client', function () {
+    return view('client.layouts.master');
+});
+Route::get('home-client', function () {
+    return view('client.layouts.home'); // Trang chủ
 });
 
 // Category Home
