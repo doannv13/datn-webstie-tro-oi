@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SurroundingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +25,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('home', function () {
+//ADMIN
+Route::get('home-admin', function () {
     return view('admin.layouts.master');
 });
 Route::get('dashboard', function () {
     return view('admin.dashboard');
+});
+
+//CLIENT
+Route::get('home-client', function () {
+    return view('client.layouts.master');
+});
+Route::get('trang-chu', function () {
+    return view('client.layouts.home'); // Trang chủ
 });
 
 // Category Home
@@ -58,10 +68,12 @@ Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPos
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Dịch vụ
+
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
 Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
 Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
 Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
+
 
 // Mã giảm giá
 Route::resource('coupon', CouponController::class);
@@ -70,12 +82,17 @@ Route::delete('coupon-permanently/{id}', [CouponController::class, 'permanentlyD
 Route::get('coupon-restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
 
 //Quản lý người dùng
-Route::resource('users',UserController::class);
+Route::resource('users', UserController::class);
 Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
 Route::delete('user_permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('user_permanently_delete');
 Route::get('user_restore/{id}', [UserController::class, 'restore'])->name('user_restore');
 
 
+// Facility
+Route::resource('surrounding', SurroundingController::class);
+Route::get('surrounding-deleted', [SurroundingController::class, 'listDeleted'])->name('surrounding-deleted');
+Route::delete('surrounding-permanently/{id}', [SurroundingController::class, 'permanentlyDelete'])->name('surrounding-permanently-delete');
+Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore'])->name('surrounding-restore');
 
 
 
@@ -98,4 +115,3 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
 });
 
 //phân quyền end
-
