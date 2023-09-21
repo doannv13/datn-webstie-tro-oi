@@ -39,7 +39,7 @@
 
 <!-- Main header start -->
 <header class="main-header" id="main-header-1">
-    <div class="container">
+    <div class="">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 0">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
@@ -123,19 +123,23 @@
 <!-- Search area box 1 start -->
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
-        <form method="GET">
+       
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
                     <div class="input-group">
-                        <span class="input-group-text input-group-i">
-                            <i class="fa fa-search text-white"></i>
+
+                        <span class="input-group-text input-group-i btn p-2" style="width: 60px;">
+                       
+                            <i class="fa fa-search text-white " ></i>
+                     
                         </span>
-                        <input type="text" class="form-control bg-input-group" placeholder="Tìm kiếm ..." />
+                        <input type="text" class="form-control bg-input-group" style="height: 50px;" placeholder="Tìm kiếm ..." />
+
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="row g-3">
-                        <div class="col-md-6 col-sm-6 col-lg-3">
+                        <div class="col-md-5 col-sm-5 col-lg-2">
                             <div class="form-floating">
                                 <!-- <select
                                   class="form-select bg-select-group"
@@ -147,6 +151,7 @@
                                   <option value="2">Two</option>
                                   <option value="3">Three</option>
                                 </select> -->
+
                                 <select class="form-select bg-select-group" id="dselect-example1" name="category_room" onchange="myOnchange()">
                                     <option selected value="0">Tất cả</option>
                                     @foreach($categories_room as $key =>$value)
@@ -157,17 +162,20 @@
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-lg-3">
+                        <div class="col-md-5 col-sm-5 col-lg-2">
                             <div class="form-floating">
+
                                 <select class="form-select bg-select-group" id="floatingSelect2" aria-label="Floating label select example" name="district" onchange="myOnchange()">
                                     <option selected value="0">Tất cả</option>
                                     @foreach($districts as $key =>$value)
                                     <option value="{{$key+1}}">{{$value->name}}</option>
                                     @endforeach
+
                                 </select>
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
+
                         <div class="col-md-6 col-sm-6 col-lg-3">
                             <div class="form-floating">
                                 <select class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example" name="price" onchange="myOnchange()">
@@ -176,28 +184,36 @@
                                     <option value="2">1 triệu -> 2 triệu</option>
                                     <option value="3">2 triệu -> 4 triệu</option>
                                     <option value="4">Trên 4 triệu</option>
+
                                 </select>
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-lg-3">
+                        <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
+
                                 <select class="form-select bg-select-group" id="floatingSelect4" aria-label="Floating label select example" name="acreage" onchange="myOnchange()">
                                     <option selected value="0">Tất cả</option>
                                     <option value="1">Dưới 20m vuông</option>
                                     <option value="2">20m -> 30m vuông</option>
                                     <option value="3">30m vuông -> 45m vuông</option>
                                     <option value="4">Trên 45m vuông</option>
+
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
+                        <div class="col-md-6 col-sm-6 col-lg-2">
+                            <a type="submit" class=" p-1 px-5 btn-2" href="#">Lọc</a>
+                        </div>
                     </div>
+
                 </div>
             </div>
-        </form>
+      
     </div>
 </div>
+
 
 <!-- Search area box 1 end -->
 <!-- script -->
@@ -242,3 +258,6 @@
         // });
     }
 </script>
+
+<!-- Search area box 1 end -->
+
