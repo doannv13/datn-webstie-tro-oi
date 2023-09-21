@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Client\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +26,7 @@ Route::get('/', function () {
 });
 
 //ADMIN
-Route::get('home-admin', function () {
-    return view('admin.layouts.master');
-});
+
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
@@ -35,10 +35,12 @@ Route::get('dashboard', function () {
 Route::get('home-client', function () {
     return view('client.layouts.master');
 });
-Route::get('trang-chu', function () {
-    return view('client.layouts.home'); // Trang chủ
-});
-
+Route::get('trang-chu',[HomeController::class, 'index'])->name('home');
+// Route::get('trang-chu', function () {
+//     return view('client.layouts.home'); // Trang chủ
+// });
+Route::post('fillter',[HomeController::class, 'filter_list']);
+// Route::get('fillter',[HomeController::class, 'filter_list']);
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
 Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
