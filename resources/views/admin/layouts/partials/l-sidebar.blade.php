@@ -154,7 +154,6 @@
                 </li>
 
                 <li>
-
                     <a href="{{asset('./be/#sidebarTasks')}}" data-bs-toggle="collapse">
                         <i class="mdi mdi-clipboard-outline"></i>
                         <span> Tasks </span>

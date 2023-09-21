@@ -42,18 +42,10 @@ class FacilityController extends Controller
                 $model->icon = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3';
             }
             $model->save();
-            $notification = array(
-                "message" => "Thêm mới thành công!",
-                "alert-type" => "success",
-            );
-            return to_route('facilities.index')->with($notification);
+            return to_route('facilities.index')->with('success', 'Thao tác thành công!');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Thêm mới không thành công!",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            return back()->with('error', 'Thao tác thất bại');
         }
     }
 
@@ -92,19 +84,10 @@ class FacilityController extends Controller
             if(\request()->hasFile('icon') && $oldImg){
                 delete_file($oldImg);
             }
-            
-            $notification = array(
-                "message" => "Cập nhật thành công!",
-                "alert-type" => "success",
-            );
-            return to_route('facilities.index')->with($notification);
+            return to_route('facilities.index')->with('success', 'Thao tác thành công!');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Cập nhật không thành công!",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            return back()->with('error', 'Thao tác thất bại!');
         }
     }
 
@@ -118,18 +101,10 @@ class FacilityController extends Controller
             $data = Facility::query()->findOrFail($id);
             $data->delete();
             // delete_file($data->icon);
-            $notification = array(
-                "message" => "Xoá thành công!",
-                "alert-type" => "success",
-            );
-            return to_route('facilities.index')->with($notification);
+            return to_route('facilities.index')->with('success', 'Thao tác thành công!');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Xoá không thành công!",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            return back()->with('error', 'Thao tác thất bại!');
         }
     }
 
@@ -155,18 +130,10 @@ class FacilityController extends Controller
             // if($oldImg){
             //     delete_file($oldImg);
             // }
-            $notification = array(
-                "message" => "Đã xoá vĩnh viễn!",
-                "alert-type" => "success",
-            );
-            return redirect()->back()->with($notification);
+            return redirect()->back()->with('success', 'Thao tác thành công!');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Xoá không thành công!",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            return back()->with('success', 'Thao tác thất bại!');
         }
     }
 
@@ -179,18 +146,10 @@ class FacilityController extends Controller
         try {
             $softDeletedFacility = Facility::onlyTrashed()->find($id);
             $softDeletedFacility->restore();
-            $notification = array(
-                "message" => "Thêm lại thành công!",
-                "alert-type" => "success",
-            );
-            return redirect()->back()->with($notification);
+            return redirect()->back()->with('success', 'Thao tác thành công!');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Thêm lại không thành công!",
-                "alert-type" => "error",
-            );
-            return back()->with($notification);
+            return back()->with('success', 'Thao tác thất bại!');
         }
     }
 }
