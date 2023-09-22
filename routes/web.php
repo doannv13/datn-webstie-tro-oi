@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
+use App\Http\Controllers\Admin\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,15 @@ Auth::routes();
 
 // Setting
 Route::resource('setting', SettingController::class);
+
+// Banner
+Route::resource('banner', BannerController::class);
+Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
+Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
+Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
+
+Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
+
 
 //Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
