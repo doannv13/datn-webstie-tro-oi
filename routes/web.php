@@ -20,13 +20,13 @@ use App\Http\Controllers\Admin\SettingController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.layouts.master');
 });
 
 //ADMIN
 Route::get('home-admin', function () {
     return view('admin.layouts.master');
-});
+})->name('home-admin');
 Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
@@ -34,7 +34,7 @@ Route::get('dashboard', function () {
 //CLIENT
 Route::get('home-client', function () {
     return view('client.layouts.master');
-});
+})->name('home-client');
 Route::get('home-client', function () {
     return view('client.layouts.home'); // Trang chủ
 });
@@ -63,7 +63,9 @@ Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostControll
 Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
 Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
 Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function(){
+    return view('client.layouts.home');
+})->name('home');
 
 // Dịch vụ
 Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
@@ -82,7 +84,12 @@ Route::resource('users',UserController::class);
 Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
 Route::delete('user_permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('user_permanently_delete');
 Route::get('user_restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-
+Route::get('client-login',function(){
+    return view('client.auth.login');
+});
+Route::get('client-signup',function(){
+    return view('client.auth.register');
+});
 
 
 

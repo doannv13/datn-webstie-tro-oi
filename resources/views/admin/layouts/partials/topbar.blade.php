@@ -171,12 +171,16 @@
         </li>
 
         <li class="dropdown notification-list topbar-dropdown">
+            @if(auth()->user())
             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="{{asset('be/assets/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle">
+                <img src="{{ auth()->user()->avatar? asset(auth()->user())->avatar : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user-image" class="rounded-circle">
                 <span class="pro-user-name ms-1">
-                                    Nowak <i class="mdi mdi-chevron-down"></i>
+
+                                        {{ auth()->user()->name }}
+
                                 </span>
             </a>
+            @endif
             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                 <!-- item-->
                 <div class="dropdown-header noti-title">
@@ -198,10 +202,15 @@
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
-                <a href="auth-logout.html" class="dropdown-item notify-item">
+                <a class="dropdown-item notify-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
                     <i class="fe-log-out"></i>
-                    <span>Logout</span>
+                    Đăng xuất
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+                </form>
 
             </div>
         </li>
@@ -218,18 +227,18 @@
     <div class="logo-box">
         <a href="index.html" class="logo logo-light text-center">
                             <span class="logo-sm">
-                                <img src="{{asset('be/assets/images/logo-sm.png')}}" alt="" height="22">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
                             </span>
             <span class="logo-lg">
-                                <img src="{{asset('be/assets/images/logo-light.png')}}" alt="" height="16">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="16">
                             </span>
         </a>
         <a href="index.html" class="logo logo-dark text-center">
                             <span class="logo-sm">
-                                <img src="{{asset('be/assets/images/logo-sm.png')}}" alt="" height="22">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
                             </span>
             <span class="logo-lg">
-                                <img src="{{asset('be/assets/images/logo-dark.png')}}" alt="" height="16">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="50">
                             </span>
         </a>
     </div>

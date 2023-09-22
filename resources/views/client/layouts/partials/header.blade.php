@@ -12,47 +12,57 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
-                <ul class="top-social-media pull-right">
-                    <li>
-                        <a
-                            href="javascript:void(0);"
-                            class="sign-in"
-                            data-bs-toggle="modal"
-                            data-bs-target="#login"
-                        ><i class="fa fa-sign-in me-1"></i>Đăng nhập</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="javascript:void(0);"
-                            data-bs-toggle="modal"
-                            data-bs-target="#signup"
-                            class="sign-in"
-                        ><i class="fa fa-user me-1"></i>Đăng ký</a
-                        >
-                    </li>
-                </ul>
-            <!-- <div class="dropdown pull-right">
-                  <button type="button" class="btn text-white bg-select-group p-0"
-                      data-bs-toggle="dropdown"  data-bs-display="static" aria-expanded="false">
-                      <img class="rounded-circle" width="30px" {{ asset('fe/src="https') }}://picsum.photos/200"
-                          alt="Header Avatar">
-                      <span class="d-xl-inline-block ms-1 dropdown-toggle">Nguyen</span>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                      <div>
-                          <a class="dropdown-item" href="">Thông tin tài khoản</a>
-                          <a class="dropdown-item" href="">Cập nhật tài khoản</a>
-                          <a class="dropdown-item" href="">Đổi mật khẩu</a>
-                          <a class="dropdown-item text-danger" href="">Đăng xuất</a>
+                    @guest
+                    <ul class="top-social-media pull-right ">
+                        <li>
+                            <a
+                                href="/client-login"
+                                onclick
+                            ><i class="fa fa-sign-in me-1"></i>Đăng nhập</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/client-signup"
+                            ><i class="fa fa-user me-1"></i>Đăng ký</a
+                            >
+                        </li>
+                    </ul>
+                    @else
+                    @if (Auth::user())
+                    <div class="dropdown pull-right">
+                        <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static" aria-expanded="false">
+                          <img class="rounded-circle" style="width:30px;height:30px"  src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="Header Avatar">
+                          <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <div>
+                            @if (Auth::user())
+                              @if (Auth::user()->role==='vendor')
+                                <a class="dropdown-item" href="">Vào trang quản lí</a>
+                              @elseif (Auth::user()->role==='admin')
+                                <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                              @endif
+                            @endif
+                            <a class="dropdown-item" href="">Thông tin tài khoản</a>
+                            <a class="dropdown-item" href="">Cập nhật tài khoản</a>
+                            <a class="dropdown-item" href="">Đổi mật khẩu</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                              Đăng xuất
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                  </div>
-              </div> -->
+                    @endif
+                    @endguest
             </div>
         </div>
     </div>
 </header>
-
 <!-- Main header start -->
 <header class="main-header" id="main-header-1">
     <div class="container">
@@ -269,5 +279,4 @@
         </form>
     </div>
 </div>
-
 <!-- Search area box 1 end -->
