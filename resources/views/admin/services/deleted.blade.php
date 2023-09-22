@@ -36,7 +36,7 @@
                                                     
                                                     <td>{{ $value->description }}</td>
                                                   
-                                                    <td class="d-flex"><a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services.restore', $value->id) }}"
+                                                    <td class="text-center"><a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services.restore', $value->id) }}"
                                                             class="btn btn-primary"><i
                                                                 class="fa-solid fa-trash-arrow-up"></i></a>
                                                            
@@ -66,7 +66,9 @@
     </div> <!-- container -->
 @endsection
 @push('scripts')
-    <script>
-        new DataTable('#tech-companies-1');
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    new DataTable('#tech-companies-1');
+</script>
 @endpush
