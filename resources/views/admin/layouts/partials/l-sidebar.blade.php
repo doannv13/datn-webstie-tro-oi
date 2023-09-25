@@ -173,6 +173,28 @@
                         </ul>
                     </div>
                 </li>
+                {{-- tiện ích --}}
+                <li>
+                    <a href="#facility" data-bs-toggle="collapse">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span> Tiện ích </span>
+                        <span class="menu-arrow"></span>
+
+                    </a>
+                    <div class="collapse" id="facility">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('facilities.index') }}">Danh Sách</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('facilities.create') }}">Thêm Tiện Ích</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('facilities-deleted') }}">Thùng Rác</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li>
                     <a href="{{asset('./be/#sidebarTasks')}}" data-bs-toggle="collapse">

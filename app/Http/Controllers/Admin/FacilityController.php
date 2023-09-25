@@ -8,6 +8,7 @@ use App\Models\Facility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Brian2694\Toastr\Facades\Toastr;
 
 class FacilityController extends Controller
 {
@@ -42,10 +43,12 @@ class FacilityController extends Controller
                 $model->icon = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3';
             }
             $model->save();
-            return to_route('facilities.index')->with('success', 'Thao tác thành công!');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('facilities.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('error', 'Thao tác thất bại');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -84,10 +87,13 @@ class FacilityController extends Controller
             if(\request()->hasFile('icon') && $oldImg){
                 delete_file($oldImg);
             }
-            return to_route('facilities.index')->with('success', 'Thao tác thành công!');
+            Toastr::success('Thao tác thành công', 'Thành công');
+
+            return to_route('facilities.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('error', 'Thao tác thất bại!');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -101,10 +107,12 @@ class FacilityController extends Controller
             $data = Facility::query()->findOrFail($id);
             $data->delete();
             // delete_file($data->icon);
-            return to_route('facilities.index')->with('success', 'Thao tác thành công!');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('facilities.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('error', 'Thao tác thất bại!');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -130,10 +138,12 @@ class FacilityController extends Controller
             // if($oldImg){
             //     delete_file($oldImg);
             // }
-            return redirect()->back()->with('success', 'Thao tác thành công!');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('success', 'Thao tác thất bại!');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -142,14 +152,15 @@ class FacilityController extends Controller
      */
 
     public function restore($id){
-
         try {
             $softDeletedFacility = Facility::onlyTrashed()->find($id);
             $softDeletedFacility->restore();
-            return redirect()->back()->with('success', 'Thao tác thành công!');
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('success', 'Thao tác thất bại!');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SurroundingController;
+use App\Http\Controllers\Client\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,11 @@ Route::get('dashboard', function () {
 Route::get('home-client', function () {
     return view('client.layouts.master');
 });
-Route::get('trang-chu', function () {
-    return view('client.layouts.home'); // Trang chủ
-});
+Route::get('trang-chu', [HomeController::class, 'index']);
+// search-page
+Route::get('search', [HomeController::class, 'index'])->name('search');
+Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+
 
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
