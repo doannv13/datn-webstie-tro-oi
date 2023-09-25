@@ -41,9 +41,10 @@
                                 <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
                               @endif
                             @endif
-                            <a class="dropdown-item" href="">Thông tin tài khoản</a>
-                            <a class="dropdown-item" href="">Cập nhật tài khoản</a>
-                            <a class="dropdown-item" href="">Đổi mật khẩu</a>
+                            <a class="dropdown-item" href="{{ route('changeinfo.edit',auth()->user()->id) }}">Cập nhật tài khoản</a>
+                            @if (Auth::user())
+                                <a class="dropdown-item" href="{{ route('changepassword.edit',auth()->user()->id) }}">Đổi mật khẩu</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                               Đăng xuất
@@ -147,15 +148,15 @@
 <!-- Search area box 1 start -->
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
-       
+
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
                     <div class="input-group">
 
                         <span class="input-group-text input-group-i btn p-2" style="width: 60px;">
-                       
+
                             <i class="fa fa-search text-white " ></i>
-                     
+
                         </span>
                         <input type="text" class="form-control bg-input-group" style="height: 50px;" placeholder="Tìm kiếm ..." />
 
@@ -176,26 +177,26 @@
                                   <option value="3">Three</option>
                                 </select> -->
 
-                                <select class="form-select bg-select-group" id="dselect-example1" name="category_room" onchange="myOnchange()">
+                                {{-- <select class="form-select bg-select-group" id="dselect-example1" name="category_room" onchange="myOnchange()">
                                     <option selected value="0">Tất cả</option>
                                     @foreach($categories_room as $key =>$value)
                                     <option value="{{$key+1}}">{{$value->name}}</option>
                                     @endforeach
 
-                                </select>
+                                </select> --}}
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-5 col-lg-2">
                             <div class="form-floating">
 
-                                <select class="form-select bg-select-group" id="floatingSelect2" aria-label="Floating label select example" name="district" onchange="myOnchange()">
+                                {{-- <select class="form-select bg-select-group" id="floatingSelect2" aria-label="Floating label select example" name="district" onchange="myOnchange()">
                                     <option selected value="0">Tất cả</option>
                                     @foreach($districts as $key =>$value)
                                     <option value="{{$key+1}}">{{$value->name}}</option>
                                     @endforeach
 
-                                </select>
+                                </select> --}}
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
@@ -234,7 +235,7 @@
 
                 </div>
             </div>
-      
+
     </div>
 </div>
 

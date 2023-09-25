@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\FacilityController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
-
+use App\Http\Controllers\Auth\ChangeInfoController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
 
@@ -44,9 +45,6 @@ Route::get('home-client', function () {
 })->name('home-client');
 Route::get('home-client', function () {
     return view('client.layouts.home'); // Trang chủ
-});
-
-
 });
 Route::get('trang-chu',[HomeController::class, 'index'])->name('home');
 // Route::get('trang-chu', function () {
@@ -108,6 +106,8 @@ Route::get('client-login',function(){
 Route::get('client-signup',function(){
     return view('client.auth.register');
 });
+Route::resource('changeinfo', ChangeInfoController::class);
+Route::resource('changepassword', ChangePasswordController::class);
 
 // Facility
 Route::resource('surrounding', SurroundingController::class);

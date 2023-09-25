@@ -50,35 +50,38 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string','min:4', 'max:255'],
-            'avatar' => ['required','image'],
+            'name' => ['required', 'string', 'min:4', 'max:255'],
+            'avatar' => ['required', 'image'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required','unique:users','regex:/^0[0-9]{7,11}$/','min:8','max:12',],
-            'password' => ['required', 'string', 'min:6','max:35', 'confirmed'],
+            'phone' => ['required', 'unique:users', 'regex:/^0[0-9]{7,11}$/', 'min:8', 'max:12'],
+            'password' => ['required', 'string','regex:/^(?=.*[A-Z])(?=.*\d).+$/', 'min:6', 'max:35', 'confirmed'],
+        ], [
+            'name.required' => 'Họ tên bắt buộc nhập.',
+            'name.string' => 'Họ tên phải là chữ.',
+            'name.min' => 'Tên ít nhất :min kí tự.',
+            'name.max' => 'Tên nhiều nhất :max kí tự.',
+            'avatar.required' => 'Ảnh đại diện không được bỏ trống.',
+            'avatar.image' => 'Ảnh không hợp lệ.',
+            'email.required' => 'Không được bỏ trống email.',
+            'email.email' => 'Email không hợp lệ.',
+            'email.max' => 'Địa chỉ email không được vượt quá :max ký tự.',
+            'email.unique' => 'Địa chỉ email đã tồn tại trong hệ thống.',
+            'phone.required' => 'Trường số điện thoại là bắt buộc.',
+            'phone.unique' => 'Số điện thoại đã tồn tại trong hệ thống.',
+            'phone.regex' => 'Số điện thoại phải là một số điện thoại Việt Nam hợp lệ.',
+            'phone.min' => 'Số điện thoại phải có ít nhất :min chữ số.',
+            'phone.max' => 'Số điện thoại không được vượt quá :max chữ số.',
+            'password.required' => 'Trường mật khẩu là bắt buộc.',
+            'password.regex' => 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa và ít nhất một số.',
+            'password.string' => 'Mật khẩu phải là một chuỗi ký tự.',
+            'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
+            'password.max' => 'Mật khẩu không được vượt quá :max ký tự.',
+            'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
         ]);
     }
-    // public function messages(): array
-    // {
-    //     return [
-    //         // name
-    //         "name.required" => "Tên không được để trống",
-    //         "name.min" => "Số kí tự phải lớn hơn 4",
-    //         "name.max" => "Số kí tự phải nhỏ hơn 20",
-    //         "name.string" => "Phải là chữ",
-    //         // price
-    //         "price.required"=>"Giá dịch vụ không được để trống",
-    //         "price.numeric"=>"Giá dịch vụ phải là số",
-    //         "price.gte"=>"Giá dịch vụ phải lớn hơn 1000",
-    //         // date_number
-    //         "date_number.required"=>"Số ngày dịch vụ không được để trống",
-    //         "date_number.numeric"=>"Số ngày dịch vụ phải là số",
-    //         "date_number.gte"=>"Số ngày dịch vụ phải lớn hơn 1",
-    //         // Description
-    //         "description.required"=>"Mô tả không được để trống",
-    //         "description.min"=>"Số kí tự phải lớn hơn 5",
-    //         "description.max"=>"Số kí tự phải nhỏ hơn 999",
-    //     ];
-    // }
+
+
+
     /**
      * Create a new user instance after a valid registration.
      *
