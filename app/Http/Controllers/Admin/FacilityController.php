@@ -72,7 +72,7 @@ class FacilityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    
+
     public function update(FacilityRequest $request, string $id)
     {
         try {
@@ -87,6 +87,7 @@ class FacilityController extends Controller
             if(\request()->hasFile('icon') && $oldImg){
                 delete_file($oldImg);
             }
+
             Toastr::success('Thao tác thành công', 'Thành công');
 
             return to_route('facilities.index');

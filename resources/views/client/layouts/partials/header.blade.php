@@ -3,35 +3,36 @@
         <div class="row align-items-center">
             <div class="col-lg-8 col-md-8 col-sm-7 col-7">
                 <div class="list-inline">
-                    <a href="tel:+55-4XX-634-7071"
-                    ><i class="fa fa-phone"></i>Need Support? +00-4X6-634-781</a
-                    >
-                    <a href="tel:info@themevessel.com" class="d-none-768"
-                    ><i class="fa fa-envelope"></i>info@themevessel.com</a
-                    >
+                    <a href="tel:+55-4XX-634-7071"><i class="fa fa-phone"></i>Need Support? +00-4X6-634-781</a>
+                    <a href="tel:info@themevessel.com" class="d-none-768"><i class="fa fa-envelope"></i>info@themevessel.com</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
                 <ul class="top-social-media pull-right">
                     <li>
-                        <a
-                            href="javascript:void(0);"
-                            class="sign-in"
-                            data-bs-toggle="modal"
-                            data-bs-target="#login"
-                        ><i class="fa fa-sign-in me-1"></i>Đăng nhập</a
-                        >
+                        <a href="javascript:void(0);" class="sign-in" data-bs-toggle="modal" data-bs-target="#login"><i class="fa fa-sign-in me-1"></i>Đăng nhập</a>
                     </li>
                     <li>
-                        <a
-                            href="javascript:void(0);"
-                            data-bs-toggle="modal"
-                            data-bs-target="#signup"
-                            class="sign-in"
-                        ><i class="fa fa-user me-1"></i>Đăng ký</a
-                        >
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signup" class="sign-in"><i class="fa fa-user me-1"></i>Đăng ký</a>
                     </li>
                 </ul>
+
+                <!-- <div class="dropdown pull-right">
+                  <button type="button" class="btn text-white bg-select-group p-0"
+                      data-bs-toggle="dropdown"  data-bs-display="static" aria-expanded="false">
+                      <img class="rounded-circle" width="30px" {{ asset('fe/src="https') }}://picsum.photos/200"
+                          alt="Header Avatar">
+                      <span class="d-xl-inline-block ms-1 dropdown-toggle">Nguyen</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-end">
+                      <div>
+                          <a class="dropdown-item" href="">Thông tin tài khoản</a>
+                          <a class="dropdown-item" href="">Cập nhật tài khoản</a>
+                          <a class="dropdown-item" href="">Đổi mật khẩu</a>
+                          <a class="dropdown-item text-danger" href="">Đăng xuất</a>
+                      </div>
+                  </div>
+              </div> -->
             </div>
         </div>
     </div>
@@ -44,76 +45,46 @@
             class="navbar navbar-expand-lg navbar-light bg-light"
             style="z-index: 0"
         >
+
             <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="{{ asset('fe/img/logos/logo.png') }}" alt="logo" height="80px" />
                 </a>
 
-                <div
-                    class="navbar-collapse collapse w-100 justify-content-center"
-                    id="navbar"
-                >
+                <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a
-                                class="nav-link"
-                                href="#"
-                                id="navbarDropdownMenuLink"
-                                aria-expanded="false"
-                            >
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" aria-expanded="false">
                                 Trang chủ
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="#"
-                                id="navbarDropdownMenuLink2"
-                                aria-expanded="false"
-                            >
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Phòng cho thuê
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="#"
-                                id="navbarDropdownMenuLink2"
-                                aria-expanded="false"
-                            >
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                href="#"
-                                id="navbarDropdownMenuLink2"
-                                aria-expanded="false"
-                            >
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Bảng giá dịch vụ
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div
-                    class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end"
-                >
+                <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href=""
-                        ><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i
-                            ></a>
+                        <a href=""><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <button class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </button>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a
-                        href=""
-                        class="d-md-block d-xl-none d-lg-none justify-content-end"
-                    ><i class="fa fa-bookmark-o me-2 fs-4"></i
-                        ></a>
+                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i class="fa fa-bookmark-o me-2 fs-4"></i></a>
 
                     <button class="navbar-toggler" id="drawer" type="button">
                         <span class="fa fa-bars"></span>
@@ -126,11 +97,7 @@
 <!-- Main header end -->
 
 <!-- Sidenav start -->
-<nav
-    id="sidebar"
-    class="nav-sidebar sidebar-heading-section"
-    style="z-index: 10"
->
+<nav id="sidebar" class="nav-sidebar sidebar-heading-section" style="z-index: 10">
     <!-- Close btn-->
     <div id="dismiss">
         <i class="fa fa-close"></i>
@@ -172,6 +139,7 @@
                         <input type="text" name="name_filter" id="name_filter" 
                         class="form-control bg-input-group" value="{{ request('name_filter') }}" 
                         placeholder="Nhập tên phòng..." style="height: 58px" />
+
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -196,6 +164,7 @@
                                     @foreach ($districts as $district)
                                     <option value="{{ $district->id }}" {{ request('district_filter') == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
                                     @endforeach
+
                                 </select>
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
@@ -212,10 +181,11 @@
                                         <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4 Triệu</option>
                                         <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu</option>
                                     </select>
+
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-lg-3">
+                        <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
                                 <select name="areage_filter" id="areage_filter" class="form-select bg-select-group"
                                 id="floatingSelect3"
@@ -225,17 +195,66 @@
                                     <option value="range_areage2" {{ request('areage_filter') == 'range_areage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
                                     <option value="range_areage3" {{ request('areage_filter') == 'range_areage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
                                     <option value="range_areage4" {{ request('areage_filter') == 'range_areage4' ? 'selected' : '' }}>Trên 45m vuông</option>
+
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm kiếm</button>
                         
+
                     </div>
+
                 </div>
             </div>
-        </form>
+      
     </div>
 </div>
 
+
 <!-- Search area box 1 end -->
+<!-- script -->
+<script>
+    function myOnchange() {
+        var category_room = document.getElementById('dselect-example1');
+        var district = document.getElementById('floatingSelect2');
+        var price = document.getElementById('floatingSelect3');
+        var acreage = document.getElementById('floatingSelect4');
+
+        console.log(category_room.value)
+        console.log(district.value)
+        console.log(price.value)
+        console.log(acreage.value)
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("send sucess!")
+               let details={category_room:category_room.value,district:district.value,price:price.value,acreage:acreage.value};
+               console.log(JSON.stringify(details))
+            }
+        };
+        xhttp.open("get","trang-chu", true);
+        xhttp.send();
+        // $.ajax({
+
+        //     url: 'http://127.0.0.1:8000/trang-chu',
+        //     type: 'GET',
+        //     data: {
+        //         'category_room': category_room.value,
+        //         'district':district.value,
+        //         'price':price.value,
+        //         'acreage':acreage.value,
+        //     },
+        //     dataType: 'json',
+        //     success: function(data) {
+        //         alert('Data: ' + data);
+        //     },
+        //     error: function(request, error) {
+        //         alert("Request: " + JSON.stringify(request));
+        //     }
+        // });
+    }
+</script>
+
+<!-- Search area box 1 end -->
+
