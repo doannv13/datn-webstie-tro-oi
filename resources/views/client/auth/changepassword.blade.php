@@ -1,4 +1,4 @@
-@extends('client.layouts.master')
+@extends('client.auth.index')
 @section('content')
 <div
 >
@@ -7,11 +7,12 @@
             <!-- Login section start -->
             <div class="login-section">
                 <div class="container-fluid">
-                    <div class="modal-header">
-                    </div>
                     <div class="row login-box">
                         <div class="form-section">
                             <div class="form-inner">
+                                <a href="{{ route('home') }}">
+                                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="300px" />
+                                </a>
                                 <h3>Cập nhật mật khẩu</h3>
                                 <form method="POST" name="register" action="{{ route('changepassword.update',auth()->user()->id) }}" onsubmit="return ValidateRegister()" enctype="multipart/form-data" ">
                                     @csrf

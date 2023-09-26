@@ -173,7 +173,7 @@
         <li class="dropdown notification-list topbar-dropdown">
             @if(auth()->user())
             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="{{ auth()->user()->avatar? asset(auth()->user())->avatar : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user-image" class="rounded-circle">
+                {{-- <img src="{{ auth()->user()->avatar? asset(auth()->user())->avatar : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user-image" class="rounded-circle"> --}}
                 <span class="pro-user-name ms-1">
 
                                         {{ auth()->user()->name }}

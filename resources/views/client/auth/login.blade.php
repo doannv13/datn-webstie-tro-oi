@@ -1,4 +1,4 @@
-@extends('client.layouts.master')
+@extends('client.auth.index')
 @section('content')
 <div
 data-bs-backdrop="static"
@@ -15,6 +15,9 @@ aria-hidden="true"
                 <div class="row login-box">
                     <div class="form-section">
                         <div class="form-inner">
+                            <a href="{{ route('home') }}">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="300px" />
+                            </a>
                             <h3>Đăng nhập tài khoản</h3>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -91,7 +94,7 @@ aria-hidden="true"
                             </div>
                             <p>
                                 Bạn chưa có tài khoản?
-                                <a href="signup.html" class="thembo"
+                                <a href="{{ route('register') }}" class="thembo"
                                 ><span class="text-sub">Đăng ký</span></a
                                 >
                             </p>
