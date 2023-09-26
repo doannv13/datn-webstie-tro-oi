@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
+use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\BannerController;
 
 /*
@@ -38,12 +39,12 @@ Route::get('dashboard', function () {
 Route::get('home-client', function () {
     return view('client.layouts.master');
 });
-Route::get('trang-chu',[HomeController::class, 'index'])->name('home');
-// Route::get('trang-chu', function () {
-//     return view('client.layouts.home'); // Trang chủ
-// });
-Route::post('fillter',[HomeController::class, 'filter_list']);
-// Route::get('fillter',[HomeController::class, 'filter_list']);
+Route::get('trang-chu', [HomeController::class, 'index']);
+// search-page
+Route::get('search', [HomeController::class, 'index'])->name('search');
+Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+
+
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
 Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');

@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Districts extends Model
+class Rooms extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 
-        'id_city', 
+        'name',
+        'areage',
+        'price',
+        'id_cate_room',
+        'id_wards',
     ];
-    
     public $timestamps = true;
 }
