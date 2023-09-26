@@ -12,7 +12,6 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\ChangeInfoController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
-use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\BannerController;
 
 /*
