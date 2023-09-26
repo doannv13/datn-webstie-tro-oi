@@ -67,7 +67,7 @@ aria-hidden="true"
                                             Ghi nhớ mật khẩu
                                         </label>
                                     </div>
-                                    <a href="forgot-password.html" class="forgot-password"
+                                    <a href="fogotpassword" class="forgot-password"
                                     >Quên mật khẩu</a
                                     >
                                 </div>

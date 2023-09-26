@@ -108,6 +108,9 @@ Route::get('client-signup',function(){
 });
 Route::resource('changeinfo', ChangeInfoController::class);
 Route::resource('changepassword', ChangePasswordController::class);
+Route::get('fogotpassword',function () {
+    return view('client.auth.fogotPassword');
+});
 
 // Facility
 Route::resource('surrounding', SurroundingController::class);
