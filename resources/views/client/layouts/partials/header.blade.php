@@ -161,8 +161,8 @@
                 <span class="input-group-text input-group-i px-3" style="width: 50px;">
                   <i class="fa fa-search text-white"></i>
                 </span>
-                        <input type="text" name="name_filter" id="name_filter" 
-                        class="form-control bg-input-group" value="{{ request('name_filter') }}" 
+                        <input type="text" name="name_filter" id="name_filter"
+                        class="form-control bg-input-group" value="{{ request('name_filter') }}"
                         placeholder="Nhập tên phòng..." style="height: 58px" />
 
                     </div>
@@ -176,9 +176,9 @@
                                     id="floatingSelect3"
                                     aria-label="Floating label select example">
                                         <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
-                                        @foreach ($category_rooms as $category_room)
+                                        {{-- @foreach ($category_rooms as $category_room)
                                         <option value="{{ $category_room->id }}" {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>{{ $category_room->name }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
@@ -188,9 +188,9 @@
 
                                 <select class="form-select bg-select-group" id="district_filter" name="district_filter">
                                     <option value="all" selected>Tất cả</option>
-                                    @foreach ($districts as $district)
+                                    {{-- @foreach ($districts as $district)
                                     <option value="{{ $district->id }}" {{ request('district_filter') == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
@@ -227,7 +227,7 @@
                             </div>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm kiếm</button>
-                        
+
 
                     </div>
 
