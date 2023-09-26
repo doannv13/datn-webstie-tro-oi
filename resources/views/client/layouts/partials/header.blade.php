@@ -8,7 +8,6 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
-
                     @guest
                     <ul class="top-social-media pull-right ">
                         <li>
@@ -55,6 +54,7 @@
                           </div>
                         </div>
 
+
                       </div>
                     @endif
                     @endguest
@@ -64,8 +64,12 @@
 </header>
 <!-- Main header start -->
 <header class="main-header" id="main-header-1">
-    <div class="">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 0">
+    <div class="container-fluid">
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-light"
+            style="z-index: 0"
+        >
+
             <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="{{ asset('fe/img/logos/logo.png') }}" alt="logo" height="80px" />
@@ -149,88 +153,82 @@
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
 
+        <form action="{{ route('search-fillter') }}" method="POST">
+            @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
                     <div class="input-group">
-
-                        <span class="input-group-text input-group-i btn p-2" style="width: 60px;">
-
-                            <i class="fa fa-search text-white " ></i>
-
-                        </span>
-                        <input type="text" class="form-control bg-input-group" style="height: 50px;" placeholder="Tìm kiếm ..." />
+                <span class="input-group-text input-group-i px-3" style="width: 50px;">
+                  <i class="fa fa-search text-white"></i>
+                </span>
+                        <input type="text" name="name_filter" id="name_filter" 
+                        class="form-control bg-input-group" value="{{ request('name_filter') }}" 
+                        placeholder="Nhập tên phòng..." style="height: 58px" />
 
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="row g-3">
-                        <div class="col-md-5 col-sm-5 col-lg-2">
+                        <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-                                <!-- <select
-                                  class="form-select bg-select-group"
-                                  id="floatingSelect1"
-                                  aria-label="Floating label select example"
-                                >
-                                  <option selected>Tất cả</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select> -->
 
-                                {{-- <select class="form-select bg-select-group" id="dselect-example1" name="category_room" onchange="myOnchange()">
-                                    <option selected value="0">Tất cả</option>
-                                    @foreach($categories_room as $key =>$value)
-                                    <option value="{{$key+1}}">{{$value->name}}</option>
-                                    @endforeach
-
-                                </select> --}}
+                                <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group"
+                                    id="floatingSelect3"
+                                    aria-label="Floating label select example">
+                                        <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                        @foreach ($category_rooms as $category_room)
+                                        <option value="{{ $category_room->id }}" {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>{{ $category_room->name }}</option>
+                                        @endforeach
+                                    </select>
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
-                        <div class="col-md-5 col-sm-5 col-lg-2">
+                        <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                {{-- <select class="form-select bg-select-group" id="floatingSelect2" aria-label="Floating label select example" name="district" onchange="myOnchange()">
-                                    <option selected value="0">Tất cả</option>
-                                    @foreach($districts as $key =>$value)
-                                    <option value="{{$key+1}}">{{$value->name}}</option>
+                                <select class="form-select bg-select-group" id="district_filter" name="district_filter">
+                                    <option value="all" selected>Tất cả</option>
+                                    @foreach ($districts as $district)
+                                    <option value="{{ $district->id }}" {{ request('district_filter') == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
                                     @endforeach
-
-                                </select> --}}
+                                </select>
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-lg-3">
                             <div class="form-floating">
-                                <select class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example" name="price" onchange="myOnchange()">
-                                    <option selected value="0">Tất cả</option>
-                                    <option value="1">Dưới 1 triệu</option>
-                                    <option value="2">1 triệu -> 2 triệu</option>
-                                    <option value="3">2 triệu -> 4 triệu</option>
-                                    <option value="4">Trên 4 triệu</option>
+                                    <select name="price_filter" id="price_filter" class="form-select bg-select-group"
+                                    id="floatingSelect3"
+                                    aria-label="Floating label select example">
+                                        <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                        <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1 Triệu</option>
+                                        <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 Triệu -> 2.5 Triệu</option>
+                                        <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4 Triệu</option>
+                                        <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu</option>
+                                    </select>
 
-                                </select>
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
-
-                                <select class="form-select bg-select-group" id="floatingSelect4" aria-label="Floating label select example" name="acreage" onchange="myOnchange()">
-                                    <option selected value="0">Tất cả</option>
-                                    <option value="1">Dưới 20m vuông</option>
-                                    <option value="2">20m -> 30m vuông</option>
-                                    <option value="3">30m vuông -> 45m vuông</option>
-                                    <option value="4">Trên 45m vuông</option>
+                                <select name="areage_filter" id="areage_filter" class="form-select bg-select-group"
+                                id="floatingSelect3"
+                                aria-label="Floating label select example">
+                                    <option value="allAreage" {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
+                                    <option value="range_areage1" {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
+                                    <option value="range_areage2" {{ request('areage_filter') == 'range_areage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
+                                    <option value="range_areage3" {{ request('areage_filter') == 'range_areage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
+                                    <option value="range_areage4" {{ request('areage_filter') == 'range_areage4' ? 'selected' : '' }}>Trên 45m vuông</option>
 
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-lg-2">
-                            <a type="submit" class=" p-1 px-5 btn-2" href="#">Lọc</a>
-                        </div>
+                        <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm kiếm</button>
+                        
+
                     </div>
 
                 </div>

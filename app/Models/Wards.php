@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Districts extends Model
+class Wards extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 
-        'id_city', 
+        'name',
+        'id_district'
     ];
-    
+
     public $timestamps = true;
 }

@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\ChangeInfoController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,12 +48,14 @@ Route::get('home-client', function () {
 Route::get('home-client', function () {
     return view('client.layouts.home'); // Trang chủ
 });
+
 Route::get('trang-chu',[HomeController::class, 'index'])->name('home');
-// Route::get('trang-chu', function () {
-//     return view('client.layouts.home'); // Trang chủ
-// });
 Route::post('fillter',[HomeController::class, 'filter_list']);
-// Route::get('fillter',[HomeController::class, 'filter_list']);
+
+Route::get('search', [HomeController::class, 'index'])->name('search');
+Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+
+
 
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
@@ -71,6 +75,15 @@ Auth::routes();
 
 // Setting
 Route::resource('setting', SettingController::class);
+
+// Banner
+Route::resource('banner', BannerController::class);
+Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
+Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
+Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
+
+Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
+
 
 //Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
@@ -130,7 +143,7 @@ Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore']
 
 
 
-//phân quyền start
+//Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
 });
@@ -138,4 +151,4 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     // route dành cho admin ở đây
 });
 
-//phân quyền end
+//Phân quyền end

@@ -20,11 +20,8 @@
 
 
     <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
-    <script src="{{ asset('be/assets/libs/jquery/jquery.min.js') }}"></script>
-    {{-- <script src="{{asset('be/assets/libs/jquery/jquery.min.js')}}"></script> --}}
-    <script src="{{ asset('be/assets/libs/toastr/build/toastr.min.js') }}"></script>
+
     <link rel="stylesheet" href="{{ asset('be/assets/css/toastr.css') }}">
-    <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- icons -->
 
@@ -45,6 +42,9 @@
         rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}"
         rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
 
 </head>
 
@@ -101,7 +101,6 @@ data-sidebar-user='true' --}}
     <div class="rightbar-overlay"></div>
 
     <!-- Vendor -->
-
     <script src="{{ asset('be/assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/simplebar/simplebar.min.js') }}"></script>
@@ -136,15 +135,66 @@ data-sidebar-user='true' --}}
             });
         })
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script src="{{asset('input-mask/jquery.inputmask.js')}}"></script>
     <!-- Dashboar init js-->
-    <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
+    {{-- <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script> --}}
 
 
     <!-- Plugins js -->
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/bootstrap5-toggle.ecmas.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/code.js') }}"></script>
+
+
+    {{-- Hiển thị thông báo --}}
+    <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            $('.toggle-class').change(function() {
+                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+                let banner_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('banner.status_change') }}',
+                    data: {
+                        'status': status,
+                        'banner_id': banner_id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            })
+
+                        } else {
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            })
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+
     @stack('scripts')
 </body>
 
