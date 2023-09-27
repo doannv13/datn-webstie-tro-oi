@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
-use App\Http\Controllers\Client\HomeController;
+
 use App\Http\Controllers\Admin\BannerController;
 
 /*
@@ -106,15 +106,6 @@ Route::resource('surrounding', SurroundingController::class);
 Route::get('surrounding-deleted', [SurroundingController::class, 'listDeleted'])->name('surrounding-deleted');
 Route::delete('surrounding-permanently/{id}', [SurroundingController::class, 'permanentlyDelete'])->name('surrounding-permanently-delete');
 Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore'])->name('surrounding-restore');
-
-
-
-
-
-
-
-
-
 
 
 

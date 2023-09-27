@@ -150,22 +150,31 @@
                                     id="floatingSelect3"
                                     aria-label="Floating label select example">
                                         <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                        @if(count($category_rooms) > 0)
                                         @foreach ($category_rooms as $category_room)
                                         <option value="{{ $category_room->id }}" {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>{{ $category_room->name }}</option>
                                         @endforeach
+                                        @else
+                                    <option value="" disabled>Không có dữ liệu loại phòng</option>
+                                @endif
                                     </select>
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
+
                                 <select class="form-select bg-select-group" id="district_filter" name="district_filter">
                                     <option value="all" selected>Tất cả</option>
+                                    @if(count($districts) > 0)
                                     @foreach ($districts as $district)
                                     <option value="{{ $district->id }}" {{ request('district_filter') == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
                                     @endforeach
-
+                                    @else
+                                    <option value="" disabled>Không có dữ liệu khu vực</option>
+                                @endif
                                 </select>
+
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
@@ -235,24 +244,6 @@
         };
         xhttp.open("get","trang-chu", true);
         xhttp.send();
-        // $.ajax({
-
-        //     url: 'http://127.0.0.1:8000/trang-chu',
-        //     type: 'GET',
-        //     data: {
-        //         'category_room': category_room.value,
-        //         'district':district.value,
-        //         'price':price.value,
-        //         'acreage':acreage.value,
-        //     },
-        //     dataType: 'json',
-        //     success: function(data) {
-        //         alert('Data: ' + data);
-        //     },
-        //     error: function(request, error) {
-        //         alert("Request: " + JSON.stringify(request));
-        //     }
-        // });
     }
 </script>
 
