@@ -133,21 +133,11 @@ Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore']
 
 
 
-
-
-
-
-
-
-
-
-
-//Phân quyền start
+// Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
     // route dành cho admin ở đây
 });
-
-//Phân quyền end
+// Phân quyền end
