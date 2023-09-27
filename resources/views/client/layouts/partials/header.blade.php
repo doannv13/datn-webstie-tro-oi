@@ -8,36 +8,60 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
-                <ul class="top-social-media pull-right">
-                    <li>
-                        <a href="javascript:void(0);" class="sign-in" data-bs-toggle="modal" data-bs-target="#login"><i class="fa fa-sign-in me-1"></i>Đăng nhập</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#signup" class="sign-in"><i class="fa fa-user me-1"></i>Đăng ký</a>
-                    </li>
-                </ul>
+                    @guest
+                    <ul class="top-social-media pull-right ">
+                        <li>
+                            <a
+                                href="/client-login"
+                                onclick
+                            ><i class="fa fa-sign-in me-1"></i>Đăng nhập</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/client-signup"
+                            ><i class="fa fa-user me-1"></i>Đăng ký</a
+                            >
+                        </li>
+                    </ul>
+                    @else
+                    @if (Auth::user())
+                    <div class="dropdown pull-right">
+                        <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static" aria-expanded="false">
+                          <img class="rounded-circle" style="width:30px;height:30px"  src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="Header Avatar">
+                          <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <div>
+                            @if (Auth::user())
+                              @if (Auth::user()->role==='vendor')
+                                <a class="dropdown-item" href="">Vào trang quản lí</a>
+                              @elseif (Auth::user()->role==='admin')
+                                <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                              @endif
+                            @endif
+                            <a class="dropdown-item" href="{{ route('changeinfo.edit',auth()->user()->id) }}">Cập nhật tài khoản</a>
+                            @if (Auth::user())
+                                <a class="dropdown-item" href="{{ route('changepassword.edit',auth()->user()->id) }}">Đổi mật khẩu</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                              Đăng xuất
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
+                          </div>
+                        </div>
 
-                <!-- <div class="dropdown pull-right">
-                  <button type="button" class="btn text-white bg-select-group p-0"
-                      data-bs-toggle="dropdown"  data-bs-display="static" aria-expanded="false">
-                      <img class="rounded-circle" width="30px" {{ asset('fe/src="https') }}://picsum.photos/200"
-                          alt="Header Avatar">
-                      <span class="d-xl-inline-block ms-1 dropdown-toggle">Nguyen</span>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                      <div>
-                          <a class="dropdown-item" href="">Thông tin tài khoản</a>
-                          <a class="dropdown-item" href="">Cập nhật tài khoản</a>
-                          <a class="dropdown-item" href="">Đổi mật khẩu</a>
-                          <a class="dropdown-item text-danger" href="">Đăng xuất</a>
+
                       </div>
-                  </div>
-              </div> -->
+                    @endif
+                    @endguest
             </div>
         </div>
     </div>
 </header>
-
 <!-- Main header start -->
 <header class="main-header" id="main-header-1">
     <div class="container-fluid">
@@ -128,6 +152,7 @@
 <!-- Search area box 1 start -->
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
+
         <form action="{{ route('search-fillter') }}" method="POST">
             @csrf
             <div class="row g-3 align-items-center">
@@ -136,8 +161,8 @@
                 <span class="input-group-text input-group-i px-3" style="width: 50px;">
                   <i class="fa fa-search text-white"></i>
                 </span>
-                        <input type="text" name="name_filter" id="name_filter" 
-                        class="form-control bg-input-group" value="{{ request('name_filter') }}" 
+                        <input type="text" name="name_filter" id="name_filter"
+                        class="form-control bg-input-group" value="{{ request('name_filter') }}"
                         placeholder="Nhập tên phòng..." style="height: 58px" />
 
                     </div>
@@ -146,10 +171,12 @@
                     <div class="row g-3">
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
+
                                 <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group"
                                     id="floatingSelect3"
                                     aria-label="Floating label select example">
                                         <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+
                                         @if(count($category_rooms) > 0)
                                         @foreach ($category_rooms as $category_room)
                                         <option value="{{ $category_room->id }}" {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>{{ $category_room->name }}</option>
@@ -166,6 +193,7 @@
 
                                 <select class="form-select bg-select-group" id="district_filter" name="district_filter">
                                     <option value="all" selected>Tất cả</option>
+
                                     @if(count($districts) > 0)
                                     @foreach ($districts as $district)
                                     <option value="{{ $district->id }}" {{ request('district_filter') == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
@@ -210,15 +238,16 @@
                             </div>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm kiếm</button>
-                        
+
 
                     </div>
 
                 </div>
             </div>
-      
+
     </div>
 </div>
+
 
 
 <!-- Search area box 1 end -->
@@ -246,6 +275,7 @@
         xhttp.send();
     }
 </script>
+
 
 <!-- Search area box 1 end -->
 
