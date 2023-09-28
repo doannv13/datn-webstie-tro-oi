@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -84,9 +85,15 @@ Route::resource('banner', BannerController::class);
 Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
 Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
 Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
-
 Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
 
+
+//Post
+Route::resource('post', PostController::class);
+//Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
+//Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
+//Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
+//Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
 
 // Category Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
