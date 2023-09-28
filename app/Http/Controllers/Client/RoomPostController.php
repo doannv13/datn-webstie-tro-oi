@@ -26,8 +26,11 @@ class RoomPostController extends Controller
      */
     public function index()
     {
+        $category_rooms = CategoryRoom::all();
+        $wards = Ward::all();
+        $districts = District::all();
         $data = RoomPost::query()->latest()->get();
-        return view('client.post-room.index', compact('data'));
+        return view('client.post-room.index', compact('data','category_rooms','wards','districts'));
     }
 
     /**
@@ -39,7 +42,10 @@ class RoomPostController extends Controller
         $services = Services::query()->latest()->get();
         $facilities = Facility::query()->latest()->get();
         $surrounding = Surrounding::query()->latest()->get();
-        return view('client.post-room.create', compact('categoryRooms', 'facilities', 'surrounding', 'services'));
+        $category_rooms = CategoryRoom::all();
+        $wards = Ward::all();
+        $districts = District::all();
+        return view('client.post-room.create', compact('categoryRooms', 'facilities', 'surrounding', 'services','category_rooms','wards','districts'));
     }
 
     /**
@@ -50,7 +56,7 @@ class RoomPostController extends Controller
         try {
             // if ($request->hasFile('image')) {
             //     $uploadFile = upload_file('room', $request->file('image'));
-            // } 
+            // }
             $ward = new Ward();
             $ward->fill([
                 'name' => $request->ward_id,
@@ -165,7 +171,7 @@ class RoomPostController extends Controller
         try {
             // if ($request->hasFile('image')) {
             //     $uploadFile = upload_file('room', $request->file('image'));
-            // } 
+            // }
             $model = RoomPost::query()->findOrFail($id);
             // dd($request->ward_id);
 
