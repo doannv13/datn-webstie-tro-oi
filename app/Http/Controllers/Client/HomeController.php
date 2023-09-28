@@ -15,7 +15,8 @@ class HomeController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts'));
+        $rooms=RoomPost::all();
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts','rooms'));
     }
 
     public function fillter_list(Request $request)
