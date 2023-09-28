@@ -173,7 +173,7 @@
         <li class="dropdown notification-list topbar-dropdown">
             @if(auth()->user())
             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                {{-- <img src="{{ auth()->user()->avatar? asset(auth()->user())->avatar : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user-image" class="rounded-circle"> --}}
+                <img src="{{ !auth()->user()->avatar==null ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user-image" class="rounded-circle">
                 <span class="pro-user-name ms-1">
 
                                         {{ auth()->user()->name }}
@@ -184,19 +184,19 @@
             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                 <!-- item-->
                 <div class="dropdown-header noti-title">
-                    <h6 class="text-overflow m-0">Welcome !</h6>
+                    <h6 class="text-overflow m-0">Xin chào !</h6>
                 </div>
 
                 <!-- item-->
-                <a href="contacts-profile.html" class="dropdown-item notify-item">
+                <a href="{{ route('admin-editinfo',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
-                    <span>My Account</span>
+                    <span>Cập nhật thông tin</span>
                 </a>
 
                 <!-- item-->
-                <a href="auth-lock-screen.html" class="dropdown-item notify-item">
+                <a href="{{ route('admin-changepassword',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-lock"></i>
-                    <span>Lock Screen</span>
+                    <span>Đổi mật khẩu</span>
                 </a>
 
                 <div class="dropdown-divider"></div>

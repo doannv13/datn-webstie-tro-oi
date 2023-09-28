@@ -138,9 +138,21 @@ Route::delete('surrounding-permanently/{id}', [SurroundingController::class, 'pe
 Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore'])->name('surrounding-restore');
 
 
+//Admin/chang info
+Route::get('admin-changeinfo/{id}',[ChangeInfoController::class,'adminedit'])->name('admin-editinfo');
+Route::put('admin-changeinfo/{id}',[ChangeInfoController::class,'adminupdate'])->name('admin-changeinfo');
+//Admin/chang password
+Route::get('admin-changepassword/{id}',[ChangePasswordController::class,'admineditpw'])->name('admin-editpassword');
+Route::put('admin-changepassword/{id}',[ChangePasswordController::class,'adminupdatepw'])->name('admin-changepassword');
 
 
-// Phân quyền start
+
+
+
+
+
+
+//Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
 });

@@ -14,7 +14,7 @@
                                     <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="300px" />
                                 </a>
                                 <h3>Cập nhật thông tin</h3>
-                                <form method="POST" name="register" action="{{ route('changeinfo.update',$data->id) }}" enctype="multipart/form-data" ">
+                                <form method="POST" name="register" action="{{ route('changeinfo.update',$data->id) }}" enctype="multipart/form-data" >
                                     @csrf
                                     @method('put')
                                     <input type="hidden" name="id" value="{{ $data->id }}">
@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="form-group clearfix">
                                         <input
-                                        id="name" placeholder="Số điện thoại" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $data->phone}}"  autocomplete="name" autofocus
+                                        id="phone" placeholder="Số điện thoại" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $data->phone}}"  autocomplete="name" autofocus
                                         />
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="file form-group clearfix d-flex align-items-center gap-5">
                                             <div class="mb-3 mt-3" style="text-align:center;">
-                                                <img src='{{ asset($data->avatar) }}' style="width: 70px;min-height:70px;height:70px;border-radius:100% ;object-fit: cover;" alt="">
+                                                <img src='{{ !$data->avatar==null ?  asset($data->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}' style="width: 70px;min-height:70px;height:70px;border-radius:100% ;object-fit: cover;" alt="">
                                                 <input type="hidden" name='old_avatar' value="{{ $data->avatar }}">
                                             </div>
                                         <div class="d-flex h-25">
