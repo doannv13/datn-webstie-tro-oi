@@ -110,7 +110,6 @@ class CouponController extends Controller
             $coupon = Coupon::where('id', $id);
             $coupon->forceDelete();
             Toastr::success('Xoá mã giảm giá thành công', 'Thành công');
-
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
