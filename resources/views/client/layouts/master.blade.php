@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:24:47 GMT -->
+
 <head>
     <title>Hotel Alpha - Booking and Reservation Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,32 +11,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/animate.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-submenu.css') }}" />
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{ asset('fe/css/bootstrap-select.min.css') }}"
-    />
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{ asset('fe/fonts/font-awesome/css/font-awesome.min.css') }}"
-    />
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{ asset('fe/fonts/flaticon/font/flaticon.css') }}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-select.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/flaticon/font/flaticon.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/linearicons/style.css') }}" />
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{ asset('fe/css/jquery.mCustomScrollbar.css') }}"
-    />
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{ asset('fe/css/bootstrap-datepicker.min.css') }}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/jquery.mCustomScrollbar.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-datepicker.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/dropzone.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/slick.css') }}" />
     <link rel="stylesheet" href="{{ asset('fe/css/leaflet.css') }}" type="text/css" />
@@ -44,40 +25,26 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/initial.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/style.css') }}" />
     <!-- dselect -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css"
-    />
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/skins/default.css') }}"/>
+    <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/skins/default.css') }}" />
 
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="{{ asset('fe/img/favicon.ico') }}" type="image/x-icon" />
 
     <!-- Google fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet"
-    />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet"
-    />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&amp;display=swap"
-        rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{ asset('fe/css/ie10-viewport-bug-workaround.css') }}"
-    />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/ie10-viewport-bug-workaround.css') }}" />
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9
-      ]><script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script
-    ><![endif]-->
+      ]><script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
     <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -86,272 +53,209 @@
     <script src="{{ asset('fe/js/respond.min.js') }}"></script>
     <![endif]-->
 </head>
+
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-TFC5925"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-    ></iframe
-    ></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<div class="page_loader"></div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFC5925" height="0" width="0"
+            style="display: none; visibility: hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="page_loader"></div>
 
-    {{--Star Header--}}
+    {{-- Star Header --}}
     @include('client.layouts.partials.header')
-    {{--End Header--}}
+    {{-- End Header --}}
 
-        <div class="content-page">
-            <div class="content">
+    <div class="content-page">
+        <div class="content">
 
-                <!-- Start Content-->
+            <!-- Start Content-->
 
             @yield('content')
             <!-- content -->
         </div>
 
 
-    <!-- Footer start #0b4c9f -->
-    @include('client.layouts.partials.footer')
-    <!-- Footer end -->
+        <!-- Footer start #0b4c9f -->
+        @include('client.layouts.partials.footer')
+        <!-- Footer end -->
 
 
-<!-- Modal signup -->
-<div
-    class="modal fade"
-    id="signup"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="9"
-    aria-labelledby="signupLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Login section start -->
-            <div class="login-section">
-                <div class="container-fluid">
-                    <div class="modal-header">
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="row login-box">
-                        <div class="form-section">
-                            <div class="form-inner">
-                                <a href="index.html">
-                                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="80px" />
-                                </a>
-                                <h3>Tạo mới tài khoản</h3>
-                                <form action="#" method="GET">
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Full Name"
-                                            aria-label="Full Name"
-                                        />
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="phone"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Phone"
-                                            aria-label="Phone"
-                                        />
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="email"
-                                            type="email"
-                                            class="form-control"
-                                            placeholder="Email Address"
-                                            aria-label="Email Address"
-                                        />
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="password"
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Password"
-                                            aria-label="Password"
-                                        />
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="password"
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Re-Password"
-                                            aria-label="Password"
-                                        />
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <button type="submit" class="btn-md btn-theme w-100">
-                                            Đăng ký
-                                        </button>
-                                    </div>
-                                    <div class="extra-login clearfix">
-                                        <span>Đăng nhập với</span>
-                                    </div>
-                                </form>
-                                <div class="clearfix"></div>
-                                <div class="social-list">
-                                    <a href="#" class="facebook-bg">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                    <a href="#" class="google-bg">
-                                        <i class="fa fa-google"></i>
-                                    </a>
-                                </div>
-                                <p>
-                                    Bạn đã có tài khoản ?
-                                    <a href="login.html"
-                                    ><span class="text-sub">Đăng nhập</span></a
-                                    >
-                                </p>
+        <!-- Modal signup -->
+        <div class="modal fade" id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="9"
+            aria-labelledby="signupLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Login section start -->
+                    <div class="login-section">
+                        <div class="container-fluid">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Login section end -->
-        </div>
-    </div>
-</div>
-
-<!-- Modal login -->
-<div
-    class="modal fade"
-    id="login"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="9"
-    aria-labelledby="loginLabel"
-    aria-hidden="true"
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Login section start -->
-            <div class="login-section">
-                <div class="container-fluid">
-                    <div class="modal-header">
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="row login-box">
-                        <div class="form-section">
-                            <div class="form-inner">
-                                <a href="index.html">
-                                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="80px" />
-                                </a>
-                                <h3>Đăng nhập tài khoản</h3>
-                                <form action="#" method="GET">
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="email"
-                                            type="email"
-                                            class="form-control"
-                                            placeholder="Email Address"
-                                            aria-label="Email Address"
-                                        />
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <input
-                                            name="password"
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Password"
-                                            aria-label="Password"
-                                        />
-                                    </div>
-                                    <div class="form-group checkbox clearfix">
-                                        <div class="form-check checkbox-theme float-start">
-                                            <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                id="rememberMe"
-                                            />
-                                            <label class="form-check-label" for="rememberMe">
-                                                Ghi nhớ mật khẩu
-                                            </label>
+                            <div class="row login-box">
+                                <div class="form-section">
+                                    <div class="form-inner">
+                                        <a href="index.html">
+                                            <img src="{{ asset('fe/img/logos/logo.png') }}" alt=""
+                                                width="80px" />
+                                        </a>
+                                        <h3>Tạo mới tài khoản</h3>
+                                        <form action="#" method="GET">
+                                            <div class="form-group clearfix">
+                                                <input name="name" type="text" class="form-control"
+                                                    placeholder="Full Name" aria-label="Full Name" />
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <input name="phone" type="text" class="form-control"
+                                                    placeholder="Phone" aria-label="Phone" />
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <input name="email" type="email" class="form-control"
+                                                    placeholder="Email Address" aria-label="Email Address" />
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <input name="password" type="password" class="form-control"
+                                                    placeholder="Password" aria-label="Password" />
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <input name="password" type="password" class="form-control"
+                                                    placeholder="Re-Password" aria-label="Password" />
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <button type="submit" class="btn-md btn-theme w-100">
+                                                    Đăng ký
+                                                </button>
+                                            </div>
+                                            <div class="extra-login clearfix">
+                                                <span>Đăng nhập với</span>
+                                            </div>
+                                        </form>
+                                        <div class="clearfix"></div>
+                                        <div class="social-list">
+                                            <a href="#" class="facebook-bg">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                            <a href="#" class="google-bg">
+                                                <i class="fa fa-google"></i>
+                                            </a>
                                         </div>
-                                        <a href="forgot-password.html" class="forgot-password"
-                                        >Quên mật khẩu</a
-                                        >
+                                        <p>
+                                            Bạn đã có tài khoản ?
+                                            <a href="login.html"><span class="text-sub">Đăng nhập</span></a>
+                                        </p>
                                     </div>
-                                    <div class="form-group clearfix">
-                                        <button type="submit" class="btn-md btn-theme w-100">
-                                            Đăng nhập
-                                        </button>
-                                    </div>
-                                    <div class="extra-login clearfix">
-                                        <span>Đăng nhập với</span>
-                                    </div>
-                                </form>
-                                <div class="clearfix"></div>
-                                <div class="social-list">
-                                    <a href="#" class="facebook-bg">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                    <a href="#" class="google-bg">
-                                        <i class="fa fa-google"></i>
-                                    </a>
                                 </div>
-                                <p>
-                                    Bạn chưa có tài khoản?
-                                    <a href="signup.html" class="thembo"
-                                    ><span class="text-sub">Đăng ký</span></a
-                                    >
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <!-- Login section end -->
                 </div>
             </div>
-            <!-- Login section end -->
         </div>
-    </div>
-</div>
 
-<script src="{{ asset('fe/js/jquery.min.js') }}"></script>
-<script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
-<script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
-<script src="{{ asset('fe/js/wow.min.js') }}"></script>
-<script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
-<script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-<script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
-<script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('fe/js/slick.min.js') }}"></script>
-<script src="{{ asset('fe/js/sidebar.js') }}"></script>
-<script src="{{ asset('fe/js/app.js') }}"></script>
-<script src="{{ asset('fe/js/dropzone.js') }}"></script>
-<script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
+        <!-- Modal login -->
+        <div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="9"
+            aria-labelledby="loginLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Login section start -->
+                    <div class="login-section">
+                        <div class="container-fluid">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="row login-box">
+                                <div class="form-section">
+                                    <div class="form-inner">
+                                        <a href="index.html">
+                                            <img src="{{ asset('fe/img/logos/logo.png') }}" alt=""
+                                                width="80px" />
+                                        </a>
+                                        <h3>Đăng nhập tài khoản</h3>
+                                        <form action="#" method="GET">
+                                            <div class="form-group clearfix">
+                                                <input name="email" type="email" class="form-control"
+                                                    placeholder="Email Address" aria-label="Email Address" />
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <input name="password" type="password" class="form-control"
+                                                    placeholder="Password" aria-label="Password" />
+                                            </div>
+                                            <div class="form-group checkbox clearfix">
+                                                <div class="form-check checkbox-theme float-start">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="rememberMe" />
+                                                    <label class="form-check-label" for="rememberMe">
+                                                        Ghi nhớ mật khẩu
+                                                    </label>
+                                                </div>
+                                                <a href="forgot-password.html" class="forgot-password">Quên mật
+                                                    khẩu</a>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <button type="submit" class="btn-md btn-theme w-100">
+                                                    Đăng nhập
+                                                </button>
+                                            </div>
+                                            <div class="extra-login clearfix">
+                                                <span>Đăng nhập với</span>
+                                            </div>
+                                        </form>
+                                        <div class="clearfix"></div>
+                                        <div class="social-list">
+                                            <a href="#" class="facebook-bg">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                            <a href="#" class="google-bg">
+                                                <i class="fa fa-google"></i>
+                                            </a>
+                                        </div>
+                                        <p>
+                                            Bạn chưa có tài khoản?
+                                            <a href="signup.html" class="thembo"><span class="text-sub">Đăng
+                                                    ký</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Login section end -->
+                </div>
+            </div>
+        </div>
 
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
-<!-- Custom javascript -->
+        <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
+        <script src="{{ asset('fe/js/wow.min.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('fe/js/slick.min.js') }}"></script>
+        <script src="{{ asset('fe/js/sidebar.js') }}"></script>
+        <script src="{{ asset('fe/js/app.js') }}"></script>
+        <script src="{{ asset('fe/js/dropzone.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
-<script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
-<!-- dselect -->
-<script>
-    dselect(document.querySelector('#dselect-example'))
-</script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
+        <!-- Custom javascript -->
+
+        <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
+        <!-- dselect -->
+        <script>
+            dselect(document.querySelector('#dselect-example'))
+        </script>
+
+        @stack('scripts')
 </body>
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->
+
 </html>

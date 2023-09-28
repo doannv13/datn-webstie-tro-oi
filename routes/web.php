@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SurroundingController;
+use App\Http\Controllers\Client\RoomPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,15 @@ Route::get('trang-chu', function () {
     return view('client.layouts.home'); // Trang chủ
 });
 
+
+// Room
+Route::resource('room-post', RoomPostController::class);
+Route::get('room_deleted', [RoomPostController::class, 'deleted'])->name('room_deleted');
+Route::delete('room_permanently/{id}', [RoomPostController::class, 'permanentlyDelete'])->name('room_permanently_delete');
+Route::get('room_restore/{id}', [RoomPostController::class, 'restore'])->name('room_restore');
+
+
+
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
 Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
@@ -69,7 +79,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Dịch vụ
 
-Route::resource('services',\App\Http\Controllers\Admin\ServicesController::class);
+Route::resource('services', \App\Http\Controllers\Admin\ServicesController::class);
 Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
 Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
 Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
