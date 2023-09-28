@@ -78,71 +78,148 @@
         <!-- Footer start #0b4c9f -->
         @include('client.layouts.partials.footer')
         <!-- Footer end -->
+<!-- Modal signup -->
+<div
+    class="modal fade"
+    id="signup"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="9"
+    aria-labelledby="signupLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Login section start -->
+            <div class="login-section">
+                <div class="container-fluid">
+                    <div class="modal-header">
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="row login-box">
+                        <div class="form-section">
+                            <div class="form-inner">
+                                <a href="index.html">
+                                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="80px" />
+                                </a>
+                                <h3>Tạo mới tài khoản</h3>
+                                <form method="POST" name="register" action="{{ route('register') }}" enctype="multipart/form-data" ">
+                                    @csrf
+                                    <div class="form-group clearfix">
+                                        <input
+                                        id="name" placeholder="Họ tên" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
+                                        />
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <input
+                                            name="phone"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Phone"
+                                            aria-label="Phone"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <input
+                                        id="email" type="email" placeholder="Địa chỉ email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"
+                                        />
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <input id="password" type="password" placeholder="Mật khẩu" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
 
-
-        <!-- Modal signup -->
-        <div class="modal fade" id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="9"
-            aria-labelledby="signupLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Login section start -->
-                    <div class="login-section">
-                        <div class="container-fluid">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="row login-box">
-                                <div class="form-section">
-                                    <div class="form-inner">
-                                        <a href="index.html">
-                                            <img src="{{ asset('fe/img/logos/logo.png') }}" alt=""
-                                                width="80px" />
-                                        </a>
-                                        <h3>Tạo mới tài khoản</h3>
-                                        <form action="#" method="GET">
-                                            <div class="form-group clearfix">
-                                                <input name="name" type="text" class="form-control"
-                                                    placeholder="Full Name" aria-label="Full Name" />
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <input name="phone" type="text" class="form-control"
-                                                    placeholder="Phone" aria-label="Phone" />
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <input name="email" type="email" class="form-control"
-                                                    placeholder="Email Address" aria-label="Email Address" />
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <input name="password" type="password" class="form-control"
-                                                    placeholder="Password" aria-label="Password" />
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <input name="password" type="password" class="form-control"
-                                                    placeholder="Re-Password" aria-label="Password" />
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <button type="submit" class="btn-md btn-theme w-100">
-                                                    Đăng ký
-                                                </button>
-                                            </div>
-                                            <div class="extra-login clearfix">
-                                                <span>Đăng nhập với</span>
-                                            </div>
-                                        </form>
-                                        <div class="clearfix"></div>
-                                        <div class="social-list">
-                                            <a href="#" class="facebook-bg">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                            <a href="#" class="google-bg">
-                                                <i class="fa fa-google"></i>
-                                            </a>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <input id="password-confirm" type="password" placeholder="Xác nhận mật khẩu" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    </div>
+                                    <div class="file form-group clearfix d-flex align-items-center gap-5">
+                                        <div class="d-flex h-25">
+                                            <label for="file">Chọn ảnh đại diện
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>
+                                            </label>
+                                            <input  type="file" name="avatar" accept="image/*" id="file" required>
                                         </div>
-                                        <p>
-                                            Bạn đã có tài khoản ?
-                                            <a href="login.html"><span class="text-sub">Đăng nhập</span></a>
-                                        </p>
+                                        <div class="mb-3 mt-3" style="text-align:center;">
+                                            <img src="" style="width: 70px;min-height:70px;border-radius:100% ;     object-fit: cover;"
+                                                id="show-image" alt="">
+                                        </div>
+                                        <style>
+                                            input[type=file] { display: none; }
+                                            label[for=file] {
+                                                display: grid;
+                                                grid-auto-flow: column;
+                                                grid-gap: .5em;
+                                                justify-items: center;
+                                                align-content: center;
+                                                padding: .85em 1.5em;
+                                                border-radius: 2em;
+                                                border: .2px solid gainsboro;
+                                                transition: 1s;
+                                                &:hover, &:focus, &:active {
+                                                    background: #F4A460;
+                                                    color:black;
+                                                }
+                                            }
+                                        </style>
+                                    </div>
+                                    <script>
+                                        function validateForm() {
+                                            let x = document.forms["myForm"]["fname"].value;
+                                            if (x == "") {
+                                                alert("Name must be filled out");
+                                                return false;
+                                            }
+                                            }
+                                    </script>
+                                    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+                                        crossorigin="anonymous"></script>
+                                    <script>
+                                    $(() => {
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                reader.onload = function(e) {
+                                                    $('#show-image').attr('src', e.target.result);
+                                                };
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+
+                                        $("#file").change(function() {
+                                            readURL(this);
+                                        });
+                                    });
+                                    </script>
+                                    <script>
+                                        dselect(document.querySelector('#dselect-example'))
+                                    </script>
+                                    <div class="form-group clearfix">
+                                        <button type="submit" class="btn-md btn-theme w-100">
+                                            Đăng ký
+                                        </button>
+                                    </div>
+                                    <div class="extra-login clearfix">
+                                        <span>Đăng nhập với</span>
                                     </div>
                                 </div>
                             </div>
@@ -152,64 +229,90 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<!-- Modal login Thảo lê -->
+<div
+    class="modal fade"
+    id="login"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="9"
+    aria-labelledby="loginLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Login section start -->
+            <div class="login-section">
+                <div class="container-fluid">
+                    <div class="modal-header">
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="row login-box">
+                        <div class="form-section">
+                            <div class="form-inner">
+                                <a href="index.html">
+                                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="80px" />
+                                </a>
 
-        <!-- Modal login -->
-        <div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="9"
-            aria-labelledby="loginLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Login section start -->
-                    <div class="login-section">
-                        <div class="container-fluid">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="row login-box">
-                                <div class="form-section">
-                                    <div class="form-inner">
-                                        <a href="index.html">
-                                            <img src="{{ asset('fe/img/logos/logo.png') }}" alt=""
-                                                width="80px" />
-                                        </a>
-                                        <h3>Đăng nhập tài khoản</h3>
-                                        <form action="#" method="GET">
-                                            <div class="form-group clearfix">
-                                                <input name="email" type="email" class="form-control"
-                                                    placeholder="Email Address" aria-label="Email Address" />
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <input name="password" type="password" class="form-control"
-                                                    placeholder="Password" aria-label="Password" />
-                                            </div>
-                                            <div class="form-group checkbox clearfix">
-                                                <div class="form-check checkbox-theme float-start">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="rememberMe" />
-                                                    <label class="form-check-label" for="rememberMe">
-                                                        Ghi nhớ mật khẩu
-                                                    </label>
-                                                </div>
-                                                <a href="forgot-password.html" class="forgot-password">Quên mật
-                                                    khẩu</a>
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <button type="submit" class="btn-md btn-theme w-100">
-                                                    Đăng nhập
-                                                </button>
-                                            </div>
-                                            <div class="extra-login clearfix">
-                                                <span>Đăng nhập với</span>
-                                            </div>
-                                        </form>
-                                        <div class="clearfix"></div>
-                                        <div class="social-list">
-                                            <a href="#" class="facebook-bg">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                            <a href="#" class="google-bg">
-                                                <i class="fa fa-google"></i>
-                                            </a>
+                                <h3>Đăng nhập tài khoản</h3>
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="form-group clearfix">
+                                        <input
+                                            id="email"
+                                            class="form-control
+                                            @error('email')
+                                            is-invalid
+                                            @enderror"
+                                            value="{{ old('email') }}"
+                                            autocomplete="email"
+                                            autofocus
+                                            name="email"
+                                            type="email"
+                                            class="form-control"
+                                            placeholder="Địa chỉ Email"
+                                            aria-label="Email Address"
+                                        />
+                                        {{-- @error('email')
+                                        <span id="errorEmail" class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror --}}
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <input
+                                        id="password"
+                                        type="password"
+                                        class="form-control
+                                        @error('password')
+                                        is-invalid
+                                        @enderror"
+                                        name="password"
+                                        min="6"
+                                        max="12"
+                                        autocomplete="current-password"
+                                        placeholder="Mật khẩu"
+                                        aria-label="Password"
+                                        />
+                                        {{-- @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror --}}
+                                    </div>
+                                    <div class="form-group checkbox clearfix">
+                                        <div class="form-check checkbox-theme float-start">
+                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="remember">
+                                                Ghi nhớ mật khẩu
+                                            </label>
                                         </div>
                                         <p>
                                             Bạn chưa có tài khoản?
@@ -217,6 +320,24 @@
                                                     ký</span></a>
                                         </p>
                                     </div>
+
+                                    <div class="form-group clearfix">
+                                        <button type="submit" onclick="validateAndSubmit()" class="btn-md btn-theme w-100">
+                                            Đăng nhập
+                                        </button>
+                                    </div>
+                                    <div class="extra-login clearfix">
+                                        <span>Đăng nhập với</span>
+                                    </div>
+                                </form>
+                                <div class="clearfix"></div>
+                                <div class="social-list">
+                                    <a href="#" class="facebook-bg">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                    <a href="#" class="google-bg">
+                                        <i class="fa fa-google"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -259,3 +380,4 @@
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->
 
 </html>
+

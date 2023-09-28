@@ -2,7 +2,6 @@
 @section('content')
     <div class="content">
         <!-- Start Content-->
-
         <!-- Banner start -->
         <div class="banner container" id="banner1" style="z-index: 0">
             <div
@@ -117,7 +116,7 @@
                     <div class="row wow fadeInUp delay-04s">
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="hotel-box">
-                                <!-- Photo thumbnail -->
+                                <!--  Photo thumbnail -- -->
                                 <div class="photo-thumbnail">
                                     <div class="photo">
                                         <img
