@@ -26,9 +26,6 @@ use App\Http\Controllers\Admin\BannerController;
 |
 */
 
-Route::get('/', function () {
-    return view('client.layouts.master');
-});
 
 //ADMIN
 
@@ -36,20 +33,21 @@ Route::get('home-admin', function () {
     return view('admin.layouts.master');
 })->name('home-admin');
 
-Route::get('dashboard', function () {
+Route::get('dashboard-admin', function () {
     return view('admin.dashboard');
 });
 
 //CLIENT
 Route::get('home-client', function () {
     return view('client.layouts.master');
-
 })->name('home-client');
-Route::get('home-client', function () {
+
+Route::get('dashboard-client', function () {
     return view('client.layouts.home'); // Trang chủ
 });
 
 
+Auth::routes();
 
 // Room
 Route::resource('room-post', RoomPostController::class);
@@ -76,7 +74,6 @@ Route::resource('facilities', FacilityController::class);
 Route::get('list-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
 Route::delete('facilities/permanently/{id}', [FacilityController::class, 'permanentlyDelete'])->name('facilities-permanently-delete');
 Route::get('restore/{id}', [FacilityController::class, 'restore'])->name('facilities-restore');
-Auth::routes();
 
 
 // Setting
@@ -91,14 +88,14 @@ Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('b
 Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
 
 
-//Post
+// Category Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
 Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
 Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
 Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');
-Route::get('/home', function(){
-    return view('client.layouts.home');
-})->name('home');
+
+//Post
+
 
 // Dịch vụ
 
