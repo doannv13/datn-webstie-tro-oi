@@ -76,6 +76,36 @@ class ChangePasswordController extends Controller
             return back();
         }
     }
+    public function admineditpw(string $id)
+    {
+        //
+        return view('admin.auth.changepassword');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function adminupdatepw(ChangePasswordRequest $request,string $id)
+    {
+        try{
+            $user = Auth::user(); // Lấy người dùng hiện tại
+
+            // Kiểm tra mật khẩu cũ
+            if (!Hash::check($request->old_password, $user->password)) {
+                toastr()->error('Mật khẩu cũ không đúng!','Thất bại');
+                return redirect()->back();
+            }
+            // Cập nhật mật khẩu mới
+            $user->password = bcrypt($request->password);
+            $user->save();
+            toastr()->success('Cập nhập mật khẩu thành công!','Thành công');
+            return to_route('home-admin');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Cập nhật mật khẩu thất bại!','Thất Bại');
+            return back();
+        }
+    }
 
     /**
      * Remove the specified resource from storage.

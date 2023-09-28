@@ -79,7 +79,35 @@ class ChangeInfoController extends Controller
             return back();
         }
     }
+    public function adminedit(string $id)
+    {
+        //
+        $data = User::findOrFail($id);
+        return view('admin.auth.changeinfo',compact('data'));
 
+    }
+    public function adminupdate(ChangeInfoRequest $request, string $id)
+    {
+        try{
+            $model = User::findOrFail($id);
+            $model->fill($request->all());
+            if($request->has('new_avatar') ){
+                $model->avatar=upload_file(OBJECT_USER,$request->file('new_avatar'));
+            }else{
+                $model->avatar=$request->old_avatar;
+            }
+            $model->save();
+            toastr()->success('Cập nhập thông tin tài khoản thành công!','Thành công');
+            if($request->hasFile('new_avatar')){
+                delete_file($request->old_avatar);
+            }
+            return to_route('home-admin');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Cập nhật thông tin thất bại!','Thất Bại');
+            return back();
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

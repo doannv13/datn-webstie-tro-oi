@@ -18,7 +18,7 @@
                                     @csrf
                                     @method('put')
                                     <div class="form-group clearfix">
-                                        <input id="password" type="password" placeholder="Mật khẩu hiện tại" class="form-control @error('password') is-invalid @enderror" name="old_password"  autocomplete="new-password">
+                                        <input id="password" type="password" placeholder="Mật khẩu hiện tại" class="form-control @error('old_password') is-invalid @enderror" name="old_password"  autocomplete="new-password">
                                         @error('old_password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
