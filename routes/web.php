@@ -90,10 +90,10 @@ Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('b
 
 //Post
 Route::resource('post', PostController::class);
-//Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
-//Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
-//Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
-//Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
+Route::get('post-deleted', [PostController::class, 'deleted'])->name('post.deleted');
+Route::delete('post/permanently/{id}', [PostController::class, 'permanentlyDelete'])->name('post.permanently.delete');
+Route::get('post/restore/{id}', [PostController::class, 'restore'])->name('post.restore');
+Route::get('/post-status', [PostController::class, 'changeStatus'])->name('post.status_change');
 
 // Category Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
