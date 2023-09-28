@@ -101,7 +101,7 @@
                         <div class="sidebar-widget archives">
                             <div class="main-title-2">
                                 <h1>Quản lý</h1>
-                            </div>  
+                            </div>
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-newspaper px-2"></i><a href="#">Quản lý tin đăng</a></li>
                                 <li><i class="fas fa-edit px-2"></i><a href="#">Đăng tin mới</a></li>
@@ -133,11 +133,11 @@
                                             <div class="form-group">
                                                 <label class="input-group">Tỉnh / thành phố:<span
                                                         class="text-danger">*</span> </label>
-                                                <select class="form-select mb-3" id="city" required=""> 
+                                                <select class="form-select mb-3" id="city" required="">
                                                     <option value="">Chọn tỉnh / thành phố</option>
                                                 </select>
                                                 <input class="billing_address_2" name="" type="hidden" value="">
-                                                <!-- <input type="text" id="thanhpho" hidden> -->   
+                                                <!-- <input type="text" id="thanhpho" hidden> -->
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 mb-3">
@@ -351,12 +351,12 @@
                                             <input type="file" data-plugins="dropify" data-height="300" />
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    {{-- <div class="mt-3">
+                                                    <div class="mt-3">
                                                         <input type="file" data-plugins="dropify"
                                                             data-default-file="assets/images/small/img-2.jpg" />
                                                         <p class="text-muted text-center mt-2 mb-0">
                                                             Default File</p>
-                                                    </div> --}}
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="mt-3">
@@ -374,7 +374,8 @@
                                                     </div>
                                                 </div>
 
-                                            </div><!-- end col -->
+                                            </div>
+                                            <!-- end col -->
                                         </div>
                                         <!-- Nhiều ảnh -->
                                         <div class="col-lg-12 col-md-12 mb-3">
@@ -620,7 +621,7 @@
             // var inputElement = document.getElementById('thanhpho');
             // var quanhuyen = document.getElementById('quanhuyen');
             // var districts = document.getElementById('district');
-            // 
+            //
             citis.onchange = function () {
                 district.length = 1;
                 ward.length = 1;
@@ -660,7 +661,7 @@
                     // district.value + '-' +
                     quan = district.options[district.selectedIndex];
                     console.log(quanhuyen.textContent);
-                }   
+                }
             };
             var resultElement = document.getElementById("result");
 

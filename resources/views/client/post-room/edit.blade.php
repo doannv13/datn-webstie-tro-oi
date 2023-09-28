@@ -1,4 +1,4 @@
-@extends('client.layouts.vendor')
+@extends('client.layouts.partials.l-sidebar')
 
 @section('main')
     <div class="container pt-2">
@@ -13,7 +13,8 @@
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-post.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room-post.update', $postroom->id) }}" method="POST"
+                      enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="sidebar row p-3">
@@ -32,7 +33,7 @@
                                     @endforeach
                                 </select>
                                 @error('city_id')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -47,7 +48,7 @@
                                     @endforeach
                                 </select>
                                 @error('district_id')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -63,7 +64,7 @@
                                     @endforeach
                                 </select>
                                 @error('ward_id')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -71,11 +72,12 @@
                             <label class="input-group">Địa chỉ chính xác:<span class="text-danger">*</span></label>
                             <div class="form-group ">
                                 <input class="form-control" type="text" name="address" id="address"
-                                    placeholder="Nhập số nhà , tên đường phố " aria-label="Nhập số nhà , tên đường phố"
-                                    value="{{ $postroom->address }}">
+                                       placeholder="Nhập số nhà , tên đường phố "
+                                       aria-label="Nhập số nhà , tên đường phố"
+                                       value="{{ $postroom->address }}">
                             </div>
                             @error('address')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-lg-12 col-md-12 mt-3">
@@ -83,11 +85,12 @@
                                     class="text-danger">*</span></label>
                             <div class="form-group">
                                 <input class="form-control" type="text" id="full_address" name="address_full"
-                                    placeholder="Nhập số nhà , tên đường phố " aria-label="Nhập số nhà , tên đường phố"
-                                    readonly value="{{ $postroom->address_full }}">
+                                       placeholder="Nhập số nhà , tên đường phố "
+                                       aria-label="Nhập số nhà , tên đường phố"
+                                       readonly value="{{ $postroom->address_full }}">
                             </div>
                             @error('empty_room')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -97,16 +100,17 @@
                             <label class="input-group">Tiêu đề:<span class="text-danger">*</span></label>
                             <div class="form-group ">
                                 <input class="form-control" type="text" name="name"
-                                    placeholder="Nhập tiêu đề của bài viết" aria-label="Nhập tiêu đề của bài viết"
-                                    value="{{ $postroom->name }}">
+                                       placeholder="Nhập tiêu đề của bài viết" aria-label="Nhập tiêu đề của bài viết"
+                                       value="{{ $postroom->name }}">
                             </div>
                             @error('name')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-lg-4 col-md-4 mb-3">
                             <div class="form-group ">
-                                <label class="input-group">Chuyên mục cho thuê:<span class="text-danger">*</span></label>
+                                <label class="input-group">Chuyên mục cho thuê:<span
+                                        class="text-danger">*</span></label>
                                 <select class="form-select mb-3" name="category_room_id">
                                     <option value="">Chọn chuyên mục</option>
                                     @foreach ($categoryRooms as $categoryRoom)
@@ -116,7 +120,7 @@
                                     @endforeach
                                 </select>
                                 @error('category_room_id')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -125,11 +129,11 @@
                                 <label class="input-group">Giá cho thuê: <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
                                     <input type="text" name="price" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5"
-                                        class="form-control" value="{{ $postroom->price }}">
+                                           class="form-control" value="{{ $postroom->price }}">
                                     <span class="input-group-text">/Tháng</span>
                                 </div>
                                 @error('price')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -138,22 +142,23 @@
                                 <label class="input-group">Diện tích:<span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
                                     <input type="text" placeholder="Diện tích" name="acreage" class="form-control"
-                                        value="{{ $postroom->acreage }}">
+                                           value="{{ $postroom->acreage }}">
                                     <span class="input-group-text">m²</span>
                                 </div>
                                 @error('acreage')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 mb-3">
                             <div class="form-group ">
-                                <label class="input-group">Số lượng phòng trống:<span class="text-danger">*</span></label>
+                                <label class="input-group">Số lượng phòng trống:<span
+                                        class="text-danger">*</span></label>
                                 <input type="text" placeholder="Số lượng phòng trống" name="empty_room"
-                                    class="form-control" value="{{ $postroom->empty_room }}">
+                                       class="form-control" value="{{ $postroom->empty_room }}">
                             </div>
                             @error('empty_room')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -162,7 +167,8 @@
                                 <label class="input-group">Trọ tự quản<span class="text-danger">*</span></label>
                                 <select class="form-select mb-3" name="managing">
                                     <option value="0" {{ $postroom->managing == '0' ? 'selected' : false }}>Trọ tự
-                                        quản</option>
+                                        quản
+                                    </option>
                                     <option value="yes" {{ $postroom->managing == 'yes' ? 'selected' : false }}>Có
                                     </option>
                                     <option value="no" {{ $postroom->managing == 'no' ? 'selected' : false }}>Không
@@ -170,7 +176,7 @@
                                 </select>
                             </div>
                             @error('managing')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -178,11 +184,12 @@
                         <div class="col-lg-12 col-md-12 mb-3">
                             <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
                             <div class="form-group message">
-                                <textarea class="form-control " style="height: 110px" name="description" placeholder="Write message"
-                                    aria-label="Write message">{{ $postroom->description }}</textarea>
+                                <textarea class="form-control " style="height: 110px" name="description"
+                                          placeholder="Write message"
+                                          aria-label="Write message">{{ $postroom->description }}</textarea>
                             </div>
                             @error('description')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-lg-12 col-md-12 mb-3">
@@ -191,7 +198,7 @@
                                 @foreach ($surrounding as $surround)
                                     <div class="form-check col-md-3 col-4 mb-2">
                                         <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                            value="{{ $surround->id }}"
+                                               value="{{ $surround->id }}"
                                             {{ in_array($surround->id, $surroundingArray) ? 'checked' : '' }}>
                                         <label class="form-check-label">
                                             {{ $surround->name }}
@@ -200,7 +207,7 @@
                                 @endforeach
                             </div>
                             @error('surrounding')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -211,7 +218,7 @@
                                 @foreach ($facilities as $facility)
                                     <div class="form-check col-md-3 col-4 mb-2">
                                         <input class="form-check-input" name="facility[]" type="checkbox"
-                                            value="{{ $facility->id }}"
+                                               value="{{ $facility->id }}"
                                             {{ in_array($facility->id, $facilityArray) ? 'checked' : '' }}>
                                         <label class="form-check-label">
                                             {{ $facility->name }}
@@ -220,7 +227,7 @@
                                 @endforeach
                             </div>
                             @error('facility')
-                                <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <!-- Upload file -->
@@ -230,7 +237,7 @@
                             <p class="sub-header">
                                 Kéo hoặc chọn file
                             </p>
-                            <input type="file" data-plugins="dropify" data-height="300" name="image" />
+                            <input type="file" data-plugins="dropify" data-height="300" name="image"/>
 
                         </div>
                         <!-- Nhiều ảnh -->
@@ -240,7 +247,7 @@
                                 Kéo hoặc chọn file
                             </p>
                             <input type="file" class="form-control" name="images[]" placeholder="Enter title"
-                                multiple>
+                                   multiple>
                             {{--  --}}
                             <!-- Preview -->
                             <div class="dropzone-previews mt-3" id="file-previews">
@@ -253,10 +260,11 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light"
-                                                    alt="">
+                                                     alt="">
                                             </div>
                                             <div class="col ps-0">
-                                                <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
+                                                <a href="javascript:void(0);" class="text-muted fw-bold"
+                                                   data-dz-name></a>
                                                 <p class="mb-0" data-dz-size></p>
                                             </div>
                                             <div class="col-auto">
@@ -283,10 +291,10 @@
                                     <label class="input-group">Họ và tên: <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="fullname" placeholder="Nhập họ tên của bạn"
-                                            value="{{ $postroom->fullname }}" class="form-control">
+                                               value="{{ $postroom->fullname }}" class="form-control">
                                     </div>
                                     @error('fullname')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -295,11 +303,12 @@
                                     <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" value="{{ $postroom->phone }}"
-                                            placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
+                                               placeholder="Nhập số điện thoại của bạn" name="phone"
+                                               class="form-control">
                                     </div>
                                 </div>
                                 @error('phone')
-                                    <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -309,10 +318,10 @@
                                     <label class="input-group">Email: <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" value="{{ $postroom->email }}" name="email"
-                                            placeholder="Nhập email của bạn" class="form-control">
+                                               placeholder="Nhập email của bạn" class="form-control">
                                     </div>
                                     @error('email')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -321,10 +330,10 @@
                                     <label class="input-group">Zalo:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" value="{{ $postroom->zalo }}"
-                                            placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
+                                               placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
                                     </div>
                                     @error('zalo')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -380,7 +389,7 @@
         };
         // console.log(phuongxa1.value);
         var promise = axios(Parameter);
-        promise.then(function(result) {
+        promise.then(function (result) {
             renderCity(result.data);
             // console.log(result.data);
             for (const a of result.data) {
@@ -404,7 +413,7 @@
                 citis.options.add(opt);
             }
 
-            citis.onchange = function() {
+            citis.onchange = function () {
                 district.length = 1;
                 ward.length = 1;
                 if (this.options[this.selectedIndex].dataset.id != "") {
@@ -423,12 +432,12 @@
                 }
             };
 
-            district.onchange = function() {
+            district.onchange = function () {
                 ward.length = 1;
                 const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
                 if (this.options[this.selectedIndex].dataset.id != "") {
                     const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this
-                            .selectedIndex]
+                        .selectedIndex]
                         .dataset.id)[0].Wards;
 
                     for (const w of dataWards) {
@@ -445,14 +454,14 @@
                 }
             };
 
-            wards.addEventListener("change", function() {
+            wards.addEventListener("change", function () {
                 var selectedXaPhuong = wards.options[wards.selectedIndex];
                 xaphuong = selectedXaPhuong.textContent;
                 full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
 
 
-            address.addEventListener("input", function() {
+            address.addEventListener("input", function () {
                 var addressValue = address.value;
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });

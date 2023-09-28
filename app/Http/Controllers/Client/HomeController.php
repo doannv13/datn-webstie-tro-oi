@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryRoom;
-use App\Models\Districts;
-use App\Models\Rooms;
-use App\Models\Wards;
+use App\Models\District;
+use App\Models\RoomPost;
+use App\Models\Ward;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,16 +13,16 @@ class HomeController extends Controller
     public function index()
     {
         $category_rooms = CategoryRoom::all();
-        $wards = Wards::all();
-        $districts = Districts::all();
+        $wards = Ward::all();
+        $districts = District::all();
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts'));
     }
 
     public function fillter_list(Request $request)
     {
         $category_rooms = CategoryRoom::query()->latest()->get();
-        $wards = Wards::query()->latest()->get();
-        $districts = Districts::query()->latest()->get();
+        $wards = Ward::query()->latest()->get();
+        $districts = District::query()->latest()->get();
 
         $selectedPrice = request()->input('price_filter');
         $selectedAreage = request()->input('areage_filter');
@@ -30,10 +30,10 @@ class HomeController extends Controller
         $district = request()->input('district_filter');
         $search = request()->input('name_filter');
 
-        $list_ward_id = Wards::where('id_district', $district)->pluck('id');
-        $query = Rooms::query();
+        $list_ward_id = Ward::where('id_district', $district)->pluck('id');
+        $query = RoomPost::query();
         $query->where('name', 'like', '%' . $search . '%');
-        
+
         if ($selectedRoomType !== 'all') {
             $query->where('id_cate_room', $selectedRoomType);
         }

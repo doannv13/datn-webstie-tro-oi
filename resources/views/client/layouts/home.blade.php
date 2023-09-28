@@ -1,8 +1,7 @@
 @extends('client.layouts.master')
 @section('content')
     <div class="content">
-        <!-- Start Content-->
-        <!-- Banner start -->
+        <<!-- Banner start -->
         <div class="banner container" id="banner1" style="z-index: 0">
             <div
                 id="carouselExampleFade"
