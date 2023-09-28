@@ -17,4 +17,9 @@ class Facility extends Model
     ];
 
     public $timestamps = true;
+
+    public function rooms()
+    {
+        return $this->belongsToMany(PostRoom::class, 'facility_rooms', 'room_id', 'facility_id');
+    }
 }

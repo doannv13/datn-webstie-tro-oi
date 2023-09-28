@@ -33,6 +33,7 @@ class HomeController extends Controller
         $list_ward_id = Wards::where('id_district', $district)->pluck('id');
         $query = Rooms::query();
         $query->where('name', 'like', '%' . $search . '%');
+        
         if ($selectedRoomType !== 'all') {
             $query->where('id_cate_room', $selectedRoomType);
         }
