@@ -24,15 +24,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data as $key => $value)
+                        @foreach ($model as $key => $value)
                             <tr id="row_@item.ID">
                                 <td class="tabledit-view-mode">{{ $value->id }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->title, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">
                                     @if ($value->image && asset($value->image))
-                                        <img src="{{ asset($value->image) }}" alt="" style="width: 40px; height: 40px">
+                                        <img src="{{ asset($value->image) }}" alt="" style="width: 80px; height: 80px">
                                     @else
-                                        <img src="{{ asset('no_image.jpg') }}" alt="" style="width: 40px; height: 40px">
+                                        <img src="{{ asset('no_image.jpg') }}" alt="" style="width: 80px; height: 80px">
                                     @endif
                                 </td>
                                 <td class="tabledit-view-mode">{!! substr($value->metaDescription, 0, 20) !!}</td>
