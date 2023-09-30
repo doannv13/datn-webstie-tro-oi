@@ -75,5 +75,45 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
+        $(function() {
+            $('.toggle-class').change(function() {
+                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+                let banner_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('banner.status_change') }}',
+                    data: {
+                        'status': status,
+                        'banner_id': banner_id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            })
+
+                        } else {
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            })
+                        }
+                    }
+                });
+            })
+        })
     </script>
 @endpush

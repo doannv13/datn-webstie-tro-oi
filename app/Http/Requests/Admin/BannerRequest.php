@@ -23,7 +23,7 @@ class BannerRequest extends FormRequest
     {
         return [
             'title' => 'required|max:50',
-            'image' => 'mimes:jpeg,png,jpg,gif|size:4096',
+            'image' => 'mimes:jpeg,png,jpg,gif',
             'url' => 'required|url',
             'description' => 'required|max:255',
         ];

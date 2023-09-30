@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\SurroundingController;
 use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\RoomPostController as AdminRoomPostController;
+use App\Http\Controllers\Admin\AdvertisementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,9 +94,24 @@ Route::resource('banner', BannerController::class);
 Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
 Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
 Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
-
 Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
 
+
+// Advertisement (ảnh quảng cáo)
+Route::resource('advertisement', AdvertisementController::class);
+Route::get('advertisement-deleted', [AdvertisementController::class, 'deleted'])->name('advertisement.deleted');
+Route::delete('advertisement/permanently/{id}', [AdvertisementController::class, 'permanentlyDelete'])->name('advertisement.permanently.delete');
+Route::get('advertisement/restore/{id}', [AdvertisementController::class, 'restore'])->name('advertisement.restore');
+Route::get('/advertisement-status', [AdvertisementController::class, 'changeStatus'])->name('advertisement.status_change');
+
+
+
+//Post
+Route::resource('post', PostController::class);
+Route::get('post-deleted', [PostController::class, 'deleted'])->name('post.deleted');
+Route::delete('post/permanently/{id}', [PostController::class, 'permanentlyDelete'])->name('post.permanently.delete');
+Route::get('post/restore/{id}', [PostController::class, 'restore'])->name('post.restore');
+Route::get('/post-status', [PostController::class, 'changeStatus'])->name('post.status_change');
 
 // Category Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
