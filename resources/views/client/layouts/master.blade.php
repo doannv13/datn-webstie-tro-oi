@@ -18,6 +18,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/jquery.mCustomScrollbar.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-datepicker.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/slick.css') }}"/>
+    <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('fe/css/leaflet.css') }}" type="text/css"/>
     {{--    css cua dropzone --}}
     <link href="{{asset('be/assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css"/>

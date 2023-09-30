@@ -123,6 +123,7 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/pages/materialdesign.init.js') }}"></script>
     <!-- knob plugin -->
     <script src="{{ asset('be/assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 

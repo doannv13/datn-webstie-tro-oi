@@ -36,12 +36,7 @@ class FacilityController extends Controller
     {
         try {
             $model = new Facility();
-            $model->fill($request->except('icon'));
-            if ($request->hasFile('icon')) {
-                $model->icon = upload_file(OBJECT_FACILITY, $request->file('icon'));
-            }else{
-                $model->icon = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3';
-            }
+            $model->fill($request->all());
             $model->save();
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('facilities.index');
@@ -77,17 +72,8 @@ class FacilityController extends Controller
     {
         try {
             $data = Facility::query()->findOrFail($id);
-            $data->fill(\request()->except('icon'));
-            $oldImg = $data->icon;
-            if (\request()->hasFile('icon')) {
-                $data->icon = upload_file(OBJECT_FACILITY, \request()->file('icon'));
-            }
+            $data->fill(\request()->all());
             $data->save();
-
-            if(\request()->hasFile('icon') && $oldImg){
-                delete_file($oldImg);
-            }
-
             Toastr::success('Thao tác thành công', 'Thành công');
 
             return to_route('facilities.index');
@@ -107,7 +93,6 @@ class FacilityController extends Controller
         try {
             $data = Facility::query()->findOrFail($id);
             $data->delete();
-            // delete_file($data->icon);
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('facilities.index');
         } catch (\Exception $exception) {
@@ -134,11 +119,7 @@ class FacilityController extends Controller
     {
         try {
             $facility = Facility::where('id', $id);
-            // $oldImg = $facility->icon;
             $facility->forceDelete();
-            // if($oldImg){
-            //     delete_file($oldImg);
-            // }
             Toastr::success('Thao tác thành công', 'Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {

@@ -67,7 +67,7 @@
                                 <span style="color: #F4A460;font-size: 15px;"
                                           class="pull-right">Diện tích: {{ $item->areage }}</span>
                                 <span style="color: #F4A460;font-size: 15px;"
-                                          class="pull-right">Khu vực: {{ $item->id_wards }}</span>
+                                          class="pull-right">Khu vực: {{ $item->wards_id }}</span>
                                 <span style="color: #F4A460;font-size: 15px;"
                                           class="pull-right">Loại phòng: {{ $item->id_cate_room }}</span>
                                 <p>Lorem ipsum dolor sit amet, conser adipiscing elit. Maecenas in pulvinar neque. Nulla
