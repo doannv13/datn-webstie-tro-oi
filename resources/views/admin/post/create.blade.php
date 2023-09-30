@@ -25,15 +25,19 @@
                                         @enderror
                                     </div>
 
-                                    <div class="row mb-3 ">
+                                    <div class="mb-3 row">
                                         <div class="col-11">
-                                            <label for="" class="form-label">Ảnh</label>
-                                            <input type="file" name="image" id="image" accept="image/*"
-                                                   class="form-control" class="@error('image') is-invalid @enderror">
+                                            <label for="example-textarea" class="form-label">Ảnh</label>
+                                            <input id="image" type="file" class="form-control" name="image"
+                                                   accept="image/*"><br>
                                         </div>
-                                        <div class="col-1">
-                                            <img src="{{ asset('no_image.jpg') }}" alt="" style="width: 100px; height: 100px" id="image_preview">
-                                        </div>
+                                       <div class="col-1">
+                                           <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
+                                                width="100px" height="100px">
+                                       </div>
+                                        @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
@@ -44,7 +48,6 @@
                                         @enderror
                                     </div>
 
-
                                     <div class="mb-3">
                                         <label for="example-textarea" class="form-label">Content</label>
                                         <textarea class="form-control" name="description" id="description" rows="5">{{ old('description') }}</textarea>
@@ -53,19 +56,10 @@
                                         @enderror
                                     </div>
 
-
-                                    <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">Slug</label>
-                                        <textarea class="form-control" name="slug" id="slug" rows="5">{{ old('slug') }}</textarea>
-                                        @error('slug')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-
                                     <div class="mb-3">
                                         <label for="example-textarea" class="form-label">ID Admin</label>
-                                        <textarea class="form-control" name="id_admin" id="id_admin" rows="5">{{ old('id_admin') }}</textarea>
+                                        <input type="text" name="id_admin" id="simpleinput" class="form-control"
+                                               value="{{ old('id_admin') }}">
                                         @error('id_admin')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -86,10 +80,14 @@
     </div> <!-- container -->
 @endsection
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('description');
+
+    <script> CKEDITOR.replace( 'description', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        } );
     </script>
 @endpush

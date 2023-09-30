@@ -82,6 +82,7 @@ class CategoryPostController extends Controller
 
             $model->fill($request->all());
             $model->save();
+
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('categorypost.index');
         } catch (\Exception $exception) {

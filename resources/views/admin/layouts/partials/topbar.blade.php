@@ -225,7 +225,7 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="index.html" class="logo logo-light text-center">
+        <a href="{{ route('post.index') }}" class="logo logo-light text-center">
                             <span class="logo-sm">
                                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
                             </span>
@@ -233,7 +233,7 @@
                                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="16">
                             </span>
         </a>
-        <a href="index.html" class="logo logo-dark text-center">
+        <a href="{{ route('post.index') }}" class="logo logo-dark text-center">
                             <span class="logo-sm">
                                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
                             </span>
