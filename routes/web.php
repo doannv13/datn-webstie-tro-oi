@@ -15,7 +15,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
 use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
-
+use App\Http\Controllers\Admin\AdvertisementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,6 +86,15 @@ Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner
 Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
 Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
 Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
+
+
+// Advertisement (ảnh quảng cáo)
+Route::resource('advertisement', AdvertisementController::class);
+Route::get('advertisement-deleted', [AdvertisementController::class, 'deleted'])->name('advertisement.deleted');
+Route::delete('advertisement/permanently/{id}', [AdvertisementController::class, 'permanentlyDelete'])->name('advertisement.permanently.delete');
+Route::get('advertisement/restore/{id}', [AdvertisementController::class, 'restore'])->name('advertisement.restore');
+Route::get('/advertisement-status', [AdvertisementController::class, 'changeStatus'])->name('advertisement.status_change');
+
 
 
 //Post

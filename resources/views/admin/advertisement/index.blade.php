@@ -1,20 +1,19 @@
 @extends('admin.layouts.master')
-@section('title', 'Danh sách banner')
+@section('title', 'Danh sách ảnh quảng cáo')
 @section('content')
 
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách banner</h5>
+                <h5 class="mt-0">Danh sách ảnh quảng cáo</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{ route('banner.create') }}">Thêm mới</a>
+                    <a class="btn btn-success mb-2" href="{{ route('advertisement.create') }}">Thêm mới</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
                                 <th class="col-2">#</th>
-                                <th class="col-2">Tiêu đề</th>
+                                <th class="col-2">Vị trí hiển thị</th>
                                 <th class="col-2">Đường dẫn</th>
-                                <th class="col-2">Mô tả</th>
                                 <th class="col-2">Ảnh</th>
                                 <th class="col-2">Trạng thái</th>
                                 <th class="col-4">Hành động</th>
@@ -24,9 +23,8 @@
                             @foreach ($data as $key => $value)
                                 <tr id="row_@item.ID">
                                     <td class="tabledit-view-mode">{{ $value->id }}</td>
-                                    <td class="tabledit-view-mode">{{ $value->title }}</td>
+                                    <td class="tabledit-view-mode">{{ $value->location }}</td>
                                     <td class="tabledit-view-mode">{{ $value->url }}</td>
-                                    <td class="tabledit-view-mode">{!! substr($value->description, 0, 20) !!}</td>
                                     <td class="tabledit-view-mode">
                                         @if ($value->image && asset($value->image))
                                             <img src="{{ asset($value->image) }}" alt="" width="100px"
@@ -43,14 +41,14 @@
                                             {{ $value->status == 'active' ? 'checked' : '' }}>
                                     </td>
                                     <td style="white-space: nowrap; width: 1%;">
-                                        <a href="{{ route('banner.edit', $value->id) }}">
+                                        <a href="{{ route('advertisement.edit', $value->id) }}">
                                             <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                                 <i class="fa-solid fa-pen-to-square fs-4"></i>
                                             </button>
                                         </a>
 
-                                        <form action="{{ route('banner.destroy', $value->id) }}" method="POST">
+                                        <form action="{{ route('advertisement.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
@@ -70,23 +68,21 @@
         </div> <!-- end card -->
     </div>
 @endsection
-
-
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
         $(function() {
             $('.toggle-class').change(function() {
                 let status = $(this).prop('checked') == true ? 'active' : 'inactive';
-                let banner_id = $(this).data('id');
+                let advertisement_id = $(this).data('id');
 
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('banner.status_change') }}',
+                    url: '{{ route('advertisement.status_change') }}',
                     data: {
                         'status': status,
-                        'banner_id': banner_id
+                        'advertisement_id': advertisement_id
                     },
                     success: function(data) {
                         console.log(data);

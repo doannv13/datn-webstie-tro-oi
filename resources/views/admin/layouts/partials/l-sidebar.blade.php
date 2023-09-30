@@ -217,30 +217,47 @@
                     </div>
                 </li>
 
-                    <a href="{{ asset('./be/#sidebarTasks') }}" data-bs-toggle="collapse">
-                        <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Tasks </span>
+                <li>
+                    <a href="#setting" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span> Cài đặt </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="setting">
+                        <ul class="nav-second-level">
+                            <li>
 
-                        <a href="#email" data-bs-toggle="collapse">
-                            <i class="mdi mdi-email-outline"></i>
-                            <span> Cài đặt </span>
+                                <a href="{{ asset('./be/task-kanban-board.html') }}">Kanban Board</a>
+                            </li>
+                            <li>
+                                <a href="{{ asset('./be/task-details.html') }}">Details</a>
 
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="email">
-                            <ul class="nav-second-level">
-                                <li>
+                                <a href="{{ route('setting.index') }}">Giao diện người dùng</a>
+                                <a href="email-inbox.html">Inbox</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
-                                    <a href="{{ asset('./be/task-kanban-board.html') }}">Kanban Board</a>
-                                </li>
-                                <li>
-                                    <a href="{{ asset('./be/task-details.html') }}">Details</a>
-
-                                    <a href="{{ route('setting.index') }}">Giao diện người dùng</a>
-                                    <a href="email-inbox.html">Inbox</a>
-                                </li>
-                            </ul>
-                        </div>
+                <li>
+                    <a href="#advertisement" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span> Ảnh quảng cáo </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="advertisement">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('advertisement.index') }}">Danh Sách</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('advertisement.create') }}">Thêm ảnh quảng cáo</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('advertisement.deleted') }}">Thùng Rác</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
 
