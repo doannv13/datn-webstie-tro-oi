@@ -15,7 +15,9 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
 use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\RoomPostController as AdminRoomPostController;
 use App\Http\Controllers\Admin\AdvertisementController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +51,13 @@ Route::get('dashboard-client', function () {
 
 
 Auth::routes();
+
+// admin roompost
+Route::resource('admin-roompost', AdminRoomPostController::class);
+Route::get('admin-roompost-deleted', [AdminRoomPostController::class, 'deleted'])->name('admin-roompost-deleted');
+Route::get('admin-roompost-restore/{id}', [AdminRoomPostController::class, 'restore'])->name('admin-roompost-restore');
+Route::delete('admin-roompost_permanently/{id}', [AdminRoomPostController::class, 'permanentlyDelete'])->name('admin-roompost-permanently-delete');
+
 
 // Room
 Route::resource('room-post', RoomPostController::class);

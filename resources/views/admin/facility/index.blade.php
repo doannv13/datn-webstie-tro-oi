@@ -5,7 +5,6 @@
             <div class="card-body">
                 <h5 class="mt-0">Danh sách tiện ích</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-primary mb-2" href="{{ route('facilities-deleted') }}">Thùng rác</a>
                     <a class="btn btn-success mb-2" href="{{ route('facilities.create') }}">Thêm mới</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
@@ -22,10 +21,7 @@
                                 <tr id="row_@item.ID">
                                     <td class="tabledit-view-mode">{{ $value->id }}</td>
                                     <td class="tabledit-view-mode">{{ $value->name }}</td>
-                                    <td class="tabledit-view-mode">
-                                        {{-- <img src="{{ $value->icon ? asset($value->icon): 'https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg' }}" alt="" style="width: 40px; height: 40px" id="image_preview"> --}}
-                                        <img src="{{ asset($value->icon) }}" style="width: 40px; height: 40px" />
-                                    </td>
+                                    <td class="tabledit-view-mode"><i class="{{ $value->icon }}"></i></td>
                                     <td class="tabledit-view-mode">{{ $value->description }}</td>
                                     <td style="white-space: nowrap; width: 1%;">
 
