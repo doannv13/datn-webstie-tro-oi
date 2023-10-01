@@ -371,24 +371,6 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#roompost" data-bs-toggle="collapse">
-                        <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Phòng</span>
-                        <span class="menu-arrow"></span>
-
-                    </a>
-                    <div class="collapse" id="roompost">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin-roompost.index') }}">Danh Sách</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin-roompost-deleted') }}">Thùng Rác</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
                     <a href="#banner" data-bs-toggle="collapse">
                         <i class="fe-folder-minus"></i>
                         <span>Banner</span>
