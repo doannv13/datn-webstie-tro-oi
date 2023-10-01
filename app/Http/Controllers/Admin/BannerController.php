@@ -43,7 +43,7 @@ class BannerController extends Controller
                 $data->image = upload_file(OBJECT_BANNER, $request->file('image'));
             }
             $data->save();
-            Toastr::success('Cập nhật cài đặt thành công', 'Thành công');
+            Toastr::success('Thêm banner thành công', 'Thành công');
             return to_route('banner.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -91,7 +91,7 @@ class BannerController extends Controller
             if ($request->hasFile('image') && $oldImg) {
                 delete_file($oldImg);
             }
-            Toastr::success('Cập nhật cài đặt thành công', 'Thành công');
+            Toastr::success('Cập nhật banner thành công', 'Thành công');
 
             return to_route('banner.index')
                 ->with('status', Response::HTTP_OK);

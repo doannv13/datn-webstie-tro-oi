@@ -256,8 +256,11 @@ class RoomPostController extends Controller
 
     public function deleted()
     {
+        $category_rooms = CategoryRoom::all();
+        $wards = Ward::all();
+        $districts = District::all();
         $data = RoomPost::onlyTrashed()->get();
-        return view('client.post-room.deleted', compact('data'));
+        return view('client.post-room.deleted', compact('data', 'category_rooms', 'wards', 'districts'));
     }
 
     public function permanentlyDelete(String $id)

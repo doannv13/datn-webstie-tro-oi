@@ -1,4 +1,3 @@
-@extends('client.layouts.master')
 @extends('client.layouts.partials.l-sidebar')
 @section('main')
     <!-- Blog body start -->

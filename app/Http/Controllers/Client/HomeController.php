@@ -28,19 +28,22 @@ class HomeController extends Controller
         $selectedPrice = request()->input('price_filter');
         $selectedAreage = request()->input('areage_filter');
         $selectedRoomType = request()->input('room_type_filter');
-        $district = request()->input('district_filter');
+        $selectedDistrict = request()->input('district_filter');
         $search = request()->input('name_filter');
 
-        $list_ward_id = Ward::where('id_district', $district)->pluck('id');
+        // $list_ward_id = Ward::where('district_id', $district)->pluck('id');
         $query = RoomPost::query();
         $query->where('name', 'like', '%' . $search . '%');
 
         if ($selectedRoomType !== 'all') {
-            $query->where('id_cate_room', $selectedRoomType);
+            $query->where('category_room_id', $selectedRoomType);
         }
-        if ($district !== 'all'){
-            $query->whereIn('id_wards', $list_ward_id);
+        if ($selectedDistrict !== 'all') {
+            $query->where('district_id', $selectedDistrict);
         }
+        // if ($district !== 'all'){
+        //     $query->whereIn('ward_id', $list_ward_id);
+        // }
         // Lọc theo giá
         if ($selectedPrice === 'all') {
             // Không cần thêm điều kiện nếu chọn tất cả

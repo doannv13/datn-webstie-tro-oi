@@ -10,7 +10,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('fe/img/logos/logo.png') }}">
 
 
     <!-- Plugins css -->
@@ -45,6 +45,9 @@
     <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
+    {{--Ckeditor--}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script> CKEDITOR.replace('editor1'); </script>
 
 </head>
 
@@ -108,6 +111,7 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/pages/materialdesign.init.js') }}"></script>
     <!-- knob plugin -->
     <script src="{{ asset('be/assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 
@@ -152,48 +156,7 @@ data-sidebar-user='true' --}}
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
-    <script>
-        $(function() {
-            $('.toggle-class').change(function() {
-                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
-                let banner_id = $(this).data('id');
 
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '{{ route('banner.status_change') }}',
-                    data: {
-                        'status': status,
-                        'banner_id': banner_id
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 3000
-                        })
-                        if ($.isEmptyObject(data.error)) {
-
-                            Toast.fire({
-                                icon: 'success',
-                                title: data.success,
-                            })
-
-                        } else {
-
-                            Toast.fire({
-                                icon: 'error',
-                                title: data.error,
-                            })
-                        }
-                    }
-                });
-            })
-        })
-    </script>
 
     @stack('scripts')
 </body>

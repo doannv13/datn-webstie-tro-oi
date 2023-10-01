@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
 use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\RoomPostController as AdminRoomPostController;
+use App\Http\Controllers\Admin\AdvertisementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +29,6 @@ use App\Http\Controllers\Admin\BannerController;
 |
 */
 
-Route::get('/', function () {
-    return view('client.layouts.master');
-});
 
 //ADMIN
 
@@ -36,19 +36,27 @@ Route::get('home-admin', function () {
     return view('admin.layouts.master');
 })->name('home-admin');
 
-Route::get('dashboard', function () {
+Route::get('dashboard-admin', function () {
     return view('admin.dashboard');
 });
 
 //CLIENT
 Route::get('home-client', function () {
     return view('client.layouts.master');
-
 })->name('home-client');
-Route::get('home-client', function () {
+
+Route::get('dashboard-client', function () {
     return view('client.layouts.home'); // Trang chủ
 });
 
+
+Auth::routes();
+
+// admin roompost
+Route::resource('admin-roompost', AdminRoomPostController::class);
+Route::get('admin-roompost-deleted', [AdminRoomPostController::class, 'deleted'])->name('admin-roompost-deleted');
+Route::get('admin-roompost-restore/{id}', [AdminRoomPostController::class, 'restore'])->name('admin-roompost-restore');
+Route::delete('admin-roompost_permanently/{id}', [AdminRoomPostController::class, 'permanentlyDelete'])->name('admin-roompost-permanently-delete');
 
 
 // Room
@@ -76,7 +84,6 @@ Route::resource('facilities', FacilityController::class);
 Route::get('list-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
 Route::delete('facilities/permanently/{id}', [FacilityController::class, 'permanentlyDelete'])->name('facilities-permanently-delete');
 Route::get('restore/{id}', [FacilityController::class, 'restore'])->name('facilities-restore');
-Auth::routes();
 
 
 // Setting
@@ -87,18 +94,33 @@ Route::resource('banner', BannerController::class);
 Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
 Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
 Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
-
 Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
 
 
+// Advertisement (ảnh quảng cáo)
+Route::resource('advertisement', AdvertisementController::class);
+Route::get('advertisement-deleted', [AdvertisementController::class, 'deleted'])->name('advertisement.deleted');
+Route::delete('advertisement/permanently/{id}', [AdvertisementController::class, 'permanentlyDelete'])->name('advertisement.permanently.delete');
+Route::get('advertisement/restore/{id}', [AdvertisementController::class, 'restore'])->name('advertisement.restore');
+Route::get('/advertisement-status', [AdvertisementController::class, 'changeStatus'])->name('advertisement.status_change');
+
+
+
 //Post
+Route::resource('post', PostController::class);
+Route::get('post-deleted', [PostController::class, 'deleted'])->name('post.deleted');
+Route::delete('post/permanently/{id}', [PostController::class, 'permanentlyDelete'])->name('post.permanently.delete');
+Route::get('post/restore/{id}', [PostController::class, 'restore'])->name('post.restore');
+Route::get('/post-status', [PostController::class, 'changeStatus'])->name('post.status_change');
+
+// Category Post
 Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
 Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
 Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
 Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');
-Route::get('/home', function(){
-    return view('client.layouts.home');
-})->name('home');
+
+//Post
+
 
 // Dịch vụ
 

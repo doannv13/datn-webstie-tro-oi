@@ -1,0 +1,176 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PostRequest;
+use App\Models\Post;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+
+class PostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+       $model = Post::query()->latest()->get();
+        return view('admin.post.index',compact('model'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.post.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(PostRequest $request)
+    {
+        try {
+            $model = new Post();
+            $slug = Str::slug($request->title);
+            $model->slug = $slug;
+            $model->fill($request->except('image'));
+            if ($request->hasFile('image')) {
+                $model->image = upload_file(OBJECT_POST, $request->file('image'));
+            }else{
+                $model->image = asset('no_image.jpg');
+            }
+            $model->save();
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return to_route('post.index');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $model = Post::query()->findOrFail($id);
+        return view('admin.post.edit',compact('model'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(PostRequest $request, string $id)
+    {
+        $model = Post::query()->findOrFail($id);
+        $slug = Str::slug($request->title);
+        $model->slug = $slug;
+        try {
+            $oldImg = $model->image; // Lưu ảnh cũ
+
+            $model->fill($request->except('image'));
+
+            if ($request->hasFile('image')) {
+                $newImg = upload_file(OBJECT_BANNER, $request->file('image')); // Tải lên ảnh mới
+                $model->image = $newImg;
+            }
+
+            $model->save();
+
+            // Kiểm tra nếu có ảnh mới và ảnh cũ tồn tại, thì xóa ảnh cũ
+            if ($request->hasFile('image') && $oldImg) {
+                delete_file($oldImg);
+            }
+            Toastr::success('Cập nhật cài đặt thành công', 'Thành công');
+
+            return to_route('post.index')
+                ->with('status', Response::HTTP_OK);
+        } catch (\Exception $exception) {
+            Log::error('Exception', [$exception]);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+
+            return back()
+                ->with('status', Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        try {
+           $model = Post::query()->findOrFail($id);
+           $model->delete();
+            Toastr::success('Post đã chuyển vào thùng rác', 'Thành công');
+
+            return to_route('post.index');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
+        }
+    }
+
+    public function deleted()
+    {
+       $model = Post::query()->onlyTrashed()->get();
+        return view('admin.post.delete', compact('model'));
+    }
+
+    public function restore(string $id)
+    {
+        try {
+            $restore = Post::query()->onlyTrashed()->findOrFail($id);
+            $restore->restore();
+            Toastr::success('Khôi phục post thành công', 'Thành công');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
+        }
+    }
+
+    public function permanentlyDelete(String $id)
+    {
+        try {
+            $coupon = Post::query()->where('id', $id);
+            $coupon->forceDelete();
+            Toastr::success('Xoá post thành công', 'Thành công');
+
+            return back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
+        }
+    }
+    public function changeStatus(Request $request)
+    {
+        try {
+            $post = Post::find($request->id);
+            $post->status = $request->status;
+            $post->save();
+            return response()->json(['success' => 'Thay đổi trạng thái thành công']);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
+        }
+    }
+}
