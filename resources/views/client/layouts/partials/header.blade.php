@@ -141,7 +141,6 @@
 <!-- Search area box 1 start -->
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
-
         <form action="{{ route('search-fillter') }}" method="POST">
             @csrf
             <div class="row g-3 align-items-center">

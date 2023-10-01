@@ -149,11 +149,13 @@
                             </div>
                         </div>
                         @endforeach
+                        {{ $rooms->links() }}
                         @endif
                         @endif
+                     
                     </div>
                     <!-- Page navigation start -->
-                    <div class="pagination-box-end">
+                    <!-- <div class="pagination-box-end">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -173,7 +175,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> -->
                     <!-- Page navigation end -->
                 </div>
             </div>

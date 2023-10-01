@@ -15,7 +15,7 @@ class HomeController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        $rooms=RoomPost::all();
+        $rooms=RoomPost::paginate(6);
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts','rooms'));
     }
 
