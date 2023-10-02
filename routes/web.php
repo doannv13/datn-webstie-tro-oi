@@ -167,8 +167,11 @@ Route::put('admin-changeinfo/{id}',[ChangeInfoController::class,'adminupdate'])-
 Route::get('admin-changepassword/{id}',[ChangePasswordController::class,'admineditpw'])->name('admin-editpassword');
 Route::put('admin-changepassword/{id}',[ChangePasswordController::class,'adminupdatepw'])->name('admin-changepassword');
 
-
-
+//BockMark
+Route::get('bookmark',[HomeController::class,'listbookmark'])->name('listbookmark');
+Route::post('bookmark/{id}',[HomeController::class,'bookmark'])->name('bookmark');
+Route::delete('unbookmark/{id}',[HomeController::class,'unbookmark'])->name('unbookmark');
+Route::delete('unbookmarkbm/{id}',[HomeController::class,'unbookmarkbm'])->name('unbookmarkbm');
 
 
 
