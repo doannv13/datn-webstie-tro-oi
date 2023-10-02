@@ -39,7 +39,6 @@ class PostController extends Controller
             $user = auth()->user();
             $model = new Post();
 
-            $model->ten_tac_gia = $user->name;
             $model->id_admin = $user->id;
 
             $slug = Str::slug($request->title);
