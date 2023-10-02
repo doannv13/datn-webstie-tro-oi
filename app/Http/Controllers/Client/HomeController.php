@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
+use App\Models\CategoryPost;
 use App\Models\CategoryRoom;
 use App\Models\District;
+use App\Models\Post;
 use App\Models\RoomPost;
 use App\Models\Ward;
+use App\Models\Bookmark;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,9 +21,75 @@ class HomeController extends Controller
         $wards = Ward::all();
         $districts = District::all();
         $rooms=RoomPost::all();
+        // dd($rooms);
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts','rooms'));
     }
+    public function bookmark(Request $request, string $id) {
+        if (Auth::check()) {
+            $user_id = auth()->user()->id;
+            $existingBookmark = Bookmark::where('user_id', $user_id)
+                ->where('room_post_id', $id)
+                ->first();
 
+            if (!$existingBookmark) {
+                $model = new Bookmark();
+                $model->user_id = $user_id;
+                $model->room_post_id = $id;
+                $model->save();
+                toastr()->success('Bạn vừa lưu 1 phòng', 'Đã lưu');
+                return to_route('home');
+            } else {
+                toastr()->error('Phòng đã được lưu trước đó', 'Thất bại');
+                return back();
+            }
+        } else {
+            toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
+            return redirect('/client-login');
+        }
+    }
+    public function listbookmark(){
+        if (Auth::check()) {
+            $user_id = auth()->user()->id;
+            $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
+            $data=Bookmark::where('user_id', $user_id)->with('roomPost')->paginate(6);
+            $categories = CategoryRoom::withCount('roomPosts')
+            ->having('room_posts_count', '>', 0)
+            ->paginate(4);
+            $posts = Post::latest()->paginate(5);
+            // dd($data[1]->roomPost);
+        return view('client.bookmark',compact('data','categories','posts','room_posts'));
+        } else {
+            toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
+            return redirect('/client-login');
+        }
+    }
+    public function unbookmark(string $id) {
+        try {
+            $user_id = auth()->user()->id;
+            $model = Bookmark::where('user_id', $user_id)
+            ->where('room_post_id', $id)
+            ->firstOrFail();
+            $model->delete();
+            toastr()->success('Đã bỏ lưu 1 phòng', 'Thành công');
+            return back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Có lỗi xảy ra', 'Thử lại sau');
+            return back();
+        }
+    }
+    public function unbookmarkbm(string $id) {
+        try {
+            $model = Bookmark::findOrFail($id);
+            $model->delete();
+            toastr()->success('Đã bỏ lưu 1 phòng', 'Thành công');
+            return back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Có lỗi xảy ra', 'Thử lại sau');
+            return back();
+        }
+    }
     public function fillter_list(Request $request)
     {
         $category_rooms = CategoryRoom::query()->latest()->get();

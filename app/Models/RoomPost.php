@@ -51,4 +51,8 @@ class RoomPost extends Model
     {
         return $this->belongsToMany(Facility::class, 'facility_rooms', 'room_id', 'facility_id');
     }
+    public function categoryPost()
+    {
+        return $this->belongsTo(CategoryPost::class);
+    }
 }
