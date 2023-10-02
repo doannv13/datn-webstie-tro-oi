@@ -20,7 +20,6 @@ class Post extends Model
         'status',
         'view',
         'id_admin',
-        'ten_tac_gia',
     ];
     public $timestamps = true;
 

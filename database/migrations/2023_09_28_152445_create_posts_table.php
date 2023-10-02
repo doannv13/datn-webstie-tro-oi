@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('slug');
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->string('view');
-            $table->string('ten_tac_gia');
             $table->unsignedBigInteger('id_admin');
             $table->timestamps();
             $table->softDeletes();
