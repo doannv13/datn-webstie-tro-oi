@@ -45,7 +45,7 @@
                                 <td class="tabledit-view-mode">{!! substr($value->description, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ $value->slug }}</td>
                                 <td class="tabledit-view-mode">{{ $value->view }}</td>
-                                <td class="tabledit-view-mode">{{ $value->id_admin }}</td>
+                                <td class="tabledit-view-mode">{{ $value->user->name }}</td>
                                 <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
                                 <td>
                                     <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
