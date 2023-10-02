@@ -10,7 +10,10 @@
                         <div class="card-body">
                             <div class="responsive-table-plugin">
                                 <div class="table-rep-plugin">
-                                    <a class="btn btn-primary" href="{{ route('user_deleted') }}">Thùng rác</a>
+                                   <div class="mb-2 d-flex gap-1 ">
+                                    <a class="btn btn-success" class="" href="{{ route('users.create') }}">Thêm mới</a>
+                                    <a class="btn btn-primary" class="" href="{{ route('user_deleted') }}">Thùng rác</a>
+                                   </div>
                                     <div class="table-responsive" data-pattern="priority-columns">
                                         <table id="tech-companies-1" class="table table-striped">
                                             <thead>
@@ -20,7 +23,7 @@
                                                     <th style="width:20%">Email</th>
                                                     <th style="width:15%">SĐT</th>
                                                     <th style="width:10%">Ảnh</th>
-                                                    <th style="width:15%">Chức Năng</th>
+                                                    <th style="width:15%">Vai trò</th>
                                                     <th style="width:5%">Thao tác</th>
                                                 </tr>
                                             </thead>
