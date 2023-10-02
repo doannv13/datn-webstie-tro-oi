@@ -12,12 +12,20 @@ class Post extends Model
     use HasFactory,SoftDeletes;
     protected $fillable = [
         'title',
+        'metaTitle',
         'image',
         'description',
         'metaDescription',
         'slug',
         'status',
+        'view',
         'id_admin',
+        'ten_tac_gia',
     ];
     public $timestamps = true;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

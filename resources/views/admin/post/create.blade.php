@@ -17,11 +17,20 @@
                                     @method('post')
 
                                     <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Tên tiêu đề</label>
-                                        <input type="text" name="title" id="simpleinput" class="form-control"
-                                            value="{{ old('title') }}">
-                                        @error('title')
+                                        <label for="simpleinput" class="form-label">Tiêu đề ngắn</label>
+                                        <input type="text" name="metaTitle" id="simpleinput" class="form-control"
+                                            value="{{ old('metaTitle') }}">
+                                        @error('metaTitle')
                                             <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="simpleinput" class="form-label">Tiêu đề</label>
+                                        <input type="text" name="title" id="simpleinput" class="form-control"
+                                               value="{{ old('title') }}">
+                                        @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -57,10 +66,10 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">ID Admin</label>
-                                        <input type="text" name="id_admin" id="simpleinput" class="form-control"
-                                               value="{{ old('id_admin') }}">
-                                        @error('id_admin')
+                                        <label for="example-textarea" class="form-label">View</label>
+                                        <input type="text" name="view" id="simpleinput" class="form-control"
+                                               value="{{ old('view') }}">
+                                        @error('view')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
