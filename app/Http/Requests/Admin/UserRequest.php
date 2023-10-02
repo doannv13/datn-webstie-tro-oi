@@ -29,4 +29,27 @@ class UserRequest extends FormRequest
             'avatar' => 'image',
         ];
     }
+    public function messages(): array
+{
+    return [
+        'name.required' => 'Vui lòng nhập tên.',
+        'name.min' => 'Tên phải có ít nhất 5 ký tự.',
+
+        'email.required' => 'Vui lòng nhập địa chỉ email.',
+        'email.min' => 'Địa chỉ email phải có ít nhất 5 ký tự.',
+        'email.unique' => 'Địa chỉ email này đã được sử dụng.',
+
+        'password.required' => 'Vui lòng nhập mật khẩu.',
+        'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
+        'password.max' => 'Mật khẩu không được quá 100 ký tự.',
+
+        'phone.required' => 'Vui lòng nhập số điện thoại.',
+        'phone.regex' => 'Số điện thoại không hợp lệ.',
+        'phone.max' => 'Số điện thoại không được quá 12 ký tự.',
+        'phone.min' => 'Số điện thoại phải có ít nhất 9 ký tự.',
+        'phone.unique' => 'Số điện thoại này đã được sử dụng.',
+
+        'avatar.image' => 'Tập tin avatar phải là hình ảnh.',
+    ];
+}
 }
