@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
@@ -28,10 +28,8 @@ class RoomPostController extends Controller
     public function index()
     {
         $category_rooms = CategoryRoom::all();
-        $wards = Ward::all();
-        $districts = District::all();
         $data = RoomPost::query()->latest()->get();
-        return view('client.post-room.index', compact('data', 'category_rooms', 'wards', 'districts'));
+        return view('admin.room-post.edit', compact('data', 'category_rooms'));
     }
 
     /**
@@ -46,7 +44,7 @@ class RoomPostController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        return view('client.post-room.create', compact('categoryRooms', 'facilities', 'surrounding', 'services', 'category_rooms', 'wards', 'districts'));
+        return view('admin.room-post.create', compact('categoryRooms', 'facilities', 'surrounding', 'services', 'category_rooms', 'wards', 'districts'));
     }
 
     /**
@@ -163,7 +161,7 @@ class RoomPostController extends Controller
         $districts = District::query()->find($id);
         $cities = City::query()->find($id);
         // dd($cities);
-        return view('client.post-room.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities'));
+        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities'));
     }
 
     /**
@@ -263,7 +261,7 @@ class RoomPostController extends Controller
     public function deleted()
     {
         $data = RoomPost::onlyTrashed()->get();
-        return view('client.post-room.deleted', compact('data'));
+        return view('admin.room-post.deleted', compact('data'));
     }
 
     public function permanentlyDelete(String $id)

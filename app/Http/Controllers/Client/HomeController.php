@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Client;
+
 use App\Http\Controllers\Controller;
 use App\Models\CategoryRoom;
 use App\Models\District;
+use App\Models\ImageRoom;
 use App\Models\RoomPost;
 use App\Models\Ward;
 use Illuminate\Http\Request;
@@ -37,7 +39,7 @@ class HomeController extends Controller
         if ($selectedRoomType !== 'all') {
             $query->where('id_cate_room', $selectedRoomType);
         }
-        if ($district !== 'all'){
+        if ($district !== 'all') {
             $query->whereIn('id_wards', $list_ward_id);
         }
         // Lọc theo giá
@@ -66,5 +68,18 @@ class HomeController extends Controller
         }
         $room = $query->get();
         return view('client.layouts.search', compact('category_rooms', 'wards', 'districts', 'room'));
+    }
+
+    public function roomPostDetail(String $id)
+    {
+
+        $roomposts = RoomPost::query()->with('facilities', 'surrounds')->findOrFail($id);
+        $caterooms = RoomPost::query()->with('facilities', 'surrounds')
+            ->where('id', '!=', $id)
+            ->where('category_room_id', $roomposts->category_room_id)
+            ->get();
+        $images = ImageRoom::query()->where('room_id', $id)->get();
+        // $rooms=RoomPost::with('facilities')->where('status','inactive')->latest('id')->paginate(6);
+        return view('client.post-room.room-post-detail', compact('roomposts', 'images', 'caterooms'));
     }
 }

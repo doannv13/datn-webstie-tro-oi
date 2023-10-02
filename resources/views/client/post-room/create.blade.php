@@ -1,4 +1,3 @@
-@extends('client.layouts.master')
 @extends('client.layouts.partials.l-sidebar')
 @section('main')
     <!-- Blog body start -->
@@ -211,34 +210,9 @@
                             <p class="sub-header">
                                 Kéo hoặc chọn file
                             </p>
-                            <input type="file" data-plugins="dropify" data-height="300" />
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="mt-3">
-                                        <input type="file" data-plugins="dropify"
-                                               data-default-file="assets/images/small/img-2.jpg" />
-                                        <p class="text-muted text-center mt-2 mb-0">
-                                            Default File</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mt-3">
-                                        <input type="file" data-plugins="dropify" disabled="disabled" />
-                                        <p class="text-muted text-center mt-2 mb-0">
-                                            Disabled the input</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="mt-3">
-                                        <input type="file" data-plugins="dropify"
-                                               data-max-file-size="1M" />
-                                        <p class="text-muted text-center mt-2 mb-0">
-                                            Max File size</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
+                            <input type="file" name="imageroom" id="image" data-plugins="dropify"
+                                data-height="300">
+                            {{-- <input type="file" name="image"  /> --}}
                             @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -352,19 +326,15 @@
                     <div class="sidebar row p-3">
                         <div class="col-lg-12 col-md-12 clearfix">
                             <div class=" text-center pull-left">
-                                <button type="submit" class="btn-md btn-theme btn-4 btn-7">Quay
-                                    lại
-                                    danh
-                                    sách
-                                </button>
+                                <a href="{{ route('room-post.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
+                                    danh sách</a>
+
                             </div>
                             <div class="send-btn text-center d-flex gap-2 pull-right">
                                 <button type="submit" class="btn-md  btn-danger btn-7">Hủy
                                 </button>
                                 <button type="submit" class="btn-md btn-theme btn-4 btn-7">Tạo
-                                    bài
-                                    viết
-                                    mới
+                                    tin đăng mới
                                 </button>
                             </div>
                         </div>
@@ -464,8 +434,7 @@
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
         }
-    </script>
-    <script>
+
         $(document).ready(function() {
             $('.upload__inputfile').each(function() {
                 $(this).on('change', function(e) {

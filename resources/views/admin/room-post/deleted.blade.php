@@ -1,4 +1,5 @@
-@extends('client.layouts.partials.l-sidebar')
+@extends('admin.layouts.master')
+
 @section('main')
     <div class="container pt-2">
         <nav class="breadcrumbs">
@@ -46,25 +47,15 @@
                                     </div>
                                 </td>
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                <td class="">
-                                    <div class="d-flex m-2">
-                                        <form action="{{ route('room-post.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
-                                                onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                <!-- Đặt kích thước cố định là 100px -->
-                                                <i class="fa-solid fa-trash fs-4"></i>
-                                            </button>
-                                        </form>
-                                        <a href="{{ route('room-post.edit', $value->id) }}">
-                                            <button type="submit" class="btn btn-primary text-center my-1 m-2"
-                                                style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
-                                                <i class="fa-solid fa-pen-to-square fs-4"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                    <button class="btn btn-primary px-4">Mua gói dịch vụ</button>
+                                <td><a href="{{ route('room_restore', $value->id) }}" class="btn btn-primary me-2"><i
+                                            class="fa-solid fa-trash-arrow-up"></i></a>
+                                    <form action="{{ route('room_permanently_delete', $value->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger">
+                                            <i class="fa-solid fa-delete-left text-light"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

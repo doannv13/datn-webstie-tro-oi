@@ -1,4 +1,4 @@
-@extends('client.layouts.partials.l-sidebar')
+@extends('admin.layouts.master')
 @section('main')
     <div class="container pt-2">
         <nav class="breadcrumbs">
