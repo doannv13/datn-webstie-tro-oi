@@ -78,10 +78,9 @@
                 <div class="container">
                     <!-- Main title -->
                     <div class="main-title">
-                        <h1>Our Best Rooms</h1>
+                        <h1>Tin Mới Nhất</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod
+                            Danh sách những tin đăng mới nhất.
                         </p>
                     </div>
                     <div class="row wow fadeInUp delay-04s">
@@ -120,29 +119,13 @@
                                     </p>
                                     <div class="fecilities row">
                                         <ul>
+                                            @if(isset($value->facilities))
+                                            @foreach ($value->facilities as $facilities)
                                             <li>
-                                                <i class="flaticon-bed"></i> Beds
+                                                <i class="{{$facilities->icon}}"></i>{{$facilities->name}}
                                             </li>
-                                            <li>
-                                                <i class="flaticon-air-conditioning"></i>
-                                                AC
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-graph-line-screen"></i>
-                                                TV
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-weightlifting"></i>
-                                                GYM
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                                Wi-fi
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-parking"></i>
-                                                Parking
-                                            </li>
+                                            @endforeach
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -152,7 +135,7 @@
                         {{ $rooms->links() }}
                         @endif
                         @endif
-                     
+
                     </div>
                     <!-- Page navigation start -->
                     <!-- <div class="pagination-box-end">
@@ -187,10 +170,9 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Our Staff</h1>
+                    <h1>Nhà Phát Triển </h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                        eiusmod
+                        Nhà phát triển website.
                     </p>
                 </div>
                 <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
@@ -403,27 +385,34 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Our Blog</h1>
+                    <h1>Bài Viết</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                        eiusmod
+                        Danh sách những bài viết mới nhất.
                     </p>
                 </div>
                 <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
+                    @if(isset($posts))
+                    @foreach($posts as $key => $value)
                     <div class="item slide-box">
                         <div class="blog-1">
                             <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-5.jpg') }}" alt="image" class="img-fluid w-100" />
+                                <img src="{{ asset($value->image)  }}" alt="image" class="img-fluid w-100" />
                                 <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-1.jpg') }}" alt="user" />
+                                    <img src="{{ asset($value->admin->avatar) }}" alt="user" />
                                 </div>
-                                <div class="date-box"><span>09</span>Sep</div>
+                                <div class="date-box">
+                                    @if(isset($value->created_at))
+                                    <span>{{ $value->created_at->format('d') }}
+                                    </span>{{ substr($value->created_at->format('F'), 0, 3) }}
+                                    @endif
+                                </div>
+
                             </div>
                             <div class="detail">
                                 <div class="post-meta clearfix">
                                     <ul>
                                         <li>
-                                            <strong><a href="#">By: Auro Navanth</a></strong>
+                                            <strong><a href="#">By: {{$value->admin->name}}</a></strong>
                                         </li>
                                         <li class="float-right mr-0">
                                             <a href="#"><i class="fa fa-commenting-o"></i></a>205
@@ -434,116 +423,16 @@
                                     </ul>
                                 </div>
                                 <h3>
-                                    <a href="blog-details.html">Standard Post Format Title</a>
+                                    <a href="blog-details.html">{{$value->title}}</a>
                                 </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
+                                <p style="width: 100px;">
+                                    {{substr($value->metaDescription,0,45)}}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-4.jpg') }}" alt="image" class="img-fluid w-100" />
-                                <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-2.jpg') }}" alt="user" />
-                                </div>
-                                <div class="date-box"><span>06</span>Sep</div>
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="#">By: Navanth Auro</a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
-                                        </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Alpha Hotel Pars Studiorum</a>
-                                </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-5.jpg') }}" alt="image" class="img-fluid w-100" />
-                                <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-3.jpg') }}" alt="user" />
-                                </div>
-                                <div class="date-box"><span>14</span>Sep</div>
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="#">By: Tanzim</a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
-                                        </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Best Night Photo at Alpha Hotel
-                                    </a>
-                                </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-6.jpg') }}" alt="image" class="img-fluid w-100" />
-                                <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-3.jpg') }}" alt="user" />
-                                </div>
-                                <div class="date-box"><span>14</span>Sep</div>
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="#">By: Tanzim</a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
-                                        </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Best Night Photo at Alpha Hotel
-                                    </a>
-                                </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>

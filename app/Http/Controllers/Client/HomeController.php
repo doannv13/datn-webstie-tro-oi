@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Client;
+
 use App\Http\Controllers\Controller;
 use App\Models\CategoryRoom;
 use App\Models\District;
+use App\Models\Post;
 use App\Models\RoomPost;
 use App\Models\Ward;
 use Illuminate\Http\Request;
@@ -15,8 +17,16 @@ class HomeController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        $rooms=RoomPost::paginate(6);
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts','rooms'));
+        $rooms = RoomPost::with(['facilities' => function ($query) {
+            $query->inRandomOrder()->take(6);
+        }])
+            ->where('status', 'inactive')
+            ->latest('id')
+            ->paginate(6);
+        $posts = Post::with('admin')->where('status', 'inactive')->latest('id')->limit(6)->get();
+        // dd($posts);
+        // dd($rooms);
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts'));
     }
 
     public function fillter_list(Request $request)

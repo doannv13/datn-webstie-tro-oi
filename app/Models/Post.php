@@ -20,4 +20,8 @@ class Post extends Model
         'id_admin',
     ];
     public $timestamps = true;
+
+    public function admin(){
+        return $this->belongsTo(User::class,'id_admin','id');
+    }
 }
