@@ -21,7 +21,7 @@
                     <div class="footer-item">
                         <div class="main-title-2">
                             <h1>Về trang chủ</h1>
-                        </div>
+                        </div>  
                         <ul class="links">
                             <li>
                                 <a href="rooms-col-3.html">Trang chủ</a>

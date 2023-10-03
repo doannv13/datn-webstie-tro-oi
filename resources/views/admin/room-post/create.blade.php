@@ -1,0 +1,389 @@
+@extends('admin.layouts.master')
+@section('title')
+    Thêm tin đăng
+@endsection
+@section('content')
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <!-- Form row -->
+        <form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">
+                                Gutters
+                            </h4>
+                            <p class="text-muted font-13">
+                                More complex layouts can also be
+                                created with the grid system.
+                            </p>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="inputState" class="form-label">Tỉnh / thành phố:<span
+                                            class="text-danger">*</span></label>
+                                    <select id="city" class="form-select" name="city_id">
+                                        <option value="">
+                                            Chọn tỉnh / thành
+                                            phố
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="inputState" class="form-label">Quận / Huyện:<span
+                                            class="text-danger">*</span></label>
+                                    <select id="district" class="form-select" name="district_id">
+                                        <option value="">
+                                            Chọn quận huyện
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="inputState" class="form-label">Phường / Xã:<span
+                                            class="text-danger">*</span></label>
+                                    <select id="ward" class="form-select" name="ward_id">
+                                        <option value="">
+                                            Chọn phường / xã
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputAddress2" class="form-label">Địa chỉ chính xác:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="address" name="address"
+                                        placeholder="Nhập số nhà , tên đường phố " />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputAddress2" class="form-label">Địa chỉ của bạn sẽ hiển
+                                        thị như sau:</label>
+                                    <input type="text" class="form-control" id="full_address" name="address_full"
+                                        placeholder="Nhập số nhà , tên đường phố " readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card-->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row"></div>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="inputEmail4" class="form-label">Tiêu đề:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name"
+                                        placeholder="Nhập tiêu đề của bài viết" />
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="inputState" class="form-label">Chuyên mục cho thuê:<span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select" name="category_room_id">
+                                        <option value="">Chọn chuyên mục</option>
+                                        @foreach ($categoryRooms as $categoryRoom)
+                                            <option value="{{ $categoryRoom->id }}"
+                                                {{ old('category_room_id') ? 'selected' : false }}>
+                                                {{ $categoryRoom->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Giá cho thuê: <span class="text-danger">*</span></label>
+                                    <div class="input-group clockpicker" data-placement="top" data-align="top">
+                                        <input type="text" name="price" class="form-control" value=""
+                                            placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5">
+                                        <span class="input-group-text">/Tháng</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Diện tích:<span class="text-danger">*</span></label>
+                                    <div class="input-group clockpicker" data-placement="top" data-align="top">
+                                        <input type="text" placeholder="Diện tích" name="acreage" class="form-control"
+                                            value="{{ old('acreage') }}">
+                                        <span class="input-group-text">m²</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="inputAddress" class="form-label">Số lượng phòng trống:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" placeholder="Số lượng phòng trống" name="empty_room"
+                                        class="form-control" value="{{ old('empty_room') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputState" class="form-label">Trọ tự quản<span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select mb-3" name="managing">
+                                        <option value="">Trọ tự quản</option>
+                                        <option value="yes" {{ old('managing') == 'yes' ? 'checked' : false }}>Có
+                                        </option>
+                                        <option value="no" {{ old('managing') == 'no' ? 'checked' : false }}>Không
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
+                                <div class="form-group message">
+                                    <textarea class="form-control " style="height: 110px" name="description" placeholder="Write message"
+                                        aria-label="Write message">{{ old('description') }}</textarea>
+                                </div>
+                                @error('description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
+                                <div class="row p-3 ">
+                                    @foreach ($surrounding as $surround)
+                                        <div class="form-check col-md-3 col-4 mb-2">
+                                            <input class="form-check-input" name="surrounding[]" type="checkbox"
+                                                value="{{ $surround->id }}">
+                                            <label class="form-check-label">
+                                                {{ $surround->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @error('surrounding')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
+                                <div class="row p-3 ">
+                                    @foreach ($facilities as $facility)
+                                        <div class="form-check col-md-3 col-4 mb-2">
+                                            <input class="form-check-input" name="facility[]" type="checkbox"
+                                                value="{{ $facility->id }}">
+                                            <label class="form-check-label">
+                                                {{ $facility->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @error('facility')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <h4 class="header-title">Tải lên ảnh nổi bật</h4>
+                                <p class="sub-header">
+                                    Kéo hoặc chọn file
+                                </p>
+                                <input type="file" name="imageroom" id="image" data-plugins="dropify"
+                                    data-height="300">
+                                {{-- <input type="file" name="image"  /> --}}
+                                @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card-->
+                </div>
+                <!-- end col-->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="inputAddress" class="form-label">Họ và tên: <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="fullname" placeholder="Nhập họ tên của bạn"
+                                        value="{{ old('fullname') }}" class="form-control">
+                                    @error('fullname')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="inputAddress" class="form-label">Số điện thoại:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" value="{{ old('phone') }}"
+                                        placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="inputAddress" class="form-label">Email: <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="email" placeholder="Nhập email của bạn"
+                                        value="{{ old('email') }}" class="form-control">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="inputAddress" class="form-label">Zalo:<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" value="{{ old('zalo') }}"
+                                        placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
+                                    @error('zalo')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                Sign in
+                            </button>
+                        </div>
+                    </div>
+                    <!-- end card-->
+                </div>
+                <!-- end col-->
+            </div>
+            <!-- end row -->
+        </form>
+    </div>
+    <!-- container -->
+@endsection
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        var citis = document.getElementById("city");
+        var districts = document.getElementById("district");
+        var wards = document.getElementById("ward");
+        var full_address = document.getElementById("full_address");
+        var address = document.getElementById("address");
+        var thanhpho;
+        var quanhuyen;
+        var xaphuong;
+        var Parameter = {
+            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+            method: "GET",
+            responseType: "application/json",
+        };
+        var promise = axios(Parameter);
+        promise.then(function(result) {
+            renderCity(result.data);
+        });
+
+        function renderCity(data) {
+            for (const x of data) {
+                var opt = document.createElement('option');
+                opt.value = x.Name;
+                opt.text = x.Name;
+                var asd = x.Id;
+                opt.setAttribute('data-id', x.Id);
+                citis.options.add(opt);
+            }
+
+
+            citis.onchange = function() {
+                district.length = 1;
+                ward.length = 1;
+                if (this.options[this.selectedIndex].dataset.id != "") {
+                    const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+                    for (const k of result[0].Districts) {
+                        var opt = document.createElement('option');
+                        opt.value = k.Name;
+                        opt.text = k.Name;
+                        var aaa = k.Id;
+                        opt.setAttribute('data-id', k.Id);
+                        district.options.add(opt);
+                    }
+                    var selectedThanhPho = citis.options[citis.selectedIndex];
+                    thanhpho = selectedThanhPho.textContent;
+                    console.log(thanhpho);
+
+                }
+            };
+
+            district.onchange = function() {
+                ward.length = 1;
+                const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+                if (this.options[this.selectedIndex].dataset.id != "") {
+                    const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex]
+                        .dataset.id)[0].Wards;
+
+                    for (const w of dataWards) {
+                        var opt = document.createElement('option');
+                        opt.value = w.Name;
+                        opt.text = w.Name;
+                        opt.setAttribute('data-id', w.Id);
+                        wards.options.add(opt);
+
+                    }
+                    // district.value + '-' +
+                    var selectedQuanHuyen = district.options[district.selectedIndex];
+                    quanhuyen = selectedQuanHuyen.textContent
+                    console.log(quanhuyen);
+                }
+            };
+
+            wards.addEventListener("change", function() {
+                var selectedXaPhuong = wards.options[wards.selectedIndex];
+                xaphuong = selectedXaPhuong.textContent;
+                console.log(xaphuong);
+
+                full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
+            });
+
+
+            address.addEventListener("input", function() {
+                var addressValue = address.value;
+                full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
+            });
+        }
+
+        $(document).ready(function() {
+            $('.upload__inputfile').each(function() {
+                $(this).on('change', function(e) {
+                    var imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+                    var maxLength = $(this).attr('data-max_length');
+                    var imgArray = [];
+
+                    Array.from(e.target.files).forEach(function(f) {
+                        if (f.type.match('image.*') && imgArray.length < maxLength) {
+                            imgArray.push(f);
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                var html =
+                                    `<div class='upload__img-box'><div style='background-image: url(${e.target.result})' data-number='${$(".upload__img-close").length}' data-file='${f.name}' class='img-bg'><div class='upload__img-close'></div></div></div>`;
+                                imgWrap.append(html);
+                            };
+                            reader.readAsDataURL(f);
+                        }
+                    });
+                });
+            });
+
+            $('body').on('click', '.upload__img-close', function(e) {
+                var file = $(this).parent().data('file');
+                var imgArray = [];
+
+                Array.from($('.upload__inputfile')[0].files).forEach(function(f) {
+                    imgArray.push(f);
+                });
+
+                imgArray = imgArray.filter(function(item) {
+                    return item.name !== file;
+                });
+
+                $(this).parent().parent().remove();
+            });
+        });
+    </script>
+@endpush
