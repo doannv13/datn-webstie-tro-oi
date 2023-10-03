@@ -49,6 +49,18 @@
       ]><script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
     <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
+    <!-- link data table -->
+    <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}"
+        rel="stylesheet" type="text/css" />
+        <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="{{ asset('fe/js/html5shiv.min.js') }}"></script>
