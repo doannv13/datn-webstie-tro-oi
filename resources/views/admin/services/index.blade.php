@@ -9,6 +9,10 @@
                     <div class="responsive-table-plugin">
                         <div class="table-rep-plugin">
                             <div class="table-responsive" data-pattern="priority-columns">
+                                <div class="mb-2 d-flex gap-1 ">
+                                    <a class="btn btn-success" href="{{ route('services.create') }}">Thêm mới</a>
+                                    <a class="btn btn-danger" href="{{ route('services.deleted') }}">Thùng rác</a>
+                                </div>
                                 <table id="tech-companies-1" class="table table-striped " style="width: 100%">
                                     <thead>
                                         <tr>
@@ -17,7 +21,7 @@
                                             <th>Giá</th>
                                             <th>Số Ngày</th>
                                             <th>Mô Tả</th>
-                                            <th></th>
+                                            <th>Hành Động</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -90,7 +90,7 @@
                 </div>
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href=""><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
+                        <a href="bookmark"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <button class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </button>
@@ -158,6 +158,7 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
+
                                 <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     @if(isset($category_rooms))
@@ -178,6 +179,7 @@
 
                                 <select class="form-select bg-select-group" id="district_filter" name="district_filter">
                                     <option value="all" selected>Tất cả</option>
+
                                     @if(isset($districts))
                                     @if(count($districts) > 0)
                                     @foreach ($districts as $district)
@@ -195,6 +197,7 @@
 
                         <div class="col-md-6 col-sm-6 col-lg-3">
                             <div class="form-floating">
+
                                 <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1 Triệu</option>
@@ -208,6 +211,7 @@
                         </div>
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
+
                                 <select name="areage_filter" id="areage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="allAreage" {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
                                     <option value="range_areage1" {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
@@ -219,7 +223,8 @@
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm kiếm</button>
+                        <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
+                            kiếm</button>
 
 
                     </div>

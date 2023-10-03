@@ -9581,8 +9581,6 @@ span.flatpickr-weekday {
             padding: 5px;
             transition: all .3s ease;
             cursor: pointer;
-            border: 2px solid;
-
             border-radius: 10px;
             line-height: 26px;
             font-size: 14px;
