@@ -11,11 +11,11 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\ChangeInfoController;
-use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
-use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\RoomPostController as AdminRoomPostController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\RoomPostController as CLientRoomPost;
+use App\Http\Controllers\Admin\RoomPostController as AdminRoomPost;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\TagController;
 
@@ -53,30 +53,35 @@ Route::get('dashboard-client', function () {
 
 Auth::routes();
 
-// admin roompost
-Route::resource('admin-roompost', AdminRoomPostController::class);
-Route::get('admin-roompost-deleted', [AdminRoomPostController::class, 'deleted'])->name('admin-roompost-deleted');
-Route::get('admin-roompost-restore/{id}', [AdminRoomPostController::class, 'restore'])->name('admin-roompost-restore');
-Route::delete('admin-roompost_permanently/{id}', [AdminRoomPostController::class, 'permanentlyDelete'])->name('admin-roompost-permanently-delete');
 
 
-// Room
-Route::resource('room-post', RoomPostController::class);
-Route::get('room_deleted', [RoomPostController::class, 'deleted'])->name('room_deleted');
-Route::delete('room_permanently/{id}', [RoomPostController::class, 'permanentlyDelete'])->name('room_permanently_delete');
-Route::get('room_restore/{id}', [RoomPostController::class, 'restore'])->name('room_restore');
-Route::get('trang-chu',[HomeController::class, 'index'])->name('home');
-Route::post('fillter',[HomeController::class, 'filter_list']);
+// Room-Post-Client
+Route::resource('room-post', CLientRoomPost::class);
+Route::get('room_deleted', [CLientRoomPost::class, 'deleted'])->name('room_deleted');
+Route::delete('room_permanently/{id}', [CLientRoomPost::class, 'permanentlyDelete'])->name('room_permanently_delete');
+Route::get('room_restore/{id}', [CLientRoomPost::class, 'restore'])->name('room_restore');
+Route::post('create-image', [CLientRoomPost::class, 'createImage'])->name('create-image');
+Route::post('update-image', [CLientRoomPost::class, 'editMultiImage'])->name('update-image');
+Route::get('delete-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('delete-image');
+
+Route::get('trang-chu', [HomeController::class, 'index'])->name('home');
+Route::post('fillter', [HomeController::class, 'filter_list']);
 Route::get('search', [HomeController::class, 'index'])->name('search');
 Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
-
+// Room-Post-Admin
+Route::resource('room-posts', AdminRoomPost::class);
+Route::get('room_deleteds', [AdminRoomPost::class, 'deleted'])->name('room_deleteds');
+Route::delete('room_permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('room_permanently_delete');
+Route::get('room_restore/{id}', [AdminRoomPost::class, 'restore'])->name('room_restore');
 
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
 Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
 Route::delete('permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('categoryrooms.permanently-delete');
-Route::get('restore/{id}', [CategoryRoomController::class, 'restore'])->name('restore');
+Route::get('categoryrooms/restore/{id}', [CategoryRoomController::class, 'restore'])->name('categoryrooms.restore');
+
 
 
 
@@ -119,9 +124,9 @@ Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostControll
 Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
 Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
 Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');
-
-//Post
-
+// Route::get('/home', function () {
+//     return view('client.layouts.home');
+// })->name('home');
 
 // Tag
 Route::resource('tags', TagController::class);
@@ -129,7 +134,6 @@ Route::get('tags-deleted', [TagController::class, 'deleted'])->name('tags.delete
 Route::delete('tags/permanently/{id}', [TagController::class, 'permanentlyDelete'])->name('tags.permanently.delete');
 Route::get('tags/restore/{id}', [TagController::class, 'restore'])->name('tags.restore');
 Route::get('/tags-status', [TagController::class, 'changeStatus'])->name('tags.status_change');
-
 
 
 // Dịch vụ
@@ -151,15 +155,15 @@ Route::resource('users', UserController::class);
 Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
 Route::delete('user_permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('user_permanently_delete');
 Route::get('user_restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-Route::get('client-login',function(){
+Route::get('client-login', function () {
     return view('client.auth.login');
 });
-Route::get('client-signup',function(){
+Route::get('client-signup', function () {
     return view('client.auth.register');
 });
 Route::resource('changeinfo', ChangeInfoController::class);
 Route::resource('changepassword', ChangePasswordController::class);
-Route::get('fogotpassword',function () {
+Route::get('fogotpassword', function () {
     return view('client.auth.fogotPassword');
 });
 
@@ -171,14 +175,17 @@ Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore']
 
 
 //Admin/chang info
-Route::get('admin-changeinfo/{id}',[ChangeInfoController::class,'adminedit'])->name('admin-editinfo');
-Route::put('admin-changeinfo/{id}',[ChangeInfoController::class,'adminupdate'])->name('admin-changeinfo');
+Route::get('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminedit'])->name('admin-editinfo');
+Route::put('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminupdate'])->name('admin-changeinfo');
 //Admin/chang password
-Route::get('admin-changepassword/{id}',[ChangePasswordController::class,'admineditpw'])->name('admin-editpassword');
-Route::put('admin-changepassword/{id}',[ChangePasswordController::class,'adminupdatepw'])->name('admin-changepassword');
+Route::get('admin-changepassword/{id}', [ChangePasswordController::class, 'admineditpw'])->name('admin-editpassword');
+Route::put('admin-changepassword/{id}', [ChangePasswordController::class, 'adminupdatepw'])->name('admin-changepassword');
 
-
-
+//BockMark
+Route::get('bookmark', [HomeController::class, 'listbookmark'])->name('listbookmark');
+Route::post('bookmark/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
+Route::delete('unbookmark/{id}', [HomeController::class, 'unbookmark'])->name('unbookmark');
+Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unbookmarkbm'])->name('unbookmarkbm');
 
 
 

@@ -18,6 +18,7 @@ use App\Models\Ward;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class RoomPostController extends Controller
 {
@@ -30,7 +31,7 @@ class RoomPostController extends Controller
         $wards = Ward::all();
         $districts = District::all();
         $data = RoomPost::query()->latest()->get();
-        return view('client.post-room.index', compact('data','category_rooms','wards','districts'));
+        return view('client.room-post.index', compact('data', 'category_rooms', 'wards', 'districts'));
     }
 
     /**
@@ -38,14 +39,11 @@ class RoomPostController extends Controller
      */
     public function create()
     {
-        $categoryRooms = CategoryRoom::query()->latest()->get();
-        $services = Services::query()->latest()->get();
-        $facilities = Facility::query()->latest()->get();
-        $surrounding = Surrounding::query()->latest()->get();
-        $category_rooms = CategoryRoom::all();
-        $wards = Ward::all();
-        $districts = District::all();
-        return view('client.post-room.create', compact('categoryRooms', 'facilities', 'surrounding', 'services','category_rooms','wards','districts'));
+        $categoryRooms = CategoryRoom::query()->get();
+        $services = Services::query()->get();
+        $facilities = Facility::query()->get();
+        $surrounding = Surrounding::query()->get();
+        return view('client.room-post.create', compact('categoryRooms', 'facilities', 'surrounding', 'services'));
     }
 
     /**
@@ -53,10 +51,12 @@ class RoomPostController extends Controller
      */
     public function store(RoomPostRequest $request)
     {
+        // dd($request->file('image'));
         try {
-            // if ($request->hasFile('image')) {
-            //     $uploadFile = upload_file('room', $request->file('image'));
-            // }
+
+            if ($request->hasFile('imageroom')) {
+                $uploadFile = upload_file('room', $request->file('imageroom'));
+            }
             $ward = new Ward();
             $ward->fill([
                 'name' => $request->ward_id,
@@ -85,8 +85,8 @@ class RoomPostController extends Controller
                 'acreage' => $request->acreage,
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
-                'image' => 1,
-                'managing' => 1,
+                'image' => $uploadFile,
+                'managing' => $request->managing,
                 'user_id' => 1,
                 'service_id' => 1,
                 'ward_id' => $ward->id,
@@ -99,17 +99,16 @@ class RoomPostController extends Controller
                 'zalo' => $request->zalo
             ]);
             $model->save();
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
+            if ($request->hasFile('image')) {
+                foreach ($request->file('image') as $image) {
                     $uploadFiles = upload_file('room/image', $image);
-                    // $imageModel = new ImageRoom();
-                    // $imageModel->room_id = $model->id;
-                    // $imageModel->image = $uploadFiles;
-                    // $imageModel->save();
+                    $imageModel = new ImageRoom();
+                    $imageModel->room_id = $model->id;
+                    $imageModel->name = $uploadFiles;
+                    $imageModel->save();
                 }
-            } else {
-                $uploadFile = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3';
             }
+
             foreach ($request->surrounding as $surrounding) {
                 $surround = new SurroundingRoom();
                 $surround->room_id = $model->id;
@@ -157,24 +156,20 @@ class RoomPostController extends Controller
         foreach ($surroundingooms as $surroundingoom) {
             $surroundingArray[] = $surroundingoom->surrounding_id;
         }
-        $wards = Ward::query()->latest()->get();
-        $districts = District::query()->latest()->get();
-        $cities = City::query()->latest()->get();
-        return view('client.post-room.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities'));
+        $wards = Ward::query()->find($id);
+        $districts = District::query()->find($id);
+        $cities = City::query()->find($id);
+        $multiImgs = ImageRoom::query()->where('room_id', $id)->get();
+        return view('client.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoomPostRequest $request, string $id)
     {
         try {
-            // if ($request->hasFile('image')) {
-            //     $uploadFile = upload_file('room', $request->file('image'));
-            // }
             $model = RoomPost::query()->findOrFail($id);
-            // dd($request->ward_id);
-
             $model->fill([
                 'name' => $request->name,
                 'price' => $request->price,
@@ -183,8 +178,7 @@ class RoomPostController extends Controller
                 'acreage' => $request->acreage,
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
-                'image' => 1,
-                'managing' => 1,
+                'managing' => $request->managing,
                 'user_id' => 1,
                 'service_id' => 1,
                 'category_room_id' => $request->category_room_id,
@@ -193,20 +187,25 @@ class RoomPostController extends Controller
                 'email' => $request->email,
                 'zalo' => $request->zalo
             ]);
-
+            $oldImg = $model->imageroom;
+            if ($request->hasFile('imageroom')) {
+                $model->image = upload_file('room', $request->file('imageroom'));
+            } else {
+                $model->image = $request->old_imageroom;
+            }
             $model->save();
-            // if ($request->hasFile('images')) {
-            //     foreach ($request->file('images') as $image) {
-            //         $uploadFiles = upload_file('room/image', $image);
-            //         // $imageModel = new ImageRoom();
-            //         $imageModel->room_id = $model->id;
-            //         $imageModel->image = $uploadFiles;
-            //         $imageModel->save();
-            //     }
-            // } else {
-            //     $uploadFile = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3';
-            // }
-            // dd($model->ward_id);
+            if (\request()->hasFile('imageroom') && $oldImg) {
+                delete_file($oldImg);
+            }
+            if ($request->hasFile('image')) {
+                foreach ($request->file('image') as $image) {
+                    $uploadFiles = upload_file('room/image', $image);
+                    $imageModel = new ImageRoom();
+                    $imageModel->room_id = $model->id;
+                    $imageModel->image = $uploadFiles;
+                    $imageModel->save();
+                }
+            }
             $model->surrounds()->sync($request->surrounding);
             $model->facilities()->sync($request->facility);
             $ward = Ward::find($model->ward->id);;
@@ -235,6 +234,73 @@ class RoomPostController extends Controller
         }
     }
 
+
+
+    public function createImage(Request $request)
+    {
+
+        if ($request->hasFile('add_image')) {
+            foreach ($request->file('add_image') as $image) {
+                $uploadFile = upload_file('room/image', $image);
+                $images = new ImageRoom();
+                $images->name = $uploadFile;
+                $images->room_id = $request->id_room;
+                $images->save();
+            }
+        }
+        Toastr::success('Thêm ảnh thành công', 'Thành công');
+        return redirect()->back();
+    }
+
+    public function editMultiImage(Request $request)
+    {
+
+        if ($request->isMethod('post')) {
+            $params = $request->post();
+            unset($params['_token']);
+
+            if ($request->hasFile('image')) {
+                $imgs = $request->file('image');
+                foreach ($imgs as $id => $img) {
+                    $update = ImageRoom::findOrFail($id);
+
+                    if ($img->isValid()) {
+                        Storage::delete('room/image' . $update->image);
+                        $fileName = upload_file('room/image', $img);
+                        $multi = $fileName;
+                    } else {
+                        $multi = $update->image;
+                    }
+                    ImageRoom::where('id', $id)->update([
+                        'name' => $multi
+                    ]);
+                }
+            }
+            Toastr::success('Sửa ảnh thành công', 'Thành công');
+
+            return redirect()->back();
+        }
+    }
+
+    public function deleteMultiImage($id)
+    {
+        if ($id) {
+            $image = ImageRoom::find($id);
+
+            if ($image) {
+                Storage::delete('room/image' . $image->image);
+                $deleted = $image->delete();
+                if ($deleted) {
+                    Toastr::success('Xoá ảnh thành công', 'Thành công');
+                } else {
+                    Toastr::error('Thao tác thất bại', 'Thất bại');
+                }
+            } else {
+                Toastr::error('Thao tác thất bại', 'Thất bại');
+            }
+            return redirect()->back();
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -245,7 +311,7 @@ class RoomPostController extends Controller
             SurroundingRoom::query()->where('room_id', $id)->delete();
             RoomPost::query()->findOrFail($id)->delete();
             Toastr::success('Tin đăng được thêm vào thùng rác thành công', 'Thành công');
-            return redirect()->back();
+            return redirect()->route('room-post.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -260,7 +326,7 @@ class RoomPostController extends Controller
         $wards = Ward::all();
         $districts = District::all();
         $data = RoomPost::onlyTrashed()->get();
-        return view('client.post-room.deleted', compact('data', 'category_rooms', 'wards', 'districts'));
+        return view('client.room-post.deleted', compact('data', 'category_rooms', 'wards', 'districts'));
     }
 
     public function permanentlyDelete(String $id)

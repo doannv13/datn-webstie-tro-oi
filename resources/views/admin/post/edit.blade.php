@@ -17,11 +17,20 @@
                                     @csrf
                                     @method('put')
                                     <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Tên tiêu đề</label>
-                                        <input type="text" name="title" id="simpleinput" class="form-control"
-                                            value="{{ old('title', $model->title ?? '') }}">
-                                        @error('title')
+                                        <label for="simpleinput" class="form-label">Tiêu đề ngắn</label>
+                                        <input type="text" name="metaTitle" id="simpleinput" class="form-control"
+                                            value="{{ old('metaTitle', $model->metaTitle ?? '') }}">
+                                        @error('metaTitle')
                                             <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="simpleinput" class="form-label">Tiêu đề</label>
+                                        <input type="text" name="title" id="simpleinput" class="form-control"
+                                               value="{{ old('title', $model->title ?? '') }}">
+                                        @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -69,14 +78,25 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    
                                     <div class="mb-3">
                                         <label class="form-label">Tags</label>
                                         <input type="text" class="selectize-close-btn form-control" name="tags"
                                             value="{{ old('tags', $tags ?? '') }}">
                                         @error('tags')
-                                            <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>                  
                                         @enderror
                                     </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="example-textarea" class="form-label">View</label>
+                                        <input type="text" name="view" id="simpleinput1" class="form-control"
+                                               value="{{ old('view', $model->view ?? '') }}">
+                                        @error('view')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    
                                     <button class="btn btn-primary waves-effect waves-light">Cập nhật</button>
                                     <a href="{{ route('post.index') }}"
                                         class="btn btn-warning waves-effect text-light">Trở về</a>

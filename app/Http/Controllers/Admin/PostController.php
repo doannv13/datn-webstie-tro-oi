@@ -36,10 +36,15 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         try {
+            $user = auth()->user();
             $model = new Post();
+
+            $model->id_admin = $user->id;
+
             $slug = Str::slug($request->title);
             $model->slug = $slug;
             $model->fill($request->except('image'));
+
             if ($request->hasFile('image')) {
                 $model->image = upload_file(OBJECT_POST, $request->file('image'));
             } else {
@@ -60,6 +65,7 @@ class PostController extends Controller
             }
             Toastr::success('Thêm bài viết thành công', 'Thành công');
             return to_route('post.index');
+
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');

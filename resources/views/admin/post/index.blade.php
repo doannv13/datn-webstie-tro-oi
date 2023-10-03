@@ -7,17 +7,22 @@
             <div class="card-body">
                 <h5 class="mt-0">Danh sách bài viết</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{ route('post.create') }}">Thêm mới</a>
-                    <table id="tech-companies-1" class="table table-centered mb-0">
+                    <div class="mb-2 d-flex gap-1 ">
+                        <a class="btn btn-success" href="{{ route('post.create') }}">Thêm mới</a>
+                        <a class="btn btn-danger" href="{{ route('post.deleted') }}">Thùng rác</a>
+                    </div>
+                    <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                         <thead>
                         <tr>
                             <th class="col-0.5">#</th>
                             <th class="col-1">Tiêu đề</th>
+                            <th class="col-1">Tiêu đề ngắn</th>
                             <th class="col-1">Ảnh</th>
-                            <th class="col-2">Mổ tả ngắn</th>
-                            <th class="col-2">Content</th>
-                            <th class="col-1.5">Slug</th>
-                            <th class="col-1">ID Admin</th>
+                            <th class="col-1">Mổ tả ngắn</th>
+                            <th class="col-1.5">Content</th>
+                            <th class="col-1">Slug</th>
+                            <th class="col-1">View</th>
+                            <th class="col-1">Tên tác giả</th>
                             <th class="col-1">Ngày đăng tải</th>
                             <th class="col-1">Trạng thái</th>
                             <th class="col-1">Hành động</th>
@@ -28,6 +33,7 @@
                             <tr id="row_@item.ID">
                                 <td class="tabledit-view-mode">{{ $value->id }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->title, 0, 20) !!}</td>
+                                <td class="tabledit-view-mode">{!! substr($value->metaTitle, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">
                                     @if ($value->image && asset($value->image))
                                         <img src="{{ asset($value->image) }}" alt="" style="width: 80px; height: 80px">
@@ -38,7 +44,8 @@
                                 <td class="tabledit-view-mode">{!! substr($value->metaDescription, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->description, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ $value->slug }}</td>
-                                <td class="tabledit-view-mode">{{ $value->id_admin }}</td>
+                                <td class="tabledit-view-mode">{{ $value->view }}</td>
+                                <td class="tabledit-view-mode">{{ $value->user->name }}</td>
                                 <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
                                 <td>
                                     <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
@@ -46,7 +53,7 @@
                                            data-onlabel="Bật" data-offlabel="Tắt"
                                         {{ $value->status == 'active' ? 'checked' : '' }}>
                                 </td>
-                                <td style="white-space: nowrap; width: 1%;">
+                                <td class="">
                                     <a href="{{ route('post.edit', $value->id) }}">
                                         <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
