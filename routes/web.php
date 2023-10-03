@@ -79,7 +79,8 @@ Route::get('room_restore/{id}', [AdminRoomPost::class, 'restore'])->name('room_r
 Route::resource('categoryrooms', CategoryRoomController::class);
 Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
 Route::delete('permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('categoryrooms.permanently-delete');
-Route::get('restore/{id}', [CategoryRoomController::class, 'restore'])->name('restore');
+Route::get('categoryrooms/restore/{id}', [CategoryRoomController::class, 'restore'])->name('categoryrooms.restore');
+
 
 
 
