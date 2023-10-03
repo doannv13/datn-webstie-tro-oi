@@ -30,6 +30,7 @@ class RoomPostController extends Controller
         $category_rooms = CategoryRoom::all();
         $data = RoomPost::query()->latest()->get();
         return view('admin.room-post.edit', compact('data', 'category_rooms'));
+
     }
 
     /**
@@ -45,11 +46,13 @@ class RoomPostController extends Controller
         $wards = Ward::all();
         $districts = District::all();
         return view('admin.room-post.create', compact('categoryRooms', 'facilities', 'surrounding', 'services', 'category_rooms', 'wards', 'districts'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(RoomPostRequest $request)
     {
         // dd($request->file('image'));
@@ -162,6 +165,7 @@ class RoomPostController extends Controller
         $cities = City::query()->find($id);
         // dd($cities);
         return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities'));
+
     }
 
     /**
@@ -238,11 +242,11 @@ class RoomPostController extends Controller
             return back();
         }
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(String $id)
+
+    public function destroy(string $id)
     {
         try {
             FacilityRoom::query()->where('room_id', $id)->delete();
@@ -283,6 +287,8 @@ class RoomPostController extends Controller
         }
     }
 
+
+    
     public function restore(String $id)
     {
         try {
@@ -301,6 +307,43 @@ class RoomPostController extends Controller
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
+        }
+    }
+    public function editMultiImage(Request $request)
+    {
+        // $imgs = $request->image;
+        // dd($imgs);
+        if ($request->isMethod('post')) {
+            $params = $request->post();
+            unset($params['_token']);
+
+            // Check if 'image' files were uploaded
+            if ($request->hasFile('image')) {
+                $imgs = $request->file('image');
+                foreach ($imgs as $id => $img) {
+                    $update = ImageRoom::findOrFail($id);
+
+                    if ($img->isValid()) {
+                        Storage::delete('/public/' . $update->image);
+
+                        $fileName = uploadFile('images/multi-image', $img);
+
+                        $multi = $request->image = $fileName;
+                    } else {
+                        $multi = $update->image; // Use the existing image if no new image was uploaded
+                    }
+
+                    ImageRoom::where('id', $id)->update([
+                        'image' => $multi
+                    ]);
+                }
+            }
+
+            $notification = [
+                'message' => 'Update MultiImage successfully',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notification);
         }
     }
 }

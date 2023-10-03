@@ -6,7 +6,7 @@
             <a href="javascript:void(0);" class="right-bar-toggle float-end">
                 <i class="mdi mdi-close"></i>
             </a>
-            <h4 class="font-16 m-0 text-white">Theme Customizer</h4>
+            <h4 class="font-16 m-0 text-white">Theme Trọ ơi</h4>
         </div>
 
         <!-- Tab panes -->

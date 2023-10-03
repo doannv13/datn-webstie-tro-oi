@@ -20,7 +20,6 @@ class CategoryPostFactory extends Factory
 
         $name = $this->faker->name();
         return [
-
             'name' => $name,
             'status'=> $this->faker->randomElement(['active', 'inactive']),
             'slug' => Str::slug($name),

@@ -15,4 +15,8 @@ class CategoryRoom extends Model
         'status',
         'description'
     ];
+    public function roomPosts()
+    {
+        return $this->hasMany(RoomPost::class);
+    }
 }

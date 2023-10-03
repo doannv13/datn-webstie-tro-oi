@@ -10,52 +10,46 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
                 @guest
-                    <ul class="top-social-media pull-right ">
-                        <li>
-                            <a href="/client-login" onclick><i class="fa fa-sign-in me-1"></i>Đăng nhập</a>
-                        </li>
-                        <li>
-                            <a href="/client-signup"><i class="fa fa-user me-1"></i>Đăng ký</a>
-                        </li>
-                    </ul>
+                <ul class="top-social-media pull-right ">
+                    <li>
+                        <a href="/client-login" onclick><i class="fa fa-sign-in me-1"></i>Đăng nhập</a>
+                    </li>
+                    <li>
+                        <a href="/client-signup"><i class="fa fa-user me-1"></i>Đăng ký</a>
+                    </li>
+                </ul>
                 @else
-                    @if (Auth::user())
-                        <div class="dropdown pull-right">
-                            <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center"
-                                data-bs-display="static" aria-expanded="false">
-                                <img class="rounded-circle" style="width:30px;height:30px"
-                                    src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
-                                    alt="Header Avatar">
-                                <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <div>
-                                    @if (Auth::user())
-                                        @if (Auth::user()->role === 'vendor')
-                                            <a class="dropdown-item" href="">Vào trang quản lí</a>
-                                        @elseif (Auth::user()->role === 'admin')
-                                            <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
-                                        @endif
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
-                                        nhật tài khoản</a>
-                                    @if (Auth::user())
-                                        <a class="dropdown-item"
-                                            href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Đăng xuất
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-
-
+                @if (Auth::user())
+                <div class="dropdown pull-right">
+                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static" aria-expanded="false">
+                        <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="Header Avatar">
+                        <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <div>
+                            @if (Auth::user())
+                            @if (Auth::user()->role==='vendor')
+                            <a class="dropdown-item" href="">Vào trang quản lí</a>
+                            @elseif (Auth::user()->role==='admin')
+                            <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                            @endif
+                            @endif
+                            <a class="dropdown-item" href="{{ route('changeinfo.edit',auth()->user()->id) }}">Cập nhật tài khoản</a>
+                            @if (Auth::user())
+                            <a class="dropdown-item" href="{{ route('changepassword.edit',auth()->user()->id) }}">Đổi mật khẩu</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Đăng xuất
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
-                    @endif
+                    </div>
+
+
+                </div>
+                @endif
                 @endguest
             </div>
         </div>
@@ -97,7 +91,7 @@
                 </div>
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href=""><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
+                        <a href="bookmark"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <button class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </button>
@@ -158,9 +152,7 @@
                         <span class="input-group-text input-group-i px-3" style="width: 50px;">
                             <i class="fa fa-search text-white"></i>
                         </span>
-                        <input type="text" name="name_filter" id="name_filter"
-                            class="form-control bg-input-group" value="{{ request('name_filter') }}"
-                            placeholder="Nhập tên phòng..." style="height: 58px" />
+                        <input type="text" name="name_filter" id="name_filter" class="form-control bg-input-group" value="{{ request('name_filter') }}" placeholder="Nhập tên phòng..." style="height: 58px" />
 
                     </div>
                 </div>
@@ -169,19 +161,17 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                <select name="room_type_filter" id="room_type_filter"
-                                    class="form-select bg-select-group" id="floatingSelect3"
-                                    aria-label="Floating label select example">
-                                    <option value="all"
-                                        {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
-                                    @if (count(category_rooms()) > 0)
-                                        @foreach (category_rooms() as $category_room)
-                                            <option value="{{ $category_room->id }}"
-                                                {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>
-                                                {{ $category_room->name }}</option>
-                                        @endforeach
+
+                                <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                    <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                    @if(isset($category_rooms))
+                                    @if(count($category_rooms) > 0)
+                                    @foreach ($category_rooms as $category_room)
+                                    <option value="{{ $category_room->id }}" {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>{{ $category_room->name }}</option>
+                                    @endforeach
                                     @else
-                                        <option value="" disabled>Không có dữ liệu loại phòng</option>
+                                    <option value="" disabled>Không có dữ liệu loại phòng</option>
+                                    @endif
                                     @endif
                                 </select>
                                 <label for="dselect-example1">Loại phòng</label>
@@ -190,20 +180,20 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                <select class="form-select bg-select-group" id="district_filter"
+                                {{-- <select class="form-select bg-select-group" id="district_filter"
                                     name="district_filter">
                                     <option value="all" selected>Tất cả</option>
 
-                                    @if (count(districts()) > 0)
-                                        @foreach (districts() as $district)
-                                            <option value="{{ $district->id }}"
-                                                {{ request('district_filter') == $district->id ? 'selected' : '' }}>
-                                                {{ $district->name }}</option>
-                                        @endforeach
+                                    @if(isset($districts))
+                                    @if(count($districts) > 0)
+                                    @foreach ($districts as $district)
+                                    <option value="{{ $district->id }}" {{ request('district_filter') == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
+                                    @endforeach
                                     @else
-                                        <option value="" disabled>Không có dữ liệu khu vực</option>
+                                    <option value="" disabled>Không có dữ liệu khu vực</option>
                                     @endif
-                                </select>
+                                    @endif
+                                </select> --}}
 
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
@@ -211,22 +201,13 @@
 
                         <div class="col-md-6 col-sm-6 col-lg-3">
                             <div class="form-floating">
-                                <select name="price_filter" id="price_filter" class="form-select bg-select-group"
-                                    id="floatingSelect3" aria-label="Floating label select example">
-                                    <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>
-                                        Tất cả</option>
-                                    <option value="range_price1"
-                                        {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1
-                                        Triệu</option>
-                                    <option value="range_price2"
-                                        {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 Triệu ->
-                                        2.5 Triệu</option>
-                                    <option value="range_price3"
-                                        {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4
-                                        Triệu</option>
-                                    <option value="range_price4"
-                                        {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
-                                    </option>
+
+                                <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                    <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                    <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1 Triệu</option>
+                                    <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 Triệu -> 2.5 Triệu</option>
+                                    <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4 Triệu</option>
+                                    <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu</option>
                                 </select>
 
                                 <label for="floatingSelect3">Mức giá</label>
@@ -234,22 +215,13 @@
                         </div>
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
-                                <select name="areage_filter" id="areage_filter" class="form-select bg-select-group"
-                                    id="floatingSelect3" aria-label="Floating label select example">
-                                    <option value="allAreage"
-                                        {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
-                                    <option value="range_areage1"
-                                        {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m
-                                        vuông</option>
-                                    <option value="range_areage2"
-                                        {{ request('areage_filter') == 'range_areage2' ? 'selected' : '' }}>20m vuông
-                                        -> 30m vuông</option>
-                                    <option value="range_areage3"
-                                        {{ request('areage_filter') == 'range_areage3' ? 'selected' : '' }}>20m vuông
-                                        -> 45m vuông</option>
-                                    <option value="range_areage4"
-                                        {{ request('areage_filter') == 'range_areage4' ? 'selected' : '' }}>Trên 45m
-                                        vuông</option>
+
+                                <select name="areage_filter" id="areage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                    <option value="allAreage" {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
+                                    <option value="range_areage1" {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
+                                    <option value="range_areage2" {{ request('areage_filter') == 'range_areage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
+                                    <option value="range_areage3" {{ request('areage_filter') == 'range_areage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
+                                    <option value="range_areage4" {{ request('areage_filter') == 'range_areage4' ? 'selected' : '' }}>Trên 45m vuông</option>
 
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
