@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Tag;
 
 
 class Post extends Model
@@ -20,4 +21,8 @@ class Post extends Model
         'id_admin',
     ];
     public $timestamps = true;
+
+    public function tags(){
+        return $this->morphToMany(Tag::class, 'taggables');
+    }
 }

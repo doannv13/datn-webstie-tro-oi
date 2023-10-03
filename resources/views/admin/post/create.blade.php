@@ -26,17 +26,17 @@
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <div class="col-11">
+                                        <div class="">
                                             <label for="example-textarea" class="form-label">Ảnh</label>
                                             <input id="image" type="file" class="form-control" name="image"
-                                                   accept="image/*"><br>
+                                                accept="image/*"><br>
                                         </div>
-                                       <div class="col-1">
-                                           <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
+                                        <div class="">
+                                            <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
                                                 width="100px" height="100px">
-                                       </div>
+                                        </div>
                                         @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -44,7 +44,7 @@
                                         <label for="example-textarea" class="form-label">Mô tả ngắn</label>
                                         <textarea class="form-control" name="metaDescription" id="metaDescription" rows="5">{{ old('metaDescription') }}</textarea>
                                         @error('metaDescription')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -59,15 +59,22 @@
                                     <div class="mb-3">
                                         <label for="example-textarea" class="form-label">ID Admin</label>
                                         <input type="text" name="id_admin" id="simpleinput" class="form-control"
-                                               value="{{ old('id_admin') }}">
+                                            value="{{ old('id_admin') }}">
                                         @error('id_admin')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Tags</label>
+                                        <input type="text" class="selectize-close-btn form-control" name="tags">
+                                        @error('tags')
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <button class="btn btn-primary waves-effect waves-light">Thêm</button>
-                                    <a href="{{ route('post.index') }}"
-                                        class="btn btn-warning waves-effect text-light">Trở về</a>
+                                    <a href="{{ route('post.index') }}" class="btn btn-warning waves-effect text-light">Trở
+                                        về</a>
                                 </form>
                             </div> <!-- end col -->
                         </div>
@@ -80,14 +87,14 @@
     </div> <!-- container -->
 @endsection
 @push('scripts')
-
-    <script> CKEDITOR.replace( 'description', {
+    <script>
+        CKEDITOR.replace('description', {
             filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
             filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
             filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
             filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
             filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
             filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-        } );
+        });
     </script>
 @endpush
