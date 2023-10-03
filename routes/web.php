@@ -17,6 +17,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\RoomPostController as CLientRoomPost;
 use App\Http\Controllers\Admin\RoomPostController as AdminRoomPost;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,8 +128,12 @@ Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPos
 //     return view('client.layouts.home');
 // })->name('home');
 
-//Post
-
+// Tag
+Route::resource('tags', TagController::class);
+Route::get('tags-deleted', [TagController::class, 'deleted'])->name('tags.deleted');
+Route::delete('tags/permanently/{id}', [TagController::class, 'permanentlyDelete'])->name('tags.permanently.delete');
+Route::get('tags/restore/{id}', [TagController::class, 'restore'])->name('tags.restore');
+Route::get('/tags-status', [TagController::class, 'changeStatus'])->name('tags.status_change');
 
 
 // Dịch vụ

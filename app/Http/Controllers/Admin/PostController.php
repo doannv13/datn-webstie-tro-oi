@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-
+use App\Models\Tag;
 class PostController extends Controller
 {
     /**
@@ -47,11 +47,23 @@ class PostController extends Controller
 
             if ($request->hasFile('image')) {
                 $model->image = upload_file(OBJECT_POST, $request->file('image'));
-            }else{
+            } else {
                 $model->image = asset('no_image.jpg');
             }
             $model->save();
-            Toastr::success('Thao tác thành công', 'Thành công');
+
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->input('tags'));
+
+                foreach ($tagNames as $tagName) {
+                    $slug = Str::slug(trim($tagName));
+
+                    $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+
+                    $model->tags()->syncWithoutDetaching([$tag->id]);
+                }
+            }
+            Toastr::success('Thêm bài viết thành công', 'Thành công');
             return to_route('post.index');
 
         } catch (\Exception $exception) {
@@ -60,6 +72,7 @@ class PostController extends Controller
             return back();
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -75,7 +88,8 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $model = Post::query()->findOrFail($id);
-        return view('admin.post.edit',compact('model'));
+        $tags = $model->tags->pluck('name')->implode(',');
+        return view('admin.post.edit',compact('model', 'tags'));
     }
 
     /**
@@ -98,11 +112,25 @@ class PostController extends Controller
 
             $model->save();
 
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->input('tags'));
+
+                $model->tags()->sync([]); // Xóa tất cả các tags hiện tại và cập nhật lại
+                foreach ($tagNames as $tagName) {
+                    $slug = Str::slug(trim($tagName));
+                    $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+                    $model->tags()->attach($tag->id);
+                }
+            } else {
+                // Nếu trường 'tags' trống, xóa tất cả các tag liên kết với bài viết
+                $model->tags()->detach();
+            }
+
             // Kiểm tra nếu có ảnh mới và ảnh cũ tồn tại, thì xóa ảnh cũ
             if ($request->hasFile('image') && $oldImg) {
                 delete_file($oldImg);
             }
-            Toastr::success('Cập nhật cài đặt thành công', 'Thành công');
+            Toastr::success('Cập nhật bài viết thành công', 'Thành công');
 
             return to_route('post.index')
                 ->with('status', Response::HTTP_OK);
@@ -156,8 +184,9 @@ class PostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
-            $coupon = Post::query()->where('id', $id);
-            $coupon->forceDelete();
+            $post = Post::query()->withTrashed()->findOrFail($id);
+            $post->tags()->detach();
+            $post->forceDelete();
             Toastr::success('Xoá post thành công', 'Thành công');
 
             return back();
