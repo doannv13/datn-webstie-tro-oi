@@ -43,6 +43,13 @@
         rel="stylesheet" />
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9
+      ]><script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
+    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
+
+
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/ie10-viewport-bug-workaround.css') }}" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
 </head>
