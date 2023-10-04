@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
@@ -120,13 +121,11 @@ Route::get('post/restore/{id}', [PostController::class, 'restore'])->name('post.
 Route::get('/post-status', [PostController::class, 'changeStatus'])->name('post.status_change');
 
 // Category Post
-Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
-Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
-Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
-Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');
-// Route::get('/home', function () {
-//     return view('client.layouts.home');
-// })->name('home');
+Route::resource('categorypost', CategoryPostController::class);
+Route::get('categorypost-deleted', [CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
+Route::delete('categorypost/permanently/{id}', [CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently.delete');
+Route::get('categorypost/restore/{id}', [CategoryPostController::class, 'restore'])->name('categorypost.restore');
+Route::get('/categorypost-status', [CategoryPostController::class, 'changeStatus'])->name('categorypost.status_change');
 
 // Tag
 Route::resource('tags', TagController::class);

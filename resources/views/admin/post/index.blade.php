@@ -31,7 +31,7 @@
                         <tbody>
                         @foreach ($model as $key => $value)
                             <tr id="row_@item.ID">
-                                <td class="tabledit-view-mode">{{ $value->id }}</td>
+                                <td class="tabledit-view-mode">{{ $key +1 }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->title, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->metaTitle, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">
@@ -86,5 +86,45 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
+        $(function() {
+            $('.toggle-class').change(function() {
+                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+                let post_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('post.status_change') }}',
+                    data: {
+                        'status': status,
+                        'post_id': post_id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            })
+
+                        } else {
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            })
+                        }
+                    }
+                });
+            })
+        })
     </script>
 @endpush
