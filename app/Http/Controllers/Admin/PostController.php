@@ -199,7 +199,7 @@ class PostController extends Controller
     public function changeStatus(Request $request)
     {
         try {
-            $post = Post::find($request->id);
+            $post = Post::find($request->post_id);
             $post->status = $request->status;
             $post->save();
             return response()->json(['success' => 'Thay đổi trạng thái thành công']);
