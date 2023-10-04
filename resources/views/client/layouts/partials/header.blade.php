@@ -90,6 +90,15 @@
                     </ul>
                 </div>
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
+                    <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                        <i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
+                        Point: 10.000
+                    </button>
+
+                </div>
+
+
+                <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
                         <a href="bookmark"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <button class="btn btn-5" style="font-size: 13px">
@@ -180,7 +189,7 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                {{-- <select class="form-select bg-select-group" id="district_filter"
+                               <select class="form-select bg-select-group" id="district_filter"
                                     name="district_filter">
                                     <option value="all" selected>Tất cả</option>
 
@@ -193,7 +202,7 @@
                                     <option value="" disabled>Không có dữ liệu khu vực</option>
                                     @endif
                                     @endif
-                                </select> --}}
+                                </select>
 
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
@@ -238,12 +247,93 @@
         </form>
     </div>
 </div>
+<!-- start modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> -->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
+                    Point: 10.000 </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h1 class="fs-4 text text-info">Nạp Point Vào Tài Khoản</h1>
 
+                    <div class="row">
+                        <hr>
+                        <div class="py-3 px-3 " style="background-color: #F0FCF5;">
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 10%</span> cho giá trị nạp từ 50.000 đ đến 1.000.000 đ</p>
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 20%</span> cho giá trị nạp từ 1.000.000 đ đến 2.000.000 đ</p>
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 30%</span> cho giá trị nạp trên 2.000.000 đ</p>
+                        </div>
+                        <div class="py-3">
+                            <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
+                            <div class="p-2">
+                                <input type="button" class="btn btn-primary" value="100000" name="price" onclick="myClick()">
+                                <input type="button" class="btn btn-primary" value="200000" name="price" onclick="myClick()">
+                                <input type="button" class="btn btn-primary" value="500000" name="price" onclick="myClick()">
+                                <input type="button" class="btn btn-primary" value="1000000" name="price" onclick="myClick()">
+                                <input type="button" class="btn btn-primary" value="2000000" name="price" onclick="myClick()">
+                                <input type="button" class="btn btn-primary" value="5000000" name="price" onclick="myClick()">
+                            </div>
+                        </div>
+
+                        <div class="p-2">
+                            <div class="d-flex justify-content-between">
+                                <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
+                                <label class="text-secondary">Tối thiểu 10.000</label>
+                            </div>
+                            <input type="text" class="form-control" value="0" id="input-price" onchange="myChange()">
+
+                        </div>
+                        <div class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">0%</span></label>
+                            <label id="sale-price" class="fw-bold text-danger">0</label>
+                        </div>
+                        <div class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Tổng nhận</label>
+                            <label id="total" class="fw-bold text-danger">0</label>
+                        </div>
+                        <div class="col  ">
+                            <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
+                            <div class="">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="1" name="type-pay" checked>
+                                    <label class="form-check-label fw-semibold">
+                                        Chuyển khoản online
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="3" name="type-pay">
+                                    <label class="form-check-label fw-semibold">
+                                        Thanh toán VN PAY
+                                    </label>
+                                    <img src="{{asset('fe/img/pay/image_2.png')}}" style="max-width: 24px; max-height: 24px;">
+                                </div>
+
+                            </div>
+                            <button type="button" onclick="onclick_Pay()" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
 
 
 <!-- Search area box 1 end -->
 <!-- script -->
+@push('scripts')
 <script>
+    new DataTable('#tech-companies-1');
+    var data = document.getElementById('data');
+
     function myOnchange() {
         var category_room = document.getElementById('dselect-example1');
         var district = document.getElementById('floatingSelect2');
@@ -270,7 +360,75 @@
         xhttp.open("get", "trang-chu", true);
         xhttp.send();
     }
+
+    function myClick() {
+        var price = document.getElementsByName("price");
+        var input_price = document.getElementById('input-price');
+        var sale = document.getElementById('sale');
+        var sale_price = document.getElementById('sale-price');
+        console.log(price)
+        for (let i = 0; i < price.length; i++) {
+            price[i].addEventListener('click', function() {
+                input_price.value = price[i].value
+                if (10000 <= input_price.value && input_price.value < 1000000) {
+                    sale.innerText = "+10%";
+                    sale_price.innerText =  String(parseFloat(input_price.value * 0.1)).replace(/(.)(?=(\d{3})+$)/g, '$1,');
+                    total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+
+                } else if (1000000 <= input_price.value && input_price.value <= 2000000) {
+                    sale.innerText = "+20%";
+                    sale_price.innerText = String(parseFloat(input_price.value * 0.2, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+                    total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.2, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+
+                } else if (2000000 < input_price.value) {
+                    sale.innerText = "+30%";
+                    sale_price.innerText = String(parseFloat(input_price.value * 0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+                    total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+                }
+
+            });
+
+        }
+
+
+    }
+
+    function myChange() {
+        var input_price = document.getElementById('input-price');
+        var sale = document.getElementById('sale');
+        var sale_price = document.getElementById('sale-price');
+        var total = document.getElementById('total')
+        if (10000 <= input_price.value && input_price.value < 1000000) {
+            sale.innerText = "+10%";
+            sale_price.innerText = String(parseFloat(input_price.value * 0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1');
+            total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+
+        } else if (1000000 <= input_price.value && input_price.value <= 2000000) {
+            sale.innerText = "+20%";
+            sale_price.innerText = String(parseFloat(input_price.value * 0.2, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+            total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.2, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+
+        } else if (2000000 < input_price.value) {
+            sale.innerText = "+30%";
+            sale_price.innerText = String(parseFloat(input_price.value * 0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+            total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
+        } else {
+            sale.innerText = "0%";
+            sale_price.innerText = 0
+            total.innerText = 0
+        }
+    }
+
+    function onclick_Pay() {
+        var checkbox = document.getElementsByName("type-pay");
+        for (var i = 0; i < checkbox.length; i++) {
+            if (checkbox[i].value == 1) {
+                location.replace("display-QR");
+            }
+        }
+    }
 </script>
+@endpush
 
 
 <!-- Search area box 1 end -->
