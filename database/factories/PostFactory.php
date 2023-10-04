@@ -20,11 +20,13 @@ class PostFactory extends Factory
         $title = $this->faker->title();
         return [
             'title' => fake()->text(),
+            'metaTitle' => fake()->text(),
             'image' => fake()->imageUrl(),
             'description' => $this->faker->text(10),
             'metaDescription' => $this->faker->text(10),
             'slug'=> Str::slug($title),
             'status'=> $this->faker->randomElement(['active', 'inactive']),
+            'view' => 1000,
             'id_admin' => 1,
         ];
     }

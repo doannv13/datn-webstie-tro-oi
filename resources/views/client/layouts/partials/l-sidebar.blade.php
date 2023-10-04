@@ -6,16 +6,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-sm-12" style="max-height: 100%;">
                     <div class="sidebar" style="height: 100%;">
-                        <!-- Search box start -->
-                        <div class="sidebar-widget search-box">
-                            <form class="form-inline form-search" method="GET">
-                                <div class="form-group">
-                                    <label class="sr-only" for="textsearch3">Search</label>
-                                    <input type="text" class="form-control" id="textsearch3" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
+
                         <!-- Archives start -->
                         <div class="sidebar-widget archives">
                             <div class="main-title-2">

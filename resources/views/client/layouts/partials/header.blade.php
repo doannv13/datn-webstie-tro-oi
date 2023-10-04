@@ -4,7 +4,8 @@
             <div class="col-lg-8 col-md-8 col-sm-7 col-7">
                 <div class="list-inline">
                     <a href="tel:+55-4XX-634-7071"><i class="fa fa-phone"></i>Need Support? +00-4X6-634-781</a>
-                    <a href="tel:info@themevessel.com" class="d-none-768"><i class="fa fa-envelope"></i>info@themevessel.com</a>
+                    <a href="tel:info@themevessel.com" class="d-none-768"><i
+                            class="fa fa-envelope"></i>info@themevessel.com</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
@@ -89,7 +90,7 @@
                     </ul>
                 </div>
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
-                    <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                         <i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                         Point: 10.000
                     </button>
@@ -106,7 +107,8 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i class="fa fa-bookmark-o me-2 fs-4"></i></a>
+                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i
+                            class="fa fa-bookmark-o me-2 fs-4"></i></a>
 
                     <button class="navbar-toggler" id="drawer" type="button">
                         <span class="fa fa-bars"></span>
@@ -168,6 +170,7 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
+
                                 <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     @if(isset($category_rooms))
@@ -186,8 +189,10 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                <select class="form-select bg-select-group" id="district_filter" name="district_filter">
+                               <select class="form-select bg-select-group" id="district_filter"
+                                    name="district_filter">
                                     <option value="all" selected>Tất cả</option>
+
                                     @if(isset($districts))
                                     @if(count($districts) > 0)
                                     @foreach ($districts as $district)
@@ -205,6 +210,7 @@
 
                         <div class="col-md-6 col-sm-6 col-lg-3">
                             <div class="form-floating">
+
                                 <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1 Triệu</option>
@@ -218,6 +224,7 @@
                         </div>
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
+
                                 <select name="areage_filter" id="areage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="allAreage" {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
                                     <option value="range_areage1" {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
@@ -229,7 +236,8 @@
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm kiếm</button>
+                        <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
+                            kiếm</button>
 
 
                     </div>
@@ -240,8 +248,10 @@
     </div>
 </div>
 <!-- start modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> -->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
@@ -296,13 +306,7 @@
                                         Chuyển khoản online
                                     </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="2" name="type-pay">
-                                    <label class="form-check-label fw-semibold">
-                                        Thanh toán MOMO
-                                    </label>
-                                    <img src="{{asset('fe/img/pay/image_1.jpg')}}" style="max-width: 24px; max-height: 24px;">
-                                </div>
+                                
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="3" name="type-pay">
                                     <label class="form-check-label fw-semibold">

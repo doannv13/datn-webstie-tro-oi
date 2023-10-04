@@ -43,6 +43,11 @@ class RoomPost extends Model
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
+
+    public function categoryroom()
+    {
+        return $this->belongsTo(CategoryRoom::class, 'category_room_id', 'id');
+    }
     public function surrounds()
     {
         return $this->belongsToMany(Surrounding::class, 'surrounding_rooms', 'room_id', 'surrounding_id');

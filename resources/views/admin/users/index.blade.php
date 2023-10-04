@@ -24,7 +24,7 @@
                                                     <th style="width:15%">SĐT</th>
                                                     <th style="width:10%">Ảnh</th>
                                                     <th style="width:15%">Vai trò</th>
-                                                    <th style="width:5%">Thao tác</th>
+                                                    <th style="width:5%">Hành động</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
