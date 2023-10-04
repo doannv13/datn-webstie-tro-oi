@@ -288,7 +288,7 @@
                             <label id="total" class="fw-bold text-danger">0</label>
                         </div>
                         <div class="col  ">
-                            <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point</p>
+                            <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
                             <div class="">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="1" name="type-pay" checked>
