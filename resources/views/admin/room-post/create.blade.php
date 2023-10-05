@@ -13,13 +13,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">
-                                Gutters
+                            <h4 class="header-title mb-3">
+                                Thêm tin đăng
                             </h4>
-                            <p class="text-muted font-13">
-                                More complex layouts can also be
-                                created with the grid system.
-                            </p>
+
 
                             <div class="row">
                                 <div class="mb-3 col-md-4">
@@ -129,8 +126,8 @@
                                 <div class="col-md-4">
                                     <label class="form-label">Diện tích:<span class="text-danger">*</span></label>
                                     <div class="input-group clockpicker" data-placement="top" data-align="top">
-                                        <input type="text" placeholder="Diện tích" name="acreage"
-                                            class="form-control" value="{{ old('acreage') }}">
+                                        <input type="text" placeholder="Diện tích" name="acreage" class="form-control"
+                                            value="{{ old('acreage') }}">
                                         <span class="input-group-text">m²</span>
                                     </div>
                                     @error('acreage')

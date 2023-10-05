@@ -92,7 +92,6 @@ class ServicesController extends Controller
                 "message" => "Sửa gói dịch vụ không thành công",
                 "alert-type" => "error",
             );
-            
         }
     }
 
@@ -114,8 +113,8 @@ class ServicesController extends Controller
     }
     public function deleted()
     {
-            $services_deleted = Services::onlyTrashed()->get();
-            return view('admin.services.delete', compact('services_deleted'));
+        $services_deleted = Services::onlyTrashed()->get();
+        return view('admin.services.delete', compact('services_deleted'));
     }
 
     public function permanentlyDelete(String $id)
@@ -126,11 +125,7 @@ class ServicesController extends Controller
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công']);
             // return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
             $services_deleted = Services::onlyTrashed()->get();
-            if (count($services_deleted) == 0) {
-                return redirect()->route('services.index')->with('success', 'Thao tác thành công');
-            } else {
-                return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
-            }
+            return redirect()->back()->with('success', 'Thao tác thành công');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -142,11 +137,6 @@ class ServicesController extends Controller
         $model = Services::query()->onlyTrashed()->findOrFail($id);
         $model->restore();
         $services_deleted = Services::onlyTrashed()->get();
-        if (count($services_deleted) == 0) {
-            return redirect()->route('services.index')->with('success', 'Thao tác thành công');
-            
-        } else {
-            return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
-        }
+        return redirect()->back()->with('success', 'Thao tác thành công');
     }
 }
