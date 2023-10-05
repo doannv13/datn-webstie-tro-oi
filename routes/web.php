@@ -187,6 +187,7 @@ Route::post('bookmark/{id}', [HomeController::class, 'bookmark'])->name('bookmar
 Route::delete('unbookmark/{id}', [HomeController::class, 'unbookmark'])->name('unbookmark');
 Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unbookmarkbm'])->name('unbookmarkbm');
 
+//Notifications
 
 
 

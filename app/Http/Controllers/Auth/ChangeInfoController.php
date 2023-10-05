@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangeInfoRequest;
 use App\Models\User;
@@ -68,6 +69,8 @@ class ChangeInfoController extends Controller
                 $model->avatar=$request->old_avatar;
             }
             $model->save();
+            event( new NotificationEvent($model));
+
             toastr()->success('Cập nhập thông tin tài khoản thành công!','Thành công');
             if($request->hasFile('new_avatar')){
                 delete_file($request->old_avatar);
