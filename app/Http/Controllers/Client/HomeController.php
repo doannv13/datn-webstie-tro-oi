@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\CategoryPost;
 use App\Models\CategoryRoom;
 use App\Models\District;
@@ -34,6 +35,7 @@ class HomeController extends Controller
             ->limit(36)
             ->paginate(6);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
+        $banners = Banner::query()->where('status','active')->latest()->limit(3)->get();
         // dd($posts);
         // dd($rooms);
         //đếm số tin đăng ,user ,bài viết
@@ -42,10 +44,10 @@ class HomeController extends Controller
         $count_post = count(Post::all());
         // dd($count_room,$count_user,$count_post);
 
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post'));
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post','banners'));
         // $rooms = RoomPost::all();
         // dd($rooms);
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms'));
+        // return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms'));
     }
     public function bookmark(Request $request, string $id)
     {
