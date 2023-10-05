@@ -11,7 +11,7 @@
                             <div class="table-responsive" data-pattern="priority-columns">
                                 <div class="mb-2 d-flex gap-1 ">
                                     <a class="btn btn-success" href="{{ route('services.create') }}">Thêm mới</a>
-                                    <a class="btn btn-danger" href="{{ route('services.deleted') }}">Thùng rác</a>
+                                    <a class="btn btn-danger" href="{{ route('services-deleted') }}">Thùng rác</a>
                                 </div>
                                 <table id="tech-companies-1" class="table table-striped " style="width: 100%">
                                     <thead>

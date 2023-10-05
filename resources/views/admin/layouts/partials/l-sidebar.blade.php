@@ -361,7 +361,7 @@
                                 <a href="{{route('services.index')}}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('services.deleted')}}">- Thùng rác</a>
+                                <a href="{{route('services-deleted')}}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

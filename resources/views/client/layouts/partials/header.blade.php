@@ -60,8 +60,8 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 0">
 
             <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="logo" height="80px" />
+                <a class="navbar-brand" href="{{route('home')}}">
+                    <img src="{{ asset('fe/img/logos/logo.png') }}"  alt="logo" height="80px" />
                 </a>
 
                 <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
@@ -187,8 +187,7 @@
                             <div class="form-floating">
 
 
-                               <select class="form-select bg-select-group" id="district_filter"
-                                    name="district_filter">
+                                <select class="form-select bg-select-group" id="district_filter" name="district_filter">
 
                                     <option value="all" selected>Tất cả</option>
 
@@ -249,8 +248,8 @@
 <!-- start modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> -->
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
@@ -305,7 +304,7 @@
                                         Chuyển khoản online
                                     </label>
                                 </div>
-                                
+
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="3" name="type-pay">
                                     <label class="form-check-label fw-semibold">
@@ -371,7 +370,7 @@
                 input_price.value = price[i].value
                 if (10000 <= input_price.value && input_price.value < 1000000) {
                     sale.innerText = "+10%";
-                    sale_price.innerText =  String(parseFloat(input_price.value * 0.1)).replace(/(.)(?=(\d{3})+$)/g, '$1,');
+                    sale_price.innerText = String(parseFloat(input_price.value * 0.1)).replace(/(.)(?=(\d{3})+$)/g, '$1,');
                     total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
 
                 } else if (1000000 <= input_price.value && input_price.value <= 2000000) {

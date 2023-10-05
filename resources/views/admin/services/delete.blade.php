@@ -15,10 +15,7 @@
                                     <p>{{ $message }}</p>
                                 </div>
                                 @endif -->
-                                <div class="mb-2 d-flex gap-1 ">
-                                    <a class="btn btn-success" href="{{ route('services.create') }}">Thêm mới</a>
-                                    <a class="btn btn-danger" href="{{ route('services.deleted') }}">Thùng rác</a>
-                                </div>
+                                
                                 <table id="tech-companies-1" class="table table-striped">
                                     <thead>
                                         <tr>
@@ -41,9 +38,9 @@
                                             <td>{{ $value->description }}</td>
 
                                             <td class="text-center">
-                                                <a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services.restore', $value->id) }}" class="btn btn-primary"><i class="fa-solid fa-trash-arrow-up"></i></a>
+                                                <a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services-restore', $value->id) }}" class="btn btn-primary"><i class="fa-solid fa-trash-arrow-up"></i></a>
 
-                                                <form action="{{ route('services.permanently.delete', $value->id) }}" method="post">
+                                                <form action="{{ route('services-permanently-delete', $value->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger mt-2">
