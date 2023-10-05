@@ -55,7 +55,7 @@
                     <div class="recent-news-item mb-3">
                         <div class="thumb">
                             <a href="#">
-                                <img src="{{ $value->image }}" alt="small-img">
+                                <img src="{{ asset($value->image) }}" alt="small-img">
                             </a>
                         </div>
                         <div class="content">
