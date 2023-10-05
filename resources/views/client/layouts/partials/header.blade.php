@@ -70,7 +70,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
 
-                    @if ($global_setting->logo && asset($global_setting->logo))
+                    @if ($global_setting && $global_setting->logo && asset($global_setting->logo))
                         <img src="{{ asset($global_setting->logo) }}" alt="logo"
                             height="80px">
                     @else

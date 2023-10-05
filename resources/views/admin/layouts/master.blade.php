@@ -119,13 +119,13 @@ data-sidebar-user='true' --}}
     <!--Morris Chart-->
     <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
-    
+
     {{-- Ckeditor --}}
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('editor1');
     </script>
-    
+
     {{-- load ảnh --}}
     {{-- <script>
         $(function() {

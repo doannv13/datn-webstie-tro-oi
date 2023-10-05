@@ -18,26 +18,28 @@
         <meta name="description" content="{{ $global_setting->meta_description }}" />
     @endif
 
-    @if ($global_setting->favicon && asset($global_setting->favicon))
+    @if ($global_setting && $global_setting->favicon && asset($global_setting->favicon))
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset($global_setting->favicon) }}" />
     @else
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
     @endif
 
 
+
+
     <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
 
     <!-- External CSS libraries -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/animate.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-submenu.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-select.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/font-awesome/css/font-awesome.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/flaticon/font/flaticon.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/linearicons/style.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/jquery.mCustomScrollbar.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-datepicker.min.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/slick.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/animate.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-submenu.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-select.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/flaticon/font/flaticon.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/fonts/linearicons/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/jquery.mCustomScrollbar.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-datepicker.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/slick.css') }}" />
     <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('fe/css/leaflet.css') }}" type="text/css" />
@@ -101,35 +103,31 @@
         </div>
 
 
-    <!-- Footer start #0b4c9f -->
-    @include('client.layouts.partials.footer')
-    <!-- Footer end -->
-    <!-- Modal signup -->
-    <div class="modal fade" id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="9"
-         aria-labelledby="signupLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Login section start -->
-                <div class="login-section">
-                    <div class="container-fluid">
-                        <div class="modal-header">
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            ></button>
-                        </div>
-                        <div class="row login-box">
-                            <div class="form-section">
-                                <div class="form-inner">
-                                    <a href="index.html">
-                                        <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="80px"/>
-                                    </a>
-                                    <h3>Tạo mới tài khoản</h3>
-                                    <form method="POST" name="register" action="{{ route('register') }}"
-                                          enctype="multipart/form-data"
-                                    ">
+        <!-- Footer start #0b4c9f -->
+        @include('client.layouts.partials.footer')
+        <!-- Footer end -->
+        <!-- Modal signup -->
+        <div class="modal fade" id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="9"
+            aria-labelledby="signupLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Login section start -->
+                    <div class="login-section">
+                        <div class="container-fluid">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="row login-box">
+                                <div class="form-section">
+                                    <div class="form-inner">
+                                        <a href="index.html">
+                                            <img src="{{ asset('fe/img/logos/logo.png') }}" alt=""
+                                                width="80px" />
+                                        </a>
+                                        <h3>Tạo mới tài khoản</h3>
+                                        <form method="POST" name="register" action="{{ route('register') }}"
+                                            enctype="multipart/form-data" ">
                                     @csrf
                                     <div class="form-group clearfix">
                                         <input
@@ -138,10 +136,10 @@
                                             value="{{ old('name') }}" required autocomplete="name" autofocus
                                         />
                                         @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+@enderror
                                     </div>
                                     <div class="form-group clearfix">
                                         <input
@@ -160,20 +158,20 @@
                                             value="{{ old('email') }}" required autocomplete="email"
                                         />
                                         @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+@enderror
                                     </div>
                                     <div class="form-group clearfix">
                                         <input id="password" type="password" placeholder="Mật khẩu"
                                                class="form-control @error('password') is-invalid @enderror"
                                                name="password" required autocomplete="new-password">
                                         @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+@enderror
 
                                     </div>
                                     <div class="form-group clearfix">
@@ -238,22 +236,21 @@
                                             }
                                         }
                                     </script>
-                                    <script src="https://code.jquery.com/jquery-3.6.0.js"
-                                            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-                                            crossorigin="anonymous"></script>
+                                    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+                                        crossorigin="anonymous"></script>
                                     <script>
                                         $(() => {
                                             function readURL(input) {
                                                 if (input.files && input.files[0]) {
                                                     var reader = new FileReader();
-                                                    reader.onload = function (e) {
+                                                    reader.onload = function(e) {
                                                         $('#show-image').attr('src', e.target.result);
                                                     };
                                                     reader.readAsDataURL(input.files[0]);
                                                 }
                                             }
 
-                                            $("#file").change(function () {
+                                            $("#file").change(function() {
                                                 readURL(this);
                                             });
                                         });
