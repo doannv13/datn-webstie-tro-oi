@@ -8,8 +8,8 @@
                 <h5 class="mt-0">Danh sách bài viết</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
-                        <a class="btn btn-success" href="{{ route('post.create') }}">Thêm mới</a>
-                        <a class="btn btn-danger" href="{{ route('post.deleted') }}">Thùng rác</a>
+                        <a class="btn btn-success" href="{{ route('posts.create') }}">Thêm mới</a>
+                        <a class="btn btn-danger" href="{{ route('posts-deleted') }}">Thùng rác</a>
                     </div>
                     <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                         <thead>
@@ -54,14 +54,14 @@
                                         {{ $value->status == 'active' ? 'checked' : '' }}>
                                 </td>
                                 <td class="">
-                                    <a href="{{ route('post.edit', $value->id) }}">
+                                    <a href="{{ route('posts.edit', $value->id) }}">
                                         <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                             <i class="fa-solid fa-pen-to-square fs-4"></i>
                                         </button>
                                     </a>
 
-                                    <form action="{{ route('post.destroy', $value->id) }}" method="POST">
+                                    <form action="{{ route('posts.destroy', $value->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
@@ -94,7 +94,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('post.status_change') }}',
+                    url: '{{ route('posts-status-change') }}',
                     data: {
                         'status': status,
                         'post_id': post_id

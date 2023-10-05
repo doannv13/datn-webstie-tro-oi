@@ -6,6 +6,9 @@
             <div class="card-body">
                 <h5 class="mt-0">Thùng rác bài viết</h5>
                 <div class="table-responsive">
+                    <div class="mb-2 d-flex gap-1 ">
+                        <a class="btn btn-success" href="{{ route('posts.index') }}">Danh sách</a>
+                    </div>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                         <tr>
@@ -40,10 +43,10 @@
                                 <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
                                 <td>{{ $value->status == 'inactive' ? 'Tắt' : 'Bật' }}</td>
                                     <td>
-                                        <a href="{{ route('post.restore', $value->id) }}" class="btn btn-primary text-center my-1"
+                                        <a href="{{ route('posts-restore', $value->id) }}" class="btn btn-primary text-center my-1"
                                            style="width: 45px;"><i
                                                 class="fa-solid fa-trash-arrow-up"></i></a>
-                                        <form action="{{ route('post.permanently.delete', $value->id) }}" method="post">
+                                        <form action="{{ route('posts-permanently-delete', $value->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger my-1" style="width: 45px;">

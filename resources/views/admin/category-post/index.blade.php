@@ -8,8 +8,8 @@
                 <h5 class="mt-0">Danh sách bài viết</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
-                        <a class="btn btn-success" href="{{ route('categorypost.create') }}">Thêm mới</a>
-                        <a class="btn btn-danger" href="{{ route('categorypost.deleted') }}">Thùng rác</a>
+                        <a class="btn btn-success" href="{{ route('category-posts.create') }}">Thêm mới</a>
+                        <a class="btn btn-danger" href="{{ route('category-posts-deleted') }}">Thùng rác</a>
                     </div>
                     <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                         <thead>
@@ -40,14 +40,14 @@
 
 
                                 <td class="">
-                                    <a href="{{ route('categorypost.edit', $value->id) }}">
+                                    <a href="{{ route('category-posts.edit', $value->id) }}">
                                         <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                             <i class="fa-solid fa-pen-to-square fs-4"></i>
                                         </button>
                                     </a>
 
-                                    <form action="{{ route('categorypost.destroy', $value->id) }}" method="POST">
+                                    <form action="{{ route('category-posts.destroy', $value->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
@@ -80,7 +80,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('categorypost.status_change') }}',
+                    url: '{{ route('category-posts-status-change') }}',
                     data: {
                         'status': status,
                         'categorypost_id': categorypost_id,
