@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
-        $data = Post::query()->latest()->get();
+        $data = Post::query()->latest()->paginate(4);
         $categories = CategoryRoom::withCount('roomPosts')
             ->having('room_posts_count', '>', 0)
             ->paginate(4);
@@ -25,6 +25,17 @@ class PostController extends Controller
         return view('client.post.index', compact('data', 'categories', 'posts', 'room_posts'));
     }
 
+
+    function postDetail(String $id)
+    {
+        $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
+        $categories = CategoryRoom::withCount('roomPosts')
+            ->having('room_posts_count', '>', 0)
+            ->paginate(4);
+        $posts = Post::latest()->paginate(5);
+        $data = Post::query()->findOrFail($id);
+        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts'));
+    }
     /**
      * Show the form for creating a new resource.
      */
