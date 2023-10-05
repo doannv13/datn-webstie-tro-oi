@@ -3,10 +3,28 @@
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:24:47 GMT -->
 
 <head>
-    <title>Hotel Alpha - Booking and Reservation Template</title>
+    <title>Trọ ơi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @if ($global_setting)
+        <meta name="title" content="{{ $global_setting->meta_title }}" />
+        <meta name="author" content="{{ $global_setting->meta_author }}" />
+        <meta name="keywords" content="{{ $global_setting->meta_keyword }}" />
+        <meta name="description" content="{{ $global_setting->meta_description }}" />
+    @endif
+
+    @if ($global_setting->favicon && asset($global_setting->favicon))
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset($global_setting->favicon) }}" />
+    @else
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
+    @endif
+
+
     <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
+
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/animate.min.css') }}"/>
@@ -31,8 +49,6 @@
     <!-- dselect -->
     <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/skins/default.css') }}" />
-    <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('fe/img/favicon.ico') }}" type="image/x-icon" />
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&amp;display=swap"
