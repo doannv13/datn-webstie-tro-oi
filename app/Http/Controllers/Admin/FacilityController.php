@@ -44,6 +44,7 @@ class FacilityController extends Controller
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
+
         }
     }
 
@@ -62,6 +63,8 @@ class FacilityController extends Controller
     {
         $data = Facility::query()->findOrFail($id);
         return view('admin.facility.edit', compact('data'));
+        // return view('client.payment-status.notification-pay', compact('data'));
+
     }
 
     /**

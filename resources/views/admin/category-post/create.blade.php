@@ -10,10 +10,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="my-2">Thêm danh mục bài viết</h3>
+                        <h3 class="my-2 text-center">Thêm danh mục bài viết</h3>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('categorypost.store') }}" method="POST">
+                                <form action="{{ route('category-posts.store') }}" method="POST">
                                     @csrf
                                     @method('post')
                                     <div class="mb-3">
@@ -36,7 +36,7 @@
                                     </div>
 
                                     <button class="btn btn-primary waves-effect waves-light">Thêm</button>
-                                    <a href="{{ route('categorypost.index') }}" class="btn btn-warning waves-effect text-light">Trở
+                                    <a href="{{ route('category-posts.index') }}" class="btn btn-warning waves-effect text-light">Trở
                                         về</a>
 
 

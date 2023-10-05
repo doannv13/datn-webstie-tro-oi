@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6 col-xl-4">
         <div class="text-center">
-            <a href="index.html">
+            <a href="{{ route('home-admin') }}">
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="100" class="mx-auto">
             </a>
         </div>
@@ -15,7 +15,7 @@
                     <h4 class="text-uppercase mt-0">Cập nhật mật khẩu</h4>
                 </div>
 
-                <form action="{{ route('admin-changepassword',auth()->user()->id) }}" method="POST">
+                <form action="{{ route('admin-change-password',auth()->user()->id) }}" method="POST">
                     @csrf
                     @method('put')
                     <div class="mb-3">
