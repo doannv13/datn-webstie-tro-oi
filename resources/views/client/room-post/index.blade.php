@@ -64,7 +64,7 @@
                                             </button>
                                         </a>
                                     </div>
-                                    <button class="btn btn-primary px-4">Mua gói dịch vụ</button>
+                                    <button class="btn btn-primary px-4"><a href="{{route('services-room.index')}}" >Mua gói dịch vụ</a></button>
                                 </td>
                             </tr>
                         @endforeach

@@ -20,11 +20,13 @@ return new class extends Migration
             $table->longText('metaDescription');
             $table->string('slug');
             $table->enum('status',['active','inactive'])->default('inactive');
+
             $table->string('view');
             $table->unsignedBigInteger('id_admin');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_admin')->references('id')->on('users');
+
         });
     }
 

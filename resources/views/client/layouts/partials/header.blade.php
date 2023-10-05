@@ -4,8 +4,7 @@
             <div class="col-lg-8 col-md-8 col-sm-7 col-7">
                 <div class="list-inline">
                     <a href="tel:+55-4XX-634-7071"><i class="fa fa-phone"></i>Need Support? +00-4X6-634-781</a>
-                    <a href="tel:info@themevessel.com" class="d-none-768"><i
-                            class="fa fa-envelope"></i>info@themevessel.com</a>
+                    <a href="tel:info@themevessel.com" class="d-none-768"><i class="fa fa-envelope"></i>info@themevessel.com</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
@@ -61,8 +60,8 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 0">
 
             <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="logo" height="80px" />
+                <a class="navbar-brand" href="{{route('home')}}">
+                    <img src="{{ asset('fe/img/logos/logo.png') }}"  alt="logo" height="80px" />
                 </a>
 
                 <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
@@ -107,8 +106,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i
-                            class="fa fa-bookmark-o me-2 fs-4"></i></a>
+                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i class="fa fa-bookmark-o me-2 fs-4"></i></a>
 
                     <button class="navbar-toggler" id="drawer" type="button">
                         <span class="fa fa-bars"></span>
@@ -152,7 +150,6 @@
 <!-- Search area box 1 start -->
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
-
         <form action="{{ route('search-fillter') }}" method="POST">
             @csrf
             <div class="row g-3 align-items-center">
@@ -189,8 +186,9 @@
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                               <select class="form-select bg-select-group" id="district_filter"
-                                    name="district_filter">
+
+                                <select class="form-select bg-select-group" id="district_filter" name="district_filter">
+
                                     <option value="all" selected>Tất cả</option>
 
                                     @if(isset($districts))
@@ -250,8 +248,8 @@
 <!-- start modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> -->
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
@@ -306,7 +304,7 @@
                                         Chuyển khoản online
                                     </label>
                                 </div>
-                                
+
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="3" name="type-pay">
                                     <label class="form-check-label fw-semibold">
@@ -372,7 +370,7 @@
                 input_price.value = price[i].value
                 if (10000 <= input_price.value && input_price.value < 1000000) {
                     sale.innerText = "+10%";
-                    sale_price.innerText =  String(parseFloat(input_price.value * 0.1)).replace(/(.)(?=(\d{3})+$)/g, '$1,');
+                    sale_price.innerText = String(parseFloat(input_price.value * 0.1)).replace(/(.)(?=(\d{3})+$)/g, '$1,');
                     total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
 
                 } else if (1000000 <= input_price.value && input_price.value <= 2000000) {

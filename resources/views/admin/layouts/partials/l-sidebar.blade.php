@@ -355,13 +355,13 @@
                     <div class="collapse" id="goidichvu">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{route('services.create')}}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{route('services.index')}}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{route('services-deleted')}}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

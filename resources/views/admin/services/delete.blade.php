@@ -9,11 +9,14 @@
                     <div class="responsive-table-plugin">
                         <div class="table-rep-plugin">
                             <div class="table-responsive" data-pattern="priority-columns">
-                                <div class="mb-2 d-flex gap-1 ">
-                                    <a class="btn btn-success" href="{{ route('services.create') }}">Thêm mới</a>
-                                    <a class="btn btn-danger" href="{{ route('services-deleted') }}">Thùng rác</a>
+
+                                <!-- @if ($message = Session::get('success'))
+                                <div class="alert alert-success">
+                                    <p>{{ $message }}</p>
                                 </div>
-                                <table id="tech-companies-1" class="table table-striped " style="width: 100%">
+                                @endif -->
+                                
+                                <table id="tech-companies-1" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
@@ -25,31 +28,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ( $services as $key =>$value)
+                                        @foreach ($services_deleted as $key => $value)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->name }}</td>
                                             <td>{{ $value->price }}</td>
                                             <td>{{ $value->date_number }}</td>
+
                                             <td>{{ $value->description }}</td>
+
                                             <td class="text-center">
-                                                <a href="{{ route('services.edit', $value->id) }}" class="btn btn-primary ">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-                                                <form action="{{route('services.destroy',$value->id )}}" method="post">
+                                                <a onclick="return confirm('Bạn có muốn khôi phục ')" href="{{ route('services-restore', $value->id) }}" class="btn btn-primary"><i class="fa-solid fa-trash-arrow-up"></i></a>
+
+                                                <form action="{{ route('services-permanently-delete', $value->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-danger mt-2" onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                        <i class="fa-solid fa-trash fs-4 text-light"></i>
+                                                    <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger mt-2">
+                                                        <i class="fa-solid fa-delete-left text-light"></i>
                                                     </button>
                                                 </form>
                                             </td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div> <!-- end .table-responsive -->
-
                         </div> <!-- end .table-rep-plugin-->
                     </div> <!-- end .responsive-table-plugin-->
                 </div>
@@ -61,6 +65,8 @@
 </div> <!-- container -->
 @endsection
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     new DataTable('#tech-companies-1');
 </script>

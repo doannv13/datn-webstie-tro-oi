@@ -49,8 +49,6 @@ class ServicesController extends Controller
             return redirect()->route('services.index')->with('success', 'Thêm dịch vụ thành công');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            
-            return back();
         }
     }
 
@@ -94,7 +92,7 @@ class ServicesController extends Controller
                 "message" => "Sửa gói dịch vụ không thành công",
                 "alert-type" => "error",
             );
-            return back()->with($notification);
+            
         }
     }
 
@@ -117,7 +115,7 @@ class ServicesController extends Controller
     public function deleted()
     {
             $services_deleted = Services::onlyTrashed()->get();
-            return view('admin.services.deleted', compact('services_deleted'));
+            return view('admin.services.delete', compact('services_deleted'));
     }
 
     public function permanentlyDelete(String $id)

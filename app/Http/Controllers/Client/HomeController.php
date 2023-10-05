@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\CategoryPost;
 use App\Models\CategoryRoom;
 use App\Models\District;
+
 use App\Models\ImageRoom;
+
 use App\Models\Post;
 use App\Models\RoomPost;
 use App\Models\Ward;
 use App\Models\Bookmark;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +25,25 @@ class HomeController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        $rooms = RoomPost::all();
+
+        $rooms = RoomPost::with(['facilities' => function ($query) {
+            $query->inRandomOrder()->take(6);
+        }])
+            ->where('status', 'inactive')
+            ->latest('id')
+            ->limit(36)
+            ->paginate(6);
+        $posts = Post::with('user')->where('status', 'inactive')->latest('id')->limit(6)->get();
+        // dd($posts);
+        // dd($rooms);
+        //đếm số tin đăng ,user ,bài viết
+        $count_room=count(RoomPost::all());
+        $count_user=count(User::all());
+        $count_post=count(Post::all());
+        // dd($count_room,$count_user,$count_post);
+
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts','count_room','count_user','count_post'));
+        // $rooms = RoomPost::all();
         // dd($rooms);
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms'));
     }
