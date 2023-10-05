@@ -21,7 +21,7 @@
                     <div class="footer-item">
                         <div class="main-title-2">
                             <h1>Về trang chủ</h1>
-                        </div>  
+                        </div>
                         <ul class="links">
                             <li>
                                 <a href="rooms-col-3.html">Trang chủ</a>
@@ -70,17 +70,17 @@
                         <ul class="personal-info">
                             <li>
                                 <i class="fa fa-map-marker"></i>
-                                Address: 322 Mỹ Đình,
+                                Địa chỉ: {{ $global_setting ? $global_setting->address : '' }}
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                Email:<a href="mailto:sales@hotelempire.com"
-                                >trooi@gmail.com</a
-                                >
+                                Email: <a
+                                    href="mailto:{{ $global_setting ? $global_setting->email : '' }}">{{ $global_setting ? $global_setting->email : '' }}</a>
                             </li>
                             <li>
                                 <i class="fa fa-phone"></i>
-                                Phone: <a href="tel:+55-417-634-7071">+123456789</a>
+                                Điện thoại hỗ trợ: <a
+                                    href="tel:+{{ $global_setting ? $global_setting->support_phone : '' }}">{{ $global_setting ? $global_setting->support_phone : '' }}</a>
                             </li>
                         </ul>
                     </div>
@@ -102,27 +102,19 @@
                     <div class="clearfix"></div>
                     <ul class="social-list">
                         <li>
-                            <a href="#" class="twitter-bg"
-                            ><i class="fa fa-twitter"></i
-                                ></a>
+                            <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="facebook-bg"
-                            ><i class="fa fa-facebook"></i
-                                ></a>
+                            <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li>
                             <a href="#" class="rss-bg"><i class="fa fa-rss"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="google-bg"
-                            ><i class="fa fa-google-plus"></i
-                                ></a>
+                            <a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="linkedin-bg"
-                            ><i class="fa fa-linkedin"></i
-                                ></a>
+                            <a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                 </div>

@@ -35,9 +35,7 @@ class HomeController extends Controller
             ->limit(36)
             ->paginate(6);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
-
         $banners = Banner::query()->where('status','active')->latest()->limit(3)->get();
-
         // dd($posts);
         // dd($rooms);
         //đếm số tin đăng ,user ,bài viết
@@ -65,7 +63,7 @@ class HomeController extends Controller
                 $model->room_post_id = $id;
                 $model->save();
                 toastr()->success('Bạn vừa lưu 1 phòng', 'Đã lưu');
-                return to_route('home');
+                return back();
             } else {
                 toastr()->error('Phòng đã được lưu trước đó', 'Thất bại');
                 return back();
@@ -75,7 +73,7 @@ class HomeController extends Controller
             return redirect('/client-login');
         }
     }
-    public function listbookmark()
+    public function listBookmark()
     {
         if (Auth::check()) {
             $user_id = auth()->user()->id;
@@ -85,14 +83,13 @@ class HomeController extends Controller
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
             $posts = Post::latest()->paginate(5);
-            // dd($room_posts[0]->facilities);
             return view('client.bookmark', compact('data', 'categories', 'posts', 'room_posts'));
         } else {
             toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
             return redirect('/client-login');
         }
     }
-    public function unbookmark(string $id)
+    public function unBookmark(string $id)
     {
         try {
             $user_id = auth()->user()->id;
@@ -108,7 +105,7 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function unbookmarkbm(string $id)
+    public function unBookmarkbm(string $id)
     {
         try {
             $model = Bookmark::findOrFail($id);
@@ -128,53 +125,50 @@ class HomeController extends Controller
         $districts = District::query()->latest()->get();
 
         $selectedPrice = request()->input('price_filter');
-        $selectedAreage = request()->input('areage_filter');
+        $selectedAcreage = request()->input('acreage_filter');
         $selectedRoomType = request()->input('room_type_filter');
         $selectedDistrict = request()->input('district_filter');
         $search = request()->input('name_filter');
 
-        $list_ward_id = Ward::where('district_id', $districts)->pluck('id');
+        // $list_ward_id = Ward::where('district_id', $district)->pluck('id');
         $query = RoomPost::query();
         $query->where('name', 'like', '%' . $search . '%');
 
         if ($selectedRoomType !== 'all') {
             $query->where('category_room_id', $selectedRoomType);
         }
-        if ($districts !== 'all') {
-            $query->whereIn('id_wards', $list_ward_id);
-            if ($selectedDistrict !== 'all') {
-                $query->where('district_id', $selectedDistrict);
-            }
-            // if ($district !== 'all'){
-            //     $query->whereIn('ward_id', $list_ward_id);
-            // }
-            // Lọc theo giá
-            if ($selectedPrice === 'all') {
-                // Không cần thêm điều kiện nếu chọn tất cả
-            } elseif ($selectedPrice === 'range_price1') {
-                $query->whereBetween('price', [0, 1000000]);
-            } elseif ($selectedPrice === 'range_price2') {
-                $query->whereBetween('price', [1000000, 2500000]);
-            } elseif ($selectedPrice === 'range_price3') {
-                $query->whereBetween('price', [2500000, 4000000]);
-            } elseif ($selectedPrice === 'range_price4') {
-                $query->where('price', '>=', 4000000);
-            }
-            // Lọc theo diện tích
-            if ($selectedAreage === 'allAreage') {
-                // Không cần thêm điều kiện nếu chọn tất cả
-            } elseif ($selectedAreage === 'range_areage1') {
-                $query->whereBetween('areage', [0, 20]);
-            } elseif ($selectedAreage === 'range_areage2') {
-                $query->whereBetween('areage', [20, 30]);
-            } elseif ($selectedAreage === 'range_areage3') {
-                $query->whereBetween('areage', [30, 45]);
-            } elseif ($selectedAreage === 'range_areage4') {
-                $query->where('areage', '>=', 45);
-            }
-            $room = $query->get();
-            return view('client.layouts.search', compact('category_rooms', 'wards', 'districts', 'room'));
+        if ($selectedDistrict !== 'all') {
+            $query->where('district_id', $selectedDistrict);
         }
+        // if ($district !== 'all'){
+        //     $query->whereIn('ward_id', $list_ward_id);
+        // }
+        // Lọc theo giá
+        if ($selectedPrice === 'all') {
+            // Không cần thêm điều kiện nếu chọn tất cả
+        } elseif ($selectedPrice === 'range_price1') {
+            $query->whereBetween('price', [0, 1000000]);
+        } elseif ($selectedPrice === 'range_price2') {
+            $query->whereBetween('price', [1000000, 2500000]);
+        } elseif ($selectedPrice === 'range_price3') {
+            $query->whereBetween('price', [2500000, 4000000]);
+        } elseif ($selectedPrice === 'range_price4') {
+            $query->where('price', '>=', 4000000);
+        }
+        // Lọc theo diện tích
+        if ($selectedAcreage === 'allAcreage') {
+            // Không cần thêm điều kiện nếu chọn tất cả
+        } elseif ($selectedAcreage === 'range_acreage1') {
+            $query->whereBetween('acreage', [0, 20]);
+        } elseif ($selectedAcreage === 'range_acreage2') {
+            $query->whereBetween('acreage', [20, 30]);
+        } elseif ($selectedAcreage === 'range_acreage3') {
+            $query->whereBetween('acreage', [30, 45]);
+        } elseif ($selectedAcreage === 'range_acreage4') {
+            $query->where('acreage', '>=', 45);
+        }
+        $room = $query->get();
+        return view('client.layouts.search', compact('category_rooms', 'wards', 'districts', 'room'));
     }
 
     function roomPostDetail(String $id)
@@ -189,6 +183,9 @@ class HomeController extends Controller
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->get();
+        // $rooms = RoomPost::with(['facilities' => function ($query) {
+        //     $query->inRandomOrder()->take(6);
+        // }]);
         $images = ImageRoom::query()->where('room_id', $id)->get();
         return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts'));
     }

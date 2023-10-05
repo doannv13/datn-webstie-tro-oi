@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRoomRequest;
 use App\Models\CategoryRoom;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -17,7 +18,7 @@ class CategoryRoomController extends Controller
     public function index()
     {
         $data = CategoryRoom::query()->orderByDesc('id')->get();
-        return view('admin.categoryrooms.index', compact('data'));
+        return view('admin.category-rooms.index', compact('data'));
     }
 
     /**
@@ -25,7 +26,7 @@ class CategoryRoomController extends Controller
      */
     public function create()
     {
-        return view('admin.categoryrooms.create');
+        return view('admin.category-rooms.create');
     }
 
 
@@ -41,7 +42,7 @@ class CategoryRoomController extends Controller
             $model->fill($request->all());
             $model->save();
             Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categoryrooms.index');
+            return to_route('category-rooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -63,7 +64,7 @@ class CategoryRoomController extends Controller
     public function edit(string $id)
     {
         $data = CategoryRoom::query()->findOrFail($id);
-        return view('admin.categoryrooms.edit', compact('data'));
+        return view('admin.category-rooms.edit', compact('data'));
     }
 
     /**
@@ -82,7 +83,9 @@ class CategoryRoomController extends Controller
 //                "message" => "Cập nhật danh mục thành công",
 //                "alert-type" => "success",
 //            );
-            return to_route('categoryrooms.index')->with('success', 'Cập nhật dịch vụ thành công');
+            Toastr::success('Cập nhật danh mục thành công', 'Thành công');
+
+            return to_route('category-rooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             $notification = array(
@@ -102,7 +105,9 @@ class CategoryRoomController extends Controller
         try {
             $categoryRoom = CategoryRoom::query()->findOrFail($id);
             $categoryRoom->delete();
-            return redirect()->route('categoryrooms.index')->with('success', 'Chuyển vào thùng rác thành công');
+            Toastr::success('Danh mục đã chuyển vào thùng rác', 'Thành công');
+
+            return to_route('category-rooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
@@ -111,17 +116,19 @@ class CategoryRoomController extends Controller
     public function deleted()
     {
         $data = CategoryRoom::onlyTrashed()->get();
-        return view('admin.categoryrooms.deleted', compact('data'));
+        return view('admin.category-rooms.deleted', compact('data'));
     }
-
     public function permanentlyDelete(string $id)
     {
         try {
             $model = CategoryRoom::where('id', $id);
             $model->forceDelete();
-            return redirect()->route('categoryrooms.index')->with('success', 'Xóa danh mục thành công');
+            Toastr::success('Xoá thành công', 'Thành công');
+            return back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -130,9 +137,23 @@ class CategoryRoomController extends Controller
         try {
             $model = CategoryRoom::query()->onlyTrashed()->findOrFail($id);
             $model->restore();
-            return redirect()->route('categoryrooms.index')->with('success', 'Khôi phục danh mục thành công');
+            Toastr::success('Khôi phục thành công', 'Thành công');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            Toastr::error('Khôi phục thất bại', 'Thất bại');
+            return back();
+        }
+    }
+    public function changeStatus(Request $request)
+    {
+        try {
+            $categoryroom = CategoryRoom::find($request->categoryrooms_id);
+            $categoryroom->status = $request->status;
+            $categoryroom->save();
+            return response()->json(['success' => 'Thay đổi trạng thái thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
         }
     }
 }

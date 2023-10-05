@@ -13,13 +13,14 @@
                                 <h1>Quản lý</h1>
                             </div>
                             <ul class="list-unstyled">
-                                <li><i class="fas fa-newspaper px-2"></i><a href="{{ route('room-post.index') }}">Quản lý
+                                <li><i class="fas fa-newspaper px-2"></i><a href="{{ route('room-posts.index') }}">Quản lý
                                         tin đăng</a></li>
-                                <li><i class="fas fa-edit px-2"></i><a href="{{ route('room-post.create') }}">Đăng tin
+                                <li><i class="fas fa-edit px-2"></i><a href="{{ route('room-posts.create') }}">Đăng tin
                                         mới</a></li>
                                 <li><i class="fas fa-list-alt px-2"></i><a href="#">Lịch sử giao dịch</a></li>
                                 <li><i class="fas fa-store px-2"></i><a href="#">Dịch vụ</a></li>
-                                <li><i class="fas fa-store px-2"></i><a href="{{ route('room_deleted') }}">Thùng rác</a>
+                                <li><i class="fas fa-store px-2"></i><a href="{{ route('room-posts-deleted') }}">Thùng
+                                        rác</a>
                                 </li>
                             </ul>
                         </div>

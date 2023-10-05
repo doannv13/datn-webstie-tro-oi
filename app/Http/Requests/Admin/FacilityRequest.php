@@ -24,6 +24,7 @@ class FacilityRequest extends FormRequest
         return [
             'name' => 'required',
             'icon' => 'required',
+            // sửa
             'description' => 'required',
         ];
     }

@@ -64,7 +64,7 @@ class PostController extends Controller
                 }
             }
             Toastr::success('Thêm bài viết thành công', 'Thành công');
-            return to_route('post.index');
+            return to_route('posts.index');
 
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -132,14 +132,12 @@ class PostController extends Controller
             }
             Toastr::success('Cập nhật bài viết thành công', 'Thành công');
 
-            return to_route('post.index')
-                ->with('status', Response::HTTP_OK);
+            return to_route('posts.index')->with('status', Response::HTTP_OK);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
             Toastr::error('Thao tác thất bại', 'Thất bại');
 
-            return back()
-                ->with('status', Response::HTTP_BAD_REQUEST);
+            return back()->with('status', Response::HTTP_BAD_REQUEST);
         }
     }
 

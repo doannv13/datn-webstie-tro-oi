@@ -127,9 +127,6 @@ class UserController extends Controller
         try {
             $data = User::where('id', $id);
             $data->forceDelete();
-            if ($data->image) {
-                delete_file($data->image);
-        }
             toastr()->success('Xóa tài khoản thành công!','Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
@@ -148,7 +145,7 @@ class UserController extends Controller
         }
         catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Cập nhật cài đặt thất bại!','Thất bại');
+            toastr()->error('Khôi phục tài khoản thất bại!','Thất bại');
             return back();
         }
     }
