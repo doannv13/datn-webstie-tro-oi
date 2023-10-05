@@ -141,6 +141,8 @@ Route::resource('services', \App\Http\Controllers\Admin\ServicesController::clas
 Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
 Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
 Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
+//Dịch vụ client
+Route::resource('services-room-post', \App\Http\Controllers\Client\ServicesController::class);
 // Thanh toán
 Route::get('display-QR',function(){
     return view('client.pay.display-QR');
