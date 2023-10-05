@@ -223,12 +223,12 @@
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
 
-                                <select name="areage_filter" id="areage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
-                                    <option value="allAreage" {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
-                                    <option value="range_areage1" {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
-                                    <option value="range_areage2" {{ request('areage_filter') == 'range_areage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
-                                    <option value="range_areage3" {{ request('areage_filter') == 'range_areage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
-                                    <option value="range_areage4" {{ request('areage_filter') == 'range_areage4' ? 'selected' : '' }}>Trên 45m vuông</option>
+                                <select name="acreage_filter" id="acreage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                    <option value="allAcreage" {{ request('acreage_filter') == 'allAcreage' ? 'selected' : '' }}>Tất cả</option>
+                                    <option value="range_acreage1" {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
+                                    <option value="range_acreage2" {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
+                                    <option value="range_acreage3" {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
+                                    <option value="range_acreage4" {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Trên 45m vuông</option>
 
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
