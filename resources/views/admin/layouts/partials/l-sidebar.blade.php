@@ -65,7 +65,6 @@
         <div id="sidebar-menu">
 
             <ul id="side-menu">
-
                 <li class="menu-title">Navigation</li>
 
                 <li>
@@ -162,13 +161,13 @@
                     <div class="collapse" id="tienich">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('facilities.create')}}">- Thêm mới</a>
+                                <a href="{{ route('facilities.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('facilities.index')}}">- Danh sách </a>
+                                <a href="{{ route('facilities.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('facilities-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('facilities-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

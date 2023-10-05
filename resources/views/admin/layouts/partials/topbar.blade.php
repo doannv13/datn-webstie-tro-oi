@@ -201,7 +201,7 @@
                 </div>
 
                 <!-- item-->
-                <a href="{{ route('admin-edit-info', auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-info',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
                     <span>Cập nhật thông tin</span>
                 </a>
@@ -239,17 +239,18 @@
     <!-- LOGO -->
     <div class="logo-box">
         <a href="{{ route('posts.index') }}" class="logo logo-light text-center">
-            <span class="logo-sm">
-                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
-            </span>
+
+                            <span class="logo-sm">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
+                            </span>
             <span class="logo-lg">
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="16">
             </span>
         </a>
         <a href="{{ route('posts.index') }}" class="logo logo-dark text-center">
-            <span class="logo-sm">
-                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
-            </span>
+                            <span class="logo-sm">
+                                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
+                            </span>
             <span class="logo-lg">
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="50">
             </span>
