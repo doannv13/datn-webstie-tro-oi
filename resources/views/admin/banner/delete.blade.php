@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h5 class="mt-0">Danh sách banner</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{ route('banner.create') }}">Thêm mới</a>
+                    <a class="btn btn-success mb-2" href="{{ route('banners.index') }}">Danh sách</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
@@ -36,12 +36,13 @@
                                         @endif
                                     </td>
                                     <td>{{ $value->status == 'inactive' ? 'Tắt' : 'Bật' }}</td>
-                                    <td><a href="{{ route('banner.restore', $value->id) }}" class="btn btn-primary me-2"><i
+                                    <td><a href="{{ route('banners-restore', $value->id) }}"
+                                            class="btn btn-primary text-center my-1" style="width: 45px;"><i
                                                 class="fa-solid fa-trash-arrow-up"></i></a>
-                                        <form action="{{ route('banner.permanently.delete', $value->id) }}" method="post">
+                                        <form action="{{ route('banners-permanently-delete', $value->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger">
+                                            <button onclick="return confirm('Bạn có muốn xoá')"  class="btn btn-danger my-1" style="width: 45px;">
                                                 <i class="fa-solid fa-delete-left text-light"></i>
                                             </button>
                                         </form>
