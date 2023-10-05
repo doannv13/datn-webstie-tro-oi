@@ -62,26 +62,7 @@
         <div id="sidebar-menu">
 
             <ul id="side-menu">
-                <li>
-                    <a href="#dashboard" data-bs-toggle="collapse">
-                        <i class="fe-folder-minus"></i>
-                        <span>Thẻ</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="dashboard">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('tags.create') }}">- Thêm mới</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('tags.index') }}">- Danh sách </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('tags.deleted') }}">- Thùng rác</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="menu-title">Navigation</li>
 
                 <li>
@@ -136,13 +117,13 @@
                     <div class="collapse" id="dmp">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('categoryrooms.create') }}">- Thêm mới</a>
+                                <a href="{{ route('category-rooms.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{ route('categoryrooms.index') }}">- Danh sách </a>
+                                <a href="{{ route('category-rooms.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{ route('categoryrooms.deleted') }}">- Thùng rác</a>
+                                <a href="{{ route('category-rooms-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -178,13 +159,13 @@
                     <div class="collapse" id="tienich">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{route('facilities.create')}}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{route('facilities.index')}}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{route('facilities-deleted')}}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -201,13 +182,13 @@
                     <div class="collapse" id="dmbv">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('categorypost.create') }}">- Thêm mới</a>
+                                <a href="{{ route('category-posts.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{ route('categorypost.index') }}">- Danh sách </a>
+                                <a href="{{ route('category-posts.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{ route('categorypost.deleted') }}">- Thùng rác</a>
+                                <a href="{{ route('category-posts-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -222,20 +203,20 @@
                     <div class="collapse" id="bv">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('post.create') }}">- Thêm mới</a>
+                                <a href="{{ route('posts.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{ route('post.index') }}">- Danh sách </a>
+                                <a href="{{ route('posts.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{ route('post.deleted') }}">- Thùng rác</a>
+                                <a href="{{ route('posts-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li>
-                    <a href="{{ asset('./be/#tag') }}" data-bs-toggle="collapse">
+                    <a href="#tag" data-bs-toggle="collapse">
                         <i class="fe-folder-minus"></i>
                         <span>Tag</span>
                         <span class="menu-arrow"></span>
@@ -243,13 +224,13 @@
                     <div class="collapse" id="tag">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{ route('tags.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{ route('tags.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{ route('tags-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -323,7 +304,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ asset('./be/#coupon') }}" data-bs-toggle="collapse">
+                    <a href="#coupon" data-bs-toggle="collapse">
                         <i class="fe-folder-minus"></i>
                         <span>Mã giảm giá</span>
                         <span class="menu-arrow"></span>
@@ -331,13 +312,13 @@
                     <div class="collapse" id="coupon">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{route('coupons.create')}}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{route('coupons.index')}}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{route('coupons-deleted')}}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -375,13 +356,7 @@
                     <div class="collapse" id="setting">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
-                            </li>
-                            <li>
-                                <a href="#">- Danh sách </a>
-                            </li>
-                            <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{route('settings.index')}}">- Danh sách </a>
                             </li>
                         </ul>
                     </div>
@@ -395,20 +370,20 @@
                     <div class="collapse" id="banner">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('banner.index') }}">- Danh sách </a>
+                                <a href="{{ route('banners.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{ route('banner.create') }}">- Thêm mới</a>
+                                <a href="{{ route('banners.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{ route('banner.deleted') }}">- Thùng rác</a>
+                                <a href="{{ route('banners-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li>
-                    <a href="{{ asset('./be/#quangcao') }}" data-bs-toggle="collapse">
+                    <a href="#quangcao" data-bs-toggle="collapse">
                         <i class="fe-folder-minus"></i>
                         <span>Quảng cáo</span>
                         <span class="menu-arrow"></span>
@@ -416,13 +391,13 @@
                     <div class="collapse" id="quangcao">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{route('advertisements.create')}}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{route('advertisements.index')}}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{route('advertisements-deleted')}}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
