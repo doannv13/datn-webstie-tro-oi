@@ -4,14 +4,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <h5 class="mt-0">Danh mục đã xóa</h5>
                     <div class="responsive-table-plugin">
-                        <h5 class="mt-0">Danh sách danh mục phòng đăng</h5>
                         <div class="table-rep-plugin">
+                            <div class="mb-2 d-flex gap-1 ">
+                            </div>
                             <div class="table-responsive" data-pattern="priority-columns">
-                                <div class="mb-2 d-flex gap-1 ">
-                                    <a class="btn btn-success" href="{{ route('categoryrooms.create') }}">Thêm mới</a>
-                                    <a class="btn btn-danger" href="{{ route('categoryrooms.deleted') }}">Thùng rác</a>
-                                </div>
                                 <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                                     <thead>
                                     <tr>
@@ -38,29 +36,25 @@
                                                        data-onlabel="Bật" data-offlabel="Tắt"
                                                     {{ $value->status == 'active' ? 'checked' : '' }}>
                                             </td>
-                                            <td class="">
-                                                <a href="{{ route('categoryrooms.edit', $value->id) }}">
-                                                    <button type="submit" class="btn btn-primary text-center my-1"
-                                                            style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
-                                                        <i class="fa-solid fa-pen-to-square fs-4"></i>
-                                                    </button>
+                                            <td  class="">
+                                                <a href="{{ route('category-rooms-restore', $value->id) }}" class="btn btn-primary mb-2">
+                                                    <i class="fa-solid fa-trash-arrow-up mx-2 fs-4"></i></i>
                                                 </a>
-
-                                                <form action="{{ route('categoryrooms.destroy', $value->id) }}" method="POST">
+                                                <form action="{{ route('category-rooms-permanently-delete', $value->id) }}"
+                                                      method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
-                                                            onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                        <!-- Đặt kích thước cố định là 100px -->
-                                                        <i class="fa-solid fa-trash fs-4"></i>
+                                                    <button class="btn btn-danger"
+                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                                        <i class="fa-solid fa-trash fs-4 mx-2 text-light"></i>
                                                     </button>
                                                 </form>
-
                                             </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
+
                             </div> <!-- end .table-responsive -->
 
                         </div> <!-- end .table-rep-plugin-->
@@ -69,7 +63,7 @@
             </div> <!-- end card -->
         </div> <!-- end col -->
     </div>
-    <!-- end row -->
+
 @endsection
 
 @push('scripts')
