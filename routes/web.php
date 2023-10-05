@@ -182,12 +182,12 @@ Route::delete('surroundings-permanently/{id}', [SurroundingController::class, 'p
 Route::get('surroundings-restore/{id}', [SurroundingController::class, 'restore'])->name('surroundings-restore');
 
 //Admin/chang info
-Route::get('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminEdit'])->name('admin-edit-info');
-Route::put('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminUpdate'])->name('admin-change-info');
+Route::get('admin-change-info/{id}', [ChangeInfoController::class, 'adminEdit'])->name('admin-edit-info');
+Route::put('admin-change-info/{id}', [ChangeInfoController::class, 'adminUpdate'])->name('admin-change-info');
 
 //Admin/chang password
-Route::get('admin-changepassword/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
-Route::put('admin-changepassword/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
+Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
+Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
 //BockMark
 Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
