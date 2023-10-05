@@ -269,13 +269,13 @@
                     <div class="collapse" id="tk">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{ route('users.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{ route('users.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{ route('users-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

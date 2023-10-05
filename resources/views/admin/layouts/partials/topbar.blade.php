@@ -188,13 +188,13 @@
                 </div>
 
                 <!-- item-->
-                <a href="{{ route('admin-editinfo',auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-info',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
                     <span>Cập nhật thông tin</span>
                 </a>
 
                 <!-- item-->
-                <a href="{{ route('admin-changepassword',auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-password',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-lock"></i>
                     <span>Đổi mật khẩu</span>
                 </a>
@@ -224,7 +224,7 @@
     </ul>
 
     <!-- LOGO -->
-    <div class="logo-box">
+    {{-- <div class="logo-box">
         <a href="{{ route('post.index') }}" class="logo logo-light text-center">
                             <span class="logo-sm">
                                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
@@ -241,7 +241,7 @@
                                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="50">
                             </span>
         </a>
-    </div>
+    </div> --}}
 
     <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
         <li>
