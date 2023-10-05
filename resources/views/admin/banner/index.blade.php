@@ -7,7 +7,8 @@
             <div class="card-body">
                 <h5 class="mt-0">Danh sách banner</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{ route('banner.create') }}">Thêm mới</a>
+                    <a class="btn btn-success mb-2" href="{{ route('banners.create') }}">Thêm mới</a>
+                    <a class="btn btn-danger mb-2" href="{{ route('banners-deleted') }}">Thùng rác</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
@@ -43,14 +44,14 @@
                                             {{ $value->status == 'active' ? 'checked' : '' }}>
                                     </td>
                                     <td style="white-space: nowrap; width: 1%;">
-                                        <a href="{{ route('banner.edit', $value->id) }}">
+                                        <a href="{{ route('banners.edit', $value->id) }}">
                                             <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                                 <i class="fa-solid fa-pen-to-square fs-4"></i>
                                             </button>
                                         </a>
 
-                                        <form action="{{ route('banner.destroy', $value->id) }}" method="POST">
+                                        <form action="{{ route('banners.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
@@ -83,7 +84,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('banner.status_change') }}',
+                    url: '{{ route('banners-status-change') }}',
                     data: {
                         'status': status,
                         'banner_id': banner_id
