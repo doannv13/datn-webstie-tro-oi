@@ -36,7 +36,7 @@
                                 <div class="mb-3">
                                     <label for="" class="form-label">Mô tả <span
                                             class="text-danger">*</span></label>
-                                    <textarea value="{{ $data->description }}" name="description" class="form-control" cols="30" rows="5"></textarea>
+                                    <textarea name="description" class="form-control" cols="30" rows="5">{{ $data->description }}</textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

@@ -8,6 +8,11 @@
             </ol>
         </nav>
     </div>
+    {{-- sửa --}}
+    <form action="{{ route('payment_vnpay') }}" method="post">
+        @csrf
+        <button type="submit" name="redirect" class="btn btn-warning">Thanh toán VNPay</button>
+    </form>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->

@@ -6,6 +6,7 @@
                 <h5 class="mt-0">Danh sách tiện ích</h5>
                 <div class="table-responsive">
                     <a class="btn btn-success mb-2" href="{{ route('facilities.create') }}">Thêm mới</a>
+                    <a class="btn btn-danger mb-2" href="{{ route('facilities-deleted') }}">Thùng rác</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>

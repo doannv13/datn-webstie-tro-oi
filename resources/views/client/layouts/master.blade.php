@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8"/>
 
-    <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}"/>
+
+    <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/animate.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-submenu.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap-select.min.css') }}"/>
@@ -365,7 +367,6 @@
                 </div>
             </div>
         </div>
-
         <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
         <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>

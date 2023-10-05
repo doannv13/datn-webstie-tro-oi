@@ -17,6 +17,7 @@ use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\RoomPostController as AdminRoomPostController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Client\PaymentVNPayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -168,8 +169,14 @@ Route::get('admin-changepassword/{id}',[ChangePasswordController::class,'admined
 Route::put('admin-changepassword/{id}',[ChangePasswordController::class,'adminupdatepw'])->name('admin-changepassword');
 
 
-
-
+// thanh toán
+Route::post('payment_vnpay', [PaymentVNPayController::class, 'payment_vnpay'])->name('payment_vnpay');
+Route::get('notification_pay', function(){
+    return view('client.payment-status.notification-pay');
+});
+Route::get('notification_fail', function(){
+    return view('client.payment-status.notification-fail');
+});
 
 
 

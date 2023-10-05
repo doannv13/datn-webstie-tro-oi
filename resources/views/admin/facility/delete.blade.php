@@ -3,7 +3,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách sản phẩm</h5>
+                <h5 class="mt-0">Danh sách thùng rác</h5>
                 <div class="table-responsive">
                     {{-- <a class="btn btn-primary mb-2" href="{{ route('facilities.index') }}">Danh sách</a> --}}
                     <table class="table table-centered mb-0" id="tech-companies-1">
