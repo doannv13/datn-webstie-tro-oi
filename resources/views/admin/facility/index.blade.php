@@ -7,14 +7,14 @@
                 <div class="table-responsive">
                     <a class="btn btn-success mb-2" href="{{ route('facilities.create') }}">Thêm mới</a>
                     <a class="btn btn-danger mb-2" href="{{ route('facilities-deleted') }}">Thùng rác</a>
-                    <table id="tech-companies-1" class="table table-centered mb-0">
+                    <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                         <thead>
                             <tr>
                                 <th class="col-2">#</th>
                                 <th class="col-2">Tên tiện ích</th>
                                 <th class="col-2">Icon</th>
-                                <th class="col-4">Mô tả</th>
-                                <th class="col-2">Hành động</th>
+                                <th class="col-3">Mô tả</th>
+                                <th class="col-3">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,7 +23,7 @@
                                     <td class="tabledit-view-mode">{{ $value->id }}</td>
                                     <td class="tabledit-view-mode">{{ $value->name }}</td>
                                     <td class="tabledit-view-mode"><i class="{{ $value->icon }}"></i></td>
-                                    <td class="tabledit-view-mode">{{ $value->description }}</td>
+                                    <td class="tabledit-view-mode">{!! $value->description !!}</td>
                                     <td style="white-space: nowrap; width: 1%;">
 
                                         <a href="{{ route('facilities.edit', $value->id) }}">

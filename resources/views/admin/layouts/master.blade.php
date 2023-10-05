@@ -33,7 +33,7 @@
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
 
-
+    
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
@@ -43,8 +43,16 @@
     <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}"
         rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css"
+        id="app-style" />
+    <link href="{{ asset('be/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 
+
+    {{-- Ckeditor --}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+    </script>
 
 </head>
 
@@ -136,7 +144,7 @@ data-sidebar-user='true' --}}
             });
         })
     </script>
-    <script src="{{asset('input-mask/jquery.inputmask.js')}}"></script>
+    <script src="{{ asset('input-mask/jquery.inputmask.js') }}"></script>
     <!-- Dashboar init js-->
     {{-- <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script> --}}
 
@@ -152,7 +160,10 @@ data-sidebar-user='true' --}}
 
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
+    <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/select2/js/select2.min.js')}}"></script>
+    <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
+    <script src="{{ asset('be/assets/js/pages/form-advanced.init.js')}}"></script>
 
 
     @stack('scripts')

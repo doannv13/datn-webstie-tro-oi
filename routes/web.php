@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
@@ -11,13 +12,14 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\ChangeInfoController;
-use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\SurroundingController;
-use App\Http\Controllers\Client\RoomPostController;
 use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\RoomPostController as AdminRoomPostController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\RoomPostController as CLientRoomPost;
+use App\Http\Controllers\Admin\RoomPostController as AdminRoomPost;
 use App\Http\Controllers\Admin\AdvertisementController;
-use App\Http\Controllers\Client\PaymentVNPayController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Client\ServicesController as ClientServices;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,62 @@ use App\Http\Controllers\Client\PaymentVNPayController;
 */
 
 
+
+
+//CLIENT
+
+Route::get('home-client', function () {
+    return view('client.layouts.master');
+})->name('home-client');
+//Trang chủ
+Route::get('trang-chu', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('dashboard-client', function () {
+    return view('client.layouts.home'); // Trang chủ
+});
+Route::get('client-signup', function () {
+    return view('client.auth.register');
+});
+Route::resource('changeinfo', ChangeInfoController::class);
+Route::resource('changepassword', ChangePasswordController::class);
+Route::get('fogotpassword', function () {
+    return view('client.auth.fogotPassword');
+});
+
+//Dịch vụ client
+Route::resource('services-room', ClientServices::class);
+
+// Thanh toán
+Route::get('display-QR', function () {
+    return view('client.pay.display-QR');
+});
+Route::get('notification-pay', function () {
+    return view('client.payment-status.notification-pay');
+});
+Route::get('notification-fail', function () {
+    return view('client.payment-status.notification-fail');
+});
+
+
+//Lọc và Tìm kiếm
+Route::post('fillter', [HomeController::class, 'filter_list']);
+Route::get('search', [HomeController::class, 'index'])->name('search');
+Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
+
+// Room-Post-Client
+Route::resource('room-posts', CLientRoomPost::class);
+Route::get('room-posts-deleted', [CLientRoomPost::class, 'deleted'])->name('room-deleted');
+Route::delete('room-posts-permanently/{id}', [CLientRoomPost::class, 'permanentlyDelete'])->name('room-permanently-delete');
+Route::get('room-posts-restore/{id}', [CLientRoomPost::class, 'restore'])->name('room-posts-restore');
+Route::post('create-room-posts-image', [CLientRoomPost::class, 'createImage'])->name('create-room-post-image');
+Route::post('update-room-posts-image', [CLientRoomPost::class, 'editMultiImage'])->name('update-room-posts-image');
+Route::get('delete-room-posts-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('delete-room-posts-image');
+
+Auth::routes();
+
+
 //ADMIN
 
 Route::get('home-admin', function () {
@@ -41,151 +99,114 @@ Route::get('dashboard-admin', function () {
     return view('admin.dashboard');
 });
 
-//CLIENT
-Route::get('home-client', function () {
-    return view('client.layouts.master');
-})->name('home-client');
 
-Route::get('dashboard-client', function () {
-    return view('client.layouts.home'); // Trang chủ
-});
-
-
-Auth::routes();
-
-// admin roompost
-Route::resource('admin-roompost', AdminRoomPostController::class);
-Route::get('admin-roompost-deleted', [AdminRoomPostController::class, 'deleted'])->name('admin-roompost-deleted');
-Route::get('admin-roompost-restore/{id}', [AdminRoomPostController::class, 'restore'])->name('admin-roompost-restore');
-Route::delete('admin-roompost_permanently/{id}', [AdminRoomPostController::class, 'permanentlyDelete'])->name('admin-roompost-permanently-delete');
-
-
-// Room
-Route::resource('room-post', RoomPostController::class);
-Route::get('room_deleted', [RoomPostController::class, 'deleted'])->name('room_deleted');
-Route::delete('room_permanently/{id}', [RoomPostController::class, 'permanentlyDelete'])->name('room_permanently_delete');
-Route::get('room_restore/{id}', [RoomPostController::class, 'restore'])->name('room_restore');
-Route::get('trang-chu',[HomeController::class, 'index'])->name('home');
-Route::post('fillter',[HomeController::class, 'filter_list']);
-Route::get('search', [HomeController::class, 'index'])->name('search');
-Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
-
-
+// Room-Post-Admin
+Route::resource('admin-room-posts', AdminRoomPost::class);
+Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('room-posts-deleted');
+Route::delete('admin-room-posts-permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('room-posts-permanently-delete');
+Route::get('admin-room-posts-restore/{id}', [AdminRoomPost::class, 'restore'])->name('room-posts-restore');
 
 // Category Home
-Route::resource('categoryrooms', CategoryRoomController::class);
-Route::get('deleted', [CategoryRoomController::class, 'deleted'])->name('categoryrooms.deleted');
-Route::delete('permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('categoryrooms.permanently-delete');
-Route::get('restore/{id}', [CategoryRoomController::class, 'restore'])->name('restore');
-
-
+Route::resource('category-rooms', CategoryRoomController::class);
+Route::get('category-rooms-deleted', [CategoryRoomController::class, 'deleted'])->name('category-rooms-deleted');
+Route::delete('category-rooms-permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('category-rooms-permanently-delete');
+Route::get('category-rooms-restore/{id}', [CategoryRoomController::class, 'restore'])->name('category-rooms-restore');
 
 // Facility
 Route::resource('facilities', FacilityController::class);
-Route::get('list-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
-Route::delete('facilities/permanently/{id}', [FacilityController::class, 'permanentlyDelete'])->name('facilities-permanently-delete');
-Route::get('restore/{id}', [FacilityController::class, 'restore'])->name('facilities-restore');
+Route::get('facilities-deleted', [FacilityController::class, 'listDeleted'])->name('facilities-deleted');
+Route::delete('facilities-permanently/{id}', [FacilityController::class, 'permanentlyDelete'])->name('facilities-permanently-delete');
+Route::get('facilities-restore/{id}', [FacilityController::class, 'restore'])->name('facilities-restore');
 
 
 // Setting
-Route::resource('setting', SettingController::class);
+Route::resource('settings', SettingController::class);
 
 // Banner
-Route::resource('banner', BannerController::class);
-Route::get('banner-deleted', [BannerController::class, 'deleted'])->name('banner.deleted');
-Route::delete('banner/permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banner.permanently.delete');
-Route::get('banner/restore/{id}', [BannerController::class, 'restore'])->name('banner.restore');
-Route::get('/banner-status', [BannerController::class, 'changeStatus'])->name('banner.status_change');
+Route::resource('banners', BannerController::class);
+Route::get('banners-deleted', [BannerController::class, 'deleted'])->name('banners-deleted');
+Route::delete('banners-permanently/{id}', [BannerController::class, 'permanentlyDelete'])->name('banners-permanently-delete');
+Route::get('banners-restore/{id}', [BannerController::class, 'restore'])->name('banners-restore');
+Route::get('banners-status', [BannerController::class, 'changeStatus'])->name('banners-status-change');
 
 
 // Advertisement (ảnh quảng cáo)
-Route::resource('advertisement', AdvertisementController::class);
-Route::get('advertisement-deleted', [AdvertisementController::class, 'deleted'])->name('advertisement.deleted');
-Route::delete('advertisement/permanently/{id}', [AdvertisementController::class, 'permanentlyDelete'])->name('advertisement.permanently.delete');
-Route::get('advertisement/restore/{id}', [AdvertisementController::class, 'restore'])->name('advertisement.restore');
-Route::get('/advertisement-status', [AdvertisementController::class, 'changeStatus'])->name('advertisement.status_change');
+Route::resource('advertisements', AdvertisementController::class);
+Route::get('advertisements-deleted', [AdvertisementController::class, 'deleted'])->name('advertisements-deleted');
+Route::delete('advertisements-permanently/{id}', [AdvertisementController::class, 'permanentlyDelete'])->name('advertisements-permanently-delete');
+Route::get('advertisements-restore/{id}', [AdvertisementController::class, 'restore'])->name('advertisements-restore');
+Route::get('/advertisements-status', [AdvertisementController::class, 'changeStatus'])->name('advertisements-status-change');
 
 
 
 //Post
-Route::resource('post', PostController::class);
-Route::get('post-deleted', [PostController::class, 'deleted'])->name('post.deleted');
-Route::delete('post/permanently/{id}', [PostController::class, 'permanentlyDelete'])->name('post.permanently.delete');
-Route::get('post/restore/{id}', [PostController::class, 'restore'])->name('post.restore');
-Route::get('/post-status', [PostController::class, 'changeStatus'])->name('post.status_change');
+Route::resource('posts', PostController::class);
+Route::get('posts-deleted', [PostController::class, 'deleted'])->name('posts-deleted');
+Route::delete('posts-permanently/{id}', [PostController::class, 'permanentlyDelete'])->name('posts-permanently-delete');
+Route::get('posts-restore/{id}', [PostController::class, 'restore'])->name('posts-restore');
+Route::get('posts-status', [PostController::class, 'changeStatus'])->name('posts-status-change');
 
 // Category Post
-Route::resource('categorypost', \App\Http\Controllers\Admin\CategoryPostController::class);
-Route::get('categorypost-deleted', [\App\Http\Controllers\Admin\CategoryPostController::class, 'deleted'])->name('categorypost.deleted');
-Route::delete('categorypost/permanently/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'permanentlyDelete'])->name('categorypost.permanently-delete');
-Route::get('categorypost/restore/{id}', [\App\Http\Controllers\Admin\CategoryPostController::class, 'restore'])->name('categorypost.restore');
+Route::resource('category-posts', CategoryPostController::class);
+Route::get('category-posts-deleted', [CategoryPostController::class, 'deleted'])->name('category-posts-deleted');
+Route::delete('category-posts-permanently/{id}', [CategoryPostController::class, 'permanentlyDelete'])->name('category-posts-permanently-delete');
+Route::get('category-posts-restore/{id}', [CategoryPostController::class, 'restore'])->name('category-posts-restore');
+Route::get('category-posts-status', [CategoryPostController::class, 'changeStatus'])->name('category-posts-status-change');
 
-//Post
-
+// Tag
+Route::resource('tags', TagController::class);
+Route::get('tags-deleted', [TagController::class, 'deleted'])->name('tags-deleted');
+Route::delete('tags-permanently/{id}', [TagController::class, 'permanentlyDelete'])->name('tags-permanently-delete');
+Route::get('tags-restore/{id}', [TagController::class, 'restore'])->name('tags-restore');
+Route::get('tags-status', [TagController::class, 'changeStatus'])->name('tags-status-change');
 
 // Dịch vụ
-
-Route::resource('services', \App\Http\Controllers\Admin\ServicesController::class);
-Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services.deleted');
-Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services.permanently.delete');
-Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services.restore');
-
+Route::resource('services', ServicesController::class);
+Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services-deleted');
+Route::delete('services-permanently/{id}', [ServicesController::class, 'permanentlyDelete'])->name('services-permanently-delete');
+Route::get('services-restore/{id}', [ServicesController::class, 'restore'])->name('services-restore');
 
 // Mã giảm giá
-Route::resource('coupon', CouponController::class);
-Route::get('coupon-deleted', [CouponController::class, 'deleted'])->name('coupon.deleted');
-Route::delete('coupon-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupon.permanently-delete');
-Route::get('coupon-restore/{id}', [CouponController::class, 'restore'])->name('coupon.restore');
+Route::resource('coupons', CouponController::class);
+Route::get('coupons-deleted', [CouponController::class, 'deleted'])->name('coupons-deleted');
+Route::delete('coupons-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupons-permanently-delete');
+Route::get('coupons-restore/{id}', [CouponController::class, 'restore'])->name('coupons-restore');
 
 //Quản lý người dùng
 Route::resource('users', UserController::class);
-Route::get('user_deleted', [UserController::class, 'deleted'])->name('user_deleted');
-Route::delete('user_permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('user_permanently_delete');
-Route::get('user_restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-Route::get('client-login',function(){
+Route::get('users-deleted', [UserController::class, 'deleted'])->name('users-deleted');
+Route::delete('users-permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('users-permanently-delete');
+Route::get('users-restore/{id}', [UserController::class, 'restore'])->name('users-restore');
+Route::get('client-login', function () {
     return view('client.auth.login');
 });
-Route::get('client-signup',function(){
-    return view('client.auth.register');
-});
-Route::resource('changeinfo', ChangeInfoController::class);
-Route::resource('changepassword', ChangePasswordController::class);
-Route::get('fogotpassword',function () {
-    return view('client.auth.fogotPassword');
-});
+
 
 // Facility
-Route::resource('surrounding', SurroundingController::class);
-Route::get('surrounding-deleted', [SurroundingController::class, 'listDeleted'])->name('surrounding-deleted');
-Route::delete('surrounding-permanently/{id}', [SurroundingController::class, 'permanentlyDelete'])->name('surrounding-permanently-delete');
-Route::get('surrounding-restore/{id}', [SurroundingController::class, 'restore'])->name('surrounding-restore');
-
+Route::resource('surroundings', SurroundingController::class);
+Route::get('surroundings-deleted', [SurroundingController::class, 'listDeleted'])->name('surroundings-deleted');
+Route::delete('surroundings-permanently/{id}', [SurroundingController::class, 'permanentlyDelete'])->name('surroundings-permanently-delete');
+Route::get('surroundings-restore/{id}', [SurroundingController::class, 'restore'])->name('surroundings-restore');
 
 //Admin/chang info
-Route::get('admin-changeinfo/{id}',[ChangeInfoController::class,'adminedit'])->name('admin-editinfo');
-Route::put('admin-changeinfo/{id}',[ChangeInfoController::class,'adminupdate'])->name('admin-changeinfo');
+Route::get('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminEdit'])->name('admin-edit-info');
+Route::put('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminUpdate'])->name('admin-change-info');
+
 //Admin/chang password
-Route::get('admin-changepassword/{id}',[ChangePasswordController::class,'admineditpw'])->name('admin-editpassword');
-Route::put('admin-changepassword/{id}',[ChangePasswordController::class,'adminupdatepw'])->name('admin-changepassword');
+Route::get('admin-changepassword/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
+Route::put('admin-changepassword/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
-
-// thanh toán
-Route::post('payment_vnpay', [PaymentVNPayController::class, 'payment_vnpay'])->name('payment_vnpay');
-Route::get('notification_pay', function(){
-    return view('client.payment-status.notification-pay');
-});
-Route::get('notification_fail', function(){
-    return view('client.payment-status.notification-fail');
-});
-
-
-
+//BockMark
+Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
+Route::post('bookmarks/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
+Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');
+Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
-    // route dành cho vendor ở đây
+// route dành cho vendor ở đây
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
-    // route dành cho admin ở đây
+// route dành cho admin ở đây
 });
 // Phân quyền end

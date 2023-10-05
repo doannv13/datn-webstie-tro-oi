@@ -22,10 +22,8 @@
                     <div class="fs-6 text pb-4 px-3">
                         <span class="fw-normal">Website Trọ Ơi rất hân hạnh được phục vụ các bạn !
                         </span>
-                    </div>
-                   
+                    </div>    
                 </div>
-
             </div>
             <div class="modal-footer justify-content-center mb-3" style="border: none;">
                 <button type="button" class="btn btn-outline-success" >Giao dịch khác</button>

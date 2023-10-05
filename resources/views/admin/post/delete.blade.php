@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách bài viết</h5>
+                <h5 class="mt-0">Thùng rác bài viết</h5>
                 <div class="table-responsive">
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
@@ -24,7 +24,7 @@
                         <tbody>
                         @foreach ($model as $key => $value)
                             <tr id="row_@item.ID">
-                                <td class="tabledit-view-mode">{{ $value->id }}</td>
+                                <td class="tabledit-view-mode">{{ $key+1 }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->title, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">
                                     @if ($value->image && asset($value->image))
@@ -38,18 +38,15 @@
                                 <td class="tabledit-view-mode">{{ $value->slug }}</td>
                                 <td class="tabledit-view-mode">{{ $value->id_admin }}</td>
                                 <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
-                                <td>
-                                    <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
-                                           data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                           data-onlabel="Bật" data-offlabel="Tắt"
-                                        {{ $value->status == 'active' ? 'checked' : '' }}>
-                                </td>
-                                    <td><a href="{{ route('post.restore', $value->id) }}" class="btn btn-primary me-2"><i
+                                <td>{{ $value->status == 'inactive' ? 'Tắt' : 'Bật' }}</td>
+                                    <td>
+                                        <a href="{{ route('post.restore', $value->id) }}" class="btn btn-primary text-center my-1"
+                                           style="width: 45px;"><i
                                                 class="fa-solid fa-trash-arrow-up"></i></a>
                                         <form action="{{ route('post.permanently.delete', $value->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger">
+                                            <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger my-1" style="width: 45px;">
                                                 <i class="fa-solid fa-delete-left text-light"></i>
                                             </button>
                                         </form>

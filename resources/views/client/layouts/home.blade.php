@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 @section('content')
 <div class="content">
-    <<!-- Banner start -->
+    <!-- Banner start -->
         <div class="banner container" id="banner1" style="z-index: 0">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -78,10 +78,9 @@
                 <div class="container">
                     <!-- Main title -->
                     <div class="main-title">
-                        <h1>Our Best Rooms</h1>
+                        <h1>Tin Mới Nhất</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod
+                            Danh sách những tin đăng mới nhất.
                         </p>
                     </div>
                     <div class="row wow fadeInUp delay-04s">
@@ -90,11 +89,37 @@
                         @foreach($rooms as $key =>$value)
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="hotel-box " style="position: relative;">
-                                <a href="#" class="" style="position: absolute; top: 15px ; right: 15px;z-index: 999;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path d="M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z" />
-                                    </svg>
-                                </a>
+                                <?php
+                                    $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
+                                    $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
+
+                                    if (Auth::check()) {
+                                        $user_id = auth()->user()->id;
+                                        $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
+                                            ->where('room_post_id', $value->id)->exists();
+
+                                    }
+                                ?>
+
+
+                                    @if ($isBookmarked)
+                                    <form action="{{ route('unbookmark', $value->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#f4a460}</style><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"/></svg>
+                                        </button>
+                                    </form>
+                                    @else
+                                    <form action="{{ route('bookmark', $value->id) }}" method="post">
+                                        @csrf
+                                        <button style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
+                                            <button style="position: absolute; top: 15px ; right: 15px;z-index: 999;background:none;border:none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#f4a460}</style><path d="M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z"/></svg>
+                                            </button>
+                                        </button>
+                                    </form>
+                                    @endif
                                 <!-- Photo thumbnail -->
                                 <div class="photo-thumbnail" style="position: relative;">
                                     <div class="text-white" style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
@@ -120,40 +145,26 @@
                                     </p>
                                     <div class="fecilities row">
                                         <ul>
+                                            @if(isset($value->facilities))
+                                            @foreach ($value->facilities as $facilities)
                                             <li>
-                                                <i class="flaticon-bed"></i> Beds
+                                                <i class="{{$facilities->icon}}"></i>{{$facilities->name}}
                                             </li>
-                                            <li>
-                                                <i class="flaticon-air-conditioning"></i>
-                                                AC
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-graph-line-screen"></i>
-                                                TV
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-weightlifting"></i>
-                                                GYM
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                                Wi-fi
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-parking"></i>
-                                                Parking
-                                            </li>
+                                            @endforeach
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
+                        {{ $rooms->links() }}
                         @endif
                         @endif
+
                     </div>
                     <!-- Page navigation start -->
-                    <div class="pagination-box-end">
+                    <!-- <div class="pagination-box-end">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -173,7 +184,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> -->
                     <!-- Page navigation end -->
                 </div>
             </div>
@@ -185,10 +196,9 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Our Staff</h1>
+                    <h1>Nhà Phát Triển </h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                        eiusmod
+                        Nhà phát triển website.
                     </p>
                 </div>
                 <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
@@ -364,31 +374,27 @@
                     <div class="left align-self-center wow fadeInLeft delay-04s">
                         <!-- Main title -->
                         <div class="main-title main-title-4">
-                            <h1>Hotel Statistics</h1>
+                            <h1>Thống Kê</h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                eiusmod
+                                Thống kê các mục mà website đang đi lên từng ngày
                             </p>
                         </div>
                     </div>
                     <div class="right float-end wow fadeInRight delay-04s">
                         <div class="counter-inner">
                             <div class="counter-box blue ml-0">
-                                <h1 class="counter">1963</h1>
-                                <h5>Guest Stay</h5>
+                                <h1 class="counter">{{$count_room}}</h1>
+                                <h5>Tin Đăng</h5>
                             </div>
                             <div class="counter-box">
-                                <h1 class="counter">1854</h1>
-                                <h5>Book Room</h5>
+                                <h1 class="counter">{{$count_post}}</h1>
+                                <h5>Bài Viết</h5>
                             </div>
                             <div class="counter-box green">
-                                <h1 class="counter">1823</h1>
-                                <h5>Member Stay</h5>
+                                <h1 class="counter">{{$count_user}}</h1>
+                                <h5>Tài Khoản</h5>
                             </div>
-                            <div class="counter-box cgreen">
-                                <h1 class="counter">1756</h1>
-                                <h5>Meals Served</h5>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -401,147 +407,52 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Our Blog</h1>
+                    <h1>Bài Viết</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                        eiusmod
+                        Danh sách những bài viết mới nhất.
                     </p>
                 </div>
                 <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
+                    @if(isset($posts))
+                    @foreach($posts as $key => $value)
                     <div class="item slide-box">
                         <div class="blog-1">
                             <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-5.jpg') }}" alt="image" class="img-fluid w-100" />
+                                <img src="{{ asset($value->image)  }}" alt="image" class="img-fluid w-100" />
                                 <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-1.jpg') }}" alt="user" />
+                                    <img src="{{ asset($value->user->avatar) }}" alt="user" />
                                 </div>
-                                <div class="date-box"><span>09</span>Sep</div>
+                                <div class="date-box">
+                                    @if(isset($value->created_at))
+                                    <span>{{ $value->created_at->format('d') }}
+                                    </span>{{ substr($value->created_at->format('F'), 0, 3) }}
+                                    @endif
+                                </div>
+
                             </div>
                             <div class="detail">
                                 <div class="post-meta clearfix">
                                     <ul>
                                         <li>
-                                            <strong><a href="#">By: Auro Navanth</a></strong>
+                                            <strong><a href="#">By: {{$value->user->name}}</a></strong>
                                         </li>
                                         <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
+                                            <a href="#"><i class="fa-regular fa-eye" style="color: #f28a36;"></i></a>{{$value->view}}
                                         </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
+                                       
                                     </ul>
                                 </div>
                                 <h3>
-                                    <a href="blog-details.html">Standard Post Format Title</a>
+                                    <a href="blog-details.html">{{$value->title}}</a>
                                 </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
+                                <p style="width: 100px;">
+                                    {{substr($value->metaDescription,0,45)}}
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-4.jpg') }}" alt="image" class="img-fluid w-100" />
-                                <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-2.jpg') }}" alt="user" />
-                                </div>
-                                <div class="date-box"><span>06</span>Sep</div>
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="#">By: Navanth Auro</a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
-                                        </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Alpha Hotel Pars Studiorum</a>
-                                </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-5.jpg') }}" alt="image" class="img-fluid w-100" />
-                                <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-3.jpg') }}" alt="user" />
-                                </div>
-                                <div class="date-box"><span>14</span>Sep</div>
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="#">By: Tanzim</a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
-                                        </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Best Night Photo at Alpha Hotel
-                                    </a>
-                                </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset('fe/img/blog/img-6.jpg') }}" alt="image" class="img-fluid w-100" />
-                                <div class="profile-user">
-                                    <img src="{{ asset('fe/img/avatar/avatar-3.jpg') }}" alt="user" />
-                                </div>
-                                <div class="date-box"><span>14</span>Sep</div>
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="#">By: Tanzim</a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="#"><i class="fa fa-commenting-o"></i></a>205
-                                        </li>
-                                        <li class="float-right">
-                                            <a href="#"><i class="fa fa-calendar"></i></a>328
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Best Night Photo at Alpha Hotel
-                                    </a>
-                                </h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>
@@ -553,10 +464,9 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-12">
                         <div class="left-info">
-                            <h2>Our Partners</h2>
+                            <h2>Đối Tác</h2>
                             <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
+                                Những đối tác mang đến sự phát triển lâu dài.
                             </p>
                         </div>
                     </div>

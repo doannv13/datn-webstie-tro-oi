@@ -27,9 +27,9 @@ return new class extends Migration
             $table->integer('district_id');
             $table->integer('city_id');
             $table->string('fullname');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
-            $table->integer('zalo')->nullable();
+            $table->string('zalo')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('category_room_id');
