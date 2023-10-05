@@ -1,13 +1,13 @@
 @extends('client.layouts.partials.l-sidebar')
 @section('main')
-    <div class="container pt-2">
+    {{-- <div class="container pt-2">
         <nav class="breadcrumbs">
             <ol class="breadcrumb">
                 <li class="breadcrumb"><a href="index.html">Home <span> / </span></a></li>
                 <li class="breadcrumb-item active">Danh sách bài viết</li>
             </ol>
         </nav>
-    </div>
+    </div> --}}
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
@@ -48,24 +48,25 @@
                                             data-bs-target="#exampleModalToggle{{ $value->id }}">
                                             <i class="fas fa-eye fs-4"></i>
                                         </button>
-                                        <form action="{{ route('room-post-admin.destroy', $value->id) }}" method="POST">
+
+                                        <a href="{{ route('room-posts.edit', $value->id) }}">
+                                            <button type="submit" class="btn btn-primary text-center my-1 m-2"
+                                                style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
+                                                <i class="fa-solid fa-pen-to-square fs-4"></i>
+                                            </button>
+                                        </a>
+                                        <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger my-1 m-2" style="width: 45px;"
+                                            <button type="submit" class="btn btn-danger my-1 " style="width: 45px;"
                                                 onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
                                                 <!-- Đặt kích thước cố định là 100px -->
                                                 <i class="fa-solid fa-trash fs-4"></i>
                                             </button>
                                         </form>
-
-                                        <a href="{{ route('room-post-admin.edit', $value->id) }}">
-                                            <button type="submit" class="btn btn-primary text-center my-1"
-                                                style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
-                                                <i class="fa-solid fa-pen-to-square fs-4"></i>
-                                            </button>
-                                        </a>
                                     </div>
-                                    <button class="btn btn-primary px-4">Mua gói dịch vụ</button>
+                                    <a class="btn btn-primary px-4" href="{{ route('services-room.index') }}">Mua
+                                        gói dịch vụ</a>
                                 </td>
                             </tr>
                         @endforeach

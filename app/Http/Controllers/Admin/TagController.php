@@ -3,23 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategoryPostRequest;
-use App\Models\CategoryPost;
-use App\Models\Coupon;
 use Illuminate\Http\Request;
+use App\Models\Tag;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Requests\Admin\TagRequest;
 
-class CategoryPostController extends Controller
+
+
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $model = CategoryPost::query()->latest()->get();
-        return view('admin.categorypost.index',compact('model'));
+        $data = Tag::query()->latest()->get();
+        return view('admin.tag.index', compact('data'));
     }
 
     /**
@@ -27,24 +28,22 @@ class CategoryPostController extends Controller
      */
     public function create()
     {
-        return view('admin.categorypost.create');
+        return view('admin.tag.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryPostRequest $request)
+    public function store(TagRequest $request)
     {
         try {
-            $model = new CategoryPost();
-
+            $data = new Tag();
             $slug = Str::slug($request->name);
-            $model->slug = $slug;
-
-            $model->fill($request->all());
-            $model->save();
-            Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categorypost.index');
+            $data->slug = $slug;
+            $data->fill($request->all());
+            $data->save();
+            Toastr::success('Thêm thẻ', 'Thành công');
+            return to_route('tags.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -55,7 +54,7 @@ class CategoryPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CategoryPost $categoryPost)
+    public function show(string $id)
     {
         //
     }
@@ -65,43 +64,41 @@ class CategoryPostController extends Controller
      */
     public function edit(string $id)
     {
-        $model = CategoryPost::query()->findOrFail($id);
-        return view('admin.categorypost.edit',compact('model'));
+        $data = Tag::query()->findOrFail($id);
+        return view('admin.tag.edit',compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryPostRequest $request, string $id)
+    public function update(TagRequest $request, string $id)
     {
         try {
-            $model = CategoryPost::query()->findOrFail($id);
-
+            $data = Tag::query()->findOrFail($id);
             $slug = Str::slug($request->name);
-            $model->slug = $slug;
-
-            $model->fill($request->all());
-            $model->save();
-
-            Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categorypost.index');
+            $data->slug = $slug;
+            $data->fill($request->all());
+            $data->save();
+            Toastr::success('Cập nhật thẻ thành công', 'Thành công');
+            return to_route('tags.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         try {
-            $model = CategoryPost::query()->findOrFail($id);
-            $model->delete();
-            Toastr::success('Post đã chuyển vào thùng rác', 'Thành công');
+            $data = Tag::query()->findOrFail($id);
+            $data->delete();
+            Toastr::success('Thẻ đã chuyển vào thùng rác', 'Thành công');
 
-            return to_route('categorypost.index');
+            return to_route('tags.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -111,20 +108,20 @@ class CategoryPostController extends Controller
 
     public function deleted()
     {
-        $model = CategoryPost::query()->onlyTrashed()->get();
-        return view('admin.categorypost.delete', compact('model'));
+        $data = Tag::query()->onlyTrashed()->get();
+        return view('admin.tag.delete', compact('data'));
     }
 
     public function restore(string $id)
     {
         try {
-            $restore = CategoryPost::query()->onlyTrashed()->findOrFail($id);
+            $restore = Tag::query()->onlyTrashed()->findOrFail($id);
             $restore->restore();
-            Toastr::success('Khôi phục thành công', 'Thành công');
+            Toastr::success('Khôi phục thẻ thành công', 'Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            Toastr::error('Khôi phục thất bại', 'Thất bại');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
         }
     }
@@ -132,9 +129,13 @@ class CategoryPostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
-            $categorypost = CategoryPost::query()->withTrashed()->findOrFail($id);
-            $categorypost->forceDelete();
-            Toastr::success('Xoá thành công', 'Thành công');
+            $tag = Tag::query()->withTrashed()->findOrFail($id);
+            foreach ($tag->posts as $post) {
+                $post->tags()->detach($tag->id);
+            }
+
+            $tag->forceDelete();
+            Toastr::success('Xoá thẻ thành công', 'Thành công');
 
             return back();
         } catch (\Exception $exception) {
@@ -146,9 +147,9 @@ class CategoryPostController extends Controller
     public function changeStatus(Request $request)
     {
         try {
-            $categorypost = CategoryPost::find($request->categorypost_id);
-            $categorypost->status = $request->status;
-            $categorypost->save();
+            $tag = Tag::find($request->tag_id);
+            $tag->status = $request->status;
+            $tag->save();
             return response()->json(['success' => 'Thay đổi trạng thái thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

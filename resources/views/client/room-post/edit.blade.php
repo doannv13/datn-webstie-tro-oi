@@ -1,18 +1,18 @@
 @extends('client.layouts.partials.l-sidebar')
 @section('main')
-    <div class="container pt-2">
+    {{-- <div class="container pt-2">
         <nav class="breadcrumbs">
             <ol class="breadcrumb">
                 <li class="breadcrumb"><a href="index.html">Home <span> / </span></a></li>
                 <li class="breadcrumb-item active">Blog Left Sidebar</li>
             </ol>
         </nav>
-    </div>
+    </div> --}}
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-post.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room-posts.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $postroom->id }}" class="d-none">

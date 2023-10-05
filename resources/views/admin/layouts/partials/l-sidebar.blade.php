@@ -1,4 +1,4 @@
-<div class="left-side-menu">
+{{-- <div class="left-side-menu">
 
     <div class="h-100" data-simplebar>
 
@@ -65,7 +65,26 @@
         <div id="sidebar-menu">
 
             <ul id="side-menu">
-
+                <li>
+                    <a href="#dashboard" data-bs-toggle="collapse">
+                        <i class="fe-folder-minus"></i>
+                        <span>Thẻ</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="dashboard">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('tags.create') }}">- Thêm mới</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('tags.index') }}">- Danh sách </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('tags.deleted') }}">- Thùng rác</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="menu-title">Navigation</li>
 
                 <li>
@@ -336,13 +355,13 @@
                     <div class="collapse" id="goidichvu">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{route('services.create')}}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{route('services.index')}}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{route('services-deleted')}}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -411,7 +430,7 @@
                         </ul>
                     </div>
                 </li>
-        </ul>
+            </ul>
 
         </div>
         <!-- End Sidebar -->
@@ -421,4 +440,4 @@
     </div>
     <!-- Sidebar -left -->
 
-</div>
+</div> --}}

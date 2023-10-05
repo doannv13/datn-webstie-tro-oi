@@ -17,7 +17,8 @@
                                     @csrf
                                     @method('put')
                                     <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Tiêu đề ngắn</label>
+                                        <label for="simpleinput" class="form-label">Tiêu đề ngắn<span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="metaTitle" id="simpleinput" class="form-control"
                                             value="{{ old('metaTitle', $model->metaTitle ?? '') }}">
                                         @error('metaTitle')
@@ -26,7 +27,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Tiêu đề</label>
+                                        <label for="simpleinput" class="form-label">Tiêu đề<span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="title" id="simpleinput" class="form-control"
                                                value="{{ old('title', $model->title ?? '') }}">
                                         @error('title')
@@ -38,40 +40,61 @@
                                         <div class="col-11">
                                             <label for="example-textarea" class="form-label">Ảnh</label>
                                             <input id="image" type="file" class="form-control" name="image"
-                                                   accept="image/*">
+                                                accept="image/*">
                                         </div>
-                                       <div class="col-1">
-                                           @if ($model->image && asset($model->image))
-                                               <img id="image_preview" src="{{ asset($model->image) }}" alt=""
+                                        <div class="col-1">
+                                            @if ($model->image && asset($model->image))
+                                                <img id="image_preview" src="{{ asset($model->image) }}" alt=""
                                                     width="100px" height="100px">
-                                           @else
-                                               <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
+                                            @else
+                                                <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
                                                     width="100px" height="100px">
-                                           @endif
-                                       </div>
+                                            @endif
+                                        </div>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">Mô tả ngắn</label>
+                                        <label for="example-textarea" class="form-label">Mô tả ngắn<span
+                                                class="text-danger">*</span></label>
                                         <textarea class="form-control" name="metaDescription" id="metaDescription" rows="5">{{ old('metaDescription', $model->metaDescription ?? '') }}</textarea>
                                         @error('metaDescription')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">Content</label>
+                                        <label for="example-textarea" class="form-label">Content<span
+                                                class="text-danger">*</span></label>
                                         <textarea class="form-control" name="description" id="description" rows="5">{{ old('description', $model->description ?? '') }}</textarea>
                                         @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+{{--                                    <div class="mb-3">--}}
+{{--                                        <label for="example-textarea" class="form-label">ID Admin</label>--}}
+{{--                                        <input type="text" name="id_admin" id="simpleinput1" class="form-control"--}}
+{{--                                            value="{{ old('id_admin', $model->id_admin ?? '') }}">--}}
+{{--                                        @error('id_admin')--}}
+{{--                                            <span class="text-danger">{{ $message }}</span>--}}
+{{--                                        @enderror--}}
+{{--                                    </div>--}}
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Tags</label>
+                                        <input type="text" class="selectize-close-btn form-control" name="tags"
+                                            value="{{ old('tags', $tags ?? '') }}">
+                                        @error('tags')
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">View</label>
+                                        <label for="example-textarea" class="form-label">View<span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="view" id="simpleinput1" class="form-control"
                                                value="{{ old('view', $model->view ?? '') }}">
                                         @error('view')
@@ -94,14 +117,14 @@
     </div> <!-- container -->
 @endsection
 @push('scripts')
-
-    <script> CKEDITOR.replace( 'description', {
+    <script>
+        CKEDITOR.replace('description', {
             filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
             filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
             filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
             filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
             filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
             filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-        } );
+        });
     </script>
 @endpush

@@ -38,7 +38,7 @@
                                             data-bs-target="#exampleModalToggle{{ $value->id }}">
                                             <i class="fas fa-eye fs-4"></i>
                                         </button>
-                                        <form action="{{ route('room-post-admin.destroy', $value->id) }}" method="POST">
+                                        <form action="{{ route('admin-room-posts.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger my-1 m-2" style="width: 45px;"
@@ -48,14 +48,13 @@
                                             </button>
                                         </form>
 
-                                        <a href="{{ route('room-post-admin.edit', $value->id) }}">
+                                        <a href="{{ route('admin-room-posts.edit', $value->id) }}">
                                             <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                                 <i class="fa-solid fa-pen-to-square fs-4"></i>
                                             </button>
                                         </a>
                                     </div>
-                                    <button class="btn btn-primary px-4">Mua gói dịch vụ</button>
                                 </td>
                             </tr>
                         @endforeach

@@ -23,7 +23,6 @@ class CategoryPostRequest extends FormRequest
     {
         return [
             'name' => 'required|min:4|unique:category_posts,name,' . $this->id,
-            'status' => 'required',
             'description' => 'required|min:5|max:999',
         ];
     }

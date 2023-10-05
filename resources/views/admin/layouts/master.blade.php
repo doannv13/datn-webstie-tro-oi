@@ -38,8 +38,8 @@
     <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css"
         id="app-style" />
-
-
+    <link href="{{ asset('be/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
+        type="text/css" />
 </head>
 
 <!-- body start -->
@@ -137,6 +137,7 @@ data-sidebar-user='true' --}}
             });
         })
     </script> --}}
+
     <script src="{{ asset('input-mask/jquery.inputmask.js') }}"></script>
     <!-- Dashboar init js-->
     <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
@@ -156,6 +157,10 @@ data-sidebar-user='true' --}}
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
+    <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/pages/form-advanced.init.js') }}"></script>
     @stack('scripts')
 </body>
 

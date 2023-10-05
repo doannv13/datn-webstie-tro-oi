@@ -6,7 +6,7 @@
     <!-- Start Content-->
     <div class="container-fluid">
         <!-- Form row -->
-        <form action="{{ route('room-post-admin.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin-room-posts.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <input type="hidden" name="id" value="{{ $postroom->id }}" class="d-none">

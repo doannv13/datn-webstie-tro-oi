@@ -1,5 +1,5 @@
 <div class="navbar-custom">
-  
+
     <ul class="list-unstyled topnav-menu float-end mb-0">
 
         <li class="d-none d-lg-block">
@@ -132,8 +132,8 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <div class="notify-icon">
-                            <img src="{{ asset('be/assets/images/users/user-4.jpg') }}"
-                                class="img-fluid rounded-circle" alt="" />
+                            <img src="{{ asset('be/assets/images/users/user-4.jpg') }}" class="img-fluid rounded-circle"
+                                alt="" />
                         </div>
                         <p class="notify-details">Karen Robinson</p>
                         <p class="text-muted mb-0 user-msg">
@@ -202,13 +202,13 @@
                 </div>
 
                 <!-- item-->
-                <a href="{{ route('admin-editinfo', auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-info', auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
                     <span>Cập nhật thông tin</span>
                 </a>
 
                 <!-- item-->
-                <a href="{{ route('admin-changepassword', auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-change-password', auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-lock"></i>
                     <span>Đổi mật khẩu</span>
                 </a>
@@ -239,7 +239,7 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="{{ route('post.index') }}" class="logo logo-light text-center">
+        <a href="{{ route('posts.index') }}" class="logo logo-light text-center">
             <span class="logo-sm">
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
             </span>
@@ -247,7 +247,7 @@
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="16">
             </span>
         </a>
-        <a href="{{ route('post.index') }}" class="logo logo-dark text-center">
+        <a href="{{ route('posts.index') }}" class="logo logo-dark text-center">
             <span class="logo-sm">
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
             </span>

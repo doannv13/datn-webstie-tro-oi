@@ -6,7 +6,7 @@
     <!-- Start Content-->
     <div class="container-fluid">
         <!-- Form row -->
-        <form action="{{ route('room-post-admin.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin-room-posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="row">
@@ -299,7 +299,7 @@
                             <button type="submit" class="btn btn-primary waves-effect waves-light">
                                 Thêm phòng
                             </button>
-                            
+
                         </div>
                     </div>
                     <!-- end card-->
@@ -309,7 +309,7 @@
             <!-- end row -->
         </form>
     </div>
-   
+
     <!-- container -->
 @endsection
 @push('scripts')

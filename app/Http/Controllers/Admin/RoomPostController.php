@@ -124,7 +124,7 @@ class RoomPostController extends Controller
                 $surround->save();
             }
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
-            return redirect()->route('room-post-admin.index');
+            return redirect()->route('admin-room-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -229,7 +229,7 @@ class RoomPostController extends Controller
             ]);
             $city->save();
             Toastr::success('Sửa tin đăng phòng thành công', 'Thành công');
-            return redirect()->route('room-post-admin.index');
+            return redirect()->route('admin-room-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -314,7 +314,7 @@ class RoomPostController extends Controller
             SurroundingRoom::query()->where('room_id', $id)->delete();
             RoomPost::query()->findOrFail($id)->delete();
             Toastr::success('Tin đăng được thêm vào thùng rác thành công', 'Thành công');
-            return redirect()->route('room-post-admin.index');
+            return redirect()->route('admin-room-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
