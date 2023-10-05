@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Setting')
 @section('content')
     <!-- Start Content-->
     <div class="container-fluid">
@@ -9,7 +10,7 @@
                         <h4 class="header-title">Cài đặt</h4>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('setting.update', $data) }}" enctype="multipart/form-data"
+                                <form action="{{ route('settings.update', $data) }}" enctype="multipart/form-data"
                                     method="post">
                                     @csrf
                                     @method('put')
