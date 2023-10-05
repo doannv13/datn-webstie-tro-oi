@@ -63,6 +63,13 @@ Route::resource('services-room', ClientServices::class);
 Route::get('display-QR', function () {
     return view('client.pay.display-QR');
 });
+Route::get('notification-pay', function () {
+    return view('client.payment-status.notification-pay');
+});
+Route::get('notification-fail', function () {
+    return view('client.payment-status.notification-fail');
+});
+
 
 //Lọc và Tìm kiếm
 Route::post('fillter', [HomeController::class, 'filter_list']);

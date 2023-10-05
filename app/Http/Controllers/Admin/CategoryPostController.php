@@ -19,7 +19,7 @@ class CategoryPostController extends Controller
     public function index()
     {
         $model = CategoryPost::query()->latest()->get();
-        return view('admin.categorypost.index',compact('model'));
+        return view('admin.category-post.index',compact('model'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryPostController extends Controller
      */
     public function create()
     {
-        return view('admin.categorypost.create');
+        return view('admin.category-post.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class CategoryPostController extends Controller
             $model->fill($request->all());
             $model->save();
             Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categorypost.index');
+            return to_route('category-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -66,7 +66,7 @@ class CategoryPostController extends Controller
     public function edit(string $id)
     {
         $model = CategoryPost::query()->findOrFail($id);
-        return view('admin.categorypost.edit',compact('model'));
+        return view('admin.category-post.edit',compact('model'));
     }
 
     /**
@@ -84,7 +84,7 @@ class CategoryPostController extends Controller
             $model->save();
 
             Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categorypost.index');
+            return to_route('category-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -101,7 +101,7 @@ class CategoryPostController extends Controller
             $model->delete();
             Toastr::success('Post đã chuyển vào thùng rác', 'Thành công');
 
-            return to_route('categorypost.index');
+            return to_route('category-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -112,7 +112,7 @@ class CategoryPostController extends Controller
     public function deleted()
     {
         $model = CategoryPost::query()->onlyTrashed()->get();
-        return view('admin.categorypost.delete', compact('model'));
+        return view('admin.category-post.delete', compact('model'));
     }
 
     public function restore(string $id)
