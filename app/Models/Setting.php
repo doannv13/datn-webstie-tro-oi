@@ -13,7 +13,11 @@ class Setting extends Model
         'address',
         'support_phone',
         'email',
-        'zalo'
+        'favicon',
+        'meta_title',
+        'meta_author',
+        'meta_keyword',
+        'meta_description',
     ];
     public $timestamps = true;
 }
