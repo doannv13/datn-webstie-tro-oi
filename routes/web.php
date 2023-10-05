@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Client\PostController as ClientPost;;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -55,6 +56,9 @@ Route::resource('changepassword', ChangePasswordController::class);
 Route::get('fogotpassword', function () {
     return view('client.auth.fogotPassword');
 });
+
+//Bài viết
+Route::resource('client-posts', ClientPost::class); // Danh sách bài viết
 
 //Dịch vụ client
 Route::resource('services-room', ClientServices::class);

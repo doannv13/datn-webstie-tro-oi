@@ -6,6 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <h5 class="mt-0">Thùng rác Dịch Vụ</h5>
                     <div class="responsive-table-plugin">
                         <div class="table-rep-plugin">
                             <div class="table-responsive" data-pattern="priority-columns">
@@ -15,7 +16,11 @@
                                     <p>{{ $message }}</p>
                                 </div>
                                 @endif -->
-                                
+                                <div class="mb-2 d-flex gap-1 ">
+                                    <a class="btn btn-success" href="{{ route('services.index') }}">Danh sách</a>
+
+                                </div>
+
                                 <table id="tech-companies-1" class="table table-striped">
                                     <thead>
                                         <tr>

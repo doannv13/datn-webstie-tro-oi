@@ -6,9 +6,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                <h5 class="mt-0">Danh sách Dịch Vụ</h5>
                     <div class="responsive-table-plugin">
                         <div class="table-rep-plugin">
                             <div class="table-responsive" data-pattern="priority-columns">
+                           
                                 <div class="mb-2 d-flex gap-1 ">
                                     <a class="btn btn-success" href="{{ route('services.create') }}">Thêm mới</a>
                                     <a class="btn btn-danger" href="{{ route('services-deleted') }}">Thùng rác</a>
