@@ -58,7 +58,8 @@ Route::get('fogotpassword', function () {
 });
 
 //Bài viết
-Route::resource('client-posts', ClientPost::class); // Danh sách bài viết
+Route::resource('posts-client', ClientPost::class); // Danh sách bài viết
+Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail');
 
 //Dịch vụ client
 Route::resource('services-room', ClientServices::class);
@@ -201,7 +202,7 @@ Route::put('admin-change-info/{id}', [ChangeInfoController::class, 'adminUpdate'
 Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
 Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
-//BockMark
+//BookMark
 Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
 Route::post('bookmarks/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
 Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');
