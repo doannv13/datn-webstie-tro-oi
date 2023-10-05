@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('room_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->integer('price');
             $table->string('address');
             $table->string('address_full');

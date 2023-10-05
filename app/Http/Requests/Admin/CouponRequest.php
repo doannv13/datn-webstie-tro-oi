@@ -28,7 +28,7 @@ class CouponRequest extends FormRequest
             'type' => 'required',
             'value' => 'required|integer',
             'quantity' => 'required|integer',
-            'status' => 'required',
+            // 'status' => 'required',
             'description' => 'required',
             'start_date' => 'required|date|after_or_equal:' . Carbon::now()->toDateTimeString(),
             'end_date' => [

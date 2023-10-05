@@ -67,9 +67,9 @@
 <header class="main-header" id="main-header-1">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 0">
-
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
+
                     @if ($global_setting->logo && asset($global_setting->logo))
                         <img src="{{ asset($global_setting->logo) }}" alt="logo"
                             height="80px">
@@ -210,8 +210,6 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-
-
                                 <select class="form-select bg-select-group" id="district_filter"
                                     name="district_filter">
 
@@ -441,13 +439,12 @@
                         total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value *
                             0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
                     }
-
                 });
-
             }
 
-
         }
+
+
 
         function myChange() {
             var input_price = document.getElementById('input-price');

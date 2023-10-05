@@ -7633,7 +7633,7 @@ span.flatpickr-weekday {
 }
 
 .sidebar-widget {
-  padding: 30px;
+  padding: 12px !important;
   border-bottom: solid 1px #eaeaea;
 }
 
@@ -7960,7 +7960,7 @@ span.flatpickr-weekday {
   box-shadow: 0 0 5px rgb(0 0 0 / 10%);
 }
 
-.booking-flow .contact-form .sidebar-widget {
+.booking-flow .contact-form {
   padding: 30px 30px 0;
 }
 

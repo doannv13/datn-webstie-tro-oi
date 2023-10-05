@@ -12,6 +12,10 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
+                                    <div class="mb-2 d-flex gap-1 ">
+                                        <a class="btn btn-success" href="{{ route('coupons.create') }}">Thêm mới</a>
+                                        <a class="btn btn-danger" href="{{ route('coupons.index') }}">Danh sách</a>
+                                    </div>
                                     <table id="tech-companies-1" class="table table-striped">
                                         <thead>
                                             <tr>
@@ -23,8 +27,7 @@
                                                 <th data-priority="3">Trạng thái</th>
                                                 <th data-priority="6">Bắt đầu</th>
                                                 <th data-priority="6">Kết thúc</th>
-                                                <th><a class="btn btn-info" href="{{ route('coupon.index') }}">Danh sách</a>
-                                                </th>
+                                                <th>Thao tác</th>
 
                                             </tr>
                                         </thead>
@@ -36,15 +39,17 @@
                                                     <th>{{ $value->type }}</th>
                                                     <th>{{ $value->value }}</th>
                                                     <th>{{ $value->quantity }}</th>
-                                                    <th>{{ $value->description }}</th>
+                                                    <th>{!! $value->status == 'inactive'
+                                                        ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
+                                                        : '<button class="btn btn-primary">Kích hoạt</button>' !!}
+                                                    </th>
                                                     <th>{{ $value->start_date }}</th>
                                                     <th>{{ $value->end_date }}</th>
-                                                    <th class="d-flex"><a href="{{ route('coupon.restore', $value->id) }}"
-
+                                                    <th class="d-flex"><a href="{{ route('coupons-restore', $value->id) }}"
                                                             class="btn btn-primary me-2"><i
-
                                                                 class="fa-solid fa-trash-arrow-up"></i></a>
-                                                        <form action="{{ route('coupon.permanently-delete', $value->id) }}"
+                                                        <form
+                                                            action="{{ route('coupons-permanently-delete', $value->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')

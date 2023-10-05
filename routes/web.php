@@ -84,8 +84,8 @@ Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->
 
 // Room-Post-Client
 Route::resource('room-posts', CLientRoomPost::class);
-Route::get('room-posts-deleted', [CLientRoomPost::class, 'deleted'])->name('room-deleted');
-Route::delete('room-posts-permanently/{id}', [CLientRoomPost::class, 'permanentlyDelete'])->name('room-permanently-delete');
+Route::get('room-posts-deleted', [CLientRoomPost::class, 'deleted'])->name('room-posts-deleted');
+Route::delete('room-posts-permanently/{id}', [CLientRoomPost::class, 'permanentlyDelete'])->name('room-posts-permanently-delete');
 Route::get('room-posts-restore/{id}', [CLientRoomPost::class, 'restore'])->name('room-posts-restore');
 Route::post('create-room-posts-image', [CLientRoomPost::class, 'createImage'])->name('create-room-post-image');
 Route::post('update-room-posts-image', [CLientRoomPost::class, 'editMultiImage'])->name('update-room-posts-image');
@@ -95,7 +95,6 @@ Auth::routes();
 
 
 //ADMIN
-
 Route::get('home-admin', function () {
     return view('admin.layouts.master');
 })->name('home-admin');
@@ -107,9 +106,9 @@ Route::get('dashboard-admin', function () {
 
 // Room-Post-Admin
 Route::resource('admin-room-posts', AdminRoomPost::class);
-Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('room-posts-deleted');
-Route::delete('admin-room-posts-permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('room-posts-permanently-delete');
-Route::get('admin-room-posts-restore/{id}', [AdminRoomPost::class, 'restore'])->name('room-posts-restore');
+Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');
+Route::delete('admin-room-posts-permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('admin-room-posts-permanently-delete');
+Route::get('admin-room-posts-restore/{id}', [AdminRoomPost::class, 'restore'])->name('admin-room-posts-restore');
 
 // Category Home
 Route::resource('category-rooms', CategoryRoomController::class);
@@ -177,6 +176,8 @@ Route::resource('coupons', CouponController::class);
 Route::get('coupons-deleted', [CouponController::class, 'deleted'])->name('coupons-deleted');
 Route::delete('coupons-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupons-permanently-delete');
 Route::get('coupons-restore/{id}', [CouponController::class, 'restore'])->name('coupons-restore');
+Route::get('coupons-status', [CouponController::class, 'changeStatus'])->name('coupons-status-change');
+
 
 //Quản lý người dùng
 Route::resource('users', UserController::class);
@@ -210,9 +211,9 @@ Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->nam
 
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
-// route dành cho vendor ở đây
+    // route dành cho vendor ở đây
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
-// route dành cho admin ở đây
+    // route dành cho admin ở đây
 });
 // Phân quyền end

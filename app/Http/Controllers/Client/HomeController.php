@@ -61,7 +61,7 @@ class HomeController extends Controller
                 $model->room_post_id = $id;
                 $model->save();
                 toastr()->success('Bạn vừa lưu 1 phòng', 'Đã lưu');
-                return to_route('home');
+                return back();
             } else {
                 toastr()->error('Phòng đã được lưu trước đó', 'Thất bại');
                 return back();
@@ -81,7 +81,6 @@ class HomeController extends Controller
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
             $posts = Post::latest()->paginate(5);
-            // dd($room_posts[0]->facilities);
             return view('client.bookmark', compact('data', 'categories', 'posts', 'room_posts'));
         } else {
             toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
@@ -182,6 +181,9 @@ class HomeController extends Controller
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->get();
+        // $rooms = RoomPost::with(['facilities' => function ($query) {
+        //     $query->inRandomOrder()->take(6);
+        // }]);
         $images = ImageRoom::query()->where('room_id', $id)->get();
         return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts'));
     }

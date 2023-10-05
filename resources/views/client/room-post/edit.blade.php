@@ -1,18 +1,11 @@
 @extends('client.layouts.partials.l-sidebar')
+@section('title', 'Sửa tin đăng')
 @section('main')
-    <div class="container pt-2">
-        <nav class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li class="breadcrumb"><a href="index.html">Home <span> / </span></a></li>
-                <li class="breadcrumb-item active">Blog Left Sidebar</li>
-            </ol>
-        </nav>
-    </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-post.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room-posts.update', $postroom->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $postroom->id }}" class="d-none">
@@ -24,11 +17,7 @@
                             <div class="form-group">
                                 <label class="input-group">Tỉnh / thành phố:<span class="text-danger">*</span> </label>
                                 <select class="form-select mb-3" id="city" name="city_id">
-
-                                    {{-- <option value="">Chọn tỉnh / thành phố</option> --}}
-                                    {{-- @foreach ($cities as $city) --}}
-                                    <option value="{{ $cities->name }}">{{ $cities->name }}</option>
-                                    {{-- @endforeach --}}
+                                    <option value="{{ $citie->name }}">{{ $citie->name }}</option>
                                 </select>
                                 @error('city_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -39,8 +28,8 @@
                             <div class="form-group ">
                                 <label class="input-group">Quận / Huyện:<span class="text-danger">*</span></label>
                                 <select class="form-select  mb-3" id="district" name="district_id">
-                                    <option value="{{ $districts->name }}">
-                                        {{ $districts->name }}</option>
+                                    <option value="{{ $district->name }}">
+                                        {{ $district->name }}</option>
                                 </select>
                                 @error('district_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -53,7 +42,7 @@
                                 </label>
                                 <select class="form-select mb-3" name="ward_id" id="ward">
 
-                                    <option value="{{ $wards->name }}"> {{ $wards->name }}</option>
+                                    <option value="{{ $ward->name }}"> {{ $ward->name }}</option>
                                 </select>
                                 @error('ward_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -300,7 +289,7 @@
                     <div class="sidebar row p-3">
                         <div class="col-lg-12 col-md-12 clearfix">
                             <div class=" text-center pull-left">
-                                <a href="{{ route('room-post.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
+                                <a href="{{ route('room-posts.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
                                     danh sách</a>
 
                             </div>
@@ -329,7 +318,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <form method="post" action="{{ route('update-image') }}"
+                                    <form method="post" action="{{ route('update-room-posts-image') }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @foreach ($multiImgs as $key => $item)
@@ -344,13 +333,13 @@
                                                 <td class="">
                                                     <input type="submit" class="btn btn-primary px-4" value="Sửa" />
 
-                                                    <a href="{{ route('delete-image', ['id' => $item->id]) }}"
+                                                    <a href="{{ route('delete-room-posts-image', ['id' => $item->id]) }}"
                                                         class="btn btn-danger">Xoá</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </form>
-                                    <form method="post" action="{{ route('create-image') }}" id="myForm"
+                                    <form method="post" action="{{ route('create-room-post-image') }}" id="myForm"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="id_room" value="{{ $postroom->id }}">
