@@ -207,7 +207,7 @@
                 </a>
 
                 <!-- item-->
-                <a href="{{ route('admin-change-password', auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-password',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-lock"></i>
                     <span>Đổi mật khẩu</span>
                 </a>
@@ -237,9 +237,8 @@
     </ul>
 
     <!-- LOGO -->
-    <div class="logo-box">
+    {{-- <div class="logo-box">
         <a href="{{ route('posts.index') }}" class="logo logo-light text-center">
-
                             <span class="logo-sm">
                                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
                             </span>
@@ -255,7 +254,7 @@
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="50">
             </span>
         </a>
-    </div>
+    </div> --}}
 
     <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
         <li>

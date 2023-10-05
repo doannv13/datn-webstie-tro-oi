@@ -85,7 +85,9 @@
 
 
                         </div>
-                        <button class="btn btn-primary">Sửa</button>
+                        <button class="btn btn-primary waves-effect waves-light">Cập nhật</button>
+                        <a href="{{ route('users.index') }}"
+                            class="btn btn-warning waves-effect text-light">Trở về</a>
                     </form>
                         <!-- end row-->
 

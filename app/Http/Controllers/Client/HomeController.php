@@ -71,7 +71,7 @@ class HomeController extends Controller
             return redirect('/client-login');
         }
     }
-    public function listbookmark()
+    public function listBookmark()
     {
         if (Auth::check()) {
             $user_id = auth()->user()->id;
@@ -88,7 +88,7 @@ class HomeController extends Controller
             return redirect('/client-login');
         }
     }
-    public function unbookmark(string $id)
+    public function unBookmark(string $id)
     {
         try {
             $user_id = auth()->user()->id;
@@ -104,7 +104,7 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function unbookmarkbm(string $id)
+    public function unBookmarkbm(string $id)
     {
         try {
             $model = Bookmark::findOrFail($id);
