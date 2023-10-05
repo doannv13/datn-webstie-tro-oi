@@ -17,7 +17,7 @@
                             </p>
                         @endif
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <form action="{{ route('coupons.update', $data->id) }}" method="POST">
                                     @csrf
                                     @method('put')

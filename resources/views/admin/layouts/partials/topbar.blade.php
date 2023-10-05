@@ -202,13 +202,13 @@
                 </div>
 
                 <!-- item-->
-                <a href="{{ route('admin-edit-info',auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-info', auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
                     <span>Cập nhật thông tin</span>
                 </a>
 
                 <!-- item-->
-                <a href="{{ route('admin-edit-password',auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-password', auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-lock"></i>
                     <span>Đổi mật khẩu</span>
                 </a>
@@ -274,7 +274,7 @@
                 @endif
             </span>
         </a>
-    </div> --}}
+    </div>  
 
     <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
         <li>

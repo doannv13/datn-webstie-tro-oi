@@ -14,12 +14,12 @@
                             </p>
                         @endif
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <form action="{{ route('category-rooms.update',$data->id) }}" method="POST">
                                     @csrf
                                     @method('put')
                                     <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Name</label>
+                                        <label for="simpleinput" class="form-label">Tên</label>
                                         <input type="hidden" name="id" value="{{ $data->id }}" class="d-none">
                                         <input type="text" name="name" id="simpleinput"
                                                class="form-control"placeholder="Name"  value="{{$data->name }}">
@@ -28,16 +28,16 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label class="form-label">Slug:</label>
                                         <input type="text" name="type" class="form-control" placeholder="Type"
                                                value="{{$data->slug }}" disabled>
                                         @error('type')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                     <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">Description</label>
+                                        <label for="example-textarea" class="form-label">Mô tả</label>
                                         <textarea class="form-control" name="description" id="example-textarea" rows="5">{{$data->description }}</textarea>
                                         @error('description')
                                         <span class="text-danger">{{ $message }}</span>

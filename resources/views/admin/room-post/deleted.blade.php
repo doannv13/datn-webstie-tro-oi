@@ -9,7 +9,6 @@
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
                         <a class="btn btn-success" href="{{ route('admin-room-posts.index') }}">Danh sách</a>
-                        <a class="btn btn-danger" href="{{ route('admin-room-posts.create') }}">Thêm mới</a>
                     </div>
                     <table class="table table-centered mb-0" id="tech-companies-1">
                         <thead class="table-light">

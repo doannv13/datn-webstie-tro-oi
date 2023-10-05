@@ -15,14 +15,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">
-                                Gutters
+                            <h4 class="header-title mb-3">
+                                Sửa tin đăng
                             </h4>
-                            <p class="text-muted font-13">
-                                More complex layouts can also be
-                                created with the grid system.
-                            </p>
-
                             <div class="row">
                                 <div class="mb-3 col-md-4">
                                     <label for="inputState" class="form-label">Tỉnh / thành phố:<span

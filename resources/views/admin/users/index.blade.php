@@ -14,7 +14,7 @@
                                     <a class="btn btn-success" href="{{ route('users.create') }}">Thêm mới</a>
                                     <a class="btn btn-danger" href="{{ route('users-deleted') }}">Thùng rác</a>
                                 </div>
-                                <table id="tech-companies-1" class="table table-centered mb-0 text-center">
+                                <table id="tech-companies-1" class="table table-centered mb-0">
                                     <thead>
                                     <tr>
                                         <th class="col-0.5">#</th>

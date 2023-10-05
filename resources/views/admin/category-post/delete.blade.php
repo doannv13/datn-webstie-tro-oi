@@ -4,10 +4,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Thùng rác danh sách bài viết</h5>
+                <h5 class="mt-0">Thùng rác</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
-                        <a class="btn btn-success" href="{{ route('category-posts.index') }}">Danh sách danh mục bài viết</a>
+                        <a class="btn btn-success" href="{{ route('category-posts.index') }}">Danh sách</a>
 
                     </div>
                     <table id="tech-companies-1" class="table table-centered mb-0">
