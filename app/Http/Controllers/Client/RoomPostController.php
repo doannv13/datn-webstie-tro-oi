@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
+use App\Http\Requests\Client\UpdateRoomPostRequest;
 use App\Models\CategoryRoom;
 use App\Models\City;
 use App\Models\District;
@@ -19,6 +20,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RoomPostController extends Controller
 {
@@ -57,6 +59,8 @@ class RoomPostController extends Controller
             if ($request->hasFile('imageroom')) {
                 $uploadFile = upload_file('room', $request->file('imageroom'));
             }
+            $slug = Str::slug($request->name);
+
             $ward = new Ward();
             $ward->fill([
                 'name' => $request->ward_id,
@@ -79,6 +83,7 @@ class RoomPostController extends Controller
             $model = new RoomPost();
             $model->fill([
                 'name' => $request->name,
+                'slug' => $slug,
                 'price' => $request->price,
                 'address' => $request->address,
                 'address_full' => $request->address_full,
@@ -87,7 +92,7 @@ class RoomPostController extends Controller
                 'description' => $request->description,
                 'image' => $uploadFile,
                 'managing' => $request->managing,
-                'user_id' => 1,
+                'user_id' => auth()->user()->id,
                 'service_id' => 1,
                 'ward_id' => $ward->id,
                 'district_id' => $district->id,
@@ -156,22 +161,25 @@ class RoomPostController extends Controller
         foreach ($surroundingooms as $surroundingoom) {
             $surroundingArray[] = $surroundingoom->surrounding_id;
         }
-        $wards = Ward::query()->find($id);
-        $districts = District::query()->find($id);
-        $cities = City::query()->find($id);
+        $ward = Ward::query()->find($id);
+        $district = District::query()->find($id);
+        $citie = City::query()->find($id);
         $multiImgs = ImageRoom::query()->where('room_id', $id)->get();
-        return view('client.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs'));
+        return view('client.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'ward', 'district', 'citie', 'multiImgs'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(RoomPostRequest $request, string $id)
+    public function update(UpdateRoomPostRequest $request, string $id)
     {
         try {
+            $slug = Str::slug($request->name);
+
             $model = RoomPost::query()->findOrFail($id);
             $model->fill([
                 'name' => $request->name,
+                'slug' => $slug,
                 'price' => $request->price,
                 'address' => $request->address,
                 'address_full' => $request->address_full,
@@ -179,7 +187,7 @@ class RoomPostController extends Controller
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
                 'managing' => $request->managing,
-                'user_id' => 1,
+                'user_id' => auth()->user()->id,
                 'service_id' => 1,
                 'category_room_id' => $request->category_room_id,
                 'fullname' => $request->fullname,

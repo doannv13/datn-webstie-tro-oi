@@ -1,18 +1,13 @@
 @extends('client.layouts.partials.l-sidebar')
+@section('title', 'Danh sách tin đăng')
 @section('main')
-    {{-- <div class="container pt-2">
-        <nav class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li class="breadcrumb"><a href="index.html">Home <span> / </span></a></li>
-                <li class="breadcrumb-item active">Danh sách bài viết</li>
-            </ol>
-        </nav>
-    </div> --}}
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 ">
+    <div class="row sidebar">
+        <h4 class="my-3">Khu vực</h4>
+        <hr class="dashed-line">
+        <div class="col-lg-12 col-md-12 col-sm-12 py-4">
             <!-- Contact form start -->
             <div class="table-responsive">
-                <table class="table" id="tech-companies-1">
+                <table class="table align-middle" id="tech-companies-1">
                     <thead class="table-light">
                         <th style="width:5%">STT</th>
                         <th style="width:15%">Liên hệ</th>
@@ -21,23 +16,23 @@
                         <th style="width:20%">Địa chỉ</th>
                         <th style="width:10%">Ngày bắt đầu</th>
                         <th style="width:10%">Ngày kết thúc</th>
-                        <th style="width:10%">Action</th>
+                        <th style="width:10%">Thao tác</th>
                     </thead>
                     <tbody class="align-items-center p-4">
                         @foreach ($data as $key => $value)
                             <tr class="">
-                                <td scope="row">{{ $key + 1 }}</td>
+                                <td>{{ $key + 1 }}</td>
                                 <td class="">
-                                    <p>{{ $value->fullname }}</p>
+                                    {{ $value->fullname }}
                                 </td>
                                 <td>
                                     <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
                                 </td>
                                 <td>
-                                    <p>{{ $value->name }}</p>
+                                    {{ $value->name }}
                                 </td>
                                 <td>
-                                    <p>{{ $value->address_full }}</p>
+                                    {{ $value->address_full }}
                                 </td>
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
@@ -93,45 +88,45 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Tên:</div>
-                                <div class="col-md-7">{{ $value->name }}</div>
+                                <div class="col-md-4 fw-bold">Tên:</div>
+                                <div class="col-md-8">{{ $value->name }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Địa chỉ:</div>
-                                <div class="col-md-7">{{ $value->address_full }}
+                                <div class="col-md-4 fw-bold">Địa chỉ:</div>
+                                <div class="col-md-8">{{ $value->address_full }}
                                 </div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Giá tiền:</div>
-                                <div class="col-md-7">{{ $value->price }}VND/tháng</div>
+                                <div class="col-md-4 fw-bold">Giá tiền:</div>
+                                <div class="col-md-8">{{ $value->price }}VND/tháng</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Diện tích:</div>
-                                <div class="col-md-7">{{ $value->acreage }}m2</div>
+                                <div class="col-md-4 fw-bold">Diện tích:</div>
+                                <div class="col-md-8">{{ $value->acreage }}m2</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Mô tả:</div>
-                                <div class="col-md-7">{{ $value->description }}</div>
+                                <div class="col-md-4 fw-bold">Mô tả:</div>
+                                <div class="col-md-8">{!! $value->description !!}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Liên hệ:</div>
-                                <div class="col-md-7">{{ $value->fullname }}</div>
+                                <div class="col-md-4 fw-bold">Liên hệ:</div>
+                                <div class="col-md-8">{{ $value->fullname }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Điện thoại:</div>
-                                <div class="col-md-7">{{ $value->phone }}</div>
+                                <div class="col-md-4 fw-bold">Điện thoại:</div>
+                                <div class="col-md-8">{{ $value->phone }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Zalo:</div>
-                                <div class="col-md-7">{{ $value->zalo }}</div>
+                                <div class="col-md-4 fw-bold">Zalo:</div>
+                                <div class="col-md-8">{{ $value->zalo }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Ngày đăng:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-4 fw-bold">Ngày đăng:</div>
+                                <div class="col-md-8">{{ $value->created_at->format('d-m-Y') }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Ngày hết hạn:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-4 fw-bold">Ngày hết hạn:</div>
+                                <div class="col-md-8">{{ $value->created_at->format('d-m-Y') }}</div>
                             </div>
                         </div>
                     </div>

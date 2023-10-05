@@ -1,14 +1,6 @@
 @extends('client.layouts.partials.l-sidebar')
+@section('title', 'Thêm tin đăng')
 @section('main')
-    <!-- Blog body start -->
-    {{-- <div class="container pt-2">
-        <nav class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li class="breadcrumb"><a href="index.html">Home <span> / </span></a></li>
-                <li class="breadcrumb-item active">Blog Left Sidebar</li>
-            </ol>
-        </nav>
-    </div> --}}
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
@@ -213,7 +205,7 @@
                             <input type="file" name="imageroom" id="image" data-plugins="dropify"
                                 data-height="300">
                             {{-- <input type="file" name="image"  /> --}}
-                            @error('image')
+                            @error('imageroom')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -247,7 +239,7 @@
                                     <label class="input-group">Họ và tên: <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="fullname" placeholder="Nhập họ tên của bạn"
-                                            value="{{ old('fullname') }}" class="form-control">
+                                            value="{{ auth()->user()->name }}" class="form-control">
                                     </div>
                                     @error('fullname')
                                         <span class="text-danger">{{ $message }}</span>
@@ -258,7 +250,7 @@
                                 <div class="form-group ">
                                     <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ old('phone') }}"
+                                        <input type="text" value="{{ auth()->user()->phone }}"
                                             placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
                                     </div>
                                     @error('phone')
@@ -272,7 +264,7 @@
                                 <div class="form-group ">
                                     <label class="input-group">Email: <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ old('email') }}" name="email"
+                                        <input type="text" value="{{ auth()->user()->email }}" name="email"
                                             placeholder="Nhập email của bạn" class="form-control">
                                     </div>
                                     @error('email')

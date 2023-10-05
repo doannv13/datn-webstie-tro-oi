@@ -4,7 +4,7 @@ namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomPostRequest extends FormRequest
+class UpdateRoomPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class RoomPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:room_posts,name,',
+            'name' => 'required|unique:room_posts,name,' . $this->id,
             'price' => 'required|integer',
             'address' => 'required',
             'address_full' => 'required',
@@ -30,7 +30,6 @@ class RoomPostRequest extends FormRequest
             'empty_room' => 'required|integer',
             'description' => 'required',
             'managing' => 'required',
-            'imageroom' => 'required',
             'image.*' => 'required',
             'ward_id' => 'required',
             'district_id' => 'required',

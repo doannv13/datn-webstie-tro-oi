@@ -169,8 +169,8 @@
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
                                 <div class="form-group message">
-                                    <textarea class="form-control " style="height: 110px" name="description" placeholder="Write message"
-                                        aria-label="Write message">{{ old('description') }}</textarea>
+                                    <textarea class="form-control " style="height: 110px" id="description" name="description"
+                                        placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
                                 </div>
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
@@ -315,6 +315,7 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        CKEDITOR.replace('description');
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");

@@ -4,6 +4,7 @@ use App\Models\CategoryRoom;
 use App\Models\District;
 use App\Models\Post;
 use App\Models\RoomPost;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('upload_file')) {
@@ -19,6 +20,18 @@ if (!function_exists('delete_file')) {
         $pathFile = str_replace('storage/', '', $pathFile);
         return Storage::exists($pathFile) ? Storage::delete($pathFile) : null;
     }
+}
+function timeposts($times)
+{
+    $dateString = $times;
+    // Tách ra ngày và thời gian
+    list($date, $time) = explode(' ', $dateString);
+    // Tạo đối tượng Carbon từ ngày và thời gian
+    $carbonDate = Carbon::createFromFormat('Y-m-d H:i:s', "$date $time");
+
+    $postedTime = $carbonDate;
+    $currentTime = Carbon::now();
+    return $postedTime->diffForHumans($currentTime);
 }
 
 

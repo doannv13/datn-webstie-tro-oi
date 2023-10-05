@@ -2,9 +2,9 @@
     <!-- Top 10 -->
     @if (room_posts())
         @if (count(room_posts()))
-            <div class="sidebar-widget recent-news">
+            <div class="sidebar-widget recent-news" style="padding: 12px">
                 <div class="main-title-2">
-                    <h1>Top 10 phòng trọ</h1>
+                    <h5>Top 10 phòng trọ</h5>
                 </div>
                 @foreach (room_posts() as $key => $post)
                     <div class="recent-news-item mb-3">
@@ -14,26 +14,26 @@
                             </a>
                         </div>
                         <div class="content">
-                            <h3 class="media-heading">
-                                <a href="rooms-details.html">{{ $post->name }}</a>
-                            </h3>
+                            <h5 class="media-heading">
+                                <a
+                                    href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 30) }}...</a>
+                            </h5>
                             <div class="listing-post-meta">
-                                {{ $post->price }}
+                                {{ number_format($post->price) }}
+                                VND/Tháng
                             </div>
-                         
                         </div>
                     </div>
                 @endforeach
             </div>
         @endif
-
     @endif
 
 
     <!-- Danh mục -->
     <div class="sidebar-widget category-posts">
         <div class="main-title-2">
-            <h1>Danh mục phòng</h1>
+            <h5>Danh mục phòng</h5>
         </div>
         <ul class="list-unstyled list-cat">
             @if (categories())
@@ -75,7 +75,7 @@
     <!-- Tag -->
     <div class="sidebar-widget tags-box">
         <div class="main-title-2">
-            <h1>Tags</h1>
+            <h5>Tags</h5>
         </div>
         <ul class="tags">
             <li><a href="#">Gần trường</a></li>
@@ -91,13 +91,12 @@
     <!-- Truyền thông -->
     <div class="social-media sidebar-widget clearfix">
         <div class="main-title-2">
-            <h1>Truyền thông</h1>
+            <h5>Truyền thông</h5>
         </div>
         <ul class="social-list">
-            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
             <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
         </ul>
     </div>

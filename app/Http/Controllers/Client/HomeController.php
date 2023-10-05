@@ -37,12 +37,12 @@ class HomeController extends Controller
         // dd($posts);
         // dd($rooms);
         //đếm số tin đăng ,user ,bài viết
-        $count_room=count(RoomPost::all());
-        $count_user=count(User::all());
-        $count_post=count(Post::all());
+        $count_room = count(RoomPost::all());
+        $count_user = count(User::all());
+        $count_post = count(Post::all());
         // dd($count_room,$count_user,$count_post);
 
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts','count_room','count_user','count_post'));
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post'));
         // $rooms = RoomPost::all();
         // dd($rooms);
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms'));
@@ -61,7 +61,7 @@ class HomeController extends Controller
                 $model->room_post_id = $id;
                 $model->save();
                 toastr()->success('Bạn vừa lưu 1 phòng', 'Đã lưu');
-                return to_route('home');
+                return back();
             } else {
                 toastr()->error('Phòng đã được lưu trước đó', 'Thất bại');
                 return back();
@@ -184,6 +184,9 @@ class HomeController extends Controller
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->get();
+        // $rooms = RoomPost::with(['facilities' => function ($query) {
+        //     $query->inRandomOrder()->take(6);
+        // }]);
         $images = ImageRoom::query()->where('room_id', $id)->get();
         return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts'));
     }

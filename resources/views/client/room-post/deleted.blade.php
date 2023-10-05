@@ -1,11 +1,13 @@
 @extends('client.layouts.partials.l-sidebar')
-
+@section('title', 'Thùng rác')
 @section('main')
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 ">
+    <div class="row sidebar">
+        <h4 class="my-3">Thùng rác</h4>
+        <hr class="dashed-line">
+        <div class="col-lg-12 col-md-12 col-sm-12 py-4">
             <!-- Contact form start -->
             <div class="table-responsive">
-                <table class="table" id="tech-companies-1">
+                <table class="table align-middle" id="tech-companies-1">
                     <thead class="table-light">
                         <th style="width:5%">STT</th>
                         <th style="width:15%">Liên hệ</th>
@@ -32,9 +34,10 @@
                                 <td>
                                     <p>{{ $value->address_full }}</p>
                                 </td>
+
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                               
+
                                 <td>
                                     <div class="d-flex m-2">
                                         <button class="btn btn-success my-1" style="font-size: 13px" data-bs-toggle="modal"
@@ -79,45 +82,45 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Tên:</div>
-                                <div class="col-md-7">{{ $value->name }}</div>
+                                <div class="col-md-4 fw-bold">Tên:</div>
+                                <div class="col-md-8">{{ $value->name }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Địa chỉ:</div>
-                                <div class="col-md-7">{{ $value->address_full }}
+                                <div class="col-md-4 fw-bold">Địa chỉ:</div>
+                                <div class="col-md-8">{{ $value->address_full }}
                                 </div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Giá tiền:</div>
-                                <div class="col-md-7">{{ $value->price }}VND/tháng</div>
+                                <div class="col-md-4 fw-bold">Giá tiền:</div>
+                                <div class="col-md-8">{{ $value->price }}VND/tháng</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Diện tích:</div>
-                                <div class="col-md-7">{{ $value->acreage }}m2</div>
+                                <div class="col-md-4 fw-bold">Diện tích:</div>
+                                <div class="col-md-8">{{ $value->acreage }}m2</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Mô tả:</div>
-                                <div class="col-md-7">{{ $value->description }}</div>
+                                <div class="col-md-4 fw-bold">Mô tả:</div>
+                                <div class="col-md-8">{!! $value->description !!}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Liên hệ:</div>
-                                <div class="col-md-7">{{ $value->fullname }}</div>
+                                <div class="col-md-4 fw-bold">Liên hệ:</div>
+                                <div class="col-md-8">{{ $value->fullname }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Điện thoại:</div>
-                                <div class="col-md-7">{{ $value->phone }}</div>
+                                <div class="col-md-4 fw-bold">Điện thoại:</div>
+                                <div class="col-md-8">{{ $value->phone }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Zalo:</div>
-                                <div class="col-md-7">{{ $value->zalo }}</div>
+                                <div class="col-md-4 fw-bold">Zalo:</div>
+                                <div class="col-md-8">{{ $value->zalo }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Ngày đăng:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-4 fw-bold">Ngày đăng:</div>
+                                <div class="col-md-8">{{ $value->created_at->format('d-m-Y') }}</div>
                             </div>
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Ngày hết hạn:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-4 fw-bold">Ngày hết hạn:</div>
+                                <div class="col-md-8">{{ $value->created_at->format('d-m-Y') }}</div>
                             </div>
                         </div>
                     </div>

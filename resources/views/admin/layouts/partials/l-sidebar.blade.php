@@ -141,13 +141,13 @@
                     <div class="collapse" id="tdp">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('room-post-admin.create') }}">- Thêm mới</a>
+                                <a href="{{ route('admin-room-posts.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{ route('room-post-admin.index') }}">- Danh sách </a>
+                                <a href="{{ route('admin-room-posts.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{ route('room_deleted_admin') }}">- Thùng rác</a>
+                                <a href="{{ route('admin-room-posts-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -162,13 +162,13 @@
                     <div class="collapse" id="tienich">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('facilities.create')}}">- Thêm mới</a>
+                                <a href="{{ route('facilities.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('facilities.index')}}">- Danh sách </a>
+                                <a href="{{ route('facilities.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('facilities-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('facilities-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -315,13 +315,13 @@
                     <div class="collapse" id="coupon">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('coupons.create')}}">- Thêm mới</a>
+                                <a href="{{ route('coupons.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('coupons.index')}}">- Danh sách </a>
+                                <a href="{{ route('coupons.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('coupons-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('coupons-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -336,13 +336,13 @@
                     <div class="collapse" id="goidichvu">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('services.create')}}">- Thêm mới</a>
+                                <a href="{{ route('services.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('services.index')}}">- Danh sách </a>
+                                <a href="{{ route('services.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('services-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('services-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -359,7 +359,7 @@
                     <div class="collapse" id="setting">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('settings.index')}}">- Danh sách </a>
+                                <a href="{{ route('settings.index') }}">- Danh sách </a>
                             </li>
                         </ul>
                     </div>
@@ -394,13 +394,13 @@
                     <div class="collapse" id="quangcao">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('advertisements.create')}}">- Thêm mới</a>
+                                <a href="{{ route('advertisements.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('advertisements.index')}}">- Danh sách </a>
+                                <a href="{{ route('advertisements.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('advertisements-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('advertisements-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

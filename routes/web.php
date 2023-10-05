@@ -83,7 +83,6 @@ Auth::routes();
 
 
 //ADMIN
-
 Route::get('home-admin', function () {
     return view('admin.layouts.master');
 })->name('home-admin');
@@ -164,6 +163,8 @@ Route::resource('coupons', CouponController::class);
 Route::get('coupons-deleted', [CouponController::class, 'deleted'])->name('coupons-deleted');
 Route::delete('coupons-permanently/{id}', [CouponController::class, 'permanentlyDelete'])->name('coupons-permanently-delete');
 Route::get('coupons-restore/{id}', [CouponController::class, 'restore'])->name('coupons-restore');
+Route::get('coupons-status', [CouponController::class, 'changeStatus'])->name('coupons-status-change');
+
 
 //Quản lý người dùng
 Route::resource('users', UserController::class);

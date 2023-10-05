@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
+use App\Http\Requests\Client\UpdateRoomPostRequest;
 use App\Models\CategoryRoom;
 use App\Models\City;
 use App\Models\District;
@@ -169,7 +170,7 @@ class RoomPostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RoomPostRequest $request, string $id)
+    public function update(UpdateRoomPostRequest $request, string $id)
     {
         try {
             $model = RoomPost::query()->findOrFail($id);

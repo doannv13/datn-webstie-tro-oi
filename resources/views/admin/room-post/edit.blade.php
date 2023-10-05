@@ -167,8 +167,8 @@
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
                                 <div class="form-group message">
-                                    <textarea class="form-control " style="height: 110px" name="description" placeholder="Write message"
-                                        aria-label="Write message">{{ $postroom->description }}</textarea>
+                                    <textarea class="form-control " style="height: 110px" id="description" name="description"
+                                        placeholder="Write message" aria-label="Write message">{{ $postroom->description }}</textarea>
                                 </div>
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
@@ -306,7 +306,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <form method="post" action="{{ route('update-images') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('update-room-posts-image') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @foreach ($multiImgs as $key => $item)
                                     <tr>
@@ -319,13 +320,13 @@
                                         <td class="">
                                             <input type="submit" class="btn btn-primary px-4" value="Sửa" />
 
-                                            <a href="{{ route('delete-images', ['id' => $item->id]) }}"
+                                            <a href="{{ route('delete-room-posts-image', ['id' => $item->id]) }}"
                                                 class="btn btn-danger">Xoá</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </form>
-                            <form method="post" action="{{ route('create-images') }}" id="myForm"
+                            <form method="post" action="{{ route('create-room-post-image') }}" id="myForm"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_room" value="{{ $postroom->id }}">
@@ -335,8 +336,8 @@
                                             <td>
                                                 <div class="upload__box">
                                                     <div class="upload__btn-box">
-                                                        <label class="upload__btn">
-                                                            <p class="btn-md btn-theme btn-4 btn-7">Chọn ảnh</p>
+                                                        <label class="upload__btn btn-primary">
+                                                            <p class="btn-md btn-theme">Chọn ảnh</p>
                                                             <input type="file" name="add_image[]" multiple=""
                                                                 data-max_length="20" class="upload__inputfile">
                                                         </label>
@@ -360,6 +361,7 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        CKEDITOR.replace('description');
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");

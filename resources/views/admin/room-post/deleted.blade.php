@@ -1,66 +1,75 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 ">
-            <!-- Contact form start -->
-            <div class="table-responsive">
-                <table class="table" id="tech-companies-1">
-                    <thead class="table-light">
-                        <th style="width:5%">STT</th>
-                        <th style="width:15%">Liên hệ</th>
-                        <th style="width:10%">Ảnh chính</th>
-                        <th style="width:20%">Name</th>
-                        <th style="width:20%">Địa chỉ</th>
-                        <th style="width:10%">Ngày bắt đầu</th>
-                        <th style="width:10%">Ngày kết thúc</th>
-                        <th style="width:10%">Action</th>
-                    </thead>
-                    <tbody class="align-items-center p-4">
-                        @foreach ($data as $key => $value)
-                            <tr class="">
-                                <td scope="row">{{ $key + 1 }}</td>
-                                <td class="">
-                                    <p>{{ $value->fullname }}</p>
-                                </td>
-                                <td>
-                                    <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
-                                </td>
-                                <td>
-                                    <p>{{ $value->name }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $value->address_full }}</p>
-                                </td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="mt-0">Thùng rác</h5>
+                <!-- Contact form start -->
+                <div class="table-responsive">
+                    <div class="mb-2 d-flex gap-1 ">
+                        <a class="btn btn-success" href="{{ route('admin-room-posts.index') }}">Danh sách</a>
+                        <a class="btn btn-danger" href="{{ route('admin-room-posts.create') }}">Thêm mới</a>
+                    </div>
+                    <table class="table table-centered mb-0" id="tech-companies-1">
+                        <thead class="table-light">
+                            <th style="width:5%">STT</th>
+                            <th style="width:15%">Liên hệ</th>
+                            <th style="width:10%">Ảnh chính</th>
+                            <th style="width:20%">Name</th>
+                            <th style="width:20%">Địa chỉ</th>
+                            <th style="width:10%">Ngày bắt đầu</th>
+                            <th style="width:10%">Ngày kết thúc</th>
+                            <th style="width:10%">Action</th>
+                        </thead>
+                        <tbody class="align-items-center p-4">
+                            @foreach ($data as $key => $value)
+                                <tr class="">
+                                    <td scope="row">{{ $key + 1 }}</td>
+                                    <td class="">
+                                        <p>{{ $value->fullname }}</p>
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
+                                    </td>
+                                    <td>
+                                        <p>{{ $value->name }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $value->address_full }}</p>
+                                    </td>
+                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
 
-                                <td>
-                                    <div class="d-flex m-2">
-                                        <button class="btn btn-success my-1" style="font-size: 13px" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalToggle{{ $value->id }}">
-                                            <i class="fas fa-eye fs-4"></i>
-                                        </button>
-                                        <a href="{{ route('admin-room-posts-restore', $value->id) }}"
-                                            class="btn btn-primary text-center my-1 m-2"><i
-                                                class="fa-solid fa-trash-arrow-up fs-4"></i></a>
-                                        <form action="{{ route('admin-room-posts-permanently-delete', $value->id) }}"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger my-1">
-                                                <i class="fa-solid fa-delete-left text-light fs-4"></i>
+                                    <td>
+                                        <div class="d-flex m-2">
+                                            <button class="btn btn-success my-1" style="font-size: 13px"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalToggle{{ $value->id }}">
+                                                <i class="fas fa-eye fs-4"></i>
                                             </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                            <a href="{{ route('admin-room-posts-restore', $value->id) }}"
+                                                class="btn btn-primary text-center my-1 m-2"><i
+                                                    class="fa-solid fa-trash-arrow-up fs-4"></i></a>
+                                            <form action="{{ route('admin-room-posts-permanently-delete', $value->id) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button onclick="return confirm('Bạn có muốn xoá')"
+                                                    class="btn btn-danger my-1">
+                                                    <i class="fa-solid fa-delete-left text-light fs-4"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
 
 
-                    </tbody>
-                </table>
-                <!-- Contact form end -->
+                        </tbody>
+                    </table>
+                    <!-- Contact form end -->
+                </div>
             </div>
         </div>
     </div>
