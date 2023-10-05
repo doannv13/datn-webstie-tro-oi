@@ -28,8 +28,6 @@
             </div>
         @endif
     @endif
-
-
     <!-- Danh mục -->
     <div class="sidebar-widget category-posts">
         <div class="main-title-2">
@@ -68,36 +66,5 @@
                     </div>
                 @endforeach
             </div>
-        @endif
-    @endif
-
-
-    <!-- Tag -->
-    <div class="sidebar-widget tags-box">
-        <div class="main-title-2">
-            <h5>Tags</h5>
-        </div>
-        <ul class="tags">
-            <li><a href="#">Gần trường</a></li>
-            <li><a href="#">Khuyến mãi</a></li>
-            <li><a href="#">View đẹp</a></li>
-            <li><a href="#">Chung cư</a></li>
-            <li><a href="#">Nhà trọ</a></li>
-            <li><a href="#">Nam Từ Liêm</a></li>
-            <li><a href="#">Đống Đa</a></li>
-            <li><a href="#">Hồ Tây</a></li>
-        </ul>
-    </div>
-    <!-- Truyền thông -->
-    <div class="social-media sidebar-widget clearfix">
-        <div class="main-title-2">
-            <h5>Truyền thông</h5>
-        </div>
-        <ul class="social-list">
-            <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-square"></i></a></li>
-            <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
-            <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-        </ul>
     </div>
 </div>

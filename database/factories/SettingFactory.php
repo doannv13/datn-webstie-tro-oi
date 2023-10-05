@@ -22,7 +22,6 @@ class SettingFactory extends Factory
             'address' => $this->faker->address,
             'support_phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,
-            'zalo' => $this->faker->phoneNumber,
         ];
     }
 }

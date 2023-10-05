@@ -8,46 +8,46 @@
                 <h5 class="mt-0">Danh sách bài viết</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
-                        <a class="btn btn-success" href="{{ route('categorypost.create') }}">Thêm mới</a>
-                        <a class="btn btn-danger" href="{{ route('categorypost.deleted') }}">Thùng rác</a>
+                        <a class="btn btn-success" href="{{ route('category-rooms.create') }}">Thêm mới</a>
+                        <a class="btn btn-danger" href="{{ route('category-rooms-deleted') }}">Thùng rác</a>
                     </div>
                     <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                         <thead>
                         <tr>
-                            <th class="col-2">STT</th>
-                            <th class="col-2">Name</th>
-                            <th class="col-2">Slug</th>
-                            <th class="col-2">Mô tả</th>
-                            <th class="col-2">Ngày</th>
-                            <th class="col-2">Trạng thái</th>
-                            <th class="col-2">Hành động</th>
+                            <th class="col-1">#</th>
+                            <th class="col-1">Tên danh mục</th>
+                            <th class="col-1">Slug</th>
+                            <th class="col-1">Ngày đăng tải</th>
+                            <th class="col-1">Mô tả</th>
+                            <th class="col-1">Trạng thái</th>
+                            <th class="col-1">Ngày cập nhật</th>
+                            <th class="col-1">Hành động</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($model as $key => $value)
+                        @foreach ($data as $key => $value)
                             <tr id="row_@item.ID">
                                 <td class="tabledit-view-mode">{{ $key +1 }}</td>
                                 <td class="tabledit-view-mode">{{ $value->name }}</td>
                                 <td class="tabledit-view-mode">{{ $value->slug }}</td>
+                                <td class="tabledit-view-mode">{{ $value->created_at }}</td>
                                 <td class="tabledit-view-mode">{!!substr($value->description, 0, 20) !!}</td>
-                                <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
                                 <td>
                                     <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                            data-onlabel="Bật" data-offlabel="Tắt"
                                         {{ $value->status == 'active' ? 'checked' : '' }}>
                                 </td>
-
+                                <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
 
                                 <td class="">
-                                    <a href="{{ route('categorypost.edit', $value->id) }}">
+                                    <a href="{{ route('category-rooms.edit', $value->id) }}">
                                         <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                             <i class="fa-solid fa-pen-to-square fs-4"></i>
                                         </button>
                                     </a>
-
-                                    <form action="{{ route('categorypost.destroy', $value->id) }}" method="POST">
+                                    <form action="{{ route('category-rooms.destroy', $value->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
@@ -75,15 +75,15 @@
         $(function() {
             $('.toggle-class').change(function() {
                 let status = $(this).prop('checked') == true ? 'active' : 'inactive';
-                let categorypost_id = $(this).data('id');
+                let categoryrooms_id = $(this).data('id');
 
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('categorypost.status_change') }}',
+                    url: '{{ route('category-rooms-status-change') }}',
                     data: {
                         'status': status,
-                        'categorypost_id': categorypost_id,
+                        'categoryrooms_id': categoryrooms_id,
                     },
                     success: function(data) {
                         console.log(data);

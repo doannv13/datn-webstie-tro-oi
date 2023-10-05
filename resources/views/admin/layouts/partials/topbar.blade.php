@@ -202,13 +202,13 @@
                 </div>
 
                 <!-- item-->
-                <a href="{{ route('admin-edit-info', auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-info',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-user"></i>
                     <span>Cập nhật thông tin</span>
                 </a>
 
                 <!-- item-->
-                <a href="{{ route('admin-change-password', auth()->user()->id) }}" class="dropdown-item notify-item">
+                <a href="{{ route('admin-edit-password',auth()->user()->id) }}" class="dropdown-item notify-item">
                     <i class="fe-lock"></i>
                     <span>Đổi mật khẩu</span>
                 </a>
@@ -238,24 +238,43 @@
     </ul>
 
     <!-- LOGO -->
+
     <div class="logo-box">
-        <a href="{{ route('posts.index') }}" class="logo logo-light text-center">
+        <a href="" class="logo logo-light text-center">
             <span class="logo-sm">
-                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
+                @if ($global_setting->logo && asset($global_setting->logo))
+                    <img src="{{ asset($global_setting->logo) }}" alt="logo" height="22">
+                @else
+                    <img src="{{ asset('no_image.jpg') }}" alt="logo" height="22">
+                @endif
             </span>
+
             <span class="logo-lg">
-                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="16">
+                @if ($global_setting->logo && asset($global_setting->logo))
+                    <img src="{{ asset($global_setting->logo) }}" alt="logo" height="16">
+                @else
+                    <img src="{{ asset('no_image.jpg') }}" alt="logo" height="16">
+                @endif
             </span>
         </a>
-        <a href="{{ route('posts.index') }}" class="logo logo-dark text-center">
+
+        <a href="" class="logo logo-dark text-center">
             <span class="logo-sm">
-                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="22">
+                @if ($global_setting->logo && asset($global_setting->logo))
+                    <img src="{{ asset($global_setting->logo) }}" alt="logo" height="22">
+                @else
+                    <img src="{{ asset('no_image.jpg') }}" alt="logo" height="22">
+                @endif
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="50">
+                @if ($global_setting->logo && asset($global_setting->logo))
+                    <img src="{{ asset($global_setting->logo) }}" alt="logo" height="50">
+                @else
+                    <img src="{{ asset('no_image.jpg') }}" alt="logo" height="50">
+                @endif
             </span>
         </a>
-    </div>
+    </div> --}}
 
     <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
         <li>

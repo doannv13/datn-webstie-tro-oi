@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Client\PostController as ClientPost;;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -56,6 +57,10 @@ Route::get('fogotpassword', function () {
     return view('client.auth.fogotPassword');
 });
 
+//Bài viết
+Route::resource('posts-client', ClientPost::class); // Danh sách bài viết
+Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail');
+
 //Dịch vụ client
 Route::resource('services-room', ClientServices::class);
 
@@ -63,6 +68,13 @@ Route::resource('services-room', ClientServices::class);
 Route::get('display-QR', function () {
     return view('client.pay.display-QR');
 });
+Route::get('notification-pay', function () {
+    return view('client.payment-status.notification-pay');
+});
+Route::get('notification-fail', function () {
+    return view('client.payment-status.notification-fail');
+});
+
 
 //Lọc và Tìm kiếm
 Route::post('fillter', [HomeController::class, 'filter_list']);
@@ -103,6 +115,7 @@ Route::resource('category-rooms', CategoryRoomController::class);
 Route::get('category-rooms-deleted', [CategoryRoomController::class, 'deleted'])->name('category-rooms-deleted');
 Route::delete('category-rooms-permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('category-rooms-permanently-delete');
 Route::get('category-rooms-restore/{id}', [CategoryRoomController::class, 'restore'])->name('category-rooms-restore');
+Route::get('category-rooms-status', [CategoryRoomController::class, 'changeStatus'])->name('category-rooms-status-change');
 
 // Facility
 Route::resource('facilities', FacilityController::class);
@@ -183,14 +196,14 @@ Route::delete('surroundings-permanently/{id}', [SurroundingController::class, 'p
 Route::get('surroundings-restore/{id}', [SurroundingController::class, 'restore'])->name('surroundings-restore');
 
 //Admin/chang info
-Route::get('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminEdit'])->name('admin-edit-info');
-Route::put('admin-changeinfo/{id}', [ChangeInfoController::class, 'adminUpdate'])->name('admin-change-info');
+Route::get('admin-change-info/{id}', [ChangeInfoController::class, 'adminEdit'])->name('admin-edit-info');
+Route::put('admin-change-info/{id}', [ChangeInfoController::class, 'adminUpdate'])->name('admin-change-info');
 
 //Admin/chang password
-Route::get('admin-changepassword/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
-Route::put('admin-changepassword/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
+Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
+Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
-//BockMark
+//BookMark
 Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
 Route::post('bookmarks/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
 Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');

@@ -3,9 +3,11 @@
         <div class="row align-items-center">
             <div class="col-lg-8 col-md-8 col-sm-7 col-7">
                 <div class="list-inline">
-                    <a href="tel:+55-4XX-634-7071"><i class="fa fa-phone"></i>Need Support? +00-4X6-634-781</a>
-                    <a href="tel:info@themevessel.com" class="d-none-768"><i
-                            class="fa fa-envelope"></i>info@themevessel.com</a>
+                    <a href="tel:+{{ $global_setting ? $global_setting->support_phone : '' }}"><i
+                            class="fa fa-phone"></i>Cần hỗ trợ?
+                        {{ $global_setting ? $global_setting->support_phone : '' }}</a>
+                    <a href="tel:{{ $global_setting ? $global_setting->email : '' }}" class="d-none-768"><i
+                            class="fa fa-envelope"></i>{{ $global_setting ? $global_setting->email : '' }}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
@@ -65,16 +67,23 @@
 <header class="main-header" id="main-header-1">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 0">
-
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('fe/img/logos/logo.png') }}" alt="logo" height="80px" />
+
+                    @if ($global_setting->logo && asset($global_setting->logo))
+                        <img src="{{ asset($global_setting->logo) }}" alt="logo"
+                            height="80px">
+                    @else
+                        <img src="{{ asset('no_image.jpg') }}" alt="logo"
+                            height="80px">
+                    @endif
                 </a>
 
                 <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('home') }}" id="navbarDropdownMenuLink"
+                                aria-expanded="false">
                                 Trang chủ
                             </a>
                         </li>
@@ -107,7 +116,7 @@
 
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href="bookmark"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
+                        <a href="bookmarks"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <button class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </button>
@@ -249,34 +258,19 @@
                         </div>
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
-
-                                <select name="areage_filter" id="areage_filter" class="form-select bg-select-group"
-                                    id="floatingSelect3" aria-label="Floating label select example">
-                                    <option value="allAreage"
-                                        {{ request('areage_filter') == 'allAreage' ? 'selected' : '' }}>Tất cả</option>
-                                    <option value="range_areage1"
-                                        {{ request('areage_filter') == 'range_areage1' ? 'selected' : '' }}>Dưới 20m
-                                        vuông</option>
-                                    <option value="range_areage2"
-                                        {{ request('areage_filter') == 'range_areage2' ? 'selected' : '' }}>20m vuông
-                                        -> 30m vuông</option>
-                                    <option value="range_areage3"
-                                        {{ request('areage_filter') == 'range_areage3' ? 'selected' : '' }}>20m vuông
-                                        -> 45m vuông</option>
-                                    <option value="range_areage4"
-                                        {{ request('areage_filter') == 'range_areage4' ? 'selected' : '' }}>Trên 45m
-                                        vuông</option>
-
+                                <select name="acreage_filter" id="acreage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                    <option value="allAcreage" {{ request('acreage_filter') == 'allAcreage' ? 'selected' : '' }}>Tất cả</option>
+                                    <option value="range_acreage1" {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
+                                    <option value="range_acreage2" {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
+                                    <option value="range_acreage3" {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
+                                    <option value="range_acreage4" {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Trên 45m vuông</option>
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
                             kiếm</button>
-
-
                     </div>
-
                 </div>
             </div>
         </form>
@@ -445,13 +439,12 @@
                         total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value *
                             0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
                     }
-
                 });
-
             }
 
-
         }
+
+
 
         function myChange() {
             var input_price = document.getElementById('input-price');

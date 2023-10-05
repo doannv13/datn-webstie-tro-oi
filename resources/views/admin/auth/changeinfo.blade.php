@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6 col-xl-4">
         <div class="text-center">
-            <a href="index.html">
+            <a href="{{ route('home-admin') }}">
                 <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" height="100" class="mx-auto">
             </a>
         </div>
@@ -15,7 +15,7 @@
                     <h4 class="text-uppercase mt-0">Cập nhật thông tin</h4>
                 </div>
 
-                <form action="{{ route('admin-changeinfo',$data->id) }}" method="POST" enctype="multipart/form-data" >
+                <form action="{{ route('admin-change-info',$data->id) }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     @method('put')
                     <input type="hidden" name="id" value="{{ $data->id }}">

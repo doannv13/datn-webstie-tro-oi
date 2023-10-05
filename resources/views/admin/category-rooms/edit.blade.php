@@ -15,7 +15,7 @@
                         @endif
                         <div class="row">
                             <div class="col-lg-8">
-                                <form action="{{ route('categoryrooms.update',$data->id) }}" method="POST">
+                                <form action="{{ route('category-rooms.update',$data->id) }}" method="POST">
                                     @csrf
                                     @method('put')
                                     <div class="mb-3">
@@ -46,7 +46,7 @@
 
                                     <button class="btn btn-primary waves-effect waves-light">Thêm</button>
                                     {{-- <button class="btn btn-waring waves-effect waves-light">Thêm</button> --}}
-                                    <a href="{{ route('categoryrooms.index') }}"
+                                    <a href="{{ route('category-rooms.index') }}"
                                        class="btn btn-warning waves-effect text-light">Trở về</a>
 
                                 </form>

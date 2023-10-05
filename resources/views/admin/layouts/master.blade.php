@@ -10,7 +10,15 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('fe/img/logos/logo.png') }}">
+
+    @if ($global_setting->favicon && asset($global_setting->favicon))
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset($global_setting->favicon) }}" />
+    @else
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
+    @endif
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Plugins css -->
     <link href="{{ asset('be/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
@@ -26,7 +34,7 @@
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
+
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
@@ -111,13 +119,13 @@ data-sidebar-user='true' --}}
     <!--Morris Chart-->
     <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
+    
     {{-- Ckeditor --}}
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('editor1');
     </script>
-
-
+    
     {{-- load ảnh --}}
     {{-- <script>
         $(function() {
@@ -135,13 +143,17 @@ data-sidebar-user='true' --}}
                 console.log(123);
                 readURL(this, '#image_preview');
             });
+
+            $("#image-favi").change(function() {
+                console.log(123);
+                readURL(this, '#image_preview_favi');
+            });
         })
     </script> --}}
 
     <script src="{{ asset('input-mask/jquery.inputmask.js') }}"></script>
     <!-- Dashboar init js-->
     <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
-
 
     <!-- Plugins js -->
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
@@ -156,7 +168,10 @@ data-sidebar-user='true' --}}
 
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
+    <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/pages/form-advanced.init.js') }}"></script>
     <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
