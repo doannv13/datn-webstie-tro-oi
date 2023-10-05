@@ -7,15 +7,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Input Types</h4>
-                        @if ($errors->any())
-                            <p class="alert alert-danger">
-                                Dữ liệu không hợp lệ vui lòng kiểm tra lại
-                            </p>
-                        @endif
+                        <h3 class="my-2 text-center">Cập nhật danh mục bài viết</h3>
+
                         <div class="row">
                             <div class="col-lg-8">
-                                <form action="{{ route('categorypost.update', $model->id) }}" method="POST">
+                                <form action="{{ route('category-posts.update', $model->id) }}" method="POST">
                                     @csrf
                                     @method('put')
 
@@ -51,8 +47,10 @@
 {{--                                        <span class="text-danger">{{ $message }}</span>--}}
 {{--                                        @enderror--}}
 {{--                                    </div>--}}
-                                    <button class="btn btn-primary waves-effect waves-light">Thêm</button>
+                                    <button class="btn btn-primary waves-effect waves-light">Cập nhật</button>
                                     {{-- <button class="btn btn-waring waves-effect waves-light">Thêm</button> --}}
+                                    <a href="{{ route('category-posts.index') }}" class="btn btn-warning waves-effect text-light">Trở
+                                        về</a>
 
 
                                 </form>
