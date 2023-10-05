@@ -111,6 +111,7 @@ Route::resource('category-rooms', CategoryRoomController::class);
 Route::get('category-rooms-deleted', [CategoryRoomController::class, 'deleted'])->name('category-rooms-deleted');
 Route::delete('category-rooms-permanently/{id}', [CategoryRoomController::class, 'permanentlyDelete'])->name('category-rooms-permanently-delete');
 Route::get('category-rooms-restore/{id}', [CategoryRoomController::class, 'restore'])->name('category-rooms-restore');
+Route::get('category-rooms-status', [CategoryRoomController::class, 'changeStatus'])->name('category-rooms-status-change');
 
 // Facility
 Route::resource('facilities', FacilityController::class);
