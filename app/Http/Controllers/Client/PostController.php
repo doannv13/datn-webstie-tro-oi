@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\CategoryRoom;
 use App\Models\Post;
+use App\Models\RoomPost;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,8 +15,14 @@ class PostController extends Controller
      */
     public function index()
     {
+        $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
         $data = Post::query()->latest()->get();
-        return view('client.post.index', compact('data'));
+        $categories = CategoryRoom::withCount('roomPosts')
+            ->having('room_posts_count', '>', 0)
+            ->paginate(4);
+        $posts = Post::latest()->paginate(5);
+        // dd($room_posts[0]->facilities);
+        return view('client.post.index', compact('data', 'categories', 'posts', 'room_posts'));
     }
 
     /**

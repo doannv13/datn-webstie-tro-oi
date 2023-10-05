@@ -8,9 +8,15 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <!-- Blog box start -->
+                    @if (isset($data))
+                        @if (count($data) > 0)
+                            @foreach ($data as $key => $value)
                     <div class="blog-1">
                         <div class="blog-image">
-                            <img src="img/blog/img-6.jpg" alt="img-2" class="img-fluid w-100">
+                            <div>
+                                <img src="{{ $value->image }}" alt="img-2" class="img-fluid w-100 h-100">
+                            </div>
+
                             <div class="profile-user">
                                 <img src="img/avatar/avatar-1.jpg" alt="user">
                             </div>
@@ -39,6 +45,9 @@
                                 gravida. Maecenas ultricies, diam vitae semper placerat,</p>
                         </div>
                     </div>
+                            @endforeach
+                        @endif
+                    @endif
 
                     <div class="blog-1">
                         <div class="blog-image">
@@ -93,448 +102,93 @@
                     </div>
                     <!-- End phân trang -->
                 </div>
-                <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="col-lg-3 col-md-12 col-sm-12">
                     <div class="sidebar">
-                        <!-- Form tìm kiếm -->
-                        <div class="sidebar-widget search-box">
-                            <form class="form-inline form-search" method="GET">
-                                <div class="form-group">
-                                    <label class="sr-only" for="textsearch3">Tìm kiếm</label>
-                                    <input type="text" class="form-control" id="textsearch3" placeholder="Tìm kiếm">
-                                </div>
-                                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-
                         <!-- Top 10 -->
-                        <div class="sidebar-widget recent-news">
-                            <div class="main-title-2">
-                                <h1>Top 10 phòng trọ</h1>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Host a Family Party</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
+                        @if ($room_posts)
+                            @if (count($room_posts))
+                                <div class="sidebar-widget recent-news">
+                                    <div class="main-title-2">
+                                        <h1>Top 10 phòng trọ</h1>
                                     </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    @foreach ($room_posts as $key => $post)
+                                        <div class="recent-news-item mb-3">
+                                            <div class="thumb">
+                                                <a href="#">
+                                                    <img src="{{ $post->image }}" alt="small-img">
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="media-heading">
+                                                    <a href="rooms-details.html">{{ $post->name }}</a>
+                                                </h3>
+                                                <div class="listing-post-meta">
+                                                    {{ $post->price }}
+                                                </div>
+                                                <div>
+                                                    @if (count($post->facilities) > 0)
+                                                        <ul class="row facilities-list clearfix">
+                                                            @foreach ($post->facilities as $value)
+                                                                <li class="col-2">
+                                                                    <i class="flaticon-bed"></i>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-2.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Room with View</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-3.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Double Room</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Host a Family Party</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-2.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Room with View</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-3.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Double Room</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Host a Family Party</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-2.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Room with View</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-3.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Double Room</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recent-news-item">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-3.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Double Room</a>
-                                    </h3>
-                                    <div class="listing-post-meta">
-                                        2.500.000 VND
-                                    </div>
-                                    <div>
-                                        <ul class="row facilities-list clearfix">
-                                            <li class="col-2">
-                                                <i class="flaticon-bed"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-graph-line-screen"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-weightlifting"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                            </li>
-                                            <li class="col-2">
-                                                <i class="flaticon-parking"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end top 10 -->
+                            @endif
 
-                        <!-- Danh mục -->
+                        @endif
+
+
+                    <!-- Danh mục -->
                         <div class="sidebar-widget category-posts">
                             <div class="main-title-2">
                                 <h1>Danh mục phòng</h1>
                             </div>
                             <ul class="list-unstyled list-cat">
-                                <li><a href="#">Chung cư mini <span>(45)</span></a></li>
-                                <li><a href="#">Trọ bình dân <span>(21)</span></a></li>
-                                <li><a href="#">Nhà nguyên căn<span>(23)</span></a></li>
-                                <li><a href="#">Khác <span>(22)</span></a></li>
+                                @if ($categories)
+                                    @foreach ($categories as $value)
+                                        <li><a
+                                                href="#">{{ $value->name }}<span>({{ $value->room_posts_count }})</span></a>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
 
                         <!-- Bài viết gần đây -->
-                        <div class="sidebar-widget recent-news">
-                            <div class="main-title-2">
-                                <h1>Bài viết gần đây</h1>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Kinh nghiệm thuê nhà trọ không bị lừa</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-2.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Kinh nghiệm thuê nhà trọ không bị lừa</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-3.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Kinh nghiệm thuê nhà trọ không bị lừa</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Kinh nghiệm thuê nhà trọ không bị lừa</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="recent-news-item mb-3">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img src="img/small/img-3.jpg" alt="small-img">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Kinh nghiệm thuê nhà trọ không bị lừa</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Tag -->
+                        @if ($posts)
+                            @if (count($posts))
+                                <div class="sidebar-widget recent-news">
+                                    <div class="main-title-2">
+                                        <h1>Bài viết gần đây</h1>
+                                    </div>
+                                    @foreach ($posts as $value)
+                                        <div class="recent-news-item mb-3">
+                                            <div class="thumb">
+                                                <a href="#">
+                                                    <img src="{{ $value->image }}" alt="small-img">
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="media-heading">
+                                                    <a href="rooms-details.html">{{ $value->title }}</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                        @endif
+                    @endif
+
+
+                    <!-- Tag -->
                         <div class="sidebar-widget tags-box">
                             <div class="main-title-2">
                                 <h1>Tags</h1>
