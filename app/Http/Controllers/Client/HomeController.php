@@ -29,11 +29,11 @@ class HomeController extends Controller
         $rooms = RoomPost::with(['facilities' => function ($query) {
             $query->inRandomOrder()->take(6);
         }])
-            ->where('status', 'inactive')
+            ->where('status', 'active')
             ->latest('id')
             ->limit(36)
             ->paginate(6);
-        $posts = Post::with('user')->where('status', 'inactive')->latest('id')->limit(6)->get();
+        $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         // dd($posts);
         // dd($rooms);
         //đếm số tin đăng ,user ,bài viết
