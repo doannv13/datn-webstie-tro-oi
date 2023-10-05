@@ -141,13 +141,13 @@
                     <div class="collapse" id="tdp">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{ route('room-post-admin.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{ route('room-post-admin.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{ route('room_deleted_admin') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

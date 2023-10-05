@@ -11,43 +11,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('fe/img/logos/logo.png') }}">
-
-
     <!-- Plugins css -->
     <link href="{{ asset('be/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
+
+    <link href="{{ asset('be/assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
-
-
     <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
-
     <link rel="stylesheet" href="{{ asset('be/assets/css/toastr.css') }}">
-
     <!-- icons -->
-
     <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
-
-
     <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
-
-
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
         rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}"
         rel="stylesheet" type="text/css" />
-    <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}"
-        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet"
+        type="text/css" />
     <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css"
+        id="app-style" />
 
-    {{--Ckeditor--}}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-    <script> CKEDITOR.replace('editor1'); </script>
 
 </head>
 
@@ -115,13 +106,20 @@ data-sidebar-user='true' --}}
     <!-- knob plugin -->
     <script src="{{ asset('be/assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 
+    <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
+
     <!--Morris Chart-->
     <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
+    {{-- Ckeditor --}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+    </script>
 
 
     {{-- load ảnh --}}
-    <script>
+    {{-- <script>
         $(function() {
             function readURL(input, selector) {
                 if (input.files && input.files[0]) {
@@ -138,10 +136,10 @@ data-sidebar-user='true' --}}
                 readURL(this, '#image_preview');
             });
         })
-    </script>
-    <script src="{{asset('input-mask/jquery.inputmask.js')}}"></script>
+    </script> --}}
+    <script src="{{ asset('input-mask/jquery.inputmask.js') }}"></script>
     <!-- Dashboar init js-->
-    {{-- <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script> --}}
+    <script src="{{ asset('be/assets/js/pages/dashboard.init.js') }}"></script>
 
 
     <!-- Plugins js -->
@@ -151,12 +149,12 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/js/app.min.js') }}"></script>
     <script src="{{ asset('be/assets/js/bootstrap5-toggle.ecmas.min.js') }}"></script>
     <script src="{{ asset('be/assets/js/code.js') }}"></script>
-
+    <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
+    <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
+    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
-
 
     @stack('scripts')
 </body>

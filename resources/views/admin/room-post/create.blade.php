@@ -6,7 +6,9 @@
     <!-- Start Content-->
     <div class="container-fluid">
         <!-- Form row -->
-        <form>
+        <form action="{{ route('room-post-admin.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('POST')
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -29,6 +31,9 @@
                                             phố
                                         </option>
                                     </select>
+                                    @error('city_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label for="inputState" class="form-label">Quận / Huyện:<span
@@ -38,6 +43,9 @@
                                             Chọn quận huyện
                                         </option>
                                     </select>
+                                    @error('district_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label for="inputState" class="form-label">Phường / Xã:<span
@@ -47,6 +55,9 @@
                                             Chọn phường / xã
                                         </option>
                                     </select>
+                                    @error('ward_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
@@ -54,6 +65,9 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="address" name="address"
                                         placeholder="Nhập số nhà , tên đường phố " />
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="inputAddress2" class="form-label">Địa chỉ của bạn sẽ hiển
@@ -81,7 +95,10 @@
                                     <label for="inputEmail4" class="form-label">Tiêu đề:<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="name"
-                                        placeholder="Nhập tiêu đề của bài viết" />
+                                        placeholder="Nhập tiêu đề của bài viết" value="{{ old('name') }}" />
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="mb-3 col-md-4">
                                     <label for="inputState" class="form-label">Chuyên mục cho thuê:<span
@@ -94,22 +111,31 @@
                                                 {{ $categoryRoom->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('category_room_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Giá cho thuê: <span class="text-danger">*</span></label>
                                     <div class="input-group clockpicker" data-placement="top" data-align="top">
-                                        <input type="text" name="price" class="form-control" value=""
-                                            placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5">
+                                        <input type="text" name="price" class="form-control"
+                                            value="{{ old('name') }}" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5">
                                         <span class="input-group-text">/Tháng</span>
                                     </div>
+                                    @error('price')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Diện tích:<span class="text-danger">*</span></label>
                                     <div class="input-group clockpicker" data-placement="top" data-align="top">
-                                        <input type="text" placeholder="Diện tích" name="acreage" class="form-control"
-                                            value="{{ old('acreage') }}">
+                                        <input type="text" placeholder="Diện tích" name="acreage"
+                                            class="form-control" value="{{ old('acreage') }}">
                                         <span class="input-group-text">m²</span>
                                     </div>
+                                    @error('acreage')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -119,17 +145,24 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" placeholder="Số lượng phòng trống" name="empty_room"
                                         class="form-control" value="{{ old('empty_room') }}">
+                                    @error('empty_room')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="inputState" class="form-label">Trọ tự quản<span
+                                    <label for="inputState" class="form-label">Hình thức chung chử<span
                                             class="text-danger">*</span></label>
                                     <select class="form-select mb-3" name="managing">
-                                        <option value="">Trọ tự quản</option>
                                         <option value="yes" {{ old('managing') == 'yes' ? 'checked' : false }}>Có
+
                                         </option>
                                         <option value="no" {{ old('managing') == 'no' ? 'checked' : false }}>Không
+
                                         </option>
                                     </select>
+                                    @error('managing')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -142,6 +175,7 @@
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
+
                             </div>
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
@@ -179,18 +213,38 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <!-- Ảnh nổi bật -->
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <h4 class="header-title">Tải lên ảnh nổi bật</h4>
                                 <p class="sub-header">
                                     Kéo hoặc chọn file
                                 </p>
-                                <input type="file" name="imageroom" id="image" data-plugins="dropify"
-                                    data-height="300">
-                                {{-- <input type="file" name="image"  /> --}}
-                                @error('image')
+                                <input type="file" data-plugins="dropify" data-height="300" name="imageroom" />
+
+                                @error('imageroom')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <!-- Nhiều ảnh -->
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <h4 class="header-title">Ảnh chi tiết phòng</h4>
+
+
+                                <div class="upload__box">
+                                    <div class="upload__btn-box">
+                                        <label class="upload__btn">
+                                            <p class="btn btn-primary btn-4 btn-7">Thêm ảnh</p>
+                                            <input type="file" name="image[]" multiple="" data-max_length="20"
+                                                class="upload__inputfile">
+                                        </label>
+                                    </div>
+                                    <div class="upload__img-wrap"></div>
+                                </div>
+                            </div>
+                            @error('image.*')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <!-- end card-->
@@ -206,7 +260,7 @@
                                     <label for="inputAddress" class="form-label">Họ và tên: <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="fullname" placeholder="Nhập họ tên của bạn"
-                                        value="{{ old('fullname') }}" class="form-control">
+                                        value="{{ auth()->user()->name }}" class="form-control">
                                     @error('fullname')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -214,20 +268,20 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="inputAddress" class="form-label">Số điện thoại:<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" value="{{ old('phone') }}"
+                                    <input type="text" value="{{ auth()->user()->phone }}"
                                         placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
                                     @error('phone')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="inputAddress" class="form-label">Email: <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="email" placeholder="Nhập email của bạn"
-                                        value="{{ old('email') }}" class="form-control">
+                                        value="{{ auth()->user()->email }}" class="form-control">
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -235,18 +289,17 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="inputAddress" class="form-label">Zalo:<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" value="{{ old('zalo') }}"
-                                        placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
+                                    <input type="text" value="{{ old('zalo') }}" placeholder="Nhập số Zalo của bạn"
+                                        name="zalo" class="form-control">
                                     @error('zalo')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                            
-
                             <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                Sign in
+                                Thêm phòng
                             </button>
+                            
                         </div>
                     </div>
                     <!-- end card-->
@@ -256,6 +309,7 @@
             <!-- end row -->
         </form>
     </div>
+   
     <!-- container -->
 @endsection
 @push('scripts')

@@ -23,13 +23,15 @@ class RoomPostRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:room_posts,name,' . $this->id,
-            'price' => 'required',
+            'price' => 'required|integer',
             'address' => 'required',
             'address_full' => 'required',
             'acreage' => 'required',
-            'empty_room' => 'required',
+            'empty_room' => 'required|integer',
             'description' => 'required',
             'managing' => 'required',
+            'imageroom' => 'image',
+            'image.*' => 'required',
             'ward_id' => 'required',
             'district_id' => 'required',
             'city_id' => 'required',
@@ -37,9 +39,9 @@ class RoomPostRequest extends FormRequest
             'surrounding' => 'required',
             'category_room_id' => 'required',
             'fullname' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'zalo' => 'required'
+            'phone' => 'required|regex:/^[0-9]{10}$/',
+            'email' => 'required|email',
+            'zalo' => 'required|regex:/^[0-9]{10}$/'
         ];
     }
 }

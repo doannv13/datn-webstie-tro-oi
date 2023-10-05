@@ -100,7 +100,7 @@
                     <!-- End phân trang -->
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12">
-                    <div class="sidebar">
+                    {{-- <div class="sidebar">
                         <!-- Top 10 -->
                         @if ($room_posts)
                             @if (count($room_posts))
@@ -214,7 +214,8 @@
                                 <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
+                    @include('client.layouts.partials.r-sidebar')
                 </div>
             </div>
         </div>

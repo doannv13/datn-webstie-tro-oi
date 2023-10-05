@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('main')
+@section('content')
     <div class="container pt-2">
         <nav class="breadcrumbs">
             <ol class="breadcrumb">
@@ -29,8 +29,8 @@
                                 <td class="">
                                     <div>
                                         <h5>{{ $value->fullname }}</h5>
-                                        <p>SĐT : 0{{ $value->phone }} </p>
-                                        <p>Zalo : 0{{ $value->zalo }}</p>
+                                        <p>SĐT : {{ $value->phone }} </p>
+                                        <p>Zalo : {{ $value->zalo }}</p>
                                     </div>
                                 </td>
                                 <td>
@@ -47,9 +47,9 @@
                                     </div>
                                 </td>
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                <td><a href="{{ route('room_restore', $value->id) }}" class="btn btn-primary me-2"><i
+                                <td><a href="{{ route('room_restore_admin', $value->id) }}" class="btn btn-primary me-2"><i
                                             class="fa-solid fa-trash-arrow-up"></i></a>
-                                    <form action="{{ route('room_permanently_delete', $value->id) }}" method="post">
+                                    <form action="{{ route('room_permanently_delete_admin', $value->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger">

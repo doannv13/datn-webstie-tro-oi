@@ -70,10 +70,14 @@ Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('se
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
 // Room-Post-Admin
-Route::resource('room-posts', AdminRoomPost::class);
-Route::get('room_deleteds', [AdminRoomPost::class, 'deleted'])->name('room_deleteds');
-Route::delete('room_permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('room_permanently_delete');
-Route::get('room_restore/{id}', [AdminRoomPost::class, 'restore'])->name('room_restore');
+Route::resource('room-post-admin', AdminRoomPost::class);
+Route::get('room_deleted_admin', [AdminRoomPost::class, 'deleted'])->name('room_deleted_admin');
+Route::delete('room_permanently_admin/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('room_permanently_delete_admin');
+Route::get('room_restore_admin/{id}', [AdminRoomPost::class, 'restore'])->name('room_restore_admin');
+Route::post('create-images', [AdminRoomPost::class, 'createImage'])->name('create-images');
+Route::post('update-images', [AdminRoomPost::class, 'editMultiImage'])->name('update-images');
+Route::get('delete-images/{id}', [AdminRoomPost::class, 'deleteMultiImage'])->name('delete-images');
+
 
 // Category Home
 Route::resource('categoryrooms', CategoryRoomController::class);
