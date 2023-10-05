@@ -33,7 +33,7 @@
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
 
-
+    
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"

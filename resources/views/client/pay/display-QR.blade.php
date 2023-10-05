@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Pay</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-</head>
-
-<body>
-
+@extends('client.layouts.master')
+@section('content')
     <div class="container mx-auto p-5" style="max-width: 700px;">
         <div class="modal-header bg-secondary-subtle btn">
             <h1 class="modal-title fs-5 p-3 ">Thanh toán online</h1>
@@ -21,7 +8,7 @@
         <div class="d-flex justify-content-between p-3">
             <div class="text-center">
                 <p class="fw-bolder">Quét QR để thanh toán hóa đơn.</p>
-                <img src="/img/pay/image 10.png" style="max-width: 200px; max-height: 200px;">
+                <img src="{{asset('fe/img/pay/image_10.png')}}" style="max-width: 200px; max-height: 200px;">
                 <p class="fw-medium">Ngân hàng: MB</p>
                 <p class="fw-medium">STK:0345673127</p>
 
@@ -44,13 +31,11 @@
         <button type="button" onclick="goBack();" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 btn-primary">Quay
             lại</button>
     </div>
+    @endsection
+    @push('scripts')
     <script>
         function goBack() {
             location.replace("checkout-pay.html");
         }
     </script>
-
-
-</body>
-
-</html>
+    @endpush
