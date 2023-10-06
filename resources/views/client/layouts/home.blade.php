@@ -339,7 +339,7 @@
                             <div class="item">
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff"
-                                        class="img-fluid w-100" />
+                                        class="img-fluid w-50  " />
                                     <div class="info">
                                         <h4>Maikel John</h4>
                                         <span>Hotel Manager</span>
