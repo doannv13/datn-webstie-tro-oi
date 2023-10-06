@@ -1,4 +1,5 @@
-@extends('client/layouts/master')
+@extends('client.layouts.master')
+@section('title', $roomposts->name)
 @section('content')
     <!-- Sub banner start -->
     <div class="sub-banner">
@@ -15,12 +16,11 @@
         </div>
     </div>
     <!-- Sub Banner end -->
-
     <!-- Rooms detail section start -->
     <div class="content-area-15 rooms-detail-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-md-12 col-xs-12">
+                <div class="col-lg-9 col-md-12 col-xs-12 sidebar">
                     <div class="rooms-detail-info">
                         <!-- Heading courses start -->
 
@@ -28,6 +28,18 @@
                         <!-- Heading courses end -->
                         <!-- sidebar start -->
                         <div class="rooms-detail-slider">
+                            {{-- <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="heading-rooms">
+                                        <h3>{{ $roomposts->name }}</h3>
+                                        <p>
+                                            <i class="fas fa-map-marker-alt"></i>{{ $roomposts->address_full }}
+                                        </p>
+                                        <h3><span>${{ $roomposts->price }}VND/Tháng</span></h3>
+                                    </div>
+                                </div>
+                            </div> --}}
+
                             <!--  Rooms detail slider start -->
                             <div class="rooms-detail-slider mb-40 ">
                                 <div class="slider slider-for pb-sm-3">
@@ -65,25 +77,37 @@
                                 </div>
                                 <hr>
                             </div>
-                            <!-- Rooms detail slider end -->
 
-                            <!-- Rooms description start -->
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <!-- Rooms details section start -->
-                                    <div class="rooms-detail-slider ">
-                                        <div class="heading-rooms  clearfix mb-50">
-                                            <div class="pull-left">
-                                                <h3>{{ $roomposts->name }}</h3>
-                                                <p>
-                                                    <i class="fa fa-map-marker"></i>{{ $roomposts->address_full }}
+                                    <div class="heading-rooms">
+                                        <h3>{{ $roomposts->name }}</h3>
+                                        <p>
+                                            <i class="fas fa-map-marker-alt me-2"></i>{{ $roomposts->address_full }}
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center my-3">
+                                            <div class="div d-flex">
+                                                <p class="pe-5"><span class="text-danger"><i
+                                                            class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($roomposts->price) }}
+                                                        VND/Tháng</span>
+                                                </p>
+                                                <p><span><i class="fas fa-expand me-2"></i></i>{{ $roomposts->acreage }}
+                                                        m2</span>
                                                 </p>
                                             </div>
-                                            <div class="pull-right">
-                                                <h3><span>${{ $roomposts->price }}/Tháng</span></h3>
+                                            <div class="dev">
+                                                <p><i class="far fa-clock me-2"></i>{{ timeposts($roomposts->created_at) }}
+                                                </p>
                                             </div>
                                         </div>
+                                        <div class="">
+                                            <p for="">Danh mục: <span
+                                                    class="fw-bold">{{ $roomposts->categoryroom->name }}</span></p>
+                                        </div>
 
+                                    </div>
+                                    <!-- Rooms details section start -->
+                                    <div class="rooms-detail-slider ">
                                         <!-- Rooms description start -->
                                         <div class="rooms-description mb-30">
                                             <!-- Title -->
@@ -96,7 +120,7 @@
                                         <!-- Rooms description end -->
 
                                         <!-- Amenities start -->
-                                        <div class="amenities mb-10">
+                                        <div class="amenities mb-5">
                                             <div class="main-title-2">
                                                 <h1>Tiện ích có sẵn</h1>
                                             </div>
@@ -104,14 +128,8 @@
                                             <div class="row">
                                                 @foreach ($roomposts->facilities as $key => $value)
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
-                                                        <ul class="condition">
-                                                            <li>
-                                                                <i class="{{ $value->icon }}"></i>{{ $value->name }}
-                                                            </li>
-                                                            <i class="{{ $value->icon }}"></i>
-                                                            {{-- <i class="fas fa-wrench"></i> --}}
-                                                            {{-- {{ $value->icon }} --}}
-                                                        </ul>
+                                                        <i class="fas fa-wrench me-2"></i>{{ $value->name }}
+                                                        {{-- <i class="{{ $value->icon }}"></i>{{ $value->name }} --}}
                                                     </div>
                                                 @endforeach
 
@@ -125,28 +143,7 @@
                                             <div class="row">
                                                 @foreach ($roomposts->surrounds as $key => $value)
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
-                                                        <ul class="condition">
-                                                            <li>
-                                                                <i class="fas fa-wrench"></i>{{ $value->name }}
-                                                            <i class="{{ $value->icon }}"></i>
-                                                            <i class="fas fa-yen-sign"></i>
-
-                                                            </li>
-
-                                                            {{-- <i class="{{ $value->icon }}"> --}}
-                                                            {{-- <li>
-                                                                <i class="flaticon-balcony-and-door"></i>Balcony
-                                                            </li>
-                                                            <li>
-                                                                <i class="flaticon-weightlifting"></i>Gym
-                                                            </li>
-                                                            <li>
-                                                                <i class="flaticon-parking"></i>Parking
-                                                            </li>
-                                                        <li>
-                                                            <i class="flaticon-sunbed"></i>Beach View
-                                                        </li> --}}
-                                                        </ul>
+                                                        <i class="fas fa-wrench me-2"></i>{{ $value->name }}
                                                     </div>
                                                 @endforeach
 
@@ -162,89 +159,127 @@
                                                 </div>
                                                 <div class="slick row comon-slick-inner wow fadeInUp delay-04s"
                                                     data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                                                    @foreach ($caterooms as $cateroom)
-                                                        <div class="item slide-box">
-                                                            <div class="hotel-box " style="position: relative;">
-                                                                <a href="#" class=""
-                                                                    style="position: absolute; top: 15px ; right: 15px;z-index: 999;">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="2em"
-                                                                        viewBox="0 0 384 512">
-                                                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                                                        <style>
-                                                                            svg {
-                                                                                fill: #F4A460
-                                                                            }
-                                                                        </style>
-                                                                        <path
-                                                                            d="M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z" />
-                                                                    </svg>
-                                                                </a>
-                                                                <!-- Photo thumbnail -->
-                                                                <div class="photo-thumbnail" style="position: relative;">
-                                                                    <div class="text-white"
-                                                                        style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
-                                                                        {{ $cateroom->price }}
-                                                                    </div>
-                                                                    <div class="photo">
-                                                                        <img style="height: 200px"
-                                                                            src="{{ asset($cateroom->image) }}"
-                                                                            alt="photo" class="img-fluid w-100">
-                                                                        <a href="rooms-details-3.html">
-                                                                            <label class=""
-                                                                                style="cursor: pointer; font-size: 20px;"
-                                                                                for="">Xem chi tiết</label>
-                                                                        </a>
-                                                                    </div>
+                                                    @if (isset($caterooms))
+                                                        @if (count($caterooms) > 0)
+                                                            @foreach ($caterooms as $key => $value)
+                                                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                    <div class="hotel-box " style="position: relative;">
+                                                                        <?php
+                                                                        $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
+                                                                        $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
+                                                                        
+                                                                        if (Auth::check()) {
+                                                                            $user_id = auth()->user()->id;
+                                                                            $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
+                                                                                ->where('room_post_id', $value->id)
+                                                                                ->exists();
+                                                                        }
+                                                                        ?>
 
-                                                                </div>
-                                                                <!-- Detail -->
-                                                                <div class="detail clearfix">
-                                                                    <h3>
-                                                                        <a
-                                                                            href="rooms-details.html">{{ $cateroom->name }}</a>
-                                                                    </h3>
-                                                                    <p class="location">
-                                                                        <a href="rooms-details.html">
-                                                                            <i
-                                                                                class="fa fa-map-marker"></i>{{ $cateroom->address_full }}
-                                                                        </a>
-                                                                    </p>
-                                                                    <div class="fecilities ">
-                                                                        <ul class="row">
-                                                                            <li class="">
-                                                                                <i class="flaticon-bed"></i>
-                                                                                <p>Beds</p>
-                                                                            </li>
-                                                                            <li class="">
-                                                                                <i class="flaticon-air-conditioning"></i>
-                                                                                <p> AC</p>
-                                                                            </li>
-                                                                            <li class="">
-                                                                                <i class="flaticon-graph-line-screen"></i>
-                                                                                <p>TV</p>
-                                                                            </li>
-                                                                            <li class="">
-                                                                                <i class="flaticon-weightlifting"></i>
-                                                                                <p>GYM</p>
-                                                                            </li>
-                                                                            <li class="">
-                                                                                <i
-                                                                                    class="flaticon-wifi-connection-signal-symbol"></i>
-                                                                                <p>Wi-fi</p>
-                                                                            </li>
-                                                                            <li class="">
-                                                                                <i class="flaticon-parking"></i>
-                                                                                <p>Parking</p>
-                                                                            </li>
-                                                                        </ul>
+
+                                                                        @if ($isBookmarked)
+                                                                            <form
+                                                                                action="{{ route('unbookmark', $value->id) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                @method('delete')
+                                                                                <button
+                                                                                    style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        height="2em"
+                                                                                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                                                        <style>
+                                                                                            svg {
+                                                                                                fill: #f4a460
+                                                                                            }
+                                                                                        </style>
+                                                                                        <path
+                                                                                            d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </form>
+                                                                        @else
+                                                                            <form
+                                                                                action="{{ route('bookmark', $value->id) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                <button
+                                                                                    style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
+                                                                                    <button
+                                                                                        style="position: absolute; top: 15px ; right: 15px;z-index: 999;background:none;border:none">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            height="2em"
+                                                                                            viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                                                            <style>
+                                                                                                svg {
+                                                                                                    fill: #f4a460
+                                                                                                }
+                                                                                            </style>
+                                                                                            <path
+                                                                                                d="M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z" />
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </button>
+                                                                            </form>
+                                                                        @endif
+                                                                        <!-- Photo thumbnail -->
+                                                                        <div class="photo-thumbnail"
+                                                                            style="position: relative;">
+                                                                            {{-- <div class="text-white"
+                                                                                style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
+                                                                                {{ number_format($value->price) }}
+                                                                                VND/Tháng
+                                                                            </div> --}}
+                                                                            <div class="photo">
+                                                                                <img src="{{ asset($value->image) }}"
+                                                                                    alt="photo" class="img-fluid w-100">
+                                                                                <a href="rooms-details.html">
+                                                                                    <label class=""
+                                                                                        style="cursor: pointer; font-size: 20px;"
+                                                                                        for="">Xem Chi Tiết</label>
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <!-- Detail -->
+                                                                        <div class="detail clearfix">
+                                                                            <h3>
+                                                                                <a
+                                                                                    href="rooms-details.html">{{ $value->name }}</a>
+                                                                            </h3>
+                                                                            <p class="location">
+                                                                                <a href="rooms-details.html">
+                                                                                    <i
+                                                                                        class="fas fa-map-marker-alt me-2"></i>{{ $value->address_full }}
+                                                                                </a>
+                                                                            </p>
+                                                                            <div class="fecilities row">
+                                                                                <div
+                                                                                    class="d-flex justify-content-between align-items-center mb-2">
+                                                                                    <p class="pe-5"><span
+                                                                                            class="text-danger"><i
+                                                                                                class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($value->price) }}
+                                                                                            Triệu/Tháng</span>
+                                                                                    </p>
+                                                                                    <p><span><i
+                                                                                                class="fas fa-expand me-2"></i></i>{{ $roomposts->acreage }}
+                                                                                            m2</span>
+                                                                                    </p>
+                                                                                </div>
+
+                                                                                <p><i
+                                                                                        class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                            @endforeach
+                                                        @endif
+                                                    @endif
 
                                                 </div>
-                                                <a class="carousel-control-prev" href="#profile-slideshow" role="button"
+                                                {{-- <a class="carousel-control-prev" href="#profile-slideshow" role="button"
                                                     data-bs-slide="prev">
                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                     <span class="visually-hidden">Previous</span>
@@ -254,7 +289,7 @@
                                                     <span class="bg-dark carousel-control-next-icon"
                                                         aria-hidden="true"></span>
                                                     <span class="visually-hidden">Next</span>
-                                                </a>
+                                                </a> --}}
 
                                             </div>
                                         </div>
@@ -286,176 +321,67 @@
                                 </div>
                             </div>
 
+
                             <!-- Rooms description end -->
                         </div>
                         <!-- sidebar end -->
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-12 col-xs-12">
+                <div class="col-lg-3 col-md-12 col-xs-12" style="padding-right: 0">
                     <div class="sidebar">
                         <!-- Search area box 3 start -->
-                        <div class="sidebar-widget text-center search-area-box-3 clearfix">
+                        <div class="sidebar-widget text-center search-area-box-3 clearfix" style="padding: 12px">
                             <div class="contact-details">
-                                <div class="contact-item  mb-3">
-                                    <div class="mx-auto"
-                                        style=" background-image: url(https://picsum.photos/200);background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 200px; margin: 20px; padding: 10px;  width:200px;">
+                                <div class="row contact-item mb-3 align-items-center">
+                                    <div class="col-md-4 mx-auto">
+                                        <img src="{{ asset(auth()->user()->avatar) }}"
+                                            alt=""style="background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 70px; width:70px;">
                                     </div>
-                                    <div>
-                                        <h2> Được đăng bởi </h2>
-                                        <p>{{ $roomposts->fullname }}</p>
-                                        <a>
+                                    <div class="col-md-8">
+                                        {{-- <h2> Được đăng bởi </h2> --}}
+                                        <h5>{{ $roomposts->fullname }}</h5>
+                                        <p><a href="">Xem thêm bài đăng</a></p>
+                                        {{-- <a>
                                             <p class="text-decoration-underline"> Xem thêm bài đăng </p>
-                                        </a>
+                                        </a> --}}
                                     </div>
-                                    <div class="heading-rooms  clearfix">
-                                        <div class="contact-item  mb-3">
-
-                                            <button style="background-color: #F4A460"
-                                                class="mx-auto mt-3 btn align-items-center btn-4 ">
-                                                <div class="icon d-flex align-items-center gap-lg-2">
-                                                    <i class="fa fa-phone"></i>
-                                                    <a href="tel:0477-0477-8556-552">{{ $roomposts->phone }}</a>
-                                                </div>
-
-                                            </button>
-                                        </div>
-                                        <div class="contact-item mt-3 mb-3">
-                                            <button style="background-color: #F4A460"
-                                                class="mx-auto mt-3  btn align-items-center btn-4 ">
-                                                <div>
-                                                    <p>Yêu cầu liên hệ lại</p>
-                                                </div>
-                                            </button>
-                                        </div>
-
-                                    </div>
-
                                 </div>
-
-
-                            </div>
-                        </div>
-
-
-                        <div class="sidebar">
-                            <!-- Top 10 -->
-                            @if ($room_postss)
-                                @if (count($room_postss))
-                                    <div class="sidebar-widget recent-news">
-                                        <div class="main-title-2">
-                                            <h1>Top 10 phòng trọ</h1>
+                                <div class="heading-rooms">
+                                    <div class="contact-item mb-3">
+                                        <div class="btn btn-primary text-center w-100">
+                                            <i class="fa fa-phone fs-5 mx-2"></i>
+                                            <a class="text-center text-light fs-6 fw-bold"
+                                                href="tel:0477-0477-8556-552">{{ $roomposts->phone }}</a>
                                         </div>
-                                        @foreach ($room_postss as $key => $post)
-                                            <div class="recent-news-item mb-3">
-                                                <div class="thumb">
-                                                    <a href="#">
-                                                        <img src="{{ $post->image }}" alt="small-img">
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h3 class="media-heading">
-                                                        <a href="rooms-details.html">{{ $post->name }}</a>
-                                                    </h3>
-                                                    <div class="listing-post-meta">
-                                                        {{ $post->price }}
-                                                    </div>
-                                                    <div>
-                                                        @if (count($post->facilities) > 0)
-                                                            <ul class="row facilities-list clearfix">
-                                                                @foreach ($post->facilities as $value)
-                                                                    <li class="col-2">
-                                                                        <i class="flaticon-bed"></i>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        @endif
-                                                    </div>
-                                                </div>
+
+                                        {{-- <button style="background-color: #F4A460"
+                                            class="mx-auto mt-3 btn align-items-center btn-4 ">
+
+                                        </button> --}}
+                                    </div>
+                                    {{-- <div class="contact-item mt-3 mb-3">
+                                        <button style="background-color: #F4A460"
+                                            class="mx-auto mt-3  btn align-items-center btn-4 ">
+                                            <div>
+                                                <p>Yêu cầu liên hệ lại</p>
                                             </div>
-                                        @endforeach
-                                    </div>
-                                @endif
+                                        </button>
+                                    </div> --}}
 
-                            @endif
-
-
-                            <!-- Danh mục -->
-                            <div class="sidebar-widget category-posts">
-                                <div class="main-title-2">
-                                    <h1>Danh mục phòng</h1>
                                 </div>
-                                <ul class="list-unstyled list-cat">
-                                    @if ($categories)
-                                        @foreach ($categories as $value)
-                                            <li><a
-                                                    href="#">{{ $value->name }}<span>({{ $value->room_posts_count }})</span></a>
-                                            </li>
-                                        @endforeach
-                                    @endif
-                                </ul>
+
                             </div>
 
-                            <!-- Bài viết gần đây -->
 
-                            @if ($posts)
-                                @if (count($posts))
-                                    <div class="sidebar-widget recent-news">
-                                        <div class="main-title-2">
-                                            <h1>Bài viết gần đây</h1>
-                                        </div>
-                                        @foreach ($posts as $value)
-                                            <div class="recent-news-item mb-3">
-                                                <div class="thumb">
-                                                    <a href="#">
-                                                        <img src="{{ $value->image }}" alt="small-img">
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h3 class="media-heading">
-                                                        <a href="rooms-details.html">{{ $value->title }}</a>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            @endif
-
-
-                            <!-- Tag -->
-                            <div class="sidebar-widget tags-box">
-                                <div class="main-title-2">
-                                    <h1>Tags</h1>
-                                </div>
-                                <ul class="tags">
-                                    <li><a href="#">Gần trường</a></li>
-                                    <li><a href="#">Khuyến mãi</a></li>
-                                    <li><a href="#">View đẹp</a></li>
-                                    <li><a href="#">Chung cư</a></li>
-                                    <li><a href="#">Nhà trọ</a></li>
-                                    <li><a href="#">Nam Từ Liêm</a></li>
-                                    <li><a href="#">Đống Đa</a></li>
-                                    <li><a href="#">Hồ Tây</a></li>
-                                </ul>
-                            </div>
-                            <!-- Truyền thông -->
-                            <div class="social-media sidebar-widget clearfix">
-                                <div class="main-title-2">
-                                    <h1>Truyền thông</h1>
-                                </div>
-                                <ul class="social-list">
-                                    <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
+
+                    @include('client.layouts.partials.r-sidebar')
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Rooms detail section end -->
 @endsection

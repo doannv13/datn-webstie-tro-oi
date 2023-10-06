@@ -22,11 +22,16 @@ class SettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'logo' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif',
             'email' => 'required|email:rfc,dns',
             'support_phone' => 'required|numeric|digits:10',
-            'zalo' => 'required|numeric|digits:10',
-            'address' => 'required|max:255'
+            'address' => 'required|max:255',
+            'favicon' => 'image|mimes:jpeg,png,jpg,gif',
+            'meta_title' => 'required|max:255',
+            'meta_author' => 'required|max:255',
+            'meta_description' => 'required|max:255',
+            'meta_keyword' => 'required|max:255',
+            'analytic' => 'max:255',
         ];
     }
 }

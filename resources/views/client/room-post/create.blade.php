@@ -1,19 +1,11 @@
 @extends('client.layouts.partials.l-sidebar')
+@section('title', 'Thêm tin đăng')
 @section('main')
-    <!-- Blog body start -->
-    <div class="container pt-2">
-        <nav class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li class="breadcrumb"><a href="index.html">Home <span> / </span></a></li>
-                <li class="breadcrumb-item active">Blog Left Sidebar</li>
-            </ol>
-        </nav>
-    </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-post.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room-posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="sidebar row p-3">
@@ -144,10 +136,9 @@
                             <div class="form-group ">
                                 <label class="input-group">Trọ tự quản<span class="text-danger">*</span></label>
                                 <select class="form-select mb-3" name="managing">
-                                    <option value="">Trọ tự quản</option>
-                                    <option value="yes" {{ old('managing') == 'yes' ? 'checked' : false }}>Có
+                                    <option value="yes" {{ old('managing') == 'yes' ? 'selected' : false }}>Có
                                     </option>
-                                    <option value="no" {{ old('managing') == 'no' ? 'checked' : false }}>Không
+                                    <option value="no" {{ old('managing') == 'no' ? 'selected' : false }}>Không
                                     </option>
                                 </select>
                             </div>
@@ -160,8 +151,8 @@
                         <div class="col-lg-12 col-md-12 mb-3">
                             <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
                             <div class="form-group message">
-                                <textarea class="form-control " style="height: 110px" name="description" placeholder="Write message"
-                                    aria-label="Write message">{{ old('description') }}</textarea>
+                                <textarea class="form-control " style="height: 110px" name="description" id="description"
+                                    placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
                             </div>
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
@@ -173,7 +164,8 @@
                                 @foreach ($surrounding as $surround)
                                     <div class="form-check col-md-3 col-4 mb-2">
                                         <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                            value="{{ $surround->id }}">
+                                            value="{{ $surround->id }}"
+                                            {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
                                         <label class="form-check-label">
                                             {{ $surround->name }}
                                         </label>
@@ -192,7 +184,8 @@
                                 @foreach ($facilities as $facility)
                                     <div class="form-check col-md-3 col-4 mb-2">
                                         <input class="form-check-input" name="facility[]" type="checkbox"
-                                            value="{{ $facility->id }}">
+                                            value="{{ $facility->id }}"
+                                            {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
                                         <label class="form-check-label">
                                             {{ $facility->name }}
                                         </label>
@@ -213,7 +206,7 @@
                             <input type="file" name="imageroom" id="image" data-plugins="dropify"
                                 data-height="300">
                             {{-- <input type="file" name="image"  /> --}}
-                            @error('image')
+                            @error('imageroom')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -247,7 +240,7 @@
                                     <label class="input-group">Họ và tên: <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="fullname" placeholder="Nhập họ tên của bạn"
-                                            value="{{ old('fullname') }}" class="form-control">
+                                            value="{{ auth()->user()->name }}" class="form-control">
                                     </div>
                                     @error('fullname')
                                         <span class="text-danger">{{ $message }}</span>
@@ -258,7 +251,7 @@
                                 <div class="form-group ">
                                     <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ old('phone') }}"
+                                        <input type="text" value="{{ auth()->user()->phone }}"
                                             placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
                                     </div>
                                     @error('phone')
@@ -272,7 +265,7 @@
                                 <div class="form-group ">
                                     <label class="input-group">Email: <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ old('email') }}" name="email"
+                                        <input type="text" value="{{ auth()->user()->email }}" name="email"
                                             placeholder="Nhập email của bạn" class="form-control">
                                     </div>
                                     @error('email')
@@ -301,9 +294,8 @@
                     <div class="sidebar row p-3">
                         <div class="col-lg-12 col-md-12 clearfix">
                             <div class=" text-center pull-left">
-                                <a href="{{ route('room-post.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
+                                <a href="{{ route('room-posts.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
                                     danh sách</a>
-
                             </div>
                             <div class="send-btn text-center d-flex gap-2 pull-right">
                                 <button type="reset" class="btn-md btn-danger btn-7">Hủy
@@ -321,12 +313,9 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('description');
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        CKEDITOR.replace('description');
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");

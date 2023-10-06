@@ -104,7 +104,9 @@
 
 
                         </div>
-                        <button class="btn btn-primary">Thêm</button>
+                        <button class="btn btn-primary waves-effect waves-light">Thêm mới</button>
+                        <a href="{{ route('users.index') }}"
+                            class="btn btn-warning waves-effect text-light">Trở về</a>
                     </form>
                         <!-- end row-->
 

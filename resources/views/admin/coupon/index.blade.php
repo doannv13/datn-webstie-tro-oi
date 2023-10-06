@@ -9,10 +9,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <h5 class="mt-0">Danh sách mã giảm giá</h5>
+
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
-                                    <table id="tech-companies-1" class="table table-striped" style="width: 100%">
+                                    <div class="mb-2 d-flex gap-1 ">
+                                        <a class="btn btn-success" href="{{ route('coupons.create') }}">Thêm mới</a>
+                                        <a class="btn btn-danger" href="{{ route('coupons-deleted') }}">Thùng rác</a>
+                                    </div>
+                                    <table id="tech-companies-1" class="table table-centered mb-0" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th style="width:5%">STT</th>
@@ -24,7 +30,7 @@
                                                 <th data-priority="3">Trạng thái</th>
                                                 <th data-priority="6">Bắt đầu</th>
                                                 <th data-priority="6">Kết thúc</th>
-                                                <th data-priority="6">Action</th>
+                                                <th data-priority="6">Thao tác</th>
                                             </tr>
                                         </thead>
 
@@ -36,24 +42,36 @@
                                                 <th>{{ $value->value }}</th>
                                                 <th>{{ $value->quantity }}</th>
                                                 <th>{{ substr($value->description, 0, 20) }}</th>
-                                                <th>{!! $value->status == 'inactive'
-                                                    ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
-                                                    : '<button class="btn btn-primary">Kích hoạt</button>' !!}
-                                                </th>
+
+                                                <td>
+                                                    <input data-id="{{ $value->id }}" class="toggle-class"
+                                                        type="checkbox" data-onstyle="success" data-offstyle="danger"
+                                                        data-toggle="toggle" data-onlabel="Bật" data-offlabel="Tắt"
+                                                        {{ $value->status == 'active' ? 'checked' : '' }}>
+                                                </td>
                                                 <th>{{ $value->start_date }}</th>
                                                 <th>{{ $value->end_date }}</th>
-                                                <th class="d-flex"><a href="{{ route('coupon.edit', $value->id) }}"
-                                                        class="btn btn-primary me-1"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
-                                                    <form action="{{ route('coupon.destroy', $value->id) }}"
-                                                        method="post">
+
+                                                <th class="">
+                                                    <a href="{{ route('coupons.edit', $value->id) }}">
+                                                        <button type="submit" class="btn btn-primary text-center my-1"
+                                                            style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
+                                                            <i class="fa-solid fa-pen-to-square fs-4"></i>
+                                                        </button>
+                                                    </a>
+
+                                                    <form action="{{ route('coupons.destroy', $value->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('delete')
-                                                        <button class="btn btn-danger"
+                                                        <button type="submit" class="btn btn-danger my-1"
+                                                            style="width: 45px;"
                                                             onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                            <i class="fa-solid fa-trash fs-4 text-light"></i>
+                                                            <!-- Đặt kích thước cố định là 100px -->
+                                                            <i class="fa-solid fa-trash fs-4"></i>
                                                         </button>
                                                     </form>
+
                                                 </th>
                                             </tr>
                                         @endforeach
@@ -75,5 +93,44 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
+        $(function() {
+            $('.toggle-class').change(function() {
+                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+                let coupon_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('coupons-status-change') }}',
+                    data: {
+                        'status': status,
+                        'coupon_id': coupon_id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            })
+
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            })
+                        }
+                    }
+                });
+            })
+        })
     </script>
 @endpush

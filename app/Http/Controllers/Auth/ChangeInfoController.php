@@ -79,14 +79,14 @@ class ChangeInfoController extends Controller
             return back();
         }
     }
-    public function adminedit(string $id)
+    public function adminEdit(string $id)
     {
         //
         $data = User::findOrFail($id);
         return view('admin.auth.changeinfo',compact('data'));
 
     }
-    public function adminupdate(ChangeInfoRequest $request, string $id)
+    public function adminUpdate(ChangeInfoRequest $request, string $id)
     {
         try{
             $model = User::findOrFail($id);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\CategoryPost;
 use App\Models\CategoryRoom;
 use App\Models\District;
@@ -24,16 +25,17 @@ class HomeController extends Controller
     {
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
+        // $districts = District::distinct()->pluck('name');
         $districts = District::all();
-
         $rooms = RoomPost::with(['facilities' => function ($query) {
             $query->inRandomOrder()->take(6);
         }])
-            ->where('status', 'inactive')
+            ->where('status', 'active')
             ->latest('id')
             ->limit(36)
             ->paginate(6);
-        $posts = Post::with('user')->where('status', 'inactive')->latest('id')->limit(6)->get();
+        $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
+        $banners = Banner::query()->where('status','active')->latest()->limit(3)->get();
         // dd($posts);
         // dd($rooms);
         //đếm số tin đăng ,user ,bài viết
@@ -41,8 +43,10 @@ class HomeController extends Controller
         $count_user = count(User::all());
         $count_post = count(Post::all());
         // dd($count_room,$count_user,$count_post);
+        // dd($districts);
 
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post'));
+
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post','banners'));
 
     }
     public function bookmark(Request $request, string $id)
@@ -59,7 +63,7 @@ class HomeController extends Controller
                 $model->room_post_id = $id;
                 $model->save();
                 toastr()->success('Bạn vừa lưu 1 phòng', 'Đã lưu');
-                return to_route('home');
+                return back();
             } else {
                 toastr()->error('Phòng đã được lưu trước đó', 'Thất bại');
                 return back();
@@ -69,7 +73,7 @@ class HomeController extends Controller
             return redirect('/client-login');
         }
     }
-    public function listbookmark()
+    public function listBookmark()
     {
         if (Auth::check()) {
             $user_id = auth()->user()->id;
@@ -79,14 +83,13 @@ class HomeController extends Controller
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
             $posts = Post::latest()->paginate(5);
-            // dd($room_posts[0]->facilities);
             return view('client.bookmark', compact('data', 'categories', 'posts', 'room_posts'));
         } else {
             toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
             return redirect('/client-login');
         }
     }
-    public function unbookmark(string $id)
+    public function unBookmark(string $id)
     {
         try {
             $user_id = auth()->user()->id;
@@ -102,7 +105,7 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function unbookmarkbm(string $id)
+    public function unBookmarkbm(string $id)
     {
         try {
             $model = Bookmark::findOrFail($id);
@@ -119,8 +122,8 @@ class HomeController extends Controller
     {
         $category_rooms = CategoryRoom::query()->latest()->get();
         $wards = Ward::query()->latest()->get();
-        $districts = District::query()->latest()->get();
-
+        // $districts = District::distinct()->pluck('name');
+        $districts = District::all();
         $selectedPrice = request()->input('price_filter');
         $selectedAcreage = request()->input('acreage_filter');
         $selectedRoomType = request()->input('room_type_filter');
@@ -181,6 +184,9 @@ class HomeController extends Controller
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->get();
+        // $rooms = RoomPost::with(['facilities' => function ($query) {
+        //     $query->inRandomOrder()->take(6);
+        // }]);
         $images = ImageRoom::query()->where('room_id', $id)->get();
         return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts'));
     }

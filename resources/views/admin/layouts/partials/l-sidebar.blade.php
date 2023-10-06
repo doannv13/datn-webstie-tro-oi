@@ -5,15 +5,12 @@
         <!-- User box -->
         <div class="user-box text-center">
 
-            <img src="{{ asset('be/assets/images/users/user-1.jpg') }}" alt="user-img" title="Mat Helme"
-                class="rounded-circle img-thumbnail avatar-md">
+            <img src="{{ asset('be/assets/images/users/user-1.jpg') }}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
             <div class="dropdown">
 
-                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"
-                    aria-expanded="false">Nowak Helme</a>
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
 
-                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"
-                    aria-expanded="false">Nowak Helme</a>
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
 
                 <div class="dropdown-menu user-pro-dropdown">
 
@@ -140,13 +137,13 @@
                     <div class="collapse" id="tdp">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{ route('admin-room-posts.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{ route('admin-room-posts.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{ route('admin-room-posts-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -249,13 +246,13 @@
                     <div class="collapse" id="tk">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{ route('users.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{ route('users.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{ route('users-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -314,13 +311,13 @@
                     <div class="collapse" id="coupon">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('coupons.create')}}">- Thêm mới</a>
+                                <a href="{{ route('coupons.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('coupons.index')}}">- Danh sách </a>
+                                <a href="{{ route('coupons.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('coupons-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('coupons-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -335,13 +332,13 @@
                     <div class="collapse" id="goidichvu">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('services.create')}}">- Thêm mới</a>
+                                <a href="{{ route('services.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('services.index')}}">- Danh sách </a>
+                                <a href="{{ route('services.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('services-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('services-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>
@@ -358,7 +355,7 @@
                     <div class="collapse" id="setting">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('settings.index')}}">- Danh sách </a>
+                                <a href="{{ route('settings.index') }}">- Danh sách </a>
                             </li>
                         </ul>
                     </div>
@@ -393,13 +390,13 @@
                     <div class="collapse" id="quangcao">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('advertisements.create')}}">- Thêm mới</a>
+                                <a href="{{ route('advertisements.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="{{route('advertisements.index')}}">- Danh sách </a>
+                                <a href="{{ route('advertisements.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="{{route('advertisements-deleted')}}">- Thùng rác</a>
+                                <a href="{{ route('advertisements-deleted') }}">- Thùng rác</a>
                             </li>
                         </ul>
                     </div>

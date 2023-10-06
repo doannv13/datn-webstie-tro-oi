@@ -18,12 +18,12 @@ class BannerFactory extends Factory
     protected $model = Banner::class;
     public function definition(): array
     {
-        $statuses = ['inactive', 'active'];
+        $status = ['inactive', 'active'];
         return [
             'title' => $this->faker->text(10),
             'description' => $this->faker->text(50),
             'url' => $this->faker->url,
-            'status' => $this->faker->randomElement($statuses),
+            'status' => $this->faker->randomElement($status),
         ];
     }
 }

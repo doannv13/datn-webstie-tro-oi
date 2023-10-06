@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('room_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->integer('price');
             $table->string('address');
             $table->string('address_full');
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->integer('empty_room');
             $table->text('description');
             $table->string('image');
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('managing', ['yes', 'no'])->default('no');
             $table->integer('ward_id');
             $table->integer('district_id');

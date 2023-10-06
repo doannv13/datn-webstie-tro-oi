@@ -8,6 +8,7 @@
                 <h5 class="mt-0">Danh sách thẻ</h5>
                 <div class="table-responsive">
                     <a class="btn btn-success mb-2" href="{{ route('tags.create') }}">Thêm mới</a>
+                    <a class="btn btn-danger mb-2" href="{{ route('tags-deleted') }}">Thùng rác</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
@@ -69,7 +70,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('tags.status_change') }}',
+                    url: '{{ route('tags-status-change') }}',
                     data: {
                         'status': status,
                         'tag_id': tag_id

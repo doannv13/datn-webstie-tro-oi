@@ -11,6 +11,7 @@ class RoomPost extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
+        'slug',
         'price',
         'address',
         'address_full',
@@ -59,5 +60,10 @@ class RoomPost extends Model
     public function categoryPost()
     {
         return $this->belongsTo(CategoryPost::class);
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggables');
     }
 }

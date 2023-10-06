@@ -16,8 +16,8 @@
                             </p>
                         @endif
                         <div class="row">
-                            <div class="col-lg-8">
-                                <form action="{{ route('coupon.store') }}" method="POST">
+                            <div class="col-lg-12">
+                                <form action="{{ route('coupons.store') }}" method="POST">
                                     @csrf
                                     @method('post')
                                     <div class="mb-3">
@@ -87,26 +87,8 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Trạng thái</label>
-                                        <div class="form-check mb-1">
-                                            <input type="radio" name="status" id="genderM" value="Inactive"
-                                                {{ old('status') == 'Inactive' ? 'checked' : '' }}
-                                                class="form-check-input">
-                                            <label for="genderM" class="form-check-label">Chưa kích hoạt</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" name="status" id="genderF"
-                                                value="Active"{{ old('status') == 'Active' ? 'checked' : '' }}
-                                                class="form-check-input">
-                                            <label for="genderF" class="form-check-label">Kích hoạt</label>
-                                        </div>
-                                        @error('status')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
                                     <button class="btn btn-primary waves-effect waves-light">Thêm</button>
-                                    <a href="{{ route('coupon.index') }}"
+                                    <a href="{{ route('coupons.index') }}"
                                         class="btn btn-warning waves-effect text-light">Trở về</a>
                                 </form>
                             </div> <!-- end col -->

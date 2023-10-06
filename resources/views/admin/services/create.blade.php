@@ -14,7 +14,7 @@
                     </p>
                     @endif
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <form action="{{ route('services.store') }}" method="POST">
                                 @csrf
                                 @method('post')
