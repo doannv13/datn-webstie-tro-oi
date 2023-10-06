@@ -103,6 +103,8 @@
         @include('client.layouts.partials.footer')
         <!-- Footer end -->
 
+    </div>
+
         <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
         <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
@@ -143,12 +145,13 @@
         <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
 
-        <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
-        <!-- dselect -->
-        <script>
-            dselect(document.querySelector('#dselect-example'))
-        </script>
 
+    <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
+    <!-- dselect -->
+    <script>
+        dselect(document.querySelector('#dselect-example'))
+    </script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
         @stack('scripts')
 </body>
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->

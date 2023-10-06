@@ -1,4 +1,6 @@
 @extends('admin.layouts.master')
+@section('title','Thùng rác')
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -9,8 +11,7 @@
                         <div class="table-rep-plugin">
                             <div class="mb-2 d-flex gap-1 ">
                                 <div class="mb-2 d-flex gap-1 ">
-                                    <a class="btn btn-success" href="{{ route('category-rooms.index') }}">Danh sách danh
-                                        mục tin đăng</a>
+                                    <a class="btn btn-success" href="{{ route('category-rooms.index') }}">Danh sách</a>
                                 </div>
                             </div>
                             <div class="table-responsive" data-pattern="priority-columns">

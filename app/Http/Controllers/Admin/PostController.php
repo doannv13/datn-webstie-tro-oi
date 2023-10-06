@@ -35,7 +35,6 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        dd($request);
         try {
             $user = auth()->user();
             $model = new Post();

@@ -62,6 +62,8 @@ class RoomPostController extends Controller
             if ($request->hasFile('imageroom')) {
                 $uploadFile = upload_file('room', $request->file('imageroom'));
             }
+            $slug = Str::slug($request->name);
+
             $ward = new Ward();
             $ward->fill([
                 'name' => $request->ward_id,
@@ -84,6 +86,7 @@ class RoomPostController extends Controller
             $model = new RoomPost();
             $model->fill([
                 'name' => $request->name,
+                'slug' => $slug,
                 'price' => $request->price,
                 'address' => $request->address,
                 'address_full' => $request->address_full,
@@ -178,7 +181,10 @@ class RoomPostController extends Controller
         $cities = City::query()->find($id);
         $multiImgs = ImageRoom::query()->where('room_id', $id)->get();
 
-        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs'));
+        $tags = $postroom->tags->pluck('name')->implode(',');
+
+        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs','tags'));
+
     }
 
     /**
@@ -187,9 +193,11 @@ class RoomPostController extends Controller
     public function update(UpdateRoomPostRequest $request, string $id)
     {
         try {
+            $slug = Str::slug($request->name);
             $model = RoomPost::query()->findOrFail($id);
             $model->fill([
                 'name' => $request->name,
+                'slug' => $slug,
                 'price' => $request->price,
                 'address' => $request->address,
                 'address_full' => $request->address_full,
@@ -243,6 +251,22 @@ class RoomPostController extends Controller
                 'district_id' => $district->id,
             ]);
             $city->save();
+
+
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->input('tags'));
+
+                $model->tags()->sync([]); // Xóa tất cả các tags hiện tại và cập nhật lại
+                foreach ($tagNames as $tagName) {
+                    $slug = Str::slug(trim($tagName));
+                    $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+                    $model->tags()->attach($tag->id);
+                }
+            } else {
+                // Nếu trường 'tags' trống, xóa tất cả các tag liên kết với bài viết
+                $model->tags()->detach();
+            }
+
             Toastr::success('Sửa tin đăng phòng thành công', 'Thành công');
             return redirect()->route('admin-room-posts.index');
         } catch (\Exception $exception) {
@@ -347,8 +371,9 @@ class RoomPostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
-            $coupon = RoomPost::where('id', $id);
-            $coupon->forceDelete();
+            $room_post = RoomPost::query()->withTrashed()->findOrFail($id);
+            $room_post->tags()->detach();
+            $room_post->forceDelete();
             $facility = FacilityRoom::query()->where('room_id', $id);
             $facility->forceDelete();
 
@@ -383,6 +408,19 @@ class RoomPostController extends Controller
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
+        }
+    }
+
+    public function changeStatus(Request $request)
+    {
+        try {
+            $room_post = RoomPost::find($request->room_post_id);
+            $room_post->status = $request->status;
+            $room_post->save();
+            return response()->json(['success' => 'Thay đổi trạng thái thành công']);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
         }
     }
 }

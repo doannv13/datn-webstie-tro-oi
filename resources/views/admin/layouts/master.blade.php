@@ -127,7 +127,7 @@ data-sidebar-user='true' --}}
     </script>
 
     {{-- load ảnh --}}
-    <script>
+     <script>
         $(function() {
             function readURL(input, selector) {
                 if (input.files && input.files[0]) {
@@ -168,8 +168,6 @@ data-sidebar-user='true' --}}
 
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
-    <script src="{{ asset('be/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
     <script src="{{ asset('be/assets/js/pages/form-advanced.init.js') }}"></script>
     <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>

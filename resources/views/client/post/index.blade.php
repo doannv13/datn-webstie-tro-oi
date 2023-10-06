@@ -65,8 +65,9 @@
                     </div>
                     <!-- End phân trang -->
                 </div>
-
-                @include('client.layouts.partials.r-sidebar')
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    @include('client.layouts.partials.r-sidebar')
+                </div>
         </div>
     </div>
     <!-- Blog body end -->

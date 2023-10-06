@@ -16,6 +16,7 @@
                             <th style="width:10%">Ảnh chính</th>
                             <th style="width:20%">Name</th>
                             <th style="width:20%">Địa chỉ</th>
+                            <th style="width:20%">Trạng thái</th>
                             <th style="width:10%">Ngày đăng</th>
                             <th style="width:10%">Action</th>
                         </thead>
@@ -35,6 +36,12 @@
                                     <td>
                                         <h5>{{ $value->address_full }}</h5>
                                     </td>
+                                     <td>
+                                    <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
+                                           data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                           data-onlabel="Bật" data-offlabel="Tắt"
+                                        {{ $value->status == 'active' ? 'checked' : '' }}>
+                                </td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td class="">
                                         <div class="d-flex m-2">
@@ -98,7 +105,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Giá tiền:</div>
-                                <div class="col-md-7">{{ $value->price }}VND/tháng</div>
+                                <div class="col-md-7">{{ number_format($value->price) }} VND/tháng</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Diện tích:</div>
@@ -106,7 +113,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Mô tả:</div>
-                                <div class="col-md-7">{{ $value->description }}</div>
+                                <div class="col-md-7">{!! $value->description !!}</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Liên hệ:</div>
@@ -139,5 +146,46 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
+
+        $(function() {
+            $('.toggle-class').change(function() {
+                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+                let room_post_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('admin-room-posts-status') }}',
+                    data: {
+                        'status': status,
+                        'room_post_id': room_post_id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            })
+
+                        } else {
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            })
+                        }
+                    }
+                });
+            })
+        })
     </script>
 @endpush

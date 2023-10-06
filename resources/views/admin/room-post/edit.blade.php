@@ -224,6 +224,15 @@
                                 </div>
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label">Tags</label>
+                                <input type="text" class="selectize-close-btn form-control" name="tags"
+                                    value="{{ old('tags', $tags ?? '') }}">
+                                @error('tags')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                         </div>
                     </div>
                     <!-- end card-->
@@ -276,7 +285,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                Thêm phòng
+                                Sửa tin đăng phòng
                             </button>
                         </div>
                     </div>

@@ -116,7 +116,7 @@
                                     <label class="form-label">Giá cho thuê: <span class="text-danger">*</span></label>
                                     <div class="input-group clockpicker" data-placement="top" data-align="top">
                                         <input type="text" name="price" class="form-control"
-                                            value="{{ old('name') }}" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5">
+                                            value="{{ old('price') }}" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5">
                                         <span class="input-group-text">/Tháng</span>
                                     </div>
                                     @error('price')
@@ -180,7 +180,8 @@
                                     @foreach ($surrounding as $surround)
                                         <div class="form-check col-md-3 col-4 mb-2">
                                             <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                                value="{{ $surround->id }}">
+                                                value="{{ $surround->id }}"
+                                                {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
                                             <label class="form-check-label">
                                                 {{ $surround->name }}
                                             </label>
@@ -199,7 +200,8 @@
                                     @foreach ($facilities as $facility)
                                         <div class="form-check col-md-3 col-4 mb-2">
                                             <input class="form-check-input" name="facility[]" type="checkbox"
-                                                value="{{ $facility->id }}">
+                                                value="{{ $facility->id }}"
+                                                {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
                                             <label class="form-check-label">
                                                 {{ $facility->name }}
                                             </label>
@@ -303,9 +305,8 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                Thêm phòng
+                                Thêm tin đăng phòng
                             </button>
-
                         </div>
                     </div>
                     <!-- end card-->

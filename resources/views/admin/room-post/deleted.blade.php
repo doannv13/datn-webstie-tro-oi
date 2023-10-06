@@ -16,7 +16,8 @@
                             <th style="width:15%">Liên hệ</th>
                             <th style="width:10%">Ảnh chính</th>
                             <th style="width:20%">Name</th>
-                            <th style="width:20%">Địa chỉ</th>
+                            <th style="width:15%">Địa chỉ</th>
+                            <th style="width:5%">Trạng thái</th>
                             <th style="width:10%">Ngày bắt đầu</th>
                             <th style="width:10%">Ngày kết thúc</th>
                             <th style="width:10%">Action</th>
@@ -36,6 +37,10 @@
                                     </td>
                                     <td>
                                         <p>{{ $value->address_full }}</p>
+                                    </td>
+                                    <td>{!! $value->status == 'inactive'
+                                        ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
+                                        : '<button class="btn btn-primary">Kích hoạt</button>' !!}
                                     </td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>
@@ -97,7 +102,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Giá tiền:</div>
-                                <div class="col-md-7">{{ $value->price }}VND/tháng</div>
+                                <div class="col-md-7">{{ number_format($value->price) }} VND/tháng</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Diện tích:</div>
@@ -105,7 +110,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Mô tả:</div>
-                                <div class="col-md-7">{{ $value->description }}</div>
+                                <div class="col-md-7">{!! $value->description !!}</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Liên hệ:</div>

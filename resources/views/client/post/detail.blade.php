@@ -61,31 +61,10 @@
                                 <div class="blog-share">
                                     <h2>Share</h2>
                                     <ul class="social-list">
-                                        <li>
-                                            <a href="#" class="facebook">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="twitter">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="google">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="linkedin">
-                                                <i class="fa fa-linkedin"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="rss">
-                                                <i class="fa fa-rss"></i>
-                                            </a>
-                                        </li>
+                                        <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
+                                        <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
                                     </ul>
                                 </div>
                                 <!-- Blog Share end -->
@@ -95,7 +74,9 @@
                 </div>
             </div>
 
-            @include('client.layouts.partials.r-sidebar')
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                @include('client.layouts.partials.r-sidebar')
+            </div>
         </div>
     </div>
 </div>
