@@ -1,11 +1,11 @@
 @extends('admin.layouts.master')
-@section('title', 'Danh sách bài viết')
+@section('title','Danh sách danh mục')
 @section('content')
 
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách bài viết</h5>
+                <h5 class="mt-0">Danh sách</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
                         <a class="btn btn-success" href="{{ route('category-rooms.create') }}">Thêm mới</a>

@@ -1,4 +1,6 @@
 @extends('admin.layouts.master')
+@section('title','Thùng rác')
+
 @section('content')
     <div class="row">
         <div class="col-12">
