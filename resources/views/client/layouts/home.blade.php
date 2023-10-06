@@ -5,14 +5,14 @@
         @if (isset($banners) && count($banners) > 0)
             <div class="banner container" id="banner1" style="z-index: 0">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" style="max-height: 700px;">
                         @foreach ($banners as $key => $item)
                             <div class="carousel-item item {{ $key === 0 ? 'active' : '' }}">
                                 <a href="{{ $item->url }}">
                                     @if ($item->image && asset($item->image))
-                                        <img src="{{ asset($item->image) }}" class="d-block w-100 h-100" alt="banner">
+                                        <img src="{{ asset($item->image) }}" class="d-block w-100 h-100" alt="banner" style="max-height: 700px;">
                                     @else
-                                        <img src="{{ asset('no_image.jpg') }}" class="d-block w-100 h-100" alt="banner">
+                                        <img src="{{ asset('no_image.jpg') }}" class="d-block w-100 h-100" alt="banner" style="max-height: 700px;">
                                     @endif
                                     <div class="carousel-caption banner-slider-inner d-flex h-100">
                                         <div class="carousel-content container align-self-center">
@@ -339,7 +339,7 @@
                             <div class="item">
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff"
-                                        class="img-fluid w-50  " />
+                                        class="img-fluid w-100  " />
                                     <div class="info">
                                         <h4>Maikel John</h4>
                                         <span>Hotel Manager</span>

@@ -117,9 +117,9 @@
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
                         <a href="bookmarks"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
-                        <button class="btn btn-5" style="font-size: 13px">
+                        <a href="{{route('room-posts.create')}}" class="btn btn-5" style="font-size: 13px" >
                             Đăng tin
-                        </button>
+</a>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
@@ -479,7 +479,7 @@
             var checkbox = document.getElementsByName("type-pay");
             for (var i = 0; i < checkbox.length; i++) {
                 if (checkbox[i].value == 1) {
-                    location.replace("display-QR");
+                    window.location="display-QR"
                 }
             }
         }
