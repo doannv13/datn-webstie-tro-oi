@@ -72,9 +72,9 @@ Route::get('notification-fail', function () {
 
 
 //Lọc và Tìm kiếm
-Route::post('fillter', [HomeController::class, 'filter_list']);
+// Route::post('fillter', [HomeController::class, 'filter_list']);
 Route::get('search', [HomeController::class, 'index'])->name('search');
-Route::post('search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
 // Room-Post-Client

@@ -7,7 +7,6 @@
                 <h3 class="my-2">Cập nhật tiện ích</h3>
                 <div class="row">
                     <div class="col-lg-12">
-
                             <form action="{{ route('facilities.update', $data->id) }}" enctype="multipart/form-data"
                                 method="POST">
                                 @csrf
@@ -22,9 +21,14 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Icon <span class="text-danger">*</span></label>
-                                    <input type="text" name="icon" value="{{ old('icon', $data->icon ?? '') }}" class="form-control"
-                                        placeholder="fas fa-wifi">
+                                    <label for="icon" class="form-label">Icon <span
+                                            class="text-danger">*</span></label>
+                                            <select name="icon" id="icon" class="form-select">
+                                                <option value="fa fas-wifi" @if($data->icon === 'fa fas-wifi') selected @endif>Wifi</option>
+                                                <option value="fas fa-fan" @if($data->icon === 'fas fa-fan') selected @endif>Quạt</option>
+                                                <option value="fas fa-bed" @if($data->icon === 'fas fa-bed') selected @endif>Giường</option>
+                                                <option value="fas fa-calendar-plus" @if($data->icon === 'fas fa-calendar-plus') selected @endif>Khác</option>
+                                            </select>
                                     @error('icon')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

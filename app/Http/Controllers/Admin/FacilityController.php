@@ -37,6 +37,8 @@ class FacilityController extends Controller
         try {
             $model = new Facility();
             $model->fill($request->all());
+            $selectIcon = $request->input('icon');
+            $model->icon = $selectIcon;
             $model->save();
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('facilities.index');
@@ -75,7 +77,11 @@ class FacilityController extends Controller
     {
         try {
             $data = Facility::query()->findOrFail($id);
+            $iconValue = $data->select_facility;
             $data->fill(\request()->all());
+            if (empty($data->icon)) {
+                $data->icon = $iconValue;
+            }
             $data->save();
             Toastr::success('Thao tác thành công', 'Thành công');
 
