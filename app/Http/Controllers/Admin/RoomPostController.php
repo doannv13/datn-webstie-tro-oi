@@ -20,6 +20,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RoomPostController extends Controller
 {
@@ -60,6 +61,8 @@ class RoomPostController extends Controller
             if ($request->hasFile('imageroom')) {
                 $uploadFile = upload_file('room', $request->file('imageroom'));
             }
+            $slug = Str::slug($request->name);
+
             $ward = new Ward();
             $ward->fill([
                 'name' => $request->ward_id,
@@ -82,6 +85,7 @@ class RoomPostController extends Controller
             $model = new RoomPost();
             $model->fill([
                 'name' => $request->name,
+                'slug' => $slug,
                 'price' => $request->price,
                 'address' => $request->address,
                 'address_full' => $request->address_full,
@@ -173,9 +177,11 @@ class RoomPostController extends Controller
     public function update(UpdateRoomPostRequest $request, string $id)
     {
         try {
+            $slug = Str::slug($request->name);
             $model = RoomPost::query()->findOrFail($id);
             $model->fill([
                 'name' => $request->name,
+                'slug' => $slug,
                 'price' => $request->price,
                 'address' => $request->address,
                 'address_full' => $request->address_full,
@@ -333,8 +339,8 @@ class RoomPostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
-            $coupon = RoomPost::where('id', $id);
-            $coupon->forceDelete();
+            $RoomPost = RoomPost::where('id', $id);
+            $RoomPost->forceDelete();
             $facility = FacilityRoom::query()->where('room_id', $id);
             $facility->forceDelete();
 
