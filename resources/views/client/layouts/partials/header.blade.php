@@ -218,9 +218,9 @@
                                     @if (isset($districts))
                                         @if (count($districts) > 0)
                                             @foreach ($districts as $district)
-                                                <option value="{{ $district->id }}"
-                                                    {{ request('district_filter') == $district->id ? 'selected' : '' }}>
-                                                    {{ $district->name }}</option>
+                                                <option value="{{ $district }}"
+                                                    {{ request('district_filter') == $district ? 'selected' : '' }}>
+                                                    {{ $district }}</option>
                                             @endforeach
                                         @else
                                             <option value="" disabled>Không có dữ liệu khu vực</option>
