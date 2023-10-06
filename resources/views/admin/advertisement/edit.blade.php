@@ -10,7 +10,7 @@
                         <h3 class="my-2">Cập nhật ảnh quảng cáo</h3>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('advertisement.update', $data->id) }}" method="POST"
+                                <form action="{{ route('advertisements.update', $data->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
@@ -52,7 +52,7 @@
                                         @enderror
                                     </div>
                                     <button class="btn btn-primary waves-effect waves-light">Cập nhật</button>
-                                    <a href="{{ route('advertisement.index') }}"
+                                    <a href="{{ route('advertisements.index') }}"
                                         class="btn btn-warning waves-effect text-light">Trở về</a>
                                 </form>
                             </div> <!-- end col -->
