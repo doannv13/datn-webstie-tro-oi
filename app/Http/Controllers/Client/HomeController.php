@@ -25,8 +25,8 @@ class HomeController extends Controller
     {
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
+        // $districts = District::distinct()->pluck('name');
         $districts = District::all();
-
         $rooms = RoomPost::with(['facilities' => function ($query) {
             $query->inRandomOrder()->take(6);
         }])
@@ -43,6 +43,7 @@ class HomeController extends Controller
         $count_user = count(User::all());
         $count_post = count(Post::all());
         // dd($count_room,$count_user,$count_post);
+        // dd($districts);
 
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post','banners'));
         // $rooms = RoomPost::all();
@@ -122,8 +123,8 @@ class HomeController extends Controller
     {
         $category_rooms = CategoryRoom::query()->latest()->get();
         $wards = Ward::query()->latest()->get();
-        $districts = District::query()->latest()->get();
-
+        // $districts = District::distinct()->pluck('name');
+        $districts = District::all();
         $selectedPrice = request()->input('price_filter');
         $selectedAcreage = request()->input('acreage_filter');
         $selectedRoomType = request()->input('room_type_filter');

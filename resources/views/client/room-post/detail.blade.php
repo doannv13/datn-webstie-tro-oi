@@ -35,7 +35,7 @@
                                         <p>
                                             <i class="fas fa-map-marker-alt"></i>{{ $roomposts->address_full }}
                                         </p>
-                                        <h3><span>${{ $roomposts->price }}/Tháng</span></h3>
+                                        <h3><span>${{ $roomposts->price }}VND/Tháng</span></h3>
                                     </div>
                                 </div>
                             </div> --}}
@@ -89,7 +89,7 @@
                                             <div class="div d-flex">
                                                 <p class="pe-5"><span class="text-danger"><i
                                                             class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($roomposts->price) }}
-                                                        Triệu/Tháng</span>
+                                                        VND/Tháng</span>
                                                 </p>
                                                 <p><span><i class="fas fa-expand me-2"></i></i>{{ $roomposts->acreage }}
                                                         m2</span>

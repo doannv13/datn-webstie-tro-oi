@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ServicesRequest;
+use Brian2694\Toastr\Facades\Toastr;
+
 
 class ServicesController extends Controller
 {
@@ -41,14 +43,14 @@ class ServicesController extends Controller
             $model = new Services();
             $model->fill($request->all());
             $model->save();
-            $notification = array(
-                "message" => "Thêm gói dịch vụ thành công",
-                "alert-type" => "success",
-            );
+           
             // return redirect()->route('services.index')->with($notification);
-            return redirect()->route('services.index')->with('success', 'Thêm dịch vụ thành công');
+            Toastr::success('Thêm dịch vụ thành công', 'Thành công');
+            return redirect()->route('services.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -80,18 +82,14 @@ class ServicesController extends Controller
             $model = Services::query()->findOrFail($id);
             $model->fill($request->all());
             $model->save();
-            $notification = array(
-                "message" => "Sửa gói dịch vụ thành công",
-                "alert-type" => "success",
-            );
+           
             // return redirect()->route('services.index')->with($notification);
-            return redirect()->route('services.index')->with('success', 'Sửa dịch vụ thành công');
+            Toastr::success('Cập nhật dịch vụ thành công', 'Thành công');
+            return redirect()->route('services.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            $notification = array(
-                "message" => "Sửa gói dịch vụ không thành công",
-                "alert-type" => "error",
-            );
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -105,7 +103,8 @@ class ServicesController extends Controller
             $model = Services::query()->findOrFail($id);
             $model->delete();
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác  thành công']);
-            return redirect()->route('services.index')->with('success', 'Thao tác thành công');
+            Toastr::success('Thêm dịch vụ thành công', 'Thành công');
+            return redirect()->route('services.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
@@ -124,11 +123,13 @@ class ServicesController extends Controller
             $model->forceDelete();
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công']);
             // return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
-            $services_deleted = Services::onlyTrashed()->get();
-            return redirect()->back()->with('success', 'Thao tác thành công');
+           
+            Toastr::success('Thao tác thành công', 'Thành công');
+            return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
+            Toastr::error('Thao tác thất bại', 'Thất bại');
+            return back();
         }
     }
 
@@ -136,7 +137,7 @@ class ServicesController extends Controller
     {
         $model = Services::query()->onlyTrashed()->findOrFail($id);
         $model->restore();
-        $services_deleted = Services::onlyTrashed()->get();
-        return redirect()->back()->with('success', 'Thao tác thành công');
+        Toastr::success('Thao tác thành công', 'Thành công');
+        return redirect()->back();
     }
 }
