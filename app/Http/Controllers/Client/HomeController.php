@@ -45,10 +45,9 @@ class HomeController extends Controller
         // dd($count_room,$count_user,$count_post);
         // dd($districts);
 
+
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post','banners'));
-        // $rooms = RoomPost::all();
-        // dd($rooms);
-        // return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms'));
+
     }
     public function bookmark(Request $request, string $id)
     {
@@ -168,7 +167,8 @@ class HomeController extends Controller
         } elseif ($selectedAcreage === 'range_acreage4') {
             $query->where('acreage', '>=', 45);
         }
-        $room = $query->get();
+        $room = $query->paginate(2);
+        // dd($room);
         return view('client.layouts.search', compact('category_rooms', 'wards', 'districts', 'room'));
     }
 

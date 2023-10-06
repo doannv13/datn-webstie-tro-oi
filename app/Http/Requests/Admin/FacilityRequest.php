@@ -32,7 +32,7 @@ class FacilityRequest extends FormRequest
     function messages(){
         return [
             'name.required' => 'Tên bắt buộc nhập!', 
-            'icon.required' => 'Icon bắt buộc nhập!', 
+            'icon.required' => 'Icon bắt buộc chọn!', 
             'description.required'  => 'Mô tả bắt buộc nhập!'
         ]; 
     }

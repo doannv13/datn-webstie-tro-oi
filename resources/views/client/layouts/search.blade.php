@@ -22,18 +22,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 col-sm-7">
                 <div class="rooms-detail-info ">
-                    <div class="heading-rooms row hotel-box-list-2 clearfix pb-3">
-                        <div class="pull-left pt-2">
-                            <h6>Có 501.233 lượt xem khu vực này trong 7 ngày qua</h6>
-                            <div class="pt-3 d-flex gap-2">
-
-                                <i class="fa fa-map-marker "></i>
-                                <p>
-                                    Nhà cho thuê tại Hà Nội
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    
                     @foreach ($room as $item)
                     <div class="row hotel-box-list-2">
                         <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12" style="position: relative;">
@@ -103,25 +92,7 @@
                     @endforeach
 
                 </div>
-                <div class="text-center">
-                    <ul class="pagination mt-4">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                {{$room->links()}}
                 <div class="row hbl-2 g-0 p-lg-3">
                     <h3> Tìm theo từ khóa</h3>
                     <div class="sidebar-widget tags-box">
