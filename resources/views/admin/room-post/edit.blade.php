@@ -276,7 +276,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                Thêm phòng
+                                Sửa tin đăng phòng
                             </button>
                         </div>
                     </div>

@@ -9,6 +9,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <h5 class="mt-0">Danh sách mã giảm giá</h5>
+
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
@@ -16,7 +18,7 @@
                                         <a class="btn btn-success" href="{{ route('coupons.create') }}">Thêm mới</a>
                                         <a class="btn btn-danger" href="{{ route('coupons-deleted') }}">Thùng rác</a>
                                     </div>
-                                    <table id="tech-companies-1" class="table table-striped" style="width: 100%">
+                                    <table id="tech-companies-1" class="table table-centered mb-0" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th style="width:5%">STT</th>
@@ -49,18 +51,27 @@
                                                 </td>
                                                 <th>{{ $value->start_date }}</th>
                                                 <th>{{ $value->end_date }}</th>
-                                                <th class="d-flex"><a href="{{ route('coupons.edit', $value->id) }}"
-                                                        class="btn btn-primary me-1"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
+
+                                                <th class="">
+                                                    <a href="{{ route('coupons.edit', $value->id) }}">
+                                                        <button type="submit" class="btn btn-primary text-center my-1"
+                                                            style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
+                                                            <i class="fa-solid fa-pen-to-square fs-4"></i>
+                                                        </button>
+                                                    </a>
+
                                                     <form action="{{ route('coupons.destroy', $value->id) }}"
-                                                        method="post">
+                                                        method="POST">
                                                         @csrf
                                                         @method('delete')
-                                                        <button class="btn btn-danger"
+                                                        <button type="submit" class="btn btn-danger my-1"
+                                                            style="width: 45px;"
                                                             onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                            <i class="fa-solid fa-trash fs-4 text-light"></i>
+                                                            <!-- Đặt kích thước cố định là 100px -->
+                                                            <i class="fa-solid fa-trash fs-4"></i>
                                                         </button>
                                                     </form>
+
                                                 </th>
                                             </tr>
                                         @endforeach

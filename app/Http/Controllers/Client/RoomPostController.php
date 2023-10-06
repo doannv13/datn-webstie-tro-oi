@@ -340,8 +340,8 @@ class RoomPostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
-            $coupon = RoomPost::where('id', $id);
-            $coupon->forceDelete();
+            $RoomPost = RoomPost::where('id', $id);
+            $RoomPost->forceDelete();
             $facility = FacilityRoom::query()->where('room_id', $id);
             $facility->forceDelete();
 
