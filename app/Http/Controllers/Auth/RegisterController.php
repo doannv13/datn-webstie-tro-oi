@@ -51,7 +51,6 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'min:4', 'max:255'],
-            'avatar' => ['required', 'image'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'unique:users', 'regex:/^0[0-9]{7,11}$/', 'min:8', 'max:12'],
             'password' => ['required', 'string','regex:/^(?=.*[A-Z])(?=.*\d).+$/', 'min:6', 'max:35', 'confirmed'],
@@ -60,8 +59,6 @@ class RegisterController extends Controller
             'name.string' => 'Họ tên phải là chữ.',
             'name.min' => 'Tên ít nhất :min kí tự.',
             'name.max' => 'Tên nhiều nhất :max kí tự.',
-            'avatar.required' => 'Ảnh đại diện không được bỏ trống.',
-            'avatar.image' => 'Ảnh không hợp lệ.',
             'email.required' => 'Không được bỏ trống email.',
             'email.email' => 'Email không hợp lệ.',
             'email.max' => 'Địa chỉ email không được vượt quá :max ký tự.',
@@ -90,10 +87,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['avatar']){
-            $data['avatar']=upload_file(OBJECT_USER,$data['avatar']);
+        if(isset($data['avatar']) && $data['avatar']) {
+            $data['avatar'] = upload_file(OBJECT_USER, $data['avatar']);
+        }else{
+            $data['avatar']=null;
         }
-        toastr()->success('Tạo tài khoản thành công!','Thành công');
+        toastr()->success('Tạo tài khoản thành công!', 'Thành công');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -102,4 +101,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
 }
