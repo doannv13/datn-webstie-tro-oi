@@ -27,7 +27,6 @@
 
 
 
-    <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
 
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}" />
@@ -75,10 +74,7 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9
-      ]><script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
-    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
+
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/ie10-viewport-bug-workaround.css') }}" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
 </head>
@@ -106,42 +102,48 @@
         <!-- Footer start #0b4c9f -->
         @include('client.layouts.partials.footer')
         <!-- Footer end -->
+
     </div>
 
-    <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
-    <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
-    <script src="{{ asset('fe/js/wow.min.js') }}"></script>
-    <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
-    <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
-    <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-    <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
-    <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('fe/js/slick.min.js') }}"></script>
-    <script src="{{ asset('fe/js/sidebar.js') }}"></script>
-    <script src="{{ asset('fe/js/app.js') }}"></script>
-    <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
+        <script src="{{ asset('fe/js/wow.min.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
+        <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('fe/js/slick.min.js') }}"></script>
+        <script src="{{ asset('fe/js/sidebar.js') }}"></script>
+        <script src="{{ asset('fe/js/app.js') }}"></script>
+        <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
-    <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
-    <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
-    <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
+        <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+        <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
+        <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
-    <!-- Custom javascript -->
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
+        <!-- Custom javascript -->
 
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
-    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
+        <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <script src="{{ asset('fe/js/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('fe/js/respond.min.js') }}"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <script src="{{ asset('fe/js/html5shiv.min.js') }}"></script>
+        <script src="{{ asset('fe/js/respond.min.js') }}"></script>
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
+        <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
+
 
 
     <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
@@ -150,8 +152,7 @@
         dselect(document.querySelector('#dselect-example'))
     </script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-
-    @stack('scripts')
+        @stack('scripts')
 </body>
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->
 

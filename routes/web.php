@@ -109,6 +109,7 @@ Route::resource('admin-room-posts', AdminRoomPost::class);
 Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');
 Route::delete('admin-room-posts-permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('admin-room-posts-permanently-delete');
 Route::get('admin-room-posts-restore/{id}', [AdminRoomPost::class, 'restore'])->name('admin-room-posts-restore');
+Route::get('admin-room-posts-status', [AdminRoomPost::class, 'changeStatus'])->name('admin-room-posts-status');
 
 // Category Home
 Route::resource('category-rooms', CategoryRoomController::class);
