@@ -16,7 +16,8 @@
                             <th style="width:15%">Liên hệ</th>
                             <th style="width:10%">Ảnh chính</th>
                             <th style="width:20%">Name</th>
-                            <th style="width:20%">Địa chỉ</th>
+                            <th style="width:15%">Địa chỉ</th>
+                            <th style="width:5%">Trạng thái</th>
                             <th style="width:10%">Ngày bắt đầu</th>
                             <th style="width:10%">Ngày kết thúc</th>
                             <th style="width:10%">Action</th>
@@ -36,6 +37,10 @@
                                     </td>
                                     <td>
                                         <p>{{ $value->address_full }}</p>
+                                    </td>
+                                    <td>{!! $value->status == 'inactive'
+                                        ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
+                                        : '<button class="btn btn-primary">Kích hoạt</button>' !!}
                                     </td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>

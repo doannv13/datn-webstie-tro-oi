@@ -30,9 +30,9 @@
                                         <label for="simpleinput" class="form-label">Tiêu đề<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="title" id="simpleinput" class="form-control"
-                                               value="{{ old('title') }}">
+                                            value="{{ old('title') }}">
                                         @error('title')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -69,35 +69,36 @@
                                         @enderror
                                     </div>
 
-{{--                                    <div class="mb-3">--}}
-{{--                                        <label for="example-textarea" class="form-label">ID Admin</label>--}}
-{{--                                        <input type="text" name="id_admin" id="simpleinput" class="form-control"--}}
-{{--                                            value="{{ old('id_admin') }}">--}}
-{{--                                        @error('id_admin')--}}
-{{--                                            <span class="text-danger">{{ $message }}</span>--}}
-{{--                                        @enderror--}}
-{{--                                    </div>--}}
+                                    {{--                                    <div class="mb-3"> --}}
+                                    {{--                                        <label for="example-textarea" class="form-label">ID Admin</label> --}}
+                                    {{--                                        <input type="text" name="id_admin" id="simpleinput" class="form-control" --}}
+                                    {{--                                            value="{{ old('id_admin') }}"> --}}
+                                    {{--                                        @error('id_admin') --}}
+                                    {{--                                            <span class="text-danger">{{ $message }}</span> --}}
+                                    {{--                                        @enderror --}}
+                                    {{--                                    </div> --}}
 
                                     <div class="mb-3">
                                         <label class="form-label">Tags</label>
                                         <input type="text" class="selectize-close-btn form-control" name="tags">
                                         @error('tags')
                                             <span class="text-danger">{{ $message }}</span>
-                                              @enderror
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="example-textarea" class="form-label">View<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="view" id="simpleinput" class="form-control"
-                                               value="{{ old('view') }}">
+                                            value="{{ old('view') }}">
                                         @error('view')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
                                     <button class="btn btn-primary waves-effect waves-light">Thêm</button>
-                                    <a href="{{ route('posts.index') }}" class="btn btn-warning waves-effect text-light">Trở
+                                    <a href="{{ route('posts.index') }}"
+                                        class="btn btn-warning waves-effect text-light">Trở
                                         về</a>
                                 </form>
                             </div> <!-- end col -->
