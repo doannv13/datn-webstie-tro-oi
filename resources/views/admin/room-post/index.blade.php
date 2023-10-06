@@ -98,7 +98,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Giá tiền:</div>
-                                <div class="col-md-7">{{ $value->price }}VND/tháng</div>
+                                <div class="col-md-7">{{ number_format($value->price) }} VND/tháng</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Diện tích:</div>
@@ -106,7 +106,7 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Mô tả:</div>
-                                <div class="col-md-7">{{ $value->description }}</div>
+                                <div class="col-md-7">{!! $value->description !!}</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Liên hệ:</div>

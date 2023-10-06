@@ -143,9 +143,7 @@
                             <div class="form-group ">
                                 <label class="input-group">Trọ tự quản<span class="text-danger">*</span></label>
                                 <select class="form-select mb-3" name="managing">
-                                    <option value="0" {{ $postroom->managing == '0' ? 'selected' : false }}>Trọ tự
-                                        quản
-                                    </option>
+
                                     <option value="yes" {{ $postroom->managing == 'yes' ? 'selected' : false }}>Có
                                     </option>
                                     <option value="no" {{ $postroom->managing == 'no' ? 'selected' : false }}>Không
@@ -375,54 +373,9 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.upload__inputfile').each(function() {
-                $(this).on('change', function(e) {
-                    var imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
-                    var maxLength = $(this).attr('data-max_length');
-                    var imgArray = [];
-
-                    Array.from(e.target.files).forEach(function(f) {
-                        if (f.type.match('image.*') && imgArray.length < maxLength) {
-                            imgArray.push(f);
-                            var reader = new FileReader();
-                            reader.onload = function(e) {
-                                var html =
-                                    `<div class='upload__img-box'><div style='background-image: url(${e.target.result})' data-number='${$(".upload__img-close").length}' data-file='${f.name}' class='img-bg'><div class='upload__img-close'></div></div></div>`;
-                                imgWrap.append(html);
-                            };
-                            reader.readAsDataURL(f);
-                        }
-                    });
-                });
-            });
-
-            $('body').on('click', '.upload__img-close', function(e) {
-                var file = $(this).parent().data('file');
-                var imgArray = [];
-
-                Array.from($('.upload__inputfile')[0].files).forEach(function(f) {
-                    imgArray.push(f);
-                });
-
-                imgArray = imgArray.filter(function(item) {
-                    return item.name !== file;
-                });
-
-                $(this).parent().parent().remove();
-            });
-        });
-    </script>
-
-
-
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('description');
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        CKEDITOR.replace('description');
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");
@@ -508,5 +461,42 @@
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
         }
+        $(document).ready(function() {
+            $('.upload__inputfile').each(function() {
+                $(this).on('change', function(e) {
+                    var imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+                    var maxLength = $(this).attr('data-max_length');
+                    var imgArray = [];
+
+                    Array.from(e.target.files).forEach(function(f) {
+                        if (f.type.match('image.*') && imgArray.length < maxLength) {
+                            imgArray.push(f);
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                var html =
+                                    `<div class='upload__img-box'><div style='background-image: url(${e.target.result})' data-number='${$(".upload__img-close").length}' data-file='${f.name}' class='img-bg'><div class='upload__img-close'></div></div></div>`;
+                                imgWrap.append(html);
+                            };
+                            reader.readAsDataURL(f);
+                        }
+                    });
+                });
+            });
+
+            $('body').on('click', '.upload__img-close', function(e) {
+                var file = $(this).parent().data('file');
+                var imgArray = [];
+
+                Array.from($('.upload__inputfile')[0].files).forEach(function(f) {
+                    imgArray.push(f);
+                });
+
+                imgArray = imgArray.filter(function(item) {
+                    return item.name !== file;
+                });
+
+                $(this).parent().parent().remove();
+            });
+        });
     </script>
 @endpush

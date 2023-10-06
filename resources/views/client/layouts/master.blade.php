@@ -108,21 +108,21 @@
         <!-- Footer end -->
     </div>
 
-        <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
-        <script src="{{ asset('fe/js/wow.min.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('fe/js/slick.min.js') }}"></script>
-        <script src="{{ asset('fe/js/sidebar.js') }}"></script>
-        <script src="{{ asset('fe/js/app.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
+    <script src="{{ asset('fe/js/wow.min.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('fe/js/slick.min.js') }}"></script>
+    <script src="{{ asset('fe/js/sidebar.js') }}"></script>
+    <script src="{{ asset('fe/js/app.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
@@ -149,6 +149,7 @@
     <script>
         dselect(document.querySelector('#dselect-example'))
     </script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
     @stack('scripts')
 </body>

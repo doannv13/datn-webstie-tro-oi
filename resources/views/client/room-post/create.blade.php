@@ -136,9 +136,9 @@
                             <div class="form-group ">
                                 <label class="input-group">Trọ tự quản<span class="text-danger">*</span></label>
                                 <select class="form-select mb-3" name="managing">
-                                    <option value="yes" {{ old('managing') == 'yes' ? 'checked' : false }}>Có
+                                    <option value="yes" {{ old('managing') == 'yes' ? 'selected' : false }}>Có
                                     </option>
-                                    <option value="no" {{ old('managing') == 'no' ? 'checked' : false }}>Không
+                                    <option value="no" {{ old('managing') == 'no' ? 'selected' : false }}>Không
                                     </option>
                                 </select>
                             </div>
@@ -151,8 +151,8 @@
                         <div class="col-lg-12 col-md-12 mb-3">
                             <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
                             <div class="form-group message">
-                                <textarea class="form-control " style="height: 110px" name="description" placeholder="Write message"
-                                    aria-label="Write message">{{ old('description') }}</textarea>
+                                <textarea class="form-control " style="height: 110px" name="description" id="description"
+                                    placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
                             </div>
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
@@ -164,7 +164,8 @@
                                 @foreach ($surrounding as $surround)
                                     <div class="form-check col-md-3 col-4 mb-2">
                                         <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                            value="{{ $surround->id }}">
+                                            value="{{ $surround->id }}"
+                                            {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
                                         <label class="form-check-label">
                                             {{ $surround->name }}
                                         </label>
@@ -183,7 +184,8 @@
                                 @foreach ($facilities as $facility)
                                     <div class="form-check col-md-3 col-4 mb-2">
                                         <input class="form-check-input" name="facility[]" type="checkbox"
-                                            value="{{ $facility->id }}">
+                                            value="{{ $facility->id }}"
+                                            {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
                                         <label class="form-check-label">
                                             {{ $facility->name }}
                                         </label>
@@ -294,7 +296,6 @@
                             <div class=" text-center pull-left">
                                 <a href="{{ route('room-posts.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
                                     danh sách</a>
-
                             </div>
                             <div class="send-btn text-center d-flex gap-2 pull-right">
                                 <button type="reset" class="btn-md btn-danger btn-7">Hủy
@@ -312,12 +313,9 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('description');
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        CKEDITOR.replace('description');
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");
