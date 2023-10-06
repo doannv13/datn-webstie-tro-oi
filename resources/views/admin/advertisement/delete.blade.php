@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
-@section('title', 'Danh sách ảnh quảng cáo')
+@section('title', 'Thùng rác | Ảnh quảng cáo')
 @section('content')
 
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách ảnh quảng cáo</h5>
+                <h5 class="mt-0">Thùng rác</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{ route('advertisement.create') }}">Thêm mới</a>
+                    <a class="btn btn-success mb-2" href="{{ route('advertisements.index') }}">Danh sách</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
@@ -35,9 +35,9 @@
                                         @endif
                                     </td>
                                     <td>{{ $value->status == 'inactive' ? 'Tắt' : 'Bật' }}</td>
-                                    <td><a href="{{ route('advertisement.restore', $value->id) }}" class="btn btn-primary me-2 mb-2"><i
+                                    <td><a href="{{ route('advertisements-restore', $value->id) }}" class="btn btn-primary me-2 mb-2"><i
                                                 class="fa-solid fa-trash-arrow-up"></i></a>
-                                        <form action="{{ route('advertisement.permanently.delete', $value->id) }}" method="post">
+                                        <form action="{{ route('advertisements-permanently-delete', $value->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger">

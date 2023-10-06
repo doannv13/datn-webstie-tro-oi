@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('url')->nullable();
             $table->string('location');
             $table->enum('status',['active','inactive'])->default('inactive');
