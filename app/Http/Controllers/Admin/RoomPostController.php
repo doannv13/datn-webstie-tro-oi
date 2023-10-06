@@ -20,6 +20,8 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use App\Models\Tag;
 
 class RoomPostController extends Controller
 {
@@ -123,6 +125,18 @@ class RoomPostController extends Controller
                 $surround->room_id = $model->id;
                 $surround->facility_id = $facility;
                 $surround->save();
+            }
+
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->input('tags'));
+
+                foreach ($tagNames as $tagName) {
+                    $slug = Str::slug(trim($tagName));
+
+                    $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+
+                    $model->tags()->syncWithoutDetaching([$tag->id]);
+                }
             }
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
             return redirect()->route('admin-room-posts.index');

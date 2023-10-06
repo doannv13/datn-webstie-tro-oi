@@ -127,7 +127,7 @@ data-sidebar-user='true' --}}
     </script>
 
     {{-- load ảnh --}}
-    {{-- <script>
+    <script>
         $(function() {
             function readURL(input, selector) {
                 if (input.files && input.files[0]) {
@@ -149,7 +149,7 @@ data-sidebar-user='true' --}}
                 readURL(this, '#image_preview_favi');
             });
         })
-    </script> --}}
+    </script>
 
     <script src="{{ asset('input-mask/jquery.inputmask.js') }}"></script>
     <!-- Dashboar init js-->

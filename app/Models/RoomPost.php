@@ -61,4 +61,9 @@ class RoomPost extends Model
     {
         return $this->belongsTo(CategoryPost::class);
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggables');
+    }
 }
