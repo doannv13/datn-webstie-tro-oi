@@ -94,7 +94,7 @@ aria-hidden="true"
                             </div>
                             <p>
                                 Bạn chưa có tài khoản?
-                                <a href="{{ route('register') }}" class="thembo"
+                                <a href="client-signup" class="thembo"
                                 ><span class="text-sub">Đăng ký</span></a
                                 >
                             </p>

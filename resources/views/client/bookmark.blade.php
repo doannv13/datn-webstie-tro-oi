@@ -96,7 +96,7 @@
                     <!-- Blog box end -->
 
                     <!-- Phân trang -->
-                    {{ $data->links() }}
+                             {{ $data->links() }}
                     <!-- End phân trang -->
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12">

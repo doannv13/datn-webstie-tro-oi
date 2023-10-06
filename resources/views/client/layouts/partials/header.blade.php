@@ -34,7 +34,7 @@
                                 <div>
                                     @if (Auth::user())
                                         @if (Auth::user()->role === 'vendor')
-                                            <a class="dropdown-item" href="">Vào trang quản lí</a>
+                                            <a class="dropdown-item" href="{{route('room-posts.index')}}">Vào trang quản lí</a>
                                         @elseif (Auth::user()->role === 'admin')
                                             <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
                                         @endif
