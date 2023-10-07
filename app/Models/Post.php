@@ -21,6 +21,7 @@ class Post extends Model
         'status',
         'view',
         'id_admin',
+        'id_category_post'
     ];
     public $timestamps = true;
 
@@ -28,9 +29,13 @@ class Post extends Model
     public function tags(){
         return $this->morphToMany(Tag::class, 'taggables');
     }
-      
+
     public function user()
     {
         return $this->belongsTo(User::class,'id_admin','id');
+    }
+    public function category_posts()
+    {
+        return $this->belongsTo(CategoryPost::class,'id_category_post','id');
     }
 }
