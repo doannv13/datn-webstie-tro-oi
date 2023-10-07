@@ -76,7 +76,10 @@ class CategoryPostController extends Controller
     {
         try {
             $model = CategoryPost::query()->findOrFail($id);
-
+            if($model->id===1){
+                toastr()->error('Bạn không thể chỉnh sửa danh mục này!', 'Thao tác thất bại');
+                return redirect()->back();
+            }
             $slug = Str::slug($request->name);
             $model->slug = $slug;
 
@@ -98,6 +101,10 @@ class CategoryPostController extends Controller
     {
         try {
             $model = CategoryPost::query()->findOrFail($id);
+            if($model->id===1){
+                toastr()->error('Bạn không thể xóa danh mục này!', 'Thao tác thất bại');
+                return redirect()->back();
+            }
             $model->delete();
             Toastr::success('Post đã chuyển vào thùng rác', 'Thành công');
 

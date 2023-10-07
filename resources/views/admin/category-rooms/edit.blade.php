@@ -41,8 +41,7 @@
                                         @enderror
                                     </div>
 
-                                    <button class="btn btn-primary waves-effect waves-light">Thêm</button>
-                                    {{-- <button class="btn btn-waring waves-effect waves-light">Thêm</button> --}}
+                                    <button class="btn btn-primary waves-effect waves-light">Cập nhật</button>
                                     <a href="{{ route('category-rooms.index') }}"
                                        class="btn btn-warning waves-effect text-light">Trở về</a>
 
