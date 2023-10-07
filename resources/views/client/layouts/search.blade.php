@@ -8,8 +8,8 @@
         </div>
         <nav class="breadcrumbs">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Room Details</li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Room Search</li>
             </ol>
         </nav>
     </div>
@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 col-sm-7">
                 <div class="rooms-detail-info ">
-                    
+
                     @foreach ($room as $item)
                     <div class="row hotel-box-list-2">
                         <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12" style="position: relative;">
