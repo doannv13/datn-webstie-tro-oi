@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CategoryPost extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'name',
         'status',
@@ -20,5 +21,15 @@ class CategoryPost extends Model
     public function posts()
     {
         return $this->hasMany(Post::class, 'id_category_post', 'id');
+    }
+    public static function boot(){
+        parent::boot();
+        static::deleting(function ($category_posts) {
+            $PostsToUpdate = Post::where('id_category_post', $category_posts->id)->get();
+            foreach ($PostsToUpdate as $Post) {
+                $Post->id_category_post = 1;
+                $Post->save();
+            }
+        });
     }
 }

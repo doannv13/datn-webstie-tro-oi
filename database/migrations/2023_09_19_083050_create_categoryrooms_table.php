@@ -20,6 +20,14 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        DB::table('category_rooms')->insert([
+            'name' => 'uncategorized',
+            'slug' => 'uncategorized',
+            'description' => 'Danh mục tin phòng mặc định',
+            'status' => 'active',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 
     /**
