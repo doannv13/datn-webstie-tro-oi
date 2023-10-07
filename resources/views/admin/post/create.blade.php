@@ -36,6 +36,18 @@
                                         @enderror
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label for="inputState" class="form-label">Danh mục bài viết:<span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" name="id_category_post">
+                                            @foreach ($categoryPosts as $categoryPost)
+                                                <option value="{{ $categoryPost->id }}"
+                                                    {{ old('id_category_post') ? 'selected' : false }}>
+                                                    {{ $categoryPost->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="mb-3 row">
                                         <div class="">
                                             <label for="example-textarea" class="form-label">Ảnh</label>

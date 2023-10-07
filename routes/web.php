@@ -36,12 +36,12 @@ use App\Http\Controllers\Client\ServicesController as ClientServices;
 
 
 Auth::routes();
-Route::get('login', function(){
-    return abort(404);
-});
-Route::get('register', function(){
-    return abort(404);
-});
+//Route::get('login', function(){
+//    return abort(404);
+//});
+//Route::get('register', function(){
+//    return abort(404);
+//});
 //CLIENT
 Route::get('home-client', function () {
     return view('client.layouts.master');

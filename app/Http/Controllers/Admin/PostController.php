@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostRequest;
+use App\Models\CategoryPost;
 use App\Models\Post;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-       $model = Post::query()->latest()->get();
-        return view('admin.post.index',compact('model'));
+        $category_posts = CategoryPost::all();
+        $model = Post::query()->latest()->get();
+        return view('admin.post.index',compact('model','category_posts'));
     }
 
     /**
@@ -27,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        $categoryPosts = CategoryPost::query()->latest()->get();
+        return view('admin.post.create',compact('categoryPosts'));
     }
 
     /**
@@ -87,9 +90,10 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
+        $categoryPosts = CategoryPost::query()->latest()->get();
         $model = Post::query()->findOrFail($id);
         $tags = $model->tags->pluck('name')->implode(',');
-        return view('admin.post.edit',compact('model', 'tags'));
+        return view('admin.post.edit',compact('model', 'tags','categoryPosts'));
     }
 
     /**

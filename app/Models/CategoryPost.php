@@ -16,4 +16,9 @@ class CategoryPost extends Model
         'description'
     ];
     public $timestamps = true;
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'id_category_post', 'id');
+    }
 }

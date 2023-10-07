@@ -28,6 +28,7 @@ class PostFactory extends Factory
             'status'=> $this->faker->randomElement(['active', 'inactive']),
             'view' => 1000,
             'id_admin' => 1,
+            'id_category_posts' => 1,
         ];
     }
 }
