@@ -1,5 +1,20 @@
 @extends('client/layouts/master')
 @section('content')
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="container">
+            <div class="breadcrumb-area">
+                <h1></h1>
+            </div>
+            <nav class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Chi tiết bài viết</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
     <!-- Content -->
 <!-- Blog body start -->
 <div class="blog-body content-area-15">
