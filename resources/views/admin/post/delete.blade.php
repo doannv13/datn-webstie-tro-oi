@@ -14,11 +14,14 @@
                         <tr>
                             <th class="col-0.5">#</th>
                             <th class="col-1">Tiêu đề</th>
+                            <th class="col-1">Tiêu đề ngắn</th>
+                            <th class="col-1">Danh mục</th>
                             <th class="col-1">Ảnh</th>
-                            <th class="col-2">Mổ tả ngắn</th>
-                            <th class="col-2">Content</th>
-                            <th class="col-1.5">Slug</th>
-                            <th class="col-1">ID Admin</th>
+                            <th class="col-1">Mổ tả ngắn</th>
+                            <th class="col-1">Content</th>
+                            <th class="col-0.5">Slug</th>
+                            <th class="col-1">View</th>
+                            <th class="col-1">Tên tác giả</th>
                             <th class="col-1">Ngày đăng tải</th>
                             <th class="col-1">Trạng thái</th>
                             <th class="col-1">Hành động</th>
@@ -27,8 +30,10 @@
                         <tbody>
                         @foreach ($model as $key => $value)
                             <tr id="row_@item.ID">
-                                <td class="tabledit-view-mode">{{ $key+1 }}</td>
+                                <td class="tabledit-view-mode">{{ $key +1 }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->title, 0, 20) !!}</td>
+                                <td class="tabledit-view-mode">{!! substr($value->metaTitle, 0, 20) !!}</td>
+                                <td class="tabledit-view-mode">{{ $value->category_posts->name }}</td>
                                 <td class="tabledit-view-mode">
                                     @if ($value->image && asset($value->image))
                                         <img src="{{ asset($value->image) }}" alt="" style="width: 80px; height: 80px">
@@ -39,7 +44,8 @@
                                 <td class="tabledit-view-mode">{!! substr($value->metaDescription, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->description, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ $value->slug }}</td>
-                                <td class="tabledit-view-mode">{{ $value->id_admin }}</td>
+                                <td class="tabledit-view-mode">{{ number_format($value->view) }}</td>
+                                <td class="tabledit-view-mode">{{ $value->user->name }}</td>
                                 <td class="tabledit-view-mode">{{ $value->updated_at }}</td>
                                 <td>{{ $value->status == 'inactive' ? 'Tắt' : 'Bật' }}</td>
                                     <td>

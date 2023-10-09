@@ -35,7 +35,7 @@
                                         </ul>
                                     </div>
                                     <h3>
-                                        <a href="blog-details.html">{{ $value->metaTitle }}</a>
+                                        <a href="#">{{ $value->metaTitle }}</a>
                                     </h3>
                                     <p>{{ $value->metaDescription }}</p>
                                 </div>

@@ -42,7 +42,7 @@ class PostController extends Controller
             $user = auth()->user();
             $model = new Post();
 
-            $model->id_admin = $user->id;
+            $model->user_id = $user->id;
 
             $slug = Str::slug($request->title);
             $model->slug = $slug;
@@ -153,9 +153,9 @@ class PostController extends Controller
         try {
            $model = Post::query()->findOrFail($id);
            $model->delete();
-            Toastr::success('Post đã chuyển vào thùng rác', 'Thành công');
+            Toastr::success('Bài viết đã chuyển vào thùng rác', 'Thành công');
 
-            return to_route('post.index');
+            return to_route('posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -174,7 +174,7 @@ class PostController extends Controller
         try {
             $restore = Post::query()->onlyTrashed()->findOrFail($id);
             $restore->restore();
-            Toastr::success('Khôi phục post thành công', 'Thành công');
+            Toastr::success('Khôi phục bài viết thành công', 'Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
