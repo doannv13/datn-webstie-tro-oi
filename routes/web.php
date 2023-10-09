@@ -63,7 +63,7 @@ Route::get('client-login', function () {
 
 //Bài viết
 Route::resource('posts-client', ClientPost::class); // Danh sách bài viết
-Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail');
+Route::get('posts-detail-view/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail-view');
 
 //Lọc và Tìm kiếm
 // Route::post('fillter', [HomeController::class, 'filter_list']);

@@ -27,7 +27,6 @@ class PostRequest extends FormRequest
             'image' => 'mimes:jpeg,png,jpg,gif|max:4096',
             'metaDescription' => 'required|max:255|min:5',
             'description' => 'required|max:999|min:5',
-            'view'=> 'required|numeric',
         ];
     }
 
@@ -37,7 +36,6 @@ class PostRequest extends FormRequest
             'title.required' => 'Trường không được bỏ trống',
             'description.required'  => 'Trường không được bỏ trống',
             'metaDescription.required'  => 'Trường không được bỏ trống',
-            'view.required'  => 'Trường không được bỏ trống',
 
             'metaTitle.max' => 'Phải dưới 50 ký tự',
             'title.max' => 'Phải dưới 155 ký tự',
@@ -49,8 +47,6 @@ class PostRequest extends FormRequest
 
             'image.mimes' => 'Phải là file ảnh JPEG, PNG, JPG, GIF',
             'image.size' => 'Dung lượng phải dưới 2Mb',
-
-            'view.numeric' => 'Phải là số'
         ];
     }
 }

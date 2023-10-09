@@ -27,7 +27,7 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">{{ $data->metaTitle }}</a>
+                                <a href="#">{{ $data->metaTitle }}</a>
                             </h3>
                             <blockquote>
                                 {{ $data->metaDescription }}

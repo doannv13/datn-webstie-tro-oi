@@ -35,7 +35,7 @@
                                         </ul>
                                     </div>
                                     <h3>
-                                        <a href="#">{{ $value->metaTitle }}</a>
+                                        <a href="{{ route('posts-detail-view', $value->id) }}">{{ $value->metaTitle }}</a>
                                     </h3>
                                     <p>{{ $value->metaDescription }}</p>
                                 </div>
