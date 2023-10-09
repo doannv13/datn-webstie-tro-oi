@@ -3,61 +3,54 @@
         <div class="row align-items-center">
             <div class="col-lg-8 col-md-8 col-sm-7 col-7">
                 <div class="list-inline">
-                    <a href="tel:+{{ $global_setting ? $global_setting->support_phone : '' }}"><i
-                            class="fa fa-phone"></i>Cần hỗ trợ?
+                    <a href="tel:+{{ $global_setting ? $global_setting->support_phone : '' }}"><i class="fa fa-phone"></i>Cần hỗ trợ?
                         {{ $global_setting ? $global_setting->support_phone : '' }}</a>
-                    <a href="tel:{{ $global_setting ? $global_setting->email : '' }}" class="d-none-768"><i
-                            class="fa fa-envelope"></i>{{ $global_setting ? $global_setting->email : '' }}</a>
+                    <a href="tel:{{ $global_setting ? $global_setting->email : '' }}" class="d-none-768"><i class="fa fa-envelope"></i>{{ $global_setting ? $global_setting->email : '' }}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-5">
                 @guest
-                    <ul class="top-social-media pull-right ">
-                        <li>
-                            <a href="/client-login" onclick><i class="fa fa-sign-in me-1"></i>Đăng nhập</a>
-                        </li>
-                        <li>
-                            <a href="/client-signup"><i class="fa fa-user me-1"></i>Đăng ký</a>
-                        </li>
-                    </ul>
+                <ul class="top-social-media pull-right ">
+                    <li>
+                        <a href="/client-login" onclick><i class="fa fa-sign-in me-1"></i>Đăng nhập</a>
+                    </li>
+                    <li>
+                        <a href="/client-signup"><i class="fa fa-user me-1"></i>Đăng ký</a>
+                    </li>
+                </ul>
                 @else
-                    @if (Auth::user())
-                        <div class="dropdown pull-right">
-                            <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center"
-                                data-bs-display="static" aria-expanded="false">
-                                <img class="rounded-circle" style="width:30px;height:30px"
-                                    src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
-                                    alt="Header Avatar">
-                                <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <div>
-                                    @if (Auth::user())
-                                        @if (Auth::user()->role === 'vendor')
-                                            <a class="dropdown-item" href="{{route('room-posts.index')}}">Vào trang quản lí</a>
-                                        @elseif (Auth::user()->role === 'admin')
-                                            <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
-                                        @endif
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
-                                        nhật tài khoản</a>
-                                    @if (Auth::user())
-                                        <a class="dropdown-item"
-                                            href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Đăng xuất
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </div>
-
-
+                @if (Auth::user())
+                <div class="dropdown pull-right">
+                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static" aria-expanded="false">
+                        <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="Header Avatar">
+                        <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <div>
+                            @if (Auth::user())
+                            @if (Auth::user()->role === 'vendor')
+                            <a class="dropdown-item" href="{{route('room-posts.index')}}">Vào trang quản lí</a>
+                            @elseif (Auth::user()->role === 'admin')
+                            <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                            @endif
+                            @endif
+                            <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
+                                nhật tài khoản</a>
+                            @if (Auth::user())
+                            <a class="dropdown-item" href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Đăng xuất
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
-                    @endif
+                    </div>
+
+
+                </div>
+                @endif
                 @endguest
             </div>
         </div>
@@ -71,19 +64,16 @@
                 <a class="navbar-brand" href="{{ route('home') }}">
 
                     @if ($global_setting && $global_setting->logo && asset($global_setting->logo))
-                        <img src="{{ asset($global_setting->logo) }}" alt="logo"
-                            height="80px">
+                    <img src="{{ asset($global_setting->logo) }}" alt="logo" height="80px">
                     @else
-                        <img src="{{ asset('no_image.jpg') }}" alt="logo"
-                            height="80px">
+                    <img src="{{ asset('no_image.jpg') }}" alt="logo" height="80px">
                     @endif
                 </a>
 
                 <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('home') }}" id="navbarDropdownMenuLink"
-                                aria-expanded="false">
+                            <a class="nav-link" href="{{ route('home') }}" id="navbarDropdownMenuLink" aria-expanded="false">
                                 Trang chủ
                             </a>
                         </li>
@@ -105,8 +95,7 @@
                     </ul>
                 </div>
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
-                    <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal"
-                        data-bs-target="#exampleModalToggle">
+                    <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                         <i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                         Point: 10.000
                     </button>
@@ -117,14 +106,13 @@
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
                         <a href="bookmarks"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
-                        <a href="{{route('room-posts.create')}}" class="btn btn-5" style="font-size: 13px" >
+                        <a href="{{route('room-posts.create')}}" class="btn btn-5" style="font-size: 13px">
                             Đăng tin
-</a>
+                        </a>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i
-                            class="fa fa-bookmark-o me-2 fs-4"></i></a>
+                    <a href="" class="d-md-block d-xl-none d-lg-none justify-content-end"><i class="fa fa-bookmark-o me-2 fs-4"></i></a>
 
                     <button class="navbar-toggler" id="drawer" type="button">
                         <span class="fa fa-bars"></span>
@@ -176,9 +164,7 @@
                         <span class="input-group-text input-group-i px-3" style="width: 50px;">
                             <i class="fa fa-search text-white"></i>
                         </span>
-                        <input type="text" name="name_filter" id="name_filter"
-                            class="form-control bg-input-group" value="{{ request('name_filter') }}"
-                            placeholder="Nhập tên phòng..." style="height: 58px" />
+                        <input type="text" name="name_filter" id="name_filter" class="form-control bg-input-group" value="{{ request('name_filter') }}" placeholder="Nhập tên phòng..." style="height: 58px" />
 
                     </div>
                 </div>
@@ -188,21 +174,18 @@
                             <div class="form-floating">
 
 
-                                <select name="room_type_filter" id="room_type_filter"
-                                    class="form-select bg-select-group" id="floatingSelect3"
-                                    aria-label="Floating label select example">
-                                    <option value="all"
-                                        {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
+                                <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                    <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     @if (isset($category_rooms))
-                                        @if (count($category_rooms) > 0)
-                                            @foreach ($category_rooms as $category_room)
-                                                <option value="{{ $category_room->id }}"
-                                                    {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>
-                                                    {{ $category_room->name }}</option>
-                                            @endforeach
-                                        @else
-                                            <option value="" disabled>Không có dữ liệu loại phòng</option>
-                                        @endif
+                                    @if (count($category_rooms) > 0)
+                                    @foreach ($category_rooms as $category_room)
+                                    <option value="{{ $category_room->id }}" {{ request('room_type_filter') == $category_room->id ? 'selected' : '' }}>
+                                        {{ $category_room->name }}
+                                    </option>
+                                    @endforeach
+                                    @else
+                                    <option value="" disabled>Không có dữ liệu loại phòng</option>
+                                    @endif
                                     @endif
                                 </select>
                                 <label for="dselect-example1">Loại phòng</label>
@@ -210,21 +193,20 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-                                <select class="form-select bg-select-group" id="district_filter"
-                                    name="district_filter">
+                                <select class="form-select bg-select-group" id="district_filter" name="district_filter">
 
                                     <option value="all" selected>Tất cả</option>
 
                                     @if (isset($districts))
-                                        @if (count($districts) > 0)
-                                            @foreach ($districts as $district)
-                                                <option value="{{ $district }}"
-                                                    {{ request('district_filter') == $district ? 'selected' : '' }}>
-                                                    {{ $district }}</option>
-                                            @endforeach
-                                        @else
-                                            <option value="" disabled>Không có dữ liệu khu vực</option>
-                                        @endif
+                                    @if (count($districts) > 0)
+                                    @foreach ($districts as $district)
+                                    <option value="{{ $district }}" {{ request('district_filter') == $district ? 'selected' : '' }}>
+                                        {{ $district }}
+                                    </option>
+                                    @endforeach
+                                    @else
+                                    <option value="" disabled>Không có dữ liệu khu vực</option>
+                                    @endif
                                     @endif
                                 </select>
 
@@ -235,21 +217,16 @@
                         <div class="col-md-6 col-sm-6 col-lg-3">
                             <div class="form-floating">
 
-                                <select name="price_filter" id="price_filter" class="form-select bg-select-group"
-                                    id="floatingSelect3" aria-label="Floating label select example">
+                                <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>
                                         Tất cả</option>
-                                    <option value="range_price1"
-                                        {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1
+                                    <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1
                                         Triệu</option>
-                                    <option value="range_price2"
-                                        {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 Triệu ->
+                                    <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 Triệu ->
                                         2.5 Triệu</option>
-                                    <option value="range_price3"
-                                        {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4
+                                    <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4
                                         Triệu</option>
-                                    <option value="range_price4"
-                                        {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
+                                    <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
                                     </option>
                                 </select>
 
@@ -279,61 +256,52 @@
 <!-- start modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> -->
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl"
-                        style="color: #f18e1e;"></i>
+                <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                     Point: 10.000 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <h1 class="fs-4 text text-info">Nạp Point Vào Tài Khoản</h1>
-
                     <div class="row">
-                        <hr>
+                       
                         <div class="py-3 px-3 " style="background-color: #F0FCF5;">
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 5%</span> cho giá
+                                trị nạp từ 20.000 đ đến 300.000 đ</p>
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 7%</span> cho giá
+                                trị nạp từ 300.000 đ đến 1.000.000 đ</p>
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 10%</span> cho giá
-                                trị nạp từ 50.000 đ đến 1.000.000 đ</p>
-                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 20%</span> cho giá
-                                trị nạp từ 1.000.000 đ đến 2.000.000 đ</p>
-                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 30%</span> cho giá
-                                trị nạp trên 2.000.000 đ</p>
+                                trị nạp trên 1.000.000 đ</p>
                         </div>
                         <div class="py-3">
                             <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
-                            <div class="p-2">
-                                <input type="button" class="btn btn-primary" value="100000" name="price"
-                                    onclick="myClick()">
-                                <input type="button" class="btn btn-primary" value="200000" name="price"
-                                    onclick="myClick()">
-                                <input type="button" class="btn btn-primary" value="500000" name="price"
-                                    onclick="myClick()">
-                                <input type="button" class="btn btn-primary" value="1000000" name="price"
-                                    onclick="myClick()">
-                                <input type="button" class="btn btn-primary" value="2000000" name="price"
-                                    onclick="myClick()">
-                                <input type="button" class="btn btn-primary" value="5000000" name="price"
-                                    onclick="myClick()">
+                            <div class="p-1 d-flex  gap-1">
+                                <input type="button" class="btn btn-primary" value="20,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="50,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="100,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="200,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="300,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="500,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="1,000,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn btn-primary" value="2,000,000" name="price" style="background-color: orange;">
+
                             </div>
                         </div>
 
                         <div class="p-2">
                             <div class="d-flex justify-content-between">
-                                <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span
-                                        class="text-danger">*</span></label>
-                                <label class="text-secondary">Tối thiểu 10.000</label>
+                                <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
+                                <label class="text-secondary">Tối thiểu 20.000</label>
                             </div>
-                            <input type="text" class="form-control" value="0" id="input-price"
-                                onchange="myChange()">
+                            <input type="text" class="form-control" type="number" value="0" id="input-price" onchange="myChange()" disabled>
 
                         </div>
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale"
-                                    class="text-success fw-bold">0%</span></label>
+                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">0%</span></label>
                             <label id="sale-price" class="fw-bold text-danger">0</label>
                         </div>
                         <div class="d-flex justify-content-between p-2">
@@ -341,12 +309,10 @@
                             <label id="total" class="fw-bold text-danger">0</label>
                         </div>
                         <div class="col  ">
-                            <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span
-                                    class="text-danger">*</span></p>
+                            <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
                             <div class="">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="1" name="type-pay"
-                                        checked>
+                                    <input class="form-check-input" type="radio" value="1" name="type-pay" checked>
                                     <label class="form-check-label fw-semibold">
                                         Chuyển khoản online
                                     </label>
@@ -357,14 +323,11 @@
                                     <label class="form-check-label fw-semibold">
                                         Thanh toán VN PAY
                                     </label>
-                                    <img src="{{ asset('fe/img/pay/image_2.png') }}"
-                                        style="max-width: 24px; max-height: 24px;">
+                                    <img src="{{ asset('fe/img/pay/image_2.png') }}" style="max-width: 24px; max-height: 24px;">
                                 </div>
 
                             </div>
-                            <button type="button" onclick="onclick_Pay()" id="btn-pay"
-                                class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
-                                style="background-color:  #FCAF17; ">Nạp Point</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
                         </div>
                     </div>
                 </div>
@@ -373,117 +336,155 @@
     </div>
 </div>
 <!-- end modal -->
+<!-- start modal QR -->
+
+<div class="modal fade" id="exampleModalToggle-1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel">Thanh Toán Online
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container mx-auto p-5" style="max-width: 700px;">
+                    <!-- content -->
+                    <div class="d-flex justify-content-evenly p-3 gap-5">
+                        <div class="text-center">
+                            <p class="fw-bolder">Quét QR để thanh toán hóa đơn.</p>
+                            <img src="{{asset('fe/img/pay/image_10.png')}}" style="max-width: 200px; max-height: 200px;">
+                            <p class="fw-medium">Ngân hàng: MB</p>
+                            <p class="fw-medium">STK:0345673127</p>
+                        </div>
+                        <div class="">
+                            <p class="fw-medium">Khách hàng: <span class="">Nguyễn Quốc V</span></p>
+                            <p class="fw-medium">Mã đơn hàng: <span class="fw-bolder">034567</span></p>
+                            <p class="fw-medium">Tổng tiền: <span class="fw-bolder" style="color: #E24343;">55.000 VND</span></p>
+                            <p class="fw-medium">Nội dung:
+                            <p class="fw-medium">TÊN KHÁCH HÀNG_MÃ ĐƠN HÀNG</p>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- text -->
+                    <center>
+                    <button type="button" onclick="notification()" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 btn-primary">Đã Thanh toán
+                    </button>
+                    </center>
+                    <div class="text-center p-3" id="notification" style="display: none;">
+                        <p class="fw-medium ">Sau khi thanh toán thành công vui lòng chờ xác nhận đơn hàng.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal QR -->
 
 
 <!-- Search area box 1 end -->
 <!-- script -->
 @push('scripts')
-    <script>
-        new DataTable('#tech-companies-1');
-        var data = document.getElementById('data');
+<script>
+    function notification(){
+        document.getElementById("notification").style.display = "block"
+    }
+    new DataTable('#tech-companies-1');
+    var data = document.getElementById('data');
 
-        function myOnchange() {
-            var category_room = document.getElementById('dselect-example1');
-            var district = document.getElementById('floatingSelect2');
-            var price = document.getElementById('floatingSelect3');
-            var acreage = document.getElementById('floatingSelect4');
+    function myOnchange() {
+        var category_room = document.getElementById('dselect-example1');
+        var district = document.getElementById('floatingSelect2');
+        var price = document.getElementById('floatingSelect3');
+        var acreage = document.getElementById('floatingSelect4');
 
-            console.log(category_room.value)
-            console.log(district.value)
-            console.log(price.value)
-            console.log(acreage.value)
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    alert("send sucess!")
-                    let details = {
-                        category_room: category_room.value,
-                        district: district.value,
-                        price: price.value,
-                        acreage: acreage.value
-                    };
-                    console.log(JSON.stringify(details))
-                }
-            };
-            xhttp.open("get", "trang-chu", true);
-            xhttp.send();
-        }
-
-        function myClick() {
-            var price = document.getElementsByName("price");
-            var input_price = document.getElementById('input-price');
-            var sale = document.getElementById('sale');
-            var sale_price = document.getElementById('sale-price');
-            console.log(price)
-            for (let i = 0; i < price.length; i++) {
-                price[i].addEventListener('click', function() {
-                    input_price.value = price[i].value
-                    if (10000 <= input_price.value && input_price.value < 1000000) {
-                        sale.innerText = "+10%";
-                        sale_price.innerText = String(parseFloat(input_price.value * 0.1)).replace(
-                            /(.)(?=(\d{3})+$)/g, '$1,');
-                        total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value *
-                            0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
-
-                    } else if (1000000 <= input_price.value && input_price.value <= 2000000) {
-                        sale.innerText = "+20%";
-                        sale_price.innerText = String(parseFloat(input_price.value * 0.2, 1)).replace(
-                            /(.)(?=(\d{3})+$)/g, '$1,')
-                        total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value *
-                            0.2, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
-
-                    } else if (2000000 < input_price.value) {
-                        sale.innerText = "+30%";
-                        sale_price.innerText = String(parseFloat(input_price.value * 0.3, 1)).replace(
-                            /(.)(?=(\d{3})+$)/g, '$1,')
-                        total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value *
-                            0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
-                    }
-                });
+        console.log(category_room.value)
+        console.log(district.value)
+        console.log(price.value)
+        console.log(acreage.value)
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("send sucess!")
+                let details = {
+                    category_room: category_room.value,
+                    district: district.value,
+                    price: price.value,
+                    acreage: acreage.value
+                };
+                console.log(JSON.stringify(details))
             }
+        };
+        xhttp.open("get", "trang-chu", true);
+        xhttp.send();
+    }
 
-        }
+
+    const prices = document.getElementsByName("price");
+    const input_price = document.getElementById('input-price');
+    const sale = document.getElementById('sale');
+    const sale_price = document.getElementById('sale-price');
+    // console.log(prices)
 
 
+    for (let i = 0; i < prices.length; i++) {
+        prices[i].style.backgroundColor = "none"
+        prices[i].addEventListener('click', function() {
+            input_price.value = prices[i].value
+            // prices[i].style.backgroundColor="orange"
+            console.log(input_price.value)
+            if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
+                sale.innerText = "+5%";
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
 
-        function myChange() {
-            var input_price = document.getElementById('input-price');
-            var sale = document.getElementById('sale');
-            var sale_price = document.getElementById('sale-price');
-            var total = document.getElementById('total')
-            if (10000 <= input_price.value && input_price.value < 1000000) {
+            } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
+                sale.innerText = "+7%";
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
+
+            } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
-                sale_price.innerText = String(parseFloat(input_price.value * 0.1, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1');
-                total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.1, 1)).replace(
-                    /(.)(?=(\d{3})+$)/g, '$1,')
-
-            } else if (1000000 <= input_price.value && input_price.value <= 2000000) {
-                sale.innerText = "+20%";
-                sale_price.innerText = String(parseFloat(input_price.value * 0.2, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
-                total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.2, 1)).replace(
-                    /(.)(?=(\d{3})+$)/g, '$1,')
-
-            } else if (2000000 < input_price.value) {
-                sale.innerText = "+30%";
-                sale_price.innerText = String(parseFloat(input_price.value * 0.3, 1)).replace(/(.)(?=(\d{3})+$)/g, '$1,')
-                total.innerText = String(parseFloat(input_price.value, 1) + parseFloat(input_price.value * 0.3, 1)).replace(
-                    /(.)(?=(\d{3})+$)/g, '$1,')
-            } else {
-                sale.innerText = "0%";
-                sale_price.innerText = 0
-                total.innerText = 0
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
             }
-        }
+        });
+    }
 
-        function onclick_Pay() {
-            var checkbox = document.getElementsByName("type-pay");
-            for (var i = 0; i < checkbox.length; i++) {
-                if (checkbox[i].value == 1) {
-                    window.location="display-QR"
-                }
-            }
+
+
+
+
+    function myChange() {
+        // var input_price = document.getElementById('input-price');
+        // var sale = document.getElementById('sale');
+        // var sale_price = document.getElementById('sale-price');
+        // var total = document.getElementById('total')
+
+        // if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
+        //             sale.innerText = "+5%";
+        //             sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
+        //             total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
+
+        //         } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
+        //             sale.innerText = "+7%";
+        //             sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
+        //             total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
+
+        //         } else if (1000000 <= input_price.value.replace(/,/g, "")) {
+        //             sale.innerText = "+10%";
+        //             sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
+        //             total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
+        //         }
+        const prices = document.getElementsByName('price')
+        console.log(prices)
+        for (let index = 0; index < prices.length; index++) {
+            const price = prices[index];
+            price.style.backgroundColor = 'red';
         }
-    </script>
+    }
+</script>
 @endpush
 
 
