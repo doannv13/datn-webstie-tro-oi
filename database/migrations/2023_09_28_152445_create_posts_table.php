@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('metaDescription');
             $table->string('slug');
             $table->enum('status',['active','inactive'])->default('inactive');
-            $table->string('view');
+            $table->unsignedInteger('view')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_post_id');
             $table->timestamps();
