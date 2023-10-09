@@ -39,10 +39,10 @@
                                     <div class="mb-3">
                                         <label for="inputState" class="form-label">Danh mục bài viết:<span
                                                 class="text-danger">*</span></label>
-                                        <select class="form-select" name="id_category_post">
+                                        <select class="form-select" name="category_post_id">
                                             @foreach ($categoryPosts as $categoryPost)
                                                 <option value="{{ $categoryPost->id }}"
-                                                    {{ old('id_category_post') ? 'selected' : false }}>
+                                                    {{ old('category_post_id') ? 'selected' : false }}>
                                                     {{ $categoryPost->name }}</option>
                                             @endforeach
                                         </select>

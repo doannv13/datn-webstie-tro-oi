@@ -22,11 +22,11 @@ return new class extends Migration
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->string('view');
             $table->unsignedBigInteger('id_admin');
-            $table->unsignedBigInteger('id_category_post');
+            $table->unsignedBigInteger('category_post_id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id_admin')->references('id')->on('users');
-            $table->foreign('id_category_post')->references('id')->on('category_posts');
+            $table->foreign('category_post_id')->references('id')->on('category_posts');
 
         });
     }

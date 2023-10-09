@@ -21,7 +21,7 @@ class Post extends Model
         'status',
         'view',
         'id_admin',
-        'id_category_post'
+        'category_post_id'
     ];
     public $timestamps = true;
 
@@ -36,6 +36,6 @@ class Post extends Model
     }
     public function category_posts()
     {
-        return $this->belongsTo(CategoryPost::class,'id_category_post','id');
+        return $this->belongsTo(CategoryPost::class,'category_post_id','id');
     }
 }
