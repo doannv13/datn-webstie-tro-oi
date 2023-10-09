@@ -27,7 +27,7 @@ class PostFactory extends Factory
             'slug'=> Str::slug($title),
             'status'=> $this->faker->randomElement(['active', 'inactive']),
             'view' => 1000,
-            'id_admin' => 1,
+            'user_id' => 1,
             'category_post_id' => 1,
         ];
     }

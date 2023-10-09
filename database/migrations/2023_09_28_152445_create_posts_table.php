@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('slug');
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->string('view');
-            $table->unsignedBigInteger('id_admin');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_post_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('id_admin')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_post_id')->references('id')->on('category_posts');
 
         });

@@ -83,9 +83,9 @@
 
                                     {{--                                    <div class="mb-3"> --}}
                                     {{--                                        <label for="example-textarea" class="form-label">ID Admin</label> --}}
-                                    {{--                                        <input type="text" name="id_admin" id="simpleinput" class="form-control" --}}
-                                    {{--                                            value="{{ old('id_admin') }}"> --}}
-                                    {{--                                        @error('id_admin') --}}
+                                    {{--                                        <input type="text" name="user_id" id="simpleinput" class="form-control" --}}
+                                    {{--                                            value="{{ old('user_id') }}"> --}}
+                                    {{--                                        @error('user_id') --}}
                                     {{--                                            <span class="text-danger">{{ $message }}</span> --}}
                                     {{--                                        @enderror --}}
                                     {{--                                    </div> --}}
