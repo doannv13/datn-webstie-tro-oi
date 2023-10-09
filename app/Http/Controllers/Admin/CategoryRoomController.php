@@ -75,6 +75,10 @@ class CategoryRoomController extends Controller
         //
         try {
             $data = CategoryRoom::query()->findOrFail($id);
+            if($data->id===1){
+                toastr()->error('Bạn không thể chỉnh sửa danh mục này!', 'Thao tác thất bại');
+                return redirect()->back();
+            }
             $slug = Str::slug($request->name);
             $data->slug = $slug;
             $data->fill($request->all());
@@ -104,10 +108,14 @@ class CategoryRoomController extends Controller
     {
         try {
             $categoryRoom = CategoryRoom::query()->findOrFail($id);
+            if($categoryRoom->id===1){
+                toastr()->error('Bạn không thể xóa danh mục này!', 'Thao tác thất bại');
+                return redirect()->back();
+            }
             $categoryRoom->delete();
             Toastr::success('Danh mục đã chuyển vào thùng rác', 'Thành công');
 
-            return to_route('category-rooms.index');
+            return redirect()->route('category-rooms.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
@@ -121,7 +129,7 @@ class CategoryRoomController extends Controller
     public function permanentlyDelete(string $id)
     {
         try {
-            $model = CategoryRoom::where('id', $id);
+            $model = CategoryRoom::withTrashed()->findOrFail($id);
             $model->forceDelete();
             Toastr::success('Xoá thành công', 'Thành công');
             return back();
@@ -135,15 +143,16 @@ class CategoryRoomController extends Controller
     public function restore(string $id)
     {
         try {
-            $model = CategoryRoom::query()->onlyTrashed()->findOrFail($id);
+            $model = CategoryRoom::withTrashed()->findOrFail($id);
             $model->restore();
             Toastr::success('Khôi phục thành công', 'Thành công');
-            return redirect()->back();
+            return back();
         } catch (\Exception $exception) {
             Toastr::error('Khôi phục thất bại', 'Thất bại');
             return back();
         }
     }
+
     public function changeStatus(Request $request)
     {
         try {
