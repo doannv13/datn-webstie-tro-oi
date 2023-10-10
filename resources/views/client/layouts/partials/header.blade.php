@@ -189,6 +189,7 @@
                                     <option value="" disabled>Không có dữ liệu loại phòng</option>
                                     @endif
                                     @endif
+
                                 </select>
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
@@ -222,13 +223,14 @@
                                 <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>
                                         Tất cả</option>
-                                    <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Từ 0 -> 1
-                                        Triệu</option>
-                                    <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 Triệu ->
-                                        2.5 Triệu</option>
-                                    <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 Triệu ->4
-                                        Triệu</option>
-                                    <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
+                                    <option value="range_price1"
+                                        {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Dưới 1 triệu</option>
+                                    <option value="range_price2"
+                                        {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 triệu - 2.5 triệu</option>
+                                    <option value="range_price3"
+                                        {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 triệu - 4 triệu</option>
+                                    <option value="range_price4"
+                                        {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
                                     </option>
                                 </select>
 
@@ -239,16 +241,17 @@
                             <div class="form-floating">
                                 <select name="acreage_filter" id="acreage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="allAcreage" {{ request('acreage_filter') == 'allAcreage' ? 'selected' : '' }}>Tất cả</option>
-                                    <option value="range_acreage1" {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 20m vuông</option>
-                                    <option value="range_acreage2" {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>20m vuông -> 30m vuông</option>
-                                    <option value="range_acreage3" {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>20m vuông -> 45m vuông</option>
-                                    <option value="range_acreage4" {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Trên 45m vuông</option>
+                                    <option value="range_acreage1" {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 20m²</option>
+                                    <option value="range_acreage2" {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>20m² - 30m²</option>
+                                    <option value="range_acreage3" {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>20m² - 45m²</option>
+                                    <option value="range_acreage4" {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Trên 45m²</option>
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
-                            kiếm</button>
+                            kiếm
+                        </button>
                     </div>
                 </div>
             </div>

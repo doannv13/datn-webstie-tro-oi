@@ -68,7 +68,6 @@ Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-
 Route::get('search', [HomeController::class, 'index'])->name('search');
 Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
-
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
