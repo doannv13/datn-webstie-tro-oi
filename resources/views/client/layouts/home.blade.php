@@ -140,7 +140,7 @@
                                         <p><i class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
                                         </p>
                                     </ul>
-                                    
+
                                     <ul class="d-flex fustify-content-between text-center mt-2">
                                         @if (isset($value->facilities))
                                         @foreach ($value->facilities as $facilities)
@@ -435,13 +435,13 @@
                                         <strong ><a href="{{route('posts-detail',$value->id)}}">By: <span class="fw-bolder">{{ $value->user->name }}</span></a></strong>
                                     </li>
                                     <li class="float-right mr-0">
-                                        <a href="#"><i class="fa-regular fa-eye" style="color: #f28a36;"></i></a>{{ $value->view }}
+                                        <a href="{{ route('posts-detail', $value->id) }}"><i class="fa-regular fa-eye" style="color: #f28a36;"></i></a>{{ $value->view }}
                                     </li>
 
                                 </ul>
                             </div>
                             <h3>
-                                <a href="{{route('posts-detail',$value->id)}}">{{ $value->title }}</a>
+                                <a href="{{ route('posts-detail', $value->id) }}">{{ $value->title }}</a>
                             </h3>
 
                             <!-- <p class="location" >

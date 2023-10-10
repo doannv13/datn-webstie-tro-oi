@@ -60,8 +60,7 @@
                         </div>
                         <div class="content">
                             <h3 class="media-heading">
-                                <a href="rooms-details.html">{{ $value->title }}</a>
-                            </h3>
+                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title,0,25)}}
                         </div>
                     </div>
                 @endforeach

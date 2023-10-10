@@ -106,7 +106,7 @@ class CategoryPostController extends Controller
                 return redirect()->back();
             }
             $model->delete();
-            Toastr::success('Post đã chuyển vào thùng rác', 'Thành công');
+            Toastr::success('Danh mục đã chuyển vào thùng rác', 'Thành công');
 
             return to_route('category-posts.index');
         } catch (\Exception $exception) {
