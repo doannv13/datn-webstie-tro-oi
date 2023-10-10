@@ -97,7 +97,9 @@
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                         <i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
-                        Point: 10.000
+                        Point @if (auth()->user())
+                        : {{number_format(auth()->user()->point)}}
+                         @endif
                     </button>
 
                 </div>
@@ -259,19 +261,24 @@
 <!-- start modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg"> -->
+
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
-                    Point: 10.000 </h1>
+                    Point
+                    @if (auth()->user())
+                       : {{number_format(auth()->user()->point)}}
+                        @endif
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <h1 class="fs-4 text text-info">Nạp Point Vào Tài Khoản</h1>
                     <div class="row">
-                       
+
                         <div class="py-3 px-3 " style="background-color: #F0FCF5;">
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 5%</span> cho giá
                                 trị nạp từ 20.000 đ đến 300.000 đ</p>
@@ -283,14 +290,14 @@
                         <div class="py-3">
                             <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
                             <div class="p-1 d-flex  gap-1">
-                                <input type="button" class="btn btn-primary" value="20,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="50,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="100,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="200,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="300,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="500,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="1,000,000" name="price" style="background-color: orange;">
-                                <input type="button" class="btn btn-primary" value="2,000,000" name="price" style="background-color: orange;">
+                                <input type="button" class="btn" value="20.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="50.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="100.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="200.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="300.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="500.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="1.000.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="2.000.000" name="price" style="background-color: orange;color:white">
 
                             </div>
                         </div>
@@ -298,7 +305,7 @@
                         <div class="p-2">
                             <div class="d-flex justify-content-between">
                                 <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
-                                <label class="text-secondary">Tối thiểu 20.000</label>
+                                <label class="text-danger">Tối thiểu 20.000</label>
                             </div>
                             <input type="text" class="form-control" type="number" value="0" id="input-price" onchange="myChange()" disabled>
 
@@ -330,7 +337,11 @@
                                 </div>
 
                             </div>
+                           @if (auth()->user())
                             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
+                           @else
+                            <label for="" class="text-danger" >Vui lòng đăng nhập</label>
+                           @endif
                         </div>
                     </div>
                 </div>
@@ -350,7 +361,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
+            <form action="{{ route('points.store') }}" method="POST">
+                @csrf
+                @method('post')
                 <div class="container mx-auto p-5" style="max-width: 700px;">
                     <!-- content -->
                     <div class="d-flex justify-content-evenly p-3 gap-5">
@@ -361,23 +374,29 @@
                             <p class="fw-medium">STK:0345673127</p>
                         </div>
                         <div class="">
-                            <p class="fw-medium">Khách hàng: <span class="">Nguyễn Quốc V</span></p>
-                            <p class="fw-medium">Mã đơn hàng: <span class="fw-bolder">034567</span></p>
-                            <p class="fw-medium">Tổng tiền: <span class="fw-bolder" style="color: #E24343;">55.000 VND</span></p>
-                            <p class="fw-medium">Nội dung:
-                            <p class="fw-medium">TÊN KHÁCH HÀNG_MÃ ĐƠN HÀNG</p>
+                            @if(auth()->user())
+                                <p class="fw-medium">Khách hàng: <span style="color: #E24343;" class="fw-bolder">{{ auth()->user()->name }}</span></p>
+                                <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
+                                <input type="text" hidden value="transfer" name="payment_method">
+                                <input type="text" hidden id="total_point" name="point">
+                                <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span></p>
+                                <p class="fw-medium">Nội dung:
+                              <span class="fw-bolder" style="color: #E24343;">trooi-{{ auth()->user()->phone }}</span>
+                            @endif
                             </p>
                         </div>
+
                     </div>
-                    <!-- text -->
                     <center>
-                    <button type="button" onclick="notification()" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 btn-primary">Đã Thanh toán
-                    </button>
+                        <button type="submit" style="background-color:  #FCAF17; " onclick="return confirm('Xác nhận thanh toán thành công?')" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
                     </center>
-                    <div class="text-center p-3" id="notification" style="display: none;">
-                        <p class="fw-medium ">Sau khi thanh toán thành công vui lòng chờ xác nhận đơn hàng.</p>
-                    </div>
+
+
+                    {{-- <div class="text-center p-3" id="notification" style="display: none;">
+                        <p class="fw-medium ">Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
+                    </div> --}}
                 </div>
+            </form>
 
             </div>
         </div>
@@ -391,6 +410,11 @@
 @push('scripts')
 <script>
     function notification(){
+        var confirmation = confirm('Xác nhận thanh toán');
+        if (confirmation) {
+            // document.getElementById("notification").style.display = "block"
+        //    toastr.success('Đã thanh toán thành công!')
+        }
         document.getElementById("notification").style.display = "block"
     }
     new DataTable('#tech-companies-1');
@@ -428,29 +452,31 @@
     const input_price = document.getElementById('input-price');
     const sale = document.getElementById('sale');
     const sale_price = document.getElementById('sale-price');
-    // console.log(prices)
 
 
     for (let i = 0; i < prices.length; i++) {
         prices[i].style.backgroundColor = "none"
         prices[i].addEventListener('click', function() {
             input_price.value = prices[i].value
-            // prices[i].style.backgroundColor="orange"
-            console.log(input_price.value)
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
                 sale.innerText = "+5%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-
+                document.getElementById('total_amount').innerText=(input_price.value.replace(/,/g, "") * 1.05).toLocaleString();
+                document.getElementById('total_point').value=(input_price.value.replace(/,/g, "") * 1.05).toLocaleString();
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
                 sale.innerText = "+7%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
-
+                document.getElementById('total_amount').innerText=(input_price.value.replace(/,/g, "") * 1.07).toLocaleString();
+                document.getElementById('total_point').value=(input_price.value.replace(/,/g, "") * 1.07).toLocaleString();
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
+                console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
+                document.getElementById('total_amount').innerText=(input_price.value.replace(/,/g, "") * 1.1).toLocaleString();
+                document.getElementById('total_point').value=(input_price.value.replace(/,/g, "") * 1.1).toLocaleString();
             }
         });
     }
@@ -460,32 +486,17 @@
 
 
     function myChange() {
-        // var input_price = document.getElementById('input-price');
-        // var sale = document.getElementById('sale');
-        // var sale_price = document.getElementById('sale-price');
-        // var total = document.getElementById('total')
-
-        // if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
-        //             sale.innerText = "+5%";
-        //             sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
-        //             total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-
-        //         } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
-        //             sale.innerText = "+7%";
-        //             sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
-        //             total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
-
-        //         } else if (1000000 <= input_price.value.replace(/,/g, "")) {
-        //             sale.innerText = "+10%";
-        //             sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
-        //             total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
-        //         }
         const prices = document.getElementsByName('price')
         console.log(prices)
         for (let index = 0; index < prices.length; index++) {
             const price = prices[index];
             price.style.backgroundColor = 'red';
         }
+    }
+</script>
+<script>
+    if(document.getElementById("input-price").value===0){
+        document.getElementById("btn-pay").disabled = true;
     }
 </script>
 @endpush
