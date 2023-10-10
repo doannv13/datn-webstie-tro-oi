@@ -9,9 +9,10 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EmailNotification extends Mailable
+class SuccessMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     /**
      * Create a new message instance.
      */
@@ -26,7 +27,7 @@ class EmailNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Xác nhận thanh toán đơn hàng cho khách',
+            subject: 'Xác nhận thanh toán thành công',
         );
     }
 
@@ -36,7 +37,7 @@ class EmailNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'client.notification.notification',
+            view: 'client.notification.accept',
         );
     }
 

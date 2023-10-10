@@ -69,7 +69,7 @@ class ChangeInfoController extends Controller
                 $model->avatar=$request->old_avatar;
             }
             $model->save();
-            event( new NotificationEvent($model));
+            // event( new NotificationEvent());
 
             toastr()->success('Cập nhập thông tin tài khoản thành công!','Thành công');
             if($request->hasFile('new_avatar')){

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\CancelEvent;
+use App\Events\NotificationEvent;
+use App\Events\SuccessEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -14,7 +18,10 @@ class TransactionController extends Controller
     public function index()
     {
         //
-        $data= Transaction::with('user')->latest()->paginate(10);
+        $data = Transaction::with('user')
+            ->where('action', 'import')
+            ->latest()
+            ->paginate(10);
         return view('admin.transaction.index',compact('data'));
     }
 
@@ -35,8 +42,11 @@ class TransactionController extends Controller
         // dd($request->all());
         $model = new Transaction();
         $model->fill($request->all());
+        $model->point = intval(str_replace(',', '', $model->point));
+        $model->action ='import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.','Đơn hàng sẽ được xác nhận sớm');
+        event( new NotificationEvent());
         return back();
     }
 
@@ -71,4 +81,32 @@ class TransactionController extends Controller
     {
         //
     }
+    public function updateStatus(Request $request, $id)
+    {
+        // Lấy giá trị trạng thái từ request
+        $newStatus = $request->input('status');
+        // Tìm bản ghi theo $id
+        $model = Transaction::find($id);
+        $model->status = $newStatus;
+        $model->save();
+        toastr()->success('chỉnh sửa thành công');
+        if($newStatus==='accept'){
+            $user = User::findOrFail($model->user_id);
+            $model->point = intval(str_replace(',', '', $model->point));
+            $user->point += $model->point;
+            $user->save();
+        event( new SuccessEvent($user));
+        }elseif($newStatus==='cancel'){
+            $user= User::findOrFail($model->user_id);
+            event( new CancelEvent($user));
+        }
+        return back();
+    }
+    public function history(){
+        $data = Transaction::with('user')
+        ->where('user_id', auth()->user()->id)
+        ->paginate(10);
+    return view('client.transaction.historyPoint',compact('data'));
+    }
+
 }

@@ -38,8 +38,8 @@
     <div class="email-container">
         <img class="logo" src="https://rs.tima.vn/staticFile/img-news/2023/3/2023351_vay-online-tien-oi.png" alt="Logo">
         <h1 class="greeting">Xác nhận đơn hàng</h1>
-        <h2>Bạn có 1 đơn hàng cần xác nhận</h2>
-        <p>Vui lòng truy cập website và xác nhận đơn hàng </p>
+        <h2>Chúc mừng, đơn hàng của bạn đã được xác nhận và đã cập nhật point trong tài khoản của bạn</h2>
+        <p>Vui lòng truy cập website để kiểm tra thông tin</p>
         <div class="sender-info">
             <p>Người gửi: Công ty Trọ ơi</p>
             <p>Số điện thoại: 0987654321</p>

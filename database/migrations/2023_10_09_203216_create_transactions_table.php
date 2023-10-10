@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('point');
+            $table->integer('point');
             $table->enum('payment_method',['transfer', 'vnpay']);
+            $table->enum('action', ['import', 'export']);
             $table->enum('status', ['pending', 'accept', 'cancel'])->default('pending');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

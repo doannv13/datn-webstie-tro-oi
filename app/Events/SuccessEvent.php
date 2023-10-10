@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Jobs\SuccessNotification;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -9,9 +10,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Jobs\MailNotification;
 use App\Models\User;
-class NotificationEvent
+class SuccessEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     use SerializesModels;
@@ -22,12 +22,12 @@ class NotificationEvent
      * @param  User  $user
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        $data['email'][0] = 'lmt.3102003@gmail.com';
+        $this->user = $user;
+        $data['email'][0] = $user->email;
 
-
-        dispatch(new MailNotification($data));
+        dispatch(new SuccessNotification($data));
     }
 
     /**

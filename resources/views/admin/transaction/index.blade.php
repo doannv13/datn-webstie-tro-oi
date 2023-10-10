@@ -21,20 +21,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data as $key => $value)
-                            <tr id="row_@item.ID">
+                            @foreach ($data as $key => $value)
+                            <tr id="row_{{ $value->ID }}">
                                 <td class="tabledit-view-mode">{{ $key +1 }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->user->name, 0, 20) !!}</td>
-                                <td class="tabledit-view-mode">{!! substr($value->point, 0, 20) !!}</td>
+                                <td class="tabledit-view-mode">{{ number_format((float) $value->point, 0, '.', ',') }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->payment_method, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ $value->created_at }}</td>
-                                <td class="tabledit-view-mode">{{ $value->status }}</td>
-                                {{-- <td>
-                                    <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
-                                           data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                           data-onlabel="Bật" data-offlabel="Tắt"
-                                        {{ $value->status == 'active' ? 'checked' : '' }}>
-                                </td> --}}
+                                <td class="tabledit-view-mode">
+                                    @if ($value->status === 'accept')
+                                        {{ $value->status }}
+                                    @else
+                                        <form action="{{ route('updatePoint.status', $value->id)}}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <select name="status">
+                                                <option value="pending" @if ($value->status === 'pending') selected @endif>Đang xử lí</option>
+                                                <option value="accept" @if ($value->status === 'accept') selected @endif>Đồng ý</option>
+                                                <option value="cancel" @if ($value->status === 'cancel') selected @endif>Không đồng ý</option>
+                                            </select>
+                                            <button type="submit">Cập nhật</button>
+                                        </form>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

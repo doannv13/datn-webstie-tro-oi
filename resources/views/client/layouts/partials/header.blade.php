@@ -98,7 +98,7 @@
                     <button class="btn btn-5" style="font-size: 13px" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                         <i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                         Point @if (auth()->user())
-                        : {{auth()->user()->point}}
+                        : {{number_format(auth()->user()->point)}}
                          @endif
                     </button>
 
@@ -266,7 +266,7 @@
                 <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                     Point
                     @if (auth()->user())
-                       : {{auth()->user()->point}}
+                       : {{number_format(auth()->user()->point)}}
                         @endif
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -287,14 +287,14 @@
                         <div class="py-3">
                             <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
                             <div class="p-1 d-flex  gap-1">
-                                <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="100,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="200,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="300,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="500,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="1,000,000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="2,000,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="20.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="50.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="100.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="200.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="300.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="500.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="1.000.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="2.000.000" name="price" style="background-color: orange;color:white">
 
                             </div>
                         </div>

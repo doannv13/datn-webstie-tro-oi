@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\RoomPostController as AdminRoomPost;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Client\ServicesController as ClientServices;
+use App\Http\Controllers\Client\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +33,6 @@ use App\Http\Controllers\Client\ServicesController as ClientServices;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
-
 Auth::routes();
 //Route::get('login', function(){
 //    return abort(404);
@@ -110,6 +108,11 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('fogotpassword', function () {
         return view('client.auth.fogotPassword');
     });
+
+    //Nạp points
+    Route::post('points',[TransactionController::class,'store'])->name('points.store');
+    Route::get('points-history',[TransactionController::class,'history'])->name('points.history');
+
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
     // route dành cho admin ở đây
@@ -222,5 +225,8 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
     Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
+    //Quản lí points
+    Route::get('points',[TransactionController::class,'index'])->name('points.index');
+    Route::put('/update-status/{id}',[TransactionController::class,'updateStatus'])->name('updatePoint.status');
 });
 // Phân quyền end
