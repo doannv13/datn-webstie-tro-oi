@@ -17,7 +17,7 @@
                                         tin đăng</a></li>
                                 <li><i class="fas fa-edit px-2"></i><a href="{{ route('room-posts.create') }}">Đăng tin
                                         mới</a></li>
-                                <li><i class="fas fa-list-alt px-2"></i><a href="#">Lịch sử giao dịch</a></li>
+                                        <li><i class="fas fa-list-alt px-2"></i><a href="{{ route('points.history') }}">Lịch sử giao dịch</a></li>
                                 <li><i class="fas fa-store px-2"></i><a href="#">Dịch vụ</a></li>
                                 <li><i class="fas fa-store px-2"></i><a href="{{ route('room-posts-deleted') }}">Thùng
                                         rác</a>

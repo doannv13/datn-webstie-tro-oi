@@ -24,4 +24,8 @@ class Tag extends Model
     public function roomPosts(){
         return $this->morphedByMany(RoomPost::class, 'taggables');
     }
+    public static function getAllTags()
+    {
+        return self::all();
+    }
 }
