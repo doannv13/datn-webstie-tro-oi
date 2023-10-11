@@ -33,8 +33,19 @@ function timeposts($times)
     $currentTime = Carbon::now();
     return $postedTime->diffForHumans($currentTime);
 }
+function countAcreage($min, $max){
+    return RoomPost::whereBetween('acreage',[$min, $max])->count();
+}
 
+function countPrice($min, $max){
+    return RoomPost::whereBetween('price',[$min, $max])->count();
+}
 
+function countDistrict($name){
+    return RoomPost::join('districts', 'room_posts.district_id', '=', 'districts.id')
+    ->where('districts.name', '=', $name)
+    ->count();
+}
 function category_rooms()
 {
     return CategoryRoom::all();

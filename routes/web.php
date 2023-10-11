@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Client\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,6 @@ use App\Http\Controllers\Admin\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
-
 Auth::routes();
 //Route::get('login', function(){
 //    return abort(404);
@@ -68,15 +66,13 @@ Route::get('client-login', function () {
 
 //Bài viết
 Route::resource('posts-client', ClientPost::class); // Danh sách bài viết
-Route::get('posts-detail-view/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail-view');
+Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail');
 
 //Lọc và Tìm kiếm
 // Route::post('fillter', [HomeController::class, 'filter_list']);
 Route::get('search', [HomeController::class, 'index'])->name('search');
 Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
-
-
 
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
@@ -117,8 +113,13 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('fogotpassword', function () {
         return view('client.auth.fogotPassword');
     });
+
+    //Nạp points
+    Route::post('points',[TransactionController::class,'store'])->name('points.store');
+    Route::get('points-history',[TransactionController::class,'history'])->name('points.history');
+
 });
-Route::group(['middleware' => 'checkRole:admin'], function () {
+    Route::group(['middleware' => 'checkRole:admin'], function () {
     // route dành cho admin ở đây
 
     //ADMIN
@@ -229,8 +230,6 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
     Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
-
-
     // Quyền
     Route::resource('permissions', PermissionController::class);
     Route::get('permissions-deleted', [PermissionController::class, 'deleted'])->name('permissions.deleted');
@@ -255,6 +254,8 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admins-deleted', [AdminController::class, 'deleted'])->name('admins-deleted');
     Route::delete('admins-permanently/{id}', [AdminController::class, 'permanentlyDelete'])->name('admins-permanently-delete');
 
-
+    //Quản lí points
+    Route::get('points',[TransactionController::class,'index'])->name('points.index');
+    Route::put('/update-status/{id}',[TransactionController::class,'updateStatus'])->name('updatePoint.status');
 });
 

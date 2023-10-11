@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
 
 
         if (Schema::hasTable('advertisements')) {
-            $sidebar_top_ad = Advertisement::query()->where('location', 'top')->get();
-            $sidebar_bottom_ad = Advertisement::query()->where('location', 'bottom')->get();
+            $sidebar_top_ad = Advertisement::query()->where('location', 'top')->where('status','active')->get();
+            $sidebar_bottom_ad = Advertisement::query()->where('location', 'bottom')->where('status','active')->get();
 
             view()->share('global_sidebar_top_ad', $sidebar_top_ad);
             view()->share('global_sidebar_bottom_ad', $sidebar_bottom_ad);

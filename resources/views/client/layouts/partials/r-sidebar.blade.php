@@ -1,4 +1,19 @@
 <div class="sidebar">
+    @foreach ($global_sidebar_top_ad as $item)
+        <div class="social-media sidebar-widget clearfix">
+            <a href="{{ $item->url }}">
+                <div class="photo-thumbnail p-2">
+                    <div class="">
+                        @if ($item->image && asset($item->image))
+                            <img class="w-100" src="{{ asset($item->image) }}" alt="photo" height="200px">
+                        @else
+                            <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo" height="200px">
+                        @endif
+                    </div>
+                </div>
+            </a>
+        </div>
+    @endforeach
     <!-- Top 10 -->
     @if (room_posts())
         @if (count(room_posts()))
@@ -60,7 +75,7 @@
                         </div>
                         <div class="content">
                             <h3 class="media-heading">
-                                <a href="{{ route('posts-detail-view', $value->id) }}">{{ substr($value->title,0,25)}}
+                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title,0,25)}}
                         </div>
                     </div>
                 @endforeach
@@ -84,16 +99,19 @@
             <li><a href="#">Hồ Tây</a></li>
         </ul>
     </div>
-    <!-- Truyền thông -->
-    <div class="social-media sidebar-widget clearfix">
-        <div class="main-title-2">
-            <h1>Truyền thông</h1>
+    @foreach ($global_sidebar_bottom_ad as $item)
+        <div class="social-media sidebar-widget clearfix">
+            <a href="{{ $item->url }}">
+                <div class="photo-thumbnail p-2">
+                    <div class="">
+                        @if ($item->image && asset($item->image))
+                            <img class="w-100" src="{{ asset($item->image) }}" alt="photo" height="200px">
+                        @else
+                            <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo" height="200px">
+                        @endif
+                    </div>
+                </div>
+            </a>
         </div>
-        <ul class="social-list">
-            <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
-            <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-        </ul>
-    </div>
+    @endforeach
 </div>
