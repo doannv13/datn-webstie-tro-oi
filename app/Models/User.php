@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'avatar',
+        'point',
         'role'
     ];
     public $timestamps = true;

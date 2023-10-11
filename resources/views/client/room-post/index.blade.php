@@ -60,7 +60,7 @@
                                             </button>
                                         </form>
                                     </div>
-                                    <a class="btn btn-primary px-4" href="{{ route('services-room.index') }}">Mua
+                                    <a class="btn btn-primary px-4" href="{{ route('services-room.edit',$value->id) }}">Mua
                                         gói dịch vụ</a>
                                 </td>
                             </tr>

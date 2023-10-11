@@ -14,8 +14,7 @@ class ServicesController extends Controller
     public function index()
     {
         //
-        $services=Services::all();
-        return view('client.services.index',compact('services'));
+        
     }
 
     /**
@@ -48,6 +47,8 @@ class ServicesController extends Controller
     public function edit(string $id)
     {
         //
+        $services=Services::all();
+        return view('client.services.index',compact('services'));
     }
 
     /**
