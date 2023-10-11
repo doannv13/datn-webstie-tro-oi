@@ -16,9 +16,6 @@
         </div>
     </div>
     <!-- Sub Banner end -->
-
-
-
     <!-- Rooms detail section start -->
     <div class="content-area-15 rooms-detail-section">
         <div class="container">
@@ -66,6 +63,7 @@
                                     </a>
                                     <div class="photo-thumbnail p-lg-2 p-sm-2">
                                         <div class="">
+
                                             <img src="{{ $item->image }}" alt="photo" class="img-fluid w-100">
                                             <a href="rooms-details.html">
                                                 <span class="blog-one__plus"></span>
@@ -123,7 +121,6 @@
 
                             </div>
                         @endforeach
-
                     </div>
                     {{-- {{$room->links()}} --}}
                     {{ $room->appends([
@@ -153,13 +150,28 @@
                         @endif
                         </div>
                     </div>
-                    
-
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-5">
 
                     <div class="sidebar">
-                        
+                        @foreach ($global_sidebar_top_ad as $item)
+                            <div class="social-media sidebar-widget clearfix">
+                                <a href="{{ $item->url }}">
+                                    <div class="photo-thumbnail p-2">
+                                        <div class="">
+                                            @if ($item->image && asset($item->image))
+                                                <img class="w-100" src="{{ asset($item->image) }}" alt="photo"
+                                                    height="200px">
+                                            @else
+                                                <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo"
+                                                    height="200px">
+                                            @endif
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                       
                         <div class="sidebar-widget category-posts">
 
                             <div class="main-title-2 d-flex justify-content-between gap-2 ">
@@ -206,7 +218,6 @@
                                 @endif
                             </ul>
                         </div>
-
                         <div class="sidebar-widget category-posts">
                             <div class="main-title-2">
                                 <h1>Diện tích </h1>
@@ -227,26 +238,24 @@
                             </ul>
                         </div>
 
-                        <div class="social-media sidebar-widget clearfix">
-                            <div class="photo-thumbnail p-2">
-                                <div class=" ">
-                                    <img src="{{ asset('fe/img/room/img-14.jpg') }}" alt="photo"
-                                        class="img-fluid w-100">
-                                    <a href="rooms-details.html">
-                                        <span class="blog-one__plus"></span>
-                                    </a>
-                                </div>
+                      @foreach ($global_sidebar_bottom_ad as $item)
+                            <div class="social-media sidebar-widget clearfix">
+                                <a href="{{ $item->url }}">
+                                    <div class="photo-thumbnail p-2">
+                                        <div class="">
+                                            @if ($item->image && asset($item->image))
+                                                <img class="w-100" src="{{ asset($item->image) }}" alt="photo"
+                                                    height="200px">
+                                            @else
+                                                <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo"
+                                                    height="200px">
+                                            @endif
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="photo-thumbnail p-2">
-                                <div class=" ">
-                                    <img src="{{ asset('fe/img/room/img-16.jpg') }}" alt="photo"
-                                        class="img-fluid w-100">
-                                    <a href="rooms-details.html">
-                                        <span class="blog-one__plus"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                         <!-- tags box start -->
 
                     </div>
