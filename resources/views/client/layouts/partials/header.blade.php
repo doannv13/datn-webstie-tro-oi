@@ -281,23 +281,23 @@
 
                         <div class="py-3 px-3 " style="background-color: #F0FCF5;">
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 5%</span> cho giá
-                                trị nạp từ 20.000 đ đến 300.000 đ</p>
+                                trị nạp từ 20,000 đ đến 300,000 đ</p>
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 7%</span> cho giá
-                                trị nạp từ 300.000 đ đến 1.000.000 đ</p>
+                                trị nạp từ 300,000 đ đến 1,000,000 đ</p>
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 10%</span> cho giá
-                                trị nạp trên 1.000.000 đ</p>
+                                trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
                             <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
                             <div class="p-1 d-flex  gap-1">
-                                <input type="button" class="btn" value="20.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="50.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="100.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="200.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="300.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="500.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="1.000.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="2.000.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="100,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="200,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="300,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="500,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="1,000,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="2,000,000" name="price" style="background-color: orange;color:white">
 
                             </div>
                         </div>
@@ -305,7 +305,7 @@
                         <div class="p-2">
                             <div class="d-flex justify-content-between">
                                 <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
-                                <label class="text-danger">Tối thiểu 20.000</label>
+                                <label class="text-danger">Tối thiểu 20,000</label>
                             </div>
                             <input type="text" class="form-control" type="number" value="0" id="input-price" onchange="myChange()" disabled>
 
