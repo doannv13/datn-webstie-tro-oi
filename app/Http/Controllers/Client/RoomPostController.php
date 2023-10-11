@@ -32,7 +32,7 @@ class RoomPostController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        $data = RoomPost::query()->latest()->get();
+        $data = RoomPost::query()->where('user_id', auth()->user()->id)->latest()->get();
         return view('client.room-post.index', compact('data', 'category_rooms', 'wards', 'districts'));
     }
 
@@ -53,7 +53,7 @@ class RoomPostController extends Controller
      */
     public function store(RoomPostRequest $request)
     {
-        // dd($request->file('image'));
+
         try {
 
             if ($request->hasFile('imageroom')) {

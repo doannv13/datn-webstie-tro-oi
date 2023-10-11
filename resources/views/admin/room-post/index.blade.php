@@ -12,13 +12,14 @@
                     <table class="table table-centered mb-0" id="tech-companies-1">
                         <thead class="table-light">
                             <th style="width:5%">STT</th>
-                            <th style="width:15%">Liên hệ</th>
+                            <th style="width:10%">Liên hệ</th>
                             <th style="width:10%">Ảnh chính</th>
                             <th style="width:20%">Name</th>
-                            <th style="width:20%">Địa chỉ</th>
-                            <th style="width:20%">Trạng thái</th>
-                            <th style="width:10%">Ngày đăng</th>
-                            <th style="width:10%">Action</th>
+                            <th style="width:15%">Địa chỉ</th>
+                            <th style="width:10%">Trạng thái</th>
+                            <th style="width:10%">Ngày bắt đầu</th>
+                            <th style="width:10%">Ngày kết thúc</th>
+                            <th style="width:10%">Thao tác</th>
                         </thead>
                         <tbody class="align-items-center p-4">
                             @foreach ($data as $key => $value)
@@ -36,12 +37,29 @@
                                     <td>
                                         <h5>{{ $value->address_full }}</h5>
                                     </td>
-                                     <td>
-                                    <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
-                                           data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                           data-onlabel="Bật" data-offlabel="Tắt"
-                                        {{ $value->status == 'active' ? 'checked' : '' }}>
-                                </td>
+                                    {{-- <td>
+                                        <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-onlabel="Bật" data-offlabel="Tắt"
+                                            {{ $value->status == 'active' ? 'checked' : '' }}>
+                                    </td> --}}
+                                    <td>
+                                        <select class="form-select mb-3 toggle-class" data-id="{{ $value->id }}"
+                                            name="status" id="statusSelect">
+                                            <option value="pendding"
+                                                {{ $value->status == 'pendding' ? 'selected' : false }}>
+                                                Chờ xử lý
+                                            </option>
+                                            <option value="accept" {{ $value->status == 'accept' ? 'selected' : false }}>Xác
+                                                nhận
+                                            </option>
+                                            <option value="cancel" {{ $value->status == 'cancel' ? 'selected' : false }}>
+                                                Huỷ
+                                            </option>
+                                        </select>
+                                    </td>
+
+                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td class="">
                                         <div class="d-flex m-2">
@@ -147,11 +165,12 @@
     <script>
         new DataTable('#tech-companies-1');
 
-        $(function() {
-            $('.toggle-class').change(function() {
-                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+        $(document).ready(function() {
+            $("#statusSelect").change(function() {
+                // let status = $(this).prop('checked') == true ? 'active' : 'inactive';
                 let room_post_id = $(this).data('id');
-
+                let status = $(this).val();
+                console.log(status);
                 $.ajax({
                     type: "GET",
                     dataType: "json",

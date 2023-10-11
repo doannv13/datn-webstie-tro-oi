@@ -5,7 +5,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-posts.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room-posts.store') }}" method="POST" id="myForm" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="sidebar row p-3">
@@ -316,6 +316,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
         CKEDITOR.replace('description');
+        var formSubmitted = false;
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");
@@ -329,9 +330,17 @@
             method: "GET",
             responseType: "application/json",
         };
+        var cityFromLocalStorage = localStorage.getItem('city');
+        var districtFromLocalStorage = localStorage.getItem('district');
+        var wardFromLocalStorage = localStorage.getItem('ward');
         var promise = axios(Parameter);
         promise.then(function(result) {
             renderCity(result.data);
+            var cityChangeEvent = new Event('change');
+            citis.dispatchEvent(cityChangeEvent);
+
+            var districtChangeEvent = new Event('change');
+            districts.dispatchEvent(districtChangeEvent);
         });
 
         function renderCity(data) {
@@ -344,7 +353,15 @@
                 citis.options.add(opt);
             }
 
-
+            if (cityFromLocalStorage) {
+                for (var i = 0; i < citis.options.length; i++) {
+                    var option = citis.options[i];
+                    if (option.value === cityFromLocalStorage) {
+                        citis.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
             citis.onchange = function() {
                 district.length = 1;
                 ward.length = 1;
@@ -362,7 +379,23 @@
                     var selectedThanhPho = citis.options[citis.selectedIndex];
                     thanhpho = selectedThanhPho.textContent;
                     console.log(thanhpho);
+                    localStorage.setItem('city', thanhpho);
 
+                    // localStorage.removeItem('district');
+                    // localStorage.removeItem('ward');
+
+                    if (districtFromLocalStorage) {
+                        for (var i = 0; i < districts.options.length; i++) {
+                            var option = districts.options[i];
+                            if (option.value === districtFromLocalStorage) {
+
+                                districts.selectedIndex = i;
+                                break;
+                            }
+                        }
+                        var districtChangeEvent = new Event('change');
+                        districts.dispatchEvent(districtChangeEvent);
+                    }
                 }
             };
 
@@ -385,6 +418,21 @@
                     var selectedQuanHuyen = district.options[district.selectedIndex];
                     quanhuyen = selectedQuanHuyen.textContent
                     console.log(quanhuyen);
+                    localStorage.setItem('district', quanhuyen);
+
+                    // localStorage.removeItem('ward');
+
+                    if (wardFromLocalStorage) {
+                        for (var i = 0; i < wards.options.length; i++) {
+                            var option = wards.options[i];
+                            if (option.value === wardFromLocalStorage) {
+                                wards.selectedIndex = i;
+                                break;
+                            }
+                        }
+                        var wardChangeEvent = new Event('change');
+                        wards.dispatchEvent(wardChangeEvent);
+                    }
                 }
             };
 
@@ -392,7 +440,7 @@
                 var selectedXaPhuong = wards.options[wards.selectedIndex];
                 xaphuong = selectedXaPhuong.textContent;
                 console.log(xaphuong);
-
+                localStorage.setItem('ward', xaphuong);
                 full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
 
@@ -402,6 +450,16 @@
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
         }
+        document.getElementById("myForm").addEventListener("submit", function() {
+            formSubmitted = true;
+
+        });
+
+        window.addEventListener('beforeunload', function(e) {
+            if (!formSubmitted) {
+                localStorage.clear();
+            }
+        });
 
         $(document).ready(function() {
             $('.upload__inputfile').each(function() {

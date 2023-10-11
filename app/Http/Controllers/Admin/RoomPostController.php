@@ -31,7 +31,7 @@ class RoomPostController extends Controller
     public function index()
     {
         $category_rooms = CategoryRoom::all();
-        $data = RoomPost::query()->latest()->get();
+        $data = RoomPost::query()->where('user_id', auth()->user()->id)->latest()->get();
         return view('admin.room-post.index', compact('data', 'category_rooms'));
     }
 
@@ -183,8 +183,7 @@ class RoomPostController extends Controller
 
         $tags = $postroom->tags->pluck('name')->implode(',');
 
-        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs','tags'));
-
+        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs', 'tags'));
     }
 
     /**

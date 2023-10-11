@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('empty_room');
             $table->text('description');
             $table->string('image');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['pendding', 'accept', 'cancel'])->default('pendding');
             $table->enum('managing', ['yes', 'no'])->default('no');
             $table->integer('ward_id');
             $table->integer('district_id');
