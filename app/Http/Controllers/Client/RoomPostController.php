@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\RoomPostNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
 use App\Http\Requests\Client\UpdateRoomPostRequest;
@@ -15,6 +16,7 @@ use App\Models\RoomPost;
 use App\Models\Services;
 use App\Models\Surrounding;
 use App\Models\SurroundingRoom;
+use App\Models\User;
 use App\Models\Ward;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -81,6 +83,7 @@ class RoomPostController extends Controller
             $city->save();
 
             $model = new RoomPost();
+
             $model->fill([
                 'name' => $request->name,
                 'slug' => $slug,
@@ -103,6 +106,12 @@ class RoomPostController extends Controller
                 'zalo' => $request->zalo
             ]);
             $model->save();
+            $content =[
+                'title' => 'Cần xác nhận tin phòng mới',
+                'description' => "Người dùng ".auth()->user()->name." vừa đăng 1 tin phòng với tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
+            ];
+            $mailTo =User::where('role', 'admin')->first();
+            event( new RoomPostNotificationEvent($mailTo, $content));
             if ($request->hasFile('image')) {
                 foreach ($request->file('image') as $image) {
                     $uploadFiles = upload_file('room/image', $image);
@@ -126,6 +135,7 @@ class RoomPostController extends Controller
                 $surround->save();
             }
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
+
             return redirect()->route('room-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -201,6 +211,12 @@ class RoomPostController extends Controller
                 $model->image = $request->old_imageroom;
             }
             $model->save();
+            $content =[
+                'title' => 'Cần xác nhận tin phòng vừa cập nhật',
+                'description' => "Người dùng ".auth()->user()->name." vừa cập nhật phòng tin phòng có tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
+            ];
+            $mailTo =User::where('role', 'admin')->first();
+            event( new RoomPostNotificationEvent($mailTo, $content));
             if (\request()->hasFile('imageroom') && $oldImg) {
                 delete_file($oldImg);
             }
