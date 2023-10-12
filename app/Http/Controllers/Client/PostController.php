@@ -34,7 +34,16 @@ class PostController extends Controller
             ->paginate(4);
         $posts = Post::latest()->paginate(5);
         $data = Post::query()->findOrFail($id);
-        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts'));
+        $share_content=DETAIL_POST_URL;
+        $id_post=Post::query()->findOrFail($id);
+        $shareComponent = \Share::page(
+            $share_content.$id_post->id,
+            'chia se fb cua quang phuc vip pro',
+        )
+            ->facebook()
+            ->twitter()
+            ->reddit();
+        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts','shareComponent'));
     }
     /**
      * Show the form for creating a new resource.

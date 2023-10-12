@@ -140,7 +140,7 @@
                                         <p><i class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
                                         </p>
                                     </ul>
-                                    
+
                                     <ul class="d-flex fustify-content-between text-center mt-2">
                                         @if (isset($value->facilities))
                                         @foreach ($value->facilities as $facilities)
