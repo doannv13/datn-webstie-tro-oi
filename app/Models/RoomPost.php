@@ -30,7 +30,8 @@ class RoomPost extends Model
         'fullname',
         'phone',
         'email',
-        'zalo'
+        'zalo',
+        'time_end'
     ];
     public function district()
     {

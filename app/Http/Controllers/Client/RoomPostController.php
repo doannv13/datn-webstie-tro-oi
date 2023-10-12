@@ -32,7 +32,7 @@ class RoomPostController extends Controller
         $category_rooms = CategoryRoom::all();
         $wards = Ward::all();
         $districts = District::all();
-        $data = RoomPost::query()->latest()->get();
+        $data = RoomPost::query()->where('user_id', auth()->user()->id)->latest()->get();
         return view('client.room-post.index', compact('data', 'category_rooms', 'wards', 'districts'));
     }
 
@@ -53,7 +53,7 @@ class RoomPostController extends Controller
      */
     public function store(RoomPostRequest $request)
     {
-        // dd($request->file('image'));
+
         try {
 
             if ($request->hasFile('imageroom')) {
@@ -93,7 +93,6 @@ class RoomPostController extends Controller
                 'image' => $uploadFile,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'ward_id' => $ward->id,
                 'district_id' => $district->id,
                 'city_id' => $city->id,
@@ -187,8 +186,8 @@ class RoomPostController extends Controller
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
                 'managing' => $request->managing,
+                'status' => 'pendding',
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'category_room_id' => $request->category_room_id,
                 'fullname' => $request->fullname,
                 'phone' => $request->phone,

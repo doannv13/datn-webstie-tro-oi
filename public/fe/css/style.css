@@ -1215,6 +1215,9 @@ strong {
 .content-area {
     padding: 100px 0 70px;
 }
+/* .content-area {
+  padding: 0 0 70px !important;
+} */
 
 .content-area-2 {
     padding: 80px 0;

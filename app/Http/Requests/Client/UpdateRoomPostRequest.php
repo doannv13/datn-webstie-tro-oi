@@ -43,4 +43,39 @@ class UpdateRoomPostRequest extends FormRequest
             'zalo' => 'required|regex:/^[0-9]{10}$/'
         ];
     }
+    function messages()
+    {
+        return [
+            'name.required' => 'Tiêu đề không được bỏ trống',
+            'name.unique' => 'Tiêu đề đã tồn tại',
+
+            'price.integer' => 'Giá tiền phải là số',
+            'price.required' => 'Giá tiền không được để trống',
+
+            'acreage.required' => 'Diện tích không được để trống',
+            'acreage.integer' => 'Diện tích phải là số',
+
+            'empty_room.required' => 'Số phòng trống không được để trống',
+            'empty_room.integer' => 'Số phòng trống phải là số',
+
+            'address.required' => 'Địa chỉ không được để trống',
+            'address.address_full' => 'Địa chỉ không được để trống',
+
+            'description.required' => 'Mô tả không được để trống',
+            'ward_id.required' => 'Xã phường bắt buộc phải chọn',
+            'district_id.required' => 'Quận huyện bắt buộc phải chọn',
+            'city_id.required' => 'Thành phố bắt buộc phải chọn',
+            'facility.required' => 'Tiện ích bắt buộc phải chọn',
+            'surrounding.required' => 'Môi trường xung quanh bắt buộc phải chọn',
+            'category_room_id.required' => 'Danh mục bắt buộc phải chọn',
+            'fullname.required' => 'Họ tên không được để tr',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'phone.regex' => 'Số điện thoại không hợp lệ',
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không hợp lệ',
+            'zalo.required' => 'Zalo không được để trống',
+            'zalo.regex' => 'Zalo không hợp lệ',
+            'imageroom.required' => 'Ảnh nổi bật không được để trống',
+        ];
+    }
 }

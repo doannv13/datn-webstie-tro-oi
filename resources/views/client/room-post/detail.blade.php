@@ -45,6 +45,11 @@
                                 <div class="slider slider-for pb-sm-3">
                                     <div><img src="{{ asset($roomposts->image) }}" class="w-100 img-fluid" alt="photo">
                                     </div>
+                                    @foreach ($images as $image)
+                                        <div class="p-1"><img src=" {{ asset($image->name) }}" class="img-fluid"
+                                                alt="photo">
+                                        </div>
+                                    @endforeach
                                     {{-- <div><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="w-100 img-fluid"
                                             alt="photo"></div>
                                     <div><img src="{{ asset('fe/img/room/img-5.jpg') }}" class="w-100 img-fluid"

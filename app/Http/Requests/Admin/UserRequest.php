@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
             'password' => 'required|min:6|max:100',
             'phone' => 'required|regex:/^[0-9]{9,}$/|max:12|min:9|unique:users,phone,' . $this->id,
             'avatar' => 'image',
+            'roles' => 'required|exists:roles,id',
         ];
     }
     public function messages(): array

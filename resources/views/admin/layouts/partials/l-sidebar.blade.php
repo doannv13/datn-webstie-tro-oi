@@ -61,9 +61,9 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
 
+
             <ul id="side-menu">
                 <li class="menu-title">Navigation</li>
-
                 <li>
                     <a href="{{ asset('./be/#dashboard') }}" data-bs-toggle="collapse">
                         <i class="fe-folder-minus"></i>
@@ -259,21 +259,79 @@
                 </li>
 
                 <li>
-                    <a href="{{ asset('./be/#pq') }}" data-bs-toggle="collapse">
+                    <a href="#permissions" data-bs-toggle="collapse">
                         <i class="fe-folder-minus"></i>
-                        <span>Phân quyền</span>
+                        <span>Quyền</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="pq">
+                    <div class="collapse" id="permissions">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{ route('permissions.create') }}">- Thêm mới</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{ route('permissions.index') }}">- Danh sách </a>
                             </li>
                             <li>
-                                <a href="#">- Thùng rác</a>
+                                <a href="{{ route('permissions.deleted') }}">- Thùng rác</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#role" data-bs-toggle="collapse">
+                        <i class="fe-folder-minus"></i>
+                        <span>Vai trò</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="role">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('roles.create') }}">- Thêm mới</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('roles.index') }}">- Danh sách </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('roles.deleted') }}">- Thùng rác</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#role-permission" data-bs-toggle="collapse">
+                        <i class="fe-folder-minus"></i>
+                        <span>Vai trò và quyền</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="role-permission">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('roles-permissions.create') }}">- Gán quyền</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('roles-permissions.index') }}">- Danh sách </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#admin" data-bs-toggle="collapse">
+                        <i class="fe-folder-minus"></i>
+                        <span>Admin</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="admin">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admins.create') }}">- Thêm mới</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admins.index') }}">- Danh sách </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admins-deleted') }}">- Thùng rác </a>
                             </li>
                         </ul>
                     </div>
@@ -282,12 +340,12 @@
                 <li class="menu-title mt-2">Quản lý đơn hàng</li>
 
                 <li>
-                    <a href="{{ asset('./be/#ttdh') }}" data-bs-toggle="collapse">
+                    <a href="{{ route('points.index') }}" data-bs-toggle="">
                         <i class="fe-folder-minus"></i>
-                        <span>Thông tin đơn hàng</span>
-                        <span class="menu-arrow"></span>
+                        <span>Xác nhận nạp ví</span>
+                        {{-- <span class="menu-arrow"></span> --}}
                     </a>
-                    <div class="collapse" id="ttdh">
+                    {{-- <div class="collapse" id="ttdh">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#">- Thêm mới</a>
@@ -299,7 +357,7 @@
                                 <a href="#">- Thùng rác</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </li>
 
                 <li>

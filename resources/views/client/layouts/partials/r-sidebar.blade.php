@@ -1,4 +1,19 @@
 <div class="sidebar">
+    @foreach ($global_sidebar_top_ad as $item)
+        <div class="social-media sidebar-widget clearfix">
+            <a href="{{ $item->url }}">
+                <div class="photo-thumbnail p-2">
+                    <div class="">
+                        @if ($item->image && asset($item->image))
+                            <img class="w-100" src="{{ asset($item->image) }}" alt="photo" height="200px">
+                        @else
+                            <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo" height="200px">
+                        @endif
+                    </div>
+                </div>
+            </a>
+        </div>
+    @endforeach
     <!-- Top 10 -->
     @if (room_posts())
         @if (count(room_posts()))
@@ -60,8 +75,7 @@
                         </div>
                         <div class="content">
                             <h3 class="media-heading">
-                                <a href="rooms-details.html">{{ $value->title }}</a>
-                            </h3>
+                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title,0,25)}}
                         </div>
                     </div>
                 @endforeach
@@ -69,4 +83,19 @@
         @endif
     @endif
 
+    @foreach ($global_sidebar_bottom_ad as $item)
+        <div class="social-media sidebar-widget clearfix">
+            <a href="{{ $item->url }}">
+                <div class="photo-thumbnail p-2">
+                    <div class="">
+                        @if ($item->image && asset($item->image))
+                            <img class="w-100" src="{{ asset($item->image) }}" alt="photo" height="200px">
+                        @else
+                            <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo" height="200px">
+                        @endif
+                    </div>
+                </div>
+            </a>
+        </div>
+    @endforeach
 </div>

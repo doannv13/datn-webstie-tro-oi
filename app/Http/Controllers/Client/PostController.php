@@ -33,7 +33,9 @@ class PostController extends Controller
             ->having('room_posts_count', '>', 0)
             ->paginate(4);
         $posts = Post::latest()->paginate(5);
+
         $data = Post::query()->findOrFail($id);
+
         $share_content=DETAIL_POST_URL;
         $id_post=Post::query()->findOrFail($id);
         $shareComponent = \Share::page(
@@ -43,6 +45,8 @@ class PostController extends Controller
             ->facebook()
             ->twitter()
             ->reddit();
+      
+        $data->increment('view');
         return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts','shareComponent'));
     }
     /**
