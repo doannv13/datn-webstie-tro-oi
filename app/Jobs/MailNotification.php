@@ -14,13 +14,15 @@ class MailNotification implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $data;
+    protected $verification;
     /**
      * Create a new job instance.
      */
-    public function __construct($data)
+    public function __construct($data,$verification)
     {
         //
         $this->data = $data;
+        $this->verification = $verification;
     }
 
     /**
@@ -29,7 +31,7 @@ class MailNotification implements ShouldQueue
     public function handle(): void
     {
         //
-        $email = new EmailNotification();
+        $email = new EmailNotification($this->verification);
         Mail::to($this->data['email'])->send($email);
     }
 }
