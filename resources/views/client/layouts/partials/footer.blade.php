@@ -101,9 +101,10 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="clearfix pull-right">
                         <div class="blog-share">
-{{--                            <ul class="social-list">--}}
-{{--                                {!! $shareComponent !!}--}}
-{{--                            </ul>--}}
+                            {{-- <ul class="social-list">
+                                {!! $shareComponent !!}
+                            </ul> --}}
+
                         </div>
                     </div>
                 </div>
