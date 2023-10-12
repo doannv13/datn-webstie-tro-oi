@@ -104,6 +104,7 @@
                             {{-- <ul class="social-list">
                                 {!! $shareComponent !!}
                             </ul> --}}
+
                         </div>
                     </div>
                 </div>
