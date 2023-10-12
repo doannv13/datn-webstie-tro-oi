@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\RoomPost;
 use App\Models\Services;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServicesController extends Controller
 {
@@ -14,8 +17,7 @@ class ServicesController extends Controller
     public function index()
     {
         //
-        $services=Services::all();
-        return view('client.services.index',compact('services'));
+       
     }
 
     /**
@@ -47,16 +49,30 @@ class ServicesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $services=Services::all();
+        return view('client.services.index',compact('services','id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
-    }
+{
+    $user_id=Auth::user()->id;
+        //lấy số point của người đang đăng nhập
+        $user=User::find($user_id);
+        //lấy thông tin đăng theo id
+        $room_post=RoomPost::find($id);
+        //lấy id services của gói dịch vụ muốn mua
+        $services_id=$request->input('services_id');
+        //lấy thông tin services theo id
+        $services=Services::find($services_id);
+        dd($services);
+        if($user->point>$services->price){
+            $user->point=$user->point-$services->price;
+            $room_post->id_services=$services_id;
+        }
+}
 
     /**
      * Remove the specified resource from storage.
