@@ -22,7 +22,17 @@ class PermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|max:255|unique:permissions,name," .$this->id
+            "name" => "required|string|max:255|unique:permissions,name," . $this->id
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Tên là trường bắt buộc.',
+            'name.string' => 'Tên phải là một chuỗi.',
+            'name.max' => 'Tên không được vượt quá :max ký tự.',
+            'name.unique' => 'Tên đã tồn tại trong hệ thống.',
         ];
     }
 }

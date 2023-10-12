@@ -60,23 +60,7 @@
                     <!-- Blog box end -->
 
                     <!-- Phân trang -->
-                    <div class="pagination-box">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                                </li>
-                                <li class="page-item"><a class="page-link active" href="blog-right-sidebar.html">1</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="blog-right-sidebar.html">2</a></li>
-                                <li class="page-item"><a class="page-link" href="blog-right-sidebar.html">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="blog-full-width.html"><i
-                                            class="fa fa-angle-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                         {{ $data->links() }}
                     <!-- End phân trang -->
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12">

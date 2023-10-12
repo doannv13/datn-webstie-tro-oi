@@ -32,7 +32,7 @@ class PostController extends Controller
         $categories = CategoryRoom::withCount('roomPosts')
             ->having('room_posts_count', '>', 0)
             ->paginate(4);
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::latest()->paginate(4);
 
         $data = Post::query()->findOrFail($id);
 
@@ -45,9 +45,14 @@ class PostController extends Controller
             ->facebook()
             ->twitter()
             ->reddit();
-      
+
         $data->increment('view');
-        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts','shareComponent'));
+        $data = Post::with(['tags' => function ($query) {
+            $query->where('status', 'active');
+        }])->findOrFail($id);
+
+        $postTags = $data->tags;
+        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts', 'postTags','shareComponent'));
     }
     /**
      * Show the form for creating a new resource.
