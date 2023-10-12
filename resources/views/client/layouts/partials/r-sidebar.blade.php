@@ -85,15 +85,15 @@
         </ul>
     </div>
     <!-- Truyền thông -->
-    <div class="social-media sidebar-widget clearfix">
-        <div class="main-title-2">
-            <h1>Truyền thông</h1>
-        </div>
-        <ul class="social-list">
-            <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
-            <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-        </ul>
-    </div>
+{{--    <div class="social-media sidebar-widget clearfix">--}}
+{{--        <div class="main-title-2">--}}
+{{--            <h1>Truyền thông</h1>--}}
+{{--        </div>--}}
+{{--        <ul class="social-list">--}}
+{{--            <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a></li>--}}
+{{--            <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>--}}
+{{--            <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>--}}
+{{--            <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>--}}
+{{--        </ul>--}}
+{{--    </div>--}}
 </div>

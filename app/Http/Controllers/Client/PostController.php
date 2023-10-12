@@ -32,7 +32,7 @@ class PostController extends Controller
         $categories = CategoryRoom::withCount('roomPosts')
             ->having('room_posts_count', '>', 0)
             ->paginate(4);
-        $posts = Post::latest()->paginate(5);
+        $posts = Post::latest()->paginate(4);
 
         $data = Post::query()->findOrFail($id);
         $data->increment('view');
