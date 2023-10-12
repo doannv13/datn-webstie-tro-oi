@@ -40,7 +40,7 @@ class TransactionController extends Controller
     {
         $model = new Transaction();
         $model->fill($request->all());
-        $model->point = intval(str_replace(',', '', $model->point));
+        $model->point = intval(str_replace('.', '', $model->point));
         $model->action ='import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.','Đơn hàng sẽ được xác nhận sớm');
