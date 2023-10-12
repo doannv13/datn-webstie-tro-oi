@@ -22,7 +22,6 @@ class CategoryRoom extends Model
     public static function boot()
     {
         parent::boot();
-
         static::deleting(function ($categoryroom) {
             $roomPostsToUpdate = RoomPost::where('category_room_id', $categoryroom->id)->get();
 

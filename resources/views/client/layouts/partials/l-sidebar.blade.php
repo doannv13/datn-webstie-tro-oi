@@ -1,8 +1,8 @@
 @extends('client.layouts.master')
 @section('content')
     <!-- Blog body start -->
-    <div class="blog-body content-area">
-        <div class="container-fluid">
+    <div class="blog-body">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-sm-12" style="max-height: 100%;">
                     <div class="sidebar" style="height: 100%;">
@@ -28,7 +28,9 @@
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-12 col-sm-12">
-                    @yield('main')
+                    {{-- <div class="container"> --}}
+                        @yield('main')
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

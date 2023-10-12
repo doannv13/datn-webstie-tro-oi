@@ -296,7 +296,7 @@
             <!-- end row -->
         </form>
         <div class="sidebar row p-3">
-            <h6 class="mb-0 text-uppercase">Sửa ảnh </h6>
+            <h6 class="mb-0 text-uppercase">Sửa ảnh chi tiết </h6>
             <hr>
             <div class="card">
                 <div class="card-body">
@@ -310,7 +310,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <form method="post" action="{{ route('update-room-posts-image') }}"
+                            <form method="post" action="{{ route('admin-update-room-posts-image') }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @foreach ($multiImgs as $key => $item)
@@ -324,13 +324,13 @@
                                         <td class="">
                                             <input type="submit" class="btn btn-primary px-4" value="Sửa" />
 
-                                            <a href="{{ route('delete-room-posts-image', ['id' => $item->id]) }}"
+                                            <a href="{{ route('admin-delete-room-posts-image', ['id' => $item->id]) }}"
                                                 class="btn btn-danger">Xoá</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </form>
-                            <form method="post" action="{{ route('create-room-post-image') }}" id="myForm"
+                            <form method="post" action="{{ route('admin-create-room-post-image') }}" id="myForm"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id_room" value="{{ $postroom->id }}">

@@ -76,10 +76,7 @@
                                 <div class="blog-share">
                                     <h2>Share</h2>
                                     <ul class="social-list">
-                                        <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
-                                        <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                                        {!! $shareComponent !!}
                                     </ul>
                                 </div>
                                 <!-- Blog Share end -->
