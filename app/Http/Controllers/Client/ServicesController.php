@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\RoomPost;
 use App\Models\Services;
+use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServicesController extends Controller
 {
@@ -14,7 +18,8 @@ class ServicesController extends Controller
     public function index()
     {
         //
-        
+        $services=Services::all();
+        return view('client.services.index',compact('services'));
     }
 
     /**
@@ -48,7 +53,7 @@ class ServicesController extends Controller
     {
         //
         $services=Services::all();
-        return view('client.services.index',compact('services'));
+        return view('client.services.buy-services',compact('services','id'));
     }
 
     /**
@@ -57,6 +62,36 @@ class ServicesController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // lấy id user đang đăng nhập
+        $user_id=Auth::user()->id;
+        //lấy số point của người đang đăng nhập
+        $user=User::find($user_id);
+        //lấy thông tin đăng theo id
+        $room_post=RoomPost::find($id);
+        // dd($room_post);
+        //lấy id services của gói dịch vụ muốn mua
+        $services_id=$request->input('services_id');
+        //lấy thông tin services theo id
+        $services=Services::find($services_id);
+        // dd($services);
+        if($user->point>=$services->price){
+            $user->point=$user->point-$services->price;
+            $room_post->service_id=$services_id;
+            // dd($services->price,$services_id);
+            //update lại số point cho user sau khi mua
+            $user->save();
+            //update lại thông tin tin đăng sau khi mua
+            $room_post->save();
+            Toastr::success('Mua gói dịch vụ thành công','Thành công');
+            return redirect()->route('room-posts.index');
+        }else{
+            Toastr::error('Bạn cần nạp point để mua dịch vụ','Thất bại');
+            return back();
+        }
+      
+
+        
+        // dd($services_id,$id);
     }
 
     /**
