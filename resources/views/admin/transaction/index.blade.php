@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Đơn hàng</h5>
+                <h5 class="mt-0">Xác nhận nạp ví</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
                     </div>
@@ -16,6 +16,7 @@
                             <th class="col-1.5">Người nạp</th>
                             <th class="col-1.5">Số tiền</th>
                             <th class="col-1.5">Phương thức</th>
+                            <th class="col-1.5">Mã xác thực</th>
                             <th class="col-1.5">Ngày mua</th>
                             <th class="col-1.5">Trạng thái</th>
                         </tr>
@@ -27,10 +28,11 @@
                                 <td class="tabledit-view-mode">{!! substr($value->user->name, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ number_format((float) $value->point, 0, '.', ',') }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->payment_method, 0, 20) !!}</td>
+                                <td class="tabledit-view-mode">{!! substr($value->verification, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ $value->created_at }}</td>
                                 <td class="tabledit-view-mode">
                                     @if ($value->status === 'accept')
-                                        {{ $value->status }}
+                                        Thành công
                                     @else
                                         <form action="{{ route('updatePoint.status', $value->id)}}" method="POST">
                                             @csrf

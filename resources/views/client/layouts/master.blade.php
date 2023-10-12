@@ -26,7 +26,8 @@
 
 
 
-
+{{--    icon facebook--}}
+    <link rel="stylesheet" type="text/css" href="{{asset('fontawesome/css/v4-shims.css')}}" />
 
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}" />
@@ -97,6 +98,28 @@
             @yield('content')
             <!-- content -->
         </div>
+        {{--    Social Media Contact    --}}
+        <div class="clearfix">
+            <div class="media-button pull-right">
+                <div class="media-button-content">
+                    <a href="tel:0981481368" class="call-icon" rel="nofollow">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <div class="animated alo-circle"></div>
+                        <div class="animated alo-circle-fill  "></div>
+                        <span>Hotline:093 621 9271</span>
+                    </a>
+                    <a href="https://www.facebook.com/phuc.quang.50103" class="mes">
+                        <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                        <span>Nhắn tin Facebook</span>
+                    </a>
+                    <a href="http://zalo.me/0932476977" class="zalo align-items-center" >
+                        <i class="fa pt-2" style="font-size: 11px" aria-hidden="true">Zalo</i>
+                        <span>Zalo: 093 621 9271</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
 
 
         <!-- Footer start #0b4c9f -->
@@ -153,6 +176,14 @@
     </script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
         @stack('scripts')
+{{--    Contact media button--}}
+    <script>
+        $(document).ready(function(){
+            $('.user-support').click(function(event) {
+                $('.media-button-content').slideToggle();
+            });
+        });
+    </script>
 </body>
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->
 

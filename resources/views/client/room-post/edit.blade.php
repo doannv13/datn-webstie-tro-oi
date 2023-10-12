@@ -302,7 +302,7 @@
                     </div>
                 </form>
                 <div class="sidebar row p-3">
-                    <h6 class="mb-0 text-uppercase">Sửa ảnh </h6>
+                    <h6 class="mb-0 text-uppercase">Sửa ảnh chi tiết </h6>
                     <hr>
                     <div class="card">
                         <div class="card-body">

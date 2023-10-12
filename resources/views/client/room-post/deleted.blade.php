@@ -10,21 +10,18 @@
                 <table class="table align-middle" id="tech-companies-1">
                     <thead class="table-light">
                         <th style="width:5%">STT</th>
-                        <th style="width:15%">Liên hệ</th>
                         <th style="width:10%">Ảnh chính</th>
-                        <th style="width:20%">Name</th>
-                        <th style="width:20%">Địa chỉ</th>
+                        <th style="width:20%">Tiêu đề</th>
+                        <th style="width:10%">Trạng thái</th>
                         <th style="width:10%">Ngày bắt đầu</th>
                         <th style="width:10%">Ngày kết thúc</th>
-                        <th style="width:10%">Action</th>
+                        <th style="width:5%">Thao tác</th>
                     </thead>
                     <tbody class="align-items-center p-4">
                         @foreach ($data as $key => $value)
                             <tr class="">
                                 <td scope="row">{{ $key + 1 }}</td>
-                                <td class="">
-                                    <p>{{ $value->fullname }}</p>
-                                </td>
+
                                 <td>
                                     <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
                                 </td>
@@ -32,7 +29,13 @@
                                     <p>{{ $value->name }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ $value->address_full }}</p>
+                                    @if ($value->status == 'pendding')
+                                        {!! '<div class="btn btn-warning">Chờ xử lý</div>' !!}
+                                    @elseif($value->status == 'accept')
+                                        {!! '<div class="btn btn-success">Kích hoạt</div>' !!}
+                                    @else
+                                        {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
+                                    @endif
                                 </td>
 
                                 <td>{{ $value->created_at->format('d-m-Y') }}</td>
@@ -42,19 +45,19 @@
                                     <div class="d-flex m-2">
                                         <button class="btn btn-success my-1" style="font-size: 13px" data-bs-toggle="modal"
                                             data-bs-target="#exampleModalToggle{{ $value->id }}">
-                                            <i class="fas fa-eye fs-4"></i>
+                                            <i class="fas fa-eye fs-5"></i>
                                         </button>
                                         <a href="{{ route('room-posts-restore', $value->id) }}"
-                                            class="btn btn-primary text-center my-1 m-2"><i
-                                                class="fa-solid fa-trash-arrow-up fs-4"></i></a>
-                                        <form action="{{ route('room-posts-permanently-delete', $value->id) }}"
+                                            class="btn btn-primary text-center m-1"><i
+                                                class="fa-solid fa-trash-arrow-up fs-5"></i></a>
+                                        {{-- <form action="{{ route('room-posts-permanently-delete', $value->id) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')
                                             <button onclick="return confirm('Bạn có muốn xoá')" class="btn btn-danger my-1">
-                                                <i class="fa-solid fa-delete-left text-light fs-4"></i>
+                                                <i class="fa-solid fa-delete-left text-light fs-5"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </td>
                             </tr>
