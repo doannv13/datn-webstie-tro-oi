@@ -199,7 +199,7 @@
                         <!-- Upload file -->
                         <!-- Ảnh nổi bật -->
                         <div class="col-lg-12 col-md-12 mb-3">
-                            <h4 class="header-title">Tải lên ảnh nổi bật</h4>
+                            <h4 class="header-title">Tải lên ảnh nổi bật<span class="text-danger">*</span></h4>
                             <p class="sub-header">
                                 Kéo hoặc chọn file
                             </p>
@@ -212,10 +212,7 @@
                         </div>
                         <!-- Nhiều ảnh -->
                         <div class="col-lg-12 col-md-12 mb-3">
-                            <h4 class="header-title">Ảnh chi tiết phòng</h4>
-                            <p class="sub-header">
-                                Kéo hoặc chọn file
-                            </p>
+                            <h4 class="header-title">Ảnh chi tiết phòng<span class="text-danger">*</span> (Nhiều ảnh)</h4>
 
                             <div class="upload__box">
                                 <div class="upload__btn-box">
@@ -228,6 +225,9 @@
                                 <div class="upload__img-wrap"></div>
                             </div>
                         </div>
+                        @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="sidebar row p-3">

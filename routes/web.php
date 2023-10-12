@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Client\PostController as ClientPost;;
+
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -21,6 +22,11 @@ use App\Http\Controllers\Admin\RoomPostController as AdminRoomPost;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Client\ServicesController as ClientServices;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RolePermissionController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Client\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +38,6 @@ use App\Http\Controllers\Client\ServicesController as ClientServices;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 
 Auth::routes();
 //Route::get('login', function(){
@@ -110,6 +114,10 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('fogotpassword', function () {
         return view('client.auth.fogotPassword');
     });
+
+    //Nạp points
+    Route::post('points', [TransactionController::class, 'store'])->name('points.store');
+    Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
     // route dành cho admin ở đây
@@ -129,6 +137,9 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');
     Route::delete('admin-room-posts-permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('admin-room-posts-permanently-delete');
     Route::get('admin-room-posts-restore/{id}', [AdminRoomPost::class, 'restore'])->name('admin-room-posts-restore');
+    Route::post('admin-create-room-posts-image', [CLientRoomPost::class, 'createImage'])->name('admin-create-room-post-image');
+    Route::post('admin-update-room-posts-image', [CLientRoomPost::class, 'editMultiImage'])->name('admin-update-room-posts-image');
+    Route::get('admin-delete-room-posts-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('admin-delete-room-posts-image');
     Route::get('admin-room-posts-status', [AdminRoomPost::class, 'changeStatus'])->name('admin-room-posts-status');
 
     // Category Home
@@ -222,5 +233,31 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
     Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
+    // Quyền
+    Route::resource('permissions', PermissionController::class);
+    Route::get('permissions-deleted', [PermissionController::class, 'deleted'])->name('permissions.deleted');
+    Route::delete('permissions/permanently/{id}', [PermissionController::class, 'permanentlyDelete'])->name('permissions.permanently.delete');
+    Route::get('permissions/restore/{id}', [PermissionController::class, 'restore'])->name('permissions.restore');
+
+    Route::get('permissions-import', [PermissionController::class, 'importPermission'])->name('permissions-import');
+    Route::get('permissions-export', [PermissionController::class, 'Export'])->name('permissions-export');
+    Route::post('permissions-import', [PermissionController::class, 'Import'])->name('import');
+
+    // vai trò
+    Route::resource('roles', RoleController::class);
+    Route::get('roles-deleted', [RoleController::class, 'deleted'])->name('roles.deleted');
+    Route::delete('roles/permanently/{id}', [RoleController::class, 'permanentlyDelete'])->name('roles.permanently.delete');
+    Route::get('roles/restore/{id}', [RoleController::class, 'restore'])->name('roles.restore');
+
+    // Vai trò và quyền
+    Route::resource('roles-permissions', RolePermissionController::class);
+
+    // Quản lí admin
+    Route::resource('admins', AdminController::class);
+    Route::get('admins-deleted', [AdminController::class, 'deleted'])->name('admins-deleted');
+    Route::delete('admins-permanently/{id}', [AdminController::class, 'permanentlyDelete'])->name('admins-permanently-delete');
+
+    //Quản lí points
+    Route::get('points', [TransactionController::class, 'index'])->name('points.index');
+    Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
 });
-// Phân quyền end

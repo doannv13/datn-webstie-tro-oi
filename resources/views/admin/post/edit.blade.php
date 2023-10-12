@@ -39,10 +39,10 @@
                                     <div class="mb-3">
                                         <label for="simpleinput" class="form-label">Danh mục bài viết:<span
                                                 class="text-danger">*</span></label>
-                                        <select class="form-select" name="id_category_post">
+                                        <select class="form-select" name="category_post_id">
                                             @foreach ($categoryPosts as $categoryPost)
                                                 <option value="{{ $categoryPost->id }}"
-                                                    {{ $model->id_category_post == $categoryPost->id ? 'selected' : false }}>
+                                                    {{ $model->category_post_id == $categoryPost->id ? 'selected' : false }}>
                                                     {{ $categoryPost->name }}</option>
                                             @endforeach
                                         </select>
@@ -88,9 +88,9 @@
 
 {{--                                    <div class="mb-3">--}}
 {{--                                        <label for="example-textarea" class="form-label">ID Admin</label>--}}
-{{--                                        <input type="text" name="id_admin" id="simpleinput1" class="form-control"--}}
-{{--                                            value="{{ old('id_admin', $model->id_admin ?? '') }}">--}}
-{{--                                        @error('id_admin')--}}
+{{--                                        <input type="text" name="user_id" id="simpleinput1" class="form-control"--}}
+{{--                                            value="{{ old('user_id', $model->user_id ?? '') }}">--}}
+{{--                                        @error('user_id')--}}
 {{--                                            <span class="text-danger">{{ $message }}</span>--}}
 {{--                                        @enderror--}}
 {{--                                    </div>--}}
@@ -104,15 +104,15 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">View<span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" name="view" id="simpleinput1" class="form-control"
-                                               value="{{ old('view', $model->view ?? '') }}">
-                                        @error('view')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+{{--                                    <div class="mb-3">--}}
+{{--                                        <label for="example-textarea" class="form-label">View<span--}}
+{{--                                                class="text-danger">*</span></label>--}}
+{{--                                        <input type="text" name="view" id="simpleinput1" class="form-control"--}}
+{{--                                               value="{{ old('view', $model->view ?? '') }}">--}}
+{{--                                        @error('view')--}}
+{{--                                        <span class="text-danger">{{ $message }}</span>--}}
+{{--                                        @enderror--}}
+{{--                                    </div>--}}
 
                                     <button class="btn btn-primary waves-effect waves-light">Cập nhật</button>
                                     <a href="{{ route('posts.index') }}"

@@ -11,8 +11,7 @@
                     <thead class="table-light">
                         <th style="width:5%">STT</th>
                         <th style="width:10%">Ảnh chính</th>
-                        <th style="width:20%">Name</th>
-                        {{-- <th style="width:15%">Địa chỉ</th> --}}
+                        <th style="width:20%">Tiêu đề</th>
                         <th style="width:10%">Trạng thái</th>
                         <th style="width:10%">Ngày bắt đầu</th>
                         <th style="width:10%">Ngày kết thúc</th>
@@ -56,15 +55,28 @@
                                                 <i class="fa-solid fa-pen-to-square fs-5"></i>
                                             </button>
                                         </a>
-                                        <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger my-1 " style="width: 45px;"
-                                                onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                <!-- Đặt kích thước cố định là 100px -->
-                                                <i class="fa-solid fa-trash fs-5"></i>
-                                            </button>
-                                        </form>
+                                        @if ($value->status == 'accept')
+                                            <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button disabled type="submit" class="btn btn-danger my-1 "
+                                                    style="width: 45px;"
+                                                    onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                    <!-- Đặt kích thước cố định là 100px -->
+                                                    <i class="fa-solid fa-trash fs-5"></i>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger my-1 " style="width: 45px;"
+                                                    onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                    <!-- Đặt kích thước cố định là 100px -->
+                                                    <i class="fa-solid fa-trash fs-5"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                     <a class="btn btn-primary" href="{{ route('services-room.index') }}">Mua
                                         gói dịch vụ</a>
@@ -144,5 +156,7 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
+        localStorage.clear();
+
     </script>
 @endpush

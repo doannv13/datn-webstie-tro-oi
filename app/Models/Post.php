@@ -20,8 +20,8 @@ class Post extends Model
         'slug',
         'status',
         'view',
-        'id_admin',
-        'id_category_post'
+        'user_id',
+        'category_post_id'
     ];
     public $timestamps = true;
 
@@ -32,10 +32,10 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'id_admin','id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
     public function category_posts()
     {
-        return $this->belongsTo(CategoryPost::class,'id_category_post','id');
+        return $this->belongsTo(CategoryPost::class,'category_post_id','id');
     }
 }

@@ -31,7 +31,7 @@ class RoomPostController extends Controller
     public function index()
     {
         $category_rooms = CategoryRoom::all();
-        $data = RoomPost::query()->where('user_id', auth()->user()->id)->latest()->get();
+        $data = RoomPost::query()->latest()->get();
         return view('admin.room-post.index', compact('data', 'category_rooms'));
     }
 
@@ -96,7 +96,6 @@ class RoomPostController extends Controller
                 'image' => $uploadFile,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'ward_id' => $ward->id,
                 'district_id' => $district->id,
                 'city_id' => $city->id,
@@ -201,11 +200,11 @@ class RoomPostController extends Controller
                 'address' => $request->address,
                 'address_full' => $request->address_full,
                 'acreage' => $request->acreage,
+                'status' => 'pendding',
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'category_room_id' => $request->category_room_id,
                 'fullname' => $request->fullname,
                 'phone' => $request->phone,

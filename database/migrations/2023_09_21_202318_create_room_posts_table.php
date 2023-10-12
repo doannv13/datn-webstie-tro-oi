@@ -36,7 +36,8 @@ return new class extends Migration
             $table->unsignedBigInteger('category_room_id');
             $table->foreign('category_room_id')->references('id')->on('category_rooms')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('set null');
+            $table->dateTime('time_end')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
