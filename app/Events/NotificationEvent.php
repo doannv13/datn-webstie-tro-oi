@@ -16,18 +16,19 @@ class NotificationEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
     use SerializesModels;
     public $user;
+    public $verification;
    /**
      * Create a new event instance.
      *
      * @param  User  $user
      * @return void
      */
-    public function __construct()
+    public function __construct($verification)
     {
         $data['email'][0] = 'lmt.3102003@gmail.com';
+        $this->verification=$verification;
 
-
-        dispatch(new MailNotification($data));
+        dispatch(new MailNotification($data,$this->verification));
     }
 
     /**

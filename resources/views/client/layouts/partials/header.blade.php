@@ -281,23 +281,23 @@
 
                         <div class="py-3 px-3 " style="background-color: #F0FCF5;">
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 5%</span> cho giá
-                                trị nạp từ 20.000 đ đến 300.000 đ</p>
+                                trị nạp từ 20,000 đ đến 300,000 đ</p>
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 7%</span> cho giá
-                                trị nạp từ 300.000 đ đến 1.000.000 đ</p>
+                                trị nạp từ 300,000 đ đến 1,000,000 đ</p>
                             <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 10%</span> cho giá
-                                trị nạp trên 1.000.000 đ</p>
+                                trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
                             <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
                             <div class="p-1 d-flex  gap-1">
-                                <input type="button" class="btn" value="20.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="50.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="100.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="200.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="300.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="500.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="1.000.000" name="price" style="background-color: orange;color:white">
-                                <input type="button" class="btn" value="2.000.000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="100,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="200,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="300,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="500,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="1,000,000" name="price" style="background-color: orange;color:white">
+                                <input type="button" class="btn" value="2,000,000" name="price" style="background-color: orange;color:white">
 
                             </div>
                         </div>
@@ -305,7 +305,7 @@
                         <div class="p-2">
                             <div class="d-flex justify-content-between">
                                 <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
-                                <label class="text-danger">Tối thiểu 20.000</label>
+                                <label class="text-danger">Tối thiểu 20,000</label>
                             </div>
                             <input type="text" class="form-control" type="number" value="0" id="input-price" onchange="myChange()" disabled>
 
@@ -338,7 +338,7 @@
 
                             </div>
                            @if (auth()->user())
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
+                            <button onclick="confirm_points()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
                            @else
                             <label for="" class="text-danger" >Vui lòng đăng nhập</label>
                            @endif
@@ -379,22 +379,17 @@
                                 <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
                                 <input type="text" hidden id="total_point" name="point">
+                                <input type="text" hidden id="verification" name="verification">
                                 <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span></p>
-                                <p class="fw-medium">Nội dung:
-                              <span class="fw-bolder" style="color: #E24343;">trooi-{{ auth()->user()->phone }}</span>
+                                <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
                             @endif
                             </p>
                         </div>
 
                     </div>
                     <center>
-                        <button type="submit" style="background-color:  #FCAF17; " onclick="return confirm('Xác nhận thanh toán thành công?')" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
+                        <button onclick="return confirm_points()" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
                     </center>
-
-
-                    {{-- <div class="text-center p-3" id="notification" style="display: none;">
-                        <p class="fw-medium ">Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
-                    </div> --}}
                 </div>
             </form>
 
@@ -495,10 +490,50 @@
     }
 </script>
 <script>
-    if(document.getElementById("input-price").value===0){
+    let alertShown = false;
+
+    function confirm_points() {
+        if (document.getElementById("input-price").value === '0') {
         document.getElementById("btn-pay").disabled = true;
+            alert('bạn chưa chọn số tiền');
+            alertShown = false;
+        }else{
+           document.getElementById("btn-pay").disabled=false;
+            alertShown = true;
+        }
+        return alertShown;
     }
 </script>
+<!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->
+
+<script>
+    function generateRandomString(length, hasLetters, hasNumbers) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+
+        if (hasLetters) {
+            for (let i = 0; i < length - 2; i++) {
+                result += characters.charAt(Math.floor(Math.random() * 52));
+            }
+        }
+
+        if (hasNumbers) {
+            for (let i = 0; i < 2; i++) {
+                result += characters.charAt(Math.floor(52 + Math.random() * 10));
+            }
+        }
+
+        return result;
+    }
+
+    // Tạo chuỗi ngẫu nhiên: 3 chữ cái và 2 số
+    const randomContent = generateRandomString(5, true, true);
+
+    // Cập nhật nội dung phần tử
+    document.getElementById("noi_dung").querySelector("span").textContent = randomContent;
+    document.getElementById("verification").value = randomContent;
+</script>
+
 @endpush
 
 

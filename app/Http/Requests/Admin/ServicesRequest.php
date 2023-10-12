@@ -32,16 +32,16 @@ class ServicesRequest extends FormRequest
     public function messages(): array
     {
         return [
-            // name
+            // Name
             "name.required" => "Tên không được để trống",
             "name.min" => "Số kí tự phải lớn hơn 4",
             "name.max" => "Số kí tự phải nhỏ hơn 20",
             "name.unique" => "Tên dịch vụ không được trùng",
-            // price
+            // Price
             "price.required"=>"Giá dịch vụ không được để trống",
             "price.numeric"=>"Giá dịch vụ phải là số",
             "price.gte"=>"Giá dịch vụ phải lớn hơn 1000",
-            // date_number
+            // Date_number
             "date_number.required"=>"Số ngày dịch vụ không được để trống",
             "date_number.numeric"=>"Số ngày dịch vụ phải là số",
             "date_number.gte"=>"Số ngày dịch vụ phải lớn hơn 1",

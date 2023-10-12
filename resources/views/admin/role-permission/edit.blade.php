@@ -66,9 +66,9 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <button class="btn btn-primary waves-effect waves-light">Lưu</button>
+                                    <button class="btn btn-primary waves-effect waves-light col-1 me-2">Lưu</button>
                                     <a href="{{ route('roles-permissions.index') }}"
-                                        class="btn btn-warning waves-effect text-light">Trở
+                                        class="btn btn-warning waves-effect text-light col-1">Trở
                                         về</a>
                                 </form>
                             </div> <!-- end col -->

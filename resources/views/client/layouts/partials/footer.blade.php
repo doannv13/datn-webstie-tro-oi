@@ -99,26 +99,18 @@
                     </p>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="clearfix"></div>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="rss-bg"><i class="fa fa-rss"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
+                    <div class="clearfix pull-right">
+                        <div class="blog-share">
+                            {{-- <ul class="social-list">
+                                {!! $shareComponent !!}
+                            </ul> --}}
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+

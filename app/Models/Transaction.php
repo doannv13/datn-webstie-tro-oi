@@ -13,7 +13,9 @@ class Transaction extends Model
             'user_id',
             'point',
             'payment_method',
-            'status'
+            'status',
+            'points',
+            'verification'
      ];
 
      public $timestamps = true;

@@ -342,7 +342,7 @@
                 <li>
                     <a href="{{ route('points.index') }}" data-bs-toggle="">
                         <i class="fe-folder-minus"></i>
-                        <span>Xác nhận đơn hàng</span>
+                        <span>Xác nhận nạp ví</span>
                         {{-- <span class="menu-arrow"></span> --}}
                     </a>
                     {{-- <div class="collapse" id="ttdh">

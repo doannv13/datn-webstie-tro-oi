@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('point');
             $table->enum('payment_method',['transfer', 'vnpay']);
             $table->enum('action', ['import', 'export']);
+            $table->string('verification')->nullable();
             $table->enum('status', ['pending', 'accept', 'cancel'])->default('pending');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

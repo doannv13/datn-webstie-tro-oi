@@ -76,6 +76,7 @@
                         <div class="content">
                             <h3 class="media-heading">
                                 <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title,0,25)}}
+                            </h3>
                         </div>
                     </div>
                 @endforeach
@@ -83,22 +84,6 @@
         @endif
     @endif
 
-    <!-- Tag -->
-    <div class="sidebar-widget tags-box">
-        <div class="main-title-2">
-            <h1>Tags</h1>
-        </div>
-        <ul class="tags">
-            <li><a href="#">Gần trường</a></li>
-            <li><a href="#">Khuyến mãi</a></li>
-            <li><a href="#">View đẹp</a></li>
-            <li><a href="#">Chung cư</a></li>
-            <li><a href="#">Nhà trọ</a></li>
-            <li><a href="#">Nam Từ Liêm</a></li>
-            <li><a href="#">Đống Đa</a></li>
-            <li><a href="#">Hồ Tây</a></li>
-        </ul>
-    </div>
     @foreach ($global_sidebar_bottom_ad as $item)
         <div class="social-media sidebar-widget clearfix">
             <a href="{{ $item->url }}">
