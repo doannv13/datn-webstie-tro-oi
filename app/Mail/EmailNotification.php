@@ -15,9 +15,12 @@ class EmailNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    protected $verification;
+
+    public function __construct($verification)
     {
         //
+        $this->verification = $verification;
     }
 
     /**
@@ -37,6 +40,9 @@ class EmailNotification extends Mailable
     {
         return new Content(
             view: 'client.notification.notification',
+            with: [
+                'verification' => $this->verification,
+            ],
         );
     }
 

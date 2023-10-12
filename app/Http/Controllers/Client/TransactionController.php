@@ -38,15 +38,15 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd($request->all());
         $model = new Transaction();
         $model->fill($request->all());
         $model->point = intval(str_replace(',', '', $model->point));
         $model->action ='import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.','Đơn hàng sẽ được xác nhận sớm');
-        event( new NotificationEvent());
+        if($model->action==='import'){
+            event( new NotificationEvent($request->verification));
+        }
         return back();
     }
 
@@ -89,7 +89,7 @@ class TransactionController extends Controller
         $model = Transaction::find($id);
         $model->status = $newStatus;
         $model->save();
-        toastr()->success('chỉnh sửa thành công');
+        toastr()->success('Chỉnh sửa thành công','thành công');
         if($newStatus==='accept'){
             $user = User::findOrFail($model->user_id);
             $model->point = intval(str_replace(',', '', $model->point));
