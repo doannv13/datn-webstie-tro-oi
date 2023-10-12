@@ -96,7 +96,6 @@ class RoomPostController extends Controller
                 'image' => $uploadFile,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'ward_id' => $ward->id,
                 'district_id' => $district->id,
                 'city_id' => $city->id,
@@ -183,8 +182,7 @@ class RoomPostController extends Controller
 
         $tags = $postroom->tags->pluck('name')->implode(',');
 
-        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs','tags'));
-
+        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs', 'tags'));
     }
 
     /**
@@ -202,11 +200,11 @@ class RoomPostController extends Controller
                 'address' => $request->address,
                 'address_full' => $request->address_full,
                 'acreage' => $request->acreage,
+                'status' => 'pendding',
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'category_room_id' => $request->category_room_id,
                 'fullname' => $request->fullname,
                 'phone' => $request->phone,

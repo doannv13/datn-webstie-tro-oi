@@ -25,4 +25,12 @@ class TagRequest extends FormRequest
             'name' => 'required|unique:tags,name,' .  $this->input('id'),
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Tên là trường bắt buộc.',
+            'name.unique' => 'Tên đã tồn tại trong hệ thống, vui lòng chọn một tên khác.',
+        ];
+    }
 }

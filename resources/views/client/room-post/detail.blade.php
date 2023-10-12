@@ -45,6 +45,11 @@
                                 <div class="slider slider-for pb-sm-3">
                                     <div><img src="{{ asset($roomposts->image) }}" class="w-100 img-fluid" alt="photo">
                                     </div>
+                                    @foreach ($images as $image)
+                                        <div class="p-1"><img src=" {{ asset($image->name) }}" class="img-fluid"
+                                                alt="photo">
+                                        </div>
+                                    @endforeach
                                     {{-- <div><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="w-100 img-fluid"
                                             alt="photo"></div>
                                     <div><img src="{{ asset('fe/img/room/img-5.jpg') }}" class="w-100 img-fluid"
@@ -61,7 +66,7 @@
                                                 alt="photo">
                                         </div>
                                     @endforeach
-                                    {{-- 
+                                    {{--
                                     <div class="p-1"><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="img-fluid"
                                             alt="photo">
                                     </div>
@@ -104,7 +109,9 @@
                                             <p for="">Danh mục: <span
                                                     class="fw-bold">{{ $roomposts->categoryroom->name }}</span></p>
                                         </div>
+                                        <div class="mt-3 mb-3">
 
+                                        </div>
                                     </div>
                                     <!-- Rooms details section start -->
                                     <div class="rooms-detail-slider ">
@@ -151,7 +158,7 @@
                                         </div>
                                         <!-- Amenities end -->
                                         <!-- Similar room start -->
-                                        <div class="similar-rooms">
+                                        <div class="similar-rooms ">
                                             <div class="blog-section content-area comon-slick">
                                                 <!-- Main title -->
                                                 <div class="main-title-2">
@@ -167,7 +174,7 @@
                                                                         <?php
                                                                         $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                         $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-                                                                        
+
                                                                         if (Auth::check()) {
                                                                             $user_id = auth()->user()->id;
                                                                             $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -295,25 +302,50 @@
                                         </div>
                                         <!-- Similar room end -->
                                         <!-- Location start -->
-                                        <div class="row">
+                                        <div class="row ">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <!-- Location start  -->
                                                 <div class="main-title-2">
                                                     <h1>Bản đồ</h1>
                                                 </div>
-                                                <div class="location w-100 sidebar-widget mb-sm-5">
+                                                <div class="location w-100 ">
                                                     <div class="map">
                                                         <!-- Main Title 2 -->
-                                                        <div id="m  ap" class="contact-map" style="height: 662px;">
+                                                        <div id="map" class="contact-map" style="height: 662px;">
                                                             <iframe
                                                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59615.81210587678!2d105.71104243751117!3d20.95298673967121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134532bef4bcdb7%3A0xbcc7a679fcba07f6!2zSMOgIMSQw7RuZywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694537835765!5m2!1svi!2s"
-                                                                width="100%" style="border:0;" allowfullscreen=""
+                                                                width="100%" height="75%" style="border:0;" allowfullscreen=""
                                                                 loading="lazy"
                                                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- Location comments end -->
+                                            </div>
+                                        </div>
+                                        <div class="row clearfix tag-share">
+                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                                                <!-- Tags box start -->
+                                                <div class="tags-box hidden-mb-10">
+                                                    <h4>Tags</h4>
+                                                    <ul class="tags">
+                                                        <li><a href="#">Rooms</a></li>
+                                                        <li><a href="#">Promotion</a></li>
+                                                        <li><a href="#">Travel</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Tags box end -->
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                                <!-- Blog Share start -->
+                                                <div class="blog-share">
+                                                    <h4>Share</h4>
+                                                    <ul class="social-list">
+                                                        {!! $shareComponent !!}
+                                                    </ul>
+                                                </div>
+                                                <!-- Blog Share end -->
                                             </div>
                                         </div>
                                     </div>
@@ -377,11 +409,23 @@
                     </div>
 
                     @include('client.layouts.partials.r-sidebar')
+                    <!-- Tag -->
+                    <div class="sidebar-widget tags-box">
+                        <div class="main-title-2">
+                            <h1>Tags</h1>
+                        </div>
+                        <ul class="tags">
+                            @foreach ($roomposts->tags as $tag)
+                                <li><a href="{{ route('tags-show', $tag->slug) }}">{{ $tag->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
     </div>
+
     <!-- Rooms detail section end -->
 @endsection

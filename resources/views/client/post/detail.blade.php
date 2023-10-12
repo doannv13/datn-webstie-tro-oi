@@ -62,9 +62,9 @@
                                     <div class="tags-box hidden-mb-10">
                                         <h2>Tags</h2>
                                         <ul class="tags">
-                                            <li><a href="#">Rooms</a></li>
-                                            <li><a href="#">Promotion</a></li>
-                                            <li><a href="#">Travel</a></li>
+                                            @foreach ($postTags as $item)
+                                                <li><a href="{{route('tags-show', $item->slug)}}">{{ $item->name }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 @endif
@@ -76,10 +76,7 @@
                                 <div class="blog-share">
                                     <h2>Share</h2>
                                     <ul class="social-list">
-                                        <li><a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#" class="google-bg"><i class="fab fa-google"></i></a></li>
-                                        <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                                        {!! $shareComponent !!}
                                     </ul>
                                 </div>
                                 <!-- Blog Share end -->

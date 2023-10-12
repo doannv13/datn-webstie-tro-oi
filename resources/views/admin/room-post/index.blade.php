@@ -12,21 +12,19 @@
                     <table class="table table-centered mb-0" id="tech-companies-1">
                         <thead class="table-light">
                             <th style="width:5%">STT</th>
-                            <th style="width:15%">Liên hệ</th>
                             <th style="width:10%">Ảnh chính</th>
-                            <th style="width:20%">Name</th>
-                            <th style="width:20%">Địa chỉ</th>
-                            <th style="width:20%">Trạng thái</th>
-                            <th style="width:10%">Ngày đăng</th>
-                            <th style="width:10%">Action</th>
+                            <th style="width:20%">Tiêu đề</th>
+                            <th style="width:15%">Địa chỉ</th>
+                            <th style="width:15%">Trạng thái</th>
+                            <th style="width:10%">Ngày bắt đầu</th>
+                            <th style="width:10%">Ngày kết thúc</th>
+                            <th style="width:5%">Thao tác</th>
                         </thead>
                         <tbody class="align-items-center p-4">
                             @foreach ($data as $key => $value)
                                 <tr class="al">
                                     <td scope="row">{{ $key + 1 }}</td>
-                                    <td class="">
-                                        <h5>{{ $value->fullname }}</h5>
-                                    </td>
+
                                     <td>
                                         <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
                                     </td>
@@ -36,36 +34,61 @@
                                     <td>
                                         <h5>{{ $value->address_full }}</h5>
                                     </td>
-                                     <td>
-                                    <input data-id="{{ $value->id }}" class="toggle-class" type="checkbox"
-                                           data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                           data-onlabel="Bật" data-offlabel="Tắt"
-                                        {{ $value->status == 'active' ? 'checked' : '' }}>
-                                </td>
+                                    <td>
+                                        <select class="form-select mb-3 toggle-class statusSelect"
+                                            data-id="{{ $value->id }}" name="status" id="statusSelect">
+                                            <option value="pendding"
+                                                {{ $value->status == 'pendding' ? 'selected' : false }}>
+                                                Chờ xử lý
+                                            </option>
+                                            <option value="accept" {{ $value->status == 'accept' ? 'selected' : false }}>Xác
+                                                nhận
+                                            </option>
+                                            <option value="cancel" {{ $value->status == 'cancel' ? 'selected' : false }}>
+                                                Huỷ
+                                            </option>
+                                        </select>
+                                    </td>
+
+                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $value->created_at->format('d-m-Y') }}</td>
                                     <td class="">
-                                        <div class="d-flex m-2">
+                                        <div class="d-flex">
                                             <!-- Button trigger modal -->
-                                            <button class="btn btn-success  my-1" style="font-size: 13px"
+                                            <button class="btn btn-success my-1" style="font-size: 13px"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#exampleModalToggle{{ $value->id }}">
-                                                <i class="fas fa-eye fs-4"></i>
+                                                <i class="fas fa-eye fs-5"></i>
                                             </button>
-                                            <form action="{{ route('admin-room-posts.destroy', $value->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger my-1 m-2" style="width: 45px;"
-                                                    onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                    <!-- Đặt kích thước cố định là 100px -->
-                                                    <i class="fa-solid fa-trash fs-4"></i>
-                                                </button>
-                                            </form>
+                                            @if ($value->status == 'accept')
+                                                <form action="{{ route('admin-room-posts.destroy', $value->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button id="deleteButton{{ $value->id }}" type="submit"
+                                                        class="btn btn-danger m-1 delete-button" style="width: 45px;"
+                                                        disabled onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                        <i class="fa-solid fa-trash fs-5"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('admin-room-posts.destroy', $value->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button id="deleteButton{{ $value->id }}" type="submit"
+                                                        class="btn btn-danger m-1 delete-button" style="width: 45px;"
+                                                        onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                        <i class="fa-solid fa-trash fs-5"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+
 
                                             <a href="{{ route('admin-room-posts.edit', $value->id) }}">
                                                 <button type="submit" class="btn btn-primary text-center my-1"
                                                     style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
-                                                    <i class="fa-solid fa-pen-to-square fs-4"></i>
+                                                    <i class="fa-solid fa-pen-to-square fs-5"></i>
                                                 </button>
                                             </a>
                                         </div>
@@ -146,12 +169,20 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
-
-        $(function() {
-            $('.toggle-class').change(function() {
-                let status = $(this).prop('checked') == true ? 'active' : 'inactive';
+        localStorage.clear();
+        $(document).ready(function() {
+            $(".statusSelect").change(function() {
+                let status = $(this).val();
                 let room_post_id = $(this).data('id');
+                let deleteButton = $("#deleteButton" + room_post_id);
 
+                if (status === 'accept') {
+                    deleteButton.prop('disabled', true); // Tắt nút xoá khi status là 'accept'
+                } else {
+                    deleteButton.prop('disabled', false); // Bật nút xoá cho mọi trạng thái khác
+                }
+
+                console.log(room_post_id);
                 $.ajax({
                     type: "GET",
                     dataType: "json",
@@ -161,31 +192,29 @@
                         'room_post_id': room_post_id
                     },
                     success: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
                             icon: 'success',
                             showConfirmButton: false,
                             timer: 3000
-                        })
-                        if ($.isEmptyObject(data.error)) {
+                        });
 
+                        if ($.isEmptyObject(data.error)) {
                             Toast.fire({
                                 icon: 'success',
                                 title: data.success,
-                            })
-
+                            });
                         } else {
-
                             Toast.fire({
                                 icon: 'error',
                                 title: data.error,
-                            })
+                            });
                         }
                     }
                 });
             })
-        })
+        });
     </script>
 @endpush
