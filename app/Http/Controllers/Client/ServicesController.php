@@ -9,6 +9,8 @@ use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\Transaction;
 
 class ServicesController extends Controller
 {
@@ -18,8 +20,8 @@ class ServicesController extends Controller
     public function index()
     {
         //
-        $services=Services::all();
-        return view('client.services.index',compact('services'));
+        $services = Services::paginate(3);
+        return view('client.services.index', compact('services'));
     }
 
     /**
@@ -52,8 +54,8 @@ class ServicesController extends Controller
     public function edit(string $id)
     {
         //
-        $services=Services::all();
-        return view('client.services.buy-services',compact('services','id'));
+        $services = Services::paginate(3);
+        return view('client.services.buy-services', compact('services', 'id'));
     }
 
     /**
@@ -63,34 +65,50 @@ class ServicesController extends Controller
     {
         //
         // lấy id user đang đăng nhập
-        $user_id=Auth::user()->id;
+        $user_id = Auth::user()->id;
         //lấy số point của người đang đăng nhập
-        $user=User::find($user_id);
+        $user = User::find($user_id);
         //lấy thông tin đăng theo id
-        $room_post=RoomPost::find($id);
+        $room_post = RoomPost::find($id);
         // dd($room_post);
         //lấy id services của gói dịch vụ muốn mua
-        $services_id=$request->input('services_id');
+        $services_id = $request->input('services_id');
         //lấy thông tin services theo id
-        $services=Services::find($services_id);
+        $service = Services::find($services_id);
+        $transcation = new Transaction();
         // dd($services);
-        if($user->point>=$services->price){
-            $user->point=$user->point-$services->price;
-            $room_post->service_id=$services_id;
-            // dd($services->price,$services_id);
-            //update lại số point cho user sau khi mua
-            $user->save();
-            //update lại thông tin tin đăng sau khi mua
-            $room_post->save();
-            Toastr::success('Mua gói dịch vụ thành công','Thành công');
-            return redirect()->route('room-posts.index');
-        }else{
-            Toastr::error('Bạn cần nạp point để mua dịch vụ','Thất bại');
+        if ($room_post->service_id== null || $room_post->service_id > $service->id || Carbon::now()>Carbon::parse($room_post->time_end)) {
+            if ($user->point >= $service->price) {
+
+                $user->point = $user->point - $service->price;
+                $room_post->service_id = $services_id;
+                $room_post->time_end = Carbon::now()->addDays($service->date_number);
+                $room_post->created_at=Carbon::now();
+                // dd($services->price,$services_id);
+                //đẩy lịch sử giao dịch vào bảng transaction
+                $transcation->user_id=$user_id;
+                $transcation->point=$service->price;
+                $transcation->action='export';
+                $transcation->status='accept';
+                $transcation->room_post_id=$id;
+                //update lại số point cho user sau khi mua
+                $user->save();
+                //update lại thông tin tin đăng sau khi mua
+                $room_post->save();
+                $transcation->save();
+                Toastr::success('Mua gói dịch vụ thành công', 'Thành công');
+                return redirect()->route('room-posts.index');
+            } else {
+                Toastr::error('Bạn cần nạp point để mua dịch vụ', 'Thất bại');
+                return back();
+            }
+        } else {
+            Toastr::error('Bạn chỉ được mua gói dịch vụ cao cấp hơn !', 'Thất bại');
             return back();
         }
-      
 
-        
+
+
         // dd($services_id,$id);
     }
 

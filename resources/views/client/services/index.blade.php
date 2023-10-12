@@ -29,8 +29,6 @@
 
 
             @endforeach
-            @endif
-            @endif
             <div class="col-lg-3 col-md-12">
                 <div class="pricing-1 plan" style="height: 500px;">
                     <div class="plan-header mb-4 ">
@@ -45,6 +43,11 @@
                     </div>
                 </div>
             </div>
+            {{ $services->links() }}
+            @endif
+            @endif
+            
+            
         </div>
         <div class="row   text-white" style="background-color: #fbfbfb;">
             <h3 class="text-center fs-8">Minh hoạ tin đăng</h3>

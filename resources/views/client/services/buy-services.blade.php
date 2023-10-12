@@ -8,7 +8,7 @@
             @if(isset($services))
             @if(count($services))
             @foreach($services as $key => $value)
-            <form class="col-lg-3 col-md-12" action="{{route('services-room-posts.update',$id)}}" method="post">
+            <form class="col-lg-4 col-md-12" action="{{route('services-room-posts.update',$id)}}" method="post">
                 <div>
                     @csrf
                     @method('PUT')
@@ -56,6 +56,7 @@
                 </div>
             </form>
             @endforeach
+            {{$services->links()}}
             @endif
             @endif
         </div>

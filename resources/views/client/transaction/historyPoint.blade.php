@@ -13,7 +13,7 @@
                         <th style="width:15%">Hành động</th>
                         <th style="width:10%">Số tiền</th>
                         <th style="width:20%">Trạng thái</th>
-                        <th style="width:10%">Ngày xử lí</th>
+                        <th style="width:10%">Thời gian</th>
                     </thead>
                     <tbody class="align-items-center p-4">
                         @foreach ($data as $key => $value)
@@ -28,7 +28,12 @@
 
                                 </td>
                                 <td>
-                                    {{ number_format( $value->point) }}
+                                    @if ($value->action ==='import')
+                                    <p class="text-success"> + {{  number_format( $value->point) }}</p>
+                                    @else
+                                    <p class="text-danger"> - {{  number_format( $value->point) }}</p>
+                                    @endif
+                                   
                                 </td>
                                 <td>
                                     @if($value->status ==='pending')
@@ -36,7 +41,7 @@
                                         Đang chờ xử lí
                                     </p>
                                     @elseif ($value->status ==='accept')
-                                       <p style="color: green">Nạp thành công</p>
+                                       <p style="color: green">Thành công</p>
                                     @else
                                     <p style="color: red">
                                         Thất bại
@@ -44,7 +49,7 @@
 
                                     @endif
                                 </td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $value->created_at}}</td>
                             </tr>
                         @endforeach
 

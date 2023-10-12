@@ -12,6 +12,7 @@
                         <th style="width:5%">STT</th>
                         <th style="width:10%">Ảnh chính</th>
                         <th style="width:20%">Tiêu đề</th>
+                        <th style="width:10%">Loại tin</th>
                         <th style="width:10%">Trạng thái</th>
                         <th style="width:10%">Ngày bắt đầu</th>
                         <th style="width:10%">Ngày kết thúc</th>
@@ -27,9 +28,13 @@
                                 <td>
                                     {{ $value->name }}
                                 </td>
-                                {{-- <td>
-                                    {{ substr($value->address_full, 0, 20) }}
-                                </td> --}}
+                                <td>
+                                    @if($value->service_id!=null)
+                                    {{$value->service->name}}
+                                    @else
+                                    <p>Tin thường</p>
+                                    @endif
+                                </td>
                                 <td>
                                     @if ($value->status == 'pendding')
                                         {!! '<div class="btn btn-warning">Chờ xử lý</div>' !!}
@@ -39,8 +44,8 @@
                                         {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
                                     @endif
                                 </td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $value->created_at}}</td>
+                                <td>{{ $value->time_end}}</td>
                                 <td class="">
                                     <div class="d-flex justify-content-around align-items-center">
                                         <!-- Button trigger modal -->
@@ -78,10 +83,12 @@
                                             </form>
                                         @endif
                                     </div>
+                                    @if($value->status==='accept')
+                                    <a class="btn btn-primary px-4 w-100" href="{{ route('services-room-posts.edit',$value->id) }}">
+                                        Dịch vụ</a>
+                                    @else
 
-                                    <a class="btn btn-primary px-4" href="{{ route('services-room-posts.edit',$value->id) }}">Mua
-
-                                        gói dịch vụ</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

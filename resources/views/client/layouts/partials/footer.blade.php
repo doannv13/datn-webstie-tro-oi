@@ -102,7 +102,7 @@
                     <div class="clearfix pull-right">
                         <div class="blog-share">
                             <ul class="social-list">
-                                {!! $shareComponent !!}
+                              
                             </ul>
                         </div>
                     </div>
