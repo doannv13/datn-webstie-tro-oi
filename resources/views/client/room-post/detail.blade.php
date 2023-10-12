@@ -28,57 +28,27 @@
                         <!-- Heading courses end -->
                         <!-- sidebar start -->
                         <div class="rooms-detail-slider">
-                            {{-- <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="heading-rooms">
-                                        <h3>{{ $roomposts->name }}</h3>
-                                        <p>
-                                            <i class="fas fa-map-marker-alt"></i>{{ $roomposts->address_full }}
-                                        </p>
-                                        <h3><span>${{ $roomposts->price }}VND/Tháng</span></h3>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                            <!--  Rooms detail slider start -->
-                            <div class="rooms-detail-slider mb-40 ">
-                                <div class="slider slider-for pb-sm-3">
-                                    <div><img src="{{ asset($roomposts->image) }}" class="w-100 img-fluid" alt="photo">
+                            <div class="rooms-detail-slider mb-40 comon-slick">
+                                <div class="slider slider-for pb-sm-3 slick comon-slick-inner wow">
+                                    <div><img src="{{ asset($roomposts->image) }}" class="w-100 img-main-slick img-fluid">
                                     </div>
                                     @foreach ($images as $image)
-                                        <div class="p-1"><img src=" {{ asset($image->name) }}" class="img-fluid"
-                                                alt="photo">
+                                        <div class="p-1"><img src=" {{ asset($image->name) }}"
+                                                class="w-100 img-main-slick img-fluid" alt="photo">
                                         </div>
                                     @endforeach
-                                    {{-- <div><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="w-100 img-fluid"
-                                            alt="photo"></div>
-                                    <div><img src="{{ asset('fe/img/room/img-5.jpg') }}" class="w-100 img-fluid"
-                                            alt="photo"></div>
-                                    <div><img src="{{ asset('fe/img/room/img-6.jpg') }}" class="w-100 img-fluid"
-                                            alt="photo"></div>
-                                    <div><img src="{{ asset('fe/img/room/img-3.jpg') }}" class="w-100 img-fluid"
-                                            alt="photo"></div> --}}
                                 </div>
                                 <hr>
                                 <div class="slider slider-nav d-lg-grid gap-3">
+                                    <div class="p-1">
+                                        <img src="{{ asset($roomposts->image) }}" class="w-100 img-slick img-fluid"
+                                            alt="photo">
+                                    </div>
                                     @foreach ($images as $image)
-                                        <div class="p-1"><img src=" {{ asset($image->name) }}" class="img-fluid"
-                                                alt="photo">
+                                        <div class="p-1"><img src=" {{ asset($image->name) }}"
+                                                class="img-slick img-fluid" alt="photo">
                                         </div>
                                     @endforeach
-                                    {{--
-                                    <div class="p-1"><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="img-fluid"
-                                            alt="photo">
-                                    </div>
-                                    <div class="p-1"><img src="{{ asset('fe/img/room/img-5.jpg') }}" class="img-fluid"
-                                            alt="photo">
-                                    </div>
-                                    <div class="p-1"><img src="{{ asset('fe/img/room/img-6.jpg') }}" class="img-fluid"
-                                            alt="photo">
-                                    </div>
-                                    <div class="p-1"><img src="{{ asset('fe/img/room/img-3.jpg') }}" class="img-fluid"
-                                            alt="photo">
-                                    </div> --}}
                                 </div>
                                 <hr>
                             </div>
@@ -314,8 +284,8 @@
                                                         <div id="map" class="contact-map" style="height: 662px;">
                                                             <iframe
                                                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59615.81210587678!2d105.71104243751117!3d20.95298673967121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134532bef4bcdb7%3A0xbcc7a679fcba07f6!2zSMOgIMSQw7RuZywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694537835765!5m2!1svi!2s"
-                                                                width="100%" height="75%" style="border:0;" allowfullscreen=""
-                                                                loading="lazy"
+                                                                width="100%" height="75%" style="border:0;"
+                                                                allowfullscreen="" loading="lazy"
                                                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                                                         </div>
                                                     </div>

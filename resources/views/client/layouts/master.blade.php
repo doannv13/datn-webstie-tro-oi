@@ -175,6 +175,32 @@
         dselect(document.querySelector('#dselect-example'))
     </script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
+    <script>
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.slider-nav',
+            focusOnSelect: true
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: true,
+            focusOnSelect: true,
+            prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>'
+        });
+
+        $('.slider-nav').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+            const thumbnailImageURL = slick.$slides.eq(nextSlide).find('img').attr('src');
+            $('.slider-for').find('.img-main-slick').attr('src', thumbnailImageURL);
+        });
+    </script>
+
         @stack('scripts')
 {{--    Contact media button--}}
     <script>

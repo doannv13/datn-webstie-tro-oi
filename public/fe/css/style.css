@@ -9764,3 +9764,11 @@ div#social-links ul li a:hover {
     left: -10px;
     top: 10px;
 }
+
+.img-slick{
+    height: 100px !important;
+}
+
+.img-main-slick{
+    height: 500px !important;
+}
