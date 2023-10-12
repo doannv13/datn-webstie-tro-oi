@@ -75,6 +75,9 @@ Route::get('search', [HomeController::class, 'index'])->name('search');
 Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
+Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
+
+
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây

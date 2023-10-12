@@ -409,6 +409,17 @@
                     </div>
 
                     @include('client.layouts.partials.r-sidebar')
+                    <!-- Tag -->
+                    <div class="sidebar-widget tags-box">
+                        <div class="main-title-2">
+                            <h1>Tags</h1>
+                        </div>
+                        <ul class="tags">
+                            @foreach ($roomposts->tags as $tag)
+                                <li><a href="{{ route('tags-show', $tag->slug) }}">{{ $tag->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
 
                 </div>
             </div>
