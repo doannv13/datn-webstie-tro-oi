@@ -36,7 +36,13 @@ class PostController extends Controller
 
         $data = Post::query()->findOrFail($id);
         $data->increment('view');
-        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts'));
+
+        $data = Post::with(['tags' => function ($query) {
+            $query->where('status', 'active');
+        }])->findOrFail($id);
+
+        $postTags = $data->tags;
+        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts', 'postTags'));
     }
     /**
      * Show the form for creating a new resource.

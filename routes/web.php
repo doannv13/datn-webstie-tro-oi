@@ -194,6 +194,9 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('tags-restore/{id}', [TagController::class, 'restore'])->name('tags-restore');
     Route::get('tags-status', [TagController::class, 'changeStatus'])->name('tags-status-change');
 
+    Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
+
+
     // Dịch vụ
     Route::resource('services', ServicesController::class);
     Route::get('services-deleted', [ServicesController::class, 'deleted'])->name('services-deleted');

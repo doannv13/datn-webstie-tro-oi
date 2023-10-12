@@ -62,9 +62,9 @@
                                     <div class="tags-box hidden-mb-10">
                                         <h2>Tags</h2>
                                         <ul class="tags">
-                                            <li><a href="#">Rooms</a></li>
-                                            <li><a href="#">Promotion</a></li>
-                                            <li><a href="#">Travel</a></li>
+                                            @foreach ($postTags as $item)
+                                                <li><a href="{{route('tags-show', $item->slug)}}">{{ $item->name }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 @endif

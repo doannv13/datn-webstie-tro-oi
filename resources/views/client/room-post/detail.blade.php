@@ -61,7 +61,7 @@
                                                 alt="photo">
                                         </div>
                                     @endforeach
-                                    {{-- 
+                                    {{--
                                     <div class="p-1"><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="img-fluid"
                                             alt="photo">
                                     </div>
@@ -167,7 +167,7 @@
                                                                         <?php
                                                                         $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                         $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-                                                                        
+
                                                                         if (Auth::check()) {
                                                                             $user_id = auth()->user()->id;
                                                                             $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -377,6 +377,17 @@
                     </div>
 
                     @include('client.layouts.partials.r-sidebar')
+                    <!-- Tag -->
+                    <div class="sidebar-widget tags-box">
+                        <div class="main-title-2">
+                            <h1>Tags</h1>
+                        </div>
+                        <ul class="tags">
+                            @foreach ($roomposts->tags as $tag)
+                                <li><a href="{{ route('tags-show', $tag->slug) }}">{{ $tag->name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
 
                 </div>
             </div>
