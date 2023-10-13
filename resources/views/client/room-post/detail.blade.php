@@ -336,7 +336,7 @@
                             <div class="contact-details">
                                 <div class="row contact-item mb-3 align-items-center">
                                     <div class="col-md-4 mx-auto">
-                                        <img src="{{ asset(auth()->user()->avatar) }}"
+                                        <img src="{{ $roomposts->user->avatar ? asset($roomposts->user->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
                                             alt=""style="background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 70px; width:70px;">
                                     </div>
                                     <div class="col-md-8">
