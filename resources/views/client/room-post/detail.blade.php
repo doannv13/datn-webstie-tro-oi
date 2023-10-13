@@ -97,7 +97,7 @@
                                         <!-- Rooms description end -->
 
                                         <!-- Amenities start -->
-                                        <div class="amenities mb-5">
+                                        <div class="amenities mb-30 ">
                                             <div class="main-title-2">
                                                 <h1>Tiện ích có sẵn</h1>
                                             </div>
@@ -105,14 +105,14 @@
                                             <div class="row">
                                                 @foreach ($roomposts->facilities as $key => $value)
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
-                                                        <i class="fas fa-wrench me-2"></i>{{ $value->name }}
+                                                        <i class="{{ $value->icon }} me-2"></i>{{ $value->name }}
                                                         {{-- <i class="{{ $value->icon }}"></i>{{ $value->name }} --}}
                                                     </div>
                                                 @endforeach
 
                                             </div>
                                         </div>
-                                        <div class="amenities mb-10">
+                                        <div class="amenities mb-30">
                                             <div class="main-title-2">
                                                 <h1>Khu vực xung quanh</h1>
                                             </div>
@@ -120,12 +120,40 @@
                                             <div class="row">
                                                 @foreach ($roomposts->surrounds as $key => $value)
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
-                                                        <i class="fas fa-wrench me-2"></i>{{ $value->name }}
+                                                        <i class="{{ $value->icon }} me-2"></i>{{ $value->name }}
                                                     </div>
                                                 @endforeach
 
                                             </div>
                                         </div>
+
+                                        <div class="amenities mb-30">
+                                            <div class="main-title-2">
+                                                <h1>Đặc điểm tin đăng</h1>
+                                            </div>
+                                            <table class="table border">
+                                                <tr>
+                                                    <td>Mã tin đăng:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Loại tin đăng:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày bắt đầu:</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày kết thúc:</td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </table>
+
+
+                                        </div>
+
                                         <!-- Amenities end -->
                                         <!-- Similar room start -->
                                         <div class="similar-rooms ">
@@ -144,7 +172,7 @@
                                                                         <?php
                                                                         $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                         $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-
+                                                                        
                                                                         if (Auth::check()) {
                                                                             $user_id = auth()->user()->id;
                                                                             $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -231,18 +259,19 @@
                                                                                 </a>
                                                                             </p>
                                                                             <div class="fecilities row">
-                                                                                <div
-                                                                                    class="d-flex justify-content-between align-items-center mb-2">
-                                                                                    <p class="pe-5"><span
-                                                                                            class="text-danger"><i
-                                                                                                class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($value->price) }}
-                                                                                            Triệu/Tháng</span>
-                                                                                    </p>
-                                                                                    <p><span><i
-                                                                                                class="fas fa-expand me-2"></i></i>{{ $roomposts->acreage }}
-                                                                                            m2</span>
-                                                                                    </p>
-                                                                                </div>
+                                                                                {{-- <div
+                                                                                    class="d-flex justify-content-between align-items-center mb-2"> --}}
+                                                                                <p class="pe-5 pb-2"><span
+                                                                                        class="text-danger"><i
+                                                                                            class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($value->price) }}
+                                                                                        Triệu/Tháng</span>
+                                                                                </p>
+
+                                                                                <p><span><i
+                                                                                            class="fas fa-expand me-2 pb-2"></i></i>{{ $roomposts->acreage }}
+                                                                                        m2</span>
+                                                                                </p>
+                                                                                {{-- </div> --}}
 
                                                                                 <p><i
                                                                                         class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
@@ -336,16 +365,16 @@
                             <div class="contact-details">
                                 <div class="row contact-item mb-3 align-items-center">
                                     <div class="col-md-4 mx-auto">
-                                        <img src="{{ asset(auth()->user()->avatar) }}"
+                                        <img src="{{ $roomposts->user->avatar ? asset($roomposts->user->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
                                             alt=""style="background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 70px; width:70px;">
+
+
                                     </div>
                                     <div class="col-md-8">
                                         {{-- <h2> Được đăng bởi </h2> --}}
                                         <h5>{{ $roomposts->fullname }}</h5>
                                         <p><a href="">Xem thêm bài đăng</a></p>
-                                        {{-- <a>
-                                            <p class="text-decoration-underline"> Xem thêm bài đăng </p>
-                                        </a> --}}
+
                                     </div>
                                 </div>
                                 <div class="heading-rooms">
@@ -356,19 +385,8 @@
                                                 href="tel:0477-0477-8556-552">{{ $roomposts->phone }}</a>
                                         </div>
 
-                                        {{-- <button style="background-color: #F4A460"
-                                            class="mx-auto mt-3 btn align-items-center btn-4 ">
-
-                                        </button> --}}
                                     </div>
-                                    {{-- <div class="contact-item mt-3 mb-3">
-                                        <button style="background-color: #F4A460"
-                                            class="mx-auto mt-3  btn align-items-center btn-4 ">
-                                            <div>
-                                                <p>Yêu cầu liên hệ lại</p>
-                                            </div>
-                                        </button>
-                                    </div> --}}
+
 
                                 </div>
 
