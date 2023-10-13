@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Client\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +38,6 @@ use App\Http\Controllers\Admin\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 
 Auth::routes();
 //Route::get('login', function(){
@@ -68,7 +67,7 @@ Route::get('client-login', function () {
 
 //Bài viết
 Route::resource('posts-client', ClientPost::class); // Danh sách bài viết
-Route::get('posts-detail-view/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail-view');
+Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail');
 
 //Lọc và Tìm kiếm
 // Route::post('fillter', [HomeController::class, 'filter_list']);
@@ -76,6 +75,7 @@ Route::get('search', [HomeController::class, 'index'])->name('search');
 Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
+Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
 
 
 //Phân quyền start
@@ -83,7 +83,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
 
     //Dịch vụ client
-    Route::resource('services-room', ClientServices::class);
+    Route::resource('services-room-posts', ClientServices::class);
 
     // Thanh toán
     Route::get('display-QR', function () {
@@ -117,6 +117,10 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('fogotpassword', function () {
         return view('client.auth.fogotPassword');
     });
+
+    //Nạp points
+    Route::post('points', [TransactionController::class, 'store'])->name('points.store');
+    Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
     // route dành cho admin ở đây
@@ -136,6 +140,9 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');
     Route::delete('admin-room-posts-permanently/{id}', [AdminRoomPost::class, 'permanentlyDelete'])->name('admin-room-posts-permanently-delete');
     Route::get('admin-room-posts-restore/{id}', [AdminRoomPost::class, 'restore'])->name('admin-room-posts-restore');
+    Route::post('admin-create-room-posts-image', [CLientRoomPost::class, 'createImage'])->name('admin-create-room-post-image');
+    Route::post('admin-update-room-posts-image', [CLientRoomPost::class, 'editMultiImage'])->name('admin-update-room-posts-image');
+    Route::get('admin-delete-room-posts-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('admin-delete-room-posts-image');
     Route::get('admin-room-posts-status', [AdminRoomPost::class, 'changeStatus'])->name('admin-room-posts-status');
 
     // Category Home
@@ -229,17 +236,15 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admin-change-password/{id}', [ChangePasswordController::class, 'adminEditPassword'])->name('admin-edit-password');
     Route::put('admin-change-password/{id}', [ChangePasswordController::class, 'adminUpdatePassword'])->name('admin-change-password');
 
-
-
     // Quyền
     Route::resource('permissions', PermissionController::class);
     Route::get('permissions-deleted', [PermissionController::class, 'deleted'])->name('permissions.deleted');
     Route::delete('permissions/permanently/{id}', [PermissionController::class, 'permanentlyDelete'])->name('permissions.permanently.delete');
     Route::get('permissions/restore/{id}', [PermissionController::class, 'restore'])->name('permissions.restore');
 
-    Route::get('permissions-import', [PermissionController::class,'importPermission'])->name('permissions-import');
-    Route::get('permissions-export', [PermissionController::class,'Export'])->name('permissions-export');
-    Route::post('permissions-import', [PermissionController::class,'Import'])->name('import');
+    Route::get('permissions-import', [PermissionController::class, 'importPermission'])->name('permissions-import');
+    Route::get('permissions-export', [PermissionController::class, 'Export'])->name('permissions-export');
+    Route::post('permissions-import', [PermissionController::class, 'Import'])->name('import');
 
     // vai trò
     Route::resource('roles', RoleController::class);
@@ -255,6 +260,7 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('admins-deleted', [AdminController::class, 'deleted'])->name('admins-deleted');
     Route::delete('admins-permanently/{id}', [AdminController::class, 'permanentlyDelete'])->name('admins-permanently-delete');
 
-
+    //Quản lí points
+    Route::get('points', [TransactionController::class, 'index'])->name('points.index');
+    Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
 });
-

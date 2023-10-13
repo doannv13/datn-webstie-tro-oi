@@ -1,8 +1,8 @@
 @extends('client.layouts.master')
 @section('content')
     <!-- Blog body start -->
-    <div class="blog-body content-area">
-        <div class="container-fluid">
+    <div class="blog-body">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-sm-12" style="max-height: 100%;">
                     <div class="sidebar" style="height: 100%;">
@@ -17,8 +17,8 @@
                                         tin đăng</a></li>
                                 <li><i class="fas fa-edit px-2"></i><a href="{{ route('room-posts.create') }}">Đăng tin
                                         mới</a></li>
-                                <li><i class="fas fa-list-alt px-2"></i><a href="#">Lịch sử giao dịch</a></li>
-                                <li><i class="fas fa-store px-2"></i><a href="#">Dịch vụ</a></li>
+                                        <li><i class="fas fa-list-alt px-2"></i><a href="{{ route('points.history') }}">Lịch sử giao dịch</a></li>
+                                <li><i class="fas fa-store px-2"></i><a href="{{ route('services-room-posts.index') }}">Dịch vụ</a></li>
                                 <li><i class="fas fa-store px-2"></i><a href="{{ route('room-posts-deleted') }}">Thùng
                                         rác</a>
                                 </li>
@@ -28,7 +28,9 @@
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-12 col-sm-12">
-                    @yield('main')
+                    {{-- <div class="container"> --}}
+                        @yield('main')
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

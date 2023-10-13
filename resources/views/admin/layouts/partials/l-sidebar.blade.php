@@ -356,12 +356,12 @@
                 <li class="menu-title mt-2">Quản lý đơn hàng</li>
 
                 <li>
-                    <a href="{{ asset('./be/#ttdh') }}" data-bs-toggle="collapse">
+                    <a href="{{ route('points.index') }}" data-bs-toggle="">
                         <i class="fe-folder-minus"></i>
-                        <span>Thông tin đơn hàng</span>
-                        <span class="menu-arrow"></span>
+                        <span>Xác nhận nạp ví</span>
+                        {{-- <span class="menu-arrow"></span> --}}
                     </a>
-                    <div class="collapse" id="ttdh">
+                    {{-- <div class="collapse" id="ttdh">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#">- Thêm mới</a>
@@ -373,7 +373,7 @@
                                 <a href="#">- Thùng rác</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </li>
                 @if (Auth::user()->can('coupon-menu'))
                     <li>

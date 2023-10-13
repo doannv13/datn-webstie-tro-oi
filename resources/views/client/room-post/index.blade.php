@@ -2,7 +2,7 @@
 @section('title', 'Danh sách tin đăng')
 @section('main')
     <div class="row sidebar">
-        <h4 class="my-3">Khu vực</h4>
+        <h4 class="my-3">Danh sách tin đăng</h4>
         <hr class="dashed-line">
         <div class="col-lg-12 col-md-12 col-sm-12 py-4">
             <!-- Contact form start -->
@@ -10,21 +10,18 @@
                 <table class="table align-middle" id="tech-companies-1">
                     <thead class="table-light">
                         <th style="width:5%">STT</th>
-                        <th style="width:15%">Liên hệ</th>
                         <th style="width:10%">Ảnh chính</th>
-                        <th style="width:20%">Name</th>
-                        <th style="width:20%">Địa chỉ</th>
+                        <th style="width:20%">Tiêu đề</th>
+                        <th style="width:10%">Loại tin</th>
+                        <th style="width:10%">Trạng thái</th>
                         <th style="width:10%">Ngày bắt đầu</th>
                         <th style="width:10%">Ngày kết thúc</th>
-                        <th style="width:10%">Thao tác</th>
+                        <th style="width:5%">Thao tác</th>
                     </thead>
                     <tbody class="align-items-center p-4">
                         @foreach ($data as $key => $value)
                             <tr class="">
                                 <td>{{ $key + 1 }}</td>
-                                <td class="">
-                                    {{ $value->fullname }}
-                                </td>
                                 <td>
                                     <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
                                 </td>
@@ -32,36 +29,66 @@
                                     {{ $value->name }}
                                 </td>
                                 <td>
-                                    {{ $value->address_full }}
+                                    @if($value->service_id!=null)
+                                    {{$value->service->name}}
+                                    @else
+                                    <p>Tin thường</p>
+                                    @endif
                                 </td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $value->created_at->format('d-m-Y') }}</td>
+                                <td>
+                                    @if ($value->status == 'pendding')
+                                        {!! '<div class="btn btn-warning">Chờ xử lý</div>' !!}
+                                    @elseif($value->status == 'accept')
+                                        {!! '<div class="btn btn-success">Kích hoạt</div>' !!}
+                                    @else
+                                        {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
+                                    @endif
+                                </td>
+                                <td>{{ $value->created_at}}</td>
+                                <td>{{ $value->time_end}}</td>
                                 <td class="">
-                                    <div class="d-flex m-2">
+                                    <div class="d-flex justify-content-around align-items-center">
                                         <!-- Button trigger modal -->
                                         <button class="btn btn-success  my-1" style="font-size: 13px" data-bs-toggle="modal"
                                             data-bs-target="#exampleModalToggle{{ $value->id }}">
-                                            <i class="fas fa-eye fs-4"></i>
+                                            <i class="fas fa-eye fs-5"></i>
                                         </button>
 
                                         <a href="{{ route('room-posts.edit', $value->id) }}">
-                                            <button type="submit" class="btn btn-primary text-center my-1 m-2"
-                                                style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
-                                                <i class="fa-solid fa-pen-to-square fs-4"></i>
+                                            <button type="submit" class="btn btn-primary text-center" style="width: 45px;">
+                                                <!-- Đặt kích thước cố định là 100px -->
+                                                <i class="fa-solid fa-pen-to-square fs-5"></i>
                                             </button>
                                         </a>
-                                        <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger my-1 " style="width: 45px;"
-                                                onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
-                                                <!-- Đặt kích thước cố định là 100px -->
-                                                <i class="fa-solid fa-trash fs-4"></i>
-                                            </button>
-                                        </form>
+                                        @if ($value->status == 'accept')
+                                            <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button disabled type="submit" class="btn btn-danger my-1 "
+                                                    style="width: 45px;"
+                                                    onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                    <!-- Đặt kích thước cố định là 100px -->
+                                                    <i class="fa-solid fa-trash fs-5"></i>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger my-1 " style="width: 45px;"
+                                                    onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                    <!-- Đặt kích thước cố định là 100px -->
+                                                    <i class="fa-solid fa-trash fs-5"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
-                                    <a class="btn btn-primary px-4" href="{{ route('services-room.index') }}">Mua
-                                        gói dịch vụ</a>
+                                    @if($value->status==='accept')
+                                    <a class="btn btn-primary px-4 w-100" href="{{ route('services-room-posts.edit',$value->id) }}">
+                                        Mua dịch vụ</a>
+                                    @else
+
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -138,5 +165,7 @@
 @push('scripts')
     <script>
         new DataTable('#tech-companies-1');
+        localStorage.clear();
+
     </script>
 @endpush

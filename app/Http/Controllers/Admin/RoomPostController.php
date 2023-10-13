@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\RoomPostNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
 use App\Http\Requests\Client\UpdateRoomPostRequest;
@@ -15,6 +16,7 @@ use App\Models\RoomPost;
 use App\Models\Services;
 use App\Models\Surrounding;
 use App\Models\SurroundingRoom;
+use App\Models\User;
 use App\Models\Ward;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -101,7 +103,6 @@ class RoomPostController extends Controller
                 'image' => $uploadFile,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'ward_id' => $ward->id,
                 'district_id' => $district->id,
                 'city_id' => $city->id,
@@ -206,11 +207,11 @@ class RoomPostController extends Controller
                 'address' => $request->address,
                 'address_full' => $request->address_full,
                 'acreage' => $request->acreage,
+                'status' => 'pendding',
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
                 'managing' => $request->managing,
                 'user_id' => auth()->user()->id,
-                'service_id' => 1,
                 'category_room_id' => $request->category_room_id,
                 'fullname' => $request->fullname,
                 'phone' => $request->phone,
@@ -421,6 +422,22 @@ class RoomPostController extends Controller
             $room_post = RoomPost::find($request->room_post_id);
             $room_post->status = $request->status;
             $room_post->save();
+            if($room_post->status==='accept'){
+                $content =[
+                    'title' => 'Tin phòng đã được duyệt',
+                    'description' => "Chúc mừng tin phòng '.$room_post->fullname .' của bạn đã được duyệt"
+                ];
+                $mailTo = User::findOrFail($room_post->user_id);
+                event( new RoomPostNotificationEvent($mailTo, $content));
+            }elseif($room_post->status==='cancel'){
+                $content =[
+                    'title' => 'Tin phòng của bạn đã bị từ chối',
+                    'description' => "Tin phòng '.$room_post->fullname .' không được thông qua do vi phạm nội quy của chúng tôi."
+                ];
+                $mailTo = User::findOrFail($room_post->user_id);
+                event( new RoomPostNotificationEvent($mailTo, $content));
+            }
+
             return response()->json(['success' => 'Thay đổi trạng thái thành công']);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

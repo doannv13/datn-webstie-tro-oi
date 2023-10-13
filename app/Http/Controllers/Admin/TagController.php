@@ -9,6 +9,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Http\Requests\Admin\TagRequest;
+use App\Models\Post;
 
 
 
@@ -61,7 +62,6 @@ class TagController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -70,7 +70,7 @@ class TagController extends Controller
     public function edit(string $id)
     {
         $data = Tag::query()->findOrFail($id);
-        return view('admin.tag.edit',compact('data'));
+        return view('admin.tag.edit', compact('data'));
     }
 
     /**
@@ -159,6 +159,16 @@ class TagController extends Controller
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
+        }
+    }
+
+    public function searchTagPost($slug)
+    {
+        $tag = Tag::where('slug', $slug)->first();
+        if ($tag) {
+            $posts = Post::where('description', 'like', '%' . $tag->name . '%')->get();
+            $totalPosts = $posts->count();
+            return view('client.post.search', compact('posts','totalPosts'));
         }
     }
 }

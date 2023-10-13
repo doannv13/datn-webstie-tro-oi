@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'avatar',
+        'point',
         'role'
     ];
     public $timestamps = true;
@@ -51,5 +52,9 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

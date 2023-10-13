@@ -28,4 +28,17 @@ class BannerRequest extends FormRequest
             'description' => 'required|max:255',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Trường tiêu đề là bắt buộc.',
+            'title.max' => 'Trường tiêu đề không được dài quá :max ký tự.',
+            'image.mimes' => 'Hình ảnh phải có định dạng là jpeg, png, jpg hoặc gif.',
+            'url.required' => 'Trường URL là bắt buộc.',
+            'url.url' => 'Trường URL phải là một địa chỉ URL hợp lệ.',
+            'description.required' => 'Trường mô tả là bắt buộc.',
+            'description.max' => 'Trường mô tả không được dài quá :max ký tự.',
+        ];
+    }
 }

@@ -27,4 +27,14 @@ class AdvertisementRequest extends FormRequest
             'location' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'image.mimes' => 'Hình ảnh phải có định dạng là jpeg, png, jpg hoặc gif.',
+            'url.required' => 'Trường URL là bắt buộc.',
+            'url.url' => 'Trường URL phải là một địa chỉ URL hợp lệ.',
+            'location.required' => 'Trường vị trí là bắt buộc.',
+        ];
+    }
 }
