@@ -383,10 +383,9 @@
                                 <input type="text" hidden id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
                                 <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span></p>
-<
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
                             @endif
-                            </p>
+                           
                         </div>
 
                     </div>

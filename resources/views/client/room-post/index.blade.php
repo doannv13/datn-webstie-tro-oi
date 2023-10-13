@@ -85,7 +85,7 @@
                                     </div>
                                     @if($value->status==='accept')
                                     <a class="btn btn-primary px-4 w-100" href="{{ route('services-room-posts.edit',$value->id) }}">
-                                        Dịch vụ</a>
+                                        Mua dịch vụ</a>
                                     @else
 
                                     @endif
