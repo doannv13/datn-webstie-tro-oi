@@ -14,6 +14,11 @@ use App\Http\Requests\Admin\TagRequest;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:tag-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

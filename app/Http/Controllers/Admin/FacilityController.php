@@ -12,6 +12,10 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class FacilityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:facility-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete']]);
+    }
     /**
      * Display a listing of the resource.
      */

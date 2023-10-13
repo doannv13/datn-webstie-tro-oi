@@ -25,6 +25,11 @@ use App\Models\Tag;
 
 class RoomPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:room-post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete', 'changeStatus', 'createImage', 'editMultiImage', 'deleteMultiImage']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -183,8 +188,7 @@ class RoomPostController extends Controller
 
         $tags = $postroom->tags->pluck('name')->implode(',');
 
-        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs','tags'));
-
+        return view('admin.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'wards', 'districts', 'cities', 'multiImgs', 'tags'));
     }
 
     /**
