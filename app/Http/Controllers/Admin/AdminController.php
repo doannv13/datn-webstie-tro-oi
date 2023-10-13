@@ -17,7 +17,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:super-admin','permission:admin-resource'], ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete']]);
+        $this->middleware('permission:admin-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete']]);
     }
     /**
      * Display a listing of the resource.
