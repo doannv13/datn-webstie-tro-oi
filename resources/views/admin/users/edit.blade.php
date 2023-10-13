@@ -46,12 +46,12 @@
 
                                     <div class="mb-3">
                                             <label for="simpleinput" class="form-label">Cập nhật ảnh đại diện</label>
-                                        <input type="file" id="example-fileinput" class="form-control" name="new_avatar">
+                                        <input type="file"  class="form-control" accept="image/*" id="image-input" name="new_avatar">
                                     </div>
                                 @if ($data->avatar)
                                 <input type="text" value="{{ $data->avatar }}" name="old_avatar" hidden>
                                 <div class="mb-3">
-                                    <img src="{{ $data->avatar }}" alt="">
+                                    <img style="width:80px;height:80px;border-radius:50%"   id="show-image" src="{{ asset($data->avatar) }}" alt="">
                                     @error('avatar')
                                     <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -63,10 +63,10 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="example-select" class="form-label">Quyền</label>
-                                    <select class="form-select" id="example-select" name="role" value="{{ $data->role }}" >
-                                        <option value="vendor">Vendor</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
+                                    <select class="form-select" id="role_id" name="role">
+                                        <option value="vendor" {{ $data->role === 'vendor' ? 'selected' : '' }}>Vendor</option>
+                                        <option value="admin" {{ $data->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                                      </select>
                                 </div>
                                 <div class="mb-3">
                                     <div class="d-flex gap-1">
@@ -78,9 +78,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 </div>
-
-
-
                             </div> <!-- end col -->
 
 
@@ -100,3 +97,28 @@
 
 </div>
 @endsection
+@push('scripts')
+    <!-- Page level plugins -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        $(() => {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#show-image').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#image-input").change(function() {
+                readURL(this);
+            });
+
+
+
+        });
+    </script>
+@endpush

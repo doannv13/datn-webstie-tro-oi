@@ -111,7 +111,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');
     Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
-    //Thay đổi mật khẩu,thông tin client
+    //Thay đổi mật khẩu,thông tin
     Route::resource('changeinfo', ChangeInfoController::class);
     Route::resource('changepassword', ChangePasswordController::class);
     Route::get('fogotpassword', function () {
@@ -263,4 +263,12 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     //Quản lí points
     Route::get('points', [TransactionController::class, 'index'])->name('points.index');
     Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
+
+    //Thay đổi mật khẩu,thông tin
+    Route::resource('changeinfo', ChangeInfoController::class);
+    Route::resource('changepassword', ChangePasswordController::class);
+    Route::get('fogotpassword', function () {
+        return view('client.auth.fogotPassword');
+    });
+
 });
