@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Jobs\RoomPostNotificationJob;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -9,27 +11,27 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Jobs\MailNotification;
-use App\Models\User;
-class NotificationEvent
+class RoomPostNotificationEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     use SerializesModels;
     public $user;
-    public $verification;
+    public $mailTo;
+    public $content;
    /**
      * Create a new event instance.
      *
      * @param  User  $user
      * @return void
      */
-    public function __construct($verification)
+    public function __construct($mailTo,$content)
     {
-        $admin =  User::where('role', 'admin')->first();
-        $data['email'][0] = $admin->email;
-        $this->verification=$verification;
+        // $data['email'][0] = 'lmt.3102003@gmail.com';
+        // $admin =  User::where('role', 'admin')->first();
+        $data['email'][0] = $mailTo;
+        $this->content=$content;
 
-        dispatch(new MailNotification($data,$this->verification));
+        dispatch(new RoomPostNotificationJob($data,$this->content));
     }
 
     /**

@@ -41,7 +41,7 @@
                                     </div>
                                 @elseif($totalResults == 0)
                                     <h6>Kết quả: Không tìm thấy tin đăng phòng nào!</h6>
-                                    <p>Vui lòng tìm kiếm theo </p>
+                                    <p>Vui lòng tìm kiếm theo thông tin khác.</p>
                                 @endif
                             </div>
                         </div>
@@ -176,11 +176,6 @@
 
                             <div class="main-title-2 d-flex justify-content-between gap-2 ">
                                 <h1>Lọc theo giá </h1>
-                                <button class="btn btn-4" style="background-color: #F4A460;">
-                                    <a
-                                        href="{{ route('search-fillter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}" class="text-white"><i class="fe-refresh-ccw"></i> Đặt lại
-                                    </a>
-                                </button>
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <li><a

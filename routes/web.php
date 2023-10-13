@@ -83,7 +83,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
 
     //Dịch vụ client
-    Route::resource('services-room', ClientServices::class);
+    Route::resource('services-room-posts', ClientServices::class);
 
     // Thanh toán
     Route::get('display-QR', function () {
