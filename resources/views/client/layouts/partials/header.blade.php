@@ -298,7 +298,6 @@
                                 <input type="button" class="btn" value="500,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="1,000,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="2,000,000" name="price" style="background-color: orange;color:white">
-
                             </div>
                         </div>
 
@@ -307,16 +306,16 @@
                                 <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
                                 <label class="text-danger">Tối thiểu 20,000</label>
                             </div>
-                            <input type="text" class="form-control" type="number" value="0" id="input-price" onchange="myChange()" disabled>
+                            <input type="text" class="form-control" type="number" value="20,000" id="input-price" onchange="myChange()" disabled>
 
                         </div>
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">0%</span></label>
-                            <label id="sale-price" class="fw-bold text-danger">0</label>
+                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">+5%</span></label>
+                            <label id="sale-price" class="fw-bold text-danger">1.000</label>
                         </div>
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Tổng nhận</label>
-                            <label id="total" class="fw-bold text-danger">0</label>
+                            <label id="total" class="fw-bold text-danger">21.000</label>
                         </div>
                         <div class="col  ">
                             <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
@@ -339,7 +338,7 @@
                             </div>
 
                            @if (auth()->user())
-                            <button onclick="confirm_points()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
                            @else
                             <label for="" class="text-danger" >Vui lòng đăng nhập</label>
                            @endif
@@ -380,7 +379,7 @@
                                 <p class="fw-medium">Khách hàng: <span style="color: #E24343;" class="fw-bolder">{{ auth()->user()->name }}</span></p>
                                 <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
-                                <input type="text" hidden id="total_point" name="point">
+                                <input type="text"  id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
                                 <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span></p>
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
@@ -390,7 +389,7 @@
 
                     </div>
                     <center>
-                        <button onclick="return confirm_points()" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
+                        <button type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
                     </center>
                 </div>
             </form>
@@ -451,9 +450,17 @@
     const sale = document.getElementById('sale');
     const sale_price = document.getElementById('sale-price');
 
+    //Fix giá trị mặc định 20k
+    if( document.getElementById('total_amount').innerText == ('')){
+        document.getElementById('total_amount').innerText = ('21.000'.replace(/,/g, "").toLocaleString());
+    }
+    if( document.getElementById('total_point').value == ('')){
+        document.getElementById('total_point').value = ('21.000'.replace(/,/g, "").toLocaleString());
+    }
 
     for (let i = 0; i < prices.length; i++) {
         prices[i].style.backgroundColor = "none"
+
         prices[i].addEventListener('click', function() {
             input_price.value = prices[i].value
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
@@ -490,23 +497,6 @@
             const price = prices[index];
             price.style.backgroundColor = 'red';
         }
-    }
-</script>
-<script>
-
-    let alertShown = false;
-
-    function confirm_points() {
-        if (document.getElementById("input-price").value === '0') {
-
-        document.getElementById("btn-pay").disabled = true;
-            alert('bạn chưa chọn số tiền');
-            alertShown = false;
-        }else{
-           document.getElementById("btn-pay").disabled=false;
-            alertShown = true;
-        }
-        return alertShown;
     }
 </script>
 <!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->
