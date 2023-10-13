@@ -12,6 +12,10 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class ServicesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:service-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -43,7 +47,7 @@ class ServicesController extends Controller
             $model = new Services();
             $model->fill($request->all());
             $model->save();
-           
+
             // return redirect()->route('services.index')->with($notification);
             Toastr::success('Thêm dịch vụ thành công', 'Thành công');
             return redirect()->route('services.index');
@@ -82,7 +86,7 @@ class ServicesController extends Controller
             $model = Services::query()->findOrFail($id);
             $model->fill($request->all());
             $model->save();
-           
+
             // return redirect()->route('services.index')->with($notification);
             Toastr::success('Cập nhật dịch vụ thành công', 'Thành công');
             return redirect()->route('services.index');
@@ -123,7 +127,7 @@ class ServicesController extends Controller
             $model->forceDelete();
             // return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công']);
             // return redirect()->route('services.deleted')->with('success', 'Thao tác thành công');
-           
+
             Toastr::success('Thao tác thành công', 'Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {

@@ -14,6 +14,10 @@ use Illuminate\Http\Response;
 
 class BannerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:banner-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */

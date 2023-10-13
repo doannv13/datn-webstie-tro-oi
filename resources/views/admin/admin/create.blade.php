@@ -92,7 +92,7 @@
                                         <div class="form-group mb-3">
                                             <label for="vaitro" class="form-label">Vai trò</label>
                                             <select name="roles" class="form-select" id="vaitro">
-                                                <option selected="" disabled="">Chọn vai trò</option>
+                                                <option disabled {{ old('roles') ? '' : 'selected' }}>Chọn vai trò</option>
                                                 @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                                 @endforeach

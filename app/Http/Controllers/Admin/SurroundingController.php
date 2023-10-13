@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Log;
 
 class SurroundingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:surrounding-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'listDeleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */

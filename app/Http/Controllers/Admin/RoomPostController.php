@@ -27,6 +27,11 @@ use App\Models\Tag;
 
 class RoomPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:room-post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete', 'changeStatus', 'createImage', 'editMultiImage', 'deleteMultiImage']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
