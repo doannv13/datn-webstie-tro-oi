@@ -40,7 +40,7 @@ class TransactionController extends Controller
     {
         $model = new Transaction();
         $model->fill($request->all());
-        $model->point = intval(str_replace(',', '', $model->point));
+        $model->point = (int)str_replace(',', '', $model->point);
         $model->action ='import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.','Đơn hàng sẽ được xác nhận sớm');
@@ -83,19 +83,22 @@ class TransactionController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
-        // Lấy giá trị trạng thái từ request
         $newStatus = $request->input('status');
-        // Tìm bản ghi theo $id
         $model = Transaction::find($id);
         $model->status = $newStatus;
         $model->save();
         toastr()->success('Chỉnh sửa thành công','thành công');
         if($newStatus==='accept'){
             $user = User::findOrFail($model->user_id);
-            $model->point = intval(str_replace(',', '', $model->point));
-            $user->point += $model->point;
+            if($model->point<300000){
+                $user->point +=($model->point+ (5/100)*$model->point)/1000;
+            }elseif($model->point>=300000 && $model->point<1000000){
+                $user->point +=($model->point+ (7/100)*$model->point)/1000;
+            }elseif($model->point>=1000000 && $model->point<=2000000){
+                $user->point +=($model->point+ (10/100)*$model->point)/1000;
+            }
             $user->save();
-        event( new SuccessEvent($user));
+            event( new SuccessEvent($user));
         }elseif($newStatus==='cancel'){
             $user= User::findOrFail($model->user_id);
             event( new CancelEvent($user));

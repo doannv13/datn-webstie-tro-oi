@@ -31,7 +31,7 @@ class RoomPostRequest extends FormRequest
             'description' => 'required',
             'managing' => 'required',
             'imageroom' => 'required',
-            'image' => 'required|max_images:4',
+            'image' => 'required|array|min:4|max:16',
             // 'image' => 'max_images:4',
             'ward_id' => 'required',
             'district_id' => 'required',
@@ -79,7 +79,8 @@ class RoomPostRequest extends FormRequest
             'zalo.regex' => 'Zalo không hợp lệ',
             'imageroom.required' => 'Ảnh nổi bật không được để trống',
             'image.required' => 'Ảnh chi tiết không được để trống',
-            'image.max_images' => 'Ảnh chi tiết tối đa 4 ảnh',
+            'image.min' => 'Ảnh chi tiết tối thiểu 4 ảnh',
+            'image.max' => 'Ảnh chi tiết tối đa 16 ảnh',
         ];
     }
 }

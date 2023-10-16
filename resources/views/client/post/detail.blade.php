@@ -26,7 +26,7 @@
                         <div class="blog-image">
                             <img src="{{asset($data->image) }}" alt="Ảnh tin tức" class="img-fluid w-100" style="height: 500px;">
                             <div class="profile-user">
-                                <img src="{{ asset($data->user->avatar) }}" alt="user">
+                                <img src="{{ asset($data->user->avatar)? asset($data->user->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user">
                             </div>
                             <div class="date-box" style="width: 116px;height: 70px">
                                 <span>{{ $data->updated_at }}</span>

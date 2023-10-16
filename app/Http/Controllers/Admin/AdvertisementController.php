@@ -13,6 +13,10 @@ use App\Http\Requests\Admin\AdvertisementRequest;
 
 class AdvertisementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:advertisement-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */

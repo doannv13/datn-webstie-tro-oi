@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Log;
 
 class CouponController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:coupon-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */

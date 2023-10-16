@@ -14,8 +14,8 @@
                             <th style="width:5%">STT</th>
                             <th style="width:10%">Ảnh chính</th>
                             <th style="width:20%">Tiêu đề</th>
-                            <th style="width:15%">Địa chỉ</th>
-                            <th style="width:15%">Trạng thái</th>
+                            <th style="width:10%">Loại tin</th>
+                            <th style="width:20%">Trạng thái</th>
                             <th style="width:10%">Ngày bắt đầu</th>
                             <th style="width:10%">Ngày kết thúc</th>
                             <th style="width:5%">Thao tác</th>
@@ -32,10 +32,14 @@
                                         <h5>{{ $value->name }}</h5>
                                     </td>
                                     <td>
-                                        <h5>{{ $value->address_full }}</h5>
+                                        @if ($value->service_id != null)
+                                            {{ $value->service->name }}
+                                        @else
+                                            <p>Tin thường</p>
+                                        @endif
                                     </td>
                                     <td>
-                                        <select class="form-select mb-3 toggle-class statusSelect"
+                                        {{-- <select class="form-select mb-3 toggle-class statusSelect"
                                             data-id="{{ $value->id }}" name="status" id="statusSelect">
                                             <option value="pendding"
                                                 {{ $value->status == 'pendding' ? 'selected' : false }}>
@@ -47,11 +51,24 @@
                                             <option value="cancel" {{ $value->status == 'cancel' ? 'selected' : false }}>
                                                 Huỷ
                                             </option>
-                                        </select>
+                                        </select> --}}
+                                        @if ($value->status == 'pendding')
+                                            <div class="statusSelect" name="status" data-id="{{ $value->id }}">
+                                                <button class="btn btn-primary" value="accept">Kích hoạt</button>
+                                                <button class="btn btn-danger" value="cancel">Từ chối</button>
+                                            </div>
+                                        @else
+                                            <div class="statusSelect" name="status" data-id="{{ $value->id }}">
+                                                <label
+                                                    class="btn {{ $value->status == 'accept' ? 'btn-success' : 'btn-danger' }}"
+                                                    for="">{{ $value->status === 'accept' ? 'Đã kích hoạt' : 'Đã huỷ' }}</label>
+                                            </div>
+                                        @endif
+
                                     </td>
 
-                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $value->created_at }}</td>
+                                    <td>{{ $value->time_end }}</td>
                                     <td class="">
                                         <div class="d-flex">
                                             <!-- Button trigger modal -->
@@ -60,7 +77,7 @@
                                                 data-bs-target="#exampleModalToggle{{ $value->id }}">
                                                 <i class="fas fa-eye fs-5"></i>
                                             </button>
-                                            @if ($value->status == 'accept')
+                                            @if ($value->status == 'pendding')
                                                 <form action="{{ route('admin-room-posts.destroy', $value->id) }}"
                                                     method="POST">
                                                     @csrf
@@ -83,11 +100,10 @@
                                                     </button>
                                                 </form>
                                             @endif
-
-
                                             <a href="{{ route('admin-room-posts.edit', $value->id) }}">
                                                 <button type="submit" class="btn btn-primary text-center my-1"
-                                                    style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
+                                                    style="width: 45px;">
+                                                    <!-- Đặt kích thước cố định là 100px -->
                                                     <i class="fa-solid fa-pen-to-square fs-5"></i>
                                                 </button>
                                             </a>
@@ -152,11 +168,11 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Ngày đăng:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-7">{{ $value->created_at }}</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Ngày hết hạn:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-7">{{ $value->time_end }}</div>
                             </div>
                         </div>
                     </div>
@@ -171,22 +187,18 @@
         new DataTable('#tech-companies-1');
         localStorage.clear();
         $(document).ready(function() {
-            $(".statusSelect").change(function() {
-                let status = $(this).val();
-                let room_post_id = $(this).data('id');
+
+            $(".statusSelect button").click(function() {
+                let statusButton = $(this);
+                let room_post_id = statusButton.parent().data(
+                    'id'); // Lấy giá trị `data-id` của phần tử cha
                 let deleteButton = $("#deleteButton" + room_post_id);
+                let status = statusButton.attr('value'); // Lấy giá trị của nút được nhấn
 
-                if (status === 'accept') {
-                    deleteButton.prop('disabled', true); // Tắt nút xoá khi status là 'accept'
-                } else {
-                    deleteButton.prop('disabled', false); // Bật nút xoá cho mọi trạng thái khác
-                }
-
-                console.log(room_post_id);
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('admin-room-posts-status') }}',
+                    url: "{{ route('admin-room-posts-status') }}",
                     data: {
                         'status': status,
                         'room_post_id': room_post_id
@@ -214,6 +226,16 @@
                         }
                     }
                 });
+                let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' : 'btn-danger') +
+                    '">' +
+                    (status === 'accept' ? 'Đã kích hoạt' : 'Đã huỷ') + '</label>';
+                statusButton.parent().html(label); // Thay đổi nội dung của phần tử "statusSelect" hiện tại
+                if (status === 'pendding') {
+                    deleteButton.prop('disabled', true); // Tắt nút xoá khi status là 'accept'
+                } else {
+                    deleteButton.prop('disabled', false); // Bật nút xoá cho mọi trạng thái khác
+                }
+
             })
         });
     </script>

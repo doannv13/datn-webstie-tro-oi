@@ -418,15 +418,12 @@
                         opt.text = w.Name;
                         opt.setAttribute('data-id', w.Id);
                         wards.options.add(opt);
-
                     }
                     var selectedQuanHuyen = district.options[district.selectedIndex];
                     quanhuyen = selectedQuanHuyen.textContent
                     console.log(quanhuyen);
                     localStorage.setItem('district', quanhuyen);
                     full_address.value = quanhuyen + " - " + thanhpho;
-
-
                     if (wardFromLocalStorage) {
                         for (var i = 0; i < wards.options.length; i++) {
                             var option = wards.options[i];
@@ -458,8 +455,8 @@
             formSubmitted = true;
             localStorage.setItem('full_address', full_address.value);
             full_address.value = localStorage.getItem('full_address');
-            // console.log(localStorage.getItem('full_address'));
         });
+        console.log(localStorage.getItem('full_address'));
 
         window.addEventListener('beforeunload', function(e) {
             if (!formSubmitted) {

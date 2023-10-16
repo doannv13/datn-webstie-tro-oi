@@ -66,6 +66,13 @@ Route::get('client-login', function () {
     return view('client.auth.login');
 });
 
+//Thay đổi mật khẩu,thông tin
+Route::resource('changeinfo', ChangeInfoController::class);
+Route::resource('changepassword', ChangePasswordController::class);
+Route::get('fogotpassword', function () {
+    return view('client.auth.fogotPassword');
+});
+
 //Bài viết
 Route::resource('posts-client', ClientPost::class); // Danh sách bài viết
 Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-detail');
@@ -84,7 +91,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
 
     //Dịch vụ client
-    Route::resource('services-room', ClientServices::class);
+    Route::resource('services-room-posts', ClientServices::class);
 
     // Thanh toán
     Route::get('display-QR', function () {
@@ -111,13 +118,6 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::post('bookmarks/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
     Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');
     Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
-
-    //Thay đổi mật khẩu,thông tin client
-    Route::resource('changeinfo', ChangeInfoController::class);
-    Route::resource('changepassword', ChangePasswordController::class);
-    Route::get('fogotpassword', function () {
-        return view('client.auth.fogotPassword');
-    });
 
     //Nạp points
     Route::post('points', [TransactionController::class, 'store'])->name('points.store');
@@ -264,4 +264,5 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     //Quản lí points
     Route::get('points', [TransactionController::class, 'index'])->name('points.index');
     Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
+
 });

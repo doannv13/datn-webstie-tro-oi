@@ -17,6 +17,9 @@ class ChangePasswordController extends Controller
     public function index()
     {
         //
+        if(!auth()->user()){
+            return redirect('client-login');
+        }
     }
 
     /**
@@ -49,7 +52,11 @@ class ChangePasswordController extends Controller
     public function edit(string $id)
     {
         //
-        return view('client.auth.changepassword');
+        if(auth()->user()){
+            return view('client.auth.changepassword');
+        }else{
+            return redirect('client-login');
+        }
     }
 
     /**
@@ -58,18 +65,21 @@ class ChangePasswordController extends Controller
     public function update(ChangePasswordRequest $request,string $id)
     {
         try{
-            $user = Auth::user(); // Lấy người dùng hiện tại
-
-            // Kiểm tra mật khẩu cũ
-            if (!Hash::check($request->old_password, $user->password)) {
-                toastr()->error('Mật khẩu cũ không đúng!','Thất bại');
-                return redirect()->back();
+            if(auth()->user()){
+                $user = Auth::user(); // Lấy người dùng hiện tại
+                // Kiểm tra mật khẩu cũ
+                if (!Hash::check($request->old_password, $user->password)) {
+                    toastr()->error('Mật khẩu cũ không đúng!','Thất bại');
+                    return redirect()->back();
+                }
+                // Cập nhật mật khẩu mới
+                $user->password = bcrypt($request->password);
+                $user->save();
+                toastr()->success('Cập nhập mật khẩu thành công!','Thành công');
+                return to_route('home');
+            }else{
+                return redirect('client-login');
             }
-            // Cập nhật mật khẩu mới
-            $user->password = bcrypt($request->password);
-            $user->save();
-            toastr()->success('Cập nhập mật khẩu thành công!','Thành công');
-            return to_route('home');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             toastr()->error('Cập nhật mật khẩu thất bại!','Thất Bại');
@@ -79,7 +89,11 @@ class ChangePasswordController extends Controller
     public function adminEditPassword(string $id)
     {
         //
-        return view('admin.auth.changepassword');
+        if(auth()->user()){
+            return view('admin.auth.changepassword');
+        }else{
+            return redirect('client-login');
+        }
     }
 
     /**
@@ -88,18 +102,21 @@ class ChangePasswordController extends Controller
     public function adminUpdatePassword(ChangePasswordRequest $request,string $id)
     {
         try{
-            $user = Auth::user(); // Lấy người dùng hiện tại
-
-            // Kiểm tra mật khẩu cũ
-            if (!Hash::check($request->old_password, $user->password)) {
-                toastr()->error('Mật khẩu cũ không đúng!','Thất bại');
-                return redirect()->back();
-            }
-            // Cập nhật mật khẩu mới
-            $user->password = bcrypt($request->password);
-            $user->save();
-            toastr()->success('Cập nhập mật khẩu thành công!','Thành công');
+            if(auth()->user()){
+                $user = Auth::user(); // Lấy người dùng hiện tại
+                // Kiểm tra mật khẩu cũ
+                if (!Hash::check($request->old_password, $user->password)) {
+                    toastr()->error('Mật khẩu cũ không đúng!','Thất bại');
+                    return redirect()->back();
+                }
+                // Cập nhật mật khẩu mới
+                $user->password = bcrypt($request->password);
+                $user->save();
+                toastr()->success('Cập nhập mật khẩu thành công!','Thành công');
             return to_route('home-admin');
+            }else{
+                return redirect('client-login');
+            }
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             toastr()->error('Cập nhật mật khẩu thất bại!','Thất Bại');

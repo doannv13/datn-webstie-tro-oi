@@ -99,7 +99,7 @@
                         <i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                         Point @if (auth()->user())
                         : {{number_format(auth()->user()->point)}}
-                         @endif
+                        @endif
                     </button>
 
                 </div>
@@ -174,8 +174,6 @@
                     <div class="row g-3">
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-
-
                                 <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     @if (isset($category_rooms))
@@ -217,20 +215,16 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-sm-6 col-lg-3">
+                        <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
                                 <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>
                                         Tất cả</option>
-                                    <option value="range_price1"
-                                        {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Dưới 1 triệu</option>
-                                    <option value="range_price2"
-                                        {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 triệu - 2.5 triệu</option>
-                                    <option value="range_price3"
-                                        {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 triệu - 4 triệu</option>
-                                    <option value="range_price4"
-                                        {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
+                                    <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Dưới 1 triệu</option>
+                                    <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 triệu - 2.5 triệu</option>
+                                    <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 triệu - 4 triệu</option>
+                                    <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
                                     </option>
                                 </select>
 
@@ -248,6 +242,12 @@
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-lg-1 p-3 ">
+                            <center>
+                        <a class="" href="{{ route('search-fillter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
+                        </a>
+                            </center>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
                             kiếm
@@ -269,8 +269,8 @@
                 <h1 class="modal-title fs-5 text-warning" id="exampleModalLabel"><i class="fa-solid fa-wallet fa-2xl" style="color: #f18e1e;"></i>
                     Point
                     @if (auth()->user())
-                       : {{number_format(auth()->user()->point)}}
-                        @endif
+                    : {{number_format(auth()->user()->point)}}
+                    @endif
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -288,7 +288,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  - <span class="text-danger">1.000 vnđ sẽ tương ứng 1 point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
@@ -298,25 +298,30 @@
                                 <input type="button" class="btn" value="500,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="1,000,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="2,000,000" name="price" style="background-color: orange;color:white">
-
                             </div>
                         </div>
 
                         <div class="p-2">
                             <div class="d-flex justify-content-between">
                                 <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
-                                <label class="text-danger">Tối thiểu 20,000</label>
+                                {{-- <label class="text-danger">Tối thiểu 20,000</label> --}}
                             </div>
-                            <input type="text" class="form-control" type="number" value="0" id="input-price" onchange="myChange()" disabled>
+                            <input type="text" class="form-control" type="number" value="20,000" id="input-price" onchange="myChange()" disabled>
 
                         </div>
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">0%</span></label>
-                            <label id="sale-price" class="fw-bold text-danger">0</label>
+                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">+5%</span> </label>
+                            <div class="d-flex">
+                                <label id="sale-price" class="fw-bold text-danger">1.000 </label>
+                                <span> vnđ</span>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Tổng nhận</label>
-                            <label id="total" class="fw-bold text-danger">0</label>
+                            <div>
+                                <label id="total" class="fw-bold text-danger">21 </label><span> points</span>
+
+                            </div>
                         </div>
                         <div class="col  ">
                             <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
@@ -337,11 +342,13 @@
                                 </div>
 
                             </div>
+
                            @if (auth()->user())
-                            <button onclick="confirm_points()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
                            @else
                             <label for="" class="text-danger" >Vui lòng đăng nhập</label>
                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -361,37 +368,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('points.store') }}" method="POST">
-                @csrf
-                @method('post')
-                <div class="container mx-auto p-5" style="max-width: 700px;">
-                    <!-- content -->
-                    <div class="d-flex justify-content-evenly p-3 gap-5">
-                        <div class="text-center">
-                            <p class="fw-bolder">Quét QR để thanh toán hóa đơn.</p>
-                            <img src="{{asset('fe/img/pay/image_10.png')}}" style="max-width: 200px; max-height: 200px;">
-                            <p class="fw-medium">Ngân hàng: MB</p>
-                            <p class="fw-medium">STK:0345673127</p>
-                        </div>
-                        <div class="">
-                            @if(auth()->user())
+                <form action="{{ route('points.store') }}" method="POST">
+                    @csrf
+                    @method('post')
+                    <div class="container mx-auto p-5" style="max-width: 700px;">
+                        <!-- content -->
+                        <div class="d-flex justify-content-evenly p-3 gap-5">
+                            <div class="text-center">
+                                <p class="fw-bolder">Quét QR để thanh toán hóa đơn.</p>
+                                <img src="{{asset('fe/img/pay/image_10.png')}}" style="max-width: 200px; max-height: 200px;">
+                                <p class="fw-medium">Ngân hàng: MB</p>
+                                <p class="fw-medium">STK:0345673127</p>
+                            </div>
+                            <div class="">
+                                @if(auth()->user())
                                 <p class="fw-medium">Khách hàng: <span style="color: #E24343;" class="fw-bolder">{{ auth()->user()->name }}</span></p>
                                 <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
-                                <input type="text" hidden id="total_point" name="point">
+                                <input type="text" hidden  id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
-                                <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span></p>
+                                <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> vnđ</p>
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
                             @endif
-                            </p>
+
                         </div>
 
                     </div>
                     <center>
-                        <button onclick="return confirm_points()" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
+                        <button onclick="return confirm('Xác nhận đã thanh toán thành công?')" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
                     </center>
                 </div>
-            </form>
+                </form>
+
 
             </div>
         </div>
@@ -404,11 +412,11 @@
 <!-- script -->
 @push('scripts')
 <script>
-    function notification(){
+    function notification() {
         var confirmation = confirm('Xác nhận thanh toán');
         if (confirmation) {
             // document.getElementById("notification").style.display = "block"
-        //    toastr.success('Đã thanh toán thành công!')
+            //    toastr.success('Đã thanh toán thành công!')
         }
         document.getElementById("notification").style.display = "block"
     }
@@ -448,30 +456,41 @@
     const sale = document.getElementById('sale');
     const sale_price = document.getElementById('sale-price');
 
+    //Fix giá trị mặc định 20k
+    if( document.getElementById('total_amount').innerText == ('')){
+        document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
+    }
+    if( document.getElementById('total_point').value == ('')){
+        document.getElementById('total_point').value = ('20,000'.replace(/,/g, "").toLocaleString());
+    }
 
     for (let i = 0; i < prices.length; i++) {
         prices[i].style.backgroundColor = "none"
+
         prices[i].addEventListener('click', function() {
             input_price.value = prices[i].value
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
                 sale.innerText = "+5%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                document.getElementById('total_amount').innerText=(input_price.value.replace(/,/g, "") * 1.05).toLocaleString();
-                document.getElementById('total_point').value=(input_price.value.replace(/,/g, "") * 1.05).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05/1000 ).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('total_amount').innerText = input_price.value
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
                 sale.innerText = "+7%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
-                document.getElementById('total_amount').innerText=(input_price.value.replace(/,/g, "") * 1.07).toLocaleString();
-                document.getElementById('total_point').value=(input_price.value.replace(/,/g, "") * 1.07).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07/1000 ).toLocaleString();
+                document.getElementById('total_amount').innerText = input_price.value
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
                 console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
-                document.getElementById('total_amount').innerText=(input_price.value.replace(/,/g, "") * 1.1).toLocaleString();
-                document.getElementById('total_point').value=(input_price.value.replace(/,/g, "") * 1.1).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1/1000 ).toLocaleString();
+                document.getElementById('total_amount').innerText = input_price.value
             }
         });
     }
@@ -487,21 +506,6 @@
             const price = prices[index];
             price.style.backgroundColor = 'red';
         }
-    }
-</script>
-<script>
-    let alertShown = false;
-
-    function confirm_points() {
-        if (document.getElementById("input-price").value === '0') {
-        document.getElementById("btn-pay").disabled = true;
-            alert('bạn chưa chọn số tiền');
-            alertShown = false;
-        }else{
-           document.getElementById("btn-pay").disabled=false;
-            alertShown = true;
-        }
-        return alertShown;
     }
 </script>
 <!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->

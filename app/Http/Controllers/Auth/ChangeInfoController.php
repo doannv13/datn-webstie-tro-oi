@@ -17,6 +17,9 @@ class ChangeInfoController extends Controller
     public function index()
     {
         //
+        if(!auth()->user()){
+            return redirect('client-login');
+        }
     }
 
     /**
@@ -50,8 +53,13 @@ class ChangeInfoController extends Controller
     public function edit(string $id)
     {
         //
-        $data = User::findOrFail($id);
-        return view('client.auth.changeinfo',compact('data'));
+        if(auth()->user()){
+            $data = User::findOrFail($id);
+            return view('client.auth.changeinfo',compact('data'));
+        }else{
+            return redirect('client-login');
+        }
+
 
     }
 
@@ -61,6 +69,7 @@ class ChangeInfoController extends Controller
     public function update(ChangeInfoRequest $request, string $id)
     {
         try{
+            if(auth()->user()){
             $model = User::findOrFail($id);
             $model->fill($request->all());
             if($request->has('new_avatar') ){
@@ -76,6 +85,9 @@ class ChangeInfoController extends Controller
                 delete_file($request->old_avatar);
             }
             return to_route('home');
+        }else{
+            return redirect('client-login');
+        }
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             toastr()->error('Cập nhật thông tin thất bại!','Thất Bại');
@@ -85,13 +97,18 @@ class ChangeInfoController extends Controller
     public function adminEdit(string $id)
     {
         //
+        if(auth()->user()){
         $data = User::findOrFail($id);
         return view('admin.auth.changeinfo',compact('data'));
+        }else{
+            return redirect('client-login');
+        }
 
     }
     public function adminUpdate(ChangeInfoRequest $request, string $id)
     {
         try{
+            if(auth()->user()){
             $model = User::findOrFail($id);
             $model->fill($request->all());
             if($request->has('new_avatar') ){
@@ -105,6 +122,9 @@ class ChangeInfoController extends Controller
                 delete_file($request->old_avatar);
             }
             return to_route('home-admin');
+            }else{
+                    return redirect('client-login');
+            }
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             toastr()->error('Cập nhật thông tin thất bại!','Thất Bại');

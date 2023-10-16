@@ -13,12 +13,19 @@ use App\Models\User;
 
 class RolePermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:role-permission-resource', ['only' => ['index','create', 'store','edit', 'update','destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roles = Role::query()->latest()->get();
+        $roles = Role::query()
+        ->where('name', '!=', 'super-admin')
+        ->latest()
+        ->get();
         return view('admin.role-permission.index', compact('roles'));
     }
 
@@ -27,7 +34,10 @@ class RolePermissionController extends Controller
      */
     public function create()
     {
-        $roles = Role::query()->latest()->get();
+        $roles = Role::query()
+        ->where('name', '!=', 'super-admin')
+        ->latest()
+        ->get();
         $permissions = Permission::query()->latest()->get();
         return view('admin.role-permission.create', compact('roles', 'permissions'));
     }

@@ -32,18 +32,16 @@
                                 <td class="tabledit-view-mode">{{ $value->created_at }}</td>
                                 <td class="tabledit-view-mode">
                                     @if ($value->status === 'accept')
-                                        Thành công
+                                           <label for="" class="btn btn-success">Thành công</label>
+                                    @elseif ($value->status === 'cancel')
+                                        <label for="" class="btn btn-danger">Thất bại</label>
                                     @else
-                                        <form action="{{ route('updatePoint.status', $value->id)}}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <select name="status">
-                                                <option value="pending" @if ($value->status === 'pending') selected @endif>Đang xử lí</option>
-                                                <option value="accept" @if ($value->status === 'accept') selected @endif>Đồng ý</option>
-                                                <option value="cancel" @if ($value->status === 'cancel') selected @endif>Không đồng ý</option>
-                                            </select>
-                                            <button type="submit">Cập nhật</button>
-                                        </form>
+                                    <form action="{{ route('updatePoint.status', $value->id)}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" onclick="return confirm('Chắc chắn chấp nhận?')" class="btn btn btn-success" name="status" value="accept">Chấp nhận</button>
+                                        <button type="submit" onclick="return confirm('Chắc chắn không đồng ý?')"  class="btn btn-danger" name="status" value="cancel">Không đồng ý</button>
+                                    </form>
                                     @endif
                                 </td>
                             </tr>

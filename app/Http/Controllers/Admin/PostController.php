@@ -12,8 +12,13 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Models\Tag;
+
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +26,7 @@ class PostController extends Controller
     {
         $category_posts = CategoryPost::all();
         $model = Post::query()->latest()->get();
-        return view('admin.post.index',compact('model','category_posts'));
+        return view('admin.post.index', compact('model', 'category_posts'));
     }
 
     /**
@@ -30,7 +35,7 @@ class PostController extends Controller
     public function create()
     {
         $categoryPosts = CategoryPost::query()->latest()->get();
-        return view('admin.post.create',compact('categoryPosts'));
+        return view('admin.post.create', compact('categoryPosts'));
     }
 
     /**
@@ -68,7 +73,6 @@ class PostController extends Controller
             }
             Toastr::success('Thêm bài viết thành công', 'Thành công');
             return to_route('posts.index');
-
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -93,7 +97,7 @@ class PostController extends Controller
         $categoryPosts = CategoryPost::query()->latest()->get();
         $model = Post::query()->findOrFail($id);
         $tags = $model->tags->pluck('name')->implode(',');
-        return view('admin.post.edit',compact('model', 'tags','categoryPosts'));
+        return view('admin.post.edit', compact('model', 'tags', 'categoryPosts'));
     }
 
     /**
@@ -151,8 +155,8 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         try {
-           $model = Post::query()->findOrFail($id);
-           $model->delete();
+            $model = Post::query()->findOrFail($id);
+            $model->delete();
             Toastr::success('Bài viết đã chuyển vào thùng rác', 'Thành công');
 
             return to_route('posts.index');
@@ -165,7 +169,7 @@ class PostController extends Controller
 
     public function deleted()
     {
-       $model = Post::query()->onlyTrashed()->get();
+        $model = Post::query()->onlyTrashed()->get();
         return view('admin.post.delete', compact('model'));
     }
 
