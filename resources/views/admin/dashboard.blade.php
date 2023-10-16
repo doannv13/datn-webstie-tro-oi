@@ -182,7 +182,7 @@
                                 <div class="progress-bar bg-pink" role="progressbar"
                                     aria-valuenow="{{ $countRoomPostToActive }}" aria-valuemin="0"
                                     aria-valuemax="{{ $countRoomPost }}"
-                                    style="width: {{ ($countRoomPostToActive / $countRoomPost) * 100 }}%;">
+                                    style="width: {{ ($countRoomPost != 0) ? ($countRoomPostToActive / $countRoomPost) * 100 : 0 }}%;">
 
                                 </div>
                             </div>
@@ -265,7 +265,7 @@
                                 <div class="progress-bar bg-warning" role="progressbar"
                                     aria-valuenow="{{ $countPostToActive }}" aria-valuemin="0"
                                     aria-valuemax="{{ $countPost }}"
-                                    style="width: {{ ($countPostToActive / $countPost) * 100 }}%;">
+                                    style="width: {{ ($countPost != 0) ? ($countPostToActive / $countPost) * 100 : 0 }}%;">
                                     <span class="visually-hidden">77% Complete</span>
                                 </div>
                             </div>
@@ -305,13 +305,13 @@
                             <div class="widget-chart-1 col-xl-6">
                                 <div class="widget-detail-1">
                                     <h2 class="fs-6 badge bg-danger rounded-pill">Admin: {{ $countAccountAdmin }}</h2>
-                                    <p class="text-muted" style="font-size: 11px">Tạo trong ngày: {{ $countAccountAdminToDay }}</p>
+                                    <p class="text-muted" style="font-size: 10px">Tạo trong ngày: {{ $countAccountAdminToDay }}</p>
                                 </div>
                             </div>
                             <div class="widget-chart-1 col-xl-6">
                                 <div class="widget-detail-1">
                                     <h2 class="fs-6 badge bg-warning rounded-pill">Vendor: {{ $countAccountVendor }}</h2>
-                                    <p class="text-muted" style="font-size: 11px">Tạo trong ngày: {{ $countAccountVendorToDay }}</p>
+                                    <p class="text-muted" style="font-size: 10px">Tạo trong ngày: {{ $countAccountVendorToDay }}</p>
                                 </div>
                             </div>
                             <div class="widget-chart-1 col-xl-6">
@@ -356,14 +356,14 @@
                                     <div class="widget-detail-1">
                                         <h2 class="fs-6 badge bg-danger rounded-pill"><a href="{{ route('coupons.index') }}"
                                             class="text-white">Mã giảm giá: {{ $countCoupon }}</a></h2>
-                                        <p class="text-muted" style="font-size: 11px">Hoạt động: {{ $countCouponToActive }}</p>
+                                        <p class="text-muted" style="font-size: 10px">Hoạt động: {{ $countCouponToActive }}</p>
                                     </div>
                                 </div>
                                 <div class="widget-chart-1 col-xl-6">
                                     <div class="widget-detail-1">
                                         <h2 class="fs-6 badge bg-warning rounded-pill"><a href="{{ route('banners.index') }}"
                                             class="text-white">Banner: {{ $countBanner }}</a></h2>
-                                        <p class="text-muted" style="font-size: 11px">Hoạt động: {{ $countBannerToActive }}</p>
+                                        <p class="text-muted" style="font-size: 10px">Hoạt động: {{ $countBannerToActive }}</p>
                                     </div>
                                 </div>
                                 <div class="widget-chart-1 col-xl-6">
@@ -460,7 +460,7 @@
                                 <div class="progress-bar bg-warning" role="progressbar"
                                     aria-valuenow="{{ $countPostToActive }}" aria-valuemin="0"
                                     aria-valuemax="{{ $countPost }}"
-                                    style="width: {{ ($countPostToActive / $countPost) * 100 }}%;">
+                                    style="width: {{ ($countPost != 0) ? ($countPostToActive / $countPost) * 100 : 0 }}%;">
                                     <span class="visually-hidden">77% Complete</span>
                                 </div>
                             </div>
