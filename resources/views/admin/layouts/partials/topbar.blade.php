@@ -284,7 +284,7 @@
         </li>
 
         <li>
-            <h4 class="page-title-main">Dashboard</h4>
+            <h4 class="page-title-main">Bảng điều khiển</h4>
         </li>
 
     </ul>
