@@ -1,296 +1,317 @@
 @extends('client.layouts.partials.l-sidebar')
 @section('title', 'Thêm tin đăng')
 @section('main')
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 ">
-        <!-- Contact form start -->
-        <div class="contact-form">
-            <form action="{{ route('room-posts.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('post')
-                <div class="sidebar row p-3">
-                    <h4>Khu vực</h4>
-                    <hr class="dashed-line">
-                    <div class="col-lg-4 col-md-4 mb-3">
-                        <div class="form-group">
-                            <label class="input-group">Tỉnh / thành phố:<span class="text-danger">*</span> </label>
-                            <select class="form-select mb-3" id="city" name="city_id">
-                                <option value="">Chọn tỉnh / thành phố</option>
-                            </select>
-                            @error('city_id')
-                            <span class="text-danger">{{ $message }}</span>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 ">
+            <!-- Contact form start -->
+            <div class="contact-form">
+                <form action="{{ route('room-posts.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('post')
+                    <div class="sidebar row p-3">
+                        <h4>Khu vực</h4>
+                        <hr class="dashed-line">
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <div class="form-group">
+                                <label class="input-group">Tỉnh / thành phố:<span class="text-danger">*</span> </label>
+                                <select class="form-select mb-3" id="city" name="city_id">
+                                    <option value="">Chọn tỉnh / thành phố</option>
+                                </select>
+                                @error('city_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Quận / Huyện:<span class="text-danger">*</span></label>
+                                <select class="form-select  mb-3" id="district" name="district_id">
+                                    <option value=""> Chọn quận huyện</option>
+                                </select>
+                                @error('district_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Phường / Xã:<span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select mb-3" name="ward_id" id="ward">
+                                    <option value="">Chọn phường / xã</option>
+                                </select>
+                                @error('ward_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <label class="input-group">Địa chỉ chính xác:<span class="text-danger">*</span></label>
+                            <div class="form-group ">
+                                <input class="form-control" type="text" name="address" id="address"
+                                    placeholder="Nhập số nhà , tên đường phố " aria-label="Nhập số nhà , tên đường phố"
+                                    value="{{ old('address') }}">
+                            </div>
+                            @error('address')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="col-lg-12 col-md-12 mt-3">
+                            <label class="input-group">Địa chỉ của bạn sẽ hiển thị như sau:<span
+                                    class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="full_address" name="address_full"
+                                    placeholder="Nhập số nhà , tên đường phố " aria-label="Nhập số nhà , tên đường phố"
+                                    readonly value="{{ old('full_address') }}">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Quận / Huyện:<span class="text-danger">*</span></label>
-                            <select class="form-select  mb-3" id="district" name="district_id">
-                                <option value=""> Chọn quận huyện</option>
-                            </select>
-                            @error('district_id')
-                            <span class="text-danger">{{ $message }}</span>
+                    <div class="sidebar row p-3">
+                        <h4 class="mb-3">Thông tin mô tả</h4>
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <label class="input-group">Tiêu đề:<span class="text-danger">*</span></label>
+                            <div class="form-group ">
+                                <input class="form-control" type="text" name="name"
+                                    placeholder="Nhập tiêu đề của bài viết" aria-label="Nhập tiêu đề của bài viết"
+                                    value="{{ old('name') }}">
+                            </div>
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Phường / Xã:<span class="text-danger">*</span>
-                            </label>
-                            <select class="form-select mb-3" name="ward_id" id="ward">
-                                <option value="">Chọn phường / xã</option>
-                            </select>
-                            @error('ward_id')
-                            <span class="text-danger">{{ $message }}</span>
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Chuyên mục cho thuê:<span class="text-danger">*</span></label>
+                                <select class="form-select mb-3" name="category_room_id">
+                                    <option value="">Chọn chuyên mục</option>
+                                    @foreach ($categoryRooms as $categoryRoom)
+                                        <option value="{{ $categoryRoom->id }}"
+                                            {{ old('category_room_id') ? 'selected' : false }}>
+                                            {{ $categoryRoom->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('category_room_id')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <label class="input-group">Địa chỉ chính xác:<span class="text-danger">*</span></label>
-                        <div class="form-group ">
-                            <input class="form-control" type="text" name="address" id="address" placeholder="Nhập số nhà , tên đường phố " aria-label="Nhập số nhà , tên đường phố" value="{{ old('address') }}">
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Giá cho thuê: <span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="price" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5"
+                                        class="form-control" value="{{ old('price') }}">
+                                    <span class="input-group-text">/Tháng</span>
+                                </div>
+                                @error('price')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                        @error('address')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-lg-12 col-md-12 mt-3">
-                        <label class="input-group">Địa chỉ của bạn sẽ hiển thị như sau:<span class="text-danger">*</span></label>
-                        <div class="form-group">
-                            <input class="form-control" type="text" id="full_address" name="address_full" placeholder="Nhập số nhà , tên đường phố " aria-label="Nhập số nhà , tên đường phố" readonly value="{{ old('full_address') }}">
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Diện tích:<span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input type="text" placeholder="Diện tích" name="acreage" class="form-control"
+                                        value="{{ old('acreage') }}">
+                                    <span class="input-group-text">m²</span>
+                                </div>
+                                @error('acreage')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="sidebar row p-3">
-                    <h4 class="mb-3">Thông tin mô tả</h4>
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <label class="input-group">Tiêu đề:<span class="text-danger">*</span></label>
-                        <div class="form-group ">
-                            <input class="form-control" type="text" name="name" placeholder="Nhập tiêu đề của bài viết" aria-label="Nhập tiêu đề của bài viết" value="{{ old('name') }}">
+                        <div class="col-lg-6 col-md-6 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Số lượng phòng trống:<span class="text-danger">*</span></label>
+                                <input type="text" placeholder="Số lượng phòng trống" name="empty_room"
+                                    class="form-control" value="{{ old('empty_room') }}">
+                            </div>
+                            @error('empty_room')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-lg-4 col-md-4 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Chuyên mục cho thuê:<span class="text-danger">*</span></label>
-                            <select class="form-select mb-3" name="category_room_id">
-                                <option value="">Chọn chuyên mục</option>
-                                @foreach ($categoryRooms as $categoryRoom)
-                                <option value="{{ $categoryRoom->id }}" {{ old('category_room_id') ? 'selected' : false }}>
-                                    {{ $categoryRoom->name }}
-                                </option>
+
+                        <div class="col-lg-6 col-md-6 mb-3">
+                            <div class="form-group ">
+                                <label class="input-group">Trọ tự quản<span class="text-danger">*</span></label>
+                                <select class="form-select mb-3" name="managing">
+                                    <option value="yes" {{ old('managing') == 'yes' ? 'selected' : false }}>Có
+                                    </option>
+                                    <option value="no" {{ old('managing') == 'no' ? 'selected' : false }}>Không
+                                    </option>
+                                </select>
+                            </div>
+                            @error('managing')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
+                            <div class="form-group message">
+                                <textarea class="form-control " style="height: 110px" name="description" id="description"
+                                    placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
+                            </div>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
+                            <div class="row p-3 ">
+                                @foreach ($surrounding as $surround)
+                                    <div class="form-check col-md-3 col-4 mb-2">
+                                        <input class="form-check-input" name="surrounding[]" type="checkbox"
+                                            value="{{ $surround->id }}"
+                                            {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label">
+                                            {{ $surround->name }}
+                                        </label>
+                                    </div>
                                 @endforeach
-                            </select>
-                        </div>
-                        @error('category_room_id')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-lg-4 col-md-4 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Giá cho thuê: <span class="text-danger">*</span></label>
-                            <div class="input-group mb-3">
-                                <input type="text" name="price" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5" class="form-control" value="{{ old('price') }}">
-                                <span class="input-group-text">/Tháng</span>
                             </div>
-                            @error('price')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Diện tích:<span class="text-danger">*</span></label>
-                            <div class="input-group mb-3">
-                                <input type="text" placeholder="Diện tích" name="acreage" class="form-control" value="{{ old('acreage') }}">
-                                <span class="input-group-text">m²</span>
-                            </div>
-                            @error('acreage')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Số lượng phòng trống:<span class="text-danger">*</span></label>
-                            <input type="text" placeholder="Số lượng phòng trống" name="empty_room" class="form-control" value="{{ old('empty_room') }}">
-                        </div>
-                        @error('empty_room')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 mb-3">
-                        <div class="form-group ">
-                            <label class="input-group">Trọ tự quản<span class="text-danger">*</span></label>
-                            <select class="form-select mb-3" name="managing">
-                                <option value="yes" {{ old('managing') == 'yes' ? 'selected' : false }}>Có
-                                </option>
-                                <option value="no" {{ old('managing') == 'no' ? 'selected' : false }}>Không
-                                </option>
-                            </select>
-                        </div>
-                        @error('managing')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
-                        <div class="form-group message">
-                            <textarea class="form-control " style="height: 110px" name="description" id="description" placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
-                        </div>
-                        @error('description')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
-                        <div class="row p-3 ">
-                            @foreach ($surrounding as $surround)
-                            <div class="form-check col-md-3 col-4 mb-2">
-                                <input class="form-check-input" name="surrounding[]" type="checkbox" value="{{ $surround->id }}" {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
-                                <label class="form-check-label">
-                                    {{ $surround->name }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                        @error('surrounding')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
-                        <div class="row p-3 ">
-                            @foreach ($facilities as $facility)
-                            <div class="form-check col-md-3 col-4 mb-2">
-                                <input class="form-check-input" name="facility[]" type="checkbox" value="{{ $facility->id }}"
-                                                {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
-                                <label class="form-check-label">
-                                    {{ $facility->name }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                        @error('facility')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <!-- Upload file -->
-                    <!-- Ảnh nổi bật -->
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <h4 class="header-title">Tải lên ảnh nổi bật</h4>
-                        <p class="sub-header">
-                            Kéo hoặc chọn file
-                        </p>
-                        <input type="file" name="imageroom" id="image" data-plugins="dropify" data-height="300">
-                        {{-- <input type="file" name="image"  /> --}}
-                        @error('imageroom')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <!-- Nhiều ảnh -->
-                    <div class="col-lg-12 col-md-12 mb-3">
-                        <h4 class="header-title">Ảnh chi tiết phòng</h4>
-                        <p class="sub-header">
-                            Kéo hoặc chọn file
-                        </p>
-
-                        <div class="upload__box">
-                            <div class="upload__btn-box">
-                                <label class="upload__btn">
-                                    <p class="btn-md btn-theme btn-4 btn-7">Thêm ảnh</p>
-                                    <input type="file" name="image[]" multiple="" data-max_length="20" class="upload__inputfile">
-                                </label>
-                            </div>
-                            <div class="upload__img-wrap"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar row p-3">
-                    <h4>Liên hệ</h4>
-                    <hr class="dashed-line">
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-4 mb-3">
-                            <div class="form-group ">
-                                <label class="input-group">Họ và tên: <span class="text-danger">*</span></label>
-                                <div class="input-group mb-3">
-                                    <input type="text" name="fullname" placeholder="Nhập họ tên của bạn" value="{{ auth()->user()->name }}" class="form-control">
-                                </div>
-                                @error('fullname')
+                            @error('surrounding')
                                 <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
+                            <div class="row p-3 ">
+                                @foreach ($facilities as $facility)
+                                    <div class="form-check col-md-3 col-4 mb-2">
+                                        <input class="form-check-input" name="facility[]" type="checkbox"
+                                            value="{{ $facility->id }}"
+                                            {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label">
+                                            {{ $facility->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @error('facility')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <!-- Upload file -->
+                        <!-- Ảnh nổi bật -->
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <h4 class="header-title">Tải lên ảnh nổi bật</h4>
+                            <p class="sub-header">
+                                Kéo hoặc chọn file
+                            </p>
+                            <input type="file" name="imageroom" id="image" data-plugins="dropify"
+                                data-height="300">
+                            {{-- <input type="file" name="image"  /> --}}
+                            @error('imageroom')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <!-- Nhiều ảnh -->
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <h4 class="header-title">Ảnh chi tiết phòng</h4>
+                            <p class="sub-header">
+                                Kéo hoặc chọn file
+                            </p>
+
+                            <div class="upload__box">
+                                <div class="upload__btn-box">
+                                    <label class="upload__btn">
+                                        <p class="btn-md btn-theme btn-4 btn-7">Thêm ảnh</p>
+                                        <input type="file" name="image[]" multiple="" data-max_length="20"
+                                            class="upload__inputfile">
+                                    </label>
+                                </div>
+                                <div class="upload__img-wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar row p-3">
+                        <h4>Liên hệ</h4>
+                        <hr class="dashed-line">
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-4 mb-3">
+                                <div class="form-group ">
+                                    <label class="input-group">Họ và tên: <span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="fullname" placeholder="Nhập họ tên của bạn"
+                                            value="{{ auth()->user()->name }}" class="form-control">
+                                    </div>
+                                    @error('fullname')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4 mb-3">
+                                <div class="form-group ">
+                                    <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" value="{{ auth()->user()->phone }}"
+                                            placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
+                                    </div>
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-4 mb-3">
+                                <div class="form-group ">
+                                    <label class="input-group">Email: <span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" value="{{ auth()->user()->email }}" name="email"
+                                            placeholder="Nhập email của bạn" class="form-control">
+                                    </div>
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4 mb-3">
+                                <div class="form-group ">
+                                    <label class="input-group">Zalo:<span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" value="{{ old('zalo') }}"
+                                            placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
+                                    </div>
+                                </div>
+                                @error('zalo')
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-4 mb-3">
-                            <div class="form-group ">
-                                <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
-                                <div class="input-group mb-3">
-                                    <input type="text" value="{{ auth()->user()->phone }}" placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
-                                </div>
-                                @error('phone')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+
+                    </div>
+
+                    <!-- End upload file -->
+
+                    <div class="sidebar row p-3">
+                        <div class="col-lg-12 col-md-12 clearfix">
+                            <div class=" text-center pull-left">
+                                <a href="{{ route('room-posts.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
+                                    danh sách</a>
+                            </div>
+                            <div class="send-btn text-center d-flex gap-2 pull-right">
+                                <button type="reset" class="btn-md btn-danger btn-7">Hủy
+                                </button>
+                                <button type="submit" id="Button" class="btn-md btn-theme btn-4 btn-7">Tạo
+                                    tin đăng mới
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-4 mb-3">
-                            <div class="form-group ">
-                                <label class="input-group">Email: <span class="text-danger">*</span></label>
-                                <div class="input-group mb-3">
-                                    <input type="text" value="{{ auth()->user()->email }}" name="email" placeholder="Nhập email của bạn" class="form-control">
-                                </div>
-                                @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-4 mb-3">
-                            <div class="form-group ">
-                                <label class="input-group">Zalo:<span class="text-danger">*</span></label>
-                                <div class="input-group mb-3">
-                                    <input type="text" value="{{ old('zalo') }}" placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
-                                </div>
-                            </div>
-                            @error('zalo')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- End upload file -->
-
-                <div class="sidebar row p-3">
-                    <div class="col-lg-12 col-md-12 clearfix">
-                        <div class=" text-center pull-left">
-                            <a href="{{ route('room-posts.index') }}" class="btn-md btn-theme btn-4 btn-7">Quay lại
-                                danh sách</a>
-                        </div>
-                        <div class="send-btn text-center d-flex gap-2 pull-right">
-                            <button type="reset" class="btn-md btn-danger btn-7">Hủy
-                            </button>
-                            <button type="submit" id="Button" class="btn-md btn-theme btn-4 btn-7">Tạo
-                                tin đăng mới
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <!-- Contact form end -->
         </div>
-        <!-- Contact form end -->
     </div>
-</div>
 @endsection
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
@@ -359,7 +380,7 @@
                     }
                     var selectedThanhPho = citis.options[citis.selectedIndex];
                     thanhpho = selectedThanhPho.textContent;
-                    console.log(thanhpho);
+                    // console.log(thanhpho);
                     full_address.value = thanhpho;
                     localStorage.setItem('city', thanhpho);
                     // localStorage.removeItem('district');
@@ -392,15 +413,12 @@
                         opt.text = w.Name;
                         opt.setAttribute('data-id', w.Id);
                         wards.options.add(opt);
-
                     }
                     var selectedQuanHuyen = district.options[district.selectedIndex];
                     quanhuyen = selectedQuanHuyen.textContent
                     console.log(quanhuyen);
                     localStorage.setItem('district', quanhuyen);
                     full_address.value = quanhuyen + " - " + thanhpho;
-
-
                     if (wardFromLocalStorage) {
                         for (var i = 0; i < wards.options.length; i++) {
                             var option = wards.options[i];
@@ -418,7 +436,7 @@
             wards.addEventListener("change", function() {
                 var selectedXaPhuong = wards.options[wards.selectedIndex];
                 xaphuong = selectedXaPhuong.textContent;
-                console.log(xaphuong);
+                // console.log(xaphuong);
                 localStorage.setItem('ward', xaphuong);
                 full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
@@ -428,12 +446,12 @@
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
         }
-        document.getElementById("myForm").addEventListener("submit", function() {
-            formSubmitted = true;
-            localStorage.setItem('full_address', full_address.value);
-            full_address.value = localStorage.getItem('full_address');
-            // console.log(localStorage.getItem('full_address'));
-        });
+        // document.getElementById("myForm").addEventListener("submit", function() {
+        //     formSubmitted = true;
+        //     localStorage.setItem('full_address', full_address.value);
+        //     full_address.value = localStorage.getItem('full_address');
+        // });
+        // console.log(localStorage.getItem('full_address'));
 
         window.addEventListener('beforeunload', function(e) {
             if (!formSubmitted) {

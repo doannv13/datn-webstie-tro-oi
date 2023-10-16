@@ -29,23 +29,23 @@
                                     {{ $value->name }}
                                 </td>
                                 <td>
-                                    @if($value->service_id!=null)
-                                    {{$value->service->name}}
+                                    @if ($value->service_id != null)
+                                        {{ $value->service->name }}
                                     @else
-                                    <p>Tin thường</p>
+                                        <p>Tin thường</p>
                                     @endif
                                 </td>
                                 <td>
                                     @if ($value->status == 'pendding')
                                         {!! '<div class="btn btn-warning">Chờ xử lý</div>' !!}
                                     @elseif($value->status == 'accept')
-                                        {!! '<div class="btn btn-success">Kích hoạt</div>' !!}
+                                        {!! '<div class="btn btn-success">Đã kích hoạt</div>' !!}
                                     @else
                                         {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
                                     @endif
                                 </td>
-                                <td>{{ $value->created_at}}</td>
-                                <td>{{ $value->time_end}}</td>
+                                <td>{{ $value->created_at }}</td>
+                                <td>{{ $value->time_end }}</td>
                                 <td class="">
                                     <div class="d-flex justify-content-around align-items-center">
                                         <!-- Button trigger modal -->
@@ -60,7 +60,7 @@
                                                 <i class="fa-solid fa-pen-to-square fs-5"></i>
                                             </button>
                                         </a>
-                                        @if ($value->status == 'accept')
+                                        @if ($value->status == 'pendding')
                                             <form action="{{ route('room-posts.destroy', $value->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -83,11 +83,11 @@
                                             </form>
                                         @endif
                                     </div>
-                                    @if($value->status==='accept')
-                                    <a class="btn btn-primary px-4 w-100" href="{{ route('services-room-posts.edit',$value->id) }}">
-                                        Mua dịch vụ</a>
+                                    @if ($value->status === 'accept')
+                                        <a class="btn btn-primary px-4 w-100"
+                                            href="{{ route('services-room-posts.edit', $value->id) }}">
+                                            Mua dịch vụ</a>
                                     @else
-
                                     @endif
                                 </td>
                             </tr>
@@ -166,6 +166,5 @@
     <script>
         new DataTable('#tech-companies-1');
         localStorage.clear();
-
     </script>
 @endpush
