@@ -148,7 +148,8 @@ class HomeController extends Controller
             ->flatten()
             ->unique()
             ->all();
-        $query = RoomPost::query()->with('categoryroom', 'district', 'tags');
+        $query = RoomPost::query()->with('categoryroom', 'district', 'tags')
+        ->where('status','accept');
 
         if ($search != null) {
             $query->where('name', 'like', '%' . $search . '%');

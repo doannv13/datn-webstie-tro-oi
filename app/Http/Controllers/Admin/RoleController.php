@@ -11,13 +11,20 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:role-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Role::query()->latest()->get();
-        return view('admin.role.index',compact('data'));
+        $data = Role::query()
+            ->where('name', '!=', 'super-admin') // Loại bỏ vai trò "super-admin"
+            ->latest()
+            ->get();
+        return view('admin.role.index', compact('data'));
     }
 
     /**
@@ -60,7 +67,7 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         $data = Role::query()->findOrFail($id);
-        return view('admin.role.edit',compact('data'));
+        return view('admin.role.edit', compact('data'));
     }
 
     /**
@@ -133,5 +140,4 @@ class RoleController extends Controller
             return back();
         }
     }
-
 }

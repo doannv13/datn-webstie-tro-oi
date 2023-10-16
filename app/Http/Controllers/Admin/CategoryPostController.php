@@ -13,6 +13,10 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:category-post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */

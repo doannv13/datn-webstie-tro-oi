@@ -5,7 +5,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-posts.store') }}" method="POST" id="myForm" enctype="multipart/form-data">
+                <form action="{{ route('room-posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="sidebar row p-3">
@@ -87,7 +87,8 @@
                                     @foreach ($categoryRooms as $categoryRoom)
                                         <option value="{{ $categoryRoom->id }}"
                                             {{ old('category_room_id') ? 'selected' : false }}>
-                                            {{ $categoryRoom->name }}</option>
+                                            {{ $categoryRoom->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -199,7 +200,7 @@
                         <!-- Upload file -->
                         <!-- Ảnh nổi bật -->
                         <div class="col-lg-12 col-md-12 mb-3">
-                            <h4 class="header-title">Tải lên ảnh nổi bật<span class="text-danger">*</span></h4>
+                            <h4 class="header-title">Tải lên ảnh nổi bật</h4>
                             <p class="sub-header">
                                 Kéo hoặc chọn file
                             </p>
@@ -212,7 +213,10 @@
                         </div>
                         <!-- Nhiều ảnh -->
                         <div class="col-lg-12 col-md-12 mb-3">
-                            <h4 class="header-title">Ảnh chi tiết phòng<span class="text-danger">*</span> (Nhiều ảnh)</h4>
+                            <h4 class="header-title">Ảnh chi tiết phòng</h4>
+                            <p class="sub-header">
+                                Kéo hoặc chọn file
+                            </p>
 
                             <div class="upload__box">
                                 <div class="upload__btn-box">
@@ -225,9 +229,6 @@
                                 <div class="upload__img-wrap"></div>
                             </div>
                         </div>
-                        @error('image')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
 
                     <div class="sidebar row p-3">
@@ -300,7 +301,7 @@
                             <div class="send-btn text-center d-flex gap-2 pull-right">
                                 <button type="reset" class="btn-md btn-danger btn-7">Hủy
                                 </button>
-                                <button type="submit" class="btn-md btn-theme btn-4 btn-7">Tạo
+                                <button type="submit" id="Button" class="btn-md btn-theme btn-4 btn-7">Tạo
                                     tin đăng mới
                                 </button>
                             </div>
@@ -333,6 +334,7 @@
         var cityFromLocalStorage = localStorage.getItem('city');
         var districtFromLocalStorage = localStorage.getItem('district');
         var wardFromLocalStorage = localStorage.getItem('ward');
+        // var addressFromLocalStorage = localStorage.getItem('full_address');
         var promise = axios(Parameter);
         promise.then(function(result) {
             renderCity(result.data);
@@ -378,9 +380,9 @@
                     }
                     var selectedThanhPho = citis.options[citis.selectedIndex];
                     thanhpho = selectedThanhPho.textContent;
-                    console.log(thanhpho);
+                    // console.log(thanhpho);
+                    full_address.value = thanhpho;
                     localStorage.setItem('city', thanhpho);
-
                     // localStorage.removeItem('district');
                     // localStorage.removeItem('ward');
 
@@ -388,7 +390,6 @@
                         for (var i = 0; i < districts.options.length; i++) {
                             var option = districts.options[i];
                             if (option.value === districtFromLocalStorage) {
-
                                 districts.selectedIndex = i;
                                 break;
                             }
@@ -412,16 +413,12 @@
                         opt.text = w.Name;
                         opt.setAttribute('data-id', w.Id);
                         wards.options.add(opt);
-
                     }
-                    // district.value + '-' +
                     var selectedQuanHuyen = district.options[district.selectedIndex];
                     quanhuyen = selectedQuanHuyen.textContent
                     console.log(quanhuyen);
                     localStorage.setItem('district', quanhuyen);
-
-                    // localStorage.removeItem('ward');
-
+                    full_address.value = quanhuyen + " - " + thanhpho;
                     if (wardFromLocalStorage) {
                         for (var i = 0; i < wards.options.length; i++) {
                             var option = wards.options[i];
@@ -439,21 +436,22 @@
             wards.addEventListener("change", function() {
                 var selectedXaPhuong = wards.options[wards.selectedIndex];
                 xaphuong = selectedXaPhuong.textContent;
-                console.log(xaphuong);
+                // console.log(xaphuong);
                 localStorage.setItem('ward', xaphuong);
                 full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
-
 
             address.addEventListener("input", function() {
                 var addressValue = address.value;
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
         }
-        document.getElementById("myForm").addEventListener("submit", function() {
-            formSubmitted = true;
-
-        });
+        // document.getElementById("myForm").addEventListener("submit", function() {
+        //     formSubmitted = true;
+        //     localStorage.setItem('full_address', full_address.value);
+        //     full_address.value = localStorage.getItem('full_address');
+        // });
+        // console.log(localStorage.getItem('full_address'));
 
         window.addEventListener('beforeunload', function(e) {
             if (!formSubmitted) {

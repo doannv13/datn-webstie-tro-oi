@@ -12,6 +12,10 @@ use Illuminate\Support\Str;
 
 class CategoryRoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:category-room-post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */

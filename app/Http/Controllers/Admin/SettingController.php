@@ -14,6 +14,10 @@ use Yoeunes\Toastr\Facades\Toastr;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:setting-resource', ['only' => ['index','update']]);
+    }
     /**
      * Display a listing of the resource.
      */

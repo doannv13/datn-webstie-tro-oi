@@ -15,12 +15,20 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = User::query()->where('role', 'admin')->latest()->get();
+        $data = User::query()
+            ->where('role', 'admin')
+            ->where('name', '!=', 'Super Admin')
+            ->latest()
+            ->get();
         return view('admin.admin.index', compact('data'));
     }
 
@@ -29,7 +37,10 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::query()
+        ->where('name', '!=', 'super-admin')
+        ->latest()
+        ->get();
         return view('admin.admin.create', compact('roles'));
     }
 
@@ -133,10 +144,11 @@ class AdminController extends Controller
         }
     }
 
-    public function deleted(){
+    public function deleted()
+    {
         try {
-        $data = User::onlyTrashed()->get();
-        return view('admin.admin.delete', compact('data'));
+            $data = User::onlyTrashed()->get();
+            return view('admin.admin.delete', compact('data'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back();
@@ -148,25 +160,25 @@ class AdminController extends Controller
         try {
             $data = User::where('id', $id);
             $data->forceDelete();
-            toastr()->success('Xóa tài khoản thành công!','Thành công');
+            toastr()->success('Xóa tài khoản thành công!', 'Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Xóa tài khoản thất bại!','Thất bại');
+            toastr()->error('Xóa tài khoản thất bại!', 'Thất bại');
             return back();
         }
     }
 
-    public function restore($id){
+    public function restore($id)
+    {
         try {
-        $data = User::onlyTrashed()->find($id);
-        $data->restore();
-        toastr()->success('Khôi phục tài khoản thành công!','Thành công');
-        return redirect()->back();
-        }
-        catch (\Exception $exception) {
+            $data = User::onlyTrashed()->find($id);
+            $data->restore();
+            toastr()->success('Khôi phục tài khoản thành công!', 'Thành công');
+            return redirect()->back();
+        } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Khôi phục tài khoản thất bại!','Thất bại');
+            toastr()->error('Khôi phục tài khoản thất bại!', 'Thất bại');
             return back();
         }
     }
