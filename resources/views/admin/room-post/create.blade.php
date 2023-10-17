@@ -151,7 +151,6 @@
                                             class="text-danger">*</span></label>
                                     <select class="form-select mb-3" name="managing">
                                         <option value="yes" {{ old('managing') == 'yes' ? 'checked' : false }}>Có
-
                                         </option>
                                         <option value="no" {{ old('managing') == 'no' ? 'checked' : false }}>Không
 

@@ -245,8 +245,8 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-lg-1 p-3 ">
                             <center>
-                        <a class="" href="{{ route('search-fillter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
-                        </a>
+                                <a class="" href="{{ route('search-fillter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
+                                </a>
                             </center>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
@@ -288,7 +288,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  - <span class="text-danger">1.000 vnđ sẽ tương ứng 1 point</span> </label>
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp - <span class="text-danger">1.000 vnđ sẽ tương ứng 1 point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
@@ -343,11 +343,11 @@
 
                             </div>
 
-                           @if (auth()->user())
+                            @if (auth()->user())
                             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
-                           @else
-                            <label for="" class="text-danger" >Vui lòng đăng nhập</label>
-                           @endif
+                            @else
+                            <label for="" class="text-danger">Vui lòng đăng nhập</label>
+                            @endif
 
                         </div>
                     </div>
@@ -385,19 +385,19 @@
                                 <p class="fw-medium">Khách hàng: <span style="color: #E24343;" class="fw-bolder">{{ auth()->user()->name }}</span></p>
                                 <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
-                                <input type="text" hidden  id="total_point" name="point">
+                                <input type="text" hidden id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
                                 <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> vnđ</p>
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
-                            @endif
+                                @endif
+
+                            </div>
 
                         </div>
-
+                        <center>
+                            <button onclick="return confirm('Xác nhận đã thanh toán thành công?')" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
+                        </center>
                     </div>
-                    <center>
-                        <button onclick="return confirm('Xác nhận đã thanh toán thành công?')" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
-                    </center>
-                </div>
                 </form>
 
 
@@ -457,10 +457,10 @@
     const sale_price = document.getElementById('sale-price');
 
     //Fix giá trị mặc định 20k
-    if( document.getElementById('total_amount').innerText == ('')){
+    if (document.getElementById('total_amount').innerText == ('')) {
         document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
     }
-    if( document.getElementById('total_point').value == ('')){
+    if (document.getElementById('total_point').value == ('')) {
         document.getElementById('total_point').value = ('20,000'.replace(/,/g, "").toLocaleString());
     }
 
@@ -473,7 +473,7 @@
                 sale.innerText = "+5%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05/1000 ).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total_amount').innerText = input_price.value
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
@@ -481,7 +481,7 @@
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
                 document.getElementById('total_point').value = input_price.value;
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07/1000 ).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
@@ -489,13 +489,11 @@
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
                 console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
                 document.getElementById('total_point').value = input_price.value;
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1/1000 ).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
             }
         });
     }
-
-
 
 
 

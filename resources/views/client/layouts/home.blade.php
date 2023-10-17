@@ -115,7 +115,7 @@
                                     {{ number_format($value->price) }} VND/Tháng
                                 </div>
                                 <div class="photo">
-                                    <img src="{{ $value->image }}" alt="photo" class="img-fluid w-100" style="max-height: 260px;">
+                                    <img src="{{ $value->image }}" alt="photo" class="img-fluid w-100" style="height: 260px;">
                                     <a href="{{ route('room-post-detail', $value->id) }}">
                                         <label class="" style="cursor: pointer; font-size: 20px;" for="">Xem Chi Tiết</label>
                                     </a>
