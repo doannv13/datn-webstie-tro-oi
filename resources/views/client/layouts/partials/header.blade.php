@@ -288,7 +288,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  - <span class="text-danger">1.000 vnđ sẽ tương ứng 1 point</span> </label>
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  - <span class="text-danger">1.000 VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
@@ -312,14 +312,14 @@
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">+5%</span> </label>
                             <div class="d-flex">
-                                <label id="sale-price" class="fw-bold text-danger">1.000 </label>
-                                <span> vnđ</span>
+                                <label id="sale-price" class="fw-bold text-danger me-1">1.000 </label>
+                                <span> VND</span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Tổng nhận</label>
                             <div>
-                                <label id="total" class="fw-bold text-danger">21 </label><span> points</span>
+                                <label id="total" class="fw-bold text-danger">21 </label><span> Points</span>
 
                             </div>
                         </div>
@@ -387,7 +387,7 @@
                                 <input type="text" hidden value="transfer" name="payment_method">
                                 <input type="text" hidden  id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
-                                <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> vnđ</p>
+                                <p class="fw-medium" id="">Số tiền thanh toán: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> VND</p>
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
                             @endif
 
