@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Client\TransactionController;
 
 /*
@@ -134,7 +135,9 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
         return view('admin.dashboard');
     });
 
-
+    //Báo cáo doanh thu
+    Route::get('admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
+    Route::post('admin-report-revenue',[ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
     // Room-Post-Admin
     Route::resource('admin-room-posts', AdminRoomPost::class);
     Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');
