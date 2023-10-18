@@ -10,7 +10,6 @@
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
-
                                     <div class="mb-2 d-flex gap-1 ">
                                         <a class="btn btn-success" href="{{ route('services.create') }}">Thêm mới</a>
                                         <a class="btn btn-danger" href="{{ route('services-deleted') }}">Thùng rác</a>
@@ -18,11 +17,12 @@
                                     <table id="tech-companies-1" class="table table-centered " style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th>Tên Gói</th>
-                                                <th>Giá</th>
-                                                <th>Số Ngày</th>
-                                                <th>Mô Tả</th>
+                                                <th style="col-1">STT</th>
+                                                <th style="col-1">Tên Gói</th>
+                                                <th style="col-1">Giá</th>
+                                                <th style="col-1">Số Ngày</th>
+                                                <th style="col-1">Màu Sắc</th>
+                                                <th style="col-1">Mô Tả</th>
                                                 <th>Hành Động</th>
                                             </tr>
                                         </thead>
@@ -33,7 +33,8 @@
                                                     <td>{{ $value->name }}</td>
                                                     <td>{{ $value->price }}</td>
                                                     <td>{{ $value->date_number }}</td>
-                                                    <td>{{ $value->description }}</td>
+                                                    <td style="color:{{$value->color}};">{{ $value->color}}</td>
+                                                    <td>{!! $value->description !!}</td>
                                                     <td class="text-center">
                                                         <a href="{{ route('services.edit', $value->id) }}"
                                                             class="btn btn-primary ">
@@ -43,10 +44,17 @@
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
+                                                           @if (countPostServiceId($value->id)>0)
+                                                            <button disabled class="btn btn-danger mt-2"
+                                                                onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
+                                                                <i class="fa-solid fa-trash fs-4 text-light"></i>
+                                                            </button>
+                                                            @else
                                                             <button class="btn btn-danger mt-2"
                                                                 onclick="return confirm('Bạn có muốn thêm vào thùng rác')">
                                                                 <i class="fa-solid fa-trash fs-4 text-light"></i>
                                                             </button>
+                                                            @endif
                                                         </form>
                                                     </td>
                                                 </tr>

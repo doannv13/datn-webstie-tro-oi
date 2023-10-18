@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RoomPost extends Model
 {
     use HasFactory, SoftDeletes;
+   
     protected $fillable = [
         'name',
         'slug',
@@ -34,6 +35,7 @@ class RoomPost extends Model
         'zalo',
         'time_end'
     ];
+   
     public function district()
     {
         return $this->belongsTo(District::class, 'district_id', 'id');
@@ -63,7 +65,6 @@ class RoomPost extends Model
     {
         return $this->belongsTo(CategoryPost::class);
     }
-
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggables');

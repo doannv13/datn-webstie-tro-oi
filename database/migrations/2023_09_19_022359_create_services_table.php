@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name',255)->unique();
             $table->integer('price');
             $table->integer('date_number');
+            $table->string('color')->nullable();
             $table->string('description', 999);
             $table->softDeletes();
             $table->timestamps();
