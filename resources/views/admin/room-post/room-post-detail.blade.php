@@ -49,7 +49,7 @@
                                                 alt="photo">
                                         </div>
                                     @endforeach
-                                    {{-- 
+                                    {{--
                                     <div class="p-1"><img src="{{ asset('fe/img/room/img-1.jpg') }}" class="img-fluid"
                                             alt="photo">
                                     </div>

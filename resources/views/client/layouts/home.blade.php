@@ -10,9 +10,9 @@
                 <div class="carousel-item item {{ $key === 0 ? 'active' : '' }}">
                     <a href="{{ $item->url }}">
                         @if ($item->image && asset($item->image))
-                        <img src="{{ asset($item->image) }}" class="d-block w-100 h-100" alt="banner" style="max-height: 700px;">
+                        <img src="{{ asset($item->image) }}" class="d-block w-100 h-100" alt="banner" style="max-height: 700px;height:700px">
                         @else
-                        <img src="{{ asset('no_image.jpg') }}" class="d-block w-100 h-100" alt="banner" style="max-height: 700px;">
+                        <img src="{{ asset('no_image.jpg') }}" class="d-block w-100 h-100" alt="banner" style="max-height: 700px;height:700px">
                         @endif
                         <div class="carousel-caption banner-slider-inner d-flex h-100">
                             <div class="carousel-content container align-self-center">
@@ -51,16 +51,16 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Tin Mới Nhất</h1>
+                    <h1>Tin nổi bật</h1>
                     <p>
-                        Danh sách những tin đăng mới nhất.
+                        Danh sách những tin phòng có ưu đãi tốt.
                     </p>
                 </div>
 
                 <div class="row wow fadeInUp delay-04s">
-                    @if (isset($rooms))
-                    @if (count($rooms) > 0)
-                    @foreach ($rooms as $key => $value)
+                    @if (isset($room_post_vip))
+                    @if (count($room_post_vip) > 0)
+                    @foreach ($room_post_vip as $key => $value)
                     <div class="col-lg-4 col-md-6 col-sm-12">
 
                         <div class="hotel-box " style="position: relative;" style="height:100%;">
@@ -123,7 +123,7 @@
 
                             </div>
                             <!-- Detail -->
-                            <div class="detail clearfix" style="height: 50%;">
+                            <div class="detail clearfix" style="height: 240px;">
                                 <h3>
                                     <a href="{{ route('room-post-detail', $value->id) }}">{{ $value->name }}</a>
                                 </h3>
@@ -153,10 +153,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     @endforeach
-                    {{ $rooms->links() }}
+                    {{ $room_post_vip->links() }}
                     @endif
                     @endif
 
