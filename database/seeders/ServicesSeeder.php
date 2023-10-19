@@ -34,7 +34,14 @@ class ServicesSeeder extends Seeder
             'date_number' => 3, 
             'color' => '#ff33cc', 
             'description' => '<p>Hiển thị dưới tin VIP 1, VIP 2 v&agrave; tr&ecirc;n tin thường.</p> <p>Ti&ecirc;u đề <span style="color:#ff33cc">M&Agrave;U HỒNG</span>, IN HOA.</p>'
-        ]);
+        ]); 
+        // Services::create([
+        //     'name' => 'Tin thường',
+        //     'price' => 0,  
+        //     'date_number' => 0, 
+        //     'color' => '#0331ff', 
+        //     'description' => '<p>Hiển thị dưới tin VIP 1, VIP 2, VIP 3.</p> <p>Ti&ecirc;u đề <span style="color:#0331ff">M&Agrave;U XANH</span>, IN HOA.</p>'
+        // ]);
         
     }
 }

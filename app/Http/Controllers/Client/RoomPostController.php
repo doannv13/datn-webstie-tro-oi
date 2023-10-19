@@ -32,9 +32,11 @@ class RoomPostController extends Controller
      */
     public function index()
     {
-        $category_rooms = CategoryRoom::all();
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
-        $districts = District::all();
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
         $data = RoomPost::query()->where('user_id', auth()->user()->id)->latest()->get();
         return view('client.room-post.index', compact('data', 'category_rooms', 'wards', 'districts'));
     }
@@ -58,7 +60,6 @@ class RoomPostController extends Controller
     {
 
         try {
-
             if ($request->hasFile('imageroom')) {
                 $uploadFile = upload_file('room', $request->file('imageroom'));
             }
@@ -136,6 +137,7 @@ class RoomPostController extends Controller
                 $surround->facility_id = $facility;
                 $surround->save();
             }
+
             if ($request->filled('tags')) {
                 $tagNames = explode(',', $request->input('tags'));
 

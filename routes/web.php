@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\TransactionController;
@@ -81,7 +82,8 @@ Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-
 //Lọc và Tìm kiếm
 // Route::post('fillter', [HomeController::class, 'filter_list']);
 Route::get('search', [HomeController::class, 'index'])->name('search');
-Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+Route::match(['get', 'post'], 'search-filter', [HomeController::class, 'filter_list'])->name('search-filter');
+// Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'filter_list_room_post_detail'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
 Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
@@ -132,9 +134,12 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
         return view('admin.layouts.master');
     })->name('home-admin');
 
-    Route::get('dashboard-admin', function () {
-        return view('admin.dashboard');
-    });
+
+    // Route::get('dashboard-admin', function () {
+    //     return view('admin.dashboard');
+    // });
+
+    Route::get('dashboard-admin', [DashboardController:: class, 'index'])->name('dashboard-admin');
 
     //Báo cáo doanh thu
     Route::get('admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
@@ -143,6 +148,7 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     //báo cáo tin đăng
     Route::get('admin-report-roompost', [ReportRoomPostControler::class, 'index'])->name('admin-report-roompost');
     Route::post('admin-report-roompost',[ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
+
     // Room-Post-Admin
     Route::resource('admin-room-posts', AdminRoomPost::class);
     Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');

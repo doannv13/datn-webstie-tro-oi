@@ -23,14 +23,11 @@
     <link href="{{ asset('be/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
-
-    <!-- morris.js -->
-    <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
-
-    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
-    <!-- end morris -->
-
     <link href="{{ asset('be/assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
+
     <link href="{{ asset('be/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
     <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
@@ -117,8 +114,9 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
 
     <!--Morris Chart-->
-    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
+
+    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
 
     {{-- Ckeditor --}}
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>

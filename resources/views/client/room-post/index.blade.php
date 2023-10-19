@@ -83,12 +83,14 @@
                                             </form>
                                         @endif
                                     </div>
+
                                     @if ($value->status === 'accept')
                                         <a class="btn btn-primary px-4 w-100"
                                             href="{{ route('services-room-posts.edit', $value->id) }}">
                                             Mua dịch vụ</a>
                                     @else
                                     @endif
+
                                 </td>
                             </tr>
                         @endforeach

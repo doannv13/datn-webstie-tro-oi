@@ -158,7 +158,7 @@
 <!-- Search area box 1 start -->
 <div class="border-top shadow-sm bg-body py-4 mb-4">
     <div class="container">
-        <form action="{{ route('search-fillter') }}" method="POST">
+        <form action="{{ route('search-filter') }}" method="POST">
             @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
@@ -245,8 +245,9 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-lg-1 p-3 ">
                             <center>
-                                <a class="" href="{{ route('search-fillter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
-                                </a>
+                        <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
+                        </a>
+
                             </center>
                         </div>
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm

@@ -36,16 +36,24 @@ function timeposts($times)
 }
 function countAcreage($min, $max)
 {
-    return RoomPost::whereBetween('acreage', [$min, $max])->count();
+    return RoomPost::whereBetween('acreage', [$min, $max])->where('status', 'accept')->count();
 }
 
 function countPrice($min, $max)
 {
-    return RoomPost::whereBetween('price', [$min, $max])->count();
+    return RoomPost::whereBetween('price', [$min, $max])->where('status', 'accept')->count();
 }
 
-function countDistrict($name)
-{
+
+function countPriceGreatThan4M(){
+    return RoomPost::where('price', '>=', 4000000)->where('status', 'accept')->count();
+}
+
+function countAcreageGreatThan45(){
+    return RoomPost::where('acreage', '>=', 45)->where('status', 'accept')->count();
+}
+
+function countDistrict($name){
     return RoomPost::join('districts', 'room_posts.district_id', '=', 'districts.id')
         ->where('districts.name', '=', $name)
         ->count();
