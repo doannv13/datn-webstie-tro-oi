@@ -19,7 +19,7 @@
                         <tbody>
                             @foreach ($data as $key => $value)
                                 <tr id="row_@item.ID">
-                                    <td class="tabledit-view-mode">{{ $value->id }}</td>
+                                    <td class="tabledit-view-mode">{{ $key+1 }}</td>
                                     <td class="tabledit-view-mode">{{ $value->name }}</td>
                                     <td class="tabledit-view-mode d-flex">
                                         <a href="{{ route('roles.edit', $value->id) }}">

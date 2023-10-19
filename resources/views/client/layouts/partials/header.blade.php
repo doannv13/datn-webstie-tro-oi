@@ -288,7 +288,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn nhanh số tiền nạp </label>
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  - <span class="text-danger">1.000 vnđ sẽ tương ứng 1 point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
@@ -304,18 +304,24 @@
                         <div class="p-2">
                             <div class="d-flex justify-content-between">
                                 <label class="fw-bold fs-6 text text-primary">Số tiền muốn nạp <span class="text-danger">*</span></label>
-                                <label class="text-danger">Tối thiểu 20,000</label>
+                                {{-- <label class="text-danger">Tối thiểu 20,000</label> --}}
                             </div>
                             <input type="text" class="form-control" type="number" value="20,000" id="input-price" onchange="myChange()" disabled>
 
                         </div>
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">+5%</span></label>
-                            <label id="sale-price" class="fw-bold text-danger">1.000</label>
+                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">+5%</span> </label>
+                            <div class="d-flex">
+                                <label id="sale-price" class="fw-bold text-danger">1.000 </label>
+                                <span> vnđ</span>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Tổng nhận</label>
-                            <label id="total" class="fw-bold text-danger">21.000</label>
+                            <div>
+                                <label id="total" class="fw-bold text-danger">21 </label><span> points</span>
+
+                            </div>
                         </div>
                         <div class="col  ">
                             <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
@@ -379,20 +385,20 @@
                                 <p class="fw-medium">Khách hàng: <span style="color: #E24343;" class="fw-bolder">{{ auth()->user()->name }}</span></p>
                                 <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
-                                <input type="text"  id="total_point" name="point">
+                                <input type="text" hidden  id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
-                                <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span></p>
+                                <p class="fw-medium" id="">Tổng tiền: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> vnđ</p>
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
                             @endif
-                           
+
                         </div>
 
                     </div>
                     <center>
-                        <button type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
+                        <button onclick="return confirm('Xác nhận đã thanh toán thành công?')" type="submit" style="background-color: #FCAF17;" class="btn text-white mt-4 fw-semibold px-3 py-2 m-2 ">Đã Thanh toán</button>
                     </center>
                 </div>
-            </form>
+                </form>
 
 
             </div>
@@ -452,10 +458,10 @@
 
     //Fix giá trị mặc định 20k
     if( document.getElementById('total_amount').innerText == ('')){
-        document.getElementById('total_amount').innerText = ('21.000'.replace(/,/g, "").toLocaleString());
+        document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
     }
     if( document.getElementById('total_point').value == ('')){
-        document.getElementById('total_point').value = ('21.000'.replace(/,/g, "").toLocaleString());
+        document.getElementById('total_point').value = ('20,000'.replace(/,/g, "").toLocaleString());
     }
 
     for (let i = 0; i < prices.length; i++) {
@@ -467,21 +473,24 @@
                 sale.innerText = "+5%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                document.getElementById('total_amount').innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString();
-                document.getElementById('total_point').value = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05/1000 ).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('total_amount').innerText = input_price.value
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
                 sale.innerText = "+7%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
-                document.getElementById('total_amount').innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString();
-                document.getElementById('total_point').value = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07/1000 ).toLocaleString();
+                document.getElementById('total_amount').innerText = input_price.value
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
                 console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
-                document.getElementById('total_amount').innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString();
-                document.getElementById('total_point').value = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1/1000 ).toLocaleString();
+                document.getElementById('total_amount').innerText = input_price.value
             }
         });
     }

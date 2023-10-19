@@ -27,6 +27,11 @@ use App\Models\Tag;
 
 class RoomPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:room-post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete', 'changeStatus', 'createImage', 'editMultiImage', 'deleteMultiImage']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -42,7 +47,7 @@ class RoomPostController extends Controller
      */
     public function create()
     {
-        $categoryRooms = CategoryRoom::query()->latest()->get();
+        $categoryRooms = CategoryRoom::query()->where('status', 'active')->get();
         $services = Services::query()->latest()->get();
         $facilities = Facility::query()->latest()->get();
         $surrounding = Surrounding::query()->latest()->get();
@@ -417,20 +422,20 @@ class RoomPostController extends Controller
             $room_post = RoomPost::find($request->room_post_id);
             $room_post->status = $request->status;
             $room_post->save();
-            if($room_post->status==='accept'){
-                $content =[
+            if ($room_post->status === 'accept') {
+                $content = [
                     'title' => 'Tin phòng đã được duyệt',
                     'description' => "Chúc mừng tin phòng '.$room_post->fullname .' của bạn đã được duyệt"
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
-                event( new RoomPostNotificationEvent($mailTo, $content));
-            }elseif($room_post->status==='cancel'){
-                $content =[
+                event(new RoomPostNotificationEvent($mailTo, $content));
+            } elseif ($room_post->status === 'cancel') {
+                $content = [
                     'title' => 'Tin phòng của bạn đã bị từ chối',
                     'description' => "Tin phòng '.$room_post->fullname .' không được thông qua do vi phạm nội quy của chúng tôi."
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
-                event( new RoomPostNotificationEvent($mailTo, $content));
+                event(new RoomPostNotificationEvent($mailTo, $content));
             }
 
             return response()->json(['success' => 'Thay đổi trạng thái thành công']);

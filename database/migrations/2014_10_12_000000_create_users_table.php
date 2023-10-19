@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('avatar')->nullable();
-            $table->integer('point')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->decimal('point', 8, 1)->default(0);
             $table->rememberToken();
             $table->enum('role', ['admin', 'vendor'])->default('vendor');
             $table->softDeletes();

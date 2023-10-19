@@ -16,7 +16,7 @@
                                     @method('post')
                                     <div class="form-group mb-3">
                                         <label for="exampleInputEmail1" class="form-label">File Import</label>
-                                        <input type="file" name="import_file" class="form-control">
+                                        <input type="file" name="import_file" class="form-control" accept=".xlsx">
                                     </div>
                                     <button type="submit" class="btn btn-secondary">Import</button>
                                     <a href="{{ route('permissions.index') }}"

@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Admin\PermissionRequest;
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PermissionExport;
 use App\Imports\PermissionImport;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:permission-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','importPermission','Export']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -153,7 +157,7 @@ class PermissionController extends Controller
         try {
             Excel::import(new PermissionImport, $request->file('import_file'));
             Toastr::success('Import quyền thành công', 'Thành công');
-            return redirect()->back();
+            return to_route('permissions.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');

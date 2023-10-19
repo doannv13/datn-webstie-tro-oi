@@ -58,8 +58,7 @@ class HomeController extends Controller
         //     ->facebook()
         //     ->twitter()
         //     ->reddit();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post','banners'));
-
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
     }
     public function bookmark(Request $request, string $id)
     {
@@ -148,7 +147,8 @@ class HomeController extends Controller
             ->flatten()
             ->unique()
             ->all();
-        $query = RoomPost::query()->with('categoryroom', 'district', 'tags');
+        $query = RoomPost::query()->with('categoryroom', 'district', 'tags')
+            ->where('status', 'accept');
 
         if ($search != null) {
             $query->where('name', 'like', '%' . $search . '%');
@@ -226,16 +226,14 @@ class HomeController extends Controller
         $caterooms = RoomPost::query()->with('facilities', 'surrounds')
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
+            ->where('status', 'accept')
             ->get();
-        // $rooms = RoomPost::with(['facilities' => function ($query) {
-        //     $query->inRandomOrder()->take(6);
-        // }]);
         $images = ImageRoom::query()->where('room_id', $id)->get();
-        $share_content=DETAIL_ROOM_URL;
-        $id_roompost=RoomPost::query()->findOrFail($id);
+        $share_content = DETAIL_ROOM_URL;
+        $id_roompost = RoomPost::query()->findOrFail($id);
 
         $shareComponent = \Share::page(
-            $share_content.$id_roompost->id,
+            $share_content . $id_roompost->id,
             'chia se fb cua quang phuc vip pro',
         )
             ->facebook()
@@ -243,7 +241,6 @@ class HomeController extends Controller
             ->reddit();
         $tags = $roomposts->tags;
 
-        return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts','shareComponent'));
-
+        return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
     }
 }
