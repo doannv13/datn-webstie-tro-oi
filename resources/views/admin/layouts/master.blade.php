@@ -22,6 +22,14 @@
     <!-- Plugins css -->
     <link href="{{ asset('be/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
+
+
+    <!-- morris.js -->
+    <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
+
+    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
+    <!-- end morris -->
+
     <link href="{{ asset('be/assets/css/app.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
