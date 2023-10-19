@@ -97,14 +97,12 @@
                     <div class="collapse" id="baocao">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{'admin-report-revenue'}}">- Doanh thu</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{'admin-report-roompost'}}">- Tin đăng </a>
                             </li>
-                            <li>
-                                <a href="#">- Thùng rác</a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </li>

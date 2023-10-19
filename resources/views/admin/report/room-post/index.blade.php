@@ -1,21 +1,24 @@
 @extends('admin.layouts.master')
-@section('title', 'Doanh Thu')
+@section('title', 'Tin Đăng')
 @section('content')
 
 <div class="row">
-    <form class="d-flex gap-2 mb-2" action="{{'admin-report-revenue'}}" method="post">
+    <form class="d-flex gap-2 mb-2" action="{{'admin-report-roompost'}}" method="post">
         @csrf
         @method('post')
         <div class="mt-1">
-            <label for="example-disable" class="form-label">Thời gian</label>
-            <input type="datetime-local" name="date_time" class="form-control" value="@if(isset($date_time)){{$date_time}}@endif">
+            <label for="example-disable" class="form-label">Bắt đầu</label>
+            <input type="datetime-local" name="date_start" class="form-control" value="@if(isset($date_start)){{$date_start}}@endif">
+        </div>
+        <div class="mt-1">
+            <label for="example-disable" class="form-label">Kết thúc</label>
+            <input type="datetime-local" name="date_end" class="form-control" value="@if(isset($date_end)){{$date_end}}@endif">
         </div>
         <div class="mt-4">
             <button type="submit" class="btn btn-primary waves-effect waves-light">Xem báo cáo</button>
         </div>
     </form>
     <div class="col-xl-3 col-md-6">
-
         <div class="card">
             <div class="card-body">
                 <div class="dropdown float-end">
@@ -34,17 +37,15 @@
                     </div>
                 </div>
 
-                <h4 class="header-title mt-0 mb-4">Tổng Doanh Thu</h4>
+                <h4 class="header-title mt-0 mb-4">Tổng tin đăng</h4>
 
                 <div class="widget-chart-1">
                     <div class="widget-chart-box-1 float-start" dir="ltr">
-                        <h2>{{number_format($revenue)}}</h2>
-                        <!-- <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#f05050 " data-bgColor="#F9B9B9" value="{{$revenue}}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15" /> -->
+                        <h2>{{$room_post}}</h2>
                     </div>
 
-
                     <div class="widget-detail-1 text-end">
-                        <h3 class="fw-normal pt-2 mb-1"> {{number_format($revenue_today)}} </h3>
+                        <h3 class="fw-normal pt-2 mb-1"> {{$room_post_today}} </h3>
                         <p class="text-muted mb-1">Hôm nay</p>
                     </div>
                 </div>
@@ -71,17 +72,16 @@
                     </div>
                 </div>
 
-                <h4 class="header-title mt-0 mb-3">Số hóa đơn hủy</h4>
+                <h4 class="header-title mt-0 mb-3">Tin đã xác nhận</h4>
 
                 <div class="widget-box-2">
                     <div class="widget-detail-2 text-end">
-                        <span class="badge bg-success rounded-pill float-start mt-3"> {{number_format($bill)}}<i class="mdi mdi-trending-up"></i> </span>
-                        <h2 class="fw-normal mb-1">{{number_format($bill_false)}} </h2>
-                        <p class="text-muted mb-3">Tổng hóa đơn</p>
+                        <span class="badge bg-success rounded-pill float-start mt-3">{{$room_post_accept}} <i class="mdi mdi-trending-up"></i> </span>
+                        <h2 class="fw-normal mb-1"> {{$room_post_accept_today}} </h2>
+                        <p class="text-muted mb-3">Hôm nay</p>
                     </div>
                     <div class="progress progress-bar-alt-success progress-sm">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="@if($bill!=0){{100-($bill_false%$bill)}}@else 100 @endif" aria-valuemin="0" aria-valuemax="100" style="width: @if($bill!=0){{100-($bill_false%$bill)}}@else 100 @endif%;">
-                            <span class="visually-hidden">@if($bill!=0&&$bill_false!=0){{100-($bill_false%$bill)}}@else 100 @endif% Complete</span>
+                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{$room_post_accept_today}}" aria-valuemin="0" aria-valuemax="{{$room_post_accept}}" style="width:  {{ ($room_post_accept != 0) ? ($room_post_accept_today / $room_post_accept) * 100 : 0 }}%;">
                         </div>
                     </div>
                 </div>
@@ -108,15 +108,14 @@
                     </div>
                 </div>
 
-                <h4 class="header-title mt-0 mb-4">Doanh thu mua dịch vụ</h4>
+                <h4 class="header-title mt-0 mb-4">Tin chờ xác nhận</h4>
 
                 <div class="widget-chart-1">
                     <div class="widget-chart-box-1 float-start" dir="ltr">
-                        <h2 class="fw-normal mb-1"> {{number_format($revenue_service)}}</h2>
-                        <!-- <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffbd4a" data-bgColor="#FFE6BA" value="80" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".15" /> -->
+                        <h2>{{$room_post_pendding}}</h2>
                     </div>
                     <div class="widget-detail-1 text-end">
-                        <h3 class="fw-normal pt-2 mb-1"> {{number_format($revenue_service_today)}}</h3>
+                        <h3 class="fw-normal pt-2 mb-1"> {{$room_post_pendding_today}} </h3>
                         <p class="text-muted mb-1">Hôm nay</p>
                     </div>
                 </div>
@@ -143,26 +142,17 @@
                     </div>
                 </div>
 
-                <h4 class="header-title mt-0 mb-3">TB doanh thu / HĐ</h4>
+                <h4 class="header-title mt-0 mb-3"> VIP / thường</h4>
 
                 <div class="widget-box-2">
                     <div class="widget-detail-2 text-end">
-                        <span class="badge bg-pink rounded-pill float-start mt-3">@if($bill!=0){{number_format($revenue/$bill)}}@else 0 @endif <i class="mdi mdi-trending-up"></i> </span>
-                        <h3 class="fw-normal mb-1">@if ($bill_today!=0)
-                            {{number_format($revenue_today/$bill_today)}}
-                            @else
-                            0
-                            @endif
-                        </h3>
-                        <p class="text-muted mb-3">Hôm nay</p>
+                        <span class="badge bg-pink rounded-pill float-start mt-3">{{$room_post_default}} </span>
+                        <h2 class="fw-normal mb-1"> {{$room_post_vip}} </h2>
+                        <p class="text-muted mb-3">Vip</p>
                     </div>
                     <div class="progress progress-bar-alt-pink progress-sm">
-                        <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="@if ($bill_today!=0&&$bill!=0)
-                        {{number_format(($revenue_today/$bill_today)/($revenue/$bill))}}
-                        @else
-                        100
-                        @endif" aria-valuemin="0" aria-valuemax="100" style="width:@if($bill_today!=0&&$bill!=0) {{100-(($revenue_today/$bill_today)/($revenue/$bill))}}@else 100 @endif %;">
-                            <span class="visually-hidden">@if($bill_today!=0&&$bill!=0){{100-(($revenue_today/$bill_today)/($revenue/$bill))}}@else 99 @endif % Complete</span>
+                        <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="{{$room_post_vip}}" aria-valuemin="0" aria-valuemax="{{$room_post_default}}" style="width:{{ ($room_post_default != 0) ? ($room_post_vip / $room_post_default) * 100 : 100 }}%;">
+
                         </div>
                     </div>
                 </div>
@@ -172,6 +162,7 @@
     </div><!-- end col -->
 
 </div>
+<!-- end row -->
 <div class="row">
     <div class="">
         <div class="card">
@@ -192,21 +183,61 @@
                     </div>
                 </div>
 
-                <h4 class="header-title mt-0 mb-3">Advanced Smil Animations</h4>
-
-                <div id="smil-animations" class="ct-chart ct-golden-section"></div>
+                <h4 class="header-title mt-0 mb-3">Tin đăng tổng quan</h4>
+                <div id="revenue-chart"></div>
             </div>
         </div>
 
     </div><!-- end col-->
-
-
 </div>
-<!-- end row -->
 @endsection
 
 @push('scripts')
+
 <script>
-    new DataTable('#tech-companies-1');
+   // Dữ liệu mẫu
+
+
+// Tạo biểu đồ
+
+    var total_room_post = {!!json_encode($total_room_post) !!};
+        const roompostData = [];
+        total_room_post.forEach(function(total_room_post) {
+            roompostData.push({
+                date: total_room_post.date,
+                revenue: total_room_post.total_posts
+            });
+        });   
+        //     const revenueData = [
+        //     { date: '2023-10-13', revenue: 100 },
+        //     { date: '2023-10-14', revenue: 200 },
+        //     { date: '2023-10-15', revenue: 300 },
+        //     { date: '2023-10-16', revenue: 400 },
+        //     { date: '2023-10-17', revenue: 500 },
+        //     { date: '2023-10-18', revenue: 600 },
+        //     { date: '2023-10-19', revenue: 700 },
+        //     { date: '2023-10-20', revenue: 800 },
+        //     // Thêm các dòng dữ liệu khác tương ứng với các ngày khác
+        // ];
+
+        // Định nghĩa mảng các ngày
+        const dates = roompostData.map(data => data.date);
+
+        // Định nghĩa mảng các doanh thu
+        const revenues = roompostData.map(data => data.total_posts);
+
+        // Tạo biểu đồ sử dụng Morris.js
+        new Morris.Line({
+            element: 'revenue-chart',
+            data: roompostData,
+            xkey: 'date',
+            ykeys: ['revenue'],
+            labels: ['Tin đăng'],
+            lineColors: ['#337ab7'],
+            xLabelAngle: 45, // Góc xoay của nhãn ngày
+            parseTime: false // Vô hiệu hóa tự động phân tích thời gian
+        });
 </script>
+
+
 @endpush
