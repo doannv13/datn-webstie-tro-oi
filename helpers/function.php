@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\RoomPost;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('upload_file')) {
     function upload_file($folder, $file)
@@ -56,8 +57,19 @@ function districts()
 }
 function room_posts()
 {
-    return RoomPost::latest()->with('facilities')->paginate(10);
+    $query = RoomPost::with('facilities')
+        ->where('status', 'accept')
+        ->whereIn('service_id', [1, 2, 3])
+        ->where('time_end', '>', Carbon::now())
+        ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
+        ->inRandomOrder()
+        ->paginate(10); // Phân trang trực tiếp trên truy vấn
+
+    return $query;
 }
+
+
+
 function categories()
 {
     return CategoryRoom::withCount('roomPosts')
@@ -67,6 +79,10 @@ function categories()
 function posts()
 {
     return Post::latest()->paginate(5);
+}
+function countPostServiceId($service_id){
+    $count = RoomPost::where('service_id', $service_id)->count();
+    return $count;
 }
 // $room_postss = RoomPost::latest()->with('facilities')->paginate(10);
 

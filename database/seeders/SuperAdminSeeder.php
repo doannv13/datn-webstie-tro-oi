@@ -25,7 +25,6 @@ class SuperAdminSeeder extends Seeder
             'role' => 'admin', // Change the role to 'admin'
             'phone' => '0987654321'
         ]);
-
         // Assign the "super-admin" role to the "super-admin" user
         $superAdmin->assignRole($superAdminRole);
     }

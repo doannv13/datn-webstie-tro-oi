@@ -19,7 +19,7 @@
         @if (count(room_posts()))
             <div class="sidebar-widget recent-news" style="padding: 12px">
                 <div class="main-title-2">
-                    <h5>Top 10 phòng trọ</h5>
+                    <h5>Top phòng trọ nổi bật</h5>
                 </div>
                 @foreach (room_posts() as $key => $post)
                     <div class="recent-news-item mb-3">

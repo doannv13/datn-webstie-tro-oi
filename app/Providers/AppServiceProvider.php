@@ -49,7 +49,6 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::extend('max_images', function ($attribute, $value, $parameters, $validator) {
             $maxImages = $parameters[0] ?? 4;
-
             if (is_array($value)) {
                 return count($value) <= $maxImages;
             }

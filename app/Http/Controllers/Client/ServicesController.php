@@ -99,8 +99,11 @@ class ServicesController extends Controller
                 Toastr::success('Mua gói dịch vụ thành công', 'Thành công');
                 return redirect()->route('room-posts.index');
             } else {
+                $modal=true;
                 Toastr::error('Bạn cần nạp point để mua dịch vụ', 'Thất bại');
-                return back();
+                // dd($modal);
+                return back()->with($modal);
+                
             }
         } else {
             Toastr::error('Bạn chỉ được mua gói dịch vụ cao cấp hơn !', 'Thất bại');
