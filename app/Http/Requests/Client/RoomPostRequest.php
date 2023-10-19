@@ -32,7 +32,6 @@ class RoomPostRequest extends FormRequest
             'managing' => 'required',
             'imageroom' => 'required',
             'image' => 'required|array|min:4|max:16',
-            // 'image' => 'max_images:4',
             'ward_id' => 'required',
             'district_id' => 'required',
             'city_id' => 'required',

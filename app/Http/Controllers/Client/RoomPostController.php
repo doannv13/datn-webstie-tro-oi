@@ -16,6 +16,7 @@ use App\Models\RoomPost;
 use App\Models\Services;
 use App\Models\Surrounding;
 use App\Models\SurroundingRoom;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Ward;
 use Brian2694\Toastr\Facades\Toastr;
@@ -43,7 +44,7 @@ class RoomPostController extends Controller
      */
     public function create()
     {
-        $categoryRooms = CategoryRoom::query()->get();
+        $categoryRooms = CategoryRoom::query()->where('status', 'active')->get();
         $services = Services::query()->get();
         $facilities = Facility::query()->get();
         $surrounding = Surrounding::query()->get();
@@ -83,7 +84,7 @@ class RoomPostController extends Controller
             $city->save();
 
             $model = new RoomPost();
-            
+
             $model->fill([
                 'name' => $request->name,
                 'slug' => $slug,
@@ -106,12 +107,12 @@ class RoomPostController extends Controller
                 'zalo' => $request->zalo
             ]);
             $model->save();
-            $content =[
+            $content = [
                 'title' => 'Cần xác nhận tin phòng mới',
-                'description' => "Người dùng ".auth()->user()->name." vừa đăng 1 tin phòng với tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
+                'description' => "Người dùng " . auth()->user()->name . " vừa đăng 1 tin phòng với tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
             ];
-            
-            
+
+
             if ($request->hasFile('image')) {
                 foreach ($request->file('image') as $image) {
                     $uploadFiles = upload_file('room/image', $image);
@@ -135,8 +136,19 @@ class RoomPostController extends Controller
                 $surround->facility_id = $facility;
                 $surround->save();
             }
-            $mailTo =User::where('role', 'admin')->first();
-            event( new RoomPostNotificationEvent($mailTo, $content));
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->input('tags'));
+
+                foreach ($tagNames as $tagName) {
+                    $slug = Str::slug(trim($tagName));
+
+                    $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+
+                    $model->tags()->syncWithoutDetaching([$tag->id]);
+                }
+            }
+            $mailTo = User::where('role', 'admin')->first();
+            event(new RoomPostNotificationEvent($mailTo, $content));
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
 
             return redirect()->route('room-posts.index');
@@ -162,7 +174,7 @@ class RoomPostController extends Controller
     {
 
         $postroom = RoomPost::query()->findOrFail($id);
-        $categoryRooms = CategoryRoom::query()->latest()->get();
+        $categoryRooms = CategoryRoom::query()->where('status', 'active')->get();
         $facilities = Facility::query()->latest()->get();
         $facilityrooms = FacilityRoom::query()->where('room_id', $id)->get();
         foreach ($facilityrooms as $facilityroom) {
@@ -177,7 +189,9 @@ class RoomPostController extends Controller
         $district = District::query()->find($id);
         $citie = City::query()->find($id);
         $multiImgs = ImageRoom::query()->where('room_id', $id)->get();
-        return view('client.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'ward', 'district', 'citie', 'multiImgs'));
+        $tags = $postroom->tags->pluck('name')->implode(',');
+
+        return view('client.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'ward', 'district', 'citie', 'multiImgs', 'tags'));
     }
 
     /**
@@ -214,11 +228,11 @@ class RoomPostController extends Controller
                 $model->image = $request->old_imageroom;
             }
             $model->save();
-            $content =[
+            $content = [
                 'title' => 'Cần xác nhận tin phòng vừa cập nhật',
-                'description' => "Người dùng ".auth()->user()->name." vừa cập nhật phòng tin phòng có tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
+                'description' => "Người dùng " . auth()->user()->name . " vừa cập nhật phòng tin phòng có tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
             ];
-            
+
             if (\request()->hasFile('imageroom') && $oldImg) {
                 delete_file($oldImg);
             }
@@ -250,8 +264,23 @@ class RoomPostController extends Controller
                 'district_id' => $district->id,
             ]);
             $city->save();
-            $mailTo =User::where('role', 'admin')->first();
-            event( new RoomPostNotificationEvent($mailTo, $content));
+
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->input('tags'));
+
+                $model->tags()->sync([]); // Xóa tất cả các tags hiện tại và cập nhật lại
+                foreach ($tagNames as $tagName) {
+                    $slug = Str::slug(trim($tagName));
+                    $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+                    $model->tags()->attach($tag->id);
+                }
+            } else {
+                // Nếu trường 'tags' trống, xóa tất cả các tag liên kết với bài viết
+                $model->tags()->detach();
+            }
+
+            $mailTo = User::where('role', 'admin')->first();
+            event(new RoomPostNotificationEvent($mailTo, $content));
             Toastr::success('Sửa tin đăng phòng thành công', 'Thành công');
             return redirect()->route('room-posts.index');
         } catch (\Exception $exception) {

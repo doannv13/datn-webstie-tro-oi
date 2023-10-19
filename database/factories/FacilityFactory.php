@@ -16,10 +16,13 @@ class FacilityFactory extends Factory
      */
     public function definition(): array
     {
+        $names = ['Tên 1', 'Tên 2', 'Tên 3', 'Tên 4', 'Tên 5', 'Tên 6', 'Tên 7', 'Tên 8', 'Tên 9', 'Tên 10'];
+        $icons = ['Tên 1', 'Tên 2', 'Tên 3', 'Tên 4', 'Tên 5', 'Tên 6', 'Tên 7', 'Tên 8', 'Tên 9', 'Tên 10'];
+
         return [
-            'name' => fake()->name(),
-            'icon' => fake()->text(10),
-            'description' => fake()->text(10),
+            'name' => $this->faker->$names,
+            'icon' => $this->faker->$icons,
+            'description' => $this->faker->text(10), // Sử dụng Faker cho description hoặc cung cấp giá trị theo ý muốn
         ];
     }
 }

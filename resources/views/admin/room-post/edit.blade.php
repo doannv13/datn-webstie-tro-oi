@@ -170,6 +170,27 @@
                                 @enderror
 
                             </div>
+
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
+                                <div class="row p-3 ">
+                                    @foreach ($facilities as $facility)
+                                        <div class="form-check col-md-3 col-4 mb-2">
+                                            <input class="form-check-input" name="facility[]" type="checkbox"
+                                                value="{{ $facility->id }}"
+                                                {{ in_array($facility->id, $facilityArray) ? 'checked' : '' }}>
+                                            <label class="form-check-label">
+                                                {{ $facility->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @error('facility')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
                                 <div class="row p-3 ">
@@ -190,24 +211,7 @@
                             </div>
 
 
-                            <div class="col-lg-12 col-md-12 mb-3">
-                                <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
-                                <div class="row p-3 ">
-                                    @foreach ($facilities as $facility)
-                                        <div class="form-check col-md-3 col-4 mb-2">
-                                            <input class="form-check-input" name="facility[]" type="checkbox"
-                                                value="{{ $facility->id }}"
-                                                {{ in_array($facility->id, $facilityArray) ? 'checked' : '' }}>
-                                            <label class="form-check-label">
-                                                {{ $facility->name }}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                @error('facility')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+
 
                             <!-- Ảnh nổi bật -->
                             <div class="col-lg-12 col-md-12 mb-3">

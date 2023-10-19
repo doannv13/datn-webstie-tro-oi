@@ -97,7 +97,7 @@
                                         <!-- Rooms description end -->
 
                                         <!-- Amenities start -->
-                                        <div class="amenities mb-5">
+                                        <div class="amenities mb-30 ">
                                             <div class="main-title-2">
                                                 <h1>Tiện ích có sẵn</h1>
                                             </div>
@@ -105,14 +105,14 @@
                                             <div class="row">
                                                 @foreach ($roomposts->facilities as $key => $value)
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
-                                                        <i class="fas fa-wrench me-2"></i>{{ $value->name }}
+                                                        <i class="{{ $value->icon }} me-2"></i>{{ $value->name }}
                                                         {{-- <i class="{{ $value->icon }}"></i>{{ $value->name }} --}}
                                                     </div>
                                                 @endforeach
 
                                             </div>
                                         </div>
-                                        <div class="amenities mb-10">
+                                        <div class="amenities mb-30">
                                             <div class="main-title-2">
                                                 <h1>Khu vực xung quanh</h1>
                                             </div>
@@ -120,12 +120,48 @@
                                             <div class="row">
                                                 @foreach ($roomposts->surrounds as $key => $value)
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
-                                                        <i class="fas fa-wrench me-2"></i>{{ $value->name }}
+                                                        <i class="{{ $value->icon }} me-2"></i>{{ $value->name }}
                                                     </div>
                                                 @endforeach
 
                                             </div>
                                         </div>
+
+                                        <div class="amenities mb-30">
+                                            <div class="main-title-2">
+                                                <h1>Đặc điểm tin đăng</h1>
+                                            </div>
+                                            <table class="table border">
+                                                <tr>
+                                                    <td>Mã tin đăng:</td>
+                                                    <td>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Loại tin đăng:</td>
+                                                    <td>
+                                                        @if ($roomposts->service_id != null)
+                                                            {{ $roomposts->service->name }}
+                                                        @else
+                                                            Tin thường
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày bắt đầu:</td>
+                                                    <td>{{ $roomposts->created_at }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày kết thúc:</td>
+                                                    <td>{{ $roomposts->time_end }}</td>
+                                                </tr>
+
+                                            </table>
+
+
+                                        </div>
+
                                         <!-- Amenities end -->
                                         <!-- Similar room start -->
                                         <div class="similar-rooms ">
@@ -144,7 +180,7 @@
                                                                         <?php
                                                                         $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                         $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-
+                                                                        
                                                                         if (Auth::check()) {
                                                                             $user_id = auth()->user()->id;
                                                                             $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -231,18 +267,19 @@
                                                                                 </a>
                                                                             </p>
                                                                             <div class="fecilities row">
-                                                                                <div
-                                                                                    class="d-flex justify-content-between align-items-center mb-2">
-                                                                                    <p class="pe-5"><span
-                                                                                            class="text-danger"><i
-                                                                                                class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($value->price) }}
-                                                                                            Triệu/Tháng</span>
-                                                                                    </p>
-                                                                                    <p><span><i
-                                                                                                class="fas fa-expand me-2"></i></i>{{ $roomposts->acreage }}
-                                                                                            m2</span>
-                                                                                    </p>
-                                                                                </div>
+                                                                                {{-- <div
+                                                                                    class="d-flex justify-content-between align-items-center mb-2"> --}}
+                                                                                <p class="pe-5 pb-2"><span
+                                                                                        class="text-danger"><i
+                                                                                            class="fas fa-tag fa-rotate-90 me-2 text-danger"></i>{{ number_format($value->price) }}
+                                                                                        Triệu/Tháng</span>
+                                                                                </p>
+
+                                                                                <p><span><i
+                                                                                            class="fas fa-expand me-2 pb-2"></i></i>{{ $roomposts->acreage }}
+                                                                                        m2</span>
+                                                                                </p>
+                                                                                {{-- </div> --}}
 
                                                                                 <p><i
                                                                                         class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
@@ -282,11 +319,11 @@
                                                     <div class="map">
                                                         <!-- Main Title 2 -->
                                                         <div id="map" class="contact-map" style="height: 662px;">
-                                                            <iframe
+                                                            {{-- <iframe
                                                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59615.81210587678!2d105.71104243751117!3d20.95298673967121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134532bef4bcdb7%3A0xbcc7a679fcba07f6!2zSMOgIMSQw7RuZywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694537835765!5m2!1svi!2s"
                                                                 width="100%" height="75%" style="border:0;"
                                                                 allowfullscreen="" loading="lazy"
-                                                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -336,16 +373,16 @@
                             <div class="contact-details">
                                 <div class="row contact-item mb-3 align-items-center">
                                     <div class="col-md-4 mx-auto">
-                                        <img src="{{ $roomposts->user->avatar ? asset($roomposts->user->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
+                                        <img src="{{ $roomposts->users->avatar ? asset($roomposts->users->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
                                             alt=""style="background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 70px; width:70px;">
+
+
                                     </div>
                                     <div class="col-md-8">
                                         {{-- <h2> Được đăng bởi </h2> --}}
                                         <h5>{{ $roomposts->fullname }}</h5>
                                         <p><a href="">Xem thêm bài đăng</a></p>
-                                        {{-- <a>
-                                            <p class="text-decoration-underline"> Xem thêm bài đăng </p>
-                                        </a> --}}
+
                                     </div>
                                 </div>
                                 <div class="heading-rooms">
@@ -356,19 +393,8 @@
                                                 href="tel:0477-0477-8556-552">{{ $roomposts->phone }}</a>
                                         </div>
 
-                                        {{-- <button style="background-color: #F4A460"
-                                            class="mx-auto mt-3 btn align-items-center btn-4 ">
-
-                                        </button> --}}
                                     </div>
-                                    {{-- <div class="contact-item mt-3 mb-3">
-                                        <button style="background-color: #F4A460"
-                                            class="mx-auto mt-3  btn align-items-center btn-4 ">
-                                            <div>
-                                                <p>Yêu cầu liên hệ lại</p>
-                                            </div>
-                                        </button>
-                                    </div> --}}
+
 
                                 </div>
 
@@ -399,3 +425,63 @@
 
     <!-- Rooms detail section end -->
 @endsection
+
+@push('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrrvu14I1PdO3KbqR8driE0OvJiwawaGw&callback=initMap&v=weekly">
+    </script>
+
+    <script>
+        const contentString = "Ba đình, Hà Nội";
+
+        function geocodeAddress(address) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                address: address
+            }, function(results, status) {
+                if (status === "OK") {
+                    var location = results[0].geometry.location;
+                    var latitude = location.lat();
+                    var longitude = location.lng();
+                    console.log("Latitude: " + latitude);
+                    console.log("Longitude: " + longitude);
+                } else {
+                    console.error("Không thể tìm thấy địa chỉ.");
+                }
+            });
+        }
+
+        function initMap() {
+            const uluru = {
+                lat: 21.032628,
+                lng: 105.806805
+            };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: uluru,
+            });
+
+            const infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                ariaLabel: "Uluru",
+            });
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map,
+                title: "Địa chỉ",
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open({
+                    anchor: marker,
+                    map,
+                });
+            });
+        }
+        var addressToGeocode = "Quận Ba Đình, Hà Nội";
+
+        geocodeAddress(addressToGeocode);
+
+        window.initMap = initMap();
+    </script>
+@endpush

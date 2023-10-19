@@ -173,25 +173,6 @@
                                 @enderror
 
                             </div>
-                            <div class="col-lg-12 col-md-12 mb-3">
-                                <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
-                                <div class="row p-3 ">
-                                    @foreach ($surrounding as $surround)
-                                        <div class="form-check col-md-3 col-4 mb-2">
-                                            <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                                value="{{ $surround->id }}"
-                                                {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
-                                            <label class="form-check-label">
-                                                {{ $surround->name }}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                @error('surrounding')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
 
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
@@ -212,6 +193,28 @@
                                 @enderror
                             </div>
 
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
+                                <div class="row p-3 ">
+                                    @foreach ($surrounding as $surround)
+                                        <div class="form-check col-md-3 col-4 mb-2">
+                                            <input class="form-check-input" name="surrounding[]" type="checkbox"
+                                                value="{{ $surround->id }}"
+                                                {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
+                                            <label class="form-check-label">
+                                                {{ $surround->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @error('surrounding')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+
                             <!-- Ảnh nổi bật -->
                             <div class="col-lg-12 col-md-12 mb-3">
                                 <h4 class="header-title">Tải lên ảnh nổi bật</h4>
@@ -226,7 +229,10 @@
                             </div>
                             <!-- Nhiều ảnh -->
                             <div class="col-lg-12 col-md-12 mb-3">
-                                <h4 class="header-title">Ảnh chi tiết phòng (nhiều ảnh)</h4>
+                                <h4 class="header-title">Ảnh chi tiết phòng</h4>
+                                <p class="sub-header">
+                                    ( Tối thiểu 4 ảnh, tối đa 16 ảnh )
+                                </p>
                                 <div class="upload__box">
                                     <div class="upload__btn-box">
                                         <label class="upload__btn">
@@ -245,7 +251,8 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Tags</label>
-                                <input type="text" class="selectize-close-btn form-control" name="tags">
+                                <input type="text" class="selectize-close-btn form-control" name="tags"
+                                    value="{{ old('tags') }}">
                                 @error('tags')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -442,7 +449,12 @@
                 xaphuong = selectedXaPhuong.textContent;
                 console.log(xaphuong);
                 localStorage.setItem('ward', xaphuong);
-                full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
+                if (localStorage.getItem('full_address') == null) {
+                    full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
+                } else {
+                    full_address.value = localStorage.getItem('full_address');
+                }
+
             });
 
             address.addEventListener("input", function() {
@@ -453,9 +465,7 @@
         document.getElementById("myForm").addEventListener("submit", function() {
             formSubmitted = true;
             localStorage.setItem('full_address', full_address.value);
-            full_address.value = localStorage.getItem('full_address');
         });
-        console.log(localStorage.getItem('full_address'));
 
         window.addEventListener('beforeunload', function(e) {
             if (!formSubmitted) {
