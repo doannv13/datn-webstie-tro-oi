@@ -39,19 +39,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{-- <select class="form-select mb-3 toggle-class statusSelect"
-                                            data-id="{{ $value->id }}" name="status" id="statusSelect">
-                                            <option value="pendding"
-                                                {{ $value->status == 'pendding' ? 'selected' : false }}>
-                                                Chờ xử lý
-                                            </option>
-                                            <option value="accept" {{ $value->status == 'accept' ? 'selected' : false }}>Xác
-                                                nhận
-                                            </option>
-                                            <option value="cancel" {{ $value->status == 'cancel' ? 'selected' : false }}>
-                                                Huỷ
-                                            </option>
-                                        </select> --}}
+
                                         @if ($value->status == 'pendding')
                                             <div class="statusSelect" name="status" data-id="{{ $value->id }}">
                                                 <button class="btn btn-primary" value="accept">Kích hoạt</button>
@@ -149,6 +137,20 @@
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Diện tích:</div>
                                 <div class="col-md-7">{{ $value->acreage }}m2</div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Danh mục:</div>
+                                <div class="col-md-7"> {{ $value->categoryroom->name }}</div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Gói dịch vụ:</div>
+                                <div class="col-md-7">
+                                    @if ($value->service_id != null)
+                                        {{ $value->service->name }}
+                                    @else
+                                        Tin thường
+                                    @endif
+                                </div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Mô tả:</div>

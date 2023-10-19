@@ -13,7 +13,13 @@ class Services extends Model
         'name',
         'price',
         'date_number',
+        'color',
         'description',
     ];
     public $timestamps = true;
+    
+    public function RoomPost()
+    {
+        return $this->hasMany(RoomPost::class);
+    }
 }
