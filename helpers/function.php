@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\RoomPost;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('upload_file')) {
     function upload_file($folder, $file)
@@ -33,13 +34,16 @@ function timeposts($times)
     $currentTime = Carbon::now();
     return $postedTime->diffForHumans($currentTime);
 }
-function countAcreage($min, $max){
-    return RoomPost::whereBetween('acreage',[$min, $max])->count();
+function countAcreage($min, $max)
+{
+    return RoomPost::whereBetween('acreage', [$min, $max])->where('status', 'accept')->count();
 }
 
-function countPrice($min, $max){
-    return RoomPost::whereBetween('price',[$min, $max])->count();
+function countPrice($min, $max)
+{
+    return RoomPost::whereBetween('price', [$min, $max])->where('status', 'accept')->count();
 }
+
 
 function countPriceGreatThan4M(){
     return RoomPost::where('price', '>=', 4000000)->where('status', 'accept')->count();
@@ -51,8 +55,8 @@ function countAcreageGreatThan45(){
 
 function countDistrict($name){
     return RoomPost::join('districts', 'room_posts.district_id', '=', 'districts.id')
-    ->where('districts.name', '=', $name)
-    ->count();
+        ->where('districts.name', '=', $name)
+        ->count();
 }
 function category_rooms()
 {
@@ -64,8 +68,20 @@ function districts()
 }
 function room_posts()
 {
-    return RoomPost::latest()->with('facilities')->paginate(10);
+
+    $query = RoomPost::with('facilities')
+        ->where('status', 'accept')
+        ->whereIn('service_id', [1, 2, 3])
+        ->where('time_end', '>', Carbon::now())
+        ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
+        ->inRandomOrder()
+        ->paginate(10); // Phân trang trực tiếp trên truy vấn
+
+    return $query;
 }
+
+
+
 function categories()
 {
     return CategoryRoom::withCount('roomPosts')
@@ -75,6 +91,10 @@ function categories()
 function posts()
 {
     return Post::latest()->paginate(5);
+}
+function countPostServiceId($service_id){
+    $count = RoomPost::where('service_id', $service_id)->count();
+    return $count;
 }
 // $room_postss = RoomPost::latest()->with('facilities')->paginate(10);
 

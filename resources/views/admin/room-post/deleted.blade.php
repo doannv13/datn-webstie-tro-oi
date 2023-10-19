@@ -111,6 +111,20 @@
                                 <div class="col-md-7">{{ $value->acreage }}m2</div>
                             </div>
                             <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Danh mục:</div>
+                                <div class="col-md-7"> {{ $value->categoryroom->name }}</div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Gói dịch vụ:</div>
+                                <div class="col-md-7">
+                                    @if ($value->service_id != null)
+                                        {{ $value->service->name }}
+                                    @else
+                                        Tin thường
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Mô tả:</div>
                                 <div class="col-md-7">{!! $value->description !!}</div>
                             </div>
@@ -128,11 +142,11 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Ngày đăng:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-7">{{ $value->created_at }}</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Ngày hết hạn:</div>
-                                <div class="col-md-7">{{ $value->created_at->format('d-m-Y') }}</div>
+                                <div class="col-md-7">{{ $value->time_end }}</div>
                             </div>
                         </div>
                     </div>

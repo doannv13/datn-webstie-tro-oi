@@ -26,8 +26,8 @@
 
 
 
-{{--    icon facebook--}}
-    <link rel="stylesheet" type="text/css" href="{{asset('fontawesome/css/v4-shims.css')}}" />
+    {{--    icon facebook --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/v4-shims.css') }}" />
 
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/bootstrap.min.css') }}" />
@@ -65,6 +65,8 @@
     <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
 
+    <link href="{{ asset('be/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
+        type="text/css" />
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
@@ -112,7 +114,7 @@
                         <i class="fa fa-facebook-official" aria-hidden="true"></i>
                         <span>Nhắn tin Facebook</span>
                     </a>
-                    <a href="http://zalo.me/0932476977" class="zalo align-items-center" >
+                    <a href="http://zalo.me/0932476977" class="zalo align-items-center">
                         <i class="fa pt-2" style="font-size: 11px" aria-hidden="true">Zalo</i>
                         <span>Zalo: 093 621 9271</span>
                     </a>
@@ -128,45 +130,44 @@
 
     </div>
 
-        <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
-        <script src="{{ asset('fe/js/wow.min.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
-        <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('fe/js/slick.min.js') }}"></script>
-        <script src="{{ asset('fe/js/sidebar.js') }}"></script>
-        <script src="{{ asset('fe/js/app.js') }}"></script>
-        <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.mb.YTPlayer.js') }}"></script>
+    <script src="{{ asset('fe/js/wow.min.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.scrollUp.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.filterizr.js') }}"></script>
+    <script src="{{ asset('fe/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('fe/js/slick.min.js') }}"></script>
+    <script src="{{ asset('fe/js/sidebar.js') }}"></script>
+    <script src="{{ asset('fe/js/app.js') }}"></script>
+    <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
-        <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
-        <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
-        <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
 
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
-        <!-- Custom javascript -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
+    <!-- Custom javascript -->
+    z
 
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
+    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
-        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-        <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
-        <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <script src="{{ asset('fe/js/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('fe/js/respond.min.js') }}"></script>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <script src="{{ asset('fe/js/html5shiv.min.js') }}"></script>
-        <script src="{{ asset('fe/js/respond.min.js') }}"></script>
-
-        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-        <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
-        <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
-
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
+    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
 
     <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
@@ -201,10 +202,10 @@
         });
     </script>
 
-        @stack('scripts')
-{{--    Contact media button--}}
+    @stack('scripts')
+    {{--    Contact media button --}}
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('.user-support').click(function(event) {
                 $('.media-button-content').slideToggle();
             });

@@ -64,7 +64,7 @@
                                     <div class="photo-thumbnail p-lg-2 p-sm-2">
                                         <div class="">
 
-                                            <img src="{{ $item->image }}" alt="photo" class="img-fluid w-100">
+                                            <img src="{{ $item->image }}" alt="photo" style="height:400px" class="img-fluid w-100">
                                             <a href="rooms-details.html">
                                                 <span class="blog-one__plus"></span>
                                             </a>
@@ -171,7 +171,7 @@
                                 </a>
                             </div>
                         @endforeach
-                       
+
                         <div class="sidebar-widget category-posts">
 
                             <div class="main-title-2 d-flex justify-content-between gap-2 ">

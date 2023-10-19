@@ -12,9 +12,9 @@
     <!-- App favicon -->
 
     @if ($global_setting->favicon && asset($global_setting->favicon))
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset($global_setting->favicon) }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset($global_setting->favicon) }}" />
     @else
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
     @endif
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -38,19 +38,13 @@
     <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
-        rel="stylesheet" type="text/css" />
-    <link href="{{ asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}"
-        rel="stylesheet" type="text/css" />
-    <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('be/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css"
-        id="app-style" />
-    <link href="{{ asset('be/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('be/assets/css/bootstrap5-toggle.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('be/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <!-- body start -->
@@ -131,7 +125,7 @@ data-sidebar-user='true' --}}
     </script>
 
     {{-- load ảnh --}}
-     <script>
+    <script>
         $(function() {
             function readURL(input, selector) {
                 if (input.files && input.files[0]) {

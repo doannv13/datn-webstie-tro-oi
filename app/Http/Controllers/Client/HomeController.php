@@ -7,9 +7,8 @@ use App\Models\Banner;
 use App\Models\CategoryPost;
 use App\Models\CategoryRoom;
 use App\Models\District;
-
 use App\Models\ImageRoom;
-
+use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\RoomPost;
 use App\Models\Ward;
@@ -17,6 +16,7 @@ use App\Models\Bookmark;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,28 +28,25 @@ class HomeController extends Controller
     {
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
-        // $districts = District::distinct()->pluck('name');
-        // $districts = District::all();
-        $districts = District::distinct()->pluck('name');
-        $rooms = RoomPost::with(['facilities' => function ($query) {
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
+        $room_post_vip = RoomPost::with(['facilities' => function ($query) {
             $query->inRandomOrder()->take(6);
         }])
             ->where('status', 'accept')
-            ->latest('id')
-            ->limit(36)
+            ->whereIn('service_id', [1, 2, 3])
+            ->where('time_end', '>', Carbon::now())
+            ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
+            ->limit(6)
+            ->inRandomOrder()
             ->paginate(6);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();
-        // dd($posts);
-        // dd($rooms);
         //đếm số tin đăng ,user ,bài viết
         $count_room = count(RoomPost::all());
         $count_user = count(User::all());
         $count_post = count(Post::all());
-        // dd($count_room,$count_user,$count_post);
-        // dd($districts);
-
-
         // Share media
         // $share_content=HOME_URL;
         // $shareComponent = \Share::page(
@@ -59,8 +56,7 @@ class HomeController extends Controller
         //     ->facebook()
         //     ->twitter()
         //     ->reddit();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'rooms', 'posts', 'count_room', 'count_user', 'count_post','banners'));
-
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
     }
     public function bookmark(Request $request, string $id)
     {
@@ -137,7 +133,9 @@ class HomeController extends Controller
     {
         $category_rooms = CategoryRoom::query()->where('status', 'active')->latest()->get();
         $wards = Ward::query()->latest()->get();
-        $districts = District::distinct()->pluck('name');
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
 
         $selectedPrice = request()->input('price_filter');
         $selectedAcreage = request()->input('acreage_filter');
@@ -151,8 +149,10 @@ class HomeController extends Controller
             ->flatten()
             ->unique()
             ->all();
-        $query = RoomPost::query()->with('categoryroom', 'district', 'tags')
-        ->where('status','accept');
+        $query = RoomPost::query()
+            ->with('categoryroom', 'district', 'tags')
+            ->where('status', 'accept')
+            ->where('time_end', '>', Carbon::now());
 
         if ($search != null) {
             $query->where('name', 'like', '%' . $search . '%');
@@ -163,6 +163,7 @@ class HomeController extends Controller
                 $query->where('category_room_id', $selectedRoomType);
             }
         }
+
         if ($selectedDistrict != null) {
             if ($selectedDistrict !== 'all') {
                 $query->whereHas('district', function ($q) use ($selectedDistrict) {
@@ -185,6 +186,7 @@ class HomeController extends Controller
                 $query->where('price', '>=', 4000000);
             }
         }
+
         // Lọc theo diện tích
         if ($selectedAcreage != null) {
             if ($selectedAcreage === 'allacreage') {
@@ -200,9 +202,11 @@ class HomeController extends Controller
             }
         }
 
+        // Sắp xếp bằng cách sử dụng CASE
+        $query->orderByRaw("CASE WHEN service_id = 1 THEN 1 WHEN service_id = 2 THEN 2 WHEN service_id = 3 THEN 3 ELSE 4 END");
         $room = $query->paginate(5);
         $totalResults = $room->total();
-
+        $currentDateTime = Carbon::now();
         return view('client.layouts.search', compact(
             'category_rooms',
             'wards',
@@ -238,23 +242,23 @@ class HomeController extends Controller
         $caterooms = RoomPost::query()->with('facilities', 'surrounds')
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
+            ->where('status', 'accept')
             ->get();
         // $rooms = RoomPost::with(['facilities' => function ($query) {
         //     $query->inRandomOrder()->take(6);
         // }]);
         $images = ImageRoom::query()->where('room_id', $id)->get();
-        $share_content=DETAIL_ROOM_URL;
-        $id_roompost=RoomPost::query()->findOrFail($id);
+        $share_content = DETAIL_ROOM_URL;
+        $id_roompost = RoomPost::query()->findOrFail($id);
 
         $shareComponent = \Share::page(
-            $share_content.$id_roompost->id,
+            $share_content . $id_roompost->id,
             'chia se fb cua quang phuc vip pro',
         )
             ->facebook()
             ->twitter()
             ->reddit();
         $tags = $roomposts->tags;
-
         return view('client.room-post.detail', compact('category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts','shareComponent'));
 
     }
