@@ -80,7 +80,8 @@ Route::get('posts-detail/{id}', [ClientPost::class, 'postDetail'])->name('posts-
 //Lọc và Tìm kiếm
 // Route::post('fillter', [HomeController::class, 'filter_list']);
 Route::get('search', [HomeController::class, 'index'])->name('search');
-Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'fillter_list'])->name('search-fillter');
+Route::match(['get', 'post'], 'search-filter', [HomeController::class, 'filter_list'])->name('search-filter');
+// Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'filter_list_room_post_detail'])->name('search-fillter');
 Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
 Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');

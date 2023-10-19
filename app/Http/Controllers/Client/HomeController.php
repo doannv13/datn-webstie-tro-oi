@@ -26,10 +26,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $category_rooms = CategoryRoom::all();
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
         // $districts = District::distinct()->pluck('name');
-        $districts = District::all();
+        // $districts = District::all();
+        $districts = District::distinct()->pluck('name');
         $rooms = RoomPost::with(['facilities' => function ($query) {
             $query->inRandomOrder()->take(6);
         }])
@@ -87,6 +88,8 @@ class HomeController extends Controller
     }
     public function listBookmark()
     {
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
+        $districts = District::distinct()->pluck('name');
         if (Auth::check()) {
             $user_id = auth()->user()->id;
             $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
@@ -95,7 +98,7 @@ class HomeController extends Controller
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
             $posts = Post::latest()->paginate(5);
-            return view('client.bookmark', compact('data', 'categories', 'posts', 'room_posts'));
+            return view('client.bookmark', compact('category_rooms', 'districts', 'data', 'categories', 'posts', 'room_posts'));
         } else {
             toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
             return redirect('/client-login');
@@ -130,9 +133,9 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function fillter_list(Request $request)
+    public function filter_list(Request $request)
     {
-        $category_rooms = CategoryRoom::query()->latest()->get();
+        $category_rooms = CategoryRoom::query()->where('status', 'active')->latest()->get();
         $wards = Ward::query()->latest()->get();
         $districts = District::distinct()->pluck('name');
 
@@ -197,7 +200,7 @@ class HomeController extends Controller
             }
         }
 
-        $room = $query->paginate(2);
+        $room = $query->paginate(5);
         $totalResults = $room->total();
 
         return view('client.layouts.search', compact(
@@ -215,8 +218,16 @@ class HomeController extends Controller
         ));
     }
 
+    public function countPrice() {
+        // Thực hiện logic để đếm số lượng mục trong phạm vi giá cụ thể ($minPrice đến $maxPrice)
+        // Replace this logic with your actual implementation
+        
+    }
+
     function roomPostDetail(String $id)
     {
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
+        $districts = District::distinct()->pluck('name');
         $search = request()->input('name_filter');
         $room_postss = RoomPost::latest()->with('facilities')->paginate(10);
         $categories = CategoryRoom::withCount('roomPosts')
@@ -244,7 +255,9 @@ class HomeController extends Controller
             ->reddit();
         $tags = $roomposts->tags;
 
-        return view('client.room-post.detail', compact('roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts','shareComponent'));
+        return view('client.room-post.detail', compact('category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts','shareComponent'));
 
     }
+
+    
 }

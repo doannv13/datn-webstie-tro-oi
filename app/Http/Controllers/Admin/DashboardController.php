@@ -10,9 +10,12 @@ use App\Models\Coupon;
 use App\Models\Facility;
 use App\Models\Post;
 use App\Models\RoomPost;
+use App\Models\Services;
 use App\Models\Surrounding;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -66,7 +69,7 @@ class DashboardController extends Controller
 
         // thống kê Vai trò
         $countRole = Role::all()->count();
-        
+
         // thống kê quyền
         $countPermission = Permission::all()->count();
 
@@ -83,8 +86,22 @@ class DashboardController extends Controller
         // thống kê mã giảm giá
         $countBanner = Banner::all()->count();
         $countBannerToActive = Banner::where('status', 'active')->count();
-        
 
+        $services = Services::withCount('roomPosts')->get();
+
+        $revenueByMonth = Transaction::select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(point) as total_revenue'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy(DB::raw('MONTH(created_at)'))
+            ->where('status', 'accept')
+            ->get();
+
+        // Chuyển đổi số điểm sang tiền theo tỷ lệ 1 điểm = 1000 VND
+        $exchangeRate = 1000;
+        foreach ($revenueByMonth as $revenue) {
+            $revenue->total_revenue *= $exchangeRate;
+        }
+        $totalRevenue = Transaction::sum('point');
+        $totalRevenue *= $exchangeRate;
         return view('admin.dashboard', compact(
             'countRoomPostToDay',
             'countRoomPostToActive',
@@ -110,7 +127,10 @@ class DashboardController extends Controller
             'countCoupon',
             'countCouponToActive',
             'countBanner',
-            'countBannerToActive'
+            'countBannerToActive',
+            'services',
+            'revenueByMonth',
+            'totalRevenue'
         ));
     }
 }

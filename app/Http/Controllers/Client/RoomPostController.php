@@ -57,7 +57,6 @@ class RoomPostController extends Controller
     {
 
         try {
-
             if ($request->hasFile('imageroom')) {
                 $uploadFile = upload_file('room', $request->file('imageroom'));
             }
@@ -135,8 +134,8 @@ class RoomPostController extends Controller
                 $surround->facility_id = $facility;
                 $surround->save();
             }
-            $mailTo =User::where('role', 'admin')->first();
-            event( new RoomPostNotificationEvent($mailTo, $content));
+            // $mailTo =User::where('role', 'admin')->first();
+            // event( new RoomPostNotificationEvent($mailTo, $content));
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
 
             return redirect()->route('room-posts.index');

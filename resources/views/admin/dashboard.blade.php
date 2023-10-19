@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <h4 class="header-title mt-0">Các tin theo gói dịch vụ </h4>
+                        <h4 class="header-title mt-0">Số tin đăng theo gói dịch vụ </h4>
 
                         <div class="widget-chart text-center">
                             <div id="chart-container" style="height: 245px;">
@@ -51,7 +51,7 @@
                 </div>
             </div><!-- end col -->
 
-            <div class="col-xl-4">
+            <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body">
                         <div class="dropdown float-end">
@@ -70,36 +70,21 @@
                                 <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                             </div>
                         </div>
-                        <h4 class="header-title mt-0">Tin đăng theo danh mục hoặc doanh thu</h4>
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <h4 class="header-title mt-0">Doanh thu</h4>
+                            </div>
+                            <div class="col-xl-4">
+                                <h2 class="fs-5 mt-0">Tổng thu: {{ str_replace(',', '.', number_format($totalRevenue)) }}₫</h2>
+                            </div>
+                        </div>
                         <div id="morris-bar-example" dir="ltr" style="height: 280px;" class="morris-chart"></div>
+
                     </div>
                 </div>
             </div><!-- end col -->
 
-            <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
-                        <h4 class="header-title mt-0">Total Revenue</h4>
-                        <div id="morris-line-example" dir="ltr" style="height: 280px;" class="morris-chart"></div>
-                    </div>
-                </div>
-            </div><!-- end col -->
+            
         </div>
         <!-- end row -->
 
@@ -386,88 +371,7 @@
                 </div>
             </div><!-- end col -->
 
-            <div class="col-xl-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
-
-                        <h4 class="header-title mt-0 mb-4"><a href="{{ route('category-posts.index') }}"
-                                class="text-dark">Danh mục bài viết</a></h4>
-
-                        <div class="widget-chart-1">
-                            <div class="widget-chart-box-1 float-start" dir="ltr">
-                                    <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#faee43"
-                                    data-bgColor="#f9f5b9" value="{{ $countCategoryPostToActive }}" data-min="0"
-                                    data-max="{{ $countCategoryPost }}" data-skin="tron" data-angleOffset="180"
-                                    data-readOnly="false" data-thickness=".15" />
-                            </div>
-                            <div class="widget-detail-1 text-end">
-                                <h2 class="fs-5">Tổng: {{ $countCategoryPost }}</h2>
-                                <h2 class="fw-normal pt-2 mb-1 fs-5">Đang hoạt động: {{ $countCategoryPostToActive }}</h2>
-                                <p class="text-muted mb-1">Trong ngày: {{ $countCategoryPostToDay }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end col -->
-
-            <div class="col-xl-3 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
-
-                        <h4 class="header-title mt-0 mb-4"><a href="{{ route('posts.index') }}" class="text-dark">Bài
-                                viết</a></h4>
-
-                        <div class="widget-box-2">
-                            <div class="widget-detail-2 text-end">
-                                <span class="badge bg-warning rounded-pill float-start mt-3">Tổng: {{ $countPost }} <i
-                                        class="mdi mdi-trending-up"></i> </span>
-                                <h2 class="fw-normal mb-1 fs-5">Đang hoạt động: {{ $countPostToActive }} </h2>
-                                <p class="text-muted mb-4">Trong ngày: {{ $countPostToDay }}</p>
-                            </div>
-                            <div class="progress progress-bar-alt-warning progress-sm">
-                                <div class="progress-bar bg-warning" role="progressbar"
-                                    aria-valuenow="{{ $countPostToActive }}" aria-valuemin="0"
-                                    aria-valuemax="{{ $countPost }}"
-                                    style="width: {{ ($countPost != 0) ? ($countPostToActive / $countPost) * 100 : 0 }}%;">
-                                    <span class="visually-hidden">77% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end col -->
+            
 
         </div>
         <!-- end row -->
@@ -748,16 +652,48 @@
     }
 
     // Tạo biểu đồ mới
+    var services = {!! json_encode($services) !!};
+    var data = [];
+    services.forEach(function (service) {
+        data.push({label: service.name, value: service.room_posts_count});
+        
+    });
+
     new Morris.Donut({
         element: 'chart-container',
-        data: [
-            {label: "VIP1", value: 30},
-            {label: "VIP2", value: 40},
-            {label: "VIP3", value: 20},
-            {label: "Tin thường", value: 100},
-
-        ],
-        colors: ['#f22424', '#f2b424', '#f72a79', '#66a3ed']
+        data: data,
+        colors: ['#f22424', '#f2b424', '#f72a79', '#66a3ed'] // Có thể điều chỉnh mảng màu tùy thuộc vào dữ liệu
     });
 </script>
+
+<script>
+
+var oldChart = document.getElementById('morris-bar-example');
+if (oldChart) {
+    oldChart.innerHTML = ''; // Xóa nội dung của phần tử
+}
+
+var revenueData = {!! json_encode($revenueByMonth) !!};
+
+var data = [];
+revenueData.forEach(function (item) {
+    data.push({ y: 'Tháng ' + item.month, a: item.total_revenue });
+});
+
+new Morris.Bar({
+    element: 'morris-bar-example',
+    data: data,
+    xkey: 'y',
+    ykeys: ['a'],
+    labels: ['Doanh thu'],
+    barSize: 10,
+    hideHover: 'auto',
+    resize: true,
+    yLabelFormat: function (y) {
+        // định dạng giá tiền Việt Nam
+        return (Math.round(y)).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+});
+
+  </script>
 @endpush

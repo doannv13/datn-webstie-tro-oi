@@ -16,4 +16,8 @@ class Services extends Model
         'description',
     ];
     public $timestamps = true;
+    public function roomPosts()
+    {
+        return $this->hasMany(RoomPost::class, 'service_id', 'id');
+    }
 }

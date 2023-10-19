@@ -23,8 +23,11 @@
     <link href="{{ asset('be/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('be/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
-
     <link href="{{ asset('be/assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('be/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
+
     <link href="{{ asset('be/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
     <link href="{{ asset('be/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
@@ -117,8 +120,9 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
 
     <!--Morris Chart-->
-    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/raphael/raphael.min.js') }}"></script>
+
+    <script src="{{ asset('be/assets/libs/morris.js06/morris.min.js') }}"></script>
 
     {{-- Ckeditor --}}
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
@@ -165,7 +169,7 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
     <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
     <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
-    
+
     {{-- Hiển thị thông báo --}}
     <script src="{{ asset('be/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
@@ -174,7 +178,6 @@ data-sidebar-user='true' --}}
     <script src="{{ asset('be/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
     <script src="{{ asset('be/assets/js/pages/form-advanced.init.js') }}"></script>
-    
     @stack('scripts')
 </body>
 

@@ -44,8 +44,11 @@ class FacilityController extends Controller
             $selectIcon = $request->input('icon');
             $model->icon = $selectIcon;
             $model->save();
+            // dd($selectIcon);
+
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('facilities.index');
+
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
