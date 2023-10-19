@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReportRevenueController;
+use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\TransactionController;
 
 /*
@@ -132,11 +134,21 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
         return view('admin.layouts.master');
     })->name('home-admin');
 
+
     // Route::get('dashboard-admin', function () {
     //     return view('admin.dashboard');
     // });
 
     Route::get('dashboard-admin', [DashboardController:: class, 'index'])->name('dashboard-admin');
+
+    //Báo cáo doanh thu
+    Route::get('admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
+    Route::post('admin-report-revenue',[ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
+
+    //báo cáo tin đăng
+    Route::get('admin-report-roompost', [ReportRoomPostControler::class, 'index'])->name('admin-report-roompost');
+    Route::post('admin-report-roompost',[ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
+
     // Room-Post-Admin
     Route::resource('admin-room-posts', AdminRoomPost::class);
     Route::get('admin-room-posts-deleted', [AdminRoomPost::class, 'deleted'])->name('admin-room-posts-deleted');
