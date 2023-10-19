@@ -245,7 +245,7 @@
                                                                             </div> --}}
                                                                             <div class="photo">
                                                                                 <img src="{{ asset($value->image) }}"
-                                                                                    alt="photo" class="img-fluid w-100">
+                                                                                    alt="photo" style="height: 350px" class="img-fluid w-100">
                                                                                 <a href="rooms-details.html">
                                                                                     <label class=""
                                                                                         style="cursor: pointer; font-size: 20px;"

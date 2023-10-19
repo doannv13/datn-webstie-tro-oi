@@ -34,6 +34,7 @@
                         <div class="listing-post-meta">
                             {{ number_format($post->price) }}
                             VND/Tháng
+
                         </div>
                     </div>
                 </div>

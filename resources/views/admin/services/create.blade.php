@@ -19,14 +19,14 @@
                                 @csrf
                                 @method('post')
                                 <div class="mb-3">
-                                    <label for="simpleinput" class="form-label">Tên Gói <span class="text-danger">*</span></label>
+                                    <label for="simpleinput" class="form-label">Tên gói <span class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{old('name')}}" id="simpleinput" class="form-control" placeholder="Tên Gói">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="example-email" class="form-label">Giá <span class="text-danger">*</span></label>
+                                    <label for="example-email" class="form-label">Giá Point<span class="text-danger">*</span></label>
                                     <input type="text" name="price" value="{{old('price')}}" class="form-control" placeholder="Giá">
                                     @error('price')
                                     <span class="text-danger">{{ $message }}</span>
@@ -34,14 +34,22 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="example-palaceholder" class="form-label">Số Ngày <span class="text-danger">*</span> </label>
+                                    <label for="example-palaceholder" class="form-label">Số ngày <span class="text-danger">*</span> </label>
                                     <input type="text" name="date_number" value="{{old('date_number')}}" id="example-palaceholder" class="form-control" placeholder="Số Ngày">
                                     @error('date_number')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="example-textarea" class="form-label">Mô Tả <span class="text-danger">*</span></label>
+
+                                    <label class="form-label">Màu sắc</label>
+                                    <input type="color" class="form-control" id="colorpicker-default" value="#4a81d4" name="color">
+                                    @error('color')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="example-textarea" class="form-label">Mô tả <span class="text-danger">*</span></label>
                                     <textarea class="form-control" name="description" id="description" value="{{old('description')}}" placeholder="Mô Tả" rows="5">{{ old('description') }}</textarea>
                                     @error('description')
                                     <span class="text-danger">{{ $message }}</span>

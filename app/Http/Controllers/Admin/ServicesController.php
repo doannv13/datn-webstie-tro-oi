@@ -47,7 +47,6 @@ class ServicesController extends Controller
             $model = new Services();
             $model->fill($request->all());
             $model->save();
-
             // return redirect()->route('services.index')->with($notification);
             Toastr::success('Thêm dịch vụ thành công', 'Thành công');
             return redirect()->route('services.index');
