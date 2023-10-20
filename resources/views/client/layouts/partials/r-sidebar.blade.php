@@ -29,9 +29,9 @@
                             </a>
                         </div>
                         <div class="content">
-                            <h5 class="media-heading">
+                            <h5 style="color:{{$post->service_id ? $post->service->color : ''}}" class="media-heading">
                                 <a
-                                    href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 30) }}...</a>
+                                style="color:{{$post->service_id ? $post->service->color : ''}}" href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 30) }}...</a>
                             </h5>
                             <div class="listing-post-meta">
                                 {{ number_format($post->price) }}

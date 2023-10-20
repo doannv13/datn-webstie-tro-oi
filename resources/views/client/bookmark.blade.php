@@ -2,7 +2,20 @@
 @section('content')
 
     <!-- Content -->
-    <h2 style="text-align: center">Book mark</h2>
+
+    <div class="sub-banner">
+        <div class="container">
+            <div class="breadcrumb-area">
+                <h1>Tin yêu thích</h1>
+            </div>
+            <nav class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Tin yêu thích</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
     <!-- Blog body start -->
     <div class="blog-body content-area">
         <div class="container">
@@ -38,10 +51,19 @@
                                                     style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
                                                     {{ number_format($value->roomPost->price) }} VND/Tháng
                                                 </div>
-                                                <div class="photo">
-                                                    <img src="{{ $value->roomPost->image }}" alt="photo"
+                                                <div class="photo" style="position: relative">
+                                                    @if($value->roomPost->service_id!=null)
+                                                        @if($value->roomPost->service->id===1)
+                                                            <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-40px;width:220px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
+                                                        @elseif ($value->roomPost->service->id===2)
+                                                            <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-40px;width:220px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
+                                                        @else
+                                                            <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:220px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
+                                                        @endif
+                                                    @endif
+                                                    <img src="{{ $value->roomPost->image }}" style="height: 300px" alt="photo"
                                                         class="img-fluid w-100">
-                                                    <a href="rooms-details.html">
+                                                    <a href="{{ route('room-post-detail', $value->roomPost->id) }}" >
                                                         <label class="" style="cursor: pointer; font-size: 20px;"
                                                             for="">Xem Chi Tiết</label>
                                                     </a>
@@ -49,9 +71,9 @@
 
                                             </div>
                                             <!-- Detail -->
-                                            <div class="detail clearfix">
-                                                <h3>
-                                                    <a href="rooms-details.html">{{ $value->roomPost->name }}</a>
+                                            <div style="height: 240px" class="detail clearfix">
+                                                <h3 >
+                                                    <a style="color:{{$value->roomPost->service_id ? $value->roomPost->service->color : ''}}" href="{{ route('room-post-detail', $value->roomPost->id) }}">{{ $value->roomPost->name }}</a>
                                                 </h3>
                                                 <p class="location">
                                                     <a href="rooms-details.html">
@@ -89,7 +111,9 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            @endif
+                            @else
+                            <h2>Bạn chưa lưu tin!</h2>
+                                @endif
                         @endif
                     </div>
 
