@@ -63,7 +63,7 @@
                     @foreach ($room_post_vip as $key => $value)
                     <div class="col-lg-4 col-md-6 col-sm-12">
 
-                        <div class="hotel-box " style="position: relative;" style="height:100%;">
+                        <div class="hotel-box" style="position: relative;" style="height:100%;">
                             <?php
                             $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                             $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
@@ -114,6 +114,17 @@
                                 <div class="text-white fw-bolder fs-5" style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
                                     {{ number_format($value->price) }} VND/Tháng
                                 </div>
+                                @if($value->service_id!=null)
+                                    @if($value->service->id===1)
+                                    <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
+                                    @elseif ($value->service->id===2)
+                                        <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
+                                    @else
+                                        <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
+                                    @endif
+                                @endif
+
+
                                 <div class="photo">
                                     <img src="{{ $value->image }}" alt="photo" class="img-fluid w-100" style="height: 260px;">
                                     <a href="{{ route('room-post-detail', $value->id) }}">
@@ -125,7 +136,7 @@
                             <!-- Detail -->
                             <div class="detail clearfix" style="height: 240px;">
                                 <h3>
-                                    <a href="{{ route('room-post-detail', $value->id) }}">{{ $value->name }}</a>
+                                    <a style="color:{{$value->service_id ? $value->service->color : ''}}" href="{{ route('room-post-detail', $value->id) }}">{{ $value->name }}</a>
                                 </h3>
                                 <p class="location">
                                     <a href="{{ route('room-post-detail', $value->id) }}">
