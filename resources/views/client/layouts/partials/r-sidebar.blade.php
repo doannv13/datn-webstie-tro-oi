@@ -15,34 +15,36 @@
         </div>
     @endforeach
     <!-- Top 10 -->
-    @if (room_posts())
-        @if (count(room_posts()))
-            <div class="sidebar-widget recent-news" style="padding: 12px">
-                <div class="main-title-2">
-                    <h5>Top phòng trọ nổi bật</h5>
-                </div>
-                @foreach (room_posts() as $key => $post)
-                    <div class="recent-news-item mb-3">
-                        <div class="thumb">
-                            <a href="#">
-                                <img src="{{ asset($post->image) }}" alt="small-img" style="width: 80px; height: 80px;">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <h5 style="color:{{$post->service_id ? $post->service->color : ''}}" class="media-heading">
+    <div class="sidebar-widget recent-news" style="padding: 12px">
+        <div class="main-title-2">
+            <h5>Top 10 phòng trọ</h5>
+        </div>
+        @if (count(room_posts()) > 0)
+            @foreach (room_posts() as $key => $post)
+                <div class="recent-news-item mb-3">
+                    <div class="thumb">
+                        <a href="#">
+                            <img src="{{ asset($post->image) }}" alt="small-img" style="width: 80px; height: 80px;">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h5 style="color:{{$post->service_id ? $post->service->color : ''}}" class="media-heading">
                                 <a
                                 style="color:{{$post->service_id ? $post->service->color : ''}}" href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 30) }}...</a>
-                            </h5>
-                            <div class="listing-post-meta">
-                                {{ number_format($post->price) }}
-                                VND/Tháng
-                            </div>
+                        </h5>
+                        <div class="listing-post-meta">
+                            {{ number_format($post->price) }}
+                            VND/Tháng
+
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
+        @else
+            <p>Tin đăng phòng trống</p>
         @endif
-    @endif
+    </div>
+
     <!-- Danh mục -->
     <div class="sidebar-widget category-posts">
         <div class="main-title-2">
@@ -75,7 +77,7 @@
                         </div>
                         <div class="content">
                             <h3 class="media-heading">
-                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title,0,25)}}
+                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title, 0, 25) }}
                             </h3>
                         </div>
                     </div>

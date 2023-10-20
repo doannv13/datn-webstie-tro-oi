@@ -34,18 +34,29 @@ function timeposts($times)
     $currentTime = Carbon::now();
     return $postedTime->diffForHumans($currentTime);
 }
-function countAcreage($min, $max){
-    return RoomPost::whereBetween('acreage',[$min, $max])->count();
+function countAcreage($min, $max)
+{
+    return RoomPost::whereBetween('acreage', [$min, $max])->where('status', 'accept')->count();
 }
 
-function countPrice($min, $max){
-    return RoomPost::whereBetween('price',[$min, $max])->count();
+function countPrice($min, $max)
+{
+    return RoomPost::whereBetween('price', [$min, $max])->where('status', 'accept')->count();
+}
+
+
+function countPriceGreatThan4M(){
+    return RoomPost::where('price', '>=', 4000000)->where('status', 'accept')->count();
+}
+
+function countAcreageGreatThan45(){
+    return RoomPost::where('acreage', '>=', 45)->where('status', 'accept')->count();
 }
 
 function countDistrict($name){
     return RoomPost::join('districts', 'room_posts.district_id', '=', 'districts.id')
-    ->where('districts.name', '=', $name)
-    ->count();
+        ->where('districts.name', '=', $name)
+        ->count();
 }
 function category_rooms()
 {
@@ -57,6 +68,7 @@ function districts()
 }
 function room_posts()
 {
+
     $query = RoomPost::with('facilities')
         ->where('status', 'accept')
         ->whereIn('service_id', [1, 2, 3])

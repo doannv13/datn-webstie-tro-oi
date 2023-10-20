@@ -5,7 +5,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 ">
             <!-- Contact form start -->
             <div class="contact-form">
-                <form action="{{ route('room-posts.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room-posts.store') }}" method="POST" id="myForm" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="sidebar row p-3">
@@ -159,6 +159,26 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div class="col-lg-12 col-md-12 mb-3">
+                            <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
+                            <div class="row p-3 ">
+                                @foreach ($facilities as $facility)
+                                    <div class="form-check col-md-3 col-4 mb-2">
+                                        <input class="form-check-input" name="facility[]" type="checkbox"
+                                            value="{{ $facility->id }}"
+                                            {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label">
+                                            {{ $facility->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @error('facility')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="col-lg-12 col-md-12 mb-3">
                             <label class="input-group">Khu vực xung quanh:<span class="text-danger">*</span></label>
                             <div class="row p-3 ">
@@ -179,24 +199,7 @@
                         </div>
 
 
-                        <div class="col-lg-12 col-md-12 mb-3">
-                            <label class="input-group">Tiện ích:<span class="text-danger">*</span></label>
-                            <div class="row p-3 ">
-                                @foreach ($facilities as $facility)
-                                    <div class="form-check col-md-3 col-4 mb-2">
-                                        <input class="form-check-input" name="facility[]" type="checkbox"
-                                            value="{{ $facility->id }}"
-                                            {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
-                                        <label class="form-check-label">
-                                            {{ $facility->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @error('facility')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+
                         <!-- Upload file -->
                         <!-- Ảnh nổi bật -->
                         <div class="col-lg-12 col-md-12 mb-3">
@@ -215,7 +218,7 @@
                         <div class="col-lg-12 col-md-12 mb-3">
                             <h4 class="header-title">Ảnh chi tiết phòng</h4>
                             <p class="sub-header">
-                                Kéo hoặc chọn file
+                                ( Tối thiểu 4 ảnh, tối đa 16 ảnh )
                             </p>
 
                             <div class="upload__box">
@@ -228,7 +231,19 @@
                                 </div>
                                 <div class="upload__img-wrap"></div>
                             </div>
+                            @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tags</label>
+                            <input type="text" class="selectize-close-btn form-control" name="tags"
+                                value="{{ old('tags') }}">
+                            @error('tags')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div><!-- end row -->
                     </div>
 
                     <div class="sidebar row p-3">
@@ -314,6 +329,9 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('be/assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('be/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
         CKEDITOR.replace('description');
@@ -334,6 +352,7 @@
         var cityFromLocalStorage = localStorage.getItem('city');
         var districtFromLocalStorage = localStorage.getItem('district');
         var wardFromLocalStorage = localStorage.getItem('ward');
+
         // var addressFromLocalStorage = localStorage.getItem('full_address');
         var promise = axios(Parameter);
         promise.then(function(result) {
@@ -380,7 +399,7 @@
                     }
                     var selectedThanhPho = citis.options[citis.selectedIndex];
                     thanhpho = selectedThanhPho.textContent;
-                    // console.log(thanhpho);
+                    console.log(thanhpho);
                     full_address.value = thanhpho;
                     localStorage.setItem('city', thanhpho);
                     // localStorage.removeItem('district');
@@ -436,9 +455,13 @@
             wards.addEventListener("change", function() {
                 var selectedXaPhuong = wards.options[wards.selectedIndex];
                 xaphuong = selectedXaPhuong.textContent;
-                // console.log(xaphuong);
+                console.log(xaphuong);
                 localStorage.setItem('ward', xaphuong);
-                full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
+                if (localStorage.getItem('full_address') == null) {
+                    full_address.value = xaphuong + " - " + quanhuyen + " - " + thanhpho;
+                } else {
+                    full_address.value = localStorage.getItem('full_address');
+                }
             });
 
             address.addEventListener("input", function() {
@@ -446,11 +469,10 @@
                 full_address.value = addressValue + " - " + xaphuong + " - " + quanhuyen + " - " + thanhpho;
             });
         }
-        // document.getElementById("myForm").addEventListener("submit", function() {
-        //     formSubmitted = true;
-        //     localStorage.setItem('full_address', full_address.value);
-        //     full_address.value = localStorage.getItem('full_address');
-        // });
+        document.getElementById("myForm").addEventListener("submit", function() {
+            formSubmitted = true;
+            localStorage.setItem('full_address', full_address.value);
+        });
         // console.log(localStorage.getItem('full_address'));
 
         window.addEventListener('beforeunload', function(e) {
@@ -497,4 +519,5 @@
             });
         });
     </script>
+    <script src="{{ asset('be/assets/js/pages/form-advanced.init.js') }}"></script>
 @endpush

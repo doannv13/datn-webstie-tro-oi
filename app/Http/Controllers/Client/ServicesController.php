@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Transaction;
 
+
 class ServicesController extends Controller
 {
     /**
@@ -20,6 +21,7 @@ class ServicesController extends Controller
     public function index()
     {
         //
+
         $services = Services::paginate(3);
         return view('client.services.index', compact('services'));
     }

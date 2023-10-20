@@ -68,24 +68,11 @@
             <ul id="side-menu">
                 <li class="menu-title">Navigation</li>
                 <li>
-                    <a href="{{ asset('./be/#dashboard') }}" data-bs-toggle="collapse">
+                    <a href="{{ route('dashboard-admin') }}">
                         <i class="fe-folder-minus"></i>
                         <span>Dashboard</span>
-                        <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="dashboard">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="#">- Thêm mới</a>
-                            </li>
-                            <li>
-                                <a href="#">- Danh sách </a>
-                            </li>
-                            <li>
-                                <a href="#">- Thùng rác</a>
-                            </li>
-                        </ul>
-                    </div>
+                    
                 </li>
 
                 <li>
@@ -97,14 +84,12 @@
                     <div class="collapse" id="baocao">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">- Thêm mới</a>
+                                <a href="{{'admin-report-revenue'}}">- Doanh thu</a>
                             </li>
                             <li>
-                                <a href="#">- Danh sách </a>
+                                <a href="{{'admin-report-roompost'}}">- Tin đăng </a>
                             </li>
-                            <li>
-                                <a href="#">- Thùng rác</a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </li>

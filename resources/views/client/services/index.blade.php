@@ -1,13 +1,14 @@
 @extends('client.layouts.partials.l-sidebar')
 @section('main')
 
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 ">
-        <!-- Contact form start -->
-        <div class="row">
-            @if(isset($services))
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 ">
+            <!-- Contact form start -->
+            <div class="row">
+                @if(isset($services))
             @if(count($services))
             @foreach($services as $key => $value)
+
             <div class="col-lg-3 col-md-12">
                 <input type="text" name="services_id" value="{{$value->id}}" hidden>
                 <div class="pricing-1 plan" style="height: 500px;">
@@ -23,6 +24,7 @@
                             {!!$value->description!!}
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- div modal confirm -->
@@ -154,3 +156,4 @@
     </div>
 
     @endsection
+
