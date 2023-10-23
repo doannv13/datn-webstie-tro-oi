@@ -52,7 +52,7 @@
                                 <a href="blog-details.html">{{ $data->title }}</a>
                             </h3>
                             <div class="row mb-30">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class=" col-xs-12">
                                     <p>{!! $data->description !!}</p>
                                 </div>
                             </div>
