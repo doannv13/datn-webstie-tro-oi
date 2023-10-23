@@ -26,7 +26,7 @@ class PostRequest extends FormRequest
             'title' => 'required|max:155',
             'image' => 'mimes:jpeg,png,jpg,gif|max:4096',
             'metaDescription' => 'required|max:255|min:5',
-            'description' => 'required|max:999|min:5',
+            'description' => 'required|max:10000|min:5',
         ];
     }
 
@@ -39,7 +39,7 @@ class PostRequest extends FormRequest
 
             'metaTitle.max' => 'Phải dưới 50 ký tự',
             'title.max' => 'Phải dưới 155 ký tự',
-            'description.max' => 'Phải dưới 999 ký tự',
+            'description.max' => 'Phải dưới 10000 ký tự',
             'metaDescription.max' => 'Phải dưới 255 ký tự',
 
             'description.min' => 'Phải trên 5 ký tự',
