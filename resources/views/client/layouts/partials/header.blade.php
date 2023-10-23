@@ -107,7 +107,7 @@
 
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href="bookmarks"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
+                        <a href="{{ route('list-bookmark') }}"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <a href="{{route('room-posts.create')}}" class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </a>

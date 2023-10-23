@@ -99,9 +99,10 @@
                                                 @elseif($item->service_id===3&&$item->time_end>$currentDateTime)
                                                     <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
                                                 @endif
+                                                <a  href="{{ route('room-post-detail', $item->id) }}">
                                             <img src="{{ $item->image }}" alt="photo" style="height:200px" class="img-fluid w-100">
-                                            <a href="rooms-details.html">
-                                                <span class="blog-one__plus"></span>
+
+
                                             </a>
                                         </div>
                                     </div>

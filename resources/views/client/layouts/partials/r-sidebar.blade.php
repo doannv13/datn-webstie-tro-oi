@@ -23,7 +23,7 @@
             @foreach (room_posts() as $key => $post)
                 <div class="recent-news-item mb-3">
                     <div class="thumb">
-                        <a href="#">
+                        <a href="{{ route('room-post-detail', $post->id) }}">
                             <img src="{{ asset($post->image) }}" alt="small-img" style="width: 80px; height: 80px;">
                         </a>
                     </div>

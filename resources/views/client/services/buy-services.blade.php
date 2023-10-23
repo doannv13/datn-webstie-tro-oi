@@ -20,7 +20,7 @@
                                 <h5>{{$value->name}}</h5>
                                 <p></p>
                                 <hr>
-                                <div class="plan-price fs-5">{{number_format($value->price)}}<span> VNĐ</span><span>/Tin/</span><span>{{$value->date_number}}</span><span> Ngày</span></div>
+                                <div class="plan-price fs-5">{{number_format($value->price)}}<span> Point</span><span>/Tin/</span><span>{{$value->date_number}}</span><span> Ngày</span></div>
                             </div>
                             <div class="plan-list p-3">
 
@@ -43,9 +43,9 @@
                                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                             </div>
                             <div class="modal-body" style="background-color: #F0FCF5;">
-                                
+
                                 <p class="text-danger fs-6 text">Bạn có chắc chắn muốn mua gói này không ?</p>
-                                
+
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success">Đồng ý</button>
