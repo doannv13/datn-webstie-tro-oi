@@ -151,8 +151,8 @@ class HomeController extends Controller
             ->all();
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
-            ->where('status', 'accept')
-            ->where('time_end', '>', Carbon::now());
+            ->where('status', 'accept');
+
 
         if ($search != null) {
             $query->where('name', 'like', '%' . $search . '%');
@@ -203,10 +203,14 @@ class HomeController extends Controller
         }
 
         // Sắp xếp bằng cách sử dụng CASE
-        $query->orderByRaw("CASE WHEN service_id = 1 THEN 1 WHEN service_id = 2 THEN 2 WHEN service_id = 3 THEN 3 ELSE 4 END");
-        $room = $query->paginate(5);
-        $totalResults = $room->total();
         $currentDateTime = Carbon::now();
+        $query->orderByRaw("CASE WHEN service_id = 1 AND time_end > '$currentDateTime' THEN 1 WHEN service_id = 2 AND time_end > '$currentDateTime' THEN 2 WHEN service_id = 3 AND time_end > '$currentDateTime' THEN 3 ELSE 4 END");
+        // dd($query->get());
+        $room = $query->paginate(5);
+        // dd($room);
+        $totalResults = $room->total();
+       
+        // dd($room);
         return view('client.layouts.search', compact(
             'category_rooms',
             'wards',
@@ -218,7 +222,8 @@ class HomeController extends Controller
             'selectedDistrict',
             'selectedRoomType',
             'search',
-            'tags'
+            'tags',
+            'currentDateTime'
         ));
     }
 

@@ -92,18 +92,17 @@
                                     @endif
                                     <div class="photo-thumbnail p-lg-2 p-sm-2">
                                         <div class="" style="position: relative;">
-                                            @if($item->service_id!=null)
-                                                @if($item->service->id===1)
+                                                @if($item->service_id===1&&$item->time_end>$currentDateTime)
                                                     <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
-                                                @elseif ($item->service->id===2)
+                                                @elseif ($item->service_id===2&&$item->time_end>$currentDateTime)
                                                     <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
-                                                @else
+                                                @elseif($item->service_id===3&&$item->time_end>$currentDateTime)
                                                     <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";">Phòng tốt</label>
                                                 @endif
-                                            @endif
+                                                <a  href="{{ route('room-post-detail', $item->id) }}">
                                             <img src="{{ $item->image }}" alt="photo" style="height:200px" class="img-fluid w-100">
-                                            <a href="rooms-details.html">
-                                                <span class="blog-one__plus"></span>
+
+
                                             </a>
                                         </div>
                                     </div>
@@ -112,7 +111,8 @@
                                     <div class="heading mt-2">
                                         <div class="clearfix">
                                             <a  href="{{ route('room-post-detail', $item->id) }}" class="">
-                                                <h5 style="font-size: 16px;color:{{$item->service_id ? $item->service->color : ''}}">{!! strlen($item->name) > 70 ? substr(strip_tags($item->name), 0, 70) . ',...' : $item->name !!}</h5>
+                                                <h5 style="font-size: 16px;color:{{ $item->service_id&&$item->time_end>$currentDateTime ? $item->service->color : ''}};">
+                                                {!! strlen($item->name) > 70 ? substr(strip_tags($item->name), 0, 70) . ',...' : $item->name !!}</h5>
                                             </a>
                                             <span style="color: #F4A460;font-size: 14px;">Giá:
                                                 {{ str_replace(',', '.', number_format($item->price)) }}/tháng</span>
