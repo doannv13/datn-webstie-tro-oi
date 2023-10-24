@@ -289,7 +289,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  - <span class="text-danger">1.000 VND sẽ tương ứng 1 Point</span> </label>
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  : <span class="text-danger">1.000 VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
@@ -310,15 +310,41 @@
                             <input type="text" class="form-control" type="number" value="20,000" id="input-price" onchange="myChange()" disabled>
 
                         </div>
+                        {{--Mã giảm giá--}}
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale" class="text-success fw-bold">+5%</span> </label>
-                            <div class="d-flex">
-                                <label id="sale-price" class="fw-bold text-danger me-1">1.000 </label>
-                                <span> VND</span>
+                            <label class=" fs-6 text fw-semibold">Mã giảm giá: </label> <br>
+                            <div>
+                                <input type="text" id="discount-code" placeholder="Nhập mã giảm giá">
+                                <button id="apply-discount">Áp dụng mã</button>
                             </div>
                         </div>
+                        <div  class="d-flex justify-content-between px-2">
+                            <label class=" fs-6 text fw-semibold"></label> <br>
+                            <div id="discount-message"></div>
+                        </div>
+                        <div  class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Số tiền giảm:</label> <br>
+                            <div class="d-flex">
+                                <label id="discount_amount_sale" class="fw-bold text-danger me-1">0</label>
+                                <span> VND</span>
+                            </div>
+                            <div id="discount_amount" hidden></div>
+                            <div id="type_discount" hidden></div>
+                        </div>
+                        <div  class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Số tiền cần nạp sau khi giảm:</label> <br>
+                            <div class="fw-medium" id=""><span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> VND</div>
+                        </div>
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Tổng nhận</label>
+                            <label class=" fs-6 text fw-semibold">Số Points thưởng: <span id="sale" class="text-success fw-bold">+5%</span> </label>
+                            <div class="d-flex">
+                                <label id="sale-price" class="fw-bold text-danger me-1">1</label>
+                                <span> Points</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Tổng Points nhận:</label>
                             <div>
                                 <label id="total" class="fw-bold text-danger">21 </label><span> Points</span>
 
@@ -387,7 +413,7 @@
                                 <input type="text" hidden value="transfer" name="payment_method">
                                 <input type="text" hidden id="total_point" name="point">
                                 <input type="text" hidden id="verification" name="verification">
-                                <p class="fw-medium" id="">Số tiền thanh toán: <span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> VND</p>
+                                <p class="fw-medium" id="">Số tiền thanh toán: <span id="total_amount1" class="fw-bolder" style="color: #E24343;"></span> VND</p>
                                 <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder" style="color: #E24343;"></span></p>
                             </div>
 
@@ -453,14 +479,21 @@
     const input_price = document.getElementById('input-price');
     const sale = document.getElementById('sale');
     const sale_price = document.getElementById('sale-price');
+    const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
+    const discount_amount_sale = document.getElementById('discount_amount_sale'); //Số tiền được giảm khi nạp tiền
+    const type_discount = document.getElementById('type_discount'); //Loại coupon percent:phần trăm, price:số tiền
 
     //Fix giá trị mặc định 20k
     if (document.getElementById('total_amount').innerText == ('')) {
         document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
     }
+    if (document.getElementById('total_amount1').innerText == ('')) {
+        document.getElementById('total_amount1').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
+    }
     if (document.getElementById('total_point').value == ('')) {
         document.getElementById('total_point').value = ('20,000'.replace(/,/g, "").toLocaleString());
     }
+
 
     for (let i = 0; i < prices.length; i++) {
         prices[i].style.backgroundColor = "none"
@@ -469,26 +502,29 @@
             input_price.value = prices[i].value
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
                 sale.innerText = "+5%";
-                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
                 document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount1').innerText = input_price.value
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
                 sale.innerText = "+7%";
-                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00007).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount1').innerText = input_price.value
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
-                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
                 console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount1').innerText = input_price.value
             }
         });
     }
@@ -532,6 +568,53 @@
     // Cập nhật nội dung phần tử
     document.getElementById("noi_dung").querySelector("span").textContent = randomContent;
     document.getElementById("verification").value = randomContent;
+
+
+    // Mã giảm giá
+    $(document).ready(function () {
+        $("#apply-discount").on("click", function () {
+            var discountCode = $("#discount-code").val();
+
+            $.ajax({
+                url: '/apply-discount', // Route mà bạn đã định nghĩa
+                method: "POST",
+                data: { discount_code: discountCode, _token: '{{ csrf_token() }}' },
+                success: function (response) {
+                    $("#discount-message").html(response.message);
+                    $("#discount_amount").html(response.discount_amount);
+                    $("#type_discount").html(response.type_discount);
+
+                    // Xử lý thay đổi tiền
+                    if(document.getElementById('type_discount').innerText == 'percent'){ // Phần trăm
+                        document.getElementById('discount_amount_sale').innerText =  (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
+                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
+                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
+                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000);
+                    }
+
+                    if(document.getElementById('type_discount').innerText == 'price'){ //Giá cố định
+                        document.getElementById('discount_amount_sale').innerText =  document.getElementById('discount_amount').innerText.toLocaleString();
+                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
+                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
+                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText);
+                    }
+
+                    if(document.getElementById('type_discount').innerText == ''){ // Phần trăm
+                        document.getElementById('discount_amount_sale').innerText =  0;
+                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); //Hiển thị lúc app mã
+                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); // Hiển thị QR
+                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "")-0); //Nạp trong ví
+                    }
+                },
+                error: function () {
+                    $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
+                }
+            });
+
+        });
+    });
+
+
 </script>
 
 @endpush
