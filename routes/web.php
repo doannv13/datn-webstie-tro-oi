@@ -115,21 +115,24 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::post('create-room-posts-image', [CLientRoomPost::class, 'createImage'])->name('create-room-post-image');
     Route::post('update-room-posts-image', [CLientRoomPost::class, 'editMultiImage'])->name('update-room-posts-image');
     Route::get('delete-room-posts-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('delete-room-posts-image');
-    //BookMark
+    // BookMark
 
     Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
     Route::post('bookmarks/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
     Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');
     Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
-    //Nạp points
+    // Nạp points
     Route::post('points', [TransactionController::class, 'store'])->name('points.store');
     Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
+
+    // Mã giảm giá
+    Route::post('apply-discount', [TransactionController::class,'applyDiscount'])->name('apply-discount');
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
-    // route dành cho admin ở đây
+    // Route dành cho admin ở đây
 
-    //ADMIN
+    // ADMIN
     Route::get('home-admin', function () {
         return view('admin.layouts.master');
     })->name('home-admin');

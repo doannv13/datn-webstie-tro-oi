@@ -8,6 +8,7 @@ use App\Events\SuccessEvent;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryRoom;
 use App\Models\District;
+use App\Models\Coupon;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -122,5 +123,33 @@ class TransactionController extends Controller
         ->paginate(10);
     return view('client.transaction.historyPoint',compact('data', 'category_rooms', 'districts'));
     }
+
+    // Mã giảm giá
+    public function applyDiscount(Request $request)
+    {
+        $discountCode = $request->input('discount_code');
+
+        // Kiểm tra mã giảm giá trong cơ sở dữ liệu
+        $discount = Coupon::where('name', $discountCode)->first();
+        // Kiểm tra và xử lý mã giảm giá tại đây, ví dụ:
+        if ($discount) {
+            $discountAmount = $discount->value; // Lấy giá trị giảm giá từ cơ sở dữ liệu
+            $typeDiscount = $discount->type;
+            return response()->json([
+                'message' => 'Mã giảm giá đã được áp dụng!',
+                'discount_amount' => $discountAmount,
+                'type_discount' => $typeDiscount
+            ]);
+
+//            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
+        } else {
+            return response()->json([
+                'message' => 'Mã giảm giá không hợp lệ.',
+                'discount_amount' => 0,
+                'type_discount' => ''
+            ]);
+        }
+    }
+
 
 }
