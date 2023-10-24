@@ -33,6 +33,7 @@ class RoomPost extends Model
         'phone',
         'email',
         'zalo',
+        'time_start',
         'time_end'
     ];
    

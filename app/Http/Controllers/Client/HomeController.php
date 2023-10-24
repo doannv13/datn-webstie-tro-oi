@@ -226,7 +226,7 @@ class HomeController extends Controller
         $currentDateTime = Carbon::now();
         $query->orderByRaw("CASE WHEN service_id = 1 AND time_end > '$currentDateTime' THEN 1 WHEN service_id = 2 AND time_end > '$currentDateTime' THEN 2 WHEN service_id = 3 AND time_end > '$currentDateTime' THEN 3 ELSE 4 END");
         // dd($query->get());
-        $room = $query->paginate(5);
+        $room = $query->latest('time_start')->paginate(5);
         // dd($room);
         $totalResults = $room->total();
        

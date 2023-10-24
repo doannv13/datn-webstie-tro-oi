@@ -203,9 +203,6 @@
 
 
 <script>
-    var currentDate = new Date(); // Lấy ngày hiện tại
-    var startDate = new Date(); // Khởi tạo ngày bắt đầu
-    startDate.setDate(startDate.getDate() - 30); // Giảm 30 ngày
     var revenueByDay = {!!json_encode($revenueByDay) !!};
         const revenueData = [];
         revenueByDay.forEach(function(revenueByDay) {

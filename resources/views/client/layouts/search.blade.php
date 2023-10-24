@@ -159,7 +159,7 @@
                                                 <div class="">
                                                     <h6 class="mb-0" style="font-size: 14px">{{ $item->fullname }}</h6>
                                                     <p style="font-size: 12px" class="">Đăng ngày:
-                                                        {{ $item->created_at->format('d-m-Y') }}</p>
+                                                        {{ $item->time_start }}</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-6">

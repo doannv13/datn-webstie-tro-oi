@@ -89,8 +89,8 @@ class ServicesController extends Controller
 
                 $user->point = $user->point - $service->price;
                 $room_post->service_id = $services_id;
+                $room_post->time_start=Carbon::now();
                 $room_post->time_end = Carbon::now()->addDays($service->date_number);
-                $room_post->created_at=Carbon::now();
                 // dd($services->price,$services_id);
                 //đẩy lịch sử giao dịch vào bảng transaction
                 $transcation->user_id=$user_id;
