@@ -18,7 +18,7 @@
                             <h5>{{$value->name}}</h5>
                             <p></p>
                             <hr>
-                            <div class="plan-price fs-5">{{number_format($value->price)}}<span> VNĐ</span><span>/Tin/</span><span>{{$value->date_number}}</span><span> Ngày</span></div>
+                            <div class="plan-price fs-5">{{number_format($value->price)}}<span> Point</span><span>/Tin/</span><span>{{$value->date_number}}</span><span> Ngày</span></div>
                         </div>
                         <div class="plan-list p-3">
                             {!!$value->description!!}
@@ -37,7 +37,7 @@
                         <h5>Tin Thường</h5>
                         <p></p>
                         <hr>
-                        <div class="plan-price fs-5">0<span> VNĐ</span><span>/Tin/</span><span>1</span><span> Ngày</span></div>
+                        <div class="plan-price fs-5">0<span> Point</span><span>/Tin/</span><span>1</span><span> Ngày</span></div>
                     </div>
                     <div class="plan-list p-3">
                         <p><strong>Hiển thị dưới tin VIP 1, VIP 2, VIP 3.</strong></p>
