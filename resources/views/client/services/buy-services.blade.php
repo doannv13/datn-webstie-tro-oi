@@ -93,7 +93,7 @@
             </div>
             <div class="row my-2">
                 <div class="col-lg-5 col-md-6 col-sm-6">
-                    <h5>Tin VIP 1</h5>
+                    <h5>Tin VIP 2</h5>
                     <div>
                         <span class="text-warning fw-bold" style="font-size: 12px;">TIÊU ĐỀ IN HOA MÀU
                             CAM</span><span class="text-dark" style="font-size: 12px;">, hiển thị sau tin VIP 1 và trên các tin khác.</span>
@@ -116,7 +116,7 @@
             </div>
             <div class="row my-2">
                 <div class="col-lg-5 col-md-6 col-sm-6">
-                    <h5>Tin VIP 1</h5>
+                    <h5>Tin VIP 3</h5>
                     <div>
                         <span class="fw-bold" style="font-size: 12px; color: rgb(255, 0, 179);">TIÊU ĐỀ IN HOA MÀU
                             HỒNG</span><span class="text-dark" style="font-size: 12px;">, hiển thị tin VIP 1, VIP 2 và trên tin thường.</span>
@@ -139,11 +139,11 @@
             </div>
             <div class="row my-2">
                 <div class="col-lg-5 col-md-6 col-sm-6">
-                    <h5>Tin VIP 1</h5>
+                    <h5>Tin Thường</h5>
                     <div>
-                        <span class="text-primary fw-bold" style="font-size: 12px;">TIÊU ĐỀ IN HOA MÀU
-                            XANH MẶC ĐỊNH</span><span class="text-dark" style="font-size: 12px;">, hiển thị dưới tin VIP 1, VIP 2, VIP 3.</span>
-                    </div>
+                    <span class=" fw-bold" style="font-size: 12px; color:black;">TIÊU ĐỀ IN HOA MÀU
+                                ĐEN MẶC ĐỊNH</span><span class="" style="font-size: 12px;">, hiển thị dưới tin VIP 1, VIP 2, VIP 3.</span>
+                        </div>
                 </div>
                 <div class="col-lg-7 col-md-6 col-sm-6">
                     <div class="row">
@@ -151,7 +151,7 @@
                             <img src="{{asset('fe/img/room/img-1.jpg')}}" alt="" style="width: 135px; height: 135px;">
                         </div>
                         <div class="col-lg-9 bg-light">
-                            <span class="text-primary fw-bold" style="font-size: 12px;">CHỈ CHO NỮ THUÊ PHÒNG STUDIO, ĐIỆN THEO GIÁ NHÀ NƯỚC</span><br>
+                            <span class=" fw-bold" style="font-size: 12px; color:black;">CHỈ CHO NỮ THUÊ PHÒNG STUDIO, ĐIỆN THEO GIÁ NHÀ NƯỚC</span><br>
                             <span class="text-success fw-bold" style="font-size: 10px;">3.5 triệu/tháng</span>
                             <span class="text-dark fw-bold" style="font-size: 10px;">-- 25m vuông</span><br>
                             <span class="text-dark fw-bold" style="font-size: 10px;">Nam Từ Liêm, Hà Nội</span><br>

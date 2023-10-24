@@ -44,8 +44,8 @@
                                             {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
                                         @endif
                                     </td>
-                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
-                                    <td>{{ $value->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $value->time_start }}</td>
+                                    <td>{{ $value->time_end }}</td>
 
                                     <td>
                                         <div class="d-flex">
