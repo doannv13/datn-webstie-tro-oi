@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('search-filter') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Phòng cho thuê
                             </a>
                         </li>
@@ -139,7 +139,7 @@
         <div class="sidebar-navigation">
             <ul class="menu-list">
                 <li><a href="#" class="active pt0">Trang chủ</a></li>
-                <li><a href="#">Phòng cho thuê</a></li>
+                <li><a href="{{ route('search-filter') }}">Phòng cho thuê</a></li>
                 <li><a href="#">Tin tức</a></li>
                 <li><a href="#">Bảng giá dịch vụ</a></li>
             </ul>
@@ -162,19 +162,27 @@
             @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
+                    
+            
+                
                     <div class="input-group">
                         <span class="input-group-text input-group-i px-3" style="width: 50px;">
                             <i class="fa fa-search text-white"></i>
                         </span>
                         <input type="text" name="name_filter" id="name_filter" class="form-control bg-input-group" value="{{ request('name_filter') }}" placeholder="Nhập tên phòng..." style="height: 58px" />
-
+                        
                     </div>
+                    
+                    
                 </div>
                 <div class="col-md-8">
+                  
+                
+
                     <div class="row g-3">
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-                                <select name="room_type_filter" id="room_type_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                <select name="room_type_filter" style="font-size: 14px" id="room_type_filter" class="form-select bg-select-group">
                                     <option value="all" {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     @if (isset($category_rooms))
                                     @if (count($category_rooms) > 0)
@@ -192,9 +200,10 @@
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
+                        
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-                                <select class="form-select bg-select-group" id="district_filter" name="district_filter">
+                                <select class="form-select bg-select-group" style="font-size: 14px" id="district_filter" name="district_filter">
 
                                     <option value="all" selected>Tất cả</option>
 
@@ -214,36 +223,57 @@
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
+                        
 
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                <select name="price_filter" id="price_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                <select name="price_filter" id="price_filter" style="font-size: 14px" class="form-select bg-select-group">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>
                                         Tất cả</option>
                                     <option value="range_price1" {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Dưới 1 triệu</option>
-                                    <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 triệu - 2.5 triệu</option>
-                                    <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 triệu - 4 triệu</option>
-                                    <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
+                                    <option value="range_price2" {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>Từ 1 đến 2 triệu</option>
+                                    <option value="range_price3" {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>Từ 2 đến 3 triệu</option>
+                                    <option value="range_price4" {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Từ 3 đến 5 triệu</option>
+                                    <option value="range_price5" {{ request('price_filter') == 'range_price5' ? 'selected' : '' }}>Từ 5 đến 7 triệu</option>
+                                    <option value="range_price6" {{ request('price_filter') == 'range_price6' ? 'selected' : '' }}>Từ 7 đến 10 triệu</option>
+                                    <option value="range_price7" {{ request('price_filter') == 'range_price7' ? 'selected' : '' }}>Trên 10 Triệu
                                     </option>
                                 </select>
 
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
+                        
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
-                                <select name="acreage_filter" id="acreage_filter" class="form-select bg-select-group" id="floatingSelect3" aria-label="Floating label select example">
+                                <select name="acreage_filter" id="acreage_filter" style="font-size: 14px" class="form-select bg-select-group">
                                     <option value="allAcreage" {{ request('acreage_filter') == 'allAcreage' ? 'selected' : '' }}>Tất cả</option>
-                                    <option value="range_acreage1" {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 20m²</option>
-                                    <option value="range_acreage2" {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>20m² - 30m²</option>
-                                    <option value="range_acreage3" {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>20m² - 45m²</option>
-                                    <option value="range_acreage4" {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Trên 45m²</option>
+                                    <option value="range_acreage1" {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 15m²</option>
+                                    <option value="range_acreage2" {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>Từ 15m² đến 25m²</option>
+                                    <option value="range_acreage3" {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>Từ 25m² đến 45m²</option>
+                                    <option value="range_acreage4" {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Từ 45m² đến 75m² </option>
+                                    <option value="range_acreage5" {{ request('acreage_filter') == 'range_acreage5' ? 'selected' : '' }}>Trên 75m² </option>
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-lg-1 p-3 ">
+                        
+
+                        {{-- update --}}
+                        {{-- <div class="col-md-5 col-sm-5 col-lg-2" style="width: 15.5%;">
+                            <div class="">
+                                <select name="" id="" style="font-size: 14px" class="form-select bg-select-group py-2">
+                                    <option value="" >Sắp xếp</option>
+                                    <option value="">Mới nhất</option>
+                                    <option value="" >Giá tăng dần</option>
+                                    <option value="" >Giá giảm dần</option>
+                                    <option value="" >Diện tích tăng dần</option>
+                                    <option value="" >Diện tích giảm dần</option>
+                                </select>
+                            </div>
+                        </div> --}}
+                        <div class="col-md-6 col-sm-6 col-lg-1 p-2 ">
                             <center>
                         <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
                         </a>
@@ -253,6 +283,9 @@
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
                             kiếm
                         </button>
+                        {{-- <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 text-center" style="height: 40px; display: flex; align-items: center; justify-content: center; width: 15.5%;">
+                            Tìm kiếm
+                        </button> --}}
                     </div>
                 </div>
             </div>

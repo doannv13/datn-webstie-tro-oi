@@ -6,6 +6,8 @@ use App\Events\CancelEvent;
 use App\Events\NotificationEvent;
 use App\Events\SuccessEvent;
 use App\Http\Controllers\Controller;
+use App\Models\CategoryRoom;
+use App\Models\District;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,11 +20,15 @@ class TransactionController extends Controller
     public function index()
     {
         //
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
         $data = Transaction::with('user')
             ->where('action', 'import')
             ->latest()
             ->paginate(10);
-        return view('admin.transaction.index',compact('data'));
+        return view('admin.transaction.index',compact('data', 'category_rooms', 'districts'));
     }
 
     /**
@@ -106,10 +112,15 @@ class TransactionController extends Controller
         return back();
     }
     public function history(){
+
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
         $data = Transaction::with('user')
         ->where('user_id', auth()->user()->id)
         ->paginate(10);
-    return view('client.transaction.historyPoint',compact('data'));
+    return view('client.transaction.historyPoint',compact('data', 'category_rooms', 'districts'));
     }
 
 }

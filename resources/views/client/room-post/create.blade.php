@@ -84,7 +84,7 @@
                                 <label class="input-group">Chuyên mục cho thuê:<span class="text-danger">*</span></label>
                                 <select class="form-select mb-3" name="category_room_id">
                                     <option value="">Chọn chuyên mục</option>
-                                    @foreach ($categoryRooms as $categoryRoom)
+                                    @foreach ($category_rooms as $categoryRoom)
                                         <option value="{{ $categoryRoom->id }}"
                                             {{ old('category_room_id') ? 'selected' : false }}>
                                             {{ $categoryRoom->name }}

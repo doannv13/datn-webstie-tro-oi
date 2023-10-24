@@ -45,12 +45,12 @@ function countPrice($min, $max)
 }
 
 
-function countPriceGreatThan4M(){
-    return RoomPost::where('price', '>=', 4000000)->where('status', 'accept')->count();
+function countPriceGreatThan10M(){
+    return RoomPost::where('price', '>=', 10000000)->where('status', 'accept')->count();
 }
 
 function countAcreageGreatThan45(){
-    return RoomPost::where('acreage', '>=', 45)->where('status', 'accept')->count();
+    return RoomPost::where('acreage', '>=', 75)->where('status', 'accept')->count();
 }
 
 function countDistrict($name){

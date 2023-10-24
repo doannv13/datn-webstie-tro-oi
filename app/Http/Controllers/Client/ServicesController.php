@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\CategoryRoom;
+use App\Models\District;
 use App\Models\RoomPost;
 use App\Models\Services;
 use App\Models\User;
@@ -21,9 +23,12 @@ class ServicesController extends Controller
     public function index()
     {
         //
-
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
         $services = Services::paginate(3);
-        return view('client.services.index', compact('services'));
+        return view('client.services.index', compact('services', 'category_rooms', 'districts'));
     }
 
     /**

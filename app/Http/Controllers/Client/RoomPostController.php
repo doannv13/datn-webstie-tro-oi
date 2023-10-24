@@ -46,11 +46,15 @@ class RoomPostController extends Controller
      */
     public function create()
     {
-        $categoryRooms = CategoryRoom::query()->where('status', 'active')->get();
+        $wards = Ward::all();
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
+        $category_rooms = CategoryRoom::query()->where('status', 'active')->get();
         $services = Services::query()->get();
         $facilities = Facility::query()->get();
         $surrounding = Surrounding::query()->get();
-        return view('client.room-post.create', compact('categoryRooms', 'facilities', 'surrounding', 'services'));
+        return view('client.room-post.create', compact('category_rooms', 'facilities', 'surrounding', 'services', 'districts'));
     }
 
     /**
@@ -174,9 +178,11 @@ class RoomPostController extends Controller
      */
     public function edit(string $id)
     {
-
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
         $postroom = RoomPost::query()->findOrFail($id);
-        $categoryRooms = CategoryRoom::query()->where('status', 'active')->get();
+        $category_rooms = CategoryRoom::query()->where('status', 'active')->get();
         $facilities = Facility::query()->latest()->get();
         $facilityrooms = FacilityRoom::query()->where('room_id', $id)->get();
         foreach ($facilityrooms as $facilityroom) {
@@ -193,7 +199,7 @@ class RoomPostController extends Controller
         $multiImgs = ImageRoom::query()->where('room_id', $id)->get();
         $tags = $postroom->tags->pluck('name')->implode(',');
 
-        return view('client.room-post.edit', compact('postroom', 'categoryRooms', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'ward', 'district', 'citie', 'multiImgs', 'tags'));
+        return view('client.room-post.edit', compact('postroom', 'category_rooms', 'districts', 'facilities', 'surrounding', 'facilityArray', 'surroundingArray', 'ward', 'district', 'citie', 'multiImgs', 'tags'));
     }
 
     /**
@@ -365,6 +371,7 @@ class RoomPostController extends Controller
     public function destroy(String $id)
     {
         try {
+            
             FacilityRoom::query()->where('room_id', $id)->delete();
             SurroundingRoom::query()->where('room_id', $id)->delete();
             RoomPost::query()->findOrFail($id)->delete();
@@ -380,9 +387,11 @@ class RoomPostController extends Controller
 
     public function deleted()
     {
-        $category_rooms = CategoryRoom::all();
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
-        $districts = District::all();
         $data = RoomPost::onlyTrashed()->get();
         return view('client.room-post.deleted', compact('data', 'category_rooms', 'wards', 'districts'));
     }
@@ -390,6 +399,7 @@ class RoomPostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
+           
             $RoomPost = RoomPost::where('id', $id);
             $RoomPost->forceDelete();
             $facility = FacilityRoom::query()->where('room_id', $id);
