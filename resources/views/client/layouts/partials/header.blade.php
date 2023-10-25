@@ -162,22 +162,22 @@
             @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
-                    
-            
-                
+
+
+
                     <div class="input-group">
                         <span class="input-group-text input-group-i px-3" style="width: 50px;">
                             <i class="fa fa-search text-white"></i>
                         </span>
                         <input type="text" name="name_filter" id="name_filter" class="form-control bg-input-group" value="{{ request('name_filter') }}" placeholder="Nhập tên phòng..." style="height: 58px" />
-                        
+
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="col-md-8">
-                  
-                
+
+
 
                     <div class="row g-3">
                         <div class="col-md-6 col-sm-6 col-lg-2">
@@ -200,7 +200,7 @@
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
                                 <select class="form-select bg-select-group" style="font-size: 14px" id="district_filter" name="district_filter">
@@ -223,7 +223,7 @@
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
-                        
+
 
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
@@ -244,7 +244,7 @@
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
                                 <select name="acreage_filter" id="acreage_filter" style="font-size: 14px" class="form-select bg-select-group">
@@ -258,7 +258,7 @@
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        
+
 
                         {{-- update --}}
                         {{-- <div class="col-md-5 col-sm-5 col-lg-2" style="width: 15.5%;">
@@ -363,6 +363,8 @@
                             </div>
                             <div id="discount_amount" hidden></div>
                             <div id="type_discount" hidden></div>
+                            <div id="status_coupon" hidden></div>
+
                         </div>
                         <div  class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Số tiền cần nạp sau khi giảm:</label> <br>
@@ -515,6 +517,7 @@
     const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
     const discount_amount_sale = document.getElementById('discount_amount_sale'); //Số tiền được giảm khi nạp tiền
     const type_discount = document.getElementById('type_discount'); //Loại coupon percent:phần trăm, price:số tiền
+    const status_coupon = document.getElementById('status_coupon'); //Trạng thái của coupon
 
     //Fix giá trị mặc định 20k
     if (document.getElementById('total_amount').innerText == ('')) {
@@ -616,23 +619,26 @@
                     $("#discount-message").html(response.message);
                     $("#discount_amount").html(response.discount_amount);
                     $("#type_discount").html(response.type_discount);
+                    $("#status_coupon").html(response.status_coupon);
+                    console.log(document.getElementById('discount_amount').innerText)
+                    console.log(document.getElementById('status_coupon').innerText)
 
                     // Xử lý thay đổi tiền
-                    if(document.getElementById('type_discount').innerText == 'percent'){ // Phần trăm
+                    if(document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active'){ // Phần trăm
                         document.getElementById('discount_amount_sale').innerText =  (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
                         document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
                         document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
                         document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000);
                     }
 
-                    if(document.getElementById('type_discount').innerText == 'price'){ //Giá cố định
+                    if(document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active'){ //Giá cố định
                         document.getElementById('discount_amount_sale').innerText =  document.getElementById('discount_amount').innerText.toLocaleString();
                         document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
                         document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
                         document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText);
                     }
 
-                    if(document.getElementById('type_discount').innerText == ''){ // Phần trăm
+                    if(document.getElementById('type_discount').innerText == ''){
                         document.getElementById('discount_amount_sale').innerText =  0;
                         document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); //Hiển thị lúc app mã
                         document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); // Hiển thị QR

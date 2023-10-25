@@ -41,7 +41,7 @@
                                                 <th>{{ $value->type }}</th>
                                                 <th>{{ $value->value }}</th>
                                                 <th>{{ $value->quantity }}</th>
-                                                <th>{{ substr($value->description, 0, 20) }}</th>
+                                                <th>{!! substr($value->description, 0, 20) !!}</th>
 
                                                 <td>
                                                     <input data-id="{{ $value->id }}" class="toggle-class"
