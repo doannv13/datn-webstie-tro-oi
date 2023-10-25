@@ -11,7 +11,7 @@
                 <thead class="table-light">
                     <th style="width:5%">STT</th>
                     <th style="width:15%">Hành động</th>
-                    <th style="width:10%">Số tiền</th>
+                    <th style="width:12%">Số tiền</th>
                     <th style="width:20%">Trạng thái</th>
                     <th style="width:10%">Gói</th>
                     <th style="width:10%">Nội dung CK</th>
@@ -31,9 +31,9 @@
                         </td>
                         <td>
                             @if ($value->action ==='import')
-                            <p class="text-success"> + {{ number_format( $value->point) }}</p>
+                            <p class="d-flex text-success"> +{{ number_format( $value->point).' VND' }} </p>
                             @else
-                            <p class="text-danger"> - {{ number_format( $value->point) }}</p>
+                            <p class="text-danger"> -{{ number_format( $value->point).' Point' }} </p>
                             @endif
 
                         </td>
@@ -65,7 +65,7 @@
                             <p class="">---</p>
                             @endif
                         </td>
-                       
+
                         <td>{{ $value->created_at}}</td>
                     </tr>
                     @endforeach

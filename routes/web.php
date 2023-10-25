@@ -119,17 +119,20 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::post('create-room-posts-image', [CLientRoomPost::class, 'createImage'])->name('create-room-post-image');
     Route::post('update-room-posts-image', [CLientRoomPost::class, 'editMultiImage'])->name('update-room-posts-image');
     Route::get('delete-room-posts-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('delete-room-posts-image');
-    //BookMark
+    // BookMark
 
 
-    //Nạp points
+    // Nạp points
     Route::post('points', [TransactionController::class, 'store'])->name('points.store');
     Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
+
+    // Mã giảm giá
+    Route::post('apply-discount', [TransactionController::class, 'applyDiscount'])->name('apply-discount');
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
-    // route dành cho admin ở đây
+    // Route dành cho admin ở đây
 
-    //ADMIN
+    // ADMIN
     Route::get('home-admin', function () {
         return view('admin.layouts.master');
     })->name('home-admin');
@@ -277,7 +280,5 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     //Quản lí points
     Route::get('points', [TransactionController::class, 'index'])->name('points.index');
     Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
-
-
 });
 Route::post('vnpay-payment', [TransactionController::class, 'vnpayPayment'])->name('vnpay-payment');

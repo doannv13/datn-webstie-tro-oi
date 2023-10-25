@@ -87,7 +87,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('search-filter') }}" id="navbarDropdownMenuLink2"
+                                aria-expanded="false">
                                 Phòng cho thuê
                             </a>
                         </li>
@@ -117,7 +118,7 @@
 
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href="bookmarks"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
+                        <a href="{{ route('list-bookmark') }}"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
                         <a href="{{ route('room-posts.create') }}" class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </a>
@@ -150,7 +151,7 @@
         <div class="sidebar-navigation">
             <ul class="menu-list">
                 <li><a href="#" class="active pt0">Trang chủ</a></li>
-                <li><a href="#">Phòng cho thuê</a></li>
+                <li><a href="{{ route('search-filter') }}">Phòng cho thuê</a></li>
                 <li><a href="#">Tin tức</a></li>
                 <li><a href="#">Bảng giá dịch vụ</a></li>
             </ul>
@@ -173,6 +174,9 @@
             @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
+
+
+
                     <div class="input-group">
                         <span class="input-group-text input-group-i px-3" style="width: 50px;">
                             <i class="fa fa-search text-white"></i>
@@ -182,14 +186,18 @@
                             placeholder="Nhập tên phòng..." style="height: 58px" />
 
                     </div>
+
+
                 </div>
                 <div class="col-md-8">
+
+
+
                     <div class="row g-3">
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-                                <select name="room_type_filter" id="room_type_filter"
-                                    class="form-select bg-select-group" id="floatingSelect3"
-                                    aria-label="Floating label select example">
+                                <select name="room_type_filter" style="font-size: 14px" id="room_type_filter"
+                                    class="form-select bg-select-group">
                                     <option value="all"
                                         {{ request('room_type_filter') == 'all' ? 'selected' : '' }}>Tất cả</option>
                                     @if (isset($category_rooms))
@@ -209,10 +217,11 @@
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
+
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
-                                <select class="form-select bg-select-group" id="district_filter"
-                                    name="district_filter">
+                                <select class="form-select bg-select-group" style="font-size: 14px"
+                                    id="district_filter" name="district_filter">
 
                                     <option value="all" selected>Tất cả</option>
 
@@ -234,54 +243,83 @@
                             </div>
                         </div>
 
+
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
 
-                                <select name="price_filter" id="price_filter" class="form-select bg-select-group"
-                                    id="floatingSelect3" aria-label="Floating label select example">
+                                <select name="price_filter" id="price_filter" style="font-size: 14px"
+                                    class="form-select bg-select-group">
                                     <option value="all" {{ request('price_filter') == 'all' ? 'selected' : '' }}>
                                         Tất cả</option>
                                     <option value="range_price1"
                                         {{ request('price_filter') == 'range_price1' ? 'selected' : '' }}>Dưới 1 triệu
                                     </option>
                                     <option value="range_price2"
-                                        {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>1 triệu - 2.5
+                                        {{ request('price_filter') == 'range_price2' ? 'selected' : '' }}>Từ 1 đến 2
                                         triệu</option>
                                     <option value="range_price3"
-                                        {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>2.5 triệu - 4
+                                        {{ request('price_filter') == 'range_price3' ? 'selected' : '' }}>Từ 2 đến 3
                                         triệu</option>
                                     <option value="range_price4"
-                                        {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Trên 4 Triệu
+                                        {{ request('price_filter') == 'range_price4' ? 'selected' : '' }}>Từ 3 đến 5
+                                        triệu</option>
+                                    <option value="range_price5"
+                                        {{ request('price_filter') == 'range_price5' ? 'selected' : '' }}>Từ 5 đến 7
+                                        triệu</option>
+                                    <option value="range_price6"
+                                        {{ request('price_filter') == 'range_price6' ? 'selected' : '' }}>Từ 7 đến 10
+                                        triệu</option>
+                                    <option value="range_price7"
+                                        {{ request('price_filter') == 'range_price7' ? 'selected' : '' }}>Trên 10 Triệu
                                     </option>
                                 </select>
 
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
+
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
-                                <select name="acreage_filter" id="acreage_filter" class="form-select bg-select-group"
-                                    id="floatingSelect3" aria-label="Floating label select example">
+                                <select name="acreage_filter" id="acreage_filter" style="font-size: 14px"
+                                    class="form-select bg-select-group">
                                     <option value="allAcreage"
                                         {{ request('acreage_filter') == 'allAcreage' ? 'selected' : '' }}>Tất cả
                                     </option>
                                     <option value="range_acreage1"
-                                        {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 20m²
+                                        {{ request('acreage_filter') == 'range_acreage1' ? 'selected' : '' }}>Dưới 15m²
                                     </option>
                                     <option value="range_acreage2"
-                                        {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>20m² -
-                                        30m²</option>
+                                        {{ request('acreage_filter') == 'range_acreage2' ? 'selected' : '' }}>Từ 15m²
+                                        đến 25m²</option>
                                     <option value="range_acreage3"
-                                        {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>20m² -
-                                        45m²</option>
+                                        {{ request('acreage_filter') == 'range_acreage3' ? 'selected' : '' }}>Từ 25m²
+                                        đến 45m²</option>
                                     <option value="range_acreage4"
-                                        {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Trên 45m²
+                                        {{ request('acreage_filter') == 'range_acreage4' ? 'selected' : '' }}>Từ 45m²
+                                        đến 75m² </option>
+                                    <option value="range_acreage5"
+                                        {{ request('acreage_filter') == 'range_acreage5' ? 'selected' : '' }}>Trên 75m²
                                     </option>
                                 </select>
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-lg-1 p-3 ">
+
+
+                        {{-- update --}}
+                        {{-- <div class="col-md-5 col-sm-5 col-lg-2" style="width: 15.5%;">
+                            <div class="">
+                                <select name="" id="" style="font-size: 14px" class="form-select bg-select-group py-2">
+                                    <option value="" >Sắp xếp</option>
+                                    <option value="">Mới nhất</option>
+                                    <option value="" >Giá tăng dần</option>
+                                    <option value="" >Giá giảm dần</option>
+                                    <option value="" >Diện tích tăng dần</option>
+                                    <option value="" >Diện tích giảm dần</option>
+                                </select>
+                            </div>
+                        </div> --}}
+                        <div class="col-md-6 col-sm-6 col-lg-1 p-2 ">
                             <center>
                                 <a class=""
                                     href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i
@@ -293,6 +331,9 @@
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
                             kiếm
                         </button>
+                        {{-- <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 text-center" style="height: 40px; display: flex; align-items: center; justify-content: center; width: 15.5%;">
+                            Tìm kiếm
+                        </button> --}}
                     </div>
                 </div>
             </div>
@@ -331,7 +372,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp - <span class="text-danger">1.000
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp : <span class="text-danger">1.000
                                     VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price"
@@ -363,54 +404,55 @@
                                 id="input-price" onchange="myChange()" disabled>
 
                         </div>
+                        {{-- Mã giảm giá --}}
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Số tiền thưởng <span id="sale"
-                                    class="text-success fw-bold">+5%</span> </label>
-                            <div class="d-flex">
-                                <label id="sale-price" class="fw-bold text-danger me-1">1.000 </label>
-                                <span> VND</span>
+                            <label class=" fs-6 text fw-semibold">Mã giảm giá: </label> <br>
+                            <div>
+                                <input type="text" id="discount-code" placeholder="Nhập mã giảm giá">
+                                <button id="apply-discount">Áp dụng mã</button>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-between px-2">
+                            <label class=" fs-6 text fw-semibold"></label> <br>
+                            <div id="discount-message"></div>
+                        </div>
                         <div class="d-flex justify-content-between p-2">
-                            <label class=" fs-6 text fw-semibold">Tổng nhận</label>
+                            <label class=" fs-6 text fw-semibold">Số tiền giảm:</label> <br>
+                            <div class="d-flex">
+                                <label id="discount_amount_sale" class="fw-bold text-danger me-1">0</label>
+                                <span> VND</span>
+                            </div>
+                            <div id="discount_amount" hidden></div>
+                            <div id="type_discount" hidden></div>
+                        </div>
+                        <div class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Số tiền cần nạp sau khi giảm:</label> <br>
+                            <div class="fw-medium" id=""><span id="total_amount" class="fw-bolder"
+                                    style="color: #E24343;"></span> VND</div>
+                        </div>
+                        <div class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Số Points thưởng: <span id="sale"
+                                    class="text-success fw-bold">+5%</span> </label>
+                            <div class="d-flex">
+                                <label id="sale-price" class="fw-bold text-danger me-1">1</label>
+                                <span> Points</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between p-2">
+                            <label class=" fs-6 text fw-semibold">Tổng Points nhận:</label>
                             <div>
                                 <label id="total" class="fw-bold text-danger">21 </label><span> Points</span>
 
                             </div>
                         </div>
-                        {{-- <div class="col  ">
-                            <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span class="text-danger">*</span></p>
-                            <div class="">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="1" name="type-pay" checked>
-                                    <label class="form-check-label fw-semibold">
-                                        Chuyển khoản online
-                                    </label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="3" name="type-pay">
-                                    <label class="form-check-label fw-semibold">
-                                        Thanh toán VN PAY
-                                    </label>
-                                    <img src="{{ asset('fe/img/pay/image_2.png') }}" style="max-width: 24px; max-height: 24px;">
-                                </div>
-
-                            </div>
-
-                            @if (auth()->user())
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
-                            @else
-                            <label for="" class="text-danger">Vui lòng đăng nhập</label>
-                            @endif
-
-                        </div> --}}
-                        <div class="col">
+                        <div class="col  ">
                             <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span
                                     class="text-danger">*</span></p>
                             <div class="">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="1" name="type-pay">
+                                    <input class="form-check-input" type="radio" value="1" name="type-pay"
+                                        checked>
                                     <label class="form-check-label fw-semibold">
                                         Chuyển khoản online
                                     </label>
@@ -424,29 +466,17 @@
                                     <img src="{{ asset('fe/img/pay/image_2.png') }}"
                                         style="max-width: 24px; max-height: 24px;">
                                 </div>
+
                             </div>
 
                             @if (auth()->user())
-                                <form action="{{ route('vnpay-payment') }}" method="post">
-                                    @csrf
-                                    <p class="fw-medium">Khách hàng: <span style="color: #E24343;"
-                                            class="fw-bolder">{{ auth()->user()->name }}</span></p>
-                                    <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
-                                    <input type="text" hidden value="transfer" name="payment_method">
-                                    <input type="text" hidden id="total_point" name="point">
-                                    <input type="text" hidden id="verification" name="verification">
-                                    <input type="text" id="totals" name="totals" value="20000">
-
-                                    <button type="submit" id="vnPayLink" name="thanhtoan"
-                                        class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
-                                        style="background-color:  #FCAF17; display: none;">Nạp Point</button>
-                                </form>
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1"
                                     id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
-                                    style="background-color:  #FCAF17; display: none;">Nạp Point</button>
+                                    style="background-color:  #FCAF17; ">Nạp Point</button>
                             @else
                                 <label for="" class="text-danger">Vui lòng đăng nhập</label>
                             @endif
+
                         </div>
                     </div>
                 </div>
@@ -481,19 +511,17 @@
                                 <p class="fw-medium">STK:0345673127</p>
                             </div>
                             <div class="">
-                                @if (auth()->user())
-                                    <p class="fw-medium">Khách hàng: <span style="color: #E24343;"
-                                            class="fw-bolder">{{ auth()->user()->name }}</span></p>
-                                    <input type="text" hidden value="{{ auth()->user()->id }}" name="user_id">
-                                    <input type="text" hidden value="transfer" name="payment_method">
-                                    <input type="text" hidden id="total_point" name="point">
-                                    <input type="text" hidden id="verification" name="verification">
-                                    <p class="fw-medium" id="">Số tiền thanh toán: <span id="total_amount"
-                                            class="fw-bolder" style="color: #E24343;"></span> VND</p>
-                                    <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder"
-                                            style="color: #E24343;"></span></p>
-                                @endif
-
+                                <p class="fw-medium">Khách hàng: <span style="color: #E24343;"
+                                        class="fw-bolder">{{ auth()->check() ? auth()->user()->name : '' }}</span></p>
+                                <input type="text" hidden value="{{ auth()->check() ? auth()->user()->id : '' }}"
+                                    name="user_id">
+                                <input type="text" hidden value="transfer" name="payment_method">
+                                <input type="text" hidden id="total_point" name="point">
+                                <input type="text" hidden id="verification" name="verification">
+                                <p class="fw-medium" id="">Số tiền thanh toán: <span id="total_amount1"
+                                        class="fw-bolder" style="color: #E24343;"></span> VND</p>
+                                <p class="fw-medium" id="noi_dung">Nội dung: <span class="fw-bolder"
+                                        style="color: #E24343;"></span></p>
                             </div>
 
                         </div>
@@ -516,23 +544,6 @@
 <!-- Search area box 1 end -->
 <!-- script -->
 @push('scripts')
-    <script>
-        const vnPayLink = document.getElementById('vnPayLink');
-        const btnPay = document.getElementById('btn-pay');
-        const radioTypePay = document.querySelectorAll('input[name="type-pay"]');
-
-        radioTypePay.forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                if (radio.value === '3') {
-                    vnPayLink.style.display = 'block';
-                    btnPay.style.display = 'none';
-                } else {
-                    vnPayLink.style.display = 'none';
-                    btnPay.style.display = 'block';
-                }
-            });
-        });
-    </script>
     <script>
         function notification() {
             var confirmation = confirm('Xác nhận thanh toán');
@@ -577,14 +588,21 @@
         const input_price = document.getElementById('input-price');
         const sale = document.getElementById('sale');
         const sale_price = document.getElementById('sale-price');
+        const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
+        const discount_amount_sale = document.getElementById('discount_amount_sale'); //Số tiền được giảm khi nạp tiền
+        const type_discount = document.getElementById('type_discount'); //Loại coupon percent:phần trăm, price:số tiền
 
         //Fix giá trị mặc định 20k
         if (document.getElementById('total_amount').innerText == ('')) {
             document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
         }
+        if (document.getElementById('total_amount1').innerText == ('')) {
+            document.getElementById('total_amount1').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
+        }
         if (document.getElementById('total_point').value == ('')) {
             document.getElementById('total_point').value = ('20,000'.replace(/,/g, "").toLocaleString());
         }
+
 
         for (let i = 0; i < prices.length; i++) {
             prices[i].style.backgroundColor = "none"
@@ -593,32 +611,33 @@
                 input_price.value = prices[i].value
                 if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
                     sale.innerText = "+5%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.05).toLocaleString()
+                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
                     total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
                     document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000)
                         .toLocaleString();
                     document.getElementById('total_point').value = input_price.value;
                     document.getElementById('total_amount').innerText = input_price.value
-                    document.getElementById('totals').value = input_price.value
-
+                    document.getElementById('total_amount1').innerText = input_price.value
                 } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
                     1000000) {
                     sale.innerText = "+7%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.07).toLocaleString()
+                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00007).toLocaleString()
                     total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
                     document.getElementById('total_point').value = input_price.value;
                     document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000)
                         .toLocaleString();
                     document.getElementById('total_amount').innerText = input_price.value
+                    document.getElementById('total_amount1').innerText = input_price.value
                 } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                     sale.innerText = "+10%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.1).toLocaleString()
+                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
                     total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
                     console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
                     document.getElementById('total_point').value = input_price.value;
                     document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000)
                         .toLocaleString();
                     document.getElementById('total_amount').innerText = input_price.value
+                    document.getElementById('total_amount1').innerText = input_price.value
                 }
             });
         }
@@ -662,6 +681,79 @@
         // Cập nhật nội dung phần tử
         document.getElementById("noi_dung").querySelector("span").textContent = randomContent;
         document.getElementById("verification").value = randomContent;
+
+
+        // Mã giảm giá
+        $(document).ready(function() {
+            $("#apply-discount").on("click", function() {
+                var discountCode = $("#discount-code").val();
+
+                $.ajax({
+                    url: '/apply-discount', // Route mà bạn đã định nghĩa
+                    method: "POST",
+                    data: {
+                        discount_code: discountCode,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $("#discount-message").html(response.message);
+                        $("#discount_amount").html(response.discount_amount);
+                        $("#type_discount").html(response.type_discount);
+
+                        // Xử lý thay đổi tiền
+                        if (document.getElementById('type_discount').innerText ==
+                            'percent') { // Phần trăm
+                            document.getElementById('discount_amount_sale').innerText = (
+                                    input_price.value.replace(/,/g, "") * document
+                                    .getElementById('discount_amount').innerText / 100)
+                                .toLocaleString();
+                            document.getElementById('total_amount').innerText = (input_price
+                                    .value.replace(/,/g, "") - document.getElementById(
+                                        'discount_amount_sale').innerText * 1000)
+                                .toLocaleString();
+                            document.getElementById('total_amount1').innerText = (input_price
+                                    .value.replace(/,/g, "") - document.getElementById(
+                                        'discount_amount_sale').innerText * 1000)
+                                .toLocaleString();
+                            document.getElementById('total_point').value = (input_price.value
+                                .replace(/,/g, "") - document.getElementById(
+                                    'discount_amount_sale').innerText * 1000);
+                        }
+
+                        if (document.getElementById('type_discount').innerText ==
+                            'price') { //Giá cố định
+                            document.getElementById('discount_amount_sale').innerText = document
+                                .getElementById('discount_amount').innerText.toLocaleString();
+                            document.getElementById('total_amount').innerText = (input_price
+                                .value.replace(/,/g, "") - document.getElementById(
+                                    'discount_amount_sale').innerText).toLocaleString();
+                            document.getElementById('total_amount1').innerText = (input_price
+                                .value.replace(/,/g, "") - document.getElementById(
+                                    'discount_amount_sale').innerText).toLocaleString();
+                            document.getElementById('total_point').value = (input_price.value
+                                .replace(/,/g, "") - document.getElementById(
+                                    'discount_amount_sale').innerText);
+                        }
+
+                        if (document.getElementById('type_discount').innerText ==
+                            '') { // Phần trăm
+                            document.getElementById('discount_amount_sale').innerText = 0;
+                            document.getElementById('total_amount').innerText = (input_price
+                                .value.replace(/,/g, "") - 0)
+                        .toLocaleString(); //Hiển thị lúc app mã
+                            document.getElementById('total_amount1').innerText = (input_price
+                                .value.replace(/,/g, "") - 0).toLocaleString(); // Hiển thị QR
+                            document.getElementById('total_point').value = (input_price.value
+                                .replace(/,/g, "") - 0); //Nạp trong ví
+                        }
+                    },
+                    error: function() {
+                        $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
+                    }
+                });
+
+            });
+        });
     </script>
 @endpush
 

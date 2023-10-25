@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\CategoryRoom;
+use App\Models\District;
 use App\Models\RoomPost;
 use App\Models\Services;
 use App\Models\User;
@@ -21,9 +23,12 @@ class ServicesController extends Controller
     public function index()
     {
         //
-
+        $category_rooms = CategoryRoom::all()->where('status', 'active');
+        $districts = District::whereHas('roomPosts', function ($query) {
+            $query->where('status', 'accept');
+        })->distinct()->pluck('name');
         $services = Services::paginate(3);
-        return view('client.services.index', compact('services'));
+        return view('client.services.index', compact('services', 'category_rooms', 'districts'));
     }
 
     /**
@@ -84,8 +89,8 @@ class ServicesController extends Controller
 
                 $user->point = $user->point - $service->price;
                 $room_post->service_id = $services_id;
+                $room_post->time_start=Carbon::now();
                 $room_post->time_end = Carbon::now()->addDays($service->date_number);
-                $room_post->created_at=Carbon::now();
                 // dd($services->price,$services_id);
                 //đẩy lịch sử giao dịch vào bảng transaction
                 $transcation->user_id=$user_id;

@@ -44,7 +44,7 @@
                                         {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
                                     @endif
                                 </td>
-                                <td>{{ $value->created_at }}</td>
+                                <td>{{  $value->time_start }}</td>
                                 <td>{{ $value->time_end }}</td>
                                 <td class="">
                                     <div class="d-flex justify-content-around align-items-center">

@@ -146,6 +146,7 @@
     <script src="{{ asset('fe/js/app.js') }}"></script>
     <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
+
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -155,7 +156,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
     <!-- Custom javascript -->
-    z
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
@@ -211,97 +212,7 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            // const storedRoomPostIds = localStorage.getItem('room_post_ids');
-            // const roomPostIdsArray = storedRoomPostIds ? JSON.parse(storedRoomPostIds) : [];
 
-            // $('.bookmark-button').each(function() {
-            //     let button = $(this);
-            //     let room_post_id = button.data('id');
-
-            //     if (roomPostIdsArray.includes(room_post_id)) {
-            //         button.removeClass('bookmark-button').addClass('unbookmark-button');
-            //     }
-            // });
-
-            // // Kiểm tra trạng thái đăng nhập của người dùng
-            // if ({{ auth()->check() }}) {
-                // Nếu đã đăng nhập
-                $(document).on('click', '.bookmark-button', function() {
-                    let button = $(this);
-                    let room_post_id = button.data('id');
-
-                    $.ajax({
-                        url: '{{ route('bookmark') }}',
-                        method: 'GET',
-                        data: {
-                            room_post_id: room_post_id,
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            button.removeClass('bookmark-button').addClass('unbookmark-button');
-                            button.off('click');
-                            button.find('path').attr('d',
-                                'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z'
-                            );
-
-                            console.log('Item bookmarked successfully');
-                        },
-                        error: function(error) {
-                            console.error(error);
-                        }
-                    });
-                });
-            // } else {
-                // Nếu chưa đăng nhập
-                // $('.bookmark-button').click(function() {
-                //     let button = $(this);
-                //     let room_post_id = button.data('id');
-
-                //     // Thêm room_post_id vào danh sách trong localStorage
-                //     roomPostIdsArray.push(room_post_id);
-                //     localStorage.setItem('room_post_ids', JSON.stringify(roomPostIdsArray));
-
-                //     // Cập nhật trạng thái nút và thực hiện các hành động khác tại đây
-                //     button.removeClass('bookmark-button').addClass('unbookmark-button');
-                //     console.log('Item bookmarked successfully');
-                // });
-            // }
-
-            $(document).on('click', '.unbookmark-button', function() {
-                let button = $(this);
-                let room_post_id = button.data('id');
-                console.log(room_post_id);
-                $.ajax({
-                    url: '{{ route('unbookmark', ['room_post_id' => 'room_post_id']) }}',
-                    method: 'DELETE',
-                    data: {
-                        room_post_id: room_post_id,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        button.removeClass('unbookmark-button').addClass('bookmark-button');
-                        button.off('click');
-                        button.find('path').attr('d',
-                            'M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z'
-                        );
-                        console.log('Item unbookmarked successfully');
-                    },
-                    error: function(error) {
-                        console.error(error);
-                    }
-                });
-
-                // Xóa room_post_id khỏi danh sách khi unbookmark
-                const index = roomPostIdsArray.indexOf(room_post_id);
-                if (index !== -1) {
-                    roomPostIdsArray.splice(index, 1);
-                    localStorage.setItem('room_post_ids', JSON.stringify(roomPostIdsArray));
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Tag;
+use Carbon\Carbon;
 
 class RoomPostController extends Controller
 {
@@ -421,6 +422,7 @@ class RoomPostController extends Controller
         try {
             $room_post = RoomPost::find($request->room_post_id);
             $room_post->status = $request->status;
+            $room_post->time_start=Carbon::now();
             $room_post->save();
             if ($room_post->status === 'accept') {
                 $content = [
@@ -438,7 +440,7 @@ class RoomPostController extends Controller
                 event(new RoomPostNotificationEvent($mailTo, $content));
             }
 
-            return response()->json(['success' => 'Thay đổi trạng thái thành công']);
+            return response()->json(['success' => 'Thay đổi trạng thái thành công','room_post_id'=>$request->room_post_id,'time_start'=>$room_post->time_start->format('Y-m-d H:i:s')]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
