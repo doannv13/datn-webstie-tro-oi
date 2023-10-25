@@ -146,6 +146,7 @@
     <script src="{{ asset('fe/js/app.js') }}"></script>
     <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
+
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -155,7 +156,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
     <!-- Custom javascript -->
-    z
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
@@ -211,7 +212,7 @@
             });
         });
     </script>
+
 </body>
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->
 
 </html>
