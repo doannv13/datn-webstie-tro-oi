@@ -56,72 +56,52 @@
                                         ->where('room_post_id', $item->id)
                                         ->exists();
                                 }
+                                
+                                $pathD = $isBookmarked ? 'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z' : 'M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z';
                                 ?>
                                 <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12" style="position: relative;">
-                                    @if ($isBookmarked)
-                                        <form action="{{ route('unbookmark', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button
-                                                style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="2em"
-                                                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                                    <style>
-                                                        svg {
-                                                            fill: #f4a460
-                                                        }
-                                                    </style>
-                                                    <path
-                                                        d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('bookmark', $item->id) }}" method="post">
-                                            @csrf
-                                            <button
-                                                style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
-                                                <button
-                                                    style="position: absolute; top: 15px ; right: 15px;z-index: 999;background:none;border:none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="2em"
-                                                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                                        <style>
-                                                            svg {
-                                                                fill: #f4a460
-                                                            }
-                                                        </style>
-                                                        <path
-                                                            d="M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z" />
-                                                    </svg>
-                                                </button>
-                                            </button>
-                                        </form>
-                                    @endif
+
+                                    <button
+                                        style="position: absolute; top: 15px; right: 15px; z-index: 9999; background: none; border: none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="2em"
+                                            class="{{ $isBookmarked ? 'unbookmark-button' : 'bookmark-button' }}"
+                                            data-id="{{ $item->id }}" viewBox="0 0 384 512">
+                                            <style>
+                                                svg {
+                                                    fill: #f4a460;
+                                                }
+                                            </style>
+                                            <path d="{{ $pathD }}">
+                                            </path>
+                                        </svg>
+                                    </button>
                                     <div class="photo-thumbnail p-lg-2 p-sm-2">
                                         <div class="" style="position: relative;">
-                                            @if ($item->service_id === 1 && $item->time_end > $currentDateTime)
-                                                <label
-                                                    style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
-                                                    UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
-                                                    sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol"
-                                                    , "Noto Color Emoji" ;">Phòng tốt</label>
-                                            @elseif ($item->service_id === 2 && $item->time_end > $currentDateTime)
-                                                <label
-                                                    style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
-                                                    UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
-                                                    sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol"
-                                                    , "Noto Color Emoji" ;">Phòng tốt</label>
-                                            @elseif($item->service_id === 3 && $item->time_end > $currentDateTime)
-                                                <label
-                                                    style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
-                                                    UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
-                                                    sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol"
-                                                    , "Noto Color Emoji" ;">Phòng tốt</label>
+                                            @if ($item->service_id != null)
+                                                @if ($item->service->id === 1)
+                                                    <label
+                                                        style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
+                                                        UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
+                                                        sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
+                                                        , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
+                                                @elseif ($item->service->id === 2)
+                                                    <label
+                                                        style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
+                                                        UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
+                                                        sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
+                                                        , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
+                                                @else
+                                                    <label
+                                                        style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
+                                                        UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
+                                                        sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
+                                                        , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
+                                                @endif
                                             @endif
-                                            <a href="{{ route('room-post-detail', $item->id) }}">
-                                                <img src="{{ $item->image }}" alt="photo" style="height:200px"
-                                                    class="img-fluid w-100">
-
+                                            <img src="{{ $item->image }}" alt="photo" style="height:200px"
+                                                class="img-fluid w-100">
+                                            <a href="rooms-details.html">
+                                                <span class="blog-one__plus"></span>
 
                                             </a>
                                         </div>
@@ -311,26 +291,26 @@
                             </ul>
                         </div>
 
-
-                        @foreach ($global_sidebar_bottom_ad as $item)
-                            <div class="social-media sidebar-widget clearfix">
-                                <a href="{{ $item->url }}">
-                                    <div class="photo-thumbnail p-2">
-                                        <div class="">
-                                            @if ($item->image && asset($item->image))
-                                                <img class="w-100" src="{{ asset($item->image) }}" alt="photo"
-                                                    height="200px">
-                                            @else
-                                                <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo"
-                                                    height="200px">
-                                            @endif
+                        <<<<<<< HEAD=======>>>>>>> dev
+                            @foreach ($global_sidebar_bottom_ad as $item)
+                                <div class="social-media sidebar-widget clearfix">
+                                    <a href="{{ $item->url }}">
+                                        <div class="photo-thumbnail p-2">
+                                            <div class="">
+                                                @if ($item->image && asset($item->image))
+                                                    <img class="w-100" src="{{ asset($item->image) }}" alt="photo"
+                                                        height="200px">
+                                                @else
+                                                    <img class=" w-100" src="{{ asset('no_image.jpg') }}" alt="photo"
+                                                        height="200px">
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
+                                    </a>
+                                </div>
+                            @endforeach
 
-                        <!-- tags box start -->
+                            <!-- tags box start -->
 
                     </div>
                 </div>
