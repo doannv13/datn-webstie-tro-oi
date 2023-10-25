@@ -22,7 +22,7 @@
                 @if (Auth::user())
                 <div class="dropdown pull-right">
                     <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static" aria-expanded="false">
-                        <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="Header Avatar">
+                        <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="Header Avatar">
                         <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">

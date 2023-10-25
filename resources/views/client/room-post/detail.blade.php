@@ -180,7 +180,7 @@
                                                                 <?php
                                                                 $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                 $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-                                                                
+
                                                                 if (Auth::check()) {
                                                                     $user_id = auth()->user()->id;
                                                                     $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -383,7 +383,7 @@
                             <div class="contact-details">
                                 <div class="row contact-item mb-3 align-items-center">
                                     <div class="col-md-4 mx-auto">
-                                        <img src="{{ $roomposts->users->avatar ? asset($roomposts->users->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
+                                        <img src="{{ $roomposts->users->avatar ? asset($roomposts->users->avatar) : asset('fe/img/logos/no-image-user.jpeg')}}"
                                             alt=""style="background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 70px; width:70px;">
 
 
