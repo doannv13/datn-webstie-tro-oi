@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:24:47 GMT -->
 
 <head>
 
@@ -55,7 +54,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/skins/default.css') }}" />
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('fe/img/favicon.ico') }}" type="image/x-icon" />
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
