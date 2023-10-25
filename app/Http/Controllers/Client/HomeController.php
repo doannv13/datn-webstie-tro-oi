@@ -58,25 +58,24 @@ class HomeController extends Controller
         //     ->reddit();
         return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
     }
-    public function bookmark(Request $request, string $id)
+    public function bookmark(Request $request)
     {
         if (Auth::check()) {
+            $room_post_id = $request['room_post_id'];
             $user_id = auth()->user()->id;
-            $existingBookmark = Bookmark::where('user_id', $user_id)
-                ->where('room_post_id', $id)
-                ->first();
+            // $existingBookmark = Bookmark::where('user_id', $user_id)
+            //     ->where('room_post_id', $id)
+            //     ->first();
 
-            if (!$existingBookmark) {
-                $model = new Bookmark();
-                $model->user_id = $user_id;
-                $model->room_post_id = $id;
-                $model->save();
-                toastr()->success('Bạn vừa lưu 1 phòng', 'Đã lưu');
-                return back();
-            } else {
-                toastr()->error('Phòng đã được lưu trước đó', 'Thất bại');
-                return back();
-            }
+            // if (!$existingBookmark) {
+            $model = new Bookmark();
+            $model->user_id = $user_id;
+            $model->room_post_id = $room_post_id;
+            $model->save();
+            return response()->json([
+                'data' => $request->all(),
+            ]);
+            // }
         } else {
             toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
             return redirect('/client-login');
@@ -100,16 +99,20 @@ class HomeController extends Controller
             return redirect('/client-login');
         }
     }
-    public function unBookmark(string $id)
+    public function unBookmark(Request $request, string $id)
     {
         try {
+            $room_post_id = $request['room_post_id'];
+
             $user_id = auth()->user()->id;
             $model = Bookmark::where('user_id', $user_id)
-                ->where('room_post_id', $id)
+                ->where('room_post_id', $room_post_id)
                 ->firstOrFail();
             $model->delete();
-            toastr()->success('Đã bỏ lưu 1 phòng', 'Thành công');
-            return back();
+            // toastr()->success('Đã bỏ lưu 1 phòng', 'Thành công');
+            return response()->json([
+                'data' => $request->all(),
+            ]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             toastr()->error('Có lỗi xảy ra', 'Thử lại sau');
@@ -222,10 +225,11 @@ class HomeController extends Controller
         ));
     }
 
-    public function countPrice() {
+    public function countPrice()
+    {
         // Thực hiện logic để đếm số lượng mục trong phạm vi giá cụ thể ($minPrice đến $maxPrice)
         // Replace this logic with your actual implementation
-        
+
     }
 
     function roomPostDetail(String $id)
@@ -259,9 +263,6 @@ class HomeController extends Controller
             ->twitter()
             ->reddit();
         $tags = $roomposts->tags;
-        return view('client.room-post.detail', compact('category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts','shareComponent'));
-
+        return view('client.room-post.detail', compact('category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
     }
-
-    
 }

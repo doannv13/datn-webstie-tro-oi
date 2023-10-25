@@ -88,6 +88,10 @@ Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->
 
 Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
 
+Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
+Route::get('bookmark', [HomeController::class, 'bookmark'])->name('bookmark');
+Route::delete('/unbookmark/{room_post_id}',  [HomeController::class, 'unBookmark'])->name('unbookmark');
+Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
@@ -117,10 +121,6 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('delete-room-posts-image/{id}', [CLientRoomPost::class, 'deleteMultiImage'])->name('delete-room-posts-image');
     //BookMark
 
-    Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-bookmark');
-    Route::post('bookmarks/{id}', [HomeController::class, 'bookmark'])->name('bookmark');
-    Route::delete('unbookmarks/{id}', [HomeController::class, 'unBookmark'])->name('unbookmark');
-    Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
     //Nạp points
     Route::post('points', [TransactionController::class, 'store'])->name('points.store');
@@ -139,15 +139,15 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     //     return view('admin.dashboard');
     // });
 
-    Route::get('dashboard-admin', [DashboardController:: class, 'index'])->name('dashboard-admin');
+    Route::get('dashboard-admin', [DashboardController::class, 'index'])->name('dashboard-admin');
 
     //Báo cáo doanh thu
     Route::get('admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
-    Route::post('admin-report-revenue',[ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
+    Route::post('admin-report-revenue', [ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
 
     //báo cáo tin đăng
     Route::get('admin-report-roompost', [ReportRoomPostControler::class, 'index'])->name('admin-report-roompost');
-    Route::post('admin-report-roompost',[ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
+    Route::post('admin-report-roompost', [ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
 
     // Room-Post-Admin
     Route::resource('admin-room-posts', AdminRoomPost::class);
@@ -278,4 +278,6 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('points', [TransactionController::class, 'index'])->name('points.index');
     Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
 
+
 });
+Route::post('vnpay-payment', [TransactionController::class, 'vnpayPayment'])->name('vnpay-payment');
