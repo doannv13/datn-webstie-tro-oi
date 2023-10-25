@@ -83,12 +83,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('posts-client.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('services-room-posts.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Bảng giá dịch vụ
                             </a>
                         </li>
