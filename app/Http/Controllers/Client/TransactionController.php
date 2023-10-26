@@ -48,6 +48,7 @@ class TransactionController extends Controller
         $model = new Transaction();
         $model->fill($request->all());
         $model->point = (int)str_replace(',', '', $model->point);
+        $model->price_promotion = (int)str_replace(',', '', $model->price_promotion);
         $model->action = 'import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.', 'Đơn hàng sẽ được xác nhận sớm');
@@ -139,20 +140,22 @@ class TransactionController extends Controller
             $discountAmount = $discount->value; // Lấy giá trị giảm giá từ cơ sở dữ liệu
             $typeDiscount = $discount->type;
             $status_coupon = $discount->status;
+            $coupon_id = $discount->id;
             return response()->json([
                 'message' => 'Mã giảm giá đã được áp dụng!',
                 'discount_amount' => $discountAmount,
                 'type_discount' => $typeDiscount,
                 'status_coupon' => $status_coupon,
+                'coupon_id' => $coupon_id,
             ]);
-
 //            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
         } else {
             return response()->json([
                 'message' => 'Mã giảm giá không hợp lệ.',
                 'discount_amount' => 0,
                 'type_discount' => '',
-                'status_coupon' => ''
+                'status_coupon' => '',
+                'coupon_id' => ''
             ]);
         }
     }

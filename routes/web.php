@@ -112,6 +112,14 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
         return view('client.payment-status.notification-fail');
     })->name('notification-fail');
 
+    // Thanh toán Online
+    Route::post('points', [TransactionController::class, 'store'])->name('points.store');
+    Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
+
+    // Thanh toán VNpay
+    Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
+    Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
+
     // Room-Post-Client
     Route::resource('room-posts', CLientRoomPost::class);
     Route::get('room-posts-deleted', [CLientRoomPost::class, 'deleted'])->name('room-posts-deleted');
@@ -123,14 +131,11 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     // BookMark
 
 
-    // Nạp points
-    Route::post('points', [TransactionController::class, 'store'])->name('points.store');
-    Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
 
     // Mã giảm giá
     Route::post('apply-discount', [TransactionController::class, 'applyDiscount'])->name('apply-discount');
 });
-Route::group(['middleware' => 'checkRole:admin'], function () {
+    Route::group(['middleware' => 'checkRole:admin'], function () {
     // Route dành cho admin ở đây
 
     // ADMIN
@@ -282,5 +287,4 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('points', [TransactionController::class, 'index'])->name('points.index');
     Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
 });
-Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
-Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
+
