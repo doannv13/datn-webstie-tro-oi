@@ -138,10 +138,12 @@ class TransactionController extends Controller
         if ($discount) {
             $discountAmount = $discount->value; // Lấy giá trị giảm giá từ cơ sở dữ liệu
             $typeDiscount = $discount->type;
+            $status_coupon = $discount->status;
             return response()->json([
                 'message' => 'Mã giảm giá đã được áp dụng!',
                 'discount_amount' => $discountAmount,
-                'type_discount' => $typeDiscount
+                'type_discount' => $typeDiscount,
+                'status_coupon' => $status_coupon,
             ]);
 
 //            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
@@ -149,7 +151,8 @@ class TransactionController extends Controller
             return response()->json([
                 'message' => 'Mã giảm giá không hợp lệ.',
                 'discount_amount' => 0,
-                'type_discount' => ''
+                'type_discount' => '',
+                'status_coupon' => ''
             ]);
         }
     }

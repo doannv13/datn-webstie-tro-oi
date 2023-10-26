@@ -26,7 +26,7 @@
                             <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center"
                                 data-bs-display="static" aria-expanded="false">
                                 <img class="rounded-circle" style="width:30px;height:30px"
-                                    src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}"
+                                    src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}"
                                     alt="Header Avatar">
                                 <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
                             </button>
@@ -93,12 +93,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('posts-client.index') }}" id="navbarDropdownMenuLink2"
+                                aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="{{ route('services-room-posts.index') }}"
+                                id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Bảng giá dịch vụ
                             </a>
                         </li>
@@ -424,6 +426,7 @@
                             </div>
                             <div id="discount_amount" hidden></div>
                             <div id="type_discount" hidden></div>
+                            <div id="status_coupon" hidden></div>
                         </div>
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Số tiền cần nạp sau khi giảm:</label> <br>
@@ -446,7 +449,8 @@
 
                             </div>
                         </div>
-                        <div class="col">
+
+                        <div class="col  ">
                             <p class="text-primary fw-bold fs-5 text">Phương Thức Nạp Point <span
                                     class="text-danger">*</span></p>
                             <div class="">
@@ -578,6 +582,7 @@
             $('input[name="type-pay"]').change();
         });
     </script>
+
     <script>
         function notification() {
             var confirmation = confirm('Xác nhận thanh toán');
@@ -789,7 +794,7 @@
                             var total_amount_value = (input_price.value.replace(/,/g, "") - 0)
                                 .toLocaleString();
                             total_amount_input.value = (input_price.value.replace(/,/g, "") -
-                                0);
+                            0);
                             document.getElementById('total_amount').innerText =
                                 total_amount_value;
                             document.getElementById('total_amount1').innerText =

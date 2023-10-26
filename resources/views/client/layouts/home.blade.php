@@ -70,7 +70,7 @@
                                             <?php
                                             $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                             $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-                                            
+
                                             if (Auth::check()) {
                                                 $user_id = auth()->user()->id;
                                                 $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -432,7 +432,7 @@
                                         <img src="{{ asset($value->image) }}" alt="image" class="img-fluid w-100"
                                             style="max-height: 260px;" />
                                         <div class="profile-user">
-                                            <img src="{{ asset($value->user->avatar) }}" alt="user" />
+                                            <img src="{{ ($value->user->avatar) ?  asset($value->user->avatar) : asset('fe/img/logos/no-image-user.jpeg')}}" alt="user" />
                                         </div>
                                         <div class="date-box">
                                             @if (isset($value->created_at))

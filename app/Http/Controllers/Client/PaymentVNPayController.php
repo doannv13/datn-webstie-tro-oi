@@ -21,7 +21,6 @@ class PaymentVNPayController extends Controller
             $payment->user_id = auth()->user()->id;
             $payment->status = 'pending';
             $payment->payment_method = 'vnpay';
-            $payment->payment_method = 'vnpay';
             $payment->point = $request->old_total_amount_input;
             $payment->price_promotion = $request->total_amount_input;
             $payment->verification = null;

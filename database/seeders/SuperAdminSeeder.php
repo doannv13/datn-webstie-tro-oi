@@ -20,7 +20,7 @@ class SuperAdminSeeder extends Seeder
         // Create the "super-admin" user
         $superAdmin = User::create([
             'name' => 'Super Admin',
-            'email' => 'superadmin@gmail.com', // Replace with the actual email
+            'email' => 'hotro.trooi.datn@gmail.com', // Replace with the actual email
             'password' => Hash::make('Admin123'), // Replace with the actual password
             'role' => 'admin', // Change the role to 'admin'
             'phone' => '0987654321'
