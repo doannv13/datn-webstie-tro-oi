@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('room_post_id')->nullable();
             $table->integer('point');
             $table->integer('price_promotion')->nullable();
+            $table->integer('coupon_id')->nullable();
             $table->enum('payment_method', ['transfer', 'vnpay'])->nullable();
             $table->enum('action', ['import', 'export']);
             $table->string('verification')->nullable();

@@ -13,6 +13,7 @@ class Transaction extends Model
         'user_id',
         'point',
         'price_promotion',
+        'coupon_id',
         'payment_method',
         'status',
         'points',
