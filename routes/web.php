@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
+use App\Http\Controllers\Client\PaymentVNPayController;
 use App\Http\Controllers\Client\TransactionController;
 
 /*
@@ -106,10 +107,10 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     });
     Route::get('notification-pay', function () {
         return view('client.payment-status.notification-pay');
-    });
+    })->name('notification-pay');
     Route::get('notification-fail', function () {
         return view('client.payment-status.notification-fail');
-    });
+    })->name('notification-fail');
 
     // Room-Post-Client
     Route::resource('room-posts', CLientRoomPost::class);
@@ -281,4 +282,5 @@ Route::group(['middleware' => 'checkRole:admin'], function () {
     Route::get('points', [TransactionController::class, 'index'])->name('points.index');
     Route::put('/update-status/{id}', [TransactionController::class, 'updateStatus'])->name('updatePoint.status');
 });
-Route::post('vnpay-payment', [TransactionController::class, 'vnpayPayment'])->name('vnpay-payment');
+Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
+Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
