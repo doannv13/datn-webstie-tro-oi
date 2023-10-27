@@ -3,7 +3,7 @@
 
 <!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:51 GMT -->
 <head>
-    <title>Hotel Alpha - Booking and Reservation Template</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
 
@@ -52,7 +52,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/skins/default.css') }}"/>
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('fe/img/favicon.ico') }}" type="image/x-icon" />
+    @if ($global_setting && $global_setting->favicon && asset($global_setting->favicon))
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset($global_setting->favicon) }}" />
+    @else
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
+    @endif
 
     <!-- Google fonts -->
     <link
