@@ -134,7 +134,7 @@
                                     <a href="#" class="facebook-bg">
                                         <i class="fa fa-facebook"></i>
                                     </a>
-                                    <a href="#" class="google-bg">
+                                    <a href="{{'/auth/google'}}" class="google-bg">
                                         <i class="fa fa-google"></i>
                                     </a>
                                 </div>

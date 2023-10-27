@@ -186,7 +186,6 @@
                         <input type="text" name="name_filter" id="name_filter"
                             class="form-control bg-input-group" value="{{ request('name_filter') }}"
                             placeholder="Nhập tên phòng..." style="height: 58px" />
-
                     </div>
 
 
@@ -664,19 +663,29 @@
             document.getElementById('price_promotion').value = ('20,000'.replace(/,/g, "").toLocaleString());
         }
 
-        for (let i = 0; i < prices.length; i++) {
-            prices[i].style.backgroundColor = "none"
+    for (let i = 0; i < prices.length; i++) {
 
             prices[i].addEventListener('click', function() {
-                input_price.value = prices[i].value
-                if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
-                    sale.innerText = "+5%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
-                    total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                    document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000)
-                        .toLocaleString();
-                    document.getElementById('total_point').value = input_price.value;
-                    document.getElementById('price_promotion').value = input_price.value;
+                // prices[i].classList.add("btn-primary");
+            prices[i].style.backgroundColor = "blue";
+
+            // Xóa lớp/đổi nền của các prices khác
+            for (var k = 0; k < prices.length; k++) {
+                if (k !== i) {
+                    // prices[k].classList.remove("btn-primary");
+                    prices[k].style.backgroundColor = "orange";
+                }
+            }
+            // Thêm lớp/đổi nền cho price[i]
+            prices[i].style.backgroundColor = "blue";
+            input_price.value = prices[i].value
+            if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
+                sale.innerText = "+5%";
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('price_promotion').value = input_price.value;
                     document.getElementById('total_amount').innerText = input_price.value
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
@@ -758,66 +767,63 @@
                 var total_amount_input = document.getElementById('total_amount_input');
                 var old_total_amount_input = document.getElementById('old_total_amount_input');
 
-                $.ajax({
-                    url: '/apply-discount', // Route mà bạn đã định nghĩa
-                    method: "POST",
-                    data: {
-                        discount_code: discountCode,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        $("#discount-message").html(response.message);
-                        $("#discount_amount").html(response.discount_amount);
-                        $("#type_discount").html(response.type_discount);
-                        $("#status_coupon").html(response.status_coupon);
+            $.ajax({
+                url: '/apply-discount', // Route mà bạn đã định nghĩa
+                method: "POST",
+                data: {
+                    discount_code: discountCode,
+                    _token: '{{ csrf_token() }}'
+
+                    },success: function(response) {
+                    $("#discount-message").html(response.message);
+                    $("#discount_amount").html(response.discount_amount);
+                    $("#type_discount").html(response.type_discount);$("#status_coupon").html(response.status_coupon);
                         $("#coupon_id1").val(response.coupon_id);
                         $("#coupon_id").val(response.coupon_id);
 
 
-                        if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active') { // Phần trăm
+                    if (document.getElementById('type_discount').innerText == 'percent'&& document.getElementById('status_coupon').innerText == 'active') { // Phần trăm
                             var discount_amount_sale = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
-                            var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000).toLocaleString();
-                            total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000);
+                            var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale  * 1000).toLocaleString();
+                        total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000);
                             old_total_amount_input.value = input_price.value.replace(/,/g, "");
                             document.getElementById('total_amount').innerText = total_amount;
                             document.getElementById('total_amount1').innerText = total_amount;
-                            document.getElementById('total_point').value = old_total_amount_input.value;
-                            document.getElementById('price_promotion').value = total_amount_input.value;
-                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
+                        document.getElementById('total_point').value = old_total_amount_input.value;
+                            document.getElementById('price_promotion').value = total_amount_input.value; document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
                         }
 
-                        if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active') { // Giá cố định
+                    if (document.getElementById('type_discount').innerText == 'price'&& document.getElementById('status_coupon').innerText == 'active') { // Giá cố định
                             var discount_amount_sale = document.getElementById('discount_amount').innerText.toLocaleString();
                             var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale).toLocaleString();
                             total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale);
                             old_total_amount_input.value = input_price.value.replace(/,/g, "");
                             document.getElementById('total_amount').innerText = total_amount;
                             document.getElementById('total_amount1').innerText = total_amount;
-                            document.getElementById('total_point').value = old_total_amount_input.value;
+                        document.getElementById('total_point').value = old_total_amount_input.value;
                             document.getElementById('price_promotion').value = total_amount_input.value;
                             document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
                         }
 
-                        if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive')  { // Không dùng mã
+                    if (document.getElementById('type_discount').innerText == ''|| document.getElementById('status_coupon').innerText == 'inactive')  { // Không dùng mã
                             document.getElementById('discount-message').innerText = 'Mã giảm giá không hợp lệ.';
                             var discount_amount_sale = document.getElementById('discount_amount_sale').innerText = 0;
-                            var total_amount_value = (input_price.value.replace(/,/g, "") - 0).toLocaleString();
+                            var total_amount_value =(input_price.value.replace(/,/g, "") - 0).toLocaleString();
                             total_amount_input.value = (input_price.value.replace(/,/g, "") - 0);
-                            old_total_amount_input.value = (input_price.value.replace(/,/g, "") - 0);
-                            document.getElementById('total_amount').innerText = total_amount_value;
+                            old_total_amount_input.value = (input_price.value.replace(/,/g, "") - 0); document.getElementById('total_amount').innerText = total_amount_value;
                             document.getElementById('total_amount1').innerText = total_amount_value;
                             document.getElementById('total_point').value = old_total_amount_input.value;
                             document.getElementById('price_promotion').value = total_amount_input.value;
                             document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
-                        }
-                    },
-                    error: function() {
-                        $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
                     }
-                });
-
+                },
+                error: function() {
+                    $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
+                }
             });
+
         });
+    });
     </script>
 @endpush
 
