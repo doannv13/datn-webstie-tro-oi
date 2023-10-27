@@ -40,9 +40,9 @@
         <h1 class="greeting">{{ $content['title'] }}</h1>
         <h2>{{ $content['description'] }}</h2>
         <div class="sender-info">
-            <p>Người gửi: Công ty Trọ ơi</p>
-            <p>Số điện thoại: 0987654321</p>
-            <p>Email: lmt.3102003@gmail.com</p>
+            <p>Người gửi: Công ty Trọ Ơi</p>
+            <p>Số điện thoại: 036.37.38.586</p>
+            <p>Email: hotro.trooi.datn@gmail.com</p>
         </div>
     </div>
 </body>

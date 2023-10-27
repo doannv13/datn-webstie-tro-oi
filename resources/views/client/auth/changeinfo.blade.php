@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="file form-group clearfix d-flex align-items-center gap-5">
                                             <div class="mb-3 mt-3" style="text-align:center;">
-                                                <img src='{{ !$data->avatar==null ?  asset($data->avatar) : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}' style="width: 70px;min-height:70px;height:70px;border-radius:100% ;object-fit: cover;" alt="">
+                                                <img src='{{ !$data->avatar==null ?  asset($data->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}' style="width: 70px;min-height:70px;height:70px;border-radius:100% ;object-fit: cover;" alt="">
                                                 <input type="hidden" name='old_avatar' value="{{ $data->avatar }}">
                                             </div>
                                         <div class="d-flex h-25">

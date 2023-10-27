@@ -9,24 +9,24 @@ class Transaction extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
-            'user_id',
-            'point',
-            'payment_method',
-            'status',
-            'points',
-            'verification'
-     ];
+    protected $fillable = [
+        'user_id',
+        'point',
+        'price_promotion',
+        'coupon_id',
+        'payment_method',
+        'status',
+        'points',
+        'verification'
+    ];
 
-     public $timestamps = true;
-     public function user()
-     {
-         return $this->belongsTo(User::class);
-     }
-     public function room_post()
-     {
-         return $this->belongsTo(RoomPost::class);
-     }
-
-
+    public $timestamps = true;
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function room_post()
+    {
+        return $this->belongsTo(RoomPost::class);
+    }
 }

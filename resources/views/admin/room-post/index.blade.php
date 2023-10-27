@@ -39,18 +39,16 @@
                                 @endif
                             </td>
                             <td>
-
                                 @if ($value->status == 'pendding')
                                 <div class="statusSelect" name="status" data-id="{{ $value->id }}">
                                     <button class="btn btn-primary" value="accept">Kích hoạt</button>
-                                    <button class="btn btn-danger mt-2" value="cancel">Từ chối</button>
+                                    <button class="btn btn-danger" value="cancel">Từ chối</button>
                                 </div>
                                 @else
                                 <div class="statusSelect" name="status" data-id="{{ $value->id }}">
                                     <label class="btn {{ $value->status == 'accept' ? 'btn-success' : 'btn-danger' }}" for="">{{ $value->status === 'accept' ? 'Đã kích hoạt' : 'Đã huỷ' }}</label>
                                 </div>
                                 @endif
-
                             </td>
 
                             <td id="time_start">{{ $value->time_start }}</td>
