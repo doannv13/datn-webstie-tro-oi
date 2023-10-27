@@ -162,22 +162,22 @@
             @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-6">
-                    
-            
-                
+
+
+
                     <div class="input-group">
                         <span class="input-group-text input-group-i px-3" style="width: 50px;">
                             <i class="fa fa-search text-white"></i>
                         </span>
                         <input type="text" name="name_filter" id="name_filter" class="form-control bg-input-group" value="{{ request('name_filter') }}" placeholder="Nhập tên phòng..." style="height: 58px" />
-                        
+
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="col-md-8">
-                  
-                
+
+
 
                     <div class="row g-3">
                         <div class="col-md-6 col-sm-6 col-lg-2">
@@ -200,7 +200,7 @@
                                 <label for="dselect-example1">Loại phòng</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
                                 <select class="form-select bg-select-group" style="font-size: 14px" id="district_filter" name="district_filter">
@@ -223,7 +223,7 @@
                                 <label for="floatingSelect2">Khu vực</label>
                             </div>
                         </div>
-                        
+
 
                         <div class="col-md-6 col-sm-6 col-lg-2">
                             <div class="form-floating">
@@ -244,7 +244,7 @@
                                 <label for="floatingSelect3">Mức giá</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-5 col-sm-5 col-lg-3">
                             <div class="form-floating">
                                 <select name="acreage_filter" id="acreage_filter" style="font-size: 14px" class="form-select bg-select-group">
@@ -258,7 +258,7 @@
                                 <label for="floatingSelect4">Diện tích</label>
                             </div>
                         </div>
-                        
+
 
                         {{-- update --}}
                         {{-- <div class="col-md-5 col-sm-5 col-lg-2" style="width: 15.5%;">
@@ -275,8 +275,8 @@
                         </div> --}}
                         <div class="col-md-6 col-sm-6 col-lg-1 p-2 ">
                             <center>
-                        <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
-                        </a>
+                                <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
+                                </a>
 
                             </center>
                         </div>
@@ -322,7 +322,7 @@
                                 trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
-                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp  : <span class="text-danger">1.000 VND sẽ tương ứng 1 Point</span> </label>
+                            <label class="fs-6 text fw-semibold">Chọn số tiền nạp : <span class="text-danger">1.000 VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
                                 <input type="button" class="btn" value="20,000" name="price" style="background-color: orange;color:white">
                                 <input type="button" class="btn" value="50,000" name="price" style="background-color: orange;color:white">
@@ -351,11 +351,11 @@
                                 <button id="apply-discount">Áp dụng mã</button>
                             </div>
                         </div>
-                        <div  class="d-flex justify-content-between px-2">
+                        <div class="d-flex justify-content-between px-2">
                             <label class=" fs-6 text fw-semibold"></label> <br>
                             <div id="discount-message"></div>
                         </div>
-                        <div  class="d-flex justify-content-between p-2">
+                        <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Số tiền giảm:</label> <br>
                             <div class="d-flex">
                                 <label id="discount_amount_sale" class="fw-bold text-danger me-1">0</label>
@@ -364,7 +364,7 @@
                             <div id="discount_amount" hidden></div>
                             <div id="type_discount" hidden></div>
                         </div>
-                        <div  class="d-flex justify-content-between p-2">
+                        <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Số tiền cần nạp sau khi giảm:</label> <br>
                             <div class="fw-medium" id=""><span id="total_amount" class="fw-bolder" style="color: #E24343;"></span> VND</div>
                         </div>
@@ -529,9 +529,21 @@
 
 
     for (let i = 0; i < prices.length; i++) {
-        prices[i].style.backgroundColor = "none"
+
 
         prices[i].addEventListener('click', function() {
+            // prices[i].classList.add("btn-primary");
+            prices[i].style.backgroundColor = "blue";
+
+            // Xóa lớp/đổi nền của các prices khác
+            for (var k = 0; k < prices.length; k++) {
+                if (k !== i) {
+                    // prices[k].classList.remove("btn-primary");
+                    prices[k].style.backgroundColor = "orange";
+                }
+            }
+            // Thêm lớp/đổi nền cho price[i]
+            prices[i].style.backgroundColor = "blue";
             input_price.value = prices[i].value
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
                 sale.innerText = "+5%";
@@ -604,50 +616,51 @@
 
 
     // Mã giảm giá
-    $(document).ready(function () {
-        $("#apply-discount").on("click", function () {
+    $(document).ready(function() {
+        $("#apply-discount").on("click", function() {
             var discountCode = $("#discount-code").val();
 
             $.ajax({
                 url: '/apply-discount', // Route mà bạn đã định nghĩa
                 method: "POST",
-                data: { discount_code: discountCode, _token: '{{ csrf_token() }}' },
-                success: function (response) {
+                data: {
+                    discount_code: discountCode,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
                     $("#discount-message").html(response.message);
                     $("#discount_amount").html(response.discount_amount);
                     $("#type_discount").html(response.type_discount);
 
                     // Xử lý thay đổi tiền
-                    if(document.getElementById('type_discount').innerText == 'percent'){ // Phần trăm
-                        document.getElementById('discount_amount_sale').innerText =  (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
-                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
-                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
-                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000);
+                    if (document.getElementById('type_discount').innerText == 'percent') { // Phần trăm
+                        document.getElementById('discount_amount_sale').innerText = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
+                        document.getElementById('total_amount').innerText = (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText * 1000).toLocaleString();
+                        document.getElementById('total_amount1').innerText = (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText * 1000).toLocaleString();
+                        document.getElementById('total_point').value = (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText * 1000);
                     }
 
-                    if(document.getElementById('type_discount').innerText == 'price'){ //Giá cố định
-                        document.getElementById('discount_amount_sale').innerText =  document.getElementById('discount_amount').innerText.toLocaleString();
-                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
-                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
-                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText);
+                    if (document.getElementById('type_discount').innerText == 'price') { //Giá cố định
+                        document.getElementById('discount_amount_sale').innerText = document.getElementById('discount_amount').innerText.toLocaleString();
+                        document.getElementById('total_amount').innerText = (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
+                        document.getElementById('total_amount1').innerText = (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
+                        document.getElementById('total_point').value = (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText);
                     }
 
-                    if(document.getElementById('type_discount').innerText == ''){ // Phần trăm
-                        document.getElementById('discount_amount_sale').innerText =  0;
-                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); //Hiển thị lúc app mã
-                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); // Hiển thị QR
-                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "")-0); //Nạp trong ví
+                    if (document.getElementById('type_discount').innerText == '') { // Phần trăm
+                        document.getElementById('discount_amount_sale').innerText = 0;
+                        document.getElementById('total_amount').innerText = (input_price.value.replace(/,/g, "") - 0).toLocaleString(); //Hiển thị lúc app mã
+                        document.getElementById('total_amount1').innerText = (input_price.value.replace(/,/g, "") - 0).toLocaleString(); // Hiển thị QR
+                        document.getElementById('total_point').value = (input_price.value.replace(/,/g, "") - 0); //Nạp trong ví
                     }
                 },
-                error: function () {
+                error: function() {
                     $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
                 }
             });
 
         });
     });
-
-
 </script>
 
 @endpush

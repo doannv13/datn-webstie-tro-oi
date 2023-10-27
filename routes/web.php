@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Client\PostController as ClientPost;;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\FacilityController;
@@ -30,6 +31,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\TransactionController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,9 +54,11 @@ Auth::routes();
 //    return abort(404);
 //});
 //CLIENT
+
 Route::get('home-client', function () {
     return view('client.layouts.master');
 })->name('home-client');
+
 //Trang chủ
 Route::get('trang-chu', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -68,6 +74,9 @@ Route::get('client-login', function () {
     return view('client.auth.login');
 });
 
+//Google Authen
+Route::get('/auth/google', [LoginController::class,'redirectToGoogle']);
+Route::get('/auth/google/callback', [LoginController::class,'handleGoogleCallback']);
 //Thay đổi mật khẩu,thông tin
 Route::resource('changeinfo', ChangeInfoController::class);
 Route::resource('changepassword', ChangePasswordController::class);
