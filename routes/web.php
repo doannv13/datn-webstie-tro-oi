@@ -4,7 +4,7 @@
 use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Client\PostController as ClientPost;;
-
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryRoomController;
@@ -29,7 +29,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
+use App\Http\Controllers\Client\PaymentVNPayController;
 use App\Http\Controllers\Client\TransactionController;
+use App\Http\Controllers\LoginFacebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +90,20 @@ Route::get('room-post-detail/{id}', [HomeController::class, 'roomPostDetail'])->
 
 Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
 
+//facebook
+// Route::get('getInfo-facebook/{social}', [LoginFacebookController::class, 'getInfo'])->name('login-facebook');
+// Route::get('checkInfo-facebook/{social}', [LoginFacebookController::class, 'checkInfo']);
 
+Route::get('auth/facebook', function(){
+    return Socialite::driver('facebook')->redirect();
+});
+Route::get('auth/facebook/callback', function(){
+    return 'callback';
+});
+
+Route::get('chinh-sach-rieng-tu', function(){
+    return '<h1>Facebook</h1>';
+});
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
@@ -128,6 +143,10 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
 
     // Mã giảm giá
     Route::post('apply-discount', [TransactionController::class,'applyDiscount'])->name('apply-discount');
+
+    Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
+    Route::post('notification_pay', [PaymentVNPayController::class, 'notification_pay'])->name('notification-pay');
+
 });
 Route::group(['middleware' => 'checkRole:admin'], function () {
     // Route dành cho admin ở đây

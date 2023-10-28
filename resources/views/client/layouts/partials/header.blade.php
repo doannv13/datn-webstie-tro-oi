@@ -83,7 +83,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" aria-expanded="false">
+                            <a class="nav-link" href="" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
@@ -260,19 +260,7 @@
                         </div>
                         
 
-                        {{-- update --}}
-                        {{-- <div class="col-md-5 col-sm-5 col-lg-2" style="width: 15.5%;">
-                            <div class="">
-                                <select name="" id="" style="font-size: 14px" class="form-select bg-select-group py-2">
-                                    <option value="" >Sắp xếp</option>
-                                    <option value="">Mới nhất</option>
-                                    <option value="" >Giá tăng dần</option>
-                                    <option value="" >Giá giảm dần</option>
-                                    <option value="" >Diện tích tăng dần</option>
-                                    <option value="" >Diện tích giảm dần</option>
-                                </select>
-                            </div>
-                        </div> --}}
+                        
                         <div class="col-md-6 col-sm-6 col-lg-1 p-2 ">
                             <center>
                         <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
@@ -405,6 +393,13 @@
 
                             @if (auth()->user())
                             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; ">Nạp Point</button>
+                            <form action="{{route('vnpay-payment')}}" method="post">
+                                
+                                <input type="hidden" id="total_amount_input" name="total_amount_input" value="">
+                                <input type="hidden" id="old_total_amount_input" name="old_total_amount_input" value="">
+                                @csrf
+                                <button name="redirect" type="submit">Thanh toán</button>
+                            </form>
                             @else
                             <label for="" class="text-danger">Vui lòng đăng nhập</label>
                             @endif
@@ -510,6 +505,8 @@
 
     const prices = document.getElementsByName("price");
     const input_price = document.getElementById('input-price');
+    const total_amount = document.getElementById('total_amount');
+    const total_amount_input = document.getElementById('total_amount_input');
     const sale = document.getElementById('sale');
     const sale_price = document.getElementById('sale-price');
     const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
@@ -519,6 +516,12 @@
     //Fix giá trị mặc định 20k
     if (document.getElementById('total_amount').innerText == ('')) {
         document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
+    }
+    if (document.getElementById('total_amount_input').value === ('')) {
+        document.getElementById('total_amount_input').value = ('20000');
+    }
+    if (document.getElementById('old_total_amount_input').value === ('')) {
+        document.getElementById('old_total_amount_input').value = ('20000');
     }
     if (document.getElementById('total_amount1').innerText == ('')) {
         document.getElementById('total_amount1').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
@@ -540,6 +543,8 @@
                 document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('total_amount1').innerText = input_price.value
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 1000000) {
                 sale.innerText = "+7%";
@@ -548,6 +553,8 @@
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('total_amount1').innerText = input_price.value
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                 sale.innerText = "+10%";
@@ -557,6 +564,8 @@
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('total_amount1').innerText = input_price.value
             }
         });
@@ -605,47 +614,57 @@
 
     // Mã giảm giá
     $(document).ready(function () {
-        $("#apply-discount").on("click", function () {
-            var discountCode = $("#discount-code").val();
+    $("#apply-discount").on("click", function () {
+        var discountCode = $("#discount-code").val();
+        var input_price = document.getElementById('input-price');
+        var total_amount_input = document.getElementById('total_amount_input');
 
-            $.ajax({
-                url: '/apply-discount', // Route mà bạn đã định nghĩa
-                method: "POST",
-                data: { discount_code: discountCode, _token: '{{ csrf_token() }}' },
-                success: function (response) {
-                    $("#discount-message").html(response.message);
-                    $("#discount_amount").html(response.discount_amount);
-                    $("#type_discount").html(response.type_discount);
+        $.ajax({
+            url: '/apply-discount', // Route mà bạn đã định nghĩa
+            method: "POST",
+            data: { discount_code: discountCode, _token: '{{ csrf_token() }}' },
+            success: function (response) {
+                $("#discount-message").html(response.message);
+                $("#discount_amount").html(response.discount_amount);
+                $("#type_discount").html(response.type_discount);
 
-                    // Xử lý thay đổi tiền
-                    if(document.getElementById('type_discount').innerText == 'percent'){ // Phần trăm
-                        document.getElementById('discount_amount_sale').innerText =  (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
-                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
-                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000).toLocaleString();
-                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText*1000);
-                    }
-
-                    if(document.getElementById('type_discount').innerText == 'price'){ //Giá cố định
-                        document.getElementById('discount_amount_sale').innerText =  document.getElementById('discount_amount').innerText.toLocaleString();
-                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
-                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText).toLocaleString();
-                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "") - document.getElementById('discount_amount_sale').innerText);
-                    }
-
-                    if(document.getElementById('type_discount').innerText == ''){ // Phần trăm
-                        document.getElementById('discount_amount_sale').innerText =  0;
-                        document.getElementById('total_amount').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); //Hiển thị lúc app mã
-                        document.getElementById('total_amount1').innerText =  (input_price.value.replace(/,/g, "")-0).toLocaleString(); // Hiển thị QR
-                        document.getElementById('total_point').value =  (input_price.value.replace(/,/g, "")-0); //Nạp trong ví
-                    }
-                },
-                error: function () {
-                    $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
+                if (document.getElementById('type_discount').innerText == 'percent') { // Phần trăm
+                    var discount_amount_sale = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
+                    var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000).toLocaleString();
+                    total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000);
+                    document.getElementById('total_amount').innerText = total_amount;
+                    document.getElementById('total_amount1').innerText = total_amount;
+                    document.getElementById('total_point').value = total_amount_input.value;
+                    document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
                 }
-            });
 
+                if (document.getElementById('type_discount').innerText == 'price') { // Giá cố định
+                    var discount_amount_sale = document.getElementById('discount_amount').innerText.toLocaleString();
+                    var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale).toLocaleString();
+                    total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale);
+                    document.getElementById('total_amount').innerText = total_amount;
+                    document.getElementById('total_amount1').innerText = total_amount;
+                    document.getElementById('total_point').value = total_amount_input.value;
+                    document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
+                }
+
+                if (document.getElementById('type_discount').innerText == '') { // Phần trăm
+                    document.getElementById('discount_amount_sale').innerText = 0;
+                    var total_amount_value = (input_price.value.replace(/,/g, "") - 0).toLocaleString();
+                    total_amount_input.value = (input_price.value.replace(/,/g, "") - 0);
+                    document.getElementById('total_amount').innerText = total_amount_value;
+                    document.getElementById('total_amount1').innerText = total_amount_value;
+                    document.getElementById('total_point').value = total_amount_input.value;
+                }
+            },
+            error: function () {
+                $("#discount-message").html("Lỗi trong quá trình xử lý mã giảm giá.");
+            }
         });
+
     });
+});
+
 
 
 </script>

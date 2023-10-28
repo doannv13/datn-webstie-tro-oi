@@ -85,7 +85,7 @@ aria-hidden="true"
                             </form>
                             <div class="clearfix"></div>
                             <div class="social-list">
-                                <a href="#" class="facebook-bg">
+                                <a href="{{ url('getInfo-facebook/facebook') }}" class="facebook-bg">
                                     <i class="fa fa-facebook"></i>
                                 </a>
                                 <a href="#" class="google-bg">

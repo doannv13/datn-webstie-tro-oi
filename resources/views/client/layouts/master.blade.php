@@ -25,7 +25,7 @@
     @endif
 
 
-
+<script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
     {{--    icon facebook --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/v4-shims.css') }}" />
 
