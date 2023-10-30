@@ -279,8 +279,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="inputAddress" class="form-label">Zalo:<span
-                                            class="text-danger">*</span></label>
+                                    <label for="inputAddress" class="form-label">Zalo:</label>
                                     <input type="text" value="{{ $postroom->zalo }}"
                                         placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">
                                     @error('zalo')

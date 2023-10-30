@@ -1,5 +1,5 @@
 <div class="sidebar">
-    @foreach ($global_sidebar_top_ad as $item)
+    {{-- @foreach ($global_sidebar_top_ad as $item)
         <div class="social-media sidebar-widget clearfix">
             <a href="{{ $item->url }}">
                 <div class="photo-thumbnail p-2">
@@ -13,7 +13,7 @@
                 </div>
             </a>
         </div>
-    @endforeach
+    @endforeach --}}
     <!-- Top 10 -->
     <div class="sidebar-widget recent-news" style="padding: 12px">
         <div class="main-title-2">
