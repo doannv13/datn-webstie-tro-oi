@@ -32,7 +32,7 @@ class PaymentVNPayController extends Controller
             $payment->verification = null;
             $payment->save();
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; // url chuyển đến trang thanh toán
-            $vnp_Returnurl = "http://datn-webstie-tro-oi1.test/vnpay-return"; // url redirect sau khi thanh toán xong
+            $vnp_Returnurl = "http://datn-webstie-tro-oi.test/vnpay-return"; // url redirect sau khi thanh toán xong
             $vnp_TmnCode = "M4WVGGAX"; //Mã website tại VNPAY
             $vnp_HashSecret = "GCJDLQSWQXFNASGVNESEOJRUUNQUZJYO"; //Chuỗi bí mật
 
