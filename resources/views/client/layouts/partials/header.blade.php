@@ -373,28 +373,28 @@
                             <label class="fs-6 text fw-semibold">Chọn số tiền nạp : <span class="text-danger">1.000
                                     VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
-                                <input type="button" class="btn" value="20,000" name="price"
+                                <input type="button" class="btn" value="20,000" name="prices"
                                        style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                        this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';" >
-                                <input type="button" class="btn" value="50,000" name="price"
+                                <input type="button" class="btn" value="50,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="100,000" name="price"
+                                <input type="button" class="btn" value="100,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="200,000" name="price"
+                                <input type="button" class="btn" value="200,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="300,000" name="price"
+                                <input type="button" class="btn" value="300,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="500,000" name="price"
+                                <input type="button" class="btn" value="500,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="1,000,000" name="price"
+                                <input type="button" class="btn" value="1,000,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="2,000,000" name="price"
+                                <input type="button" class="btn" value="2,000,000" name="prices"
                                     style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
                             </div>
@@ -628,7 +628,7 @@
         }
 
 
-        const prices = document.getElementsByName("price");
+        const prices = document.getElementsByName("prices");
         const input_price = document.getElementById('input-price');
         const total_amount = document.getElementById('total_amount');
         const total_amount_input = document.getElementById('total_amount_input');
