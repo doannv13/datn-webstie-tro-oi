@@ -155,6 +155,8 @@ class RoomPostController extends Controller
             }
             $mailTo = User::where('role', 'admin')->first();
             event(new RoomPostNotificationEvent($mailTo, $content));
+            $message="Bạn vừa tạo tin đăng mới vui lòng chờ admin xác nhận";
+            notificationDB($message);
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
 
             return redirect()->route('room-posts.index');

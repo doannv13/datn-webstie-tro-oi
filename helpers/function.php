@@ -2,11 +2,14 @@
 
 use App\Models\CategoryRoom;
 use App\Models\District;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\RoomPost;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+
 
 if (!function_exists('upload_file')) {
     function upload_file($folder, $file)
@@ -103,3 +106,10 @@ function countPostServiceId($service_id){
 //     ->paginate(4);
 
 // $posts = Post::latest()->paginate(5);
+//function notification database
+function notificationDB($massage){
+    return Notification::create([
+        'user_id' =>  Auth::id(),
+        'message' => $massage,
+    ]);
+}

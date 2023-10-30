@@ -95,7 +95,7 @@
             <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
                 <!-- item-->
-                <div class="dropdown-item noti-title">
+                <div class="dropdown-item noti-title " >
                     <h5 class="m-0">
                         <span class="float-end">
                             <a href="" class="text-dark">
@@ -108,7 +108,7 @@
                 <div class="noti-scroll" data-simplebar>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                    <a href="javascript:void(0);" class="dropdown-item notify-item active" id="notification">
                         <div class="notify-icon">
                             <img src="{{ asset('be/assets/images/users/user-1.jpg') }}" class="img-fluid rounded-circle"
                                 alt="" />
@@ -119,58 +119,7 @@
                         </p>
                     </a>
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-primary">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Caleb Flakelar commented on Admin
-                            <small class="text-muted">1 min ago</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon">
-                            <img src="{{ asset('be/assets/images/users/user-4.jpg') }}" class="img-fluid rounded-circle"
-                                alt="" />
-                        </div>
-                        <p class="notify-details">Karen Robinson</p>
-                        <p class="text-muted mb-0 user-msg">
-                            <small>Wow ! this admin looks good and awesome design</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-warning">
-                            <i class="mdi mdi-account-plus"></i>
-                        </div>
-                        <p class="notify-details">New user registered.
-                            <small class="text-muted">5 hours ago</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-info">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Caleb Flakelar commented on Admin
-                            <small class="text-muted">4 days ago</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-secondary">
-                            <i class="mdi mdi-heart"></i>
-                        </div>
-                        <p class="notify-details">Carlos Crouch liked
-                            <b>Admin</b>
-                            <small class="text-muted">13 days ago</small>
-                        </p>
-                    </a>
+                 
                 </div>
 
                 <!-- All-->
@@ -292,3 +241,49 @@
     <div class="clearfix"></div>
 
 </div>
+@push('scripts')
+<script>
+     $(function() {
+            $('#notification').ready(function() {
+               
+                let $user_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('notifications') }}',
+                    data: {
+                        'status': status,
+                        'coupon_id': coupon_id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            })
+
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            })
+                        }
+                    }
+                });
+            })
+        })
+
+</script>
+@endpush
+
+
