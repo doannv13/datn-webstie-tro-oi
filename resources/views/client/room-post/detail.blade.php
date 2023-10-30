@@ -5,12 +5,12 @@
     <div class="sub-banner">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1>Room Details</h1>
+                <h1>Chi tiết phòng</h1>
             </div>
             <nav class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Room Details</li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Chi tiết phòng</li>
                 </ol>
             </nav>
         </div>
@@ -135,7 +135,7 @@
                                                 <tr>
                                                     <td>Mã tin đăng:</td>
                                                     <td>
-
+                                                        {{ $roomposts->id }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -154,7 +154,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Ngày kết thúc:</td>
-                                                    <td>{{ $roomposts->time_end }}</td>
+                                                    <td>{{ $roomposts->time_end ? $roomposts->time_end : 'N/A' }}</td>
                                                 </tr>
 
                                             </table>
@@ -307,7 +307,7 @@
 
                                         <!-- Similar room end -->
                                         <!-- Location start -->
-                                        <div class="row ">
+                                        {{-- <div class="row ">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <!-- Location start  -->
                                                 <div class="main-title-2">
@@ -317,17 +317,17 @@
                                                     <div class="map">
                                                         <!-- Main Title 2 -->
                                                         <div id="map" class="contact-map" style="height: 662px;">
-                                                            {{-- <iframe
+                                                            <iframe
                                                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59615.81210587678!2d105.71104243751117!3d20.95298673967121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134532bef4bcdb7%3A0xbcc7a679fcba07f6!2zSMOgIMSQw7RuZywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694537835765!5m2!1svi!2s"
                                                                 width="100%" height="75%" style="border:0;"
                                                                 allowfullscreen="" loading="lazy"
-                                                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+                                                                referrerpolicy="no-referrer-when-downgrade"></iframe>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- Location comments end -->
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row clearfix tag-share">
                                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                                 <!-- Tags box start -->
@@ -404,27 +404,27 @@
                                 </div>
                                 <div class="heading-rooms">
                                     <div class="contact-item mb-3">
-                                        <div class="btn btn-primary text-center w-100" onclick="showPhoneNumber('phone')">
+                                        <button class="btn btn-primary text-center text-light fs-6 fw-bold w-100"
+                                            onclick="showPhoneNumber()">
                                             <i class="fa fa-phone fs-5 mx-2"></i>
-                                            <a style="font-size: 18px" id="phone">
-                                                0<?php 
-                                                    $phoneNumber = str_replace(',', ' ', number_format($roomposts->phone));
-                                                    $maskedPhoneNumber = substr($phoneNumber, 0, 1) . preg_replace("/[0-9]/", "*", substr($phoneNumber, 1));
-                                                    echo $maskedPhoneNumber;
-                                                ?>
-                                            </a>
-                                        </div>
-                                        <div class="btn btn-primary text-center w-100 mt-3" onclick="showPhoneNumber('zalo')">
-                                            <a style="font-size: 18px">Zalo: 
-                                                0<?php 
-                                                    $zaloNumber = str_replace(',', ' ', number_format($roomposts->zalo));
-                                                    $maskedPhoneNumber = substr($zaloNumber, 0, 1) . preg_replace("/[0-9]/", "*", substr($zaloNumber, 1));
-                                                    echo $maskedPhoneNumber;
-                                                ?>
-                                            </a>
-                                        </div>
 
+                                            <span
+                                                class="show-phone">{{ substr($roomposts->phone, 0, 2) . str_repeat('*', strlen($roomposts->phone) - 2) }}</span>
+                                            <span style="display: none"
+                                                class="hidden-phone">{{ $roomposts->phone }}</span>
+                                        </button>
                                     </div>
+                                    @if ($roomposts->zalo)
+                                        <div class="contact-item mb-3">
+                                            <a href="https://zalo.me/{{ $roomposts->zalo }}"
+                                                class="btn btn-primary text-center text-light fs-6 fw-bold w-100"
+                                                onclick="showPhoneNumber()">
+                                                <i class="fa fa-phone fs-5 mx-2"></i>
+
+                                                <span class="show-phone">Chat qua Zalo</span>
+                                            </a>
+                                        </div>
+                                    @endif
 
 
                                 </div>
@@ -448,11 +448,13 @@
     <!-- Rooms detail section end -->
 @endsection
 @push('scripts')
-<script>
-    function showPhoneNumber(id) {
-        var element = document.getElementById(id);
-        var phoneNumber = element.innerText.substr(1); // Lấy phần số điện thoại đã được ẩn
-        element.innerText = "0" + phoneNumber; // Hiển thị số điện thoại đầy đủ khi nhấp vào
-    }
-</script>
+    <script>
+        function showPhoneNumber() {
+            var showPhone = document.querySelector(".show-phone");
+            var hiddenPhone = document.querySelector(".hidden-phone");
+
+            showPhone.style.display = "none"; // Ẩn nội dung có lớp show-phone
+            hiddenPhone.style.display = "inline"; // Hiển thị nội dung có lớp hidden-phone
+        }
+    </script>
 @endpush

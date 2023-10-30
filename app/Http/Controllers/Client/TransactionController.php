@@ -29,7 +29,7 @@ class TransactionController extends Controller
             ->where('action', 'import')
             ->latest()
             ->paginate(10);
-        return view('admin.transaction.index',compact('data', 'category_rooms', 'districts'));
+        return view('admin.transaction.index', compact('data', 'category_rooms', 'districts'));
     }
 
     /**
@@ -95,9 +95,15 @@ class TransactionController extends Controller
         $model = Transaction::find($id);
         $model->status = $newStatus;
         $model->save();
+
         toastr()->success('Chỉnh sửa thành công', 'thành công');
         if ($newStatus === 'accept') {
             $user = User::findOrFail($model->user_id);
+            if ($model->coupon_id) {
+                $coupon = Coupon::findOrFail($model->coupon_id);
+                $coupon->quantity -= 1;
+                $coupon->save();
+            }
             if ($model->point < 300000) {
                 $user->point += ($model->point + (5 / 100) * $model->point) / 1000;
             } elseif ($model->point >= 300000 && $model->point < 1000000) {
@@ -116,16 +122,17 @@ class TransactionController extends Controller
 
 
 
-    public function history(){
+    public function history()
+    {
 
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $districts = District::whereHas('roomPosts', function ($query) {
             $query->where('status', 'accept');
         })->distinct()->pluck('name');
         $data = Transaction::with('user')
-        ->where('user_id', auth()->user()->id)
-        ->paginate(10);
-    return view('client.transaction.historyPoint',compact('data', 'category_rooms', 'districts'));
+            ->where('user_id', auth()->user()->id)
+            ->paginate(10);
+        return view('client.transaction.historyPoint', compact('data', 'category_rooms', 'districts'));
     }
 
     // Mã giảm giá
@@ -148,7 +155,7 @@ class TransactionController extends Controller
                 'status_coupon' => $status_coupon,
                 'coupon_id' => $coupon_id,
             ]);
-//            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
+            //            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
         } else {
             return response()->json([
                 'message' => 'Mã giảm giá không hợp lệ.',
