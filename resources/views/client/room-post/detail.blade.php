@@ -344,9 +344,16 @@
                                                         <h1>Tags</h1>
                                                     </div>
                                                     <ul class="tags">
+
                                                         @foreach ($roomposts->tags as $tag)
-                                                            <li><a
-                                                                    href="{{ route('tags-show', $tag->slug) }}">{{ $tag->name }}</a>
+                                                            <li>
+                                                                @php
+                                                                    $formattedSlug = str_replace('-', ' ', $tag->slug);
+                                                                @endphp
+                                                                <a
+                                                                    href="{{ route('search-filter', ['name_filter' => $formattedSlug]) }}">
+                                                                    {{ $tag->name }}
+                                                                </a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -379,7 +386,7 @@
                 <div class="col-lg-3 col-md-12 col-xs-12" style="padding-right: 0">
                     <div class="sidebar">
                         <!-- Search area box 3 start -->
-                        <div class="sidebar-widget text-center search-area-box-3 clearfix" style="padding: 12px">
+                        <div class="sidebar-widget search-area-box-3 clearfix" style="padding: 12px">
                             <div class="contact-details">
                                 <div class="row contact-item mb-3 align-items-center">
                                     <div class="col-md-4 mx-auto">
@@ -418,7 +425,6 @@
                                             </a>
                                         </div>
                                     @endif
-
 
 
                                 </div>
