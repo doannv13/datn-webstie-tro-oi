@@ -40,9 +40,9 @@
         <h1 class="greeting">Xác nhận đơn hàng</h1>
         <h2>Vui lòng kiểm tra lại, chúng tôi đã kiểm tra và không nhận được đơn hàng của bạn, vui lòng liên lạc lại với chúng tôi bằng zalo hoặc email bên dưới</h2>
         <div class="sender-info">
-            <p>Người gửi: Công ty Trọ ơi</p>
-            <p>Số điện thoại: 0987654321</p>
-            <p>Email: lmt.3102003@gmail.com</p>
+            <p>Người gửi: Công ty Trọ Ơi</p>
+            <p>Số điện thoại: 036.37.38.586</p>
+            <p>Email: hotro.trooi.datn@gmail.com</p>
         </div>
     </div>
 </body>

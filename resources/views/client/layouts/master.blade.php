@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:24:47 GMT -->
 
 <head>
 
@@ -24,6 +23,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('no_image.jpg') }}" />
     @endif
 
+    <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
 
 <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
     {{--    icon facebook --}}
@@ -55,7 +55,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/skins/default.css') }}" />
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('fe/img/favicon.ico') }}" type="image/x-icon" />
     <link href="{{ asset('be/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('be/assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}"
@@ -80,9 +79,11 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('fe/css/ie10-viewport-bug-workaround.css') }}" />
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
+
     <!-- Google Tag Manager (noscript) -->
     {{-- <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFC5925" height="0" width="0"
@@ -93,7 +94,7 @@
     {{-- Star Header --}}
     @include('client.layouts.partials.header')
     {{-- End Header --}}
-
+    {{ session()->start() }}
     <div class="content-page">
         <div class="content">
             <!-- Start Content-->
@@ -129,7 +130,6 @@
         <!-- Footer end -->
 
     </div>
-
     <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
     <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
@@ -146,6 +146,7 @@
     <script src="{{ asset('fe/js/app.js') }}"></script>
     <script src="{{ asset('fe/js/jquery.magnific-popup.min.js') }}"></script>
 
+
     <script src="{{ asset('be/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -155,7 +156,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
     <!-- Custom javascript -->
-    z
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
@@ -170,11 +171,11 @@
     <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
 
 
-    <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
+    {{-- <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
     <!-- dselect -->
     <script>
         dselect(document.querySelector('#dselect-example'))
-    </script>
+    </script> --}}
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
     <script>
@@ -211,7 +212,66 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('.bookmark-button').click(function() {
+                let button = $(this);
+                let room_post_id = button.data('id');
+
+                $.ajax({
+                    url: '{{ route('bookmark') }}',
+                    method: 'GET',
+                    data: {
+                        room_post_id: room_post_id,
+                    },
+                    success: function(response) {
+                        button.removeClass('bookmark-button').addClass('unbookmark-button');
+                        button.off('click'); // Remove the click event
+                        // toastr() - > success('Bạn vừa lưu 1 phòng', 'Đã lưu');
+
+                        // You can also change the SVG icon or other UI elements if needed
+                        button.find('path').attr('d',
+                            'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z'
+                        );
+
+                        console.log('Item bookmarked successfully');
+
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            $(document).on('click', '.unbookmark-button', function() {
+                let button = $(this);
+                let room_post_id = button.data('id');
+
+                $.ajax({
+                    url: '{{ route('unbookmark', ['room_post_id' => 'room_post_id']) }}',
+                    method: 'DELETE',
+                    data: {
+                        room_post_id: room_post_id,
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        button.removeClass('unbookmark-button').addClass('bookmark-button');
+                        button.off('click');
+                        button.find('path').attr('d',
+                            'M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z'
+                        );
+
+                        console.log('Item unbookmarked successfully');
+
+                    },
+                    error: function(error) {
+
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/hotel-alpha-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Aug 2023 14:25:23 GMT -->
 
 </html>

@@ -48,11 +48,12 @@ class TransactionController extends Controller
         $model = new Transaction();
         $model->fill($request->all());
         $model->point = (int)str_replace(',', '', $model->point);
-        $model->action ='import';
+        $model->price_promotion = (int)str_replace(',', '', $model->price_promotion);
+        $model->action = 'import';
         $model->save();
-        toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.','Đơn hàng sẽ được xác nhận sớm');
-        if($model->action==='import'){
-            event( new NotificationEvent($request->verification));
+        toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.', 'Đơn hàng sẽ được xác nhận sớm');
+        if ($model->action === 'import') {
+            event(new NotificationEvent($request->verification));
         }
         return back();
     }
@@ -94,24 +95,27 @@ class TransactionController extends Controller
         $model = Transaction::find($id);
         $model->status = $newStatus;
         $model->save();
-        toastr()->success('Chỉnh sửa thành công','thành công');
-        if($newStatus==='accept'){
+        toastr()->success('Chỉnh sửa thành công', 'thành công');
+        if ($newStatus === 'accept') {
             $user = User::findOrFail($model->user_id);
-            if($model->point<300000){
-                $user->point +=($model->point+ (5/100)*$model->point)/1000;
-            }elseif($model->point>=300000 && $model->point<1000000){
-                $user->point +=($model->point+ (7/100)*$model->point)/1000;
-            }elseif($model->point>=1000000 && $model->point<=2000000){
-                $user->point +=($model->point+ (10/100)*$model->point)/1000;
+            if ($model->point < 300000) {
+                $user->point += ($model->point + (5 / 100) * $model->point) / 1000;
+            } elseif ($model->point >= 300000 && $model->point < 1000000) {
+                $user->point += ($model->point + (7 / 100) * $model->point) / 1000;
+            } elseif ($model->point >= 1000000 && $model->point <= 2000000) {
+                $user->point += ($model->point + (10 / 100) * $model->point) / 1000;
             }
             $user->save();
-            event( new SuccessEvent($user));
-        }elseif($newStatus==='cancel'){
-            $user= User::findOrFail($model->user_id);
-            event( new CancelEvent($user));
+            event(new SuccessEvent($user));
+        } elseif ($newStatus === 'cancel') {
+            $user = User::findOrFail($model->user_id);
+            event(new CancelEvent($user));
         }
         return back();
     }
+
+
+
     public function history(){
 
         $category_rooms = CategoryRoom::all()->where('status', 'active');
@@ -135,21 +139,24 @@ class TransactionController extends Controller
         if ($discount) {
             $discountAmount = $discount->value; // Lấy giá trị giảm giá từ cơ sở dữ liệu
             $typeDiscount = $discount->type;
+            $status_coupon = $discount->status;
+            $coupon_id = $discount->id;
             return response()->json([
                 'message' => 'Mã giảm giá đã được áp dụng!',
                 'discount_amount' => $discountAmount,
-                'type_discount' => $typeDiscount
+                'type_discount' => $typeDiscount,
+                'status_coupon' => $status_coupon,
+                'coupon_id' => $coupon_id,
             ]);
-
 //            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
         } else {
             return response()->json([
                 'message' => 'Mã giảm giá không hợp lệ.',
                 'discount_amount' => 0,
-                'type_discount' => ''
+                'type_discount' => '',
+                'status_coupon' => '',
+                'coupon_id' => ''
             ]);
         }
     }
-
-    
 }

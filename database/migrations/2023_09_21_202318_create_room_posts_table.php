@@ -37,6 +37,7 @@ return new class extends Migration
             $table->foreign('category_room_id')->references('id')->on('category_rooms')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('time_end')->nullable();
+            $table->dateTime('time_start')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -154,7 +154,9 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+   
+   
+  
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
@@ -163,6 +165,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Laravel\Socialite\SocialiteServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -188,6 +191,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        // 'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Toastr' => Brian2694\Toastr\Facades\Toastr::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,

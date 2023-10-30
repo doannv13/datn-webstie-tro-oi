@@ -30,11 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
-    'facebook' => [
-        'client_id' => '289663767308518',
-        'client_secret' => '4c9adce47522d8aed62facfdacc1a301',
-        'redirect' => 'auth/facebook/callback',
+    //config google authen
+    'google' => [
+        'client_id'     => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT')
     ],
-
 ];

@@ -14,7 +14,9 @@
                         <tr>
                             <th class="col-0.5">#</th>
                             <th class="col-1.5">Người nạp</th>
-                            <th class="col-1.5">Số tiền</th>
+                            <th class="col-1.5">Số tiền gốc</th>
+                            <th class="col-1.5">Số tiền thanh toán</th>
+                            <th class="col-1.5">Mã giảm giá</th>
                             <th class="col-1.5">Phương thức</th>
                             <th class="col-1.5">Mã xác thực</th>
                             <th class="col-1.5">Ngày mua</th>
@@ -27,6 +29,8 @@
                                 <td class="tabledit-view-mode">{{ $key +1 }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->user->name, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ number_format((float) $value->point, 0, '.', ',') }}</td>
+                                <td class="tabledit-view-mode">{{ number_format((float) $value->price_promotion, 0, '.', ',') }}</td>
+                                <td class="tabledit-view-mode">{{ $value->coupon_id }}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->payment_method, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{!! substr($value->verification, 0, 20) !!}</td>
                                 <td class="tabledit-view-mode">{{ $value->created_at }}</td>
