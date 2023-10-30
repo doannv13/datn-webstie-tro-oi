@@ -278,7 +278,7 @@
                             </div>
                             <div class="col-lg-6 col-md-4 mb-3">
                                 <div class="form-group ">
-                                    <label class="input-group">Zalo:<span class="text-danger">*</span></label>
+                                    <label class="input-group">Zalo:</label>
                                     <div class="input-group mb-3">
                                         <input type="text" value="{{ $postroom->zalo }}"
                                             placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">

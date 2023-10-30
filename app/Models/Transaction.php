@@ -29,4 +29,8 @@ class Transaction extends Model
     {
         return $this->belongsTo(RoomPost::class);
     }
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
+    }
 }

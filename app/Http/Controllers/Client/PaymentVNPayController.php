@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\SuccessEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,11 +24,15 @@ class PaymentVNPayController extends Controller
             $payment->payment_method = 'vnpay';
             $payment->point = $request->old_total_amount_input;
             $payment->price_promotion = $request->total_amount_input;
-            $payment->coupon_id = $request->coupon_id1;
+            if ($request->coupon_id1) {
+                $payment->coupon_id = $request->coupon_id1;
+            } else {
+                $payment->coupon_id = null;
+            }
             $payment->verification = null;
             $payment->save();
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; // url chuyển đến trang thanh toán
-            $vnp_Returnurl = "http://datn-webstie-tro-oi.test/vnpay-return"; // url redirect sau khi thanh toán xong
+            $vnp_Returnurl = "http://datn-webstie-tro-oi1.test/vnpay-return"; // url redirect sau khi thanh toán xong
             $vnp_TmnCode = "M4WVGGAX"; //Mã website tại VNPAY
             $vnp_HashSecret = "GCJDLQSWQXFNASGVNESEOJRUUNQUZJYO"; //Chuỗi bí mật
 
@@ -121,6 +126,7 @@ class PaymentVNPayController extends Controller
                     $transaction->status = 'accept';
                     $transaction->verification = "Tro_oi_" . $_GET['vnp_TxnRef'];
                     $transaction->save();
+
                     // $transaction->status = $newStatus;
                     // toastr()->success('Chỉnh sửa thành công', 'thành công');
                     $user = User::findOrFail($transaction->user_id);
@@ -132,6 +138,11 @@ class PaymentVNPayController extends Controller
                         $user->point += ($transaction->point + (10 / 100) * $transaction->point) / 1000;
                     }
                     $user->save();
+                    if ($transaction->coupon_id) {
+                        $transaction = Coupon::findOrFail($transaction->coupon_id);
+                        $transaction->quantity -= 1;
+                        $transaction->save();
+                    }
                     event(new SuccessEvent($user));
                 }
                 // Sau khi cập nhật xong, bạn có thể chuyển hướng hoặc hiển thị thông báo

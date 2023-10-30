@@ -41,7 +41,7 @@ class RoomPostRequest extends FormRequest
             'fullname' => 'required',
             'phone' => 'required|regex:/^[0-9]{10}$/',
             'email' => 'required|email',
-            'zalo' => 'required|regex:/^[0-9]{10}$/'
+            'zalo' => 'nullable|regex:/^[0-9]{10}$/'
         ];
     }
     function messages()
