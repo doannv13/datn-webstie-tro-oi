@@ -22,31 +22,31 @@
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-xs-12 sidebar">
                     <div class="rooms-detail-info">
-                        <!-- Heading courses start -->
 
-                        {{-- {{ dd($roomposts) }} --}}
-                        <!-- Heading courses end -->
                         <!-- sidebar start -->
                         <div class="rooms-detail-slider">
                             <div class="rooms-detail-slider mb-40 comon-slick">
                                 <div class="slider slider-for pb-sm-3 slick comon-slick-inner wow">
-                                    <div><img src="{{ asset($roomposts->image) }}" class="w-100 img-main-slick img-fluid">
+                                    <div><img src="{{ asset($roomposts->image) }}"
+                                            class="w-100 h-100 img-main-slick img-fluid">
                                     </div>
                                     @foreach ($images as $image)
-                                        <div class="p-1"><img src=" {{ asset($image->name) }}"
-                                                class="w-100 img-main-slick img-fluid" alt="photo">
+                                        <div class="p-1">
+                                            <img src=" {{ asset($image->name) }}"
+                                                class="w-100 h-100 img-main-slick img-fluid" alt="photo">
                                         </div>
                                     @endforeach
                                 </div>
                                 <hr>
                                 <div class="slider slider-nav d-lg-grid gap-3">
                                     <div class="p-1">
-                                        <img src="{{ asset($roomposts->image) }}" class="w-100 img-slick img-fluid"
+                                        <img src="{{ asset($roomposts->image) }}" class="w-100 h-100 img-slick img-fluid"
                                             alt="photo">
                                     </div>
                                     @foreach ($images as $image)
                                         <div class="p-1"><img src=" {{ asset($image->name) }}"
-                                                class="img-slick img-fluid" alt="photo">
+                                                class="w-100 h-100 img-slick img-fluid" alt="photo"
+                                                style="width: 194px; background-size: 100%; background-repeat: no-repeat;">
                                         </div>
                                     @endforeach
                                 </div>
@@ -409,11 +409,10 @@
                                     </div>
                                     @if ($roomposts->zalo)
                                         <div class="contact-item mb-3">
-                                            <a href="https://zalo.me/{{ $roomposts->zalo }}"
-                                                class="btn btn-primary text-center text-light fs-6 fw-bold w-100"
+                                            <a target="_blank" href="https://zalo.me/{{ $roomposts->zalo }}"
+                                                class="btn btn-outline-primary text-center fs-6 fw-bold w-100"
                                                 onclick="showPhoneNumber()">
-                                                <i class="fa fa-phone fs-5 mx-2"></i>
-
+                                                <i class="fa-regular fa-comment-dots fs-5 mx-2"></i>
                                                 <span class="show-phone">Chat qua Zalo</span>
                                             </a>
                                         </div>

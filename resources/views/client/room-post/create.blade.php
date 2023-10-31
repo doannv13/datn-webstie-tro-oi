@@ -267,7 +267,8 @@
                                 <div class="form-group ">
                                     <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ auth()->user()->phone }}"
+                                        <input type="text"
+                                            value="{{ auth()->user()->phone ? auth()->user()->phone : old('phone') }}"
                                             placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
                                     </div>
                                     @error('phone')
