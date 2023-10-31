@@ -522,6 +522,7 @@
                                     name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
                                 <input type="text" hidden id="total_point" name="point">
+                                <input type="number" hidden id="point_persent" name="point_persent">
                                 <input type="text" hidden id="price_promotion" name="price_promotion">
                                 <input type="text" hidden id="coupon_id" name="coupon_id" value="">
                                 <input type="text" hidden id="verification" name="verification">
@@ -680,6 +681,7 @@
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('total_amount1').innerText = input_price.value;
+                    document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
                 } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
                     1000000) {
                     sale.innerText = "+7%";
@@ -692,6 +694,7 @@
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('total_amount1').innerText = input_price.value
+                    document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
                 } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                     sale.innerText = "+10%";
                     sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
@@ -704,6 +707,7 @@
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('total_amount1').innerText = input_price.value
+                    document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
                 }
             });
 
@@ -725,7 +729,7 @@
     <script>
         function generateRandomString(length, hasLetters, hasNumbers) {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
+            let result = 'trooi_tranfer_';
 
             if (hasLetters) {
                 for (let i = 0; i < length - 2; i++) {
@@ -777,7 +781,7 @@
                     if (document.getElementById('type_discount').innerText == 'percent'&& document.getElementById('status_coupon').innerText == 'active') { // Phần trăm
                             var discount_amount_sale = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
                             var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale  * 1000).toLocaleString();
-                        total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000);
+                            total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000);
                             old_total_amount_input.value = input_price.value.replace(/,/g, "");
                             document.getElementById('total_amount').innerText = total_amount;
                             document.getElementById('total_amount1').innerText = total_amount;

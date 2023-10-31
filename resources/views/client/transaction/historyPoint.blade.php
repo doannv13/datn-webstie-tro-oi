@@ -12,9 +12,10 @@
                     <th style="width:5%">STT</th>
                     <th style="width:15%">Hành động</th>
                     <th style="width:12%">Số tiền</th>
-                    <th style="width:20%">Trạng thái</th>
+                    <th style="width:10%">Số point</th>
+                    <th style="width:10%">Trạng thái</th>
                     <th style="width:10%">Gói</th>
-                    <th style="width:10%">Nội dung CK</th>
+                    <th style="width:10%">Nội dung</th>
                     <th style="width:10%">Thời gian</th>
                 </thead>
                 <tbody class="align-items-center p-4">
@@ -38,8 +39,11 @@
 
                         </td>
                         <td>
+                            {{ $value->point_persent ? $value->point_persent.' Point'  : '---' }}
+                        </td>
+                        <td>
                             @if($value->status ==='pending')
-                            <p style="color: yellow">
+                            <p style="color: orange">
                                 Đang chờ xử lí
                             </p>
                             @elseif ($value->status ==='accept')

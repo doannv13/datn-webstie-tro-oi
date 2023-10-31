@@ -104,13 +104,14 @@ class TransactionController extends Controller
                 $coupon->quantity -= 1;
                 $coupon->save();
             }
-            if ($model->point < 300000) {
-                $user->point += ($model->point + (5 / 100) * $model->point) / 1000;
-            } elseif ($model->point >= 300000 && $model->point < 1000000) {
-                $user->point += ($model->point + (7 / 100) * $model->point) / 1000;
-            } elseif ($model->point >= 1000000 && $model->point <= 2000000) {
-                $user->point += ($model->point + (10 / 100) * $model->point) / 1000;
-            }
+            $user->point += $model->point_persent;
+            // if ($model->point < 300000) {
+            //     $user->point += ($model->point + (5 / 100) * $model->point) / 1000;
+            // } elseif ($model->point >= 300000 && $model->point < 1000000) {
+            //     $user->point += ($model->point + (7 / 100) * $model->point) / 1000;
+            // } elseif ($model->point >= 1000000 && $model->point <= 2000000) {
+            //     $user->point += ($model->point + (10 / 100) * $model->point) / 1000;
+            // }
             $user->save();
             event(new SuccessEvent($user));
         } elseif ($newStatus === 'cancel') {
@@ -131,6 +132,7 @@ class TransactionController extends Controller
         })->distinct()->pluck('name');
         $data = Transaction::with('user')
             ->where('user_id', auth()->user()->id)
+            ->latest()
             ->paginate(10);
         return view('client.transaction.historyPoint', compact('data', 'category_rooms', 'districts'));
     }

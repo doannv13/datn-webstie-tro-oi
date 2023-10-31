@@ -130,13 +130,14 @@ class PaymentVNPayController extends Controller
                     // $transaction->status = $newStatus;
                     // toastr()->success('Chỉnh sửa thành công', 'thành công');
                     $user = User::findOrFail($transaction->user_id);
-                    if ($transaction->point < 300000) {
-                        $user->point += ($transaction->point + (5 / 100) * $transaction->point) / 1000;
-                    } elseif ($transaction->point >= 300000 && $transaction->point < 1000000) {
-                        $user->point += ($transaction->point + (7 / 100) * $transaction->point) / 1000;
-                    } elseif ($transaction->point >= 1000000 && $transaction->point <= 2000000) {
-                        $user->point += ($transaction->point + (10 / 100) * $transaction->point) / 1000;
-                    }
+                    // if ($transaction->point < 300000) {
+                    //     $user->point += ($transaction->point + (5 / 100) * $transaction->point) / 1000;
+                    // } elseif ($transaction->point >= 300000 && $transaction->point < 1000000) {
+                    //     $user->point += ($transaction->point + (7 / 100) * $transaction->point) / 1000;
+                    // } elseif ($transaction->point >= 1000000 && $transaction->point <= 2000000) {
+                    //     $user->point += ($transaction->point + (10 / 100) * $transaction->point) / 1000;
+                    // }
+                    $user->point += $transaction->point_persent;
                     $user->save();
                     if ($transaction->coupon_id) {
                         $transaction = Coupon::findOrFail($transaction->coupon_id);
