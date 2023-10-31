@@ -12,6 +12,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'point',
+        'point_persent',
         'price_promotion',
         'coupon_id',
         'payment_method',
