@@ -124,7 +124,7 @@ class PaymentVNPayController extends Controller
                 if ($transaction) {
                     // Cập nhật trạng thái thành 'accept'
                     $transaction->status = 'accept';
-                    $transaction->verification = "Tro_oi_" . $_GET['vnp_TxnRef'];
+                    $transaction->verification = "trooi_vnpay_" . $_GET['vnp_TxnRef'];
                     $transaction->save();
 
                     // $transaction->status = $newStatus;
