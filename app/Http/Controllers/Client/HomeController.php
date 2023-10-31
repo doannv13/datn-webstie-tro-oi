@@ -146,19 +146,25 @@ class HomeController extends Controller
         $selectedDistrict = request()->input('district_filter');
         $search = request()->input('name_filter');
 
-        $tags = RoomPost::with('tags')
+        $tags = RoomPost::with(['tags' => function ($query) {
+            $query->where('status', 'active');
+        }])
             ->get()
             ->pluck('tags.*.name')
             ->flatten()
             ->unique()
             ->all();
+            
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
 
-
+        // tìm theo từ nhập vào input và theo tags
         if ($search != null) {
             $query->where('name', 'like', '%' . $search . '%');
+            $query->orWhereHas('tags', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            });
         }
 
         if ($selectedRoomType != null) {
@@ -268,11 +274,19 @@ class HomeController extends Controller
             ->paginate(4);
         $posts = Post::latest()->paginate(5);
         $roomposts = RoomPost::query()->with('facilities', 'surrounds')->findOrFail($id);
+        if ($search != null) {
+            $roomposts->where('name', 'like', '%' . $search . '%')
+                ->orWhereHas('tags', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+        }
         $caterooms = RoomPost::query()->with('facilities', 'surrounds')
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->where('status', 'accept')
             ->get();
+            
+
         // $rooms = RoomPost::with(['facilities' => function ($query) {
         //     $query->inRandomOrder()->take(6);
         // }]);
@@ -288,6 +302,6 @@ class HomeController extends Controller
             ->twitter()
             ->reddit();
         $tags = $roomposts->tags;
-        return view('client.room-post.detail', compact('category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
+        return view('client.room-post.detail', compact('search', 'tags', 'category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
     }
 }

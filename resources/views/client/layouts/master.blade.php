@@ -25,7 +25,7 @@
 
     <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
 
-
+<script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
     {{--    icon facebook --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/v4-shims.css') }}" />
 
@@ -94,7 +94,7 @@
     {{-- Star Header --}}
     @include('client.layouts.partials.header')
     {{-- End Header --}}
-    {{ session()->start() }}
+    {{-- {{ session()->start() }} --}}
     <div class="content-page">
         <div class="content">
             <!-- Start Content-->
