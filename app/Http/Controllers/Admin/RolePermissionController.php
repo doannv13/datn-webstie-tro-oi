@@ -48,16 +48,10 @@ class RolePermissionController extends Controller
     public function store(RolePermissionRequest $request)
     {
         try {
-            $roleId = $request->input('role_id');
-            $permissionIds = $request->permission;
+            $role = Role::create(['name' => $request->input('name')]);
+            $role->syncPermissions($request->input('permission'));
 
-            $role = Role::findById($roleId);
-
-            $permissions = Permission::whereIn('id', $permissionIds)->get();
-
-            $role->syncPermissions($permissions);
-
-            Toastr::success('Gán quyền thành công', 'Thành công');
+            Toastr::success('Thêm vai trò và gán quyền thành công', 'Thành công');
             return redirect()->route('roles-permissions.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -93,6 +87,8 @@ class RolePermissionController extends Controller
         try {
             // Lấy thông tin của vai trò cần cập nhật
             $role = Role::query()->findOrFail($id);
+            $role->name = $request->input('name');
+            $role->save();
 
             // Lấy danh sách quyền được chọn từ form
             $permissions = $request->permission;
@@ -122,8 +118,9 @@ class RolePermissionController extends Controller
         try {
             $role = Role::findOrFail($id);
             $role->permissions()->detach();
-            Toastr::success('Xóa quyền khỏi vai trò thành công', 'Thành công');
-            return view('admin.role-permission.index', compact('roles'));
+            $role->delete();
+            Toastr::success('Xóa vai trò thành công', 'Thành công');
+            return redirect()->route('roles-permissions.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
