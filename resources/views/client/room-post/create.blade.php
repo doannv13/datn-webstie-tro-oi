@@ -267,7 +267,8 @@
                                 <div class="form-group ">
                                     <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ auth()->user()->phone }}"
+                                        <input type="text"
+                                            value="{{ auth()->user()->phone ? auth()->user()->phone : old('phone') }}"
                                             placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
                                     </div>
                                     @error('phone')
@@ -291,7 +292,7 @@
                             </div>
                             <div class="col-lg-6 col-md-4 mb-3">
                                 <div class="form-group ">
-                                    <label class="input-group">Zalo:<span class="text-danger">*</span></label>
+                                    <label class="input-group">Zalo:</label>
                                     <div class="input-group mb-3">
                                         <input type="text" value="{{ old('zalo') }}"
                                             placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">

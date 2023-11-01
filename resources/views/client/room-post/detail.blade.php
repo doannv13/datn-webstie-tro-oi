@@ -5,12 +5,12 @@
     <div class="sub-banner">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1>Room Details</h1>
+                <h1>Chi tiết phòng</h1>
             </div>
             <nav class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Room Details</li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Chi tiết phòng</li>
                 </ol>
             </nav>
         </div>
@@ -22,31 +22,31 @@
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-xs-12 sidebar">
                     <div class="rooms-detail-info">
-                        <!-- Heading courses start -->
 
-                        {{-- {{ dd($roomposts) }} --}}
-                        <!-- Heading courses end -->
                         <!-- sidebar start -->
                         <div class="rooms-detail-slider">
                             <div class="rooms-detail-slider mb-40 comon-slick">
                                 <div class="slider slider-for pb-sm-3 slick comon-slick-inner wow">
-                                    <div><img src="{{ asset($roomposts->image) }}" class="w-100 img-main-slick img-fluid">
+                                    <div><img src="{{ asset($roomposts->image) }}"
+                                            class="w-100 h-100 img-main-slick img-fluid">
                                     </div>
                                     @foreach ($images as $image)
-                                        <div class="p-1"><img src=" {{ asset($image->name) }}"
-                                                class="w-100 img-main-slick img-fluid" alt="photo">
+                                        <div class="p-1">
+                                            <img src=" {{ asset($image->name) }}"
+                                                class="w-100 h-100 img-main-slick img-fluid" alt="photo">
                                         </div>
                                     @endforeach
                                 </div>
                                 <hr>
                                 <div class="slider slider-nav d-lg-grid gap-3">
                                     <div class="p-1">
-                                        <img src="{{ asset($roomposts->image) }}" class="w-100 img-slick img-fluid"
+                                        <img src="{{ asset($roomposts->image) }}" class="w-100 h-100 img-slick img-fluid"
                                             alt="photo">
                                     </div>
                                     @foreach ($images as $image)
                                         <div class="p-1"><img src=" {{ asset($image->name) }}"
-                                                class="img-slick img-fluid" alt="photo">
+                                                class="w-100 h-100 img-slick img-fluid" alt="photo"
+                                                style="width: 194px; background-size: 100%; background-repeat: no-repeat;">
                                         </div>
                                     @endforeach
                                 </div>
@@ -135,7 +135,7 @@
                                                 <tr>
                                                     <td>Mã tin đăng:</td>
                                                     <td>
-
+                                                        {{ $roomposts->id }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -154,7 +154,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Ngày kết thúc:</td>
-                                                    <td>{{ $roomposts->time_end }}</td>
+                                                    <td>{{ $roomposts->time_end ? $roomposts->time_end : 'N/A' }}</td>
                                                 </tr>
 
                                             </table>
@@ -180,7 +180,7 @@
                                                                 <?php
                                                                 $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                 $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-
+                                                                
                                                                 if (Auth::check()) {
                                                                     $user_id = auth()->user()->id;
                                                                     $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -307,7 +307,7 @@
 
                                         <!-- Similar room end -->
                                         <!-- Location start -->
-                                        <div class="row ">
+                                        {{-- <div class="row ">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <!-- Location start  -->
                                                 <div class="main-title-2">
@@ -317,17 +317,17 @@
                                                     <div class="map">
                                                         <!-- Main Title 2 -->
                                                         <div id="map" class="contact-map" style="height: 662px;">
-                                                            {{-- <iframe
+                                                            <iframe
                                                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59615.81210587678!2d105.71104243751117!3d20.95298673967121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134532bef4bcdb7%3A0xbcc7a679fcba07f6!2zSMOgIMSQw7RuZywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694537835765!5m2!1svi!2s"
                                                                 width="100%" height="75%" style="border:0;"
                                                                 allowfullscreen="" loading="lazy"
-                                                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+                                                                referrerpolicy="no-referrer-when-downgrade"></iframe>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- Location comments end -->
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row clearfix tag-share">
                                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                                 <!-- Tags box start -->
@@ -344,9 +344,16 @@
                                                         <h1>Tags</h1>
                                                     </div>
                                                     <ul class="tags">
+
                                                         @foreach ($roomposts->tags as $tag)
-                                                            <li><a
-                                                                    href="{{ route('tags-show', $tag->slug) }}">{{ $tag->name }}</a>
+                                                            <li>
+                                                                @php
+                                                                    $formattedSlug = str_replace('-', ' ', $tag->slug);
+                                                                @endphp
+                                                                <a
+                                                                    href="{{ route('search-filter', ['name_filter' => $formattedSlug]) }}">
+                                                                    {{ $tag->name }}
+                                                                </a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -379,11 +386,11 @@
                 <div class="col-lg-3 col-md-12 col-xs-12" style="padding-right: 0">
                     <div class="sidebar">
                         <!-- Search area box 3 start -->
-                        <div class="sidebar-widget text-center search-area-box-3 clearfix" style="padding: 12px">
+                        <div class="sidebar-widget search-area-box-3 clearfix" style="padding: 12px">
                             <div class="contact-details">
                                 <div class="row contact-item mb-3 align-items-center">
                                     <div class="col-md-4 mx-auto">
-                                        <img src="{{ $roomposts->users->avatar ? asset($roomposts->users->avatar) : asset('fe/img/logos/no-image-user.jpeg')}}"
+                                        <img src="{{ $roomposts->users->avatar ? asset($roomposts->users->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}"
                                             alt=""style="background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 70px; width:70px;">
 
 
@@ -397,13 +404,26 @@
                                 </div>
                                 <div class="heading-rooms">
                                     <div class="contact-item mb-3">
-                                        <div class="btn btn-primary text-center w-100">
+                                        <button class="btn btn-primary text-center text-light fs-6 fw-bold w-100"
+                                            onclick="showPhoneNumber()">
                                             <i class="fa fa-phone fs-5 mx-2"></i>
-                                            <a class="text-center text-light fs-6 fw-bold"
-                                                href="tel:0477-0477-8556-552">{{ $roomposts->phone }}</a>
-                                        </div>
 
+                                            <span
+                                                class="show-phone">{{ substr($roomposts->phone, 0, 2) . str_repeat('*', strlen($roomposts->phone) - 2) }}</span>
+                                            <span style="display: none"
+                                                class="hidden-phone">{{ $roomposts->phone }}</span>
+                                        </button>
                                     </div>
+                                    @if ($roomposts->zalo)
+                                        <div class="contact-item mb-3">
+                                            <a target="_blank" href="https://zalo.me/{{ $roomposts->zalo }}"
+                                                class="btn btn-outline-primary text-center fs-6 fw-bold w-100"
+                                                onclick="showPhoneNumber()">
+                                                <i class="fa-regular fa-comment-dots fs-5 mx-2"></i>
+                                                <span class="show-phone">Chat qua Zalo</span>
+                                            </a>
+                                        </div>
+                                    @endif
 
 
                                 </div>
@@ -426,4 +446,14 @@
 
     <!-- Rooms detail section end -->
 @endsection
+@push('scripts')
+    <script>
+        function showPhoneNumber() {
+            var showPhone = document.querySelector(".show-phone");
+            var hiddenPhone = document.querySelector(".hidden-phone");
 
+            showPhone.style.display = "none"; // Ẩn nội dung có lớp show-phone
+            hiddenPhone.style.display = "inline"; // Hiển thị nội dung có lớp hidden-phone
+        }
+    </script>
+@endpush

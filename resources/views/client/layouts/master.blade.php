@@ -25,7 +25,7 @@
 
     <script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
 
-
+<script src="{{ asset('fe/js/jquery-3.6.0.min.js') }}"></script>
     {{--    icon facebook --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/v4-shims.css') }}" />
 
@@ -94,7 +94,7 @@
     {{-- Star Header --}}
     @include('client.layouts.partials.header')
     {{-- End Header --}}
-    {{ session()->start() }}
+    {{-- {{ session()->start() }} --}}
     <div class="content-page">
         <div class="content">
             <!-- Start Content-->
@@ -105,19 +105,19 @@
         <div class="clearfix">
             <div class="media-button pull-right">
                 <div class="media-button-content">
-                    <a href="tel:0981481368" class="call-icon" rel="nofollow">
+                    <a href="tel:0363738586" class="call-icon" rel="nofollow">
                         <i class="fa fa-phone" aria-hidden="true"></i>
                         <div class="animated alo-circle"></div>
                         <div class="animated alo-circle-fill  "></div>
-                        <span>Hotline:093 621 9271</span>
+                        <span>Hotline:036 37 38 586</span>
                     </a>
                     <a href="https://www.facebook.com/phuc.quang.50103" class="mes">
                         <i class="fa fa-facebook-official" aria-hidden="true"></i>
                         <span>Nhắn tin Facebook</span>
                     </a>
-                    <a href="http://zalo.me/0932476977" class="zalo align-items-center">
+                    <a href="http://zalo.me/0363738586" class="zalo align-items-center">
                         <i class="fa pt-2" style="font-size: 11px" aria-hidden="true">Zalo</i>
-                        <span>Zalo: 093 621 9271</span>
+                        <span>Zalo: 036 37 38 586</span>
                     </a>
                 </div>
 

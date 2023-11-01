@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('point', 8, 1)->default(0);
             $table->rememberToken();
             $table->enum('role', ['admin', 'vendor'])->default('vendor');
+            $table->integer('facebook_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

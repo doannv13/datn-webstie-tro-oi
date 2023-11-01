@@ -3,7 +3,7 @@
 
 use App\Http\Controllers\Admin\CategoryPostController;
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Client\PostController as ClientPost;;
+use App\Http\Controllers\Client\PostController as ClientPost;
 
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\LoginController;

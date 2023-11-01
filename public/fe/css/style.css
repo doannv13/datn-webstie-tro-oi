@@ -9766,9 +9766,17 @@ div#social-links ul li a:hover {
 }
 
 .img-slick{
+    width: 100% !important;
     height: 100px !important;
 }
+.img-slick img{
+    width: 194px; 
+    height: 100px;
+    background-size: 100%; 
+    background-repeat: no-repeat;
+}
 
-.img-main-slick{
+.img-main-slick img{
     height: 500px !important;
 }
+

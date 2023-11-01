@@ -30,23 +30,24 @@
                                 @foreach ($data as $key => $value)
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="hotel-box " style="position: relative;">
-                                            <form action="{{ route('unbookmarkbm', $value->id) }}" method="post">
+                                            {{-- <form action="{{ route('unbookmarkbm', $value->id) }}" method="post">
                                                 @csrf
-                                                @method('delete')
-                                                <button
-                                                    style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="2em"
-                                                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                                        <style>
-                                                            svg {
-                                                                fill: #f4a460
-                                                            }
-                                                        </style>
-                                                        <path
-                                                            d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
-                                                    </svg>
-                                                </button>
-                                            </form>
+                                                @method('delete') --}}
+                                            <button
+                                                style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="2em"
+                                                    data-id="{{ $value->id }}" class="unbookmarkbtn"
+                                                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                    <style>
+                                                        svg {
+                                                            fill: #f3a35f
+                                                        }
+                                                    </style>
+                                                    <path
+                                                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                                </svg>
+                                            </button>
+                                            {{-- </form> --}}
                                             <!-- Photo thumbnail -->
                                             <div class="photo-thumbnail" style="position: relative;">
                                                 <div class="text-white"
@@ -263,3 +264,29 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.unbookmarkbtn').on('click', function() {
+            let button = $(this);
+            let id = button.data('id');
+            let divToDelete = button.closest('.hotel-box');
+            $.ajax({
+                url: '{{ route('unbookmarkbm', ['id' => 'id']) }}', // Sử dụng id thay vì 'id'
+                method: 'DELETE',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    divToDelete.remove();
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+
+@endpush
