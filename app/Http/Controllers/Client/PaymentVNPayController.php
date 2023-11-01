@@ -132,7 +132,7 @@ class PaymentVNPayController extends Controller
                     $user->save();
                     if ($transaction->coupon_id) {
                         $transaction = Coupon::findOrFail($transaction->coupon_id);
-                        $transaction->quantity -= 1;
+                        $coupon->quantity = max(0, $coupon->quantity - 1);
                         $transaction->save();
                     }
                     event(new SuccessEvent($user));

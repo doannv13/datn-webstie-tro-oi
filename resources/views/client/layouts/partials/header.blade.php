@@ -321,9 +321,7 @@
                         <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 p-1 text-center">Tìm
                             kiếm
                         </button>
-                        {{-- <button type="submit" class="col-md-6 col-sm-6 col-lg-2 btn-2 text-center" style="height: 40px; display: flex; align-items: center; justify-content: center; width: 15.5%;">
-                            Tìm kiếm
-                        </button> --}}
+
                     </div>
                 </div>
             </div>
@@ -331,8 +329,6 @@
     </div>
 </div>
 <!-- start modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> -->
 
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
@@ -417,6 +413,7 @@
                             <div id="discount_amount" hidden></div>
                             <div id="type_discount" hidden></div>
                             <div id="status_coupon" hidden></div>
+                            <div id="coupon_quantity" hidden></div>
                         </div>
                         <div class="d-flex justify-content-between p-2">
                             <label class=" fs-6 text fw-semibold">Số tiền cần nạp sau khi giảm:</label> <br>
@@ -763,8 +760,11 @@
                         $("#status_coupon").html(response.status_coupon);
                         $("#coupon_id1").val(response.coupon_id);
                         $("#coupon_id").val(response.coupon_id);
+                        $("#coupon_quantity").html(response.coupon_quantity);
 
-                        if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active') { // Phần trăm
+                        console.log(document.getElementById('coupon_quantity').innerText)
+
+                        if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Phần trăm
                             var discount_amount_sale1 = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
                             document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
                             var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
@@ -778,7 +778,7 @@
                             document.getElementById('price_promotion').value = total_amount_input.value;
                         }
 
-                        if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active') { // Giá cố định
+                        if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Giá cố định
                             var discount_amount_sale1 = (document.getElementById('discount_amount').innerText-0).toLocaleString();
                             document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
                             var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
@@ -791,7 +791,7 @@
                             document.getElementById('price_promotion').value = total_amount_input.value;
                         }
 
-                        if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive') { // Không dùng mã
+                        if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive' || parseInt(document.getElementById('coupon_quantity').innerText) == 0) { // Không dùng mã
                             document.getElementById('discount-message').innerText = 'Mã giảm giá không hợp lệ.';
                             var discount_amount_sale = document.getElementById('discount_amount_sale').innerText = 0;
                             var total_amount_value = (input_price.value.replace(/,/g, "") - 0).toLocaleString();
