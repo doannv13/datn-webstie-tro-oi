@@ -779,19 +779,10 @@
                         $("#coupon_id").val(response.coupon_id);
 
                         if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active') { // Phần trăm
-                            var discount_amount_sale = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
-                            var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000).toLocaleString();
-                            total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale * 1000);
-                            old_total_amount_input.value = input_price.value.replace(/,/g, "");
-                            document.getElementById('total_amount').innerText = total_amount;
-                            document.getElementById('total_amount1').innerText = total_amount;
-                            document.getElementById('total_point').value = old_total_amount_input.value;
-                            document.getElementById('price_promotion').value = total_amount_input.value;
-                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
-                        }
-
-                        if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active') { // Giá cố định
-                            var discount_amount_sale = document.getElementById('discount_amount').innerText.toLocaleString();
+                            var discount_amount_sale1 = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
+                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
+                            var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
+                            console.log(discount_amount_sale)
                             var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale).toLocaleString();
                             total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale);
                             old_total_amount_input.value = input_price.value.replace(/,/g, "");
@@ -799,7 +790,19 @@
                             document.getElementById('total_amount1').innerText = total_amount;
                             document.getElementById('total_point').value = old_total_amount_input.value;
                             document.getElementById('price_promotion').value = total_amount_input.value;
-                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
+                        }
+
+                        if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active') { // Giá cố định
+                            var discount_amount_sale1 = (document.getElementById('discount_amount').innerText-0).toLocaleString();
+                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
+                            var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
+                            var total_amount = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale),0).toLocaleString();
+                            total_amount_input.value = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale),0);
+                            old_total_amount_input.value = input_price.value.replace(/,/g, "");
+                            document.getElementById('total_amount').innerText = total_amount;
+                            document.getElementById('total_amount1').innerText = total_amount;
+                            document.getElementById('total_point').value = old_total_amount_input.value;
+                            document.getElementById('price_promotion').value = total_amount_input.value;
                         }
 
                         if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive') { // Không dùng mã
