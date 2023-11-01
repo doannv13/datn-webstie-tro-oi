@@ -4,7 +4,7 @@
     <div class="sub-banner">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1></h1>
+                <h1>Chi tiết bài viết</h1>
             </div>
             <nav class="breadcrumbs">
                 <ol class="breadcrumb">
@@ -65,7 +65,7 @@
                                             {{-- @foreach ($postTags as $item)
                                                 <li><a href="{{route('tags-show', $item->slug)}}">{{ $item->name }}</a></li>
                                             @endforeach --}}
-                                            
+
                                             @foreach ($postTags as $tag)
                                             <li>
                                                 @php
