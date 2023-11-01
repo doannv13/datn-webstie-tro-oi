@@ -596,10 +596,6 @@
             var price = document.getElementById('floatingSelect3');
             var acreage = document.getElementById('floatingSelect4');
 
-            console.log(category_room.value)
-            console.log(district.value)
-            console.log(price.value)
-            console.log(acreage.value)
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -670,13 +666,12 @@
             prices[i].style.backgroundColor = "blue";
             input_price.value = prices[i].value
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
-                sale.innerText = "+5%";
-                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
-                total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
-                document.getElementById('total_point').value = input_price.value;
-
-                document.getElementById('price_promotion').value = input_price.value;
+                    sale.innerText = "+5%";
+                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
+                    total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
+                    document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
+                    document.getElementById('total_point').value = input_price.value;
+                    document.getElementById('price_promotion').value = input_price.value;
                     document.getElementById('total_amount').innerText = input_price.value
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
@@ -716,11 +711,10 @@
 
 
         function myChange() {
-            const prices = document.getElementsByName('price')
-            console.log(prices)
+            const prices = document.getElementsByName('prices')
             for (let index = 0; index < prices.length; index++) {
-                const price = prices[index];
-                price.style.backgroundColor = 'red';
+                const prices = prices[index];
+                prices.style.backgroundColor = 'red';
             }
         }
     </script>
