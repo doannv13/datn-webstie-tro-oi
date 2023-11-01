@@ -32,7 +32,7 @@
                         </td>
                         <td>
                             @if ($value->action ==='import')
-                            <p class="d-flex text-success"> +{{ number_format( $value->point).' VND' }} </p>
+                            <p class="d-flex text-success"> +{{ number_format( $value->price_promotion).' VND' }} </p>
                             @else
                             <p class="text-danger"> -{{ number_format( $value->point).' Point' }} </p>
                             @endif
