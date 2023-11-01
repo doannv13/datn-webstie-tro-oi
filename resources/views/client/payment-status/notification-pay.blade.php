@@ -1,5 +1,5 @@
-@extends('client.services.index')
-@section('notification-payment')
+@extends('client.layouts.master')
+@section('content')
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -45,8 +45,12 @@
                 </div>
 
             </div>
+            {{-- <div class="modal-footer justify-content-center mb-3" style="border: none;">
+                <button type="button" class="btn btn-outline-success" ><a href="{{ route('points.history') }}">Chi tiết đơn hàng</a> </button>
+            </div> --}}
             <div class="modal-footer justify-content-center mb-3" style="border: none;">
                 <button type="button" class="btn btn-outline-success" ><a href="{{ route('points.history') }}">Chi tiết đơn hàng</a> </button>
+                <button type="button" class="btn btn-outline-warning" ><a href="{{ route('home') }}">Về trang chủ</a></button>
             </div>
         </div>
     </div>
