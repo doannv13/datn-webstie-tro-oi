@@ -41,6 +41,9 @@ class HomeController extends Controller
             ->limit(6)
             ->inRandomOrder()
             ->paginate(6);
+        // dd($room_post_vip);
+        $room_post_new = RoomPost::latest('time_start')->where('status','accept')->limit(30)->paginate(3);
+        // dd($room_post_new);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();
         //đếm số tin đăng ,user ,bài viết
@@ -56,7 +59,7 @@ class HomeController extends Controller
         //     ->facebook()
         //     ->twitter()
         //     ->reddit();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip','room_post_new', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
     }
     public function bookmark(Request $request)
     {
