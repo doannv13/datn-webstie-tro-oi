@@ -88,7 +88,12 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user_id = auth()->user()->id;
             $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
-            $data = Bookmark::where('user_id', $user_id)->with('roomPost')->paginate(6);
+            $data = Bookmark::where('user_id', $user_id)
+            ->whereHas('roomPost', function ($query) {
+                $query->where('status', 'accept');
+            })
+            ->with('roomPost')
+            ->paginate(6);
             $categories = CategoryRoom::withCount('roomPosts')
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
@@ -156,7 +161,7 @@ class HomeController extends Controller
             ->flatten()
             ->unique()
             ->all();
-            
+
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
@@ -275,7 +280,7 @@ class HomeController extends Controller
             ->where('category_room_id', $roomposts->category_room_id)
             ->where('status', 'accept')
             ->get();
-            
+
 
         // $rooms = RoomPost::with(['facilities' => function ($query) {
         //     $query->inRandomOrder()->take(6);
