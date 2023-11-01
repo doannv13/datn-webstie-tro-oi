@@ -708,15 +708,6 @@
 
         }
 
-
-
-        function myChange() {
-            const prices = document.getElementsByName('prices')
-            for (let index = 0; index < prices.length; index++) {
-                const prices = prices[index];
-                prices.style.backgroundColor = 'red';
-            }
-        }
     </script>
     <!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->
 
