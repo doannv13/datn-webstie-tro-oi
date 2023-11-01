@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Gán quyền')
+@section('title', 'Cập nhật vai trò và quyền')
 @section('content')
     <!-- Start Content-->
     <div class="container-fluid">
@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="my-2">Gán quyền</h3>
+                        <h3 class="my-2">Cập nhật vai trò và quyền</h3>
                         <div class="row">
                             <div class="col-lg-12">
                                 <form action="{{ route('roles-permissions.update', $role->id) }}" method="POST">
@@ -16,7 +16,10 @@
                                     <div class="mb-3">
                                         <label for="example-palaceholder" class="form-label">Tên vai trò</label>
                                         <input class="form-control" type="text" value="{{ $role->name }}"
-                                            name="name" readonly>
+                                            name="name">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-check">
