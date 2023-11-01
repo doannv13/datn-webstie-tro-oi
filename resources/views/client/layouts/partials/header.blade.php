@@ -522,7 +522,7 @@
                                     name="user_id">
                                 <input type="text" hidden value="transfer" name="payment_method">
                                 <input type="text" hidden id="total_point" name="point">
-                                <input type="number" hidden id="point_persent" name="point_persent">
+                                <input type="text" hidden id="point_persent" name="point_persent">
                                 <input type="text" hidden id="price_promotion" name="price_promotion">
                                 <input type="text" hidden id="coupon_id" name="coupon_id" value="">
                                 <input type="text" hidden id="verification" name="verification">
