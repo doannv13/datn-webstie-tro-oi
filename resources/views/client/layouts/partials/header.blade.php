@@ -470,6 +470,7 @@
                                         value="">
                                     <input type="hidden" id="coupon_id1" name="coupon_id1"
                                         value="">
+                                    <input type="text" hidden id="point_persent_vnpay" name="point_persent_vnpay">
                                     @csrf
                                     <button type="submit" id="vnPayLink" name="redirect"
                                         class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
@@ -648,20 +649,17 @@
         if (document.getElementById('price_promotion').value == ('')) {
             document.getElementById('price_promotion').value = ('20,000'.replace(/,/g, "").toLocaleString());
         }
+        if (document.getElementById('point_persent').value == ('')) {
+            document.getElementById('point_persent').value = 21;
+        }
+        if (document.getElementById('point_persent_vnpay').value == ('')) {
+            document.getElementById('point_persent_vnpay').value = 21;
+        }
 
     for (let i = 0; i < prices.length; i++) {
 
             prices[i].addEventListener('click', function() {
                 // prices[i].classList.add("btn-primary");
-            prices[i].style.backgroundColor = "blue";
-
-            // Xóa lớp/đổi nền của các prices khác
-            for (var k = 0; k < prices.length; k++) {
-                if (k !== i) {
-                    // prices[k].classList.remove("btn-primary");
-                    prices[k].style.backgroundColor = "orange";
-                }
-            }
             // Thêm lớp/đổi nền cho price[i]
             prices[i].style.backgroundColor = "blue";
             input_price.value = prices[i].value
@@ -677,6 +675,7 @@
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('total_amount1').innerText = input_price.value;
                     document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
+                    document.getElementById('point_persent_vnpay').value=(input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
                 } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
                     1000000) {
                     sale.innerText = "+7%";
@@ -690,7 +689,8 @@
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('total_amount1').innerText = input_price.value
                     document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
-                } else if (1000000 <= input_price.value.replace(/,/g, "")) {
+                    document.getElementById('point_persent_vnpay').value=(input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
+            } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                     sale.innerText = "+10%";
                     sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
                     total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
@@ -703,7 +703,8 @@
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                     document.getElementById('total_amount1').innerText = input_price.value
                     document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
-                }
+                    document.getElementById('point_persent_vnpay').value=(input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
+            }
             });
 
         }

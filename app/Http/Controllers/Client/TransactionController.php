@@ -49,6 +49,7 @@ class TransactionController extends Controller
         $model->fill($request->all());
         $model->point = (int)str_replace(',', '', $model->point);
         $model->price_promotion = (int)str_replace(',', '', $model->price_promotion);
+        $model->point_persent = (int)str_replace('.', '', $model->point_persent);
         $model->action = 'import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.', 'Đơn hàng sẽ được xác nhận sớm');
