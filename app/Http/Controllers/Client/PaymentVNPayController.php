@@ -147,7 +147,11 @@ class PaymentVNPayController extends Controller
                     event(new SuccessEvent($user));
                 }
                 // Sau khi cập nhật xong, bạn có thể chuyển hướng hoặc hiển thị thông báo
-                return redirect()->route('notification-pay');
+                // return redirect()->route('notification-pay');
+                $transactionId = $_GET['vnp_TxnRef'];
+                $amount = $transaction->point;
+                $point = $transaction->point_persent;
+                return view('client.payment-status.notification-pay')->with(['transactionId' => $transactionId, 'amount' => $amount, 'point' => $point]);
             } else {
                 // Cập nhật trạng thái thành 'cancel'
                 //$transaction->status = 'cancel';

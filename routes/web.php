@@ -102,7 +102,8 @@ Route::get('bookmarks', [HomeController::class, 'listBookmark'])->name('list-boo
 Route::get('bookmark', [HomeController::class, 'bookmark'])->name('bookmark');
 Route::delete('/unbookmark/{room_post_id}',  [HomeController::class, 'unBookmark'])->name('unbookmark');
 Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
-
+Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
+Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
@@ -126,8 +127,8 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
 
     // Thanh toán VNpay
-    Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
-    Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
+    
+    
 
     // Room-Post-Client
     Route::resource('room-posts', CLientRoomPost::class);
