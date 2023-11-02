@@ -116,7 +116,7 @@
                                                     {!! strlen($item->name) > 70 ? substr(strip_tags($item->name), 0, 70) . ',...' : $item->name !!}</h5>
                                             </a>
                                             <span style="color: #F4A460;font-size: 14px;">Giá:
-                                                {{ str_replace(',', '.', number_format($item->price)) }}/tháng</span>
+                                                {{ str_replace(',', '.', number_format($item->price)) }} VND/tháng</span>
                                             <span style="color: #F4A460;font-size: 14px;">| Diện tích:
                                                 {{ $item->acreage }}m²</span>
                                         </div>
@@ -229,9 +229,6 @@
                                         href="{{ route('search-filter', ['price_filter' => 'range_price6', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
                                         7
                                         triệu - 10 triệu<span>({{ countPrice(7000000, 10000000) }})</span></a></li>
-                                <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price7', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Trên
-                                        10 triệu<span>({{ countPriceGreatThan10M() }})</span></a></li>
                             </ul>
                         </div>
                         <div class="sidebar-widget category-posts">

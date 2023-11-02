@@ -101,6 +101,10 @@ function countPostServiceId($service_id){
     $count = RoomPost::where('service_id', $service_id)->count();
     return $count;
 }
+function countRoomPostVip(){
+    $count =  RoomPost::where('status','accept')->whereNotNull('service_id')->count();
+    return $count;
+}
 // $room_postss = RoomPost::latest()->with('facilities')->paginate(10);
 
 // $categories = CategoryRoom::withCount('roomPosts')
