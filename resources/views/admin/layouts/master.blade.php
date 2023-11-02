@@ -100,6 +100,8 @@ data-sidebar-user='true' --}}
     <div class="rightbar-overlay"></div>
 
     <!-- Vendor -->
+  
+   
     <script src="{{ asset('be/assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('be/assets/libs/simplebar/simplebar.min.js') }}"></script>

@@ -229,7 +229,6 @@
                                         href="{{ route('search-filter', ['price_filter' => 'range_price6', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
                                         7
                                         triệu - 10 triệu<span>({{ countPrice(7000000, 10000000) }})</span></a></li>
-                                
                             </ul>
                         </div>
                         <div class="sidebar-widget category-posts">
