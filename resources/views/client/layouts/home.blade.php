@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     @endforeach
-                    {{ $room_post_vip->links() }}
+                   
                 </div>
                 @endif
                 <!-- Tin thuong  -->
@@ -143,10 +143,8 @@
                         Danh sách những tin phòng mới nhất.
                     </p>
                 </div>
-
                 <div class="row wow fadeInUp delay-04s">
-                    @if (isset($room_post_new))
-                    @if (count($room_post_new) > 0)
+
                     @foreach ($room_post_new as $key => $value)
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="hotel-box" style="position: relative;" style="height:100%;">
@@ -173,11 +171,20 @@
                                     </path>
                                 </svg>
                             </button>
-                            {{-- @endif --}}
+
                             <div class="photo-thumbnail" style="position: relative; height:50%;">
                                 <div class="text-white fw-bolder fs-5" style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
                                     {{ number_format($value->price) }} VND/Tháng
                                 </div>
+                                @if ($value->service_id != null)
+                                @if ($value->service->id === 1)
+                                <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, " Segoe UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" , sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
+                                @elseif ($value->service->id === 2)
+                                <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, " Segoe UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" , sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
+                                @else
+                                <label style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, " Segoe UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" , sans-serif, "Apple Color Emoji" , "Segoe UI Emoji" , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
+                                @endif
+                                @endif
                                 <div class="photo">
                                     <img src="{{ asset($value->image) }}" alt="photo" class="img-fluid w-100" style="height: 260px;">
                                     <a href="{{ route('room-post-detail', $value->id) }}">
@@ -212,11 +219,9 @@
                         </div>
                     </div>
                     @endforeach
-                    {{ $room_post_new->links() }}
-                    @endif
-                    @endif
+                    {{$room_post_new->links()}}
 
-                </div>
+                
 
             </div>
         </div>

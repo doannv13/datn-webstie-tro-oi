@@ -38,9 +38,9 @@ class HomeController extends Controller
             ->whereIn('service_id', [1, 2, 3])
             ->where('time_end', '>', Carbon::now())
             ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
-            ->limit(6)
             ->inRandomOrder()
-            ->paginate(6);
+            ->limit(6)
+            ->get();
         // dd($room_post_vip);
         $room_post_new = RoomPost::latest('time_start')->where('status','accept')->limit(30)->paginate(3);
         // dd($room_post_new);
