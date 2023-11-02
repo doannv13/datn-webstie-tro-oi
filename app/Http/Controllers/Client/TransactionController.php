@@ -102,17 +102,10 @@ class TransactionController extends Controller
             $user = User::findOrFail($model->user_id);
             if ($model->coupon_id) {
                 $coupon = Coupon::findOrFail($model->coupon_id);
-                $coupon->quantity -= 1;
+                $coupon->quantity = max(0, $coupon->quantity - 1);
                 $coupon->save();
             }
             $user->point += $model->point_persent;
-            // if ($model->point < 300000) {
-            //     $user->point += ($model->point + (5 / 100) * $model->point) / 1000;
-            // } elseif ($model->point >= 300000 && $model->point < 1000000) {
-            //     $user->point += ($model->point + (7 / 100) * $model->point) / 1000;
-            // } elseif ($model->point >= 1000000 && $model->point <= 2000000) {
-            //     $user->point += ($model->point + (10 / 100) * $model->point) / 1000;
-            // }
             $user->save();
             event(new SuccessEvent($user));
         } elseif ($newStatus === 'cancel') {
@@ -151,12 +144,14 @@ class TransactionController extends Controller
             $typeDiscount = $discount->type;
             $status_coupon = $discount->status;
             $coupon_id = $discount->id;
+            $coupon_quantity = $discount->quantity;
             return response()->json([
                 'message' => 'Mã giảm giá đã được áp dụng!',
                 'discount_amount' => $discountAmount,
                 'type_discount' => $typeDiscount,
                 'status_coupon' => $status_coupon,
                 'coupon_id' => $coupon_id,
+                'coupon_quantity' => $coupon_quantity,
             ]);
             //            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
         } else {
@@ -165,7 +160,9 @@ class TransactionController extends Controller
                 'discount_amount' => 0,
                 'type_discount' => '',
                 'status_coupon' => '',
-                'coupon_id' => ''
+                'coupon_id' => '',
+                'coupon_quantity' => '',
+
             ]);
         }
     }

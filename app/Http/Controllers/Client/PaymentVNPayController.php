@@ -96,13 +96,6 @@ class PaymentVNPayController extends Controller
                 $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
                 $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
             }
-            // $returnData = array(
-            //     'code' => '00', 'message' => 'success', 'data' => $vnp_Url
-            // );
-
-
-            // $paymentId = $payment->id;
-            // dd($paymentId);
             session()->start();
 
             // Session::put('payment_id', $paymentId);
@@ -129,7 +122,7 @@ class PaymentVNPayController extends Controller
                     $user->save();
                     if ($transaction->coupon_id) {
                         $coupon = Coupon::findOrFail($transaction->coupon_id);
-                        $coupon->quantity -= 1;
+                        $coupon->quantity = max(0, $coupon->quantity - 1);
                         $coupon->save();
                     }
                     event(new SuccessEvent($user));
