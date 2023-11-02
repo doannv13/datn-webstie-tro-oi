@@ -26,7 +26,9 @@
                                     <img src="{{ asset($value->image) }}" style="width: 100px;height: 100px;">
                                 </td>
                                 <td>
-                                    {{ $value->name }}
+                                    <a href="{{ route('room-post-detail', $value->id) }}">
+                                        {{ $value->name }}
+                                    </a>
                                 </td>
                                 <td>
                                     @if ($value->service_id != null)
@@ -44,7 +46,7 @@
                                         {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
                                     @endif
                                 </td>
-                                <td>{{  $value->time_start }}</td>
+                                <td>{{ $value->time_start }}</td>
                                 <td>{{ $value->time_end }}</td>
                                 <td class="">
                                     <div class="d-flex justify-content-around align-items-center">

@@ -92,7 +92,7 @@
                                                 <h1>Mô tả chi tiết</h1>
                                             </div>
                                             <!-- paragraph -->
-                                            <p class="mb-0">{!! $roomposts->description !!}</p>
+                                            <div class="mb-0">{!! $roomposts->description !!}</div>
                                         </div>
                                         <!-- Rooms description end -->
 
@@ -123,7 +123,6 @@
                                                         <i class="{{ $value->icon }} me-2"></i>{{ $value->name }}
                                                     </div>
                                                 @endforeach
-
                                             </div>
                                         </div>
 
@@ -132,6 +131,18 @@
                                                 <h1>Đặc điểm tin đăng</h1>
                                             </div>
                                             <table class="table border">
+                                                <tr>
+                                                    <td>Hình thức trọ:</td>
+                                                    <td>
+                                                        {{ $roomposts->managing == 'yes' ? 'Tự quản' : 'Chung chủ' }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Số phòng trống:</td>
+                                                    <td>
+                                                        {{ $roomposts->empty_room }}
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td>Mã tin đăng:</td>
                                                     <td>
