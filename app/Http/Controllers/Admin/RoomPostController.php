@@ -212,7 +212,6 @@ class RoomPostController extends Controller
                 'empty_room' => $request->empty_room,
                 'description' => $request->description,
                 'managing' => $request->managing,
-                'user_id' => auth()->user()->id,
                 'category_room_id' => $request->category_room_id,
                 'fullname' => $request->fullname,
                 'phone' => $request->phone,

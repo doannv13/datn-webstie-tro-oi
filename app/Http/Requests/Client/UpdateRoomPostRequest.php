@@ -28,7 +28,7 @@ class UpdateRoomPostRequest extends FormRequest
             'address_full' => 'required',
             'acreage' => 'required',
             'empty_room' => 'required|integer',
-            'description' => 'required',
+            'description' => 'required|min:300',
             'managing' => 'required',
             'image.*' => 'required',
             'ward_id' => 'required',
@@ -62,6 +62,7 @@ class UpdateRoomPostRequest extends FormRequest
             'address.address_full' => 'Địa chỉ không được để trống',
 
             'description.required' => 'Mô tả không được để trống',
+            'description.min' => 'Mô tả tối thiểu 300 kí tự',
             'ward_id.required' => 'Xã phường bắt buộc phải chọn',
             'district_id.required' => 'Quận huyện bắt buộc phải chọn',
             'city_id.required' => 'Thành phố bắt buộc phải chọn',
