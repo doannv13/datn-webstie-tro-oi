@@ -56,6 +56,8 @@ class TransactionController extends Controller
         if ($model->action === 'import') {
             event(new NotificationEvent($request->verification));
         }
+        $message="Mã nạp ".$model->verification." cần được xác nhận ngay !";
+        notificationDB($message);
         return back();
     }
 
@@ -108,6 +110,8 @@ class TransactionController extends Controller
             $user->point += $model->point_persent;
             $user->save();
             event(new SuccessEvent($user));
+            $message="Mã nạp ".$model->verification." của bạn đã được xác nhận.";
+            sendNotification($model->user_id,$message);
         } elseif ($newStatus === 'cancel') {
             $user = User::findOrFail($model->user_id);
             event(new CancelEvent($user));

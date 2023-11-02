@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\PaymentVNPayController;
 use App\Http\Controllers\Client\TransactionController;
 use App\Http\Controllers\HomeController as ControllersHomeController;
+use App\Http\Controllers\Client\NotificationController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -109,6 +110,10 @@ Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->
 Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
 
 
+
+//thong bao
+
+Route::resource('notifications', NotificationController::class);
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
@@ -132,7 +137,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::post('points', [TransactionController::class, 'store'])->name('points.store');
     Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
 
-    
+
 
     // Room-Post-Client
     Route::resource('room-posts', CLientRoomPost::class);
