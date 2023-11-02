@@ -92,7 +92,7 @@
                     <h5 class="m-0">
                         <span class="float-end">
                             <a href="/notifications" class="text-dark">
-                                <small>Đã đọc tất cả</small>
+                                <small>Đọc tất cả</small>
                             </a>
                         </span>Thông báo
                     </h5>
@@ -252,7 +252,7 @@
                         // console.log(data);
                         // Generate HTML for each notification
                         let notificationHTML = 
-                        ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item" id="notification${data.id}">
+                        ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item "  id="notification${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
                                 <div class="notify-icon">
                                     <img src="${data.avata}" id='avatar' class="img-fluid rounded-circle" alt="" />
                                 </div>
@@ -266,12 +266,7 @@
                         </a>
                         ` 
                        
-                        if (data.read_at === null) {
-                        // Set backgroundColor to the desired color for unread notifications
                        
-                        }else{
-                            notificationHTML = notificationHTML.replace('class="dropdown-item', 'class="dropdown-item bg-success-subtle ');
-                        }
                         // Append the generated HTML to the notificationsHTML
                         notificationsHTML += notificationHTML;
                       

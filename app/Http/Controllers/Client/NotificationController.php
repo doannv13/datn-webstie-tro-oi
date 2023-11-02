@@ -57,7 +57,7 @@ class NotificationController extends Controller
         $notification=Notification::find($id);
         $notification->read_at=Carbon::now();
         $notification->save();
-        return to_route('admin-room-posts.index');
+        return back();
     }
 
     /**
@@ -65,7 +65,7 @@ class NotificationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
     }
 
     /**
