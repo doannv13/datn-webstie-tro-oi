@@ -20,12 +20,12 @@
                             <span class="fs-6 fw-bolder">{{ $transactionId }}.</span>
                             @endif
                             <span class="fw-normal">Giá trị</span> 
-                            @if (isset($amount))
-                            <span class="fw-bolder " style="color: #F21220;">{{ $amount }} VND</span>
+                            @if (isset($price))
+                            <span class="fw-bolder " style="color: #F21220;">{{ $price }} VND</span>
                             @endif
                             <span class="fw-normal">với số point nhận được là </span> 
                             @if (isset($point))
-                            <span class="fw-bolder " style="color: #17aa6f;">{{ $point }} VND.</span>
+                            <span class="fw-bolder " style="color: #17aa6f;">{{ $point }} Point.</span>
                             @endif
                             {{-- <span class="fw-bolder " style="color: #F21220;">300.000 VND.</span> --}}
                         </span>
