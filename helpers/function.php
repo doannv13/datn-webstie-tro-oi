@@ -1,10 +1,12 @@
 <?php
 
+use App\Events\RealtimeNotification;
 use App\Models\CategoryRoom;
 use App\Models\District;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\RoomPost;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -107,9 +109,29 @@ function countPostServiceId($service_id){
 
 // $posts = Post::latest()->paginate(5);
 //function notification database
-function notificationDB($massage){
-    return Notification::create([
-        'user_id' =>  Auth::id(),
-        'message' => $massage,
+
+function notificationDB($message){
+    $user = Auth::user();    
+    $id=$user->id;
+    $notification = Notification::create([
+        'message' => $message,
+        'user_id_send'=> $id,
     ]);
+    $usersId= User::where('role', 'admin')->pluck('id')->toArray();
+    // event(new App\Events\RealTimeMessage($message));
+    $notification->users()->attach($usersId);
+}
+function sendNotification($userId,$message){
+    $user = Auth::user();    
+    $id=$user->id;
+    $notification = Notification::create([
+        'message' => $message,
+        'user_id_send'=> $id,
+    ]);
+    $notification->users()->attach($userId);
+}
+function countNotification()  {
+    $user= User::find(auth()->user()->id);
+    $count = $user->notifications()->whereNull('read_at')->count();
+    return $count;
 }

@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\PaymentVNPayController;
 use App\Http\Controllers\Client\TransactionController;
+use App\Http\Controllers\Client\NotificationController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -103,6 +104,10 @@ Route::get('bookmark', [HomeController::class, 'bookmark'])->name('bookmark');
 Route::delete('/unbookmark/{room_post_id}',  [HomeController::class, 'unBookmark'])->name('unbookmark');
 Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
+
+//thong bao
+
+Route::resource('notifications', NotificationController::class);
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây

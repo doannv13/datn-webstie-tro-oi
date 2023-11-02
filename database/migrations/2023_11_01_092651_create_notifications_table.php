@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('message');
+            $table->unsignedBigInteger('user_id_send');
+            $table->foreign('user_id_send')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('user_id');
-           
         });
     }
 
@@ -28,4 +28,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('notifications');
     }
+    
 };

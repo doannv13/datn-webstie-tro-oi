@@ -427,10 +427,12 @@ class RoomPostController extends Controller
             if ($room_post->status === 'accept') {
                 $content = [
                     'title' => 'Tin phòng đã được duyệt',
-                    'description' => "Chúc mừng tin phòng '.$room_post->fullname .' của bạn đã được duyệt"
+                    'description' => "Chúc mừng tin phòng '.$room_post->fullname .' của bạn đã được duyệt."
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
+                $message="Mã tin ".$room_post->id." của bạn đã được duyệt.";
+                sendNotification($room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
                 $content = [
                     'title' => 'Tin phòng của bạn đã bị từ chối',
@@ -438,6 +440,8 @@ class RoomPostController extends Controller
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
+                $message="Mã tin ".$room_post->id." của bạn đã bị từ chối.";
+                sendNotification($room_post->user_id,$message);
             }
 
             return response()->json(['success' => 'Thay đổi trạng thái thành công','room_post_id'=>$request->room_post_id,'time_start'=>$room_post->time_start->format('Y-m-d H:i:s')]);

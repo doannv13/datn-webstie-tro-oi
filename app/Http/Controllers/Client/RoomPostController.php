@@ -32,6 +32,7 @@ class RoomPostController extends Controller
      */
     public function index()
     {
+        
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
         $districts = District::whereHas('roomPosts', function ($query) {
@@ -155,7 +156,7 @@ class RoomPostController extends Controller
             }
             $mailTo = User::where('role', 'admin')->first();
             event(new RoomPostNotificationEvent($mailTo, $content));
-            $message="Bạn vừa tạo tin đăng mới vui lòng chờ admin xác nhận";
+            $message="Mã tin ".$model->id." vừa đăng cần được xác nhận ngay !";
             notificationDB($message);
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
 
