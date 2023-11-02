@@ -91,7 +91,12 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user_id = auth()->user()->id;
             $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
-            $data = Bookmark::where('user_id', $user_id)->with('roomPost')->paginate(6);
+            $data = Bookmark::where('user_id', $user_id)
+            ->whereHas('roomPost', function ($query) {
+                $query->where('status', 'accept');
+            })
+            ->with('roomPost')
+            ->paginate(6);
             $categories = CategoryRoom::withCount('roomPosts')
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
@@ -122,19 +127,21 @@ class HomeController extends Controller
             return back();
         }
     }
-    public function unBookmarkbm(string $id)
+    public function unBookmarkbm(Request $request, $id)
     {
         try {
-            $model = Bookmark::findOrFail($id);
+            $model = Bookmark::where('id', $request['id']); // Sử dụng $id thay vì $request['id']
             $model->delete();
-            toastr()->success('Đã bỏ lưu 1 phòng', 'Thành công');
-            return back();
+            return response()->json([
+                'data' => $request->all(),
+            ]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             toastr()->error('Có lỗi xảy ra', 'Thử lại sau');
             return back();
         }
     }
+
     public function filter_list(Request $request)
     {
         $category_rooms = CategoryRoom::query()->where('status', 'active')->latest()->get();
@@ -149,19 +156,25 @@ class HomeController extends Controller
         $selectedDistrict = request()->input('district_filter');
         $search = request()->input('name_filter');
 
-        $tags = RoomPost::with('tags')
+        $tags = RoomPost::with(['tags' => function ($query) {
+            $query->where('status', 'active');
+        }])
             ->get()
             ->pluck('tags.*.name')
             ->flatten()
             ->unique()
             ->all();
+
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
 
-
+        // tìm theo từ nhập vào input và theo tags
         if ($search != null) {
             $query->where('name', 'like', '%' . $search . '%');
+            $query->orWhereHas('tags', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            });
         }
 
         if ($selectedRoomType != null) {
@@ -182,26 +195,19 @@ class HomeController extends Controller
         if ($selectedPrice != null) {
             if ($selectedPrice === 'all') {
                 // Không cần thêm điều kiện nếu chọn tất cả
-            } 
-            elseif ($selectedPrice === 'range_price1') {
+            } elseif ($selectedPrice === 'range_price1') {
                 $query->whereBetween('price', [0, 1000000]);
-            } 
-            elseif ($selectedPrice === 'range_price2') {
+            } elseif ($selectedPrice === 'range_price2') {
                 $query->whereBetween('price', [1000000, 2000000]);
-            } 
-            elseif ($selectedPrice === 'range_price3') {
+            } elseif ($selectedPrice === 'range_price3') {
                 $query->whereBetween('price', [2000000, 3000000]);
-            }
-            elseif ($selectedPrice === 'range_price4') {
+            } elseif ($selectedPrice === 'range_price4') {
                 $query->whereBetween('price', [3000000, 5000000]);
-            }
-            elseif ($selectedPrice === 'range_price5') {
+            } elseif ($selectedPrice === 'range_price5') {
                 $query->whereBetween('price', [5000000, 7000000]);
-            }
-            elseif ($selectedPrice === 'range_price6') {
+            } elseif ($selectedPrice === 'range_price6') {
                 $query->whereBetween('price', [7000000, 10000000]);
-            } 
-            elseif ($selectedPrice === 'range_price7') {
+            } elseif ($selectedPrice === 'range_price7') {
                 $query->where('price', '>=', 10000000);
             }
         }
@@ -210,20 +216,15 @@ class HomeController extends Controller
         if ($selectedAcreage != null) {
             if ($selectedAcreage === 'allacreage') {
                 // Không cần thêm điều kiện nếu chọn tất cả
-            } 
-            elseif ($selectedAcreage === 'range_acreage1') {
+            } elseif ($selectedAcreage === 'range_acreage1') {
                 $query->whereBetween('acreage', [0, 15]);
-            } 
-            elseif ($selectedAcreage === 'range_acreage2') {
+            } elseif ($selectedAcreage === 'range_acreage2') {
                 $query->whereBetween('acreage', [15, 25]);
-            } 
-            elseif ($selectedAcreage === 'range_acreage3') {
+            } elseif ($selectedAcreage === 'range_acreage3') {
                 $query->whereBetween('acreage', [25, 45]);
-            } 
-            elseif ($selectedAcreage === 'range_acreage4') {
+            } elseif ($selectedAcreage === 'range_acreage4') {
                 $query->whereBetween('acreage', [45, 75]);
-            }
-            elseif ($selectedAcreage === 'range_acreage5') {
+            } elseif ($selectedAcreage === 'range_acreage5') {
                 $query->where('acreage', '>=', 75);
             }
         }
@@ -235,7 +236,7 @@ class HomeController extends Controller
         $room = $query->latest('time_start')->paginate(5);
         // dd($room);
         $totalResults = $room->total();
-       
+
         // dd($room);
         return view('client.layouts.search', compact(
             'category_rooms',
@@ -271,11 +272,19 @@ class HomeController extends Controller
             ->paginate(4);
         $posts = Post::latest()->paginate(5);
         $roomposts = RoomPost::query()->with('facilities', 'surrounds')->findOrFail($id);
+        if ($search != null) {
+            $roomposts->where('name', 'like', '%' . $search . '%')
+                ->orWhereHas('tags', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+        }
         $caterooms = RoomPost::query()->with('facilities', 'surrounds')
             ->where('id', '!=', $id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->where('status', 'accept')
             ->get();
+
+
         // $rooms = RoomPost::with(['facilities' => function ($query) {
         //     $query->inRandomOrder()->take(6);
         // }]);
@@ -291,6 +300,6 @@ class HomeController extends Controller
             ->twitter()
             ->reddit();
         $tags = $roomposts->tags;
-        return view('client.room-post.detail', compact('category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
+        return view('client.room-post.detail', compact('search', 'tags', 'category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
     }
 }

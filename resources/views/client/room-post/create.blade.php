@@ -100,7 +100,7 @@
                             <div class="form-group ">
                                 <label class="input-group">Giá cho thuê: <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="price" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5"
+                                    <input type="number" name="price" placeholder="VD: 3 triệu 500 nghìn thì nhập 3.5"
                                         class="form-control" value="{{ old('price') }}">
                                     <span class="input-group-text">/Tháng</span>
                                 </div>
@@ -113,7 +113,7 @@
                             <div class="form-group ">
                                 <label class="input-group">Diện tích:<span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
-                                    <input type="text" placeholder="Diện tích" name="acreage" class="form-control"
+                                    <input type="number" placeholder="Diện tích" name="acreage" class="form-control"
                                         value="{{ old('acreage') }}">
                                     <span class="input-group-text">m²</span>
                                 </div>
@@ -125,7 +125,7 @@
                         <div class="col-lg-6 col-md-6 mb-3">
                             <div class="form-group ">
                                 <label class="input-group">Số lượng phòng trống:<span class="text-danger">*</span></label>
-                                <input type="text" placeholder="Số lượng phòng trống" name="empty_room"
+                                <input type="number" placeholder="Số lượng phòng trống" name="empty_room"
                                     class="form-control" value="{{ old('empty_room') }}">
                             </div>
                             @error('empty_room')
@@ -267,7 +267,8 @@
                                 <div class="form-group ">
                                     <label class="input-group">Số điện thoại:<span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" value="{{ auth()->user()->phone }}"
+                                        <input type="text"
+                                            value="{{ auth()->user()->phone ? auth()->user()->phone : old('phone') }}"
                                             placeholder="Nhập số điện thoại của bạn" name="phone" class="form-control">
                                     </div>
                                     @error('phone')
@@ -291,7 +292,7 @@
                             </div>
                             <div class="col-lg-6 col-md-4 mb-3">
                                 <div class="form-group ">
-                                    <label class="input-group">Zalo:<span class="text-danger">*</span></label>
+                                    <label class="input-group">Zalo:</label>
                                     <div class="input-group mb-3">
                                         <input type="text" value="{{ old('zalo') }}"
                                             placeholder="Nhập số Zalo của bạn" name="zalo" class="form-control">

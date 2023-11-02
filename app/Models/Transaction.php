@@ -12,6 +12,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'point',
+        'point_persent',
         'price_promotion',
         'coupon_id',
         'payment_method',
@@ -28,5 +29,9 @@ class Transaction extends Model
     public function room_post()
     {
         return $this->belongsTo(RoomPost::class);
+    }
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
     }
 }

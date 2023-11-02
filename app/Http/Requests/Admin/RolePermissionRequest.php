@@ -22,7 +22,7 @@ class RolePermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'role_id' => 'required|exists:roles,id',
+            'name' => 'required|unique:roles,name,' . $this->id,
             'permission' => 'required|array|min:1',
             'permission.*' => 'exists:permissions,id',
         ];
@@ -31,8 +31,8 @@ class RolePermissionRequest extends FormRequest
     public function messages()
     {
         return [
-            'role_id.required' => 'Trường vai trò là bắt buộc.',
-            'role_id.exists' => 'Vai trò đã chọn không tồn tại trong hệ thống.',
+            'name.required' => 'Trường vai trò là bắt buộc.',
+            'name.unique' => 'Vai trò đã tồn tại',
             'permission.required' => 'Phải chọn ít nhất một quyền.',
             'permission.array' => 'Quyền phải được chọn dưới dạng một mảng.',
             'permission.min' => 'Phải chọn ít nhất một quyền.',

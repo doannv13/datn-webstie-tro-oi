@@ -52,6 +52,7 @@ class PostController extends Controller
         }])->findOrFail($id);
 
         $postTags = $data->tags;
+        // dd($postTags);
         return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts', 'postTags','shareComponent'));
     }
     /**

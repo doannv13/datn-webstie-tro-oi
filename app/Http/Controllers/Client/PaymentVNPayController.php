@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\SuccessEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,9 +22,14 @@ class PaymentVNPayController extends Controller
             $payment->user_id = auth()->user()->id;
             $payment->status = 'cancel';
             $payment->payment_method = 'vnpay';
+            $payment->point_persent = (int)str_replace('.', '', $request->point_persent_vnpay);
             $payment->point = $request->old_total_amount_input;
             $payment->price_promotion = $request->total_amount_input;
-            $payment->coupon_id = $request->coupon_id1;
+            if ($request->coupon_id1) {
+                $payment->coupon_id = $request->coupon_id1;
+            } else {
+                $payment->coupon_id = null;
+            }
             $payment->verification = null;
             $payment->save();
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; // url chuyển đến trang thanh toán
@@ -119,19 +125,16 @@ class PaymentVNPayController extends Controller
                 if ($transaction) {
                     // Cập nhật trạng thái thành 'accept'
                     $transaction->status = 'accept';
-                    $transaction->verification = "Tro_oi_" . $_GET['vnp_TxnRef'];
+                    $transaction->verification = "trooi_vnpay_" . $_GET['vnp_TxnRef'];
                     $transaction->save();
-                    // $transaction->status = $newStatus;
-                    // toastr()->success('Chỉnh sửa thành công', 'thành công');
                     $user = User::findOrFail($transaction->user_id);
-                    if ($transaction->point < 300000) {
-                        $user->point += ($transaction->point + (5 / 100) * $transaction->point) / 1000;
-                    } elseif ($transaction->point >= 300000 && $transaction->point < 1000000) {
-                        $user->point += ($transaction->point + (7 / 100) * $transaction->point) / 1000;
-                    } elseif ($transaction->point >= 1000000 && $transaction->point <= 2000000) {
-                        $user->point += ($transaction->point + (10 / 100) * $transaction->point) / 1000;
-                    }
+                    $user->point += $transaction->point_persent;
                     $user->save();
+                    if ($transaction->coupon_id) {
+                        $transaction = Coupon::findOrFail($transaction->coupon_id);
+                        $coupon->quantity = max(0, $coupon->quantity - 1);
+                        $transaction->save();
+                    }
                     event(new SuccessEvent($user));
                 }
                 // Sau khi cập nhật xong, bạn có thể chuyển hướng hoặc hiển thị thông báo
@@ -145,7 +148,7 @@ class PaymentVNPayController extends Controller
             }
         }
     }
-    /**
+   /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)

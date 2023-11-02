@@ -64,6 +64,7 @@
                                         <i class="fa fa-google"></i>
                                     </a>
                                 </div>
+
                                 <p>
                                     Bạn chưa có tài khoản?
                                     <a href="client-signup" class="thembo"><span class="text-sub">Đăng ký</span></a>

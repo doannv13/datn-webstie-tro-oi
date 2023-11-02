@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Gán quyền')
+@section('title', 'Thêm vai trò và gán quyền')
 @section('content')
     <!-- Start Content-->
     <div class="container-fluid">
@@ -15,13 +15,8 @@
                                     @method('post')
                                     <div class="mb-3">
                                         <label for="example-palaceholder" class="form-label">Tên vai trò</label>
-                                        <select name="role_id" class="form-select mb-3" id="example-palaceholder">
-                                            <option selected="">Chọn vai trò</option>
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('role_id')
+                                        <input class="form-control" type="text" name="name">
+                                        @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
