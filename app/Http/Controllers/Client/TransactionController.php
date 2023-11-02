@@ -166,4 +166,9 @@ class TransactionController extends Controller
             ]);
         }
     }
+
+    // public function returnIdTrans(){
+    //     $return = Transaction::query()->find();
+    //     return view('payment-status.motification-pay', compact('return'));
+    // }
 }

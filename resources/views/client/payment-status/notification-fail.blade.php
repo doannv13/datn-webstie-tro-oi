@@ -26,8 +26,8 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center mb-3" style="border: none;">
-                <button type="button" class="btn btn-outline-success" >Giao dịch khác</button>
-                <button type="button" class="btn btn-outline-warning" >Thanh toán lại</button>
+                <button type="button" class="btn btn-outline-success" ><a href="{{ route('home') }}">Giao dịch khác</a> </button>
+                <button type="button" class="btn btn-outline-warning" ><a href="{{ route('home') }}">Thanh toán lại</a></button>
             </div>
         </div>
     </div>
