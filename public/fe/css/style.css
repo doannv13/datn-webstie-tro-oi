@@ -9776,7 +9776,13 @@ div#social-links ul li a:hover {
     background-repeat: no-repeat;
 }
 
-.img-main-slick img{
-    height: 500px !important;
+.img-main-slick {
+    width: 966px !important;
+    height: 640px !important;
+}
+.img-main{
+    width: 100% !important;
+    height: 640px !important;
+    background-size: 100%; 
 }
 
