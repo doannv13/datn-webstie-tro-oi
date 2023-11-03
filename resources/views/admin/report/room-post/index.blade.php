@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="row">
-    <form class="d-flex gap-2 mb-2" action="{{'admin-report-roompost'}}" method="post">
+    <div class="d-flex justify-content-between align-items-center">
+    <form class="d-flex gap-2 mb-4" action="{{'admin-report-roompost'}}" method="post">
         @csrf
         @method('post')
         <div class="mt-1">
@@ -18,6 +19,10 @@
             <button type="submit" class="btn btn-primary waves-effect waves-light">Xem báo cáo</button>
         </div>
     </form>
+    <div>
+        <a class="btn btn-info" href="{{ route('admin-export-roompost') }}">Xuất báo cáo</a>
+    </div>
+    </div>
     <div class="col-xl-3 col-md-6">
         <div class="card">
             <div class="card-body">
@@ -207,7 +212,7 @@
                 date: total_room_post.date,
                 revenue: total_room_post.total_posts
             });
-        });   
+        });
         //     const revenueData = [
         //     { date: '2023-10-13', revenue: 100 },
         //     { date: '2023-10-14', revenue: 200 },

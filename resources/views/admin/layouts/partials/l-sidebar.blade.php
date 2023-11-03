@@ -89,7 +89,9 @@
                             <li>
                                 <a href="{{'admin-report-roompost'}}">- Tin đăng </a>
                             </li>
-
+                            <li>
+                                <a href="{{'admin-report-post'}}">- Bài viết </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
