@@ -28,7 +28,7 @@
                             <div class="rooms-detail-slider mb-40 comon-slick">
                                 <div class="slider slider-for pb-sm-3 slick comon-slick-inner wow">
                                     <div><img src="{{ asset($roomposts->image) }}"
-                                            class="w-100 h-100 img-main-slick img-fluid">
+                                            class="w-100 h-100 img-main-slick img-fluid" style="height: 500px !important">
                                     </div>
                                     @foreach ($images as $image)
                                         <div class="p-1">
@@ -191,7 +191,7 @@
                                                                 <?php
                                                                 $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                                                 $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
-                                                                
+
                                                                 if (Auth::check()) {
                                                                     $user_id = auth()->user()->id;
                                                                     $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
@@ -421,9 +421,11 @@
 
                                             <span
                                                 class="show-phone">{{ substr($roomposts->phone, 0, 2) . str_repeat('*', strlen($roomposts->phone) - 2) }}</span>
+
                                             <span style="display: none"
                                                 class="hidden-phone">{{ $roomposts->phone }}</span>
                                         </button>
+                                        <p>Bấm vào để hiện số điện thoại !</p>
                                     </div>
                                     @if ($roomposts->zalo)
                                         <div class="contact-item mb-3">

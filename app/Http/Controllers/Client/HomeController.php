@@ -26,6 +26,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $currentDateTime = Carbon::now();
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
         $districts = District::whereHas('roomPosts', function ($query) {
@@ -59,7 +60,7 @@ class HomeController extends Controller
         //     ->facebook()
         //     ->twitter()
         //     ->reddit();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip','room_post_new', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip','room_post_new', 'posts', 'count_room', 'count_user', 'count_post', 'banners','currentDateTime'));
     }
     public function bookmark(Request $request)
     {

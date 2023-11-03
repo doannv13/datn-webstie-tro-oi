@@ -78,19 +78,19 @@
                                     <div class="photo-thumbnail p-lg-2 p-sm-2">
                                         <div class="" style="position: relative;">
                                             @if ($item->service_id != null)
-                                                @if ($item->service->id === 1)
+                                                @if ($item->service->id === 1 && $item->time_end>$currentDateTime)
                                                     <label
                                                         style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
                                                         UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
                                                         sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
                                                         , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
-                                                @elseif ($item->service->id === 2)
+                                                @elseif ($item->service->id === 2 && $item->time_end>$currentDateTime)
                                                     <label
                                                         style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
                                                         UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
                                                         sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
                                                         , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
-                                                @else
+                                                @elseif($item->service->id === 3 && $item->time_end>$currentDateTime)
                                                     <label
                                                         style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
                                                         UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
