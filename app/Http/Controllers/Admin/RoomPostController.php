@@ -423,10 +423,12 @@ class RoomPostController extends Controller
             $room_post->status = $request->status;
             $room_post->time_start=Carbon::now();
             $room_post->save();
+            $user = User::findOrFail($room_post->user_id);
             if ($room_post->status === 'accept') {
                 $content = [
+                    'user' => $user->name,
                     'title' => 'Tin phòng đã được duyệt',
-                    'description' => "Chúc mừng tin phòng '.$room_post->fullname .' của bạn đã được duyệt."
+                    'description' => "Chúc mừng tin phòng $room_post->fullname của bạn đã được duyệt."
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
@@ -434,8 +436,9 @@ class RoomPostController extends Controller
                 sendNotification($room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
                 $content = [
+                    'user' => $user->name,
                     'title' => 'Tin phòng của bạn đã bị từ chối',
-                    'description' => "Tin phòng '.$room_post->fullname .' không được thông qua do vi phạm nội quy của chúng tôi."
+                    'description' => "Tin phòng $room_post->fullname không được thông qua do vi phạm nội quy của chúng tôi."
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
