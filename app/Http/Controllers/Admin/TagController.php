@@ -166,9 +166,12 @@ class TagController extends Controller
     {
         $tag = Tag::where('slug', $slug)->first();
         if ($tag) {
-            $posts = Post::where('description', 'like', '%' . $tag->name . '%')->get();
+            $posts = Post::whereHas('tags', function ($query) use ($tag) {
+                $query->where('tags.id', $tag->id);
+            })->get();
+
             $totalPosts = $posts->count();
-            return view('client.post.search', compact('posts','totalPosts'));
+            return view('client.post.search', compact('posts', 'totalPosts'));
         }
     }
 }

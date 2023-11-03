@@ -31,7 +31,7 @@
                             <div class="blog-image">
                                 <img src="{{ asset($value->image) }}" alt="img-2" class="w-100" height="500px">
                                 <div class="profile-user">
-                                    <img src="{{ asset($value->user->avatar) }}" alt="user">
+                                    <img src="{{ $value->user->avatar? asset($value->user->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="user">
                                 </div>
                                 <div class="date-box">
                                     @if (isset($value->created_at))
