@@ -49,12 +49,15 @@ class TransactionController extends Controller
         $model->fill($request->all());
         $model->point = (int)str_replace(',', '', $model->point);
         $model->price_promotion = (int)str_replace(',', '', $model->price_promotion);
+        $model->point_persent = (int)str_replace('.', '', $model->point_persent);
         $model->action = 'import';
         $model->save();
         toastr()->success('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.', 'Đơn hàng sẽ được xác nhận sớm');
         if ($model->action === 'import') {
             event(new NotificationEvent($request->verification));
         }
+        $message="Mã nạp ".$model->verification." cần được xác nhận ngay !";
+        notificationDB($message);
         return back();
     }
 
@@ -96,24 +99,19 @@ class TransactionController extends Controller
         $model->status = $newStatus;
         $model->save();
 
-        toastr()->success('Chỉnh sửa thành công', 'thành công');
+        toastr()->success('Chỉnh sửa thành công', 'Thành công');
         if ($newStatus === 'accept') {
             $user = User::findOrFail($model->user_id);
             if ($model->coupon_id) {
                 $coupon = Coupon::findOrFail($model->coupon_id);
-                $coupon->quantity -= 1;
+                $coupon->quantity = max(0, $coupon->quantity - 1);
                 $coupon->save();
             }
             $user->point += $model->point_persent;
-            // if ($model->point < 300000) {
-            //     $user->point += ($model->point + (5 / 100) * $model->point) / 1000;
-            // } elseif ($model->point >= 300000 && $model->point < 1000000) {
-            //     $user->point += ($model->point + (7 / 100) * $model->point) / 1000;
-            // } elseif ($model->point >= 1000000 && $model->point <= 2000000) {
-            //     $user->point += ($model->point + (10 / 100) * $model->point) / 1000;
-            // }
             $user->save();
             event(new SuccessEvent($user));
+            $message="Mã nạp ".$model->verification." của bạn đã được xác nhận.";
+            sendNotification($model->user_id,$message);
         } elseif ($newStatus === 'cancel') {
             $user = User::findOrFail($model->user_id);
             event(new CancelEvent($user));
@@ -150,12 +148,14 @@ class TransactionController extends Controller
             $typeDiscount = $discount->type;
             $status_coupon = $discount->status;
             $coupon_id = $discount->id;
+            $coupon_quantity = $discount->quantity;
             return response()->json([
                 'message' => 'Mã giảm giá đã được áp dụng!',
                 'discount_amount' => $discountAmount,
                 'type_discount' => $typeDiscount,
                 'status_coupon' => $status_coupon,
                 'coupon_id' => $coupon_id,
+                'coupon_quantity' => $coupon_quantity,
             ]);
             //            return response()->json(['message' => 'Mã giảm giá đã được áp dụng!']);
         } else {
@@ -164,8 +164,15 @@ class TransactionController extends Controller
                 'discount_amount' => 0,
                 'type_discount' => '',
                 'status_coupon' => '',
-                'coupon_id' => ''
+                'coupon_id' => '',
+                'coupon_quantity' => '',
+
             ]);
         }
     }
+
+    // public function returnIdTrans(){
+    //     $return = Transaction::query()->find();
+    //     return view('payment-status.motification-pay', compact('return'));
+    // }
 }

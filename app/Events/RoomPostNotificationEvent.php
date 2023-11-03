@@ -30,10 +30,9 @@ class RoomPostNotificationEvent
         // $admin =  User::where('role', 'admin')->first();
         $data['email'][0] = $mailTo;
         $this->content=$content;
-
         dispatch(new RoomPostNotificationJob($data,$this->content));
     }
-
+    
     /**
      * Get the channels the event should broadcast on.
      *

@@ -4,7 +4,7 @@
     <div class="sub-banner">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1></h1>
+                <h1>Chi tiết bài viết</h1>
             </div>
             <nav class="breadcrumbs">
                 <ol class="breadcrumb">
@@ -62,11 +62,11 @@
                                     <div class="tags-box hidden-mb-10">
                                         <h2>Tags</h2>
                                         <ul class="tags">
-                                            {{-- @foreach ($postTags as $item)
+                                            @foreach ($postTags as $item)
                                                 <li><a href="{{route('tags-show', $item->slug)}}">{{ $item->name }}</a></li>
-                                            @endforeach --}}
-                                            
-                                            @foreach ($postTags as $tag)
+                                            @endforeach
+
+                                            {{-- @foreach ($postTags as $tag)
                                             <li>
                                                 @php
                                                     $formattedSlug = str_replace('-', ' ', $tag->slug);
@@ -75,7 +75,7 @@
                                                     {{ $tag->name }}
                                                 </a>
                                             </li>
-                                        @endforeach
+                                        @endforeach --}}
                                         </ul>
                                     </div>
                                 @endif

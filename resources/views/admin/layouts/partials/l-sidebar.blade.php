@@ -72,7 +72,7 @@
                         <i class="fe-folder-minus"></i>
                         <span>Dashboard</span>
                     </a>
-                    
+
                 </li>
 
                 <li>
@@ -89,7 +89,9 @@
                             <li>
                                 <a href="{{'admin-report-roompost'}}">- Tin đăng </a>
                             </li>
-                            
+                            <li>
+                                <a href="{{'admin-report-post'}}">- Bài viết </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -275,28 +277,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('role-menu'))
-                    <li>
-                        <a href="#role" data-bs-toggle="collapse">
-                            <i class="fe-folder-minus"></i>
-                            <span>Vai trò</span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="role">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <a href="{{ route('roles.create') }}">- Thêm mới</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('roles.index') }}">- Danh sách </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('roles.deleted') }}">- Thùng rác</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                @endif
+
                 @if (Auth::user()->can('role-permission-menu'))
                     <li>
                         <a href="#role-permission" data-bs-toggle="collapse">
@@ -307,10 +288,13 @@
                         <div class="collapse" id="role-permission">
                             <ul class="nav-second-level">
                                 <li>
-                                    <a href="{{ route('roles-permissions.create') }}">- Gán quyền</a>
+                                    <a href="{{ route('roles-permissions.create') }}">- Thêm vai trò và gán quyền</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('roles-permissions.index') }}">- Danh sách </a>
+                                    <a href="{{ route('roles-permissions.index') }}">- Danh sách vai trò và quyền </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('roles.deleted') }}">- Thùng rác</a>
                                 </li>
                             </ul>
                         </div>

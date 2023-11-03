@@ -32,9 +32,12 @@ use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\PaymentVNPayController;
 use App\Http\Controllers\Client\TransactionController;
+use App\Http\Controllers\HomeController as ControllersHomeController;
+use App\Http\Controllers\Client\NotificationController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\Admin\ReportPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +106,15 @@ Route::get('bookmark', [HomeController::class, 'bookmark'])->name('bookmark');
 Route::delete('/unbookmark/{room_post_id}',  [HomeController::class, 'unBookmark'])->name('unbookmark');
 Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->name('unbookmarkbm');
 
+// Thanh toán VNpay
+Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
+Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
+
+
+
+//thong bao
+
+Route::resource('notifications', NotificationController::class);
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
     // route dành cho vendor ở đây
@@ -117,6 +129,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::get('notification-pay', function () {
         return view('client.payment-status.notification-pay');
     })->name('notification-pay');
+
     Route::get('notification-fail', function () {
         return view('client.payment-status.notification-fail');
     })->name('notification-fail');
@@ -125,9 +138,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     Route::post('points', [TransactionController::class, 'store'])->name('points.store');
     Route::get('points-history', [TransactionController::class, 'history'])->name('points.history');
 
-    // Thanh toán VNpay
-    Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
-    Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
+
 
     // Room-Post-Client
     Route::resource('room-posts', CLientRoomPost::class);
@@ -162,10 +173,17 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     //Báo cáo doanh thu
     Route::get('admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
     Route::post('admin-report-revenue', [ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
+    Route::get('admin-export-revenue', [ReportRevenueController::class, 'exportRevenue'])->name('admin-export-revenue');
 
     //báo cáo tin đăng
     Route::get('admin-report-roompost', [ReportRoomPostControler::class, 'index'])->name('admin-report-roompost');
     Route::post('admin-report-roompost', [ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
+    Route::get('admin-export-roompost', [ReportRoomPostControler::class, 'exportRoomPost'])->name('admin-export-roompost');
+
+
+     //báo cáo bài viết
+     Route::get('admin-report-post', [ReportPostController::class, 'index'])->name('admin-report-post');
+     Route::post('admin-report-post', [ReportPostController::class, 'filterPost'])->name('admin-report-post');
 
     // Room-Post-Admin
     Route::resource('admin-room-posts', AdminRoomPost::class);

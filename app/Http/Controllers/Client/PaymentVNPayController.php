@@ -22,6 +22,7 @@ class PaymentVNPayController extends Controller
             $payment->user_id = auth()->user()->id;
             $payment->status = 'cancel';
             $payment->payment_method = 'vnpay';
+            $payment->point_persent = (int)str_replace('.', '', $request->point_persent_vnpay);
             $payment->point = $request->old_total_amount_input;
             $payment->price_promotion = $request->total_amount_input;
             if ($request->coupon_id1) {
@@ -95,13 +96,6 @@ class PaymentVNPayController extends Controller
                 $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
                 $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
             }
-            // $returnData = array(
-            //     'code' => '00', 'message' => 'success', 'data' => $vnp_Url
-            // );
-
-
-            // $paymentId = $payment->id;
-            // dd($paymentId);
             session()->start();
 
             // Session::put('payment_id', $paymentId);
@@ -117,47 +111,38 @@ class PaymentVNPayController extends Controller
     {
         if (isset($_GET['vnp_ResponseCode'])) {
             $vnp_ResponseCode = $_GET['vnp_ResponseCode'];
-            // Tìm đối tượng thanh toán dựa trên điều kiện nào đó, chẳng hạn $vnp_TxnRef
             $transaction = Transaction::where('id', $_GET['vnp_TxnRef'])->first();
-            if ($vnp_ResponseCode == '00') {
-                // dd($_GET['vnp_Amount']);
-                if ($transaction) {
-                    // Cập nhật trạng thái thành 'accept'
+            if ($transaction) {
+                if ($vnp_ResponseCode == '00') {
                     $transaction->status = 'accept';
                     $transaction->verification = "trooi_vnpay_" . $_GET['vnp_TxnRef'];
                     $transaction->save();
-
-                    // $transaction->status = $newStatus;
-                    // toastr()->success('Chỉnh sửa thành công', 'thành công');
                     $user = User::findOrFail($transaction->user_id);
-                    // if ($transaction->point < 300000) {
-                    //     $user->point += ($transaction->point + (5 / 100) * $transaction->point) / 1000;
-                    // } elseif ($transaction->point >= 300000 && $transaction->point < 1000000) {
-                    //     $user->point += ($transaction->point + (7 / 100) * $transaction->point) / 1000;
-                    // } elseif ($transaction->point >= 1000000 && $transaction->point <= 2000000) {
-                    //     $user->point += ($transaction->point + (10 / 100) * $transaction->point) / 1000;
-                    // }
                     $user->point += $transaction->point_persent;
                     $user->save();
                     if ($transaction->coupon_id) {
-                        $transaction = Coupon::findOrFail($transaction->coupon_id);
-                        $transaction->quantity -= 1;
-                        $transaction->save();
+                        $coupon = Coupon::findOrFail($transaction->coupon_id);
+                        $coupon->quantity = max(0, $coupon->quantity - 1);
+                        $coupon->save();
                     }
                     event(new SuccessEvent($user));
+                    $transactionId = $_GET['vnp_TxnRef'];
+                    $price = $transaction->price_promotion;
+                    $point = $transaction->point_persent;
+                    return view('client.payment-status.notification-pay')->with(['transactionId' => $transactionId, 'price' => $price, 'point' => $point]);
+                } else {
+                    $transaction->verification = "Tro_oi_" . $_GET['vnp_TxnRef'];
+                    $transaction->save();
+                    return redirect()->route('notification-fail');
                 }
-                // Sau khi cập nhật xong, bạn có thể chuyển hướng hoặc hiển thị thông báo
-                return redirect()->route('notification-pay');
             } else {
-                // Cập nhật trạng thái thành 'cancel'
-                //$transaction->status = 'cancel';
-                $transaction->verification = "Tro_oi_" . $_GET['vnp_TxnRef'];
-                $transaction->save();
+                // Handle the case when the transaction is not found
+                // For example, you can redirect to an error page or show an error message
                 return redirect()->route('notification-fail');
             }
         }
     }
-   /**
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)

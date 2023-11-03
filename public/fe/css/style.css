@@ -1212,9 +1212,9 @@ strong {
 }
 
 /** CONTENT AREA **/
-.content-area {
+/* .content-area {
     padding: 100px 0 70px;
-}
+} */
 /* .content-area {
   padding: 0 0 70px !important;
 } */
@@ -9770,9 +9770,9 @@ div#social-links ul li a:hover {
     height: 100px !important;
 }
 .img-slick img{
-    width: 194px; 
+    width: 194px;
     height: 100px;
-    background-size: 100%; 
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 
@@ -9782,6 +9782,7 @@ div#social-links ul li a:hover {
 }
 .img-main{
     width: 100% !important;
+    height: 640px !important;
     background-size: 100%; 
 }
 

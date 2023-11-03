@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h5 class="mt-0">Danh sách vai trò và quyền</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{route('roles-permissions.create')}}">Gán quyền</a>
+                    <a class="btn btn-success mb-2" href="{{route('roles-permissions.create')}}">Thêm vai trò và gán quyền</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
@@ -38,7 +38,7 @@
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
-                                                onclick="return confirm('Xóa quyền khỏi vai trò')">
+                                                onclick="return confirm('Chuyển vai trò vào thùng rác ?')">
                                                 <!-- Đặt kích thước cố định là 100px -->
                                                 <i class="fa-solid fa-trash fs-4"></i>
                                             </button>

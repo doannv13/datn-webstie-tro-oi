@@ -15,17 +15,26 @@
                 </div>
                 <div class="mt-3" style="background-color: #F0FCF5;">
                     <div class="fs-6 text pt-4 p-3">
-                        <span class="fw-normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bạn đã thanh toán thành công hóa đơn mã số 
-                            <span class="fs-6 fw-bolder">39184385xyz.</span>
+                        <span class="fw-normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bạn đã thanh toán thành công hóa đơn mã số Tro_oi_
+                            @if (isset($transactionId))
+                            <span class="fs-6 fw-bolder">{{ $transactionId }}.</span>
+                            @endif
                             <span class="fw-normal">Giá trị</span> 
-                            <span class="fw-bolder " style="color: #F21220;">300.000 VND.</span>
+                            @if (isset($price))
+                            <span class="fw-bolder " style="color: #F21220;">{{ $price }} VND</span>
+                            @endif
+                            <span class="fw-normal">với số point nhận được là </span> 
+                            @if (isset($point))
+                            <span class="fw-bolder " style="color: #17aa6f;">{{ $point }} Point.</span>
+                            @endif
+                            {{-- <span class="fw-bolder " style="color: #F21220;">300.000 VND.</span> --}}
                         </span>
                     </div>
                     <div class="fs-6 text  px-3">
                         <span class="fw-normal">Sau khi xác nhận thanh toán thành công bạn có thể theo dõi hóa đơn tại 
                             <span class="fs-6 fw-bolder">Thông tin tài khoản > Theo dõi hóa đơn</span>
                             <span class="fw-normal">hoặc bấm vào</span> 
-                            <span class="fw-bolder ">Chi tiết đơn hàng</span>
+                            <span class="fw-bolder">Chi tiết đơn hàng</span>
                             <span class="fw-normal">ở phía dưới.</span> 
                         </span>
                     </div>
@@ -36,8 +45,12 @@
                 </div>
 
             </div>
+            {{-- <div class="modal-footer justify-content-center mb-3" style="border: none;">
+                <button type="button" class="btn btn-outline-success" ><a href="{{ route('points.history') }}">Chi tiết đơn hàng</a> </button>
+            </div> --}}
             <div class="modal-footer justify-content-center mb-3" style="border: none;">
-                <button type="button" class="btn btn-outline-success" >Chi tiết đơn hàng</button>
+                <button type="button" class="btn btn-outline-success" ><a href="{{ route('points.history') }}">Chi tiết đơn hàng</a> </button>
+                <button type="button" class="btn btn-outline-warning" ><a href="{{ route('home') }}">Về trang chủ</a></button>
             </div>
         </div>
     </div>

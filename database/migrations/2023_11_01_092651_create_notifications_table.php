@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('slug');
-            $table->enum('status',['active','inactive'])->default('active');
-            $table->softDeletes();
+            $table->string('message');
+            $table->unsignedBigInteger('user_id_send');
+            $table->foreign('user_id_send')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('notifications');
     }
+    
 };

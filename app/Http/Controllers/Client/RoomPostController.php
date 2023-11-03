@@ -32,6 +32,7 @@ class RoomPostController extends Controller
      */
     public function index()
     {
+
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
         $districts = District::whereHas('roomPosts', function ($query) {
@@ -112,7 +113,9 @@ class RoomPostController extends Controller
                 'zalo' => $request->zalo
             ]);
             $model->save();
+            $user = User::findOrFail($model->user_id);
             $content = [
+                'user' => $user->name,
                 'title' => 'Cần xác nhận tin phòng mới',
                 'description' => "Người dùng " . auth()->user()->name . " vừa đăng 1 tin phòng với tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
             ];
@@ -155,6 +158,8 @@ class RoomPostController extends Controller
             }
             $mailTo = User::where('role', 'admin')->first();
             event(new RoomPostNotificationEvent($mailTo, $content));
+            $message="Mã tin ".$model->id." vừa đăng cần được xác nhận ngay !";
+            notificationDB($message);
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
 
             return redirect()->route('room-posts.index');
@@ -235,7 +240,9 @@ class RoomPostController extends Controller
                 $model->image = $request->old_imageroom;
             }
             $model->save();
+            $user = User::findOrFail($model->user_id);
             $content = [
+                'user' => $user->name,
                 'title' => 'Cần xác nhận tin phòng vừa cập nhật',
                 'description' => "Người dùng " . auth()->user()->name . " vừa cập nhật phòng tin phòng có tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
             ];
@@ -370,7 +377,7 @@ class RoomPostController extends Controller
     public function destroy(String $id)
     {
         try {
-            
+
             FacilityRoom::query()->where('room_id', $id)->delete();
             SurroundingRoom::query()->where('room_id', $id)->delete();
             RoomPost::query()->findOrFail($id)->delete();
@@ -398,7 +405,7 @@ class RoomPostController extends Controller
     public function permanentlyDelete(String $id)
     {
         try {
-           
+
             $RoomPost = RoomPost::where('id', $id);
             $RoomPost->forceDelete();
             $facility = FacilityRoom::query()->where('room_id', $id);

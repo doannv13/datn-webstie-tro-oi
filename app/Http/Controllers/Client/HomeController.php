@@ -26,6 +26,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $currentDateTime = Carbon::now();
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $wards = Ward::all();
         $districts = District::whereHas('roomPosts', function ($query) {
@@ -38,9 +39,12 @@ class HomeController extends Controller
             ->whereIn('service_id', [1, 2, 3])
             ->where('time_end', '>', Carbon::now())
             ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
-            ->limit(6)
             ->inRandomOrder()
-            ->paginate(6);
+            ->limit(6)
+            ->get();
+        // dd($room_post_vip);
+        $room_post_new = RoomPost::latest('time_start')->where('status','accept')->limit(30)->paginate(3);
+        // dd($room_post_new);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();
         //đếm số tin đăng ,user ,bài viết
@@ -56,7 +60,7 @@ class HomeController extends Controller
         //     ->facebook()
         //     ->twitter()
         //     ->reddit();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip', 'posts', 'count_room', 'count_user', 'count_post', 'banners'));
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip','room_post_new', 'posts', 'count_room', 'count_user', 'count_post', 'banners','currentDateTime'));
     }
     public function bookmark(Request $request)
     {
@@ -88,7 +92,12 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user_id = auth()->user()->id;
             $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
-            $data = Bookmark::where('user_id', $user_id)->with('roomPost')->paginate(6);
+            $data = Bookmark::where('user_id', $user_id)
+            ->whereHas('roomPost', function ($query) {
+                $query->where('status', 'accept');
+            })
+            ->with('roomPost')
+            ->paginate(6);
             $categories = CategoryRoom::withCount('roomPosts')
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
@@ -156,7 +165,7 @@ class HomeController extends Controller
             ->flatten()
             ->unique()
             ->all();
-            
+
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
@@ -275,7 +284,7 @@ class HomeController extends Controller
             ->where('category_room_id', $roomposts->category_room_id)
             ->where('status', 'accept')
             ->get();
-            
+
 
         // $rooms = RoomPost::with(['facilities' => function ($query) {
         //     $query->inRandomOrder()->take(6);
