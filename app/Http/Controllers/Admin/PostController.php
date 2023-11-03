@@ -127,6 +127,7 @@ class PostController extends Controller
                 foreach ($tagNames as $tagName) {
                     $slug = Str::slug(trim($tagName));
                     $tag = Tag::firstOrCreate(['name' => trim($tagName), 'slug' => $slug]);
+                    $tag->status = 'active';
                     $model->tags()->attach($tag->id);
                 }
             } else {
