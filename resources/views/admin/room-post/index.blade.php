@@ -196,51 +196,53 @@
                     'id'); // Lấy giá trị `data-id` của phần tử cha
                 let deleteButton = $("#deleteButton" + room_post_id);
                 let status = statusButton.attr('value'); // Lấy giá trị của nút được nhấn
+                if (confirm("Chắc chắn chấp nhận?")) {
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: "{{ route('admin-room-posts-status') }}",
+                        data: {
+                            'status': status,
+                            'room_post_id': room_post_id
+                        },
+                        success: function(data) {
+                            console.log(data);
 
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "{{ route('admin-room-posts-status') }}",
-                    data: {
-                        'status': status,
-                        'room_post_id': room_post_id
-                    },
-                    success: function(data) {
-                        console.log(data);
-
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-
-                        if ($.isEmptyObject(data.error)) {
-                            Toast.fire({
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
                                 icon: 'success',
-                                title: data.success,
+                                showConfirmButton: false,
+                                timer: 3000
                             });
-                        } else {
-                            Toast.fire({
-                                icon: 'error',
-                                title: data.error,
-                            });
+
+                            if ($.isEmptyObject(data.error)) {
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.success,
+                                });
+                            } else {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: data.error,
+                                });
+                            }
                         }
+                    });
+
+                    let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' :
+                            'btn-danger') +
+                        '">' +
+                        (status === 'accept' ? 'Đã kích hoạt' : 'Đã huỷ') + '</label>';
+                    statusButton.parent().html(
+                        label); // Thay đổi nội dung của phần tử "statusSelect" hiện tại
+                    if (status === 'pendding') {
+                        deleteButton.prop('disabled', true); // Tắt nút xoá khi status là 'accept'
+                    } else {
+                        // document.getElementById('time_start').innerText=data.time_start;
+                        deleteButton.prop('disabled', false); // Bật nút xoá cho mọi trạng thái khác
                     }
-                });
-
-                let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' : 'btn-danger') +
-                    '">' +
-                    (status === 'accept' ? 'Đã kích hoạt' : 'Đã huỷ') + '</label>';
-                statusButton.parent().html(label); // Thay đổi nội dung của phần tử "statusSelect" hiện tại
-                if (status === 'pendding') {
-                    deleteButton.prop('disabled', true); // Tắt nút xoá khi status là 'accept'
-                } else {
-                    // document.getElementById('time_start').innerText=data.time_start;
-                    deleteButton.prop('disabled', false); // Bật nút xoá cho mọi trạng thái khác
                 }
-
             })
         });
     </script>

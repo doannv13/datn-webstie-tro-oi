@@ -27,13 +27,13 @@
                         <div class="rooms-detail-slider">
                             <div class="rooms-detail-slider mb-40 comon-slick">
                                 <div class="slider slider-for pb-sm-3 slick comon-slick-inner wow">
-                                    <div><img src="{{ asset($roomposts->image) }}"
-                                            class="w-100 h-100 img-main-slick img-fluid">
+                                    <div class="img-main-slick"><img src="{{ asset($roomposts->image) }}"
+                                            class="img-fluid img-main" style="width: 100%;">
                                     </div>
                                     @foreach ($images as $image)
-                                        <div class="p-1">
-                                            <img src=" {{ asset($image->name) }}"
-                                                class="w-100 h-100 img-main-slick img-fluid" alt="photo">
+                                        <div class="img-main-slick">
+                                            <img src=" {{ asset($image->name) }}" class="img-fluid img-main"
+                                                style="width: 100%;">
                                         </div>
                                     @endforeach
                                 </div>
