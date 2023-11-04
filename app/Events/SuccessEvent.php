@@ -27,7 +27,7 @@ class SuccessEvent
         $this->user = $user;
         $data['email'][0] = $user->email;
 
-        dispatch(new SuccessNotification($data));
+        dispatch(new SuccessNotification($data, $user->name));
     }
 
     /**

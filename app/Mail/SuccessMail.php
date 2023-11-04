@@ -16,9 +16,11 @@ class SuccessMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    protected $username;
+    public function __construct($username)
     {
         //
+        $this->username= $username;
     }
 
     /**
@@ -38,6 +40,9 @@ class SuccessMail extends Mailable
     {
         return new Content(
             view: 'client.notification.accept',
+            with: [
+                'username' => $this->username,
+            ],
         );
     }
 

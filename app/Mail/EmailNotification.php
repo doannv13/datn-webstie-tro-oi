@@ -15,12 +15,14 @@ class EmailNotification extends Mailable
     /**
      * Create a new message instance.
      */
+    protected $username;
     protected $verification;
 
-    public function __construct($verification)
+    public function __construct($username, $verification)
     {
         //
         $this->verification = $verification;
+        $this->username = $username;
     }
 
     /**
@@ -42,6 +44,7 @@ class EmailNotification extends Mailable
             view: 'client.notification.notification',
             with: [
                 'verification' => $this->verification,
+                'username' => $this->username,
             ],
         );
     }

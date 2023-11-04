@@ -16,9 +16,12 @@ class CancelMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    protected $username;
+
+    public function __construct($username)
     {
         //
+        $this->username = $username;
     }
 
     /**
@@ -38,6 +41,9 @@ class CancelMail extends Mailable
     {
         return new Content(
             view: 'client.notification.cancel',
+            with: [
+                'username' => $this->username,
+            ],
         );
     }
 

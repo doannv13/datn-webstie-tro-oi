@@ -28,7 +28,7 @@ class CancelEvent
         $this->user = $user;
         $data['email'][0] = $user->email;
 
-        dispatch(new CancelNotification($data));
+        dispatch(new CancelNotification($data,$user->name));
     }
 
     /**

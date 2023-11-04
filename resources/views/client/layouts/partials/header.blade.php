@@ -653,7 +653,7 @@
     <script>
         function generateRandomString(length, hasLetters, hasNumbers) {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
+            let result = 'trooi_transfer_';
 
         if (hasLetters) {
             for (let i = 0; i < length - 2; i++) {
