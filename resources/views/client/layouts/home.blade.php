@@ -244,11 +244,11 @@
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-5.jpg') }}" alt="staff" class="img-fluid w-100" />
                                     <div class="info">
-                                        <h4>Hartisona Roy</h4>
+                                        <h4>Nguyễn Đoàn</h4>
                                         <span>Hotel Developer</span>
                                     </div>
                                     <div class="overlay text-light">
-                                        <h4><a href="staff.html">Hartisona Roy</a></h4>
+                                        <h4><a href="staff.html">Nguyễn Đoàn</a></h4>
                                         <p>
                                             Btuff sight equal of my woody. Him children bringing
                                             goodness suitable she entirely put far daughter pushing
@@ -276,11 +276,11 @@
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-6.jpg') }}" alt="staff" class="img-fluid w-100" />
                                     <div class="info">
-                                        <h4>Karen Paran</h4>
+                                        <h4>Trần Công</h4>
                                         <span>Hotel Director</span>
                                     </div>
                                     <div class="overlay text-light">
-                                        <h4><a href="staff.html">Karen Paran</a></h4>
+                                        <h4><a href="staff.html">Trần Công</a></h4>
                                         <p>
                                             Btuff sight equal of my woody. Him children bringing
                                             goodness suitable she entirely put far daughter pushing
@@ -308,11 +308,11 @@
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100" />
                                     <div class="info">
-                                        <h4>Hartisona Roy</h4>
+                                        <h4>Tuấn Anh</h4>
                                         <span>Hotel Developer</span>
                                     </div>
                                     <div class="overlay text-light">
-                                        <h4><a href="staff.html">Hartisona Roy</a></h4>
+                                        <h4><a href="staff.html">Hoàng tử cô đơn</a></h4>
                                         <p>
                                             Btuff sight equal of my woody. Him children bringing
                                             goodness suitable she entirely put far daughter pushing
@@ -340,11 +340,11 @@
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-8.jpg') }}" alt="staff" class="img-fluid w-100" />
                                     <div class="info">
-                                        <h4>Shakira Kaisar</h4>
+                                        <h4>Khánh Nguyên</h4>
                                         <span>Support Manager</span>
                                     </div>
                                     <div class="overlay text-light">
-                                        <h4><a href="staff.html">Shakira Kaisar</a></h4>
+                                        <h4><a href="staff.html">Khánh Nguyên</a></h4>
                                         <p>
                                             Btuff sight equal of my woody. Him children bringing
                                             goodness suitable she entirely put far daughter pushing
@@ -372,11 +372,11 @@
                                 <div class="thumb">
                                     <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100  " />
                                     <div class="info">
-                                        <h4>Maikel John</h4>
+                                        <h4>Quốc Việt</h4>
                                         <span>Hotel Manager</span>
                                     </div>
                                     <div class="overlay text-light">
-                                        <h4><a href="staff.html">Maikel John</a></h4>
+                                        <h4><a href="staff.html">Quốc Việt</a></h4>
                                         <p>
                                             Btuff sight equal of my woody. Him children bringing
                                             goodness suitable she entirely put far daughter pushing
@@ -398,7 +398,71 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="item slide-box">
+                        <div class="staff-box-4">
+                            <div class="item">
+                                <div class="thumb">
+                                    <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100  " />
+                                    <div class="info">
+                                        <h4>Lê Minh Thảo</h4>
+                                        <span>Hotel Manager</span>
+                                    </div>
+                                    <div class="overlay text-light">
+                                        <h4><a href="staff.html">Lê Minh Thảo</a></h4>
+                                        <p>
+                                            Btuff sight equal of my woody. Him children bringing
+                                            goodness suitable she entirely put far daughter pushing
+                                            point.
+                                        </p>
+                                        <ul>
+                                            <li class="facebook">
+                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                            </li>
+                                            <li class="twitter">
+                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                            </li>
+                                            <li class="google">
+                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item slide-box">
+                        <div class="staff-box-4">
+                            <div class="item">
+                                <div class="thumb">
+                                    <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100  " />
+                                    <div class="info">
+                                        <h4>Quang Phúc</h4>
+                                        <span>Hotel Manager</span>
+                                    </div>
+                                    <div class="overlay text-light">
+                                        <h4><a href="staff.html">Quang Phúc</a></h4>
+                                        <p>
+                                            Btuff sight equal of my woody. Him children bringing
+                                            goodness suitable she entirely put far daughter pushing
+                                            point.
+                                        </p>
+                                        <ul>
+                                            <li class="facebook">
+                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                            </li>
+                                            <li class="twitter">
+                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                            </li>
+                                            <li class="google">
+                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
             </div>
         </div>
         <!-- staff section ebd -->

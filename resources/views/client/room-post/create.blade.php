@@ -150,7 +150,7 @@
 
 
                         <div class="col-lg-12 col-md-12 mb-3">
-                            <label class="input-group">Mô tả chi tiết:<span class="text-danger">*</span></label>
+                            <label class="input-group">Mô tả chi tiết (tối thiểu 300 kí tự):<span class="text-danger">*</span></label>
                             <div class="form-group message">
                                 <textarea class="form-control " style="height: 110px" name="description" id="description"
                                     placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
