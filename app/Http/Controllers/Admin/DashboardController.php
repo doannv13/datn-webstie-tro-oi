@@ -95,13 +95,7 @@ class DashboardController extends Controller
             ->where('status', 'accept')
             ->get();
 
-        // Chuyển đổi số điểm sang tiền theo tỷ lệ 1 điểm = 1000 VND
-        $exchangeRate = 1000;
-        foreach ($revenueByMonth as $revenue) {
-            $revenue->total_revenue *= $exchangeRate;
-        }
-        $totalRevenue = Transaction::sum('point');
-        $totalRevenue *= $exchangeRate;
+        $totalRevenue = Transaction::where('status', 'accept')->sum('point');
         return view('admin.dashboard', compact(
             'countRoomPostToDay',
             'countRoomPostToActive',

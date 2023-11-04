@@ -456,8 +456,8 @@
             yLabelFormat: function(y) {
                 // định dạng giá tiền Việt Nam
                 return (Math.round(y)).toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
+                    // style: 'currency',
+                    // currency: 'VND',
                 });
             }
         });
