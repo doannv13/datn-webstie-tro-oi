@@ -9,41 +9,29 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            color: black;
         }
         .email-container {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 5px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
         }
-        .logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-        }
-        .greeting {
-            font-size: 24px;
-        }
-        .message {
-            font-size: 18px;
-        }
-        .sender-info {
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
     <div class="email-container">
-        <img class="logo" src="https://rs.tima.vn/staticFile/img-news/2023/3/2023351_vay-online-tien-oi.png" alt="Logo">
-        <h1 class="greeting">Xác nhận đơn hàng</h1>
-        <h2>Vui lòng kiểm tra lại, chúng tôi đã kiểm tra và không nhận được đơn hàng của bạn, vui lòng liên lạc lại với chúng tôi bằng zalo hoặc email bên dưới</h2>
-        <div class="sender-info">
-            <p>Người gửi: Công ty Trọ Ơi</p>
-            <p>Số điện thoại: 036.37.38.586</p>
-            <p>Email: hotro.trooi.datn@gmail.com</p>
-        </div>
+        <p>Xin chào, {{ $username }}!</p>
+        <p class="greeting">Xác nhận đơn hàng</p>
+        <p>Vui lòng kiểm tra lại, chúng tôi đã kiểm tra và không nhận được đơn hàng của bạn, vui lòng liên lạc lại với chúng tôi bằng zalo hoặc email bên dưới</p>
+        <p>Vui lòng truy cập website để xem chi tiết: <a style="color:skyblue"  href="http://localhost:8000">Bấm ở đây!</a></p>
+        <ul class="sender-info">
+            <li>Công ty:Trọ Ơi</li>
+            <li>Số điện thoại: 036.37.38.586</li>
+            <li>Email: hotro.trooi.datn@gmail.com</li>
+        </ul>
     </div>
 </body>
 </html>

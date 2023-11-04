@@ -29,7 +29,7 @@ class NotificationEvent
         $data['email'][0] = $admin->email;
         $this->verification=$verification;
 
-        dispatch(new MailNotification($data,$this->verification));
+        dispatch(new MailNotification($data,$admin->name,$this->verification));
     }
 
     /**

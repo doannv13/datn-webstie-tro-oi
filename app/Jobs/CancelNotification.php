@@ -19,13 +19,15 @@ class CancelNotification implements ShouldQueue
      * Create a new job instance.
      */
     protected $data;
+    protected $username;
     /**
      * Create a new job instance.
      */
-    public function __construct($data)
+    public function __construct($data,$username)
     {
         //
         $this->data = $data;
+        $this->username = $username;
     }
 
     /**
@@ -34,7 +36,7 @@ class CancelNotification implements ShouldQueue
     public function handle(): void
     {
         //
-        $email = new CancelMail();
+        $email = new CancelMail($this->username);
         Mail::to($this->data['email'])->send($email);
     }
 }
