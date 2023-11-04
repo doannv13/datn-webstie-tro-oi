@@ -16,8 +16,8 @@ class ReportRevenueController extends Controller
     public function index()
     {
 
-        $revenue = Transaction::query()->where('status', 'accept')->where('action', 'import')->sum('point');
-        $revenue_today = Transaction::where('status', 'accept')->where('action', 'import')->whereDate('created_at', today())->sum('point');
+        $revenue = Transaction::query()->where('status', 'accept')->where('action', 'import')->sum('price_promotion');
+        $revenue_today = Transaction::where('status', 'accept')->where('action', 'import')->whereDate('created_at', today())->sum('price_promotion');
         $bill_today = Transaction::where('status', 'accept')->where('action', 'import')->whereDate('created_at', today())->count();
         $bill = Transaction::query()->where('action', 'import')->count();
         $bill_false = Transaction::query()->where('action', 'import')->where('status', 'cancel')->count();
@@ -52,8 +52,8 @@ class ReportRevenueController extends Controller
         if ($date_start != null) {
             $query->where('created_at', '>=', $date_start);
         }
-        $revenue = $query->where('status', 'accept')->where('action', 'import')->sum('point'); //
-        $revenue_service = Transaction::where('action', 'export')->whereBetween('created_at', [$date_start, $date_end])->sum('point'); //
+        $revenue = $query->where('status', 'accept')->where('action', 'import')->sum('price_promotion'); //
+        $revenue_service = Transaction::where('action', 'export')->whereBetween('created_at', [$date_start, $date_end])->sum('price_promotion'); //
         $bill = $query->where('action', 'import')->count(); //
         $bill_false = $query->where('action', 'import')->where('status', 'cancel')->count(); //
         // dd($revenue_service,$bill,$bill_false);

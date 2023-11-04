@@ -207,30 +207,30 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price1', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Dưới
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price1', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Dưới
                                         1 triệu<span>({{ countPrice(0, 1000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price2', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price2', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         1
                                         triệu - 2 triệu<span>({{ countPrice(1000000, 2000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price3', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price3', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         2
                                         triệu - 3 triệu<span>({{ countPrice(2000000, 3000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price4', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price4', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         3
                                         triệu - 5 triệu<span>({{ countPrice(3000000, 5000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price5', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price5', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         5
                                         triệu - 7 triệu<span>({{ countPrice(5000000, 7000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price6', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price6', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         7
                                         triệu - 10 triệu<span>({{ countPrice(7000000, 10000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price7', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">Trên
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price7', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Trên
                                         10 triệu<span>({{ countPriceGreatThan10M() }})</span></a></li>
                             </ul>
                         </div>
@@ -240,22 +240,22 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage1', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search]) }}">Dưới
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage1', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Dưới
                                         15m²<span>({{ countAcreage(0, 15) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage2', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage2', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         15m²
                                         - 25m² <span>({{ countAcreage(15, 25) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage3', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage3', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         25m² -
                                         45m² <span>({{ countAcreage(25, 45) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage3', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search]) }}">Từ
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage4', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
                                         45m² -
                                         75m² <span>({{ countAcreage(45, 75) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage4', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search]) }}">Trên
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage5', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Trên
                                         75m²<span>({{ countAcreageGreatThan45() }})</span></a></li>
                             </ul>
                         </div>
@@ -269,7 +269,7 @@
                                         @foreach ($districts as $district)
                                             <li>
                                                 <a
-                                                    href="{{ route('search-filter', ['district_filter' => $district, 'price_filter' => $selectedPrice, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search]) }}">
+                                                    href="{{ route('search-filter', ['district_filter' => $district, 'price_filter' => $selectedPrice, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">
                                                     {{ $district }} <span> ({{ countDistrict($district) }})
                                                     </span></a>
                                             </li>

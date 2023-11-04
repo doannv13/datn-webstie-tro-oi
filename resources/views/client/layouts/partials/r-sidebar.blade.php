@@ -40,7 +40,7 @@
         <ul class="list-unstyled list-cat">
             @if (categories())
                 @foreach (categories() as $value)
-                    <li><a href="#">{{ $value->name }}<span>({{ $value->room_posts_count }})</span></a>
+                    <li><a href="{{ route('search-filter', ['room_type_filter' => $value->id]) }}">{{ $value->name }}<span>({{ $value->room_posts_count }})</span></a>
                     </li>
                 @endforeach
             @endif
