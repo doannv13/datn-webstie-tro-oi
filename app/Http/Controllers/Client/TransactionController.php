@@ -28,7 +28,7 @@ class TransactionController extends Controller
         $data = Transaction::with('user')
             ->where('action', 'import')
             ->latest()
-            ->paginate(10);
+            ->get();
         return view('admin.transaction.index', compact('data', 'category_rooms', 'districts'));
     }
 
