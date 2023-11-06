@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Cập nhật tiện ích')
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -47,7 +48,7 @@
                                     <button class="btn btn-warning" type="submit"> <a href="{{ route('facilities.index') }}" class="text-white">Trở về</a> </button>
                                 </div>
                             </form>
-                        
+
                         </div> <!-- end col -->
                     </div>
                     <!-- end row-->

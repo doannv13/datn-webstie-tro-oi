@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Dashboard | ADMIN - Trọ ơi')
 @section('content')
     <div class="container-fluid">
 
@@ -29,7 +30,7 @@
 
                         <div class="widget-chart text-center">
                             <div id="chart-container" style="height: 245px;">
-                                
+
                             </div>
                             <ul class="list-inline chart-detail-list mb-0">
                                 <li class="list-inline-item">
@@ -424,7 +425,7 @@
             element: 'chart-container',
             data: data,
             colors: ['#f22424', '#f2b424', '#f72a79', '#66a3ed'] // Có thể điều chỉnh mảng màu tùy thuộc vào dữ liệu
-            
+
         });
     </script>
 

@@ -1,4 +1,5 @@
 @extends('client.auth.index')
+@section('title', 'Cập nhật thông tin tài khoản | Trọ Ơi')
 @section('content')
 <div
 >

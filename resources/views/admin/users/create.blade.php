@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Thêm mới người dùng')
 @section('content')
 <div class="content">
 

@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Cập nhật tiện ích xung quanh')
 @section('content')
     <div class="account-pages mt-5 mb-5">
         <div class="container">

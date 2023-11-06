@@ -1,4 +1,5 @@
 @extends('client.layouts.partials.l-sidebar')
+@section('title', 'Dịch vụ')
 @section('main')
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 ">
@@ -47,8 +48,8 @@
             {{ $services->links() }}
             @endif
             @endif
-            
-            
+
+
         </div>
         <div class="row   text-white" style="background-color: #fbfbfb;">
             <h3 class="text-center fs-8">Minh hoạ tin đăng</h3>

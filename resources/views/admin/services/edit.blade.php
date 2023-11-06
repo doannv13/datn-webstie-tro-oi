@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Cập nhật dịch vụ')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -7,7 +8,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title p-2 fs-3 text ">Sửa Dịch Vụ</h4>
+                    <h4 class="header-title p-2 fs-3 text ">Cập nhật dịch Vụ</h4>
                     @if ($errors->any())
                     <p class=" alert alert-danger col-lg-8">
                         Dữ liệu không hợp lệ vui lòng kiểm tra lại

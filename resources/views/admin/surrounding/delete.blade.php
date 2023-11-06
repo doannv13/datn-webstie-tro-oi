@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Thùng rác | Tiện ích xung quanh')
 @section('content')
     <div class="col-12">
         <div class="card">

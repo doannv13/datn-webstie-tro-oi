@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Thùng rác | Dịch vụ')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -34,7 +35,7 @@
                                             <td>{{ $value->price }}</td>
                                             <td>{{ $value->date_number }}</td>
                                             <td style="color:{{$value->color}};">{{ $value->color }}</td>
-                                        
+
                                             <td>{!! $value->description !!}</td>
 
                                             <td class="text-center">
