@@ -7,7 +7,7 @@
             <div class="col-lg-6 bg-color-15 none-992 bg-img">
                 <div class="info clearfix">
                     <h1>Chào mừng bạn đến với <span>Trọ ơi</span></h1>
-                    <p>Xứ mệnh của chúng tôi ... </p>
+                    <p>Xứ mệnh của chúng tôi là xây dựng một cộng đồng trực tuyến cho những người đang tìm phòng trọ, cho thuê phòng trọ, và chủ nhà. Cộng đồng này có thể giúp họ chia sẻ kinh nghiệm, đánh giá, và thông tin hữu ích về thị trường phòng trọ. </p>
                 </div>
             </div>
             <div class="col-lg-6 align-self-center pad-0 form-section">

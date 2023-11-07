@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\CancelEvent;
 use App\Events\NotificationEvent;
+use App\Events\RoomPostNotificationEvent;
 use App\Events\SuccessEvent;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryRoom;
@@ -94,7 +95,16 @@ class TransactionController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
+
         $newStatus = $request->input('status');
+        $reason=$request->input('reason');
+        // dd($reason);
+        if ($newStatus === 'cancel') {
+            if (empty($reason)) {
+                toastr()->error('Lý do không được để trống khi hủy đơn nạp', 'Lỗi');
+                return back()->withInput();
+            }
+        }
         $model = Transaction::find($id);
         $model->status = $newStatus;
         $model->save();
@@ -114,7 +124,12 @@ class TransactionController extends Controller
             sendNotification($model->user_id,$message);
         } elseif ($newStatus === 'cancel') {
             $user = User::findOrFail($model->user_id);
-            event(new CancelEvent($user));
+            $content = [
+                'user' => $user->name,
+                'title' => 'Đơn nạp của bạn đã bị từ chối',
+                'description' => "Mã nạp ".$model->verification." nhận ".$model->point_persent." point không được chấp nhận với lý do: ".$reason
+            ];
+            event(new RoomPostNotificationEvent($user->email, $content));
         }
         return back();
     }
