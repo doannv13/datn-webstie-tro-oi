@@ -1,11 +1,17 @@
 
-@extends('client.auth.index')
+@extends('client.layouts.master')
 @section('title', 'Cập nhật thông tin tài khoản | Trọ Ơi')
 @section('content')
 <div class="login-section">
     <div class="container-fluid">
-        <div class="row login-box">
-            <div class="col-lg-6 align-self-center pad-0 form-section">
+        <div class="row login-box" style="width:100%;display:flex;justify-content: center;margin-bottom:20px">
+            <div class="col-lg-6 bg-color-15 none-992 bg-img1" style="width:40%;"">
+                <div class="info clearfix">
+                    <h1><span>Cập nhật thông tin</span></h1>
+                    <p>Xứ mệnh của chúng tôi là xây dựng một cộng đồng trực tuyến cho những người đang tìm phòng trọ, cho thuê phòng trọ, và chủ nhà. Cộng đồng này có thể giúp họ chia sẻ kinh nghiệm, đánh giá, và thông tin hữu ích về thị trường phòng trọ. </p>
+                </div>
+            </div>
+            <div class="col-lg-6 align-self-center pad-0 form-section" style="width:40%;"">
                 <div class="form-section" style="width:100%">
                     <div class="form-inner">
                         <a href="{{ route('home') }}">
@@ -107,12 +113,6 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 bg-color-15 none-992 bg-img">
-                <div class="info clearfix">
-                    <h1>Chào mừng bạn đến với <span>Trọ ơi</span></h1>
-                    <p>Xứ mệnh của chúng tôi là xây dựng một cộng đồng trực tuyến cho những người đang tìm phòng trọ, cho thuê phòng trọ, và chủ nhà. Cộng đồng này có thể giúp họ chia sẻ kinh nghiệm, đánh giá, và thông tin hữu ích về thị trường phòng trọ. </p>
                 </div>
             </div>
         </div>
