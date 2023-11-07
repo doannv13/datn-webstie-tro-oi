@@ -438,7 +438,7 @@ class RoomPostController extends Controller
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng của bạn đã bị từ chối',
-                    'description' => "Tin phòng $room_post->fullname không được thông qua với lý do ".$request->reason
+                    'description' => "Tin phòng $room_post->fullname không được thông qua với lý do: ".$request->reason
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));

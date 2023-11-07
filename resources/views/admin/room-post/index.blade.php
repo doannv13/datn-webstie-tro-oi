@@ -43,9 +43,9 @@
                             <td>
                                 @if ($value->status == 'pendding')
                                 <div class="buttonStatus{{$value->id}} d-flex gap-1 statusSelect" name="status" data-id="{{ $value->id }}" >
-                                    
+
                                     <button class="btn btn-primary"  value="accept">Kích hoạt</button>
-                                  
+
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$value->id}}">
                                         Từ chối
                                     </button>
@@ -61,13 +61,12 @@
                                                     <label for="floatingTextarea2">Nội dung</label>
                                                     <div class="form-floating">
                                                         <textarea class="form-control" id="reason" required pattern=".{5,}" placeholder="Nội dung hơn 5 kí tự"  style="height: 100px"></textarea>
-                                                        <!-- <input type="text" id="reason" > -->
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer statusSelect"  name="status" data-id="{{ $value->id }}">
-                        
+
                                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  value="cancel">Xác nhận</button>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -204,71 +203,115 @@
     localStorage.clear();
     $(document).ready(function() {
         $(".statusSelect button").click(function() {
-            let statusButton = $(this);
-            
-            let room_post_id = statusButton.parent().data(
-                'id'); // Lấy giá trị `data-id` của phần tử cha
-            let deleteButton = $("#deleteButton" + room_post_id);
-            let buttonChange =$(".buttonStatus"+ room_post_id);
-            let status = statusButton.attr('value'); // Lấy giá trị của nút được nhấn
+    let statusButton = $(this);
+    let room_post_id = statusButton.parent().data('id'); // Lấy giá trị `data-id` của phần tử cha
+    let deleteButton = $("#deleteButton" + room_post_id);
+    let buttonChange = $(".buttonStatus" + room_post_id);
+    let status = statusButton.attr('value');
+
+    if (status === 'cancel') {
+        if (confirm("Chắc chắn chấp nhận?")) {
             let reason = $("#reason").val();
-            if (status === 'accept' || status === 'cancel') {
-                if (confirm("Chắc chắn chấp nhận?")) {
-                    console.log(reason)
-                    $.ajax({
-                        type: "GET",
-                        dataType: "json",
-                        url: "{{ route('admin-room-posts-status') }}",
-                        data: {
-                            'status': status,
-                            'room_post_id': room_post_id,
-                            'reason': reason
-                            
-                            
-                        },
-                        success: function(data) {
-                            console.log(data);
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
+            if (reason.trim().length >= 5 && reason.trim().length <= 50) {
+                console.log(reason);
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "{{ route('admin-room-posts-status') }}",
+                    data: {
+                        'status': status,
+                        'room_post_id': room_post_id,
+                        'reason': reason
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
                                 icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000
+                                title: data.success,
                             });
-
-                            if ($.isEmptyObject(data.error)) {
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: data.success,
-                                });
-                            } else {
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: data.error,
-                                });
-                            }
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            });
                         }
-                    });
-
-                    let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' :
-                            'btn-danger') +
-                        '">' +
-                        (status === 'accept' ? 'Đã kích hoạt' : 'Đã hủy') + '</label>';
-                    // if(status==='accept'){
-                    //     var label = '<label class="btn btn-success">'+'Đã kích hoạt'+'</label>';
-                    // }else if(status==='cancel'){
-                    //     var label = '<label class="btn btn-danger">'+'Đã hủy'+'</label>';
-                    // }
-                    buttonChange.parent().html(label); // Thay đổi nội dung của phần tử "statusSelect" hiện tại
-                    if (status === 'pendding') {
-                        deleteButton.prop('disabled', true); // Tắt nút xoá khi status là 'accept'
-                    } else {
-                        // document.getElementById('time_start').innerText=data.time_start;
-                        deleteButton.prop('disabled', false); // Bật nút xoá cho mọi trạng thái khác
                     }
+                });
+
+                let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' : 'btn-danger') +
+                    '">' + (status === 'accept' ? 'Đã kích hoạt' : 'Đã hủy') + '</label';
+                buttonChange.parent().html(label);
+
+                if (status === 'pendding') {
+                    deleteButton.prop('disabled', true);
+                } else {
+                    deleteButton.prop('disabled', false);
                 }
+            } else {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Nội dung phải có ít nhất 5 kí tự và không nhiều hơn 50 ký tự',
+                });
             }
-        })
+        }
+    }else if(status === 'accept'){
+        if (confirm("Chắc chắn chấp nhận?")) {
+            $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "{{ route('admin-room-posts-status') }}",
+                    data: {
+                        'status': status,
+                        'room_post_id': room_post_id,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                            });
+                        } else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                            });
+                        }
+                    }
+                });
+                let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' : 'btn-danger') +
+                    '">' + (status === 'accept' ? 'Đã kích hoạt' : 'Đã hủy') + '</label';
+                buttonChange.parent().html(label);
+
+        }
+    }
+
+});
+
     });
 </script>
 @endpush

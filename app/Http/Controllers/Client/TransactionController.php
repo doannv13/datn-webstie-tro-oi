@@ -95,9 +95,16 @@ class TransactionController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
+
         $newStatus = $request->input('status');
         $reason=$request->input('reason');
         // dd($reason);
+        if ($newStatus === 'cancel') {
+            if (empty($reason)) {
+                toastr()->error('Lý do không được để trống khi hủy đơn nạp', 'Lỗi');
+                return back()->withInput();
+            }
+        }
         $model = Transaction::find($id);
         $model->status = $newStatus;
         $model->save();
@@ -120,7 +127,7 @@ class TransactionController extends Controller
             $content = [
                 'user' => $user->name,
                 'title' => 'Đơn nạp của bạn đã bị từ chối',
-                'description' => "Mã nạp ".$model->verification." nhận ".$model->point_persent." point không được chấp nhận với lý do ".$reason
+                'description' => "Mã nạp ".$model->verification." nhận ".$model->point_persent." point không được chấp nhận với lý do: ".$reason
             ];
             event(new RoomPostNotificationEvent($user->email, $content));
         }

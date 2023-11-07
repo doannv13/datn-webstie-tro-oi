@@ -1,14 +1,10 @@
 @extends('client.auth.index')
 @section('content')
-<div
->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Login section start -->
-            <div class="login-section">
-                <div class="container-fluid">
-                    <div class="row login-box">
-                        <div class="form-section">
+<div class="login-section">
+    <div class="container-fluid">
+        <div class="row login-box">
+            <div class="col-lg-6 align-self-center pad-0 form-section">
+                <div class="form-section" style="width:100%">
                             <div class="form-inner">
                                 <a href="{{ route('home') }}">
                                     <img src="{{ asset('fe/img/logos/logo.png') }}" alt="" width="300px" />
@@ -44,22 +40,14 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+            </div>
+            <div class="col-lg-6 bg-color-15 none-992 bg-img">
+                <div class="info clearfix">
+                    <h1>Chào mừng bạn đến với <span>Trọ ơi</span></h1>
+                    <p>Xứ mệnh của chúng tôi là xây dựng một cộng đồng trực tuyến cho những người đang tìm phòng trọ, cho thuê phòng trọ, và chủ nhà. Cộng đồng này có thể giúp họ chia sẻ kinh nghiệm, đánh giá, và thông tin hữu ích về thị trường phòng trọ. </p>
                 </div>
             </div>
-            <!-- Login section end -->
         </div>
     </div>
 </div>
-<script>
-    function ValidateRegister(){
-        let flag= true;
-        let dataPhone =document.querySelector('#phone).value
-        if(dataPhone.trim()===''){
-            flag=false;
-            document.querySelector('#error_phone').innerHTML='KH BỎ TRỐNG'
-        }
-        return flag;
-    }
-</script>
 @endsection

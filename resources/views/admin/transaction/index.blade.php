@@ -28,8 +28,8 @@
                         <tr id="row_{{ $value->ID }}">
                             <td class="tabledit-view-mode">{{ $key +1 }}</td>
                             <td class="tabledit-view-mode">{!! substr($value->user->name, 0, 20) !!}</td>
-                            <td class="tabledit-view-mode">{{ number_format((float) $value->point, 0, '.', ',') }}</td>
-                            <td class="tabledit-view-mode">{{ number_format((float) $value->price_promotion, 0, '.', ',') }}</td>
+                            <td class="tabledit-view-mode">{{ number_format((float) $value->point, 0, '.', ',') }} VND</td>
+                            <td class="tabledit-view-mode">{{ number_format((float) $value->price_promotion, 0, '.', ',') }} VND</td>
                             <td class="tabledit-view-mode">{{ optional($value->coupon)->name ?? 'N/A' }}</td>
                             <td class="tabledit-view-mode">{!! substr($value->payment_method, 0, 20) !!}</td>
                             <td class="tabledit-view-mode">{!! substr($value->verification, 0, 20) !!}</td>
@@ -57,13 +57,10 @@
                                                 </div>
                                                 <div class="modal-body ">
                                                     <div class="d-flex justify-content-star">
-                                                <label for="floatingTextarea2 ">Nội dung<span class="text-warning">(Lớn hơn 5 kí tự)</span></label>
+                                                <label for="floatingTextarea2 ">Nội dung<span class=""> (lớn hơn 5 kí tự)</span></label>
                                                     </div>
                                                     <div class="form-floating">
-                                                   
-                                                        <textarea  class="form-control " name="reason" required pattern=".{5,}"  placeholder="Describe yourself here..." style="height: 100px"></textarea>
-                                                        
-            
+                                                        <textarea  class="form-control " name="reason"   placeholder="Nhập lí do từ chối" style="height: 100px"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -89,6 +86,6 @@
 @push('scripts')
 <script>
     new DataTable('#tech-companies-1');
-    
+
 </script>
 @endpush
