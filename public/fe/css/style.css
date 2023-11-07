@@ -6380,6 +6380,35 @@ footer ul {
     bottom: 0;
     background: rgb(0 15 191 / 63%);
 }
+.login-section .bg-img1 {
+    min-height: 100vh;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 50px;
+    background: #fff;
+    background: rgba(0, 0, 0, 0.04) url(../img/banner/img-5.jpg) top left repeat;
+    z-index: 999;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-section .bg-img1:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(0 15 191 / 33%);
+
+}
 
 .login-section .form-section .extra-login {
     float: left;
@@ -8369,6 +8398,9 @@ span.flatpickr-weekday {
     .login-section .bg-img {
         display: none;
     }
+    .login-section .bg-img1 {
+        display: none;
+    }
 
     .our-newslatters {
         padding: 30px 0;
@@ -9783,6 +9815,6 @@ div#social-links ul li a:hover {
 .img-main{
     width: 100% !important;
     height: 640px !important;
-    background-size: 100%; 
+    background-size: 100%;
 }
 

@@ -20,12 +20,12 @@
                 </ul>
                 @else
                 @if (Auth::user())
-                <div class="dropdown pull-right">
-                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static" aria-expanded="false">
+                <div class="btn-group pull-right dropend">
+                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center dropdown-toggle" style="border-0"  data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="Header Avatar">
-                        <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                        <span class="d-xl-inline-block ms-1 ">{{ Auth::user()->name }}</span>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end">
+                    <div class="dropdown-menu">
                         <div>
                             @if (Auth::user())
                             @if (Auth::user()->role === 'vendor')
@@ -48,9 +48,37 @@
                             </form>
                         </div>
                     </div>
-
-
                 </div>
+                {{-- <div class="dropdown pull-right dropend ">
+                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static"  data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="Header Avatar">
+                        <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                    </button>
+
+                    <div class="dropdown-menu">
+                        <div>
+                            @if (Auth::user())
+                            @if (Auth::user()->role === 'vendor')
+                            <a class="dropdown-item" href="{{ route('room-posts.index') }}">Vào trang quản
+                                lí</a>
+                            @elseif (Auth::user()->role === 'admin')
+                            <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                            @endif
+                            @endif
+                            <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
+                                nhật tài khoản</a>
+                            @if (Auth::user())
+                            <a class="dropdown-item" href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Đăng xuất
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div> --}}
                 @endif
                 @endguest
             </div>
@@ -272,8 +300,8 @@
 
 
 
-                        <div class="col-md-6 col-sm-6 col-lg-1 p-2 ">
-                            <center>
+                        <div class="col-md-6 col-sm-6 col-lg-1 p-2 " >
+                            <center style="margin-top: 8px">
                                 <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
                                 </a>
 
