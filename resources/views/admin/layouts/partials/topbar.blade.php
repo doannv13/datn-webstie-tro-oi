@@ -110,7 +110,7 @@
                                     <small>sajbbjas</small>
                                 </p>
                             </a>
-                             -->       
+                             -->
                     <div id="content-notify">
 
                     </div>
@@ -118,7 +118,7 @@
 
                 <!-- All -->
                 <a href="" class="dropdown-item text-center text-primary notify-item notify-all">
-                    
+
                 <i class="fa-regular fa-bell" style="color: #eb820a;"></i>
                 </a>
 
@@ -191,9 +191,9 @@
 
             <span class="logo-lg">
                 @if ($global_setting->logo && asset($global_setting->logo))
-                <img src="{{ asset($global_setting->logo) }}" alt="logo" height="16">
+                <img src="{{ asset($global_setting->logo) }}" alt="logo" height="85">
                 @else
-                <img src="{{ asset('no_image.jpg') }}" alt="logo" height="16">
+                <img src="{{ asset('no_image.jpg') }}" alt="logo" height="85">
                 @endif
             </span>
         </a>
@@ -208,9 +208,9 @@
             </span>
             <span class="logo-lg">
                 @if ($global_setting->logo && asset($global_setting->logo))
-                <img src="{{ asset($global_setting->logo) }}" alt="logo" height="50">
+                <img src="{{ asset($global_setting->logo) }}" alt="logo" height="85">
                 @else
-                <img src="{{ asset('no_image.jpg') }}" alt="logo" height="50">
+                <img src="{{ asset('no_image.jpg') }}" alt="logo" height="85">
                 @endif
             </span>
         </a>
@@ -224,7 +224,7 @@
         </li>
 
         <li>
-            <h4 class="page-title-main">Bảng điều khiển</h4>
+            <h4 class="page-title-main"></h4>
         </li>
 
     </ul>
@@ -247,11 +247,11 @@
                 success: function(response) {
                 // Create an empty string to store the HTML for notifications
                     let notificationsHTML = '';
-                   
+
                     response.forEach(function(data) {
                         // console.log(data);
                         // Generate HTML for each notification
-                        let notificationHTML = 
+                        let notificationHTML =
                         ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item "  id="notification${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
                                 <div class="notify-icon">
                                     <img src="${data.avata}" id='avatar' class="img-fluid rounded-circle" alt="" />
@@ -264,18 +264,18 @@
                                     <small>${data.message}</small>
                                 </p>
                         </a>
-                        ` 
-                       
-                       
+                        `
+
+
                         // Append the generated HTML to the notificationsHTML
                         notificationsHTML += notificationHTML;
-                      
+
                         // document.querySelector('#notify-content').innerHTML = notificationsHTML;
                     });
                     // console.log(notificationsHTML);
                     // Append the new notificationsHTML to the .noti-scroll element
                     document.querySelector('#content-notify').innerHTML = notificationsHTML;
-                    
+
                 },
                 error: function(error) {
                     console.error(error);

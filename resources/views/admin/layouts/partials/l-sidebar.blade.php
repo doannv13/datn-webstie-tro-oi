@@ -66,7 +66,7 @@
 
 
             <ul id="side-menu">
-                <li class="menu-title">Navigation</li>
+                <li class="menu-title">Thống kê</li>
                 <li>
                     <a href="{{ route('dashboard-admin') }}">
                         <i class="fe-folder-minus"></i>
