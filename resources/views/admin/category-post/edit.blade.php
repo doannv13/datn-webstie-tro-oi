@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Cập nhật danh mục bài viết')
 @section('content')
     <!-- Start Content-->
     <div class="container-fluid">

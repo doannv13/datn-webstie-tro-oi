@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Thùng rác
+    Thùng rác | Mã giảm giá
 @endsection
 @section('content')
     <!-- Start Content-->

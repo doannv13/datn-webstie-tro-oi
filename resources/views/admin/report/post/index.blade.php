@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Bài viết')
+@section('title', 'Báo cáo | Bài viết')
 @section('content')
 
     <div class="row">

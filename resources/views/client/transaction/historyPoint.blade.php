@@ -1,5 +1,5 @@
 @extends('client.layouts.partials.l-sidebar')
-@section('title', 'Danh sách tin đăng')
+@section('title', 'Lịch sử giao dịch')
 @section('main')
 <div class="row sidebar">
     <h4 class="my-3">Lịch sử giao dịch</h4>

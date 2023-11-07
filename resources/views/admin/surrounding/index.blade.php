@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Danh sách tiện ích')
 @section('content')
     <div class="col-12">
         <div class="card">
@@ -22,7 +23,7 @@
                                     <td class="tabledit-view-mode">{{ $key+1 }}</td>
                                     <td class="tabledit-view-mode">{{ $value->name }}</td>
                                     <td class="tabledit-view-mode">{{ $value->icon }}</td>
-                                    
+
                                     <td style="white-space: nowrap; width: 1%;">
 
                                         <a href="{{ route('surroundings.edit', $value->id) }}">

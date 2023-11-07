@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Lưu mật khẩu | Trọ Ơi')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

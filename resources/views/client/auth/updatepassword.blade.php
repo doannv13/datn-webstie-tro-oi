@@ -1,4 +1,5 @@
 @extends('client.auth.index')
+@section('title', 'Làm mới mật khẩu | Trọ Ơi')
 @section('content')
 <div class="login-section">
     <div class="container-fluid">

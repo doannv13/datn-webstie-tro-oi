@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','Danh sách danh mục')
+@section('title','Danh sách danh mục tin đăng')
 @section('content')
 
     <div class="col-12">

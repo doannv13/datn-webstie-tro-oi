@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title','Sửa danh mục')
+@section('title','Sửa danh mục tin đăng')
 
 @section('content')
     <!-- Start Content-->
@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="mt-0">Chỉnh sửa danh mục phòng</h5>
+                        <h5 class="mt-0">Chỉnh sửa danh mục tin đăng</h5>
                         <div class="row">
                             <div class="col-lg-12">
                                 <form action="{{ route('category-rooms.update',$data->id) }}" method="POST">

@@ -1,4 +1,5 @@
 @extends('admin.auth.index')
+@section('title', 'Cập nhật thông tin')
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6 col-xl-4">

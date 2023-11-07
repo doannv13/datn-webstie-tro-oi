@@ -1,4 +1,5 @@
 @extends('client.layouts.master')
+@section('title', 'Trang chủ | Trọ Ơi')
 @section('content')
 <div class="content">
     <!-- Banner start -->

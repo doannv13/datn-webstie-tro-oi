@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Danh sách dịch vụ')
 @section('content')
     <!-- Start Content-->
     <div class="container-fluid">
