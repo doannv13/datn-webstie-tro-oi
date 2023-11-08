@@ -167,8 +167,6 @@ class HomeController extends Controller
             ->all();
 
         $query = RoomPost::query()
-            ->join('users', 'room_posts.user_id', '=', 'users.id')
-            ->select('room_posts.*', 'users.avatar')
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
 
