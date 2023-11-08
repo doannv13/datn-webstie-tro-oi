@@ -43,7 +43,7 @@ class HomeController extends Controller
             ->limit(6)
             ->get();
         // dd($room_post_vip);
-        $room_post_new = RoomPost::latest('time_start')->where('status','accept')->limit(30)->paginate(3);
+        $room_post_new = RoomPost::latest('time_start')->where('status', 'accept')->limit(30)->paginate(3);
         // dd($room_post_new);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();
@@ -60,7 +60,7 @@ class HomeController extends Controller
         //     ->facebook()
         //     ->twitter()
         //     ->reddit();
-        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip','room_post_new', 'posts', 'count_room', 'count_user', 'count_post', 'banners','currentDateTime'));
+        return view('client.layouts.home', compact('category_rooms', 'wards', 'districts', 'room_post_vip', 'room_post_new', 'posts', 'count_room', 'count_user', 'count_post', 'banners', 'currentDateTime'));
     }
     public function bookmark(Request $request)
     {
@@ -93,11 +93,11 @@ class HomeController extends Controller
             $user_id = auth()->user()->id;
             $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
             $data = Bookmark::where('user_id', $user_id)
-            ->whereHas('roomPost', function ($query) {
-                $query->where('status', 'accept');
-            })
-            ->with('roomPost')
-            ->paginate(6);
+                ->whereHas('roomPost', function ($query) {
+                    $query->where('status', 'accept');
+                })
+                ->with('roomPost')
+                ->paginate(6);
             $categories = CategoryRoom::withCount('roomPosts')
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
@@ -167,6 +167,8 @@ class HomeController extends Controller
             ->all();
 
         $query = RoomPost::query()
+            ->join('users', 'room_posts.user_id', '=', 'users.id')
+            ->select('room_posts.*', 'users.avatar')
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
 
