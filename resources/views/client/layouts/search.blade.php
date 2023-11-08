@@ -133,8 +133,8 @@
                                     <div class="heading-rooms gap-5 align-items-center row">
                                         <div class="row">
                                             <div class="col-md-7 col-6 d-flex">
-                                                <div class=""
-                                                    style=" background-image: url(https://picsum.photos/200);background-size: contain;  background-repeat: no-repeat; border-radius: 50%; border: 2px solid #a1a1a1; height: 30px; margin: 5px; padding: 10px;  width:30px;">
+                                                <div class="">
+                                                    <img  class="rounded-circle me-2" style="width:30px;height:30px" src="{{ $item->avatar ? asset($item->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="">
                                                 </div>
                                                 <div class="">
                                                     <h6 class="mb-0" style="font-size: 14px">{{ $item->fullname }}</h6>

@@ -1135,8 +1135,8 @@
 
 @media (min-width: 992px) {
     .banner .item img {
-        animation: bgburnsEast 25s linear infinite alternate;
-        -webkit-animation: bgburnsEast 25s linear infinite alternate;
+        /* animation: bgburnsEast 25s linear infinite alternate; */
+        /* -webkit-animation: bgburnsEast 25s linear infinite alternate; */
     }
 }
 
