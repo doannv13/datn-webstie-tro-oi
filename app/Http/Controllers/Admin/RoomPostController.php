@@ -425,6 +425,7 @@ class RoomPostController extends Controller
             $room_post->save();
             $user = User::findOrFail($room_post->user_id);
             if ($room_post->status === 'accept') {
+                $room_post->reason = '';
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng đã được duyệt',
@@ -435,6 +436,7 @@ class RoomPostController extends Controller
                 $message="Mã tin ".$room_post->id." của bạn đã được duyệt.";
                 sendNotification($room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
+                $room_post->reason = $request->reason;
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng của bạn đã bị từ chối',
@@ -445,7 +447,7 @@ class RoomPostController extends Controller
                 $message="Mã tin ".$room_post->id." của bạn đã bị từ chối.";
                 sendNotification($room_post->user_id,$message);
             }
-
+            $room_post->save();
             return response()->json(['success' => 'Thay đổi trạng thái thành công','room_post_id'=>$request->room_post_id,'time_start'=>$room_post->time_start->format('Y-m-d H:i:s')]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

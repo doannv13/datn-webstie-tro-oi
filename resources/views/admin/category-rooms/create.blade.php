@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="mt-0">Tạo mới danh mục tin đăng phòng </h5>
+                            <h2 class="mt-0">Tạo mới danh mục tin đăng phòng </h5>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <form action="{{ route('category-rooms.store') }}" method="POST">

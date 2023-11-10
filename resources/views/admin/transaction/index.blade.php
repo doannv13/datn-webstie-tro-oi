@@ -5,7 +5,7 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h5 class="mt-0">Xác nhận nạp ví</h5>
+            <h2 class="mt-0">Xác nhận nạp ví</h5>
             <div class="table-responsive">
                 <div class="mb-2 d-flex gap-1 ">
                 </div>
@@ -14,13 +14,14 @@
                         <tr>
                             <th class="col-0.5">#</th>
                             <th class="col-1.5">Người nạp</th>
-                            <th class="col-1.5">Số tiền gốc</th>
-                            <th class="col-1.5">Số tiền thanh toán</th>
+                            <th class="col-1">Số tiền gốc</th>
+                            <th class="col-1">Số tiền thanh toán</th>
                             <th class="col-1.5">Mã giảm giá</th>
-                            <th class="col-1.5">Phương thức</th>
-                            <th class="col-1.5">Mã xác thực</th>
-                            <th class="col-1.5">Ngày mua</th>
+                            <th class="col-1">Phương thức</th>
+                            <th class="col-1">Mã xác thực</th>
+                            <th class="col-1">Ngày mua</th>
                             <th class="col-1.5">Trạng thái</th>
+                            <th class="col-2">Lí do</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,6 +73,9 @@
                                 </form>
                                 @endif
                             </td>
+                            <td class="tabledit-view-mode">{!!
+                                ($value->status && $value->status=='cancel') ?  substr($value->reason, 0, 20) : '--'
+                                !!}</td>
                         </tr>
                         @endforeach
                     </tbody>

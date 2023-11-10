@@ -46,8 +46,8 @@
                                         {!! '<div class="btn btn-danger">Đã huỷ</div>' !!}
                                     @endif
                                 </td>
-                                <td>{{ $value->time_start }}</td>
-                                <td>{{ $value->time_end }}</td>
+                                <td>{{ $value->time_start ? $value->time_start : '--' }}</td>
+                                <td>{{ $value->time_end ? $value->time_end : '--' }}</td>
                                 <td class="">
                                     <div class="d-flex justify-content-around align-items-center">
                                         <!-- Button trigger modal -->
@@ -119,8 +119,16 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row my-3">
-                                <div class="col-md-5 fw-bold">Tên:</div>
+                                <div class="col-md-5 fw-bold">Tiêu đề:</div>
                                 <div class="col-md-7">{{ $value->name }}</div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Loại tin:</div>
+                                <div class="col-md-7"> @if ($value->service_id != null)
+                                    {{ $value->service->name }}
+                                @else
+                                    <p>Tin thường</p>
+                                @endif</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Địa chỉ:</div>
@@ -135,6 +143,25 @@
                                 <div class="col-md-5 fw-bold">Diện tích:</div>
                                 <div class="col-md-7">{{ $value->acreage }}m2</div>
                             </div>
+                            <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Trạng thái:</div>
+                                <div class="col-md-7">
+                                    @php
+                                        $statusMapping = [
+                                            'pendding' => 'Chờ xử lý',
+                                            'accept' => 'Chấp nhận',
+                                            'cancel' => 'Đã bỏ',
+                                        ];
+                                    @endphp
+                                    {{ $statusMapping[$value->status] }}
+                                </div>
+                            </div>
+                            @if($value && $value->status==='cancel' || $value->status==='pendding')
+                            <div class="row my-3">
+                                <div class="col-md-5 fw-bold">Lí do:</div>
+                                <div class="col-md-7"> {{ $value->reason ? $value->reason : '--' }}</div>
+                            </div>
+                            @endif
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Danh mục:</div>
                                 <div class="col-md-7"> {{ $value->categoryroom->name }}</div>
@@ -167,11 +194,11 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Ngày đăng:</div>
-                                <div class="col-md-7">{{ $value->created_at }}</div>
+                                <div class="col-md-7">{{ $value->created_at ? $value->created_at : '--' }}</div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-5 fw-bold">Ngày hết hạn:</div>
-                                <div class="col-md-7">{{ $value->time_end }}</div>
+                                <div class="col-md-7">{{ $value->time_end ? $value->time_end : '--' }}</div>
                             </div>
                         </div>
                     </div>
