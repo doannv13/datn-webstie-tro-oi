@@ -153,14 +153,16 @@
                                 class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle"
                                 id="bookmarkQty">
                                 @php
-                                    $user_id = auth()->user()->id;
-                                    $bm = \App\Models\Bookmark::where('user_id', $user_id)
-                                        ->whereHas('roomPost', function ($query) {
-                                            $query->where('status', 'accept');
-                                        })
-                                        ->count();
+                                    if (Auth::check()) {
+                                        $user_id = auth()->user()->id;
+                                        $bm = \App\Models\Bookmark::where('user_id', $user_id)
+                                            ->whereHas('roomPost', function ($query) {
+                                                $query->where('status', 'accept');
+                                            })
+                                            ->count();
+                                    }
                                 @endphp
-                                {{ $bm }}
+                                {{ $bm ?? 0 }}
                             </span>
                         </a>
                         <a href="{{ route('room-posts.create') }}" class="btn btn-5" style="font-size: 13px">
