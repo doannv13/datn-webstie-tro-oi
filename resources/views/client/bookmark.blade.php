@@ -279,6 +279,7 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
+                    $('#bookmarkQty').text(response.bm);
                     divToDelete.remove();
                 },
                 error: function(error) {
