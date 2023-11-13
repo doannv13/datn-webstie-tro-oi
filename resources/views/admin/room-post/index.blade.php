@@ -176,11 +176,11 @@
                     </div>
                     @if($value && $value->status==='cancel' || $value->status==='pendding')
                     <div class="row my-3">
-                        <div class="col-md-5 fw-bold">Lí do:</div>
+                        <div class="col-md-5 fw-bold">Lí do từ chối:</div>
                         @if(count($value->cancelHistories) > 0)
                         <ul class="col-md-7">
                         @foreach ($value->cancelHistories as $item)
-                            <li class="">{{  ' '.$item->reason }}</li>
+                            <p class="">{{  '- '.$item->reason }}</p>
                         @endforeach
                         </ul>
                         @else

@@ -162,7 +162,7 @@
                                 @if(count($value->cancelHistories) > 0)
                                 <ul class="col-md-7">
                                 @foreach ($value->cancelHistories as $item)
-                                    <li class="">&#8226;{{  ' '.$item->reason }}</li>
+                                    <li class="">{{  '- '.$item->reason }}</li>
                                 @endforeach
                                 </ul>
                                 @else

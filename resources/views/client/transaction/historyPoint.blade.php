@@ -14,10 +14,10 @@
                     <th style="width:12%">Số tiền</th>
                     <th style="width:10%">Số point</th>
                     <th style="width:5%">Trạng thái</th>
-                    <th style="width:10%">Lí do</th>
                     <th style="width:10%">Gói</th>
                     <th style="width:10%">Nội dung</th>
                     <th style="width:10%">Thời gian</th>
+                    <th style="width:10%">Lí do</th>
                 </thead>
                 <tbody class="align-items-center p-4">
                     @foreach ($data as $key => $value)
@@ -56,9 +56,9 @@
 
                             @endif
                         </td>
-                        <td>
+                        {{-- <td>
                             {{ $value->reason ? substr($value->reason, 0, 20) : '---' }}
-                        </td>
+                        </td> --}}
                         <td>
                             @if ($value->action ==='export')
                             <p class=""> {{ $value->room_post->service->name }}</p>
@@ -75,6 +75,17 @@
                         </td>
 
                         <td>{{ $value->created_at}}</td>
+                        <td class="tabledit-view-mode">
+                            @if(empty(!$value->reason))
+                                <button class="btn btn-success" style="font-size: 13px"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalToggle{{ $value->id }}">
+                                        <i class="fas fa-eye fs-5"></i>
+                                </button>
+                                @else
+                                --
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
 
@@ -92,51 +103,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel"><i class="text-primary fa-solid fa-wallet fa-2xl mx-2"></i>
-                    Tin đăng phòng {{ $value->name }}</h1>
+                    Giao dịch {{ $value->name }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Tên:</div>
-                        <div class="col-md-8">{{ $value->name }}</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Địa chỉ:</div>
-                        <div class="col-md-8">{{ $value->address_full }}
-                        </div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Giá tiền:</div>
-                        <div class="col-md-8">{{ $value->price }}VND/tháng</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Diện tích:</div>
-                        <div class="col-md-8">{{ $value->acreage }}m2</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Mô tả:</div>
-                        <div class="col-md-8">{!! $value->description !!}</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Liên hệ:</div>
-                        <div class="col-md-8">{{ $value->fullname }}</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Điện thoại:</div>
-                        <div class="col-md-8">{{ $value->phone }}</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Zalo:</div>
-                        <div class="col-md-8">{{ $value->zalo }}</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Ngày đăng:</div>
-                        <div class="col-md-8">{{ $value->created_at->format('d-m-Y') }}</div>
-                    </div>
-                    <div class="row my-3">
-                        <div class="col-md-4 fw-bold">Ngày hết hạn:</div>
-                        <div class="col-md-8">{{ $value->created_at->format('d-m-Y') }}</div>
+                        <div class="col-md-4 fw-bold">Lí do từ chối:</div>
+                        <div class="col-md-8">{{ $value->reason }}</div>
                     </div>
                 </div>
             </div>
