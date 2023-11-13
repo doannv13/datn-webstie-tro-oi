@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách ảnh quảng cáo</h5>
+                <h2 class="mt-0">Danh sách ảnh quảng cáo</h5>
                 <div class="table-responsive">
                     <a class="btn btn-success mb-2" href="{{ route('advertisements.create') }}">Thêm mới</a>
                     <a class="btn btn-danger mb-2" href="{{ route('advertisements-deleted') }}">Thùng rác</a>

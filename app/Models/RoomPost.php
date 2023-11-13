@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RoomPost extends Model
 {
     use HasFactory, SoftDeletes;
-   
+
     protected $fillable = [
         'name',
         'slug',
@@ -36,7 +36,10 @@ class RoomPost extends Model
         'time_start',
         'time_end'
     ];
-   
+    public function cancelHistories()
+    {
+        return $this->hasMany(CancelHistory::class, 'room_post_id');
+    }
     public function district()
     {
         return $this->belongsTo(District::class, 'district_id', 'id');

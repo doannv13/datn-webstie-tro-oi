@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('action', ['import', 'export']);
             $table->string('verification')->nullable();
             $table->enum('status', ['pending', 'accept', 'cancel'])->default('pending');
+            $table->string('reason')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('room_post_id')->references('id')->on('room_posts');
             $table->timestamps();

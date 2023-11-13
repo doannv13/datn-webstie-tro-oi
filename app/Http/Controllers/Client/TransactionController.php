@@ -107,7 +107,7 @@ class TransactionController extends Controller
         }
         $model = Transaction::find($id);
         $model->status = $newStatus;
-        $model->save();
+
 
         toastr()->success('Chỉnh sửa thành công', 'Thành công');
         if ($newStatus === 'accept') {
@@ -124,6 +124,7 @@ class TransactionController extends Controller
             sendNotification($model->user_id,$message);
         } elseif ($newStatus === 'cancel') {
             $user = User::findOrFail($model->user_id);
+            $model->reason = $reason;
             $content = [
                 'user' => $user->name,
                 'title' => 'Đơn nạp của bạn đã bị từ chối',
@@ -131,6 +132,7 @@ class TransactionController extends Controller
             ];
             event(new RoomPostNotificationEvent($user->email, $content));
         }
+        $model->save();
         return back();
     }
 

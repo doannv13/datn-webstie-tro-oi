@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách danh mục bài viết</h5>
+                <h2 class="mt-0">Danh sách danh mục bài viết</h5>
                 <div class="table-responsive">
                     <div class="mb-2 d-flex gap-1 ">
                         <a class="btn btn-success" href="{{ route('category-posts.create') }}">Thêm mới</a>
