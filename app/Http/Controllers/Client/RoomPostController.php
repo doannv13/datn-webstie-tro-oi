@@ -38,7 +38,7 @@ class RoomPostController extends Controller
         $districts = District::whereHas('roomPosts', function ($query) {
             $query->where('status', 'accept');
         })->distinct()->pluck('name');
-        $data = RoomPost::query()->where('user_id', auth()->user()->id)->latest()->get();
+        $data = RoomPost::with('cancelHistories')->where('user_id', auth()->user()->id)->latest()->get();
         return view('client.room-post.index', compact('data', 'category_rooms', 'wards', 'districts'));
     }
 

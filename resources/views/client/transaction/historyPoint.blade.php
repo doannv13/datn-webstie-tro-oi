@@ -10,10 +10,11 @@
             <table class="table align-middle" id="tech-companies-1">
                 <thead class="table-light">
                     <th style="width:5%">STT</th>
-                    <th style="width:15%">Hành động</th>
+                    <th style="width:10%">Hành động</th>
                     <th style="width:12%">Số tiền</th>
                     <th style="width:10%">Số point</th>
-                    <th style="width:10%">Trạng thái</th>
+                    <th style="width:5%">Trạng thái</th>
+                    <th style="width:10%">Lí do</th>
                     <th style="width:10%">Gói</th>
                     <th style="width:10%">Nội dung</th>
                     <th style="width:10%">Thời gian</th>
@@ -54,6 +55,9 @@
                             </p>
 
                             @endif
+                        </td>
+                        <td>
+                            {{ $value->reason ? substr($value->reason, 0, 20) : '---' }}
                         </td>
                         <td>
                             @if ($value->action ==='export')

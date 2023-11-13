@@ -177,7 +177,15 @@
                     @if($value && $value->status==='cancel' || $value->status==='pendding')
                     <div class="row my-3">
                         <div class="col-md-5 fw-bold">Lí do:</div>
-                        <div class="col-md-7"> {{ $value->reason ? $value->reason : '--' }}</div>
+                        @if(count($value->cancelHistories) > 0)
+                        <ul class="col-md-7">
+                        @foreach ($value->cancelHistories as $item)
+                            <li class="">{{  ' '.$item->reason }}</li>
+                        @endforeach
+                        </ul>
+                        @else
+                        <div class="col-md-7">--</div>
+                        @endif
                     </div>
                     @endif
                     <div class="row my-3">

@@ -111,7 +111,6 @@ class TransactionController extends Controller
 
         toastr()->success('Chỉnh sửa thành công', 'Thành công');
         if ($newStatus === 'accept') {
-            $model->reason = '';
             $user = User::findOrFail($model->user_id);
             if ($model->coupon_id) {
                 $coupon = Coupon::findOrFail($model->coupon_id);

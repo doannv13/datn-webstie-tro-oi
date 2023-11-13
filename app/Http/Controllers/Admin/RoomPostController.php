@@ -6,6 +6,7 @@ use App\Events\RoomPostNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
 use App\Http\Requests\Client\UpdateRoomPostRequest;
+use App\Models\CancelHistory;
 use App\Models\CategoryRoom;
 use App\Models\City;
 use App\Models\District;
@@ -39,7 +40,7 @@ class RoomPostController extends Controller
     public function index()
     {
         $category_rooms = CategoryRoom::all();
-        $data = RoomPost::query()->latest()->get();
+        $data = RoomPost::with('cancelHistories')->latest()->get();
         return view('admin.room-post.index', compact('data', 'category_rooms'));
     }
 
@@ -425,7 +426,6 @@ class RoomPostController extends Controller
             $room_post->save();
             $user = User::findOrFail($room_post->user_id);
             if ($room_post->status === 'accept') {
-                $room_post->reason = '';
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng đã được duyệt',
@@ -436,7 +436,10 @@ class RoomPostController extends Controller
                 $message="Mã tin ".$room_post->id." của bạn đã được duyệt.";
                 sendNotification($room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
-                $room_post->reason = $request->reason;
+                $history = new CancelHistory();
+                $history->reason = $request->reason;
+                $history->room_post_id = $request->room_post_id;
+                $history->save();
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng của bạn đã bị từ chối',

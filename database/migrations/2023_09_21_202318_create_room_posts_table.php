@@ -23,7 +23,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('image');
             $table->enum('status', ['pendding', 'accept', 'cancel'])->default('pendding');
-            $table->string('reason')->nullable();
             $table->enum('managing', ['yes', 'no'])->default('no');
             $table->integer('ward_id');
             $table->integer('district_id');
