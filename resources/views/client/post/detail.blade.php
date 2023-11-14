@@ -49,7 +49,7 @@
                             </blockquote>
                            <br>
                             <h3>
-                                <a href="blog-details.html">{{ $data->title }}</a>
+                                <a href="#">{{ $data->title }}</a>
                             </h3>
                             <div class="row mb-30">
                                 <div class=" col-xs-12">
