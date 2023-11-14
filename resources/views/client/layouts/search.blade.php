@@ -78,19 +78,19 @@
                                     <div class="photo-thumbnail p-lg-2 p-sm-2">
                                         <div class="" style="position: relative;">
                                             @if ($item->service_id != null)
-                                                @if ($item->service->id === 1 && $item->time_end>$currentDateTime)
+                                                @if ($item->service->id === 1 && $item->time_end > $currentDateTime)
                                                     <label
                                                         style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
                                                         UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
                                                         sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
                                                         , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
-                                                @elseif ($item->service->id === 2 && $item->time_end>$currentDateTime)
+                                                @elseif ($item->service->id === 2 && $item->time_end > $currentDateTime)
                                                     <label
                                                         style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
                                                         UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
                                                         sans-serif, "Apple Color Emoji" , "Segoe UI Emoji"
                                                         , "Segoe UI Symbol" , "Noto Color Emoji" ;">Phòng tốt</label>
-                                                @elseif($item->service->id === 3 && $item->time_end>$currentDateTime)
+                                                @elseif($item->service->id === 3 && $item->time_end > $currentDateTime)
                                                     <label
                                                         style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-40px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
                                                         UI", Roboto, "Helvetica Neue" , Arial, "Noto Sans" ,
@@ -120,8 +120,8 @@
                                             <span style="color: #F4A460;font-size: 14px;">| Diện tích:
                                                 {{ $item->acreage }}m²</span>
                                         </div>
-                                        <p style="font-size: 14px" class="mb-0">{!! strlen($item->description) > 210
-                                            ? substr(strip_tags($item->description), 0, 210) . ',...'
+                                        <p style="font-size: 14px;" class="mb-0 room-post-desc">{!! strlen($item->description) > 210
+                                            ? substr(strip_tags($item->description), 0, 210) . '...'
                                             : $item->description !!}</p>
                                         <p style="color: #F4A460;font-size: 14px;" class="mb-0">
                                             <i class="fa-solid fa-location-dot fa-lg " style="color: #f46b10;"></i>
@@ -134,7 +134,9 @@
                                         <div class="row">
                                             <div class="col-md-7 col-6 d-flex">
                                                 <div class="">
-                                                    <img  class="rounded-circle me-2" style="width:30px;height:30px" src="{{ $item->avatar ? asset($item->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="">
+                                                    <img class="rounded-circle me-2" style="width:30px;height:30px"
+                                                        src="{{ $item->avatar ? asset($item->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}"
+                                                        alt="">
                                                 </div>
                                                 <div class="">
                                                     <h6 class="mb-0" style="font-size: 14px">{{ $item->fullname }}</h6>
@@ -148,9 +150,9 @@
                                                         <i class="fa fa-phone"></i>
                                                         <a style="font-size: 14px">
                                                             0<?php
-                                                                $phoneNumber = str_replace(',', ' ', number_format($item->phone));
-                                                                $maskedPhoneNumber = substr($phoneNumber, 0, 1) . preg_replace("/[0-9]/", "*", substr($phoneNumber, 1));
-                                                                echo $maskedPhoneNumber;
+                                                            $phoneNumber = str_replace(',', ' ', number_format($item->phone));
+                                                            $maskedPhoneNumber = substr($phoneNumber, 0, 1) . preg_replace('/[0-9]/', '*', substr($phoneNumber, 1));
+                                                            echo $maskedPhoneNumber;
                                                             ?>
                                                         </a>
                                                     </div>
@@ -207,30 +209,30 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price1', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Dưới
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price1', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Dưới
                                         1 triệu<span>({{ countPrice(0, 1000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price2', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price2', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         1
                                         triệu - 2 triệu<span>({{ countPrice(1000000, 2000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price3', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price3', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         2
                                         triệu - 3 triệu<span>({{ countPrice(2000000, 3000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price4', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price4', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         3
                                         triệu - 5 triệu<span>({{ countPrice(3000000, 5000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price5', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price5', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         5
                                         triệu - 7 triệu<span>({{ countPrice(5000000, 7000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price6', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price6', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         7
                                         triệu - 10 triệu<span>({{ countPrice(7000000, 10000000) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['price_filter' => 'range_price7', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Trên
+                                        href="{{ route('search-filter', ['price_filter' => 'range_price7', 'district_filter' => $selectedDistrict, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Trên
                                         10 triệu<span>({{ countPriceGreatThan10M() }})</span></a></li>
                             </ul>
                         </div>
@@ -240,22 +242,22 @@
                             </div>
                             <ul class="list-unstyled list-cat">
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage1', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Dưới
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage1', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Dưới
                                         15m²<span>({{ countAcreage(0, 15) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage2', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage2', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         15m²
                                         - 25m² <span>({{ countAcreage(15, 25) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage3', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage3', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         25m² -
                                         45m² <span>({{ countAcreage(25, 45) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage4', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Từ
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage4', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Từ
                                         45m² -
                                         75m² <span>({{ countAcreage(45, 75) }})</span></a></li>
                                 <li><a
-                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage5', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">Trên
+                                        href="{{ route('search-filter', ['acreage_filter' => 'range_acreage5', 'district_filter' => $selectedDistrict, 'price_filter' => $selectedPrice, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">Trên
                                         75m²<span>({{ countAcreageGreatThan45() }})</span></a></li>
                             </ul>
                         </div>
@@ -269,7 +271,7 @@
                                         @foreach ($districts as $district)
                                             <li>
                                                 <a
-                                                    href="{{ route('search-filter', ['district_filter' => $district, 'price_filter' => $selectedPrice, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search,'room_type_filter'=>$selectedRoomType]) }}">
+                                                    href="{{ route('search-filter', ['district_filter' => $district, 'price_filter' => $selectedPrice, 'acreage_filter' => $selectedAcreage, 'name_filter' => $search, 'room_type_filter' => $selectedRoomType]) }}">
                                                     {{ $district }} <span> ({{ countDistrict($district) }})
                                                     </span></a>
                                             </li>
