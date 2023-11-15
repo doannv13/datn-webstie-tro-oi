@@ -113,7 +113,9 @@ Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->nam
 
 
 //thong bao
-
+Route::get('notification-all',function ()  {
+    return view('client.notification.index');
+})->name('notification-all');
 Route::resource('notifications', NotificationController::class);
 //Phân quyền start
 Route::group(['middleware' => 'checkRole:vendor'], function () {
@@ -167,7 +169,9 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
     // Route::get('dashboard-admin', function () {
     //     return view('admin.dashboard');
     // });
-
+    Route::get('admin-notification-all',function ()  {
+        return view('admin.notification.index');
+    })->name('admin-notification-all');
     Route::get('dashboard-admin', [DashboardController::class, 'index'])->name('dashboard-admin');
 
     //Báo cáo doanh thu

@@ -43,7 +43,7 @@ class HomeController extends Controller
             ->limit(6)
             ->get();
         // dd($room_post_vip);
-        $room_post_new = RoomPost::latest('time_start')->where('status', 'accept')->limit(30)->paginate(3);
+        $room_post_new = RoomPost::latest('time_start')->where('status', 'accept')->limit(30)->paginate(6);
         // dd($room_post_new);
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();

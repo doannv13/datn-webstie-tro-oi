@@ -50,15 +50,18 @@ function countPrice($min, $max)
 }
 
 
-function countPriceGreatThan10M(){
+function countPriceGreatThan10M()
+{
     return RoomPost::where('price', '>=', 10000000)->where('status', 'accept')->count();
 }
 
-function countAcreageGreatThan45(){
+function countAcreageGreatThan45()
+{
     return RoomPost::where('acreage', '>=', 75)->where('status', 'accept')->count();
 }
 
-function countDistrict($name){
+function countDistrict($name)
+{
     return RoomPost::join('districts', 'room_posts.district_id', '=', 'districts.id')
         ->where('districts.name', '=', $name)
         ->count();
@@ -97,12 +100,14 @@ function posts()
 {
     return Post::latest()->paginate(5);
 }
-function countPostServiceId($service_id){
+function countPostServiceId($service_id)
+{
     $count = RoomPost::where('service_id', $service_id)->count();
     return $count;
 }
-function countRoomPostVip(){
-    $count =  RoomPost::where('status','accept')->whereNotNull('service_id')->count();
+function countRoomPostVip()
+{
+    $count =  RoomPost::where('status', 'accept')->whereNotNull('service_id')->count();
     return $count;
 }
 // $room_postss = RoomPost::latest()->with('facilities')->paginate(10);
@@ -114,28 +119,39 @@ function countRoomPostVip(){
 // $posts = Post::latest()->paginate(5);
 //function notification database
 
-function notificationDB($message){
-    $user = Auth::user();    
-    $id=$user->id;
+function notificationDB($link_detail, $message)
+{
+    $user = Auth::user();
+    $id = $user->id;
     $notification = Notification::create([
         'message' => $message,
-        'user_id_send'=> $id,
+        'user_id_send' => $id,
+        'link_detail' => $link_detail
     ]);
-    $usersId= User::where('role', 'admin')->pluck('id')->toArray();
+    $usersId = User::where('role', 'admin')->pluck('id')->toArray();
     // event(new App\Events\RealTimeMessage($message));
     $notification->users()->attach($usersId);
 }
-function sendNotification($userId,$message){
-    $user = Auth::user();    
-    $id=$user->id;
+function sendNotification($link_detail, $userId, $message)
+{
+    $user = Auth::user();
+    $id = $user->id;
     $notification = Notification::create([
         'message' => $message,
-        'user_id_send'=> $id,
+        'user_id_send' => $id,
+        'link_detail' => $link_detail
     ]);
     $notification->users()->attach($userId);
 }
-function countNotification()  {
-    $user= User::find(auth()->user()->id);
+function countNotification()
+{
+    $user = User::find(auth()->user()->id);
     $count = $user->notifications()->whereNull('read_at')->count();
     return $count;
+}
+function notification()
+{
+    $user = User::find(auth()->user()->id);
+    $notifications = $user->notifications()->latest()->get();
+    return $notifications;
 }

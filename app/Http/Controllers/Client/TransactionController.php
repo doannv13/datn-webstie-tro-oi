@@ -57,8 +57,9 @@ class TransactionController extends Controller
         if ($model->action === 'import') {
             event(new NotificationEvent($request->verification));
         }
+        $link_detail="points";
         $message="Mã nạp ".$model->verification." cần được xác nhận ngay !";
-        notificationDB($message);
+        notificationDB($link_detail,$message);
         return back();
     }
 
@@ -121,7 +122,8 @@ class TransactionController extends Controller
             $user->save();
             event(new SuccessEvent($user));
             $message="Mã nạp ".$model->verification." của bạn đã được xác nhận.";
-            sendNotification($model->user_id,$message);
+            $link_detail="points-history";
+            sendNotification($link_detail,$model->user_id,$message);
         } elseif ($newStatus === 'cancel') {
             $user = User::findOrFail($model->user_id);
             $content = [
@@ -130,6 +132,9 @@ class TransactionController extends Controller
                 'description' => "Mã nạp ".$model->verification." nhận ".$model->point_persent." point không được chấp nhận với lý do: ".$reason
             ];
             event(new RoomPostNotificationEvent($user->email, $content));
+            $message="Mã nạp ".$model->verification." của bạn bị từ chối.";
+            $link_detail="points-history";
+            sendNotification($link_detail,$model->user_id,$message);
         }
         return back();
     }

@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class NotificationController extends Controller
 {
@@ -18,7 +19,7 @@ class NotificationController extends Controller
     {
         //
         $user = Auth::user();
-        $user_id=$user->id;
+        $user_id = $user->id;
         $user = User::find($user_id);
         $user->notifications()->update(['read_at' => now()]);
         return back();
@@ -54,10 +55,14 @@ class NotificationController extends Controller
     public function edit(string $id)
     {
         //
-        $notification=Notification::find($id);
-        $notification->read_at=Carbon::now();
+        $notification = Notification::find($id);
+        $notification->read_at = Carbon::now();
         $notification->save();
-        return back();
+       
+        // dd(trim($link, "'"));
+
+        // dd($notification->link_detail);
+        return redirect($to=$notification->link_detail);
     }
 
     /**
@@ -65,7 +70,6 @@ class NotificationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
     }
 
     /**

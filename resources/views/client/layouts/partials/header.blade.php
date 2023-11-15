@@ -21,7 +21,13 @@
                 @else
                 @if (Auth::user())
                 <div class="btn-group pull-right dropend">
-                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center dropdown-toggle" style="border-0"  data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="mx-4">
+                        <button type="button" class="btn  position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal" id='notificationModal'>
+                        <i class="fa-solid fa-bell fa-xl" style="color: #fff5f5;"></i>
+                        <span class="badge bg-danger rounded-circle noti-icon-badge position-absolute top-0 end-0">{{countNotification()}}</span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center dropdown-toggle" style="border-0" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="Header Avatar">
                         <span class="d-xl-inline-block ms-1 ">{{ Auth::user()->name }}</span>
                     </button>
@@ -52,37 +58,37 @@
                 {{-- <div class="dropdown pull-right dropend ">
                     <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static"  data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="Header Avatar">
-                        <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
-                    </button>
+                <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                </button>
 
-                    <div class="dropdown-menu">
-                        <div>
-                            @if (Auth::user())
-                            @if (Auth::user()->role === 'vendor')
-                            <a class="dropdown-item" href="{{ route('room-posts.index') }}">Vào trang quản
-                                lí</a>
-                            @elseif (Auth::user()->role === 'admin')
-                            <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
-                            @endif
-                            @endif
-                            <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
-                                nhật tài khoản</a>
-                            @if (Auth::user())
-                            <a class="dropdown-item" href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
-                            @endif
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Đăng xuất
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                <div class="dropdown-menu">
+                    <div>
+                        @if (Auth::user())
+                        @if (Auth::user()->role === 'vendor')
+                        <a class="dropdown-item" href="{{ route('room-posts.index') }}">Vào trang quản
+                            lí</a>
+                        @elseif (Auth::user()->role === 'admin')
+                        <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                        @endif
+                        @endif
+                        <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
+                            nhật tài khoản</a>
+                        @if (Auth::user())
+                        <a class="dropdown-item" href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
+                        @endif
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Đăng xuất
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
-                </div> --}}
-                @endif
-                @endguest
-            </div>
+                </div>
+            </div> --}}
+            @endif
+            @endguest
         </div>
+    </div>
     </div>
 </header>
 <!-- Main header start -->
@@ -112,8 +118,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts-client.index') }}" id="navbarDropdownMenuLink2"
-                                aria-expanded="false">
+                            <a class="nav-link" href="{{ route('posts-client.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
@@ -133,6 +138,7 @@
                     </button>
 
                 </div>
+
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
                         <a href="{{ route('list-bookmark') }}"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
@@ -300,7 +306,7 @@
 
 
 
-                        <div class="col-md-6 col-sm-6 col-lg-1 p-2 " >
+                        <div class="col-md-6 col-sm-6 col-lg-1 p-2 ">
                             <center style="margin-top: 8px">
                                 <a class="" href="{{ route('search-filter', ['district_filter' => 'all', 'price_filter' => 'all', 'acreage_filter' => 'all', 'name_filter' => '']) }}"><i class="fa-solid fa-arrows-rotate fa-xl" style="color: #f46315;"></i>
                                 </a>
@@ -345,29 +351,21 @@
                             <label class="fs-6 text fw-semibold">Chọn số tiền nạp : <span class="text-danger">1.000
                                     VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
-                                <input type="button" class="btn" value="20,000" name="prices"
-                                       style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
-                                       this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';" >
-                                <input type="button" class="btn" value="50,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="20,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                       this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
+                                <input type="button" class="btn" value="50,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="100,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="100,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="200,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="200,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="300,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="300,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="500,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="500,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="1,000,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="1,000,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
-                                <input type="button" class="btn" value="2,000,000" name="prices"
-                                    style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
+                                <input type="button" class="btn" value="2,000,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
                             </div>
                         </div>
@@ -442,6 +440,7 @@
                             </div>
 
                             @if (auth()->user())
+
                             <form action="{{ route('vnpay-payment') }}" method="post">
                                 <input type="hidden" id="total_amount_input" name="total_amount_input" value="">
                                 <input type="hidden" id="old_total_amount_input" name="old_total_amount_input" value="">
@@ -450,6 +449,7 @@
                                 <button type="submit" id="vnPayLink" name="redirect" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; display: none;">Thanh Toán VNPay</button>
                             </form>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; display: none;">Thanh Toán Online</button>
+
                             @else
                             <label for="" class="text-danger">Vui lòng đăng nhập</label>
                             @endif
@@ -511,12 +511,101 @@
     </div>
 </div>
 <!-- end modal QR -->
+<!-- Modal thông báo-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông báo</h1>
+                <a href="/notifications" class="btn btn-warning text-white mx-2 ">
+                        Đọc tất cả
+                    </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="tech-companies-5" class="table table-centered " style="width: 100%">
+                    <tbody>
 
+                        <div id="content-notify">
+
+                        </div>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">    
+                    <a href="notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    Xem tất cả
+                                   
+                                </a>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="{{auth()->user()->id}} " id="user_id">
+</div>
 
 <!-- Search area box 1 end -->
+<!-- script notification -->
+
 <!-- script -->
 @push('scripts')
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+<script>
+    $(document).ready(function() {
+        $('#notificationModal').on('click', function() {
+            let id = $('#user_id').val();
+            $.ajax({
+                url: '{{ route('notificatons.index')}}', // Sử dụng id thay vì 'id'
+                method: 'GET',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    // Create an empty string to store the HTML for notifications
+                    let notificationsHTML = '';
+                    response.forEach(function(data) {
+                        // console.log(data);
+                        // Generate HTML for each notification
+                        let notificationHTML =
+                            `  <tr>
+                            <a href="notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
+                                    <div class="notify-icon ">
+                                        <img src="${data.avata ? data.avata : 'fe/img/logos/no-image-user.jpeg'}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
+                                    </div>
+                               
+                                
+                                    <div class="w-full">
+                                        <div class="d-flex gap-2">
+                                            <p class="notify-details " id="name_user" style="margin:0px;">${data.name} </p>
+                                            <small class="text-muted">${data.created_at_about}</small>
+                                        </div>
+                                        <p class="text-muted mb-0 user-msg" id="message-notify">
+                                            <small>${data.message}</small>
+                                        </p>
+                                    </div>
+                                </a>
+                                
+                            </tr>
+                        `
+                        // Append the generated HTML to the notificationsHTML
+                        notificationsHTML += notificationHTML;
+
+                        // document.querySelector('#notify-content').innerHTML = notificationsHTML;
+                    });
+                    // console.log(notificationsHTML);
+                    // Append the new notificationsHTML to the .noti-scroll element
+                    document.querySelector('#content-notify').innerHTML = notificationsHTML;
+
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>
+
 <script>
     $(document).ready(function() {
         // Bắt sự kiện khi giá trị của input:radio thay đổi
@@ -541,7 +630,6 @@
         $('input[name="type-pay"]').change();
     });
 </script>
-
 <script>
     function notification() {
         var confirmation = confirm('Xác nhận thanh toán');
@@ -559,6 +647,7 @@
         var district = document.getElementById('floatingSelect2');
         var price = document.getElementById('floatingSelect3');
         var acreage = document.getElementById('floatingSelect4');
+
 
 
         var xhttp = new XMLHttpRequest();
@@ -579,19 +668,21 @@
     }
 
 
-        const prices = document.getElementsByName("prices");
-        const input_price = document.getElementById('input-price');
-        const total_amount = document.getElementById('total_amount');
-        const total_amount_input = document.getElementById('total_amount_input');
-        const sale = document.getElementById('sale');
-        const sale_price = document.getElementById('sale-price');
-        const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
-        const discount_amount_sale = document.getElementById('discount_amount_sale'); //Số tiền được giảm khi nạp tiền
-        const type_discount = document.getElementById('type_discount'); //Loại coupon percent:phần trăm, price:số tiền
-        const status_coupon = document.getElementById('status_coupon'); //Trạng thái
-        const discount_message = document.getElementById('discount-message'); //Trạng thái
-        const coupon_id1 = document.getElementById('coupon_id1'); // coupon_id1 của thanh toán vnpay
-        const coupon_id = document.getElementById('coupon_id'); // coupon_id của thanh toán online
+
+    const prices = document.getElementsByName("prices");
+    const input_price = document.getElementById('input-price');
+    const total_amount = document.getElementById('total_amount');
+    const total_amount_input = document.getElementById('total_amount_input');
+    const sale = document.getElementById('sale');
+    const sale_price = document.getElementById('sale-price');
+    const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
+    const discount_amount_sale = document.getElementById('discount_amount_sale'); //Số tiền được giảm khi nạp tiền
+    const type_discount = document.getElementById('type_discount'); //Loại coupon percent:phần trăm, price:số tiền
+    const status_coupon = document.getElementById('status_coupon'); //Trạng thái
+    const discount_message = document.getElementById('discount-message'); //Trạng thái
+    const coupon_id1 = document.getElementById('coupon_id1'); // coupon_id1 của thanh toán vnpay
+    const coupon_id = document.getElementById('coupon_id'); // coupon_id của thanh toán online
+
 
 
     //Fix giá trị mặc định 20k
@@ -613,75 +704,81 @@
     if (document.getElementById('price_promotion').value == ('')) {
         document.getElementById('price_promotion').value = ('20,000'.replace(/,/g, "").toLocaleString());
     }
-        if (document.getElementById('point_persent').value == ('')) {
-            document.getElementById('point_persent').value = 21;
-        }
-        if (document.getElementById('point_persent_vnpay').value == ('')) {
-            document.getElementById('point_persent_vnpay').value = 21;
-        }
+    if (document.getElementById('point_persent').value == ('')) {
+        document.getElementById('point_persent').value = 21;
+    }
+    if (document.getElementById('point_persent_vnpay').value == ('')) {
+        document.getElementById('point_persent_vnpay').value = 21;
+
+    }
 
     for (let i = 0; i < prices.length; i++) {
 
+
         prices[i].addEventListener('click', function() {
             // prices[i].classList.add("btn-primary");
+
             // Thêm lớp/đổi nền cho price[i]
             prices[i].style.backgroundColor = "blue";
             input_price.value = prices[i].value
             if (20000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") < 300000) {
-                    sale.innerText = "+5%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
-                    total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                    document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
-                    document.getElementById('total_point').value = input_price.value;
-                    document.getElementById('price_promotion').value = input_price.value;
-                    document.getElementById('total_amount').innerText = input_price.value
-                    document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('total_amount1').innerText = input_price.value;
-                    document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
-                    document.getElementById('point_persent_vnpay').value=(input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
-                } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
-                    1000000) {
-                    sale.innerText = "+7%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00007).toLocaleString()
-                    total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
-                    document.getElementById('total_point').value = input_price.value;
-                    document.getElementById('price_promotion').value = input_price.value;
-                    document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString();
-                    document.getElementById('total_amount').innerText = input_price.value
-                    document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('total_amount1').innerText = input_price.value
-                    document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
-                    document.getElementById('point_persent_vnpay').value=(input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
+                sale.innerText = "+5%";
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('price_promotion').value = input_price.value;
+                document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('total_amount1').innerText = input_price.value;
+                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
+
+                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
+
+            } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
+                1000000) {
+                sale.innerText = "+7%";
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00007).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('price_promotion').value = input_price.value;
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString();
+                document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('total_amount1').innerText = input_price.value
+                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
+
+                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
-                    sale.innerText = "+10%";
-                    sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
-                    total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
-                    console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
-                    document.getElementById('total_point').value = input_price.value;
-                    document.getElementById('price_promotion').value = input_price.value;
-                    document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString();
-                    document.getElementById('total_amount').innerText = input_price.value
-                    document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('total_amount1').innerText = input_price.value
-                    document.getElementById('point_persent').value=(input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
-                    document.getElementById('point_persent_vnpay').value=(input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
+
+                sale.innerText = "+10%";
+                sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
+                total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
+                console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
+                document.getElementById('total_point').value = input_price.value;
+                document.getElementById('price_promotion').value = input_price.value;
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString();
+                document.getElementById('total_amount').innerText = input_price.value
+                document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
+                document.getElementById('total_amount1').innerText = input_price.value
+                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
+
+                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
             }
-            });
-        }
 
-
-
-
+        });
+    }
 </script>
 <!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->
 
-    <script>
-        function generateRandomString(length, hasLetters, hasNumbers) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = 'trooi_transfer_';
+
+<script>
+    function generateRandomString(length, hasLetters, hasNumbers) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = 'trooi_transfer_';
 
         if (hasLetters) {
             for (let i = 0; i < length - 2; i++) {
@@ -715,13 +812,14 @@
             var total_amount_input = document.getElementById('total_amount_input');
             var old_total_amount_input = document.getElementById('old_total_amount_input');
 
-                $.ajax({
-                    url: '/apply-discount', // Route mà bạn đã định nghĩa
-                    method: "POST",
-                    data: {
-                        discount_code: discountCode,
-                        _token: '{{ csrf_token() }}'
-                    },
+
+            $.ajax({
+                url: '/apply-discount', // Route mà bạn đã định nghĩa
+                method: "POST",
+                data: {
+                    discount_code: discountCode,
+                    _token: '{{ csrf_token() }}'
+                },
 
                 success: function(response) {
                     $("#discount-message").html(response.message);
@@ -729,31 +827,31 @@
                     $("#type_discount").html(response.type_discount);
                     $("#status_coupon").html(response.status_coupon);
                     $("#coupon_id1").val(response.coupon_id);
-                    $("#coupon_id").val(response.coupon_id);$("#coupon_quantity").html(response.coupon_quantity);
-
-                        console.log(document.getElementById('coupon_quantity').innerText)
-
-                        if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Phần trăm
-                            var discount_amount_sale1 = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
-                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
-                            var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
-                            console.log(discount_amount_sale)
-                            var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale).toLocaleString();
+                    $("#coupon_id").val(response.coupon_id);
+                    $("#coupon_quantity").html(response.coupon_quantity);
+                    if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Phần trăm
+                        var discount_amount_sale1 = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
+                        document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
+                        var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
+                        console.log(discount_amount_sale)
+                        var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale).toLocaleString();
                         total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale);
-                            old_total_amount_input.value = input_price.value.replace(/,/g, "");
-                            document.getElementById('total_amount').innerText = total_amount;
-                            document.getElementById('total_amount1').innerText = total_amount;
+
+                        old_total_amount_input.value = input_price.value.replace(/,/g, "");
+                        document.getElementById('total_amount').innerText = total_amount;
+                        document.getElementById('total_amount1').innerText = total_amount;
                         document.getElementById('total_point').value = old_total_amount_input.value;
+
                         document.getElementById('price_promotion').value = total_amount_input.value;
 
                     }
 
-                    if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active'&& parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Giá cố định
-                        var discount_amount_sale1 = (document.getElementById('discount_amount').innerText-0).toLocaleString();
-                            document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
-                            var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
-                        var total_amount = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale),0).toLocaleString();
-                        total_amount_input.value = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale),0);
+                    if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Giá cố định
+                        var discount_amount_sale1 = (document.getElementById('discount_amount').innerText - 0).toLocaleString();
+                        document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
+                        var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
+                        var total_amount = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale), 0).toLocaleString();
+                        total_amount_input.value = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale), 0);
                         old_total_amount_input.value = input_price.value.replace(/,/g, "");
                         document.getElementById('total_amount').innerText = total_amount;
                         document.getElementById('total_amount1').innerText = total_amount;
@@ -762,7 +860,7 @@
 
                     }
 
-                    if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive'|| parseInt(document.getElementById('coupon_quantity').innerText) == 0) { // Không dùng mã
+                    if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive' || parseInt(document.getElementById('coupon_quantity').innerText) == 0) { // Không dùng mã
                         document.getElementById('discount-message').innerText = 'Mã giảm giá không hợp lệ.';
                         var discount_amount_sale = document.getElementById('discount_amount_sale').innerText = 0;
                         var total_amount_value = (input_price.value.replace(/,/g, "") - 0).toLocaleString();
@@ -775,11 +873,65 @@
                         document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
                     }
 
-                    }
-                });
+                }
             });
+        });
     });
     //notification
+    $(document).ready(function() {
+        $('#notificationModal').on('click', function() {
+            let id = $('#user_id').val();
+            $.ajax({
+                url: '{{ route('notificatons.index')}}', // Sử dụng id thay vì 'id'
+                method: 'GET',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    // Create an empty string to store the HTML for notifications
+                    let notificationsHTML = '';
+                    response.forEach(function(data) {
+                        // console.log(data);
+                        // Generate HTML for each notification
+                        let notificationHTML =
+                            `  <tr>
+                            <a href="notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
+                                    <div class="notify-icon ">
+                                        <img src="${data.avata ? data.avata : 'fe/img/logos/no-image-user.jpeg'}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
+                                    </div>
+                               
+                                
+                                    <div class="w-full">
+                                        <div class="d-flex gap-2">
+                                            <p class="notify-details " id="name_user" style="margin:0px;">${data.name} </p>
+                                            <small class="text-muted">${data.created_at_about}</small>
+                                        </div>
+                                        <p class="text-muted mb-0 user-msg" id="message-notify">
+                                            <small>${data.message}</small>
+                                        </p>
+                                    </div>
+                                </a>
+                                
+                            </tr>
+                        `
+                        // Append the generated HTML to the notificationsHTML
+                        notificationsHTML += notificationHTML;
+
+                        // document.querySelector('#notify-content').innerHTML = notificationsHTML;
+                    });
+                    // console.log(notificationsHTML);
+                    // Append the new notificationsHTML to the .noti-scroll element
+                    document.querySelector('#content-notify').innerHTML = notificationsHTML;
+
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
 </script>
 @endpush
 

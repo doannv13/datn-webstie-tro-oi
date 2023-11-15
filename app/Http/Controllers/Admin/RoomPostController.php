@@ -433,7 +433,8 @@ class RoomPostController extends Controller
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
                 $message="Mã tin ".$room_post->id." của bạn đã được duyệt.";
-                sendNotification($room_post->user_id,$message);
+                $link_detail="room-post-detail/".$room_post->id;
+                sendNotification($link_detail,$room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
                 $content = [
                     'user' => $user->name,
@@ -442,8 +443,9 @@ class RoomPostController extends Controller
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
-                $message="Mã tin ".$room_post->id." của bạn đã bị từ chối.";
-                sendNotification($room_post->user_id,$message);
+                $message="Mã tin ".$room_post->id." của bạn đã bị từ chối vui lòng cập nhật lại tin đăng.";
+                $link_detail="room-posts/".$room_post->id."/edit";
+                sendNotification($link_detail,$room_post->user_id,$message);
             }
 
             return response()->json(['success' => 'Thay đổi trạng thái thành công','room_post_id'=>$request->room_post_id,'time_start'=>$room_post->time_start->format('Y-m-d H:i:s')]);

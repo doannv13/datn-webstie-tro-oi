@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id_send');
             $table->foreign('user_id_send')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('read_at')->nullable();
+            $table->string('link_detail');
             $table->timestamps();
         });
     }
