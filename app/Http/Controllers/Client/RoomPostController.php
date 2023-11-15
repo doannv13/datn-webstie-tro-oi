@@ -158,10 +158,10 @@ class RoomPostController extends Controller
             }
             $mailTo = User::where('role', 'admin')->first();
             event(new RoomPostNotificationEvent($mailTo, $content));
-            $message="Mã tin ".$model->id." vừa đăng cần được xác nhận ngay !";
-            notificationDB($message);
+            $message = "Mã tin " . $model->id . " vừa đăng cần được xác nhận ngay.";
+            $link_detail = "admin-room-posts";
+            notificationDB($link_detail, $message);
             Toastr::success('Thêm tin đăng phòng thành công', 'Thành công');
-
             return redirect()->route('room-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -214,8 +214,12 @@ class RoomPostController extends Controller
     {
         try {
             $slug = Str::slug($request->name);
-
             $model = RoomPost::query()->findOrFail($id);
+            if ($model->status === "accept" || $model->status==="cancel") {
+                $message = "Mã tin " . $model->id . " vừa cập nhật cần được xác nhận ngay.";
+                $link_detail = "admin-room-posts";
+                notificationDB($link_detail, $message);
+            }
             $model->fill([
                 'name' => $request->name,
                 'slug' => $slug,
@@ -292,9 +296,10 @@ class RoomPostController extends Controller
                 // Nếu trường 'tags' trống, xóa tất cả các tag liên kết với bài viết
                 $model->tags()->detach();
             }
-
             $mailTo = User::where('role', 'admin')->first();
             event(new RoomPostNotificationEvent($mailTo, $content));
+
+
             Toastr::success('Sửa tin đăng phòng thành công', 'Thành công');
             return redirect()->route('room-posts.index');
         } catch (\Exception $exception) {
@@ -410,7 +415,6 @@ class RoomPostController extends Controller
             $RoomPost->forceDelete();
             $facility = FacilityRoom::query()->where('room_id', $id);
             $facility->forceDelete();
-
             $surrounding = SurroundingRoom::query()->where('room_id', $id);
             $surrounding->forceDelete();
             Toastr::success('Xoá tin đăng thành công', 'Thành công');
