@@ -224,392 +224,115 @@
 
 
 
-            </div>
-        </div>
-        <!-- Hotel section end -->
-
-        <!-- staff section start -->
-        <div class="content-area staff-section comon-slick">
-            <div class="container">
-                <!-- Main title -->
-                <div class="main-title">
-                    <h1>Nhà Phát Triển </h1>
-                    <p>
-                        Nhà phát triển website.
-                    </p>
-                </div>
-                <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-5.jpg') }}" alt="staff" class="img-fluid w-100" />
-                                    <div class="info">
-                                        <h4>Nguyễn Đoàn</h4>
-                                        <span>Hotel Developer</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Nguyễn Đoàn</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-6.jpg') }}" alt="staff" class="img-fluid w-100" />
-                                    <div class="info">
-                                        <h4>Trần Công</h4>
-                                        <span>Hotel Director</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Trần Công</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100" />
-                                    <div class="info">
-                                        <h4>Tuấn Anh</h4>
-                                        <span>Hotel Developer</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Hoàng tử cô đơn</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-8.jpg') }}" alt="staff" class="img-fluid w-100" />
-                                    <div class="info">
-                                        <h4>Khánh Nguyên</h4>
-                                        <span>Support Manager</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Khánh Nguyên</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100  " />
-                                    <div class="info">
-                                        <h4>Quốc Việt</h4>
-                                        <span>Hotel Manager</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Quốc Việt</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100  " />
-                                    <div class="info">
-                                        <h4>Lê Minh Thảo</h4>
-                                        <span>Hotel Manager</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Lê Minh Thảo</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item slide-box">
-                        <div class="staff-box-4">
-                            <div class="item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fe/img/staff/img-7.jpg') }}" alt="staff" class="img-fluid w-100  " />
-                                    <div class="info">
-                                        <h4>Quang Phúc</h4>
-                                        <span>Hotel Manager</span>
-                                    </div>
-                                    <div class="overlay text-light">
-                                        <h4><a href="staff.html">Quang Phúc</a></h4>
-                                        <p>
-                                            Btuff sight equal of my woody. Him children bringing
-                                            goodness suitable she entirely put far daughter pushing
-                                            point.
-                                        </p>
-                                        <ul>
-                                            <li class="facebook">
-                                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="twitter">
-                                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="google">
-                                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   </div>
-            </div>
-        </div>
-        <!-- staff section ebd -->
-
-        <!-- Counters strat -->
-        <div class="counters-4">
-            <div class="container">
-                <div class="row">
-                    <div class="left align-self-center wow fadeInLeft delay-04s">
-                        <!-- Main title -->
-                        <div class="main-title main-title-4">
-                            <h1>Thống Kê</h1>
-                            <p>
-                                Thống kê các mục mà website đang đi lên từng ngày
-                            </p>
-                        </div>
-                    </div>
-                    <div class="right float-end wow fadeInRight delay-04s">
-                        <div class="counter-inner">
-                            <div class="counter-box blue ml-0">
-                                <h1 class="counter">{{ $count_room }}</h1>
-                                <h5>Tin Đăng</h5>
-                            </div>
-                            <div class="counter-box">
-                                <h1 class="counter">{{ $count_post }}</h1>
-                                <h5>Bài Viết</h5>
-                            </div>
-                            <div class="counter-box green">
-                                <h1 class="counter">{{ $count_user }}</h1>
-                                <h5>Tài Khoản</h5>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Counters strat -->
+            <!-- Hotel section end -->
 
-        <!-- Blog section start -->
-        <div class="blog-section content-area comon-slick">
-            <div class="container">
-                <!-- Main title -->
-                <div class="main-title">
-                    <h1>Bài Viết</h1>
-                    <p>
-                        Danh sách những bài viết mới nhất.
-                    </p>
-                </div>
-                <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
-                    @if (isset($posts))
-                    @foreach ($posts as $key => $value)
-                    <div class="item slide-box">
-                        <div class="blog-1">
-                            <div class="blog-image">
-                                <img src="{{ asset($value->image) }}" alt="image" class="img-fluid w-100" style="max-height: 260px;" />
-                                <div class="profile-user">
-                                    <img src="{{ ($value->user->avatar) ?  asset($value->user->avatar) : asset('fe/img/logos/no-image-user.jpeg')}}" alt="user" />
+            <!-- staff section start -->
+            <div class="content-area staff-section comon-slick">
+                <div class="container">
+                    <!-- Main title -->
+                    <div class="main-title">
+                        <h1>Nhà Phát Triển </h1>
+                        <p>
+                            Nhà phát triển website.
+                        </p>
+                    </div>
+                    <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{asset('fe/img/avatar/doannv.jpg')  }}" alt="staff" class="img-fluid w-100" style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Nguyễn Đoàn</h4>
+                                            <span>Chủ tịch HDQT</span>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="date-box">
-                                    @if (isset($value->created_at))
-                                    <span>{{ $value->created_at->format('d') }}
-                                    </span>{{ substr($value->created_at->format('F'), 0, 3) }}
-                                    @endif
-                                </div>
-
-                            </div>
-                            <div class="detail">
-                                <div class="post-meta clearfix">
-                                    <ul>
-                                        <li>
-                                            <strong><a href="{{ route('posts-detail', $value->id) }}">By: <span class="fw-bolder">{{ $value->user->name }}</span></a></strong>
-                                        </li>
-                                        <li class="float-right mr-0">
-                                            <a href="{{ route('posts-detail', $value->id) }}"><i class="fa-regular fa-eye" style="color: #f28a36;"></i></a>{{ $value->view }}
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="{{ route('posts-detail', $value->id) }}">{{ $value->title }}</a>
-                                </h3>
-
-                                <!-- <p class="location" >
-                                                                                                                                                                                                                                                                                                        {{ $value->metaDescription }}
-                                                                                                                                                                                                                                                                                                    </p> -->
-                                <p> {{ substr($value->metaDescription, 0, 40) }}</p>
-
                             </div>
                         </div>
-                    </div>
-                    @endforeach
-                    @endif
-                </div>
-            </div>
-        </div>
-        <!-- Blog section end -->
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{ asset('fe/img/avatar/congtv.jpg')  }}" alt="staff" class="img-fluid w-100" style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Trần Công</h4>
+                                            <span>Đồng sáng lập</span>
+                                        </div>
 
-        <!-- Partners 2 start -->
-        <div class="partners-2 comon-slick">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-12">
-                        <div class="left-info">
-                            <h2>Đối Tác</h2>
-                            <p>
-                                Những đối tác mang đến sự phát triển lâu dài.
-                            </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-7 col-md-12">
-                        <div class="partners-inner">
-                            <div class="slick row comon-slick-inner" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 2}}]}'>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-1.png') }}" alt="brand" class="img-fluid" />
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{ asset('fe/img/avatar/anhnt.jpg') }}" alt="staff" class="img-fluid w-100" style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Tuấn Anh</h4>
+                                            <span>Đồng sáng lập</span>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-2.png') }}" alt="brand" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{asset('fe/img/avatar/nguyennk.jpg')}}" alt="staff" class="img-fluid w-100" style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Khánh Nguyên</h4>
+                                            <span>Đồng sáng lập</span>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-3.png') }}" alt="brand" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{asset('fe/img/avatar/vietnq.jpg') }}" alt="staff" class="img-fluid w-100  " style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Quốc Việt</h4>
+                                            <span>Đồng sáng lập</span>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-4.png') }}" alt="brand" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{ asset('fe/img/avatar/thaolm.jpg') }}" alt="staff" class="img-fluid w-100  " style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Lê Minh Thảo</h4>
+                                            <span>Đồng sáng lập</span>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-5.png') }}" alt="brand" class="img-fluid" />
-                                    </div>
-                                </div>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-6.png') }}" alt="brand" class="img-fluid" />
-                                    </div>
-                                </div>
-                                <div class="item slide-box">
-                                    <div class="partners-box">
-                                        <img src="{{ asset('fe/img/brand/brand-4.png') }}" alt="brand" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="item slide-box">
+                            <div class="staff-box-4">
+                                <div class="item">
+                                    <div class="thumb">
+                                        <img src="{{ asset('fe/img/avatar/phucnq.jpg') }}" alt="staff" class="img-fluid w-100  " style="width:300px; height:375px;" />
+                                        <div class="info">
+                                            <h4>Quang Phúc</h4>
+                                            <span>Đồng sáng lập</span>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -617,12 +340,158 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Partners 2 end -->
+            <!-- staff section ebd -->
+
+            <!-- Counters strat -->
+            <div class="counters-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="left align-self-center wow fadeInLeft delay-04s">
+                            <!-- Main title -->
+                            <div class="main-title main-title-4">
+                                <h1>Thống Kê</h1>
+                                <p>
+                                    Thống kê các mục mà website đang đi lên từng ngày
+                                </p>
+                            </div>
+                        </div>
+                        <div class="right float-end wow fadeInRight delay-04s">
+                            <div class="counter-inner">
+                                <div class="counter-box blue ml-0">
+                                    <h1 class="counter">{{ $count_room }}</h1>
+                                    <h5>Tin Đăng</h5>
+                                </div>
+                                <div class="counter-box">
+                                    <h1 class="counter">{{ $count_post }}</h1>
+                                    <h5>Bài Viết</h5>
+                                </div>
+                                <div class="counter-box green">
+                                    <h1 class="counter">{{ $count_user }}</h1>
+                                    <h5>Tài Khoản</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Counters strat -->
+
+            <!-- Blog section start -->
+            <div class="blog-section content-area comon-slick">
+                <div class="container">
+                    <!-- Main title -->
+                    <div class="main-title">
+                        <h1>Bài Viết</h1>
+                        <p>
+                            Danh sách những bài viết mới nhất.
+                        </p>
+                    </div>
+                    <div class="slick row comon-slick-inner wow fadeInUp delay-04s" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}], "dots": true, "dotClass": "slick-dots"}'>
+                        @if (isset($posts))
+                        @foreach ($posts as $key => $value)
+                        <div class="item slide-box" >
+                            <div class="blog-1">
+                                <div class="blog-image">
+                                    <img src="{{ asset($value->image) }}" alt="image" class="img-fluid w-100" style="max-height: 260px;" />
+                                    <div class="profile-user">
+                                        <img src="{{ ($value->user->avatar) ?  asset($value->user->avatar) : asset('fe/img/logos/no-image-user.jpeg')}}" alt="user" />
+                                    </div>
+                                    <div class="date-box">
+                                        @if (isset($value->created_at))
+                                        <span>{{ $value->created_at->format('d') }}
+                                        </span>{{ substr($value->created_at->format('F'), 0, 3) }}
+                                        @endif
+                                    </div>
+
+                                </div>
+                                <div class="detail" style="height:220px;">
+                                    <div class="post-meta clearfix">
+                                        <ul>
+                                            <li>
+                                                <strong><a href="{{ route('posts-detail', $value->id) }}">By: <span class="fw-bolder">{{ $value->user->name }}</span></a></strong>
+                                            </li>
+                                            <li class="float-right mr-0">
+                                                <a href="{{ route('posts-detail', $value->id) }}"><i class="fa-regular fa-eye" style="color: #f28a36;"></i></a>{{ $value->view }}
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <h3>
+                                        <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title, 0, 80) }}</a>
+                                    </h3>
+                                    <p> {{ substr($value->metaDescription, 0, 100) }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <!-- Blog section end -->
+
+            <!-- Partners 2 start -->
+            <div class="partners-2 comon-slick">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12">
+                            <div class="left-info">
+                                <h2>Đối Tác</h2>
+                                <p>
+                                    Những đối tác mang đến sự phát triển lâu dài.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-12">
+                            <div class="partners-inner">
+                                <div class="slick row comon-slick-inner" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 2}}]}'>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-1.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-2.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-3.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-4.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-5.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-6.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="item slide-box">
+                                        <div class="partners-box">
+                                            <img src="{{ asset('fe/img/brand/brand-4.png') }}" alt="brand" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Partners 2 end -->
 
 
-        <!-- content -->
-        @endsection
-        @push('scripts')
+            <!-- content -->
+            @endsection
+            @push('scripts')
 
-        @endpush
+            @endpush

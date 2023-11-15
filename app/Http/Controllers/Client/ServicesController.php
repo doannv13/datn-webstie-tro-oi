@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Transaction;
-
+use App\Events\RoomPostNotificationEvent;
+use App\Models\Notification;
 
 class ServicesController extends Controller
 {
@@ -86,7 +87,6 @@ class ServicesController extends Controller
         // dd($services);
         if ($room_post->service_id== null || $room_post->service_id > $service->id || Carbon::now()>Carbon::parse($room_post->time_end)) {
             if ($user->point >= $service->price) {
-
                 $user->point = $user->point - $service->price;
                 $room_post->service_id = $services_id;
                 $room_post->time_start=Carbon::now();
@@ -104,6 +104,20 @@ class ServicesController extends Controller
                 $room_post->save();
                 $transcation->save();
                 Toastr::success('Mua gói dịch vụ thành công', 'Thành công');
+                $message="Mã tin ".$room_post->id." của bạn vừa mua gói ".$service->name;
+                $link_detail="room-post-detail/".$room_post->id;
+                $notification = Notification::create([
+                    'message' => $message,
+                    'user_id_send' => User::where('role', 'admin')->first()->id,
+                    'link_detail' => $link_detail
+                ]);
+                $notification->users()->attach($room_post->user_id);
+                $content = [
+                    'user' => $user->name,
+                    'title' => 'Mua dịch vụ thành công.',
+                    'description' => "Mã tin đăng ".$room_post->id." vừa được mua gói ".$service->name
+                ];
+                event(new RoomPostNotificationEvent($user->email, $content));
                 return redirect()->route('room-posts.index');
             } else {
                 $modal=true;

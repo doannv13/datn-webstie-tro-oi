@@ -101,7 +101,7 @@
                 <div class="noti-scroll" data-simplebar id='notify-content'>
 
                     <!-- item-->
-                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item active" id="notification">
+                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item active" id="notification">
                                 <div class="notify-icon">
                                     <img src="" id='avatar' class="img-fluid rounded-circle" alt="" />
                                 </div>
@@ -117,10 +117,13 @@
                 </div>
 
                 <!-- All -->
-                <a href="" class="dropdown-item text-center text-primary notify-item notify-all">
+                <div class="dropdown-item text-center text-primary notify-item notify-all">
 
-                <i class="fa-regular fa-bell" style="color: #eb820a;"></i>
-                </a>
+                <a href="admin-notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    Xem tất cả
+                                   
+                                </a>
+                </div>
 
             </div>
         </li>
@@ -229,9 +232,10 @@
 
     </ul>
 
-    <div class="clearfix" ></div>
+    <div class="clearfix"></div>
     <input type="hidden" value="{{auth()->user()->id}} " id="user_id">
 </div>
+
 @push('scripts')
 <script>
     $(document).ready(function() {
@@ -245,14 +249,13 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                // Create an empty string to store the HTML for notifications
+                    // Create an empty string to store the HTML for notifications
                     let notificationsHTML = '';
-
                     response.forEach(function(data) {
                         // console.log(data);
                         // Generate HTML for each notification
                         let notificationHTML =
-                        ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item "  id="notification${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
+                            ` <a href="notifications/${data.id}/edit" class="dropdown-item notify-item " id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}"> 
                                 <div class="notify-icon">
                                     <img src="${data.avata}" id='avatar' class="img-fluid rounded-circle" alt="" />
                                 </div>
@@ -263,10 +266,8 @@
                                 <p class="text-muted mb-0 user-msg" id="message-notify">
                                     <small>${data.message}</small>
                                 </p>
-                        </a>
+                                </a>
                         `
-
-
                         // Append the generated HTML to the notificationsHTML
                         notificationsHTML += notificationHTML;
 
@@ -283,5 +284,6 @@
             });
         });
     });
+    
 </script>
 @endpush
