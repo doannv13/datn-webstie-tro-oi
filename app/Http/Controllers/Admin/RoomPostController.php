@@ -6,6 +6,7 @@ use App\Events\RoomPostNotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\RoomPostRequest;
 use App\Http\Requests\Client\UpdateRoomPostRequest;
+use App\Models\CancelHistory;
 use App\Models\CategoryRoom;
 use App\Models\City;
 use App\Models\District;
@@ -39,7 +40,7 @@ class RoomPostController extends Controller
     public function index()
     {
         $category_rooms = CategoryRoom::all();
-        $data = RoomPost::query()->latest()->get();
+        $data = RoomPost::with('cancelHistories')->latest()->get();
         return view('admin.room-post.index', compact('data', 'category_rooms'));
     }
 
@@ -436,6 +437,10 @@ class RoomPostController extends Controller
                 $link_detail="room-post-detail/".$room_post->id;
                 sendNotification($link_detail,$room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
+                $history = new CancelHistory();
+                $history->reason = $request->reason;
+                $history->room_post_id = $request->room_post_id;
+                $history->save();
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng của bạn đã bị từ chối',
@@ -447,7 +452,7 @@ class RoomPostController extends Controller
                 $link_detail="room-posts/".$room_post->id."/edit";
                 sendNotification($link_detail,$room_post->user_id,$message);
             }
-
+            $room_post->save();
             return response()->json(['success' => 'Thay đổi trạng thái thành công','room_post_id'=>$request->room_post_id,'time_start'=>$room_post->time_start->format('Y-m-d H:i:s')]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

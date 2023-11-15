@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Thùng rác</h5>
+                <h2 class="mt-0">Thùng rác</h5>
                 <div class="table-responsive">
                     <a class="btn btn-success mb-2" href="{{ route('tags.index') }}">Danh sách</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">

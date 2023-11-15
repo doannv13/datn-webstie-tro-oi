@@ -108,7 +108,7 @@ class TransactionController extends Controller
         }
         $model = Transaction::find($id);
         $model->status = $newStatus;
-        $model->save();
+
 
         toastr()->success('Chỉnh sửa thành công', 'Thành công');
         if ($newStatus === 'accept') {
@@ -126,6 +126,7 @@ class TransactionController extends Controller
             sendNotification($link_detail,$model->user_id,$message);
         } elseif ($newStatus === 'cancel') {
             $user = User::findOrFail($model->user_id);
+            $model->reason = $reason;
             $content = [
                 'user' => $user->name,
                 'title' => 'Đơn nạp của bạn đã bị từ chối',
@@ -136,6 +137,7 @@ class TransactionController extends Controller
             $link_detail="points-history";
             sendNotification($link_detail,$model->user_id,$message);
         }
+        $model->save();
         return back();
     }
 

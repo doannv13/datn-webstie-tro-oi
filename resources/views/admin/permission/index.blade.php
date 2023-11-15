@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách quyền</h5>
+                <h2 class="mt-0">Danh sách quyền</h5>
                 <div class="table-responsive">
                     <a class="btn btn-success mb-2" href="{{ route('permissions.create') }}">Thêm mới</a>
                     <a class="btn btn-secondary mb-2" href="{{ route('permissions-import') }}">Import</a>

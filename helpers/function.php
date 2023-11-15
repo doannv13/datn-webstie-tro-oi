@@ -98,7 +98,7 @@ function categories()
 }
 function posts()
 {
-    return Post::latest()->paginate(5);
+    return Post::query()->where('status', 'active')->paginate(5);
 }
 function countPostServiceId($service_id)
 {
@@ -119,10 +119,12 @@ function countRoomPostVip()
 // $posts = Post::latest()->paginate(5);
 //function notification database
 
+
 function notificationDB($link_detail, $message)
 {
     $user = Auth::user();
     $id = $user->id;
+
     $notification = Notification::create([
         'message' => $message,
         'user_id_send' => $id,
@@ -132,10 +134,12 @@ function notificationDB($link_detail, $message)
     // event(new App\Events\RealTimeMessage($message));
     $notification->users()->attach($usersId);
 }
+
 function sendNotification($link_detail, $userId, $message)
 {
     $user = Auth::user();
     $id = $user->id;
+
     $notification = Notification::create([
         'message' => $message,
         'user_id_send' => $id,

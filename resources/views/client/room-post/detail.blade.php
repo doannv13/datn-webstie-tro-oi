@@ -165,7 +165,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Ngày kết thúc:</td>
-                                                    <td>{{ $roomposts->time_end ? $roomposts->time_end : 'N/A' }}</td>
+                                                    <td>{{ $roomposts->time_end ? $roomposts->time_end : '--' }}</td>
                                                 </tr>
 
                                             </table>

@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="mt-0">Thùng rác</h5>
+                            <h2 class="mt-0">Thùng rác</h5>
                             <div class="table-responsive">
                                 <div class="mb-2 d-flex gap-1 ">
                                     <a class="btn btn-success" href="{{ route('users.index') }}">Danh sách</a>

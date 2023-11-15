@@ -23,8 +23,8 @@
                 <div class="btn-group pull-right dropend">
                     <div class="mx-4">
                         <button type="button" class="btn  position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal" id='notificationModal'>
-                        <i class="fa-solid fa-bell fa-xl" style="color: #fff5f5;"></i>
-                        <span class="badge bg-danger rounded-circle noti-icon-badge position-absolute top-0 end-0">{{countNotification()}}</span>
+                            <i class="fa-solid fa-bell fa-xl" style="color: #fff5f5;"></i>
+                            <span class="badge bg-danger rounded-circle noti-icon-badge position-absolute top-0 end-0">{{countNotification()}}</span>
                         </button>
                     </div>
                     <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center dropdown-toggle" style="border-0" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,44 +52,45 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
+
                         </div>
-                    </div>
-                </div>
-                {{-- <div class="dropdown pull-right dropend ">
+                        {{-- <div class="dropdown pull-right dropend ">
                     <button type="button" class="btn text-white bg-select-group p-0 d-flex align-items-center" data-bs-display="static"  data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" style="width:30px;height:30px" src="{{ auth()->user()->avatar ? asset(auth()->user()->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="Header Avatar">
-                <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
-                </button>
+                        <span class="d-xl-inline-block ms-1 dropdown-toggle">{{ Auth::user()->name }}</span>
+                        </button>
 
-                <div class="dropdown-menu">
-                    <div>
-                        @if (Auth::user())
-                        @if (Auth::user()->role === 'vendor')
-                        <a class="dropdown-item" href="{{ route('room-posts.index') }}">Vào trang quản
-                            lí</a>
-                        @elseif (Auth::user()->role === 'admin')
-                        <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
-                        @endif
-                        @endif
-                        <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
-                            nhật tài khoản</a>
-                        @if (Auth::user())
-                        <a class="dropdown-item" href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
-                        @endif
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Đăng xuất
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
+                        <div class="dropdown-menu">
+                            <div>
+                                @if (Auth::user())
+                                @if (Auth::user()->role === 'vendor')
+                                <a class="dropdown-item" href="{{ route('room-posts.index') }}">Vào trang quản
+                                    lí</a>
+                                @elseif (Auth::user()->role === 'admin')
+                                <a class="dropdown-item" href="{{ route('home-admin') }}">Vào admin</a>
+                                @endif
+                                @endif
+                                <a class="dropdown-item" href="{{ route('changeinfo.edit', auth()->user()->id) }}">Cập
+                                    nhật tài khoản</a>
+                                @if (Auth::user())
+                                <a class="dropdown-item" href="{{ route('changepassword.edit', auth()->user()->id) }}">Đổi mật khẩu</a>
+                                @endif
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Đăng xuất
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+
+                        </div>
+                    </div> --}}
+                    @endif
+                    @endguest
+
                 </div>
-            </div> --}}
-            @endif
-            @endguest
+            </div>
         </div>
-    </div>
-    </div>
 </header>
 <!-- Main header start -->
 <header class="main-header" id="main-header-1">
@@ -141,7 +142,22 @@
 
                 <div class="d-none-992 d-none-768 nav navbar-nav w-100 justify-content-end">
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('list-bookmark') }}"><i class="fa fa-bookmark-o me-2 fs-4 text-main"></i></a>
+                        <a href="{{ route('list-bookmark') }}" class="position-relative me-3">
+                            <i class="fa fa-bookmark-o me-2 fs-4 text-main"></i>
+                            <span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle" id="bookmarkQty">
+                                @php
+                                if (Auth::check()) {
+                                $user_id = auth()->user()->id;
+                                $bm = \App\Models\Bookmark::where('user_id', $user_id)
+                                ->whereHas('roomPost', function ($query) {
+                                $query->where('status', 'accept');
+                                })
+                                ->count();
+                                }
+                                @endphp
+                                {{ $bm ?? 0 }}
+                            </span>
+                        </a>
                         <a href="{{ route('room-posts.create') }}" class="btn btn-5" style="font-size: 13px">
                             Đăng tin
                         </a>
@@ -343,14 +359,18 @@
                     <div class="row">
 
                         <div class="py-3 px-3 " style="background-color: #F0FCF5;">
-                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 5%</span> cho giá trị nạp từ 20,000 đ đến 300,000 đ</p>
-                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 7%</span> cho giá trị nạp từ 300,000 đ đến 1,000,000 đ</p>
-                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 10%</span> cho giá trị nạp trên 1,000,000 đ</p>
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 5%</span> cho giá trị
+                                nạp từ 20,000 đ đến 300,000 đ</p>
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 7%</span> cho giá trị
+                                nạp từ 300,000 đ đến 1,000,000 đ</p>
+                            <p class="fs-6 text text-secondary">Tặng <span class="text-danger">+ 10%</span> cho giá
+                                trị nạp trên 1,000,000 đ</p>
                         </div>
                         <div class="py-3">
                             <label class="fs-6 text fw-semibold">Chọn số tiền nạp : <span class="text-danger">1.000
                                     VND sẽ tương ứng 1 Point</span> </label>
                             <div class="p-1 d-flex  gap-1">
+
                                 <input type="button" class="btn" value="20,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                        this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
                                 <input type="button" class="btn" value="50,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
@@ -367,6 +387,7 @@
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
                                 <input type="button" class="btn" value="2,000,000" name="prices" style="background-color: orange; color: white;" onfocus="this.style.backgroundColor='#0d6efd'; this.style.color='white';
                                     this.style.border='2px solid green';" onblur="this.style.backgroundColor='orange'; this.style.color='white'; this.style.border='none';">
+
                             </div>
                         </div>
 
@@ -449,7 +470,6 @@
                                 <button type="submit" id="vnPayLink" name="redirect" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; display: none;">Thanh Toán VNPay</button>
                             </form>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1" id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text" style="background-color:  #FCAF17; display: none;">Thanh Toán Online</button>
-
                             @else
                             <label for="" class="text-danger">Vui lòng đăng nhập</label>
                             @endif
@@ -518,8 +538,8 @@
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Thông báo</h1>
                 <a href="/notifications" class="btn btn-warning text-white mx-2 ">
-                        Đọc tất cả
-                    </a>
+                    Đọc tất cả
+                </a>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -533,11 +553,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="modal-footer">    
-                    <a href="notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    Xem tất cả
-                                   
-                                </a>
+            <div class="modal-footer">
+                <a href="notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
+                    Xem tất cả
+
+                </a>
             </div>
         </div>
     </div>
@@ -603,7 +623,6 @@
             });
         });
     });
-
 </script>
 
 <script>
@@ -612,6 +631,7 @@
         $('input[name="type-pay"]').change(function() {
             // Lấy giá trị của input:radio đã chọn
             var selectedValue = $('input[name="type-pay"]:checked').val();
+
 
             // Ẩn tất cả các nút thanh toán trước khi thay đổi
             $('#vnPayLink, #btn-pay').hide();
@@ -630,12 +650,15 @@
         $('input[name="type-pay"]').change();
     });
 </script>
+
+
 <script>
     function notification() {
         var confirmation = confirm('Xác nhận thanh toán');
         if (confirmation) {
             // document.getElementById("notification").style.display = "block"
             //    toastr.success('Đã thanh toán thành công!')
+
         }
         document.getElementById("notification").style.display = "block"
     }
@@ -647,7 +670,6 @@
         var district = document.getElementById('floatingSelect2');
         var price = document.getElementById('floatingSelect3');
         var acreage = document.getElementById('floatingSelect4');
-
 
 
         var xhttp = new XMLHttpRequest();
@@ -685,6 +707,7 @@
 
 
 
+
     //Fix giá trị mặc định 20k
     if (document.getElementById('total_amount').innerText == ('')) {
         document.getElementById('total_amount').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
@@ -709,15 +732,14 @@
     }
     if (document.getElementById('point_persent_vnpay').value == ('')) {
         document.getElementById('point_persent_vnpay').value = 21;
-
     }
+
 
     for (let i = 0; i < prices.length; i++) {
 
 
         prices[i].addEventListener('click', function() {
             // prices[i].classList.add("btn-primary");
-
             // Thêm lớp/đổi nền cho price[i]
             prices[i].style.backgroundColor = "blue";
             input_price.value = prices[i].value
@@ -725,17 +747,18 @@
                 sale.innerText = "+5%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.00005).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.05).toLocaleString()
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.05 / 1000)
+                    .toLocaleString();
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('price_promotion').value = input_price.value;
                 document.getElementById('total_amount').innerText = input_price.value
                 document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('total_amount1').innerText = input_price.value;
-                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
-
-                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") * 1.05 / 1000).toLocaleString()
-
+                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.05 /
+                    1000).toLocaleString()
+                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") *
+                    1.05 / 1000).toLocaleString()
             } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
                 1000000) {
                 sale.innerText = "+7%";
@@ -743,36 +766,39 @@
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.07).toLocaleString()
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('price_promotion').value = input_price.value;
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000)
+                    .toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
                 document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('total_amount1').innerText = input_price.value
-                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
-
-                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") * 1.07 / 1000).toLocaleString()
+                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.07 /
+                    1000).toLocaleString()
+                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") *
+                    1.07 / 1000).toLocaleString()
             } else if (1000000 <= input_price.value.replace(/,/g, "")) {
-
                 sale.innerText = "+10%";
                 sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
                 total.innerText = (input_price.value.replace(/,/g, "") * 1.1).toLocaleString()
                 console.log((input_price.value.replace(/,/g, "") * 1.1).toLocaleString());
                 document.getElementById('total_point').value = input_price.value;
                 document.getElementById('price_promotion').value = input_price.value;
-                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString();
+                document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000)
+                    .toLocaleString();
                 document.getElementById('total_amount').innerText = input_price.value
                 document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
                 document.getElementById('total_amount1').innerText = input_price.value
-                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
-
-                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") * 1.1 / 1000).toLocaleString()
+                document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.1 /
+                    1000).toLocaleString()
+                document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") *
+                    1.1 / 1000).toLocaleString()
             }
-
         });
     }
 </script>
 <!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->
+
 
 
 <script>
@@ -821,6 +847,7 @@
                     _token: '{{ csrf_token() }}'
                 },
 
+
                 success: function(response) {
                     $("#discount-message").html(response.message);
                     $("#discount_amount").html(response.discount_amount);
@@ -829,110 +856,97 @@
                     $("#coupon_id1").val(response.coupon_id);
                     $("#coupon_id").val(response.coupon_id);
                     $("#coupon_quantity").html(response.coupon_quantity);
-                    if (document.getElementById('type_discount').innerText == 'percent' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Phần trăm
-                        var discount_amount_sale1 = (input_price.value.replace(/,/g, "") * document.getElementById('discount_amount').innerText / 100).toLocaleString();
-                        document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
-                        var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
+
+                    console.log(document.getElementById('coupon_quantity').innerText)
+
+                    if (document.getElementById('type_discount').innerText == 'percent' &&
+                        document.getElementById('status_coupon').innerText == 'active' &&
+                        parseInt(document.getElementById('coupon_quantity').innerText) > 0
+                    ) { // Phần trăm
+                        var discount_amount_sale1 = (input_price.value.replace(/,/g, "") *
+                                document.getElementById('discount_amount').innerText / 100)
+                            .toLocaleString();
+                        document.getElementById('discount_amount_sale').innerText =
+                            discount_amount_sale1;
+                        var discount_amount_sale = parseFloat(discount_amount_sale1.replace(
+                            /\./g, ""
+                        )); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
                         console.log(discount_amount_sale)
-                        var total_amount = (input_price.value.replace(/,/g, "") - discount_amount_sale).toLocaleString();
-                        total_amount_input.value = (input_price.value.replace(/,/g, "") - discount_amount_sale);
-
+                        var total_amount = (input_price.value.replace(/,/g, "") -
+                            discount_amount_sale).toLocaleString();
+                        total_amount_input.value = (input_price.value.replace(/,/g, "") -
+                            discount_amount_sale);
                         old_total_amount_input.value = input_price.value.replace(/,/g, "");
                         document.getElementById('total_amount').innerText = total_amount;
                         document.getElementById('total_amount1').innerText = total_amount;
-                        document.getElementById('total_point').value = old_total_amount_input.value;
+                        document.getElementById('total_point').value =
+                            old_total_amount_input.value;
+                        document.getElementById('price_promotion').value =
+                            total_amount_input.value;
 
-                        document.getElementById('price_promotion').value = total_amount_input.value;
 
                     }
 
-                    if (document.getElementById('type_discount').innerText == 'price' && document.getElementById('status_coupon').innerText == 'active' && parseInt(document.getElementById('coupon_quantity').innerText) > 0) { // Giá cố định
-                        var discount_amount_sale1 = (document.getElementById('discount_amount').innerText - 0).toLocaleString();
-                        document.getElementById('discount_amount_sale').innerText = discount_amount_sale1;
-                        var discount_amount_sale = parseFloat(discount_amount_sale1.replace(/\./g, "")); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
-                        var total_amount = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale), 0).toLocaleString();
-                        total_amount_input.value = Math.max((input_price.value.replace(/,/g, "") - discount_amount_sale), 0);
+
+                    if (document.getElementById('type_discount').innerText == 'price' &&
+                        document.getElementById('status_coupon').innerText == 'active' &&
+                        parseInt(document.getElementById('coupon_quantity').innerText) > 0
+                    ) { // Giá cố định
+                        var discount_amount_sale1 = (document.getElementById(
+                            'discount_amount').innerText - 0).toLocaleString();
+                        document.getElementById('discount_amount_sale').innerText =
+                            discount_amount_sale1;
+                        var discount_amount_sale = parseFloat(discount_amount_sale1.replace(
+                            /\./g, ""
+                        )); // Loại bỏ dấu chấm và chuyển discountAmountSale thành số
+                        var total_amount = Math.max((input_price.value.replace(/,/g, "") -
+                            discount_amount_sale), 0).toLocaleString();
+                        total_amount_input.value = Math.max((input_price.value.replace(/,/g,
+                            "") - discount_amount_sale), 0);
                         old_total_amount_input.value = input_price.value.replace(/,/g, "");
                         document.getElementById('total_amount').innerText = total_amount;
                         document.getElementById('total_amount1').innerText = total_amount;
-                        document.getElementById('total_point').value = old_total_amount_input.value;
-                        document.getElementById('price_promotion').value = total_amount_input.value;
+                        document.getElementById('total_point').value =
+                            old_total_amount_input.value;
+                        document.getElementById('price_promotion').value =
+                            total_amount_input.value;
+
 
                     }
 
-                    if (document.getElementById('type_discount').innerText == '' || document.getElementById('status_coupon').innerText == 'inactive' || parseInt(document.getElementById('coupon_quantity').innerText) == 0) { // Không dùng mã
-                        document.getElementById('discount-message').innerText = 'Mã giảm giá không hợp lệ.';
-                        var discount_amount_sale = document.getElementById('discount_amount_sale').innerText = 0;
-                        var total_amount_value = (input_price.value.replace(/,/g, "") - 0).toLocaleString();
-                        total_amount_input.value = (input_price.value.replace(/,/g, "") - 0);
-                        old_total_amount_input.value = (input_price.value.replace(/,/g, "") - 0);
-                        document.getElementById('total_amount').innerText = total_amount_value;
-                        document.getElementById('total_amount1').innerText = total_amount_value;
-                        document.getElementById('total_point').value = old_total_amount_input.value;
-                        document.getElementById('price_promotion').value = total_amount_input.value;
-                        document.getElementById('discount_amount_sale').innerText = discount_amount_sale;
+
+                    if (document.getElementById('type_discount').innerText == '' || document
+                        .getElementById('status_coupon').innerText == 'inactive' ||
+                        parseInt(document.getElementById('coupon_quantity').innerText) == 0
+                    ) { // Không dùng mã
+                        document.getElementById('discount-message').innerText =
+                            'Mã giảm giá không hợp lệ.';
+                        var discount_amount_sale = document.getElementById(
+                            'discount_amount_sale').innerText = 0;
+                        var total_amount_value = (input_price.value.replace(/,/g, "") - 0)
+                            .toLocaleString();
+                        total_amount_input.value = (input_price.value.replace(/,/g, "") -
+                            0);
+                        old_total_amount_input.value = (input_price.value.replace(/,/g,
+                            "") - 0);
+                        document.getElementById('total_amount').innerText =
+                            total_amount_value;
+                        document.getElementById('total_amount1').innerText =
+                            total_amount_value;
+                        document.getElementById('total_point').value =
+                            old_total_amount_input.value;
+                        document.getElementById('price_promotion').value =
+                            total_amount_input.value;
+                        document.getElementById('discount_amount_sale').innerText =
+                            discount_amount_sale;
                     }
-
                 }
             });
         });
+
     });
-    //notification
-    $(document).ready(function() {
-        $('#notificationModal').on('click', function() {
-            let id = $('#user_id').val();
-            $.ajax({
-                url: '{{ route('notificatons.index')}}', // Sử dụng id thay vì 'id'
-                method: 'GET',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function(response) {
-                    // Create an empty string to store the HTML for notifications
-                    let notificationsHTML = '';
-                    response.forEach(function(data) {
-                        // console.log(data);
-                        // Generate HTML for each notification
-                        let notificationHTML =
-                            `  <tr>
-                            <a href="notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
-                                    <div class="notify-icon ">
-                                        <img src="${data.avata ? data.avata : 'fe/img/logos/no-image-user.jpeg'}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
-                                    </div>
-                               
-                                
-                                    <div class="w-full">
-                                        <div class="d-flex gap-2">
-                                            <p class="notify-details " id="name_user" style="margin:0px;">${data.name} </p>
-                                            <small class="text-muted">${data.created_at_about}</small>
-                                        </div>
-                                        <p class="text-muted mb-0 user-msg" id="message-notify">
-                                            <small>${data.message}</small>
-                                        </p>
-                                    </div>
-                                </a>
-                                
-                            </tr>
-                        `
-                        // Append the generated HTML to the notificationsHTML
-                        notificationsHTML += notificationHTML;
-
-                        // document.querySelector('#notify-content').innerHTML = notificationsHTML;
-                    });
-                    // console.log(notificationsHTML);
-                    // Append the new notificationsHTML to the .noti-scroll element
-                    document.querySelector('#content-notify').innerHTML = notificationsHTML;
-
-                },
-                error: function(error) {
-                    console.error(error);
-                }
-            });
-        });
-    });
-
 </script>
+
 @endpush
 
 

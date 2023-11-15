@@ -28,8 +28,8 @@
                             <div class="profile-user">
                                 <img src="{{ $data->user->avatar? asset($data->user->avatar) : asset('fe/img/logos/no-image-user.jpeg') }}" alt="user">
                             </div>
-                            <div class="date-box" style="width: 116px;height: 70px">
-                                <span>{{ $data->updated_at }}</span>
+                            <div class="date-box" style="width: 116px;height: 45px">
+                                <span>{{ $data->updated_at->format('Y-m-d') }}</span>
                             </div>
                         </div>
                         <div class="detail">
@@ -49,7 +49,7 @@
                             </blockquote>
                            <br>
                             <h3>
-                                <a href="blog-details.html">{{ $data->title }}</a>
+                                <a href="#">{{ $data->title }}</a>
                             </h3>
                             <div class="row mb-30">
                                 <div class=" col-xs-12">

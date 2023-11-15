@@ -34,8 +34,8 @@
                                     <div class="profile-user">
                                         <img src="{{ $value->user->avatar ? $value->user->avatar : 'https://worldapheresis.org/wp-content/uploads/2022/04/360_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpeg' }}" alt="user">
                                     </div>
-                                    <div class="date-box" style="width: 116px;height: 70px">
-                                        <span>{{ $value->updated_at }}</span>
+                                    <div class="date-box" style="width: 116px;height: 44px">
+                                        <span>{{ $value->updated_at->format('Y-m-d') }}</span>
                                     </div>
                                 </div>
                                 <div class="detail">

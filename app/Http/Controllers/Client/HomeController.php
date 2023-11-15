@@ -76,8 +76,14 @@ class HomeController extends Controller
             $model->user_id = $user_id;
             $model->room_post_id = $room_post_id;
             $model->save();
+            $bm = Bookmark::where('user_id', $user_id)
+            ->whereHas('roomPost', function ($query) {
+                $query->where('status', 'accept');
+            })
+            ->count();
             return response()->json([
-                'data' => $request->all(),
+                // 'data' => $request->all(),
+                'bm' => $bm
             ]);
             // }
         } else {
@@ -102,6 +108,7 @@ class HomeController extends Controller
                 ->having('room_posts_count', '>', 0)
                 ->paginate(4);
             $posts = Post::latest()->paginate(5);
+
             return view('client.bookmark', compact('category_rooms', 'districts', 'data', 'categories', 'posts', 'room_posts'));
         } else {
             toastr()->error('Bạn cần phải đăng nhập', 'Thất bại');
@@ -118,9 +125,15 @@ class HomeController extends Controller
                 ->where('room_post_id', $room_post_id)
                 ->firstOrFail();
             $model->delete();
-            // toastr()->success('Đã bỏ lưu 1 phòng', 'Thành công');
+
+            $bm = Bookmark::where('user_id', $user_id)
+            ->whereHas('roomPost', function ($query) {
+                $query->where('status', 'accept');
+            })
+            ->count();
             return response()->json([
-                'data' => $request->all(),
+                // 'data' => $request->all(),
+                'bm' => $bm
             ]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -133,8 +146,15 @@ class HomeController extends Controller
         try {
             $model = Bookmark::where('id', $request['id']); // Sử dụng $id thay vì $request['id']
             $model->delete();
+            $user_id = auth()->user()->id;
+            $bm = Bookmark::where('user_id', $user_id)
+            ->whereHas('roomPost', function ($query) {
+                $query->where('status', 'accept');
+            })
+            ->count();
             return response()->json([
-                'data' => $request->all(),
+                // 'data' => $request->all(),
+                'bm' => $bm
             ]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -167,8 +187,6 @@ class HomeController extends Controller
             ->all();
 
         $query = RoomPost::query()
-            ->join('users', 'room_posts.user_id', '=', 'users.id')
-            ->select('room_posts.*', 'users.avatar')
             ->with('categoryroom', 'district', 'tags')
             ->where('status', 'accept');
 
