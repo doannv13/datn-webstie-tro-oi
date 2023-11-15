@@ -108,22 +108,22 @@
 
                 <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
+                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home') }}" id="navbarDropdownMenuLink" aria-expanded="false">
                                 Trang chủ
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('search-filter') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('search-filter') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Phòng cho thuê
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('posts-client*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('posts-client.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('services-room-posts*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('services-room-posts.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Bảng giá dịch vụ
                             </a>

@@ -9818,3 +9818,11 @@ div#social-links ul li a:hover {
     background-size: 100%;
 }
 
+.room-post-desc {
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
