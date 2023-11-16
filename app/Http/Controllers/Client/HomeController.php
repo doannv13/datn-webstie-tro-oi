@@ -48,9 +48,9 @@ class HomeController extends Controller
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();
         //đếm số tin đăng ,user ,bài viết
-        $count_room = count(RoomPost::all());
+        $count_room = RoomPost::where('status', 'active')->count();
         $count_user = count(User::all());
-        $count_post = count(Post::all());
+        $count_post = Post::where('status', 'active')->count();
         // Share media
         // $share_content=HOME_URL;
         // $shareComponent = \Share::page(

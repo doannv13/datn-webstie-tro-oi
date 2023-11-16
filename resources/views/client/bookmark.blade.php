@@ -99,33 +99,6 @@
                                                         <i class="fa fa-map-marker"></i>{{ $value->roomPost->address_full }}
                                                     </a>
                                                 </p>
-                                                <div class="fecilities row">
-                                                    <ul>
-                                                        <li>
-                                                            <i class="flaticon-bed"></i> Beds
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-air-conditioning"></i>
-                                                            AC
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-graph-line-screen"></i>
-                                                            TV
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-weightlifting"></i>
-                                                            GYM
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                                            Wi-fi
-                                                        </li>
-                                                        <li>
-                                                            <i class="flaticon-parking"></i>
-                                                            Parking
-                                                        </li>
-                                                    </ul>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

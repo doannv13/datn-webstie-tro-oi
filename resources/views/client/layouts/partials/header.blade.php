@@ -144,7 +144,7 @@
                     <div class="d-flex align-items-center">
                         <a href="{{ route('list-bookmark') }}" class="position-relative me-3">
                             <i class="fa fa-bookmark-o me-2 fs-4 text-main"></i>
-                            <span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle" id="bookmarkQty">
+                            <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle" id="bookmarkQty">
                                 @php
                                 if (Auth::check()) {
                                 $user_id = auth()->user()->id;
