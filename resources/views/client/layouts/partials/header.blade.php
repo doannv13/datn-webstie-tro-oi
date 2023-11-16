@@ -554,7 +554,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <a href="notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
+                <a href="/notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
                     Xem tất cả
 
                 </a>
@@ -570,7 +570,6 @@
 <!-- script notification -->
 
 <!-- script -->
-@push('scripts')
 <script>
     $(document).ready(function() {
         $('#notificationModal').on('click', function() {
@@ -590,9 +589,9 @@
                         // Generate HTML for each notification
                         let notificationHTML =
                             `  <tr>
-                            <a href="notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
+                            <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
                                     <div class="notify-icon ">
-                                        <img src="${data.avata ? data.avata : 'fe/img/logos/no-image-user.jpeg'}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
+                                        <img src="${data.avata ? data.avata : "{{asset('fe/img/logos/no-image-user.jpeg')}}"}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
                                     </div>
 
 
@@ -626,6 +625,8 @@
         });
     });
 </script>
+@push('scripts')
+
 
 <script>
     $(document).ready(function() {
