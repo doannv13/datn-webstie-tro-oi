@@ -16,6 +16,6 @@ class District extends Model
 
     public function roomPosts()
     {
-        return $this->hasMany(Roompost::class, 'district_id', 'id');
+        return $this->hasMany(RoomPost::class, 'district_id', 'id');
     }
 }
