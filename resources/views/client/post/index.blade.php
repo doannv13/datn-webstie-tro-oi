@@ -1,4 +1,5 @@
 @extends('client/layouts/master')
+@section('title', 'Tin tức')
 @section('content')
     <!-- Sub banner start -->
     <div class="sub-banner">
@@ -69,4 +70,5 @@
         </div>
     </div>
     <!-- Blog body end -->
+
 @endsection

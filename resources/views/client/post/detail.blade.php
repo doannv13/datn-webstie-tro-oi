@@ -1,4 +1,5 @@
 @extends('client/layouts/master')
+@section('title', 'Chi tiết bài viết')
 @section('content')
     <!-- Sub banner start -->
     <div class="sub-banner">

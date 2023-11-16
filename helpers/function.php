@@ -94,6 +94,7 @@ function categories()
 {
     return CategoryRoom::withCount('roomPosts')
         ->having('room_posts_count', '>', 0)
+        ->where('status', 'active')
         ->paginate(4);
 }
 function posts()
