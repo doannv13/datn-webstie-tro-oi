@@ -561,7 +561,9 @@
             </div>
         </div>
     </div>
-    <input type="hidden" value="{{auth()->user()->id}} " id="user_id">
+    @if(auth()->check())
+        <input type="hidden" value="{{auth()->user()->id}} " id="user_id">
+    @endif
 </div>
 
 <!-- Search area box 1 end -->
@@ -592,8 +594,8 @@
                                     <div class="notify-icon ">
                                         <img src="${data.avata ? data.avata : 'fe/img/logos/no-image-user.jpeg'}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
                                     </div>
-                               
-                                
+
+
                                     <div class="w-full">
                                         <div class="d-flex gap-2">
                                             <p class="notify-details " id="name_user" style="margin:0px;">${data.name} </p>
@@ -604,7 +606,7 @@
                                         </p>
                                     </div>
                                 </a>
-                                
+
                             </tr>
                         `
                         // Append the generated HTML to the notificationsHTML
