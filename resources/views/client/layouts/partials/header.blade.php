@@ -108,22 +108,22 @@
 
                 <div class="navbar-collapse collapse w-100 justify-content-center" id="navbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
+                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home') }}" id="navbarDropdownMenuLink" aria-expanded="false">
                                 Trang chủ
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('search-filter') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('search-filter') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Phòng cho thuê
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('posts-client*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('posts-client.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Tin tức
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('services-room-posts*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('services-room-posts.index') }}" id="navbarDropdownMenuLink2" aria-expanded="false">
                                 Bảng giá dịch vụ
                             </a>
@@ -144,7 +144,7 @@
                     <div class="d-flex align-items-center">
                         <a href="{{ route('list-bookmark') }}" class="position-relative me-3">
                             <i class="fa fa-bookmark-o me-2 fs-4 text-main"></i>
-                            <span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle" id="bookmarkQty">
+                            <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle" id="bookmarkQty">
                                 @php
                                 if (Auth::check()) {
                                 $user_id = auth()->user()->id;
@@ -554,21 +554,22 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <a href="notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
+                <a href="/notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
                     Xem tất cả
 
                 </a>
             </div>
         </div>
     </div>
-    <input type="hidden" value="{{auth()->user()->id}} " id="user_id">
+    @if(auth()->check())
+        <input type="hidden" value="{{auth()->user()->id}} " id="user_id">
+    @endif
 </div>
 
 <!-- Search area box 1 end -->
 <!-- script notification -->
 
 <!-- script -->
-@push('scripts')
 <script>
     $(document).ready(function() {
         $('#notificationModal').on('click', function() {
@@ -588,12 +589,12 @@
                         // Generate HTML for each notification
                         let notificationHTML =
                             `  <tr>
-                            <a href="notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
+                            <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item d-flex gap-2 mb-2" id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
                                     <div class="notify-icon ">
-                                        <img src="${data.avata ? data.avata : 'fe/img/logos/no-image-user.jpeg'}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
+                                        <img src="${data.avata ? data.avata : "{{asset('fe/img/logos/no-image-user.jpeg')}}"}" id='avatar' class="img-fluid rounded-circle " style="width:44px; height: 44px;px;" alt="" />
                                     </div>
-                               
-                                
+
+
                                     <div class="w-full">
                                         <div class="d-flex gap-2">
                                             <p class="notify-details " id="name_user" style="margin:0px;">${data.name} </p>
@@ -604,7 +605,7 @@
                                         </p>
                                     </div>
                                 </a>
-                                
+
                             </tr>
                         `
                         // Append the generated HTML to the notificationsHTML
@@ -624,6 +625,8 @@
         });
     });
 </script>
+@push('scripts')
+
 
 <script>
     $(document).ready(function() {

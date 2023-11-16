@@ -119,9 +119,8 @@
                 <!-- All -->
                 <div class="dropdown-item text-center text-primary notify-item notify-all">
 
-                <a href="admin-notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
+                <a href="/admin-notification-all" class="dropdown-item text-center text-primary notify-item notify-all">
                                     Xem tất cả
-                                   
                                 </a>
                 </div>
 
@@ -255,9 +254,9 @@
                         // console.log(data);
                         // Generate HTML for each notification
                         let notificationHTML =
-                            ` <a href="notifications/${data.id}/edit" class="dropdown-item notify-item " id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}"> 
+                            ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item " id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}"> 
                                 <div class="notify-icon">
-                                    <img src="${data.avata}" id='avatar' class="img-fluid rounded-circle" alt="" />
+                                    <img src="${data.avata ? data.avata : "{{asset('fe/img/logos/no-image-user.jpeg')}}"}" id='avatar' class="img-fluid rounded-circle" alt="" />
                                 </div>
                                 <div class="d-flex justify-content-between ">
                                 <p class="notify-details " id="name_user" style="margin:0px;">${data.name} </p>

@@ -22,10 +22,7 @@ class NotificationController extends Controller
         // // dd($user);
         // $user_id=$user->id;
         $user = User::find($request->id);
-        $notifications =  $user->notifications()->take(8)->get();
-        // $notifications = Notification::where('user_id', 2)
-        //     ->whereNull('read_at')
-        //     ->get();
+        $notifications =  $user->notifications()->latest()->take(8)->get();
         $newArray = [];
         if($request->notification_id){
             $model=Notification::findOrfail($request->notification_id);
@@ -43,7 +40,6 @@ class NotificationController extends Controller
             $created_at_about = timeposts($item->created_at);
             $newArray[] = ['id' => $id, 'name' => $name, 'message' => $message,"link_detail"=>$link_detail, 'avata' => $avata, 'read_at' => $read_at, 'created_at_about' => $created_at_about];
         }
-        $newArray = array_reverse($newArray);
         return response()->json(
             $newArray,
         );
@@ -86,7 +82,7 @@ class NotificationController extends Controller
      */
     public function update(Request $request)
     {
-        
+
     }
 
     /**
