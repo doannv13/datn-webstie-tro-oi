@@ -13,6 +13,10 @@ use App\Exports\RoomPostExport;
 
 class ReportRoomPostControler extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin-resource', ['only' => ['index','fillterRoompost','exportRoomPost']]);
+    }
 
     public function index()
     {

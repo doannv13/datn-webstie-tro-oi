@@ -74,30 +74,30 @@
                     </a>
 
                 </li>
-
-                <li>
-                    <a href="{{ asset('./be/#baocao') }}" data-bs-toggle="collapse">
-                        <i class="fe-folder-minus"></i>
-                        <span>Báo cáo</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="baocao">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{'admin-report-revenue'}}">- Doanh thu</a>
-                            </li>
-                            <li>
-                                <a href="{{'admin-report-roompost'}}">- Tin đăng </a>
-                            </li>
-                            <li>
-                                <a href="{{'admin-report-post'}}">- Bài viết </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
+                @if (Auth::user()->can('report-resource'))
+                    <li>
+                        <a href="{{ asset('./be/#baocao') }}" data-bs-toggle="collapse">
+                            <i class="fe-folder-minus"></i>
+                            <span>Báo cáo</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="baocao">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ 'admin-report-revenue' }}">- Doanh thu</a>
+                                </li>
+                                <li>
+                                    <a href="{{ 'admin-report-roompost' }}">- Tin đăng </a>
+                                </li>
+                                <li>
+                                    <a href="{{ 'admin-report-post' }}">- Bài viết </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                 <li class="menu-title mt-2">Quản lý Phòng</li>
-                @if (Auth::user()->can('category-room-post-menu'))
+                @if (Auth::user()->can('category-room-post-resource'))
                     <li>
                         <a href="{{ asset('./be/#dmp') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -120,7 +120,7 @@
                     </li>
                 @endif
 
-                @if (Auth::user()->can('room-post-menu'))
+                @if (Auth::user()->can('room-post-resource'))
                     <li>
                         <a href="{{ asset('./be/#tdp') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -142,7 +142,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('facility-menu'))
+                @if (Auth::user()->can('facility-resource'))
                     <li>
                         <a href="{{ asset('./be/#tienich') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -165,7 +165,7 @@
                     </li>
                 @endif
                 <li class="menu-title mt-2">Quản lý bài viết</li>
-                @if (Auth::user()->can('category-post-menu'))
+                @if (Auth::user()->can('category-post-resource'))
                     <li>
                         <a href="{{ asset('./be/#dmbv') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -187,7 +187,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('post-menu'))
+                @if (Auth::user()->can('post-resource'))
                     <li>
                         <a href="{{ asset('./be/#bv') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -209,7 +209,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('tag-menu'))
+                @if (Auth::user()->can('tag-resource'))
                     <li>
                         <a href="#tag" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -233,7 +233,7 @@
                 @endif
 
                 <li class="menu-title mt-2">Quản lý tài khoản</li>
-                @if (Auth::user()->can('user-menu'))
+                @if (Auth::user()->can('user-resource'))
                     <li>
                         <a href="{{ asset('./be/#tk') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -255,7 +255,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('permission-menu'))
+                @if (Auth::user()->can('permission-resource'))
                     <li>
                         <a href="#permissions" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -278,7 +278,7 @@
                     </li>
                 @endif
 
-                @if (Auth::user()->can('role-permission-menu'))
+                @if (Auth::user()->can('role-permission-resource'))
                     <li>
                         <a href="#role-permission" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -291,7 +291,8 @@
                                     <a href="{{ route('roles-permissions.create') }}">- Thêm vai trò và gán quyền</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('roles-permissions.index') }}">- Danh sách vai trò và quyền </a>
+                                    <a href="{{ route('roles-permissions.index') }}">- Danh sách vai trò và quyền
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('roles.deleted') }}">- Thùng rác</a>
@@ -300,7 +301,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('admin-menu'))
+                @if (Auth::user()->can('admin-resource'))
                     <li>
                         <a href="#admin" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -322,29 +323,18 @@
                         </div>
                     </li>
                 @endif
-                <li class="menu-title mt-2">Quản lý đơn hàng</li>
+                @if (Auth::user()->can('point-resource'))
+                    <li class="menu-title mt-2">Quản lý đơn hàng</li>
 
-                <li>
-                    <a href="{{ route('points.index') }}" data-bs-toggle="">
-                        <i class="fe-folder-minus"></i>
-                        <span>Xác nhận nạp ví</span>
-                        {{-- <span class="menu-arrow"></span> --}}
-                    </a>
-                    {{-- <div class="collapse" id="ttdh">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="#">- Thêm mới</a>
-                            </li>
-                            <li>
-                                <a href="#">- Danh sách </a>
-                            </li>
-                            <li>
-                                <a href="#">- Thùng rác</a>
-                            </li>
-                        </ul>
-                    </div> --}}
-                </li>
-                @if (Auth::user()->can('coupon-menu'))
+                    <li>
+                        <a href="{{ route('points.index') }}" data-bs-toggle="">
+                            <i class="fe-folder-minus"></i>
+                            <span>Xác nhận nạp ví</span>
+                        </a>
+
+                    </li>
+                @endif
+                @if (Auth::user()->can('coupon-resource'))
                     <li>
                         <a href="#coupon" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -366,7 +356,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('service-menu'))
+                @if (Auth::user()->can('service-resource'))
                     <li>
                         <a href="{{ asset('./be/#goidichvu') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -389,7 +379,7 @@
                     </li>
                 @endif
                 <li class="menu-title mt-2">Setting</li>
-                @if (Auth::user()->can('setting-menu'))
+                @if (Auth::user()->can('setting-resource'))
                     <li>
                         <a href="{{ asset('./be/#setting') }}" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -405,7 +395,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('banner-menu'))
+                @if (Auth::user()->can('banner-resource'))
                     <li>
                         <a href="#banner" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>
@@ -427,7 +417,7 @@
                         </div>
                     </li>
                 @endif
-                @if (Auth::user()->can('advertisement-menu'))
+                @if (Auth::user()->can('advertisement-resource'))
                     <li>
                         <a href="#quangcao" data-bs-toggle="collapse">
                             <i class="fe-folder-minus"></i>

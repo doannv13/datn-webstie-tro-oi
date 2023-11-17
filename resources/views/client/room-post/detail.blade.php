@@ -92,7 +92,7 @@
                                                 <h1>Mô tả chi tiết</h1>
                                             </div>
                                             <!-- paragraph -->
-                                            <div class="mb-0">{!! $roomposts->description !!}</div>
+                                            <div class="mb-0" style="overflow-wrap: break-word;">{!! $roomposts->description !!}</div>
                                         </div>
                                         <!-- Rooms description end -->
 
