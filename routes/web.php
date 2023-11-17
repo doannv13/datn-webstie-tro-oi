@@ -155,7 +155,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
 
         // ADMIN
         Route::get('home-admin', function () {
-            return view('admin.layouts.master');
+            return view('admin.layouts.home-admin');
         })->name('home-admin');
 
         Route::get('admin-notification-all', function () {
