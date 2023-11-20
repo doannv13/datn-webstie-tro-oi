@@ -40,7 +40,6 @@ class HomeController extends Controller
             ->where('time_end', '>', Carbon::now())
             ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
             ->inRandomOrder()
-            ->limit(6)
             ->get();
         // dd($room_post_vip);
         $room_post_new = RoomPost::latest('time_start')->where('status', 'accept')->limit(30)->paginate(6);
@@ -48,7 +47,7 @@ class HomeController extends Controller
         $posts = Post::with('user')->where('status', 'active')->latest('id')->limit(6)->get();
         $banners = Banner::query()->where('status', 'active')->latest()->limit(3)->get();
         //đếm số tin đăng ,user ,bài viết
-        $count_room = RoomPost::where('status', 'active')->count();
+        $count_room = RoomPost::where('status', 'accept')->count();
         $count_user = count(User::all());
         $count_post = Post::where('status', 'active')->count();
         // Share media

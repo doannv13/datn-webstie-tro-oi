@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 class LoginController extends Controller
 {
     /*
@@ -61,11 +61,13 @@ class LoginController extends Controller
         // If not, create a new user record
         else {
             toastr()->success('Tạo tài khoản thành công!', 'Thành công');
+           
+          
             $user = User::create(
                 [
                     'email' => $googleUser->email,
                     'name' => $googleUser->name,
-                    'password' => 'Admin123',
+                    'password' => "A123".Str::random(8),
                     'avatar' => $googleUser->avatar,
                 ]
             );

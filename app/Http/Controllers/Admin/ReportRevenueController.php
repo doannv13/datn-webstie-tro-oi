@@ -61,6 +61,7 @@ class ReportRevenueController extends Controller
         $bill_today = Transaction::where('status', 'accept')->where('action', 'import')->whereDate('created_at', today())->count();
         $revenue_service_today = Transaction::query()->where('action', 'export')->whereDate('created_at', today())->sum('point');
         $revenueByDay = Transaction::select(DB::raw('DATE(created_at) as revenue_date'), DB::raw('SUM(point) as revenue_total'))->groupBy('revenue_date')->orderBy('revenue_date')->where('status', 'accept')->where('action', 'import')->whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])->get();
+        // dd($date_start,$date_end);
         return view('admin.report.revenue.index', compact('revenue', 'revenue_today', 'bill', 'bill_false', 'bill_today', 'revenue_service', 'revenue_service_today', 'date_start', 'date_end', 'revenueByDay'));
     }
 

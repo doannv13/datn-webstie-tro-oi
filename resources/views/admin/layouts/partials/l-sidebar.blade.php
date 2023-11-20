@@ -84,13 +84,13 @@
                     <div class="collapse" id="baocao">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{'admin-report-revenue'}}">- Doanh thu</a>
+                                <a href="{{route('admin-report-revenue')}}">- Doanh thu</a>
                             </li>
                             <li>
-                                <a href="{{'admin-report-roompost'}}">- Tin đăng </a>
+                                <a href="{{route('admin-report-roompost')}}">- Tin đăng </a>
                             </li>
                             <li>
-                                <a href="{{'admin-report-post'}}">- Bài viết </a>
+                                <a href="{{route('admin-report-post')}}">- Bài viết </a>
                             </li>
                         </ul>
                     </div>

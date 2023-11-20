@@ -164,19 +164,19 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
         Route::get('dashboard-admin', [DashboardController::class, 'index'])->name('dashboard-admin');
 
         //Báo cáo doanh thu
-        Route::get('admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
-        Route::post('admin-report-revenue', [ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
-        Route::get('admin-export-revenue', [ReportRevenueController::class, 'exportRevenue'])->name('admin-export-revenue');
+        Route::get('/admin-report-revenue', [ReportRevenueController::class, 'index'])->name('admin-report-revenue');
+        Route::post('/admin-report-revenue', [ReportRevenueController::class, 'fillterRevenue'])->name('admin-report-revenue');
+        Route::get('/admin-export-revenue', [ReportRevenueController::class, 'exportRevenue'])->name('admin-export-revenue');
 
         //báo cáo tin đăng
-        Route::get('admin-report-roompost', [ReportRoomPostControler::class, 'index'])->name('admin-report-roompost');
-        Route::post('admin-report-roompost', [ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
-        Route::get('admin-export-roompost', [ReportRoomPostControler::class, 'exportRoomPost'])->name('admin-export-roompost');
+        Route::get('/admin-report-roompost', [ReportRoomPostControler::class, 'index'])->name('admin-report-roompost');
+        Route::post('/admin-report-roompost', [ReportRoomPostControler::class, 'fillterRoompost'])->name('admin-report-roompost');
+        Route::get('/admin-export-roompost', [ReportRoomPostControler::class, 'exportRoomPost'])->name('admin-export-roompost');
 
 
         //báo cáo bài viết
-        Route::get('admin-report-post', [ReportPostController::class, 'index'])->name('admin-report-post');
-        Route::post('admin-report-post', [ReportPostController::class, 'filterPost'])->name('admin-report-post');
+        Route::get('/admin-report-post', [ReportPostController::class, 'index'])->name('admin-report-post');
+        Route::post('/admin-report-post', [ReportPostController::class, 'fillterPost'])->name('admin-report-post');
 
         // Room-Post-Admin
         Route::resource('admin-room-posts', AdminRoomPost::class);
