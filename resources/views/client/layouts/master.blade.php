@@ -105,6 +105,11 @@
         </div>
         {{--    Social Media Contact    --}}
         <div class="clearfix">
+
+            {{-- <div class="media-button pull-left"> --}}
+            <!-- Messenger Chat Plugin Code -->
+
+            {{-- </div> --}}
             <div class="media-button pull-right">
                 <div class="media-button-content">
                     <a href="tel:0363738586" class="call-icon" rel="nofollow">
@@ -121,6 +126,14 @@
                         <i class="fa pt-2" style="font-size: 11px" aria-hidden="true">Zalo</i>
                         <span>Zalo: 036 37 38 586</span>
                     </a>
+
+                    <!-- Messenger Chat Plugin Code -->
+                    <div id="fb-root"></div>
+
+                    <!-- Your Chat Plugin code -->
+                    <div id="fb-customer-chat" class="fb-customerchat">
+                    </div>
+
                 </div>
 
             </div>
@@ -132,6 +145,32 @@
         <!-- Footer end -->
 
     </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "153586964513136");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v18.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
     <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
@@ -218,37 +257,37 @@
     <script>
         $(document).ready(function() {
             // function bookmark() {
-                $('.bookmark-button').click(function() {
-                    let button = $(this);
-                    let room_post_id = button.data('id');
+            $('.bookmark-button').click(function() {
+                let button = $(this);
+                let room_post_id = button.data('id');
 
-                    $.ajax({
-                        url: '{{ route('bookmark') }}',
-                        dataType: 'json',
-                        method: 'GET',
-                        data: {
-                            room_post_id: room_post_id,
-                        },
-                        success: function(response) {
+                $.ajax({
+                    url: '{{ route('bookmark') }}',
+                    dataType: 'json',
+                    method: 'GET',
+                    data: {
+                        room_post_id: room_post_id,
+                    },
+                    success: function(response) {
 
-                            $('#bookmarkQty').text(response.bm);
-                            button.removeClass('bookmark-button').addClass('unbookmark-button');
-                            button.off('click'); // Remove the click event
-                            // toastr() - > success('Bạn vừa lưu 1 phòng', 'Đã lưu');
+                        $('#bookmarkQty').text(response.bm);
+                        button.removeClass('bookmark-button').addClass('unbookmark-button');
+                        button.off('click'); // Remove the click event
+                        // toastr() - > success('Bạn vừa lưu 1 phòng', 'Đã lưu');
 
 
-                            // You can also change the SVG icon or other UI elements if needed
-                            button.find('path').attr('d',
-                                'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z'
-                            );
-                            console.log('Item bookmarked successfully');
+                        // You can also change the SVG icon or other UI elements if needed
+                        button.find('path').attr('d',
+                            'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z'
+                        );
+                        console.log('Item bookmarked successfully');
 
-                        },
-                        error: function(error) {
-                            console.error(error);
-                        }
-                    });
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
                 });
+            });
             // }
             // bookmark();
             // $('.unbookmark-button').click(function() {
@@ -284,10 +323,6 @@
                     }
                 });
             });
-
-
-
-
         });
     </script>
 
