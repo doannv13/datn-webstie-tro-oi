@@ -76,6 +76,11 @@ Route::get('client-login', function () {
 //Google Authen
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+//Facebook login
+Route::get('auth/facebook', [LoginController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
 //Thay đổi mật khẩu,thông tin
 Route::resource('changeinfo', ChangeInfoController::class);
 Route::resource('changepassword', ChangePasswordController::class);

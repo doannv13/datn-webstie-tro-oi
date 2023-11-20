@@ -105,6 +105,11 @@
         </div>
         {{--    Social Media Contact    --}}
         <div class="clearfix">
+
+            {{-- <div class="media-button pull-left"> --}}
+            <!-- Messenger Chat Plugin Code -->
+
+            {{-- </div> --}}
             <div class="media-button pull-right">
                 <div class="media-button-content">
                     <a href="tel:0363738586" class="call-icon" rel="nofollow">
@@ -121,6 +126,14 @@
                         <i class="fa pt-2" style="font-size: 11px" aria-hidden="true">Zalo</i>
                         <span>Zalo: 036 37 38 586</span>
                     </a>
+
+                    <!-- Messenger Chat Plugin Code -->
+                    <div id="fb-root"></div>
+
+                    <!-- Your Chat Plugin code -->
+                    <div id="fb-customer-chat" class="fb-customerchat">
+                    </div>
+
                 </div>
 
             </div>
@@ -132,6 +145,32 @@
         <!-- Footer end -->
 
     </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "153586964513136");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v18.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <script src="{{ asset('fe/js/jquery.min.js') }}"></script>
     <script src="{{ asset('fe/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('fe/js/bootstrap-submenu.js') }}"></script>
@@ -314,10 +353,6 @@
                     }
                 });
             });
-
-
-
-
         });
     </script>
 
