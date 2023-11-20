@@ -82,17 +82,13 @@ class LoginController extends Controller
     public function handleFacebookCallback()
     {
         try {
-        
             $user = Socialite::driver('facebook')->user();
-         
             $finduser = User::where('email', $user->email)->first();
         
             if($finduser){
-         
                 Auth::login($finduser);
                 toastr()->success('Đăng nhập thành công!', 'Thành công');
                 return redirect()->intended('/');
-         
             }else{
                 $newUser = User::create([
                     'name' => $user->name,
