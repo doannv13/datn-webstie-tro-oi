@@ -9,22 +9,6 @@
             <div class="col-xl-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
 
                         <h4 class="header-title mt-0">Số tin đăng theo gói dịch vụ </h4>
 
@@ -53,26 +37,10 @@
                     </div>
                 </div>
             </div><!-- end col -->
-
+            
             <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-xl-8">
                                 <h4 class="header-title mt-0">Doanh thu</h4>
@@ -82,8 +50,11 @@
                                 </h2>
                             </div>
                         </div>
+                        @if ($revenueByMonth->count() > 0)
                         <div id="morris-bar-example" dir="ltr" style="height: 280px;" class="morris-chart"></div>
-
+                        @else
+                        <div>Chưa có doanh thu nào!</div>
+                        @endif
                     </div>
                 </div>
             </div><!-- end col -->
@@ -97,22 +68,6 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
 
                         <h4 class="header-title mt-0 mb-4"><a href="{{ route('category-rooms.index') }}"
                                 class="text-dark">Danh mục tin đăng</a></h4>
@@ -128,9 +83,9 @@
 
                             <div class="widget-detail-1 text-end">
                                 <h2 class="fs-5">Tổng: {{ $countCategoryRoomPost }}</h2>
-                                <h2 class="fw-normal pt-2 mb-1 fs-5">Đang hoạt động: {{ $countCategoryRoomPostToActive }}
+                                <h2 class="fw-normal pt-2 mb-1 fs-5">Hoạt động: {{ $countCategoryRoomPostToActive }}
                                 </h2>
-                                <p class="text-muted  mb-1">Tin trong ngày: {{ $countCategoryRoomPostToDay }}</p>
+                                <p class="text-muted  mb-1">Trong ngày: {{ $countCategoryRoomPostToDay }}</p>
 
                             </div>
                         </div>
@@ -141,22 +96,6 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
 
                         <h4 class="header-title mt-0 mb-4"><a href="{{ route('admin-room-posts.index') }}"
                                 class="text-dark">Tin đăng phòng</a></h4>
@@ -165,8 +104,8 @@
                             <div class="widget-detail-2 text-end">
                                 <span class="badge bg-pink rounded-pill float-start mt-3">Tổng: {{ $countRoomPost }} <i
                                         class="mdi mdi-trending-up"></i> </span>
-                                <h2 class="fw-normal mb-1 fs-5">Đang hoạt động: {{ $countRoomPostToActive }} </h2>
-                                <p class="text-muted mb-4">Tin trong ngày: {{ $countRoomPostToDay }}</p>
+                                <h2 class="fw-normal mb-1 fs-5">Hoạt động: {{ $countRoomPostToActive }} </h2>
+                                <p class="text-muted mb-4">Trong ngày: {{ $countRoomPostToDay }}</p>
                             </div>
                             <div class="progress progress-bar-alt-pink progress-sm">
                                 <div class="progress-bar bg-pink" role="progressbar"
@@ -184,22 +123,6 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
 
                         <h4 class="header-title mt-0 mb-4"><a href="{{ route('category-posts.index') }}"
                                 class="text-dark">Danh mục bài viết</a></h4>
@@ -213,7 +136,7 @@
                             </div>
                             <div class="widget-detail-1 text-end">
                                 <h2 class="fs-5">Tổng: {{ $countCategoryPost }}</h2>
-                                <h2 class="fw-normal pt-2 mb-1 fs-5">Đang hoạt động: {{ $countCategoryPostToActive }}</h2>
+                                <h2 class="fw-normal pt-2 mb-1 fs-5">Hoạt động: {{ $countCategoryPostToActive }}</h2>
                                 <p class="text-muted mb-1">Trong ngày: {{ $countCategoryPostToDay }}</p>
                             </div>
                         </div>
@@ -224,22 +147,6 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
 
                         <h4 class="header-title mt-0 mb-4"><a href="{{ route('posts.index') }}" class="text-dark">Bài
                                 viết</a></h4>
@@ -272,22 +179,6 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
 
                         <h4 class="header-title mt-0"><a href="{{ route('users.index') }}" class="text-dark">Tài khoản:
                                 {{ $countAccount }}</a></h4>
@@ -295,14 +186,14 @@
                             <div class="widget-chart-1 col-xl-6">
                                 <div class="widget-detail-1">
                                     <h2 class="fs-6 badge bg-danger rounded-pill">Admin: {{ $countAccountAdmin }}</h2>
-                                    <p class="text-muted" style="font-size: 10px">Tạo trong ngày:
+                                    <p class="text-muted" style="font-size: 10px">Trong ngày:
                                         {{ $countAccountAdminToDay }}</p>
                                 </div>
                             </div>
                             <div class="widget-chart-1 col-xl-6">
                                 <div class="widget-detail-1">
                                     <h2 class="fs-6 badge bg-warning rounded-pill">Vendor: {{ $countAccountVendor }}</h2>
-                                    <p class="text-muted" style="font-size: 10px">Tạo trong ngày:
+                                    <p class="text-muted" style="font-size: 10px">Trong ngày:
                                         {{ $countAccountVendorToDay }}</p>
                                 </div>
                             </div>
@@ -327,22 +218,6 @@
             <div class="col-xl-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <div class="dropdown float-end">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                            </div>
-                        </div>
                         <h4 class="header-title mt-0">Khác</h4>
                         <div class="row">
                             <div class="widget-chart-1 col-xl-6">

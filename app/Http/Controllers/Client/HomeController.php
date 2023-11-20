@@ -185,7 +185,7 @@ class HomeController extends Controller
             ->pluck('tags.*.name')
             ->flatten()
             ->unique()
-            ->all();
+            ->take(6);
 
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
