@@ -172,10 +172,10 @@
                             <div class="row p-3 ">
                                 @foreach ($facilities as $facility)
                                     <div class="form-check col-md-3 col-4 mb-2">
-                                        <input class="form-check-input" name="facility[]" type="checkbox"
-                                            value="{{ $facility->id }}"
+                                        <input class="form-check-input" id="facility-{{ $facility->id }}"
+                                            name="facility[]" type="checkbox" value="{{ $facility->id }}"
                                             {{ in_array($facility->id, $facilityArray) ? 'checked' : '' }}>
-                                        <label class="form-check-label">
+                                        <label class="form-check-label" for="facility-{{ $facility->id }}">
                                             {{ $facility->name }}
                                         </label>
                                     </div>
@@ -191,10 +191,10 @@
                             <div class="row p-3 ">
                                 @foreach ($surrounding as $surround)
                                     <div class="form-check col-md-3 col-4 mb-2">
-                                        <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                            value="{{ $surround->id }}"
+                                        <input class="form-check-input" id="surround-{{ $surround->id }}"
+                                            name="surrounding[]" type="checkbox" value="{{ $surround->id }}"
                                             {{ in_array($surround->id, $surroundingArray) ? 'checked' : '' }}>
-                                        <label class="form-check-label">
+                                        <label class="form-check-label" for="surround-{{ $surround->id }}">
                                             {{ $surround->name }}
                                         </label>
                                     </div>

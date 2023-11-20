@@ -46,6 +46,11 @@ class LoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    
     public function handleGoogleCallback()
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
@@ -72,5 +77,34 @@ class LoginController extends Controller
             Auth::login($user);
         }
         return redirect()->intended('/');
+    }
+
+    public function handleFacebookCallback()
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $finduser = User::where('email', $user->email)->first();
+        
+            if($finduser){
+                Auth::login($finduser);
+                toastr()->success('Đăng nhập thành công!', 'Thành công');
+                return redirect()->intended('/');
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'facebook_id'=> $user->id,
+                    'password' => encrypt('123456789'),
+                    'avatar' => $user->avatar,
+                ]);
+        
+                Auth::login($newUser);
+        
+                return redirect()->intended('/');
+            }
+        
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }
