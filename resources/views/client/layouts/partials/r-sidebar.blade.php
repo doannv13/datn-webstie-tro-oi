@@ -15,8 +15,8 @@
                     <div class="content">
                         <h5 style="color:{{$post->service_id ? $post->service->color : ''}}" class="media-heading">
                             <a
-                                style="color:{{$post->service_id ? $post->service->color : ''}}"
-                                href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 30) }}
+                                style="color:{{$post->service_id ? $post->service->color : ''}}; font-size: 14px; text-transform: uppercase;"
+                                href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 35) }}
                                 ...</a>
                         </h5>
                         <div class="listing-post-meta">
@@ -63,8 +63,8 @@
                             </a>
                         </div>
                         <div class="content">
-                            <h6 class="media-heading">
-                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title, 0, 40) }}
+                            <h6 class="text-uppercase" style="font-size: 14px">
+                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title, 0, 35) }}...
                             </h6>
                         </div>
                     </div>

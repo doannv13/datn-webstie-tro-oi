@@ -6,8 +6,8 @@
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
     @if ($global_setting)
         <meta name="title" content="{{ $global_setting->meta_title }}" />
@@ -182,29 +182,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
     <script>
-        $('.slider-for').slick({
+        $('.rooms-detail-slider .slider-for').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
             fade: true,
-            asNavFor: '.slider-nav',
-            focusOnSelect: true
+            asNavFor: '.rooms-detail-slider .slider-nav'
         });
-        $('.slider-nav').slick({
-            slidesToShow: 5,
+        $('.rooms-detail-slider .slider-nav').slick({
+            slidesToShow: 3,
             slidesToScroll: 1,
-            asNavFor: '.slider-for',
+            asNavFor: '.rooms-detail-slider .slider-for',
             dots: true,
+            centerMode: true,
             focusOnSelect: true,
             prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
             nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>'
         });
 
-        $('.slider-nav').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-            const thumbnailImageURL = slick.$slides.eq(nextSlide).find('img').attr('src');
-            $('.slider-for').find('.img-main-slick').attr('src', thumbnailImageURL);
-        });
     </script>
+
+
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "153586964513136");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v18.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
 
     @stack('scripts')
     {{--    Contact media button --}}
@@ -218,37 +248,37 @@
     <script>
         $(document).ready(function() {
             // function bookmark() {
-                $('.bookmark-button').click(function() {
-                    let button = $(this);
-                    let room_post_id = button.data('id');
+            $('.bookmark-button').click(function() {
+                let button = $(this);
+                let room_post_id = button.data('id');
 
-                    $.ajax({
-                        url: '{{ route('bookmark') }}',
-                        dataType: 'json',
-                        method: 'GET',
-                        data: {
-                            room_post_id: room_post_id,
-                        },
-                        success: function(response) {
+                $.ajax({
+                    url: '{{ route('bookmark') }}',
+                    dataType: 'json',
+                    method: 'GET',
+                    data: {
+                        room_post_id: room_post_id,
+                    },
+                    success: function(response) {
 
-                            $('#bookmarkQty').text(response.bm);
-                            button.removeClass('bookmark-button').addClass('unbookmark-button');
-                            button.off('click'); // Remove the click event
-                            // toastr() - > success('Bạn vừa lưu 1 phòng', 'Đã lưu');
+                        $('#bookmarkQty').text(response.bm);
+                        button.removeClass('bookmark-button').addClass('unbookmark-button');
+                        button.off('click'); // Remove the click event
+                        // toastr() - > success('Bạn vừa lưu 1 phòng', 'Đã lưu');
 
 
-                            // You can also change the SVG icon or other UI elements if needed
-                            button.find('path').attr('d',
-                                'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z'
-                            );
-                            console.log('Item bookmarked successfully');
+                        // You can also change the SVG icon or other UI elements if needed
+                        button.find('path').attr('d',
+                            'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z'
+                        );
+                        console.log('Item bookmarked successfully');
 
-                        },
-                        error: function(error) {
-                            console.error(error);
-                        }
-                    });
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
                 });
+            });
             // }
             // bookmark();
             // $('.unbookmark-button').click(function() {
