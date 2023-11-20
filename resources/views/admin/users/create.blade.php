@@ -68,8 +68,8 @@
                                 <div class="mb-3">
                                     <label for="example-select" class="form-label">Vai trò</label>
                                     <select class="form-select" id="example-select" name="role">
-                                        <option value="vendor">Vendor</option>
-                                        <option value="admin">Admin</option>
+                                        <option value="vendor">Nhà cung cấp</option>
+                                        <option value="admin">Quản trị viên</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
