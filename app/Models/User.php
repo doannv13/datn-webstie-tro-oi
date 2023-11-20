@@ -29,6 +29,7 @@ class User extends Authenticatable
         'avatar',
         'point',
         'role',
+        'facebook_id'
     ];
     public $timestamps = true;
     /**
