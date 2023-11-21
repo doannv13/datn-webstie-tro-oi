@@ -22,7 +22,8 @@ class FacilitySeeder extends Seeder
             ['name' => 'Kệ bếp', 'icon' => 'fa-solid fa-kitchen-set'],
             ['name' => 'Giường', 'icon' => 'fa-solid fa-bed'],
             ['name' => 'Máy giặt', 'icon' => 'fa-solid fa-jug-detergent'],
-            ['name' => 'Tủ lạnh', 'icon' => 'fa-regular fa-refrigerator'],
+            // ['name' => 'Tủ lạnh', 'icon' => 'fa-regular fa-refrigerator'],
+            ['name' => 'Tủ lạnh', 'icon' => 'far fa-snowflake'],
             ['name' => 'Bãi để xe riêng', 'icon' => 'fa-solid fa-motorcycle'],
             ['name' => 'Camera an ninh', 'icon' => 'fa-solid fa-camera'],
         ];
