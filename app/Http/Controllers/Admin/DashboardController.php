@@ -89,13 +89,25 @@ class DashboardController extends Controller
 
         $services = Services::withCount('roomPosts')->get();
 
-        $revenueByMonth = Transaction::select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(point) as total_revenue'))
+        // $revenueByMonth = Transaction::select(
+        //     DB::raw('MONTH(created_at) as month'), 
+        //     DB::raw('SUM(point) as total_revenue')
+        //     )
+        //     ->groupBy(DB::raw('MONTH(created_at)'))
+        //     ->orderBy(DB::raw('MONTH(created_at)'))
+        //     ->where('status', 'accept')
+        //     ->get();
+        $revenueByMonth = Transaction::select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(price_promotion) as total_revenue')
+        )
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy(DB::raw('MONTH(created_at)'))
             ->where('status', 'accept')
+            ->where('action', 'import') // Add this line to filter by action "import"
             ->get();
 
-        $totalRevenue = Transaction::where('status', 'accept')->sum('point');
+        $totalRevenue = Transaction::where('status', 'accept')->where('action', 'import')->sum('price_promotion');
         return view('admin.dashboard', compact(
             'countRoomPostToDay',
             'countRoomPostToActive',

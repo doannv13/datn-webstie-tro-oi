@@ -46,7 +46,9 @@
                             </div>
                         </div>
                         @foreach ($room as $item)
-                            <div class="row hotel-box-list-2 py-3">
+                        <a href="{{ route('room-post-detail', $item->id) }}">
+                            <div class="row hotel-box-list-2">
+
                                 <?php
                                 $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                 $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
@@ -148,7 +150,7 @@
                                                 <button style="background-color: #F4A460" class="btn rounded-3">
                                                     <div class="d-flex gap-2 align-items-center text-white">
                                                         <i class="fa fa-phone"></i>
-                                                        <a style="font-size: 14px">
+                                                        <a href="{{ route('room-post-detail', $item->id) }}" style="font-size: 14px" class="text-white">
                                                             0<?php
                                                             $phoneNumber = str_replace(',', ' ', number_format($item->phone));
                                                             $maskedPhoneNumber = substr($phoneNumber, 0, 1) . preg_replace('/[0-9]/', '*', substr($phoneNumber, 1));
@@ -165,6 +167,7 @@
                                 </div>
 
                             </div>
+                            </a>
                         @endforeach
                     </div>
                     {{-- {{$room->links()}} --}}

@@ -56,8 +56,10 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="heading-rooms">
+
                                         <h3 style="font-size:24px;text-transform: uppercase; color:{{ $roomposts->service_id ? $roomposts->service->color : '' }}">
                                             {{ $roomposts->name }}</h3>
+
                                         <p>
                                             <i class="fas fa-map-marker-alt me-2"></i>{{ $roomposts->address_full }}
                                         </p>

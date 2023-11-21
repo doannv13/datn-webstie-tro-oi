@@ -4,16 +4,16 @@
 
 <div class="row">
     <div class="d-flex justify-content-between align-items-center">
-    <form class="d-flex gap-2 mb-4" action="{{'admin-report-roompost'}}" method="post">
+    <form class="d-flex gap-2 mb-4" action="{{route('admin-report-roompost')}}" method="post">
         @csrf
         @method('post')
         <div class="mt-1">
             <label for="example-disable" class="form-label">Bắt đầu</label>
-            <input type="datetime-local" name="date_start" class="form-control" value="@if(isset($date_start)){{$date_start}}@endif">
+            <input type="datetime-local" name="date_start" class="form-control" value="{{isset($date_start)?$date_start:''}}" onchange="validateDates()">
         </div>
         <div class="mt-1">
             <label for="example-disable" class="form-label">Kết thúc</label>
-            <input type="datetime-local" name="date_end" class="form-control" value="@if(isset($date_end)){{$date_end}}@endif">
+            <input type="datetime-local" name="date_end" class="form-control" value="{{isset($date_end)?$date_end:''}}" onchange="validateDates()">
         </div>
         <div class="mt-4">
             <button type="submit" class="btn btn-primary waves-effect waves-light">Xem báo cáo</button>
@@ -26,21 +26,6 @@
     <div class="col-xl-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <div class="dropdown float-end">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                    </div>
-                </div>
 
                 <h4 class="header-title mt-0 mb-4">Tổng tin đăng</h4>
 
@@ -58,24 +43,10 @@
         </div>
     </div><!-- end col -->
 
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-2 col-md-6">
         <div class="card">
             <div class="card-body">
-                <div class="dropdown float-end">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                    </div>
-                </div>
+                
 
                 <h4 class="header-title mt-0 mb-3">Tin đã xác nhận</h4>
 
@@ -94,24 +65,10 @@
         </div>
     </div><!-- end col -->
 
-    <div class="col-xl-3 col-md-6">
+    <div class="col-xl-2 col-md-6">
         <div class="card">
             <div class="card-body">
-                <div class="dropdown float-end">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                    </div>
-                </div>
+               
 
                 <h4 class="header-title mt-0 mb-4">Tin chờ xác nhận</h4>
 
@@ -127,26 +84,29 @@
             </div>
         </div>
     </div><!-- end col -->
+    <div class="col-xl-2 col-md-6">
+        <div class="card">
+            <div class="card-body">
+               
+
+                <h4 class="header-title mt-0 mb-4">Tin đã hủy</h4>
+
+                <div class="widget-chart-1">
+                    <div class="widget-chart-box-1 float-start" dir="ltr">
+                        <h2>{{$room_post-($room_post_accept+$room_post_pendding)}}</h2>
+                    </div>
+                    <div class="widget-detail-1 text-end">
+                        <h3 class="fw-normal pt-2 mb-1"> {{$room_post_today-($room_post_accept_today+$room_post_pendding_today)}} </h3>
+                        <p class="text-muted mb-1">Hôm nay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- end col -->
 
     <div class="col-xl-3 col-md-6">
         <div class="card">
             <div class="card-body">
-                <div class="dropdown float-end">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                    </div>
-                </div>
-
                 <h4 class="header-title mt-0 mb-3"> VIP / thường</h4>
 
                 <div class="widget-box-2">
@@ -172,23 +132,11 @@
     <div class="">
         <div class="card">
             <div class="card-body">
-                <div class="dropdown float-end">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                    </div>
-                </div>
-
-                <h4 class="header-title mt-0 mb-3">Tin đăng tổng quan</h4>
+                <h4 class="header-title mt-0 mb-3">Tin đăng tổng quan 
+                @if(count($total_room_post)<=0)
+                    <span class="text-danger"> (Không có doanh thu)</span>
+                @endif
+                </h4>
                 <div id="revenue-chart"></div>
             </div>
         </div>
@@ -198,7 +146,20 @@
 @endsection
 
 @push('scripts')
-
+<script>
+    function validateDates() {
+        var dateStartInput = document.getElementsByName('date_start')[0];
+        var dateEndInput = document.getElementsByName('date_end')[0];
+        
+        var dateStart = new Date(dateStartInput.value);
+        var dateEnd = new Date(dateEndInput.value);
+        
+        if (dateStart > dateEnd) {
+            alert('Ngày kết thúc phải lớn hơn ngày bắt đầu.');
+            dateEndInput.value = '';
+        }
+    }
+</script>
 <script>
    // Dữ liệu mẫu
 

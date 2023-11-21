@@ -40,7 +40,6 @@ class HomeController extends Controller
             ->where('time_end', '>', Carbon::now())
             ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
             ->inRandomOrder()
-            ->limit(6)
             ->get();
         // dd($room_post_vip);
         $room_post_new = RoomPost::latest('time_start')->where('status', 'accept')->limit(30)->paginate(6);
@@ -185,7 +184,7 @@ class HomeController extends Controller
             ->pluck('tags.*.name')
             ->flatten()
             ->unique()
-            ->all();
+            ->take(6);
 
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
