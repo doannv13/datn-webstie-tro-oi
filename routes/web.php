@@ -76,6 +76,11 @@ Route::get('client-login', function () {
 //Google Authen
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+//Facebook login
+Route::get('auth/facebook', [LoginController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
 //Thay đổi mật khẩu,thông tin
 Route::resource('changeinfo', ChangeInfoController::class);
 Route::resource('changepassword', ChangePasswordController::class);
@@ -155,7 +160,7 @@ Route::group(['middleware' => 'checkRole:vendor'], function () {
 
         // ADMIN
         Route::get('home-admin', function () {
-            return view('admin.layouts.master');
+            return view('admin.layouts.home-admin');
         })->name('home-admin');
 
         Route::get('admin-notification-all', function () {

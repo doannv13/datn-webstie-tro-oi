@@ -150,7 +150,8 @@
 
 
                         <div class="col-lg-12 col-md-12 mb-3">
-                            <label class="input-group">Mô tả chi tiết (tối thiểu 300 kí tự):<span class="text-danger">*</span></label>
+                            <label class="input-group">Mô tả chi tiết (tối thiểu 300 kí tự):<span
+                                    class="text-danger">*</span></label>
                             <div class="form-group message">
                                 <textarea class="form-control " style="height: 110px" name="description" id="description"
                                     placeholder="Write message" aria-label="Write message">{{ old('description') }}</textarea>
@@ -165,10 +166,10 @@
                             <div class="row p-3 ">
                                 @foreach ($facilities as $facility)
                                     <div class="form-check col-md-3 col-4 mb-2">
-                                        <input class="form-check-input" name="facility[]" type="checkbox"
-                                            value="{{ $facility->id }}"
+                                        <input class="form-check-input" id="facility-{{ $facility->id }}"
+                                            name="facility[]" type="checkbox" value="{{ $facility->id }}"
                                             {{ in_array($facility->id, old('facility', [])) ? 'checked' : '' }}>
-                                        <label class="form-check-label">
+                                        <label class="form-check-label" for="facility-{{ $facility->id }}">
                                             {{ $facility->name }}
                                         </label>
                                     </div>
@@ -184,10 +185,10 @@
                             <div class="row p-3 ">
                                 @foreach ($surrounding as $surround)
                                     <div class="form-check col-md-3 col-4 mb-2">
-                                        <input class="form-check-input" name="surrounding[]" type="checkbox"
-                                            value="{{ $surround->id }}"
+                                        <input class="form-check-input" id="surrounding-{{ $surround->id }}"
+                                            name="surrounding[]" type="checkbox" value="{{ $surround->id }}"
                                             {{ in_array($surround->id, old('surrounding', [])) ? 'checked' : '' }}>
-                                        <label class="form-check-label">
+                                        <label class="form-check-label" for="surrounding-{{ $surround->id }}">
                                             {{ $surround->name }}
                                         </label>
                                     </div>

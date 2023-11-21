@@ -50,6 +50,7 @@ class HomeController extends Controller
         $count_room = RoomPost::where('status', 'accept')->count();
         $count_user = count(User::all());
         $count_post = Post::where('status', 'active')->count();
+        // dd($count_room,$count_post);
         // Share media
         // $share_content=HOME_URL;
         // $shareComponent = \Share::page(

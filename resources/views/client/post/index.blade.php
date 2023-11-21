@@ -1,4 +1,5 @@
 @extends('client/layouts/master')
+@section('title', 'Tin tức')
 @section('content')
     <!-- Sub banner start -->
     <div class="sub-banner">
@@ -17,7 +18,7 @@
     <!-- Sub Banner end -->
     <!-- Content -->
     <!-- Blog body start -->
-    <div class="blog-body content-area">
+    <div class="pt-4 blog-body content-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12">
@@ -49,7 +50,7 @@
                                         </ul>
                                     </div>
                                     <h3>
-                                        <a href="{{ route('posts-detail', $value->id) }}">{{ $value->metaTitle }}</a>
+                                        <a class="fs-6 text-uppercase" href="{{ route('posts-detail', $value->id) }}">{{ $value->metaTitle }}</a>
                                     </h3>
                                     <p>{{ $value->metaDescription }}</p>
                                 </div>
@@ -69,4 +70,5 @@
         </div>
     </div>
     <!-- Blog body end -->
+
 @endsection

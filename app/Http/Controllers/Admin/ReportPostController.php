@@ -11,6 +11,11 @@ use Carbon\Carbon;
 
 class ReportPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:report-resource', ['only' => ['index']]);
+    }
+
    public function index(){
       $post = Post::query()->count();
       $post_today = Post::query()->whereDate('created_at', today())->count();

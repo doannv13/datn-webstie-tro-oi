@@ -12,7 +12,11 @@ use App\Exports\RevenueExport;
 
 class ReportRevenueController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('permission:report-resource', ['only' => ['index','fillterRevenue','exportRevenue']]);
+    }
+
     public function index()
     {
 
