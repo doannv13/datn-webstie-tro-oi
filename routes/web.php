@@ -97,7 +97,7 @@ Route::get('tin-tuc/{slug}', [ClientPost::class, 'postDetail'])->name('posts-det
 Route::get('search', [HomeController::class, 'index'])->name('search');
 Route::match(['get', 'post'], 'search-filter', [HomeController::class, 'filter_list'])->name('search-filter');
 // Route::match(['get', 'post'], 'search-fillter', [HomeController::class, 'filter_list_room_post_detail'])->name('search-fillter');
-Route::get('{slug}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
+Route::get('tin-dang/{slug}', [HomeController::class, 'roomPostDetail'])->name('room-post-detail');
 
 Route::get('/tags/posts/{slug}', [TagController::class, 'searchTagPost'])->name('tags-show');
 
