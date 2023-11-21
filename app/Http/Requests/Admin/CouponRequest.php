@@ -46,11 +46,11 @@ class CouponRequest extends FormRequest
 
             'type.required' => 'Kiểu không được để trống',
 
-            'value.required' => 'Mật khẩu phải bắt buộc nhập',
+            'value.required' => 'Giá trị bắt buộc nhập',
             'value.integer' => 'Giá trị phải là số',
 
 
-            'description.required' => 'Địa chỉ phải bắt buộc nhập',
+            'description.required' => 'Mô tả phải bắt buộc nhập',
 
             'status.required' => 'Trạng thái không được để trống',
 
