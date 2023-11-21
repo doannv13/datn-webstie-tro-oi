@@ -286,7 +286,7 @@
                                                                                 class="img-slick img-fluid w-100"
                                                                                 style="height: 260px;">
                                                                             <a
-                                                                                href="{{ route('room-post-detail', $value->id) }}">
+                                                                                href="{{ route('room-post-detail', $value->slug) }}">
                                                                                 <label class=""
                                                                                     style="cursor: pointer; font-size: 20px;"
                                                                                     for="">Xem Chi Tiết</label>
@@ -297,12 +297,12 @@
                                                                     <!-- Detail -->
                                                                     <div class="detail clearfix" style="height: 240px;">
                                                                         <h3>
-                                                                            <a style="color:{{ $value->service_id ? $value->service->color : '' }}"
-                                                                                href="{{ route('room-post-detail', $value->id) }}"> {!! strlen($value->name) > 40 ? substr(strip_tags($value->name), 0, 40) . '...' : $value->name !!}</a>
+                                                                            <a style="text-transform: uppercase; font-size:16px;color:{{ $value->service_id ? $value->service->color : '' }}"
+                                                                                href="{{ route('room-post-detail', $value->slug) }}"> {!! strlen($value->name) > 50 ? substr(strip_tags($value->name), 0, 50) . '...' : $value->name !!}</a>
                                                                         </h3>
                                                                         <p class="location">
                                                                             <a
-                                                                                href="{{ route('room-post-detail', $value->id) }}">
+                                                                                href="{{ route('room-post-detail', $value->slug) }}">
                                                                                 <i class="fa-solid fa-location-dot fa-lg "
                                                                                     style="color: #f46b10;"></i>
                                                                                 {{ substr($value->address_full, 0, 50) }}

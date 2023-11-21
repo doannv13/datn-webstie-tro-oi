@@ -9826,3 +9826,8 @@ div#social-links ul li a:hover {
     display: inline-block;
 }
 
+.sidebar-widget .list-unstyled li.active a {
+    color: #F4A460; /* Màu sắc tùy chọn cho liên kết active */
+    font-weight: bold; /* Hoặc bất kỳ kiểu chữ nào khác */
+}
+
