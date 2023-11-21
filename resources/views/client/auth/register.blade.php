@@ -95,7 +95,7 @@
                         </form>
                         <div class="clearfix"></div>
                         <div class="social-list">
-                            <a href="#" class="facebook-bg">
+                            <a href="{{ url('auth/facebook') }}" class="facebook-bg">
                                 <i class="fa fa-facebook"></i>
                             </a>
                             <a href="{{'/auth/google'}}" class="google-bg">

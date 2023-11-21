@@ -17,13 +17,13 @@
     </div>
     <!-- Sub Banner end -->
     <!-- Rooms detail section start -->
-    <div class="content-area-15 rooms-detail-section">
+    <div class="pt-4 content-area-15 rooms-detail-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-7">
                     <div class="rooms-detail-info ">
-                        <div class="heading-rooms row hotel-box-list-2 clearfix pb-3">
-                            <div class="pull-left pt-2">
+                        <div class="heading-rooms row hotel-box-list-2 clearfix">
+                            <div class="pull-left py-4">
                                 @if ($totalResults)
                                     <h6>Kết quả: {{ $totalResults }} tin đăng phòng</h6>
                                     <div class="pt-3 d-flex gap-2">
@@ -48,6 +48,7 @@
                         @foreach ($room as $item)
                         <a href="{{ route('room-post-detail', $item->id) }}">
                             <div class="row hotel-box-list-2">
+
                                 <?php
                                 $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
                                 $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
@@ -113,8 +114,8 @@
                                         <div class="clearfix">
                                             <a href="{{ route('room-post-detail', $item->id) }}" class="">
                                                 <h5
-                                                    style="font-size: 16px;color:{{ $item->service_id && $item->time_end > $currentDateTime ? $item->service->color : '' }};">
-                                                    {!! strlen($item->name) > 70 ? substr(strip_tags($item->name), 0, 70) . ',...' : $item->name !!}</h5>
+                                                    style="text-transform: uppercase;font-size: 16px;color:{{ $item->service_id && $item->time_end > $currentDateTime ? $item->service->color : '' }}">
+                                                    {!! strlen($item->name) > 70 ? substr(strip_tags($item->name), 0, 70) . '...' : $item->name !!}</h5>
                                             </a>
                                             <span style="color: #F4A460;font-size: 14px;">Giá:
                                                 {{ str_replace(',', '.', number_format($item->price)) }} VND/tháng</span>
