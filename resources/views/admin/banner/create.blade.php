@@ -43,7 +43,7 @@
                                         <input id="image" type="file" class="form-control" name="image"
                                             accept="image/*"><br>
                                         <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
-                                            width="100px" height="100px">
+                                            width="100px" height="100px"><br>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

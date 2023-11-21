@@ -56,7 +56,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="heading-rooms">
-                                        <h3 style="color:{{ $roomposts->service_id ? $roomposts->service->color : '' }}">
+                                        <h3 style="font-size:24px;text-transform: uppercase; color:{{ $roomposts->service_id ? $roomposts->service->color : '' }}">
                                             {{ $roomposts->name }}</h3>
                                         <p>
                                             <i class="fas fa-map-marker-alt me-2"></i>{{ $roomposts->address_full }}
@@ -296,7 +296,7 @@
                                                                     <div class="detail clearfix" style="height: 240px;">
                                                                         <h3>
                                                                             <a style="color:{{ $value->service_id ? $value->service->color : '' }}"
-                                                                                href="{{ route('room-post-detail', $value->id) }}">{{ $value->name }}</a>
+                                                                                href="{{ route('room-post-detail', $value->id) }}"> {!! strlen($value->name) > 40 ? substr(strip_tags($value->name), 0, 40) . '...' : $value->name !!}</a>
                                                                         </h3>
                                                                         <p class="location">
                                                                             <a

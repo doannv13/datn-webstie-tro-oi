@@ -6,8 +6,8 @@
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
     @if ($global_setting)
         <meta name="title" content="{{ $global_setting->meta_title }}" />
@@ -221,59 +221,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
     <script>
-        $('.rooms-detail-slider .slider-for').slick({
+        $('.slider-for').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
             fade: true,
-            asNavFor: '.rooms-detail-slider .slider-nav'
+            asNavFor: '.slider-nav',
+            focusOnSelect: true
         });
-        $('.rooms-detail-slider .slider-nav').slick({
-            slidesToShow: 3,
+        $('.slider-nav').slick({
+            slidesToShow: 5,
             slidesToScroll: 1,
-            asNavFor: '.rooms-detail-slider .slider-for',
+            asNavFor: '.slider-for',
             dots: true,
-            centerMode: true,
             focusOnSelect: true,
             prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
             nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>'
         });
 
-    </script>
-
-
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
-
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "153586964513136");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-    <!-- Your SDK code -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v18.0'
+        $('.slider-nav').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+            const thumbnailImageURL = slick.$slides.eq(nextSlide).find('img').attr('src');
+            $('.slider-for').find('.img-main-slick').attr('src', thumbnailImageURL);
         });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
     </script>
-
-
 
     @stack('scripts')
     {{--    Contact media button --}}
