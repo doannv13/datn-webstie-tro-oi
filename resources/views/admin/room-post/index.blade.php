@@ -23,7 +23,7 @@
                             </thead>
                             <tbody class="align-items-center p-4">
                                 @foreach ($data as $key => $value)
-                                    <tr class="al">
+                                    <tr class="al" data-id="{{ $value->id }}">
                                         <td scope="row">{{ $key + 1 }}</td>
 
                                         <td>
@@ -288,10 +288,7 @@
                                     'reason': reason
                                 },
                                 success: function(data) {
-                                    if (data.time_start) {
-                                        $('.time_start').text(data.time_start);
-                                    }
-
+                                    console.log(data);
                                     const Toast = Swal.mixin({
                                         toast: true,
                                         position: 'top-end',
@@ -304,14 +301,21 @@
                                         Toast.fire({
                                             icon: 'success',
                                             title: data.success,
+                                        }).then(() => {
+                                            location.reload();
                                         });
                                     } else {
                                         Toast.fire({
                                             icon: 'error',
                                             title: data.error,
+                                        }).then(() => {
+                                            location.reload();
                                         });
                                     }
+                                    location.reload();
+
                                 }
+
                             });
 
                             let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' :
@@ -349,9 +353,7 @@
                                 'room_post_id': room_post_id,
                             },
                             success: function(data) {
-                                if (data.time_start) {
-                                    $('.time_start').text(data.time_start);
-                                }
+                                console.log(data);
                                 const Toast = Swal.mixin({
                                     toast: true,
                                     position: 'top-end',
@@ -364,14 +366,21 @@
                                     Toast.fire({
                                         icon: 'success',
                                         title: data.success,
+                                    }).then(() => {
+                                        location.reload();
                                     });
                                 } else {
                                     Toast.fire({
                                         icon: 'error',
                                         title: data.error,
+                                    }).then(() => {
+                                        location.reload();
                                     });
                                 }
+                                // location.reload();
+
                             }
+
                         });
                         let label = '<label class="btn ' + (status === 'accept' ? 'btn-success' :
                                 'btn-danger') +
