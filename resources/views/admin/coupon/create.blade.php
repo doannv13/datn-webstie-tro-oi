@@ -21,7 +21,8 @@
                                     @csrf
                                     @method('post')
                                     <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Tên mã giảm giá</label>
+                                        <label for="simpleinput" class="form-label">Tên mã giảm giá<span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="name" id="simpleinput" class="form-control"
                                             placeholder="Tên mã giảm giá..." value="{{ old('name') }}">
                                         @error('name')
@@ -30,7 +31,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label">Kiểu</label>
+                                        <label class="form-label">Kiểu<span
+                                                class="text-danger">*</span></label>
 
                                         <div class="form-check mb-1">
                                             <input type="radio" name="type"
@@ -49,7 +51,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="example-palaceholder" class="form-label">Giá trị</label>
+                                        <label for="example-palaceholder" class="form-label">Giá trị<span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="value" id="example-palaceholder" class="form-control"
                                             placeholder="Giá trị..." value="{{ old('value') }}">
                                         @error('value')
@@ -57,14 +60,16 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">Mô tả</label>
+                                        <label for="example-textarea" class="form-label">Mô tả<span
+                                                class="text-danger">*</span></label>
                                         <textarea class="form-control" placeholder="Mô tả ..." name="description" id="description" rows="5">{{ old('description') }}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="example-palaceholder" class="form-label">Số lượng</label>
+                                        <label for="example-palaceholder" class="form-label">Số lượng<span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="quantity" id="example-palaceholder" class="form-control"
                                             placeholder="Số lượng..." value="{{ old('quantity') }}">
                                         @error('quantity')
@@ -72,7 +77,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="example-disable" class="form-label">Ngày bắt đầu</label>
+                                        <label for="example-disable" class="form-label">Ngày bắt đầu<span
+                                                class="text-danger">*</span></label>
                                         <input type="datetime-local" name="start_date" class="form-control"
                                             value="{{ old('start_date') }}">
                                         @error('start_date')
@@ -80,7 +86,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="example-disable" class="form-label">Ngảy kết thúc</label>
+                                        <label for="example-disable" class="form-label">Ngày kết thúc<span
+                                                class="text-danger">*</span></label>
                                         <input type="datetime-local" name="end_date" class="form-control"
                                             value="{{ old('end_date') }}">
                                         @error('end_date')
