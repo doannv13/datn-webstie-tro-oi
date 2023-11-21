@@ -27,9 +27,16 @@
                                                 class="text-danger">*</span></label>
                                         <select name="icon" id="icon" class="form-select">
                                             <option value="">Chọn icon</option>
-                                            <option value="fa fas-wifi">Wifi</option>
+                                            <option value="fa-solid fa-wifi">Wifi</option>
                                             <option value="fas fa-fan">Quạt</option>
-                                            <option value="fas fa-bed">Giường</option>
+                                            <option value="fa-solid fa-bed">Giường</option>
+                                            <option value="fa-solid fa-temperature-full">Bình nóng lạnh</option>
+                                            <option value="fa-solid fa-snowflake">Điều hoà</option>
+                                            <option value="fa-solid fa-kitchen-set">Kệ bếp</option>
+                                            <option value="fa-solid fa-jug-detergent">Máy giặt</option>
+                                            <option value="far fa-snowflake">Tủ lạnh</option>
+                                            <option value="fa-solid fa-motorcycle">Bãi để xe</option>
+                                            <option value="fa-solid fa-camera">Camera an ninh</option>
                                             <option value="fas fa-calendar-plus">Khác</option>
                                         </select>
                                         @error('icon')
