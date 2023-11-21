@@ -625,6 +625,9 @@
         });
     });
 </script>
+
+
+@push('scripts')
 <script>
     function notification() {
         var confirmation = confirm('Xác nhận thanh toán');
@@ -795,9 +798,6 @@
         $('input[name="type-pay"]').change();
     });
 </script>
-@push('scripts')
-
-
 
 
 

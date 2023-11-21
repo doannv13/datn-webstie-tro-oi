@@ -434,7 +434,7 @@ class RoomPostController extends Controller
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
                 $message="Mã tin ".$room_post->id." của bạn đã được duyệt.";
-                $link_detail="room-post-detail/".$room_post->id;
+                $link_detail=route('room-post-detail',$room_post->slug);
                 sendNotification($link_detail,$room_post->user_id,$message);
             } elseif ($room_post->status === 'cancel') {
                 $history = new CancelHistory();
