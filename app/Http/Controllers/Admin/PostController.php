@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categoryPosts = CategoryPost::query()->latest()->get();
+        $categoryPosts = CategoryPost::query()->where('status', 'active')->latest()->get();;
         return view('admin.post.create', compact('categoryPosts'));
     }
 
@@ -94,7 +94,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        $categoryPosts = CategoryPost::query()->latest()->get();
+        $categoryPosts = CategoryPost::query()->where('status', 'active')->latest()->get();
         $model = Post::query()->findOrFail($id);
         $tags = $model->tags->pluck('name')->implode(',');
         return view('admin.post.edit', compact('model', 'tags', 'categoryPosts'));

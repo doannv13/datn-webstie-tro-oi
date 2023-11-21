@@ -312,7 +312,7 @@
                                             location.reload();
                                         });
                                     }
-                                    location.reload();
+                                    
 
                                 }
 
@@ -377,8 +377,6 @@
                                         location.reload();
                                     });
                                 }
-                                // location.reload();
-
                             }
 
                         });

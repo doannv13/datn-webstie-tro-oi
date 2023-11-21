@@ -8,15 +8,15 @@
             @foreach (room_posts() as $key => $post)
                 <div class="recent-news-item mb-3">
                     <div class="thumb">
-                        <a href="{{ route('room-post-detail', $post->id) }}">
+                        <a href="{{ route('room-post-detail', $post->slug) }}">
                             <img src="{{ asset($post->image) }}" alt="small-img" style="width: 80px; height: 80px;">
                         </a>
                     </div>
                     <div class="content">
                         <h5 style="color:{{$post->service_id ? $post->service->color : ''}}" class="media-heading">
                             <a
-                                style="color:{{$post->service_id ? $post->service->color : ''}}"
-                                href="{{ route('room-post-detail', $post->id) }}">{{ substr($post->name, 0, 30) }}
+                                style="color:{{$post->service_id ? $post->service->color : ''}}; font-size: 14px; text-transform: uppercase;"
+                                href="{{ route('room-post-detail', $post->slug) }}">{{ substr($post->name, 0, 30) }}
                                 ...</a>
                         </h5>
                         <div class="listing-post-meta">
@@ -59,12 +59,12 @@
                     <div class="recent-news-item mb-3">
                         <div class="thumb">
                             <a href="#">
-                                <img src="{{ asset($value->image) }}" alt="small-img">
+                                <img src="{{ asset($value->image) }}" alt="small-img" width="80px" height="80px">
                             </a>
                         </div>
                         <div class="content">
-                            <h6 class="media-heading">
-                                <a href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title, 0, 40) }}
+                            <h6 class="text-uppercase" style="font-size: 14px">
+                                <a href="{{ route('posts-detail', $value->slug) }}">{{ substr($value->title, 0, 30) }}...
                             </h6>
                         </div>
                     </div>

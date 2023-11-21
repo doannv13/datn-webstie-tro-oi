@@ -4,13 +4,9 @@
 
         <li class="d-none d-lg-block">
             <form class="app-search">
+
                 <div class="app-search-box">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="top-search">
-                        <button class="btn input-group-text" type="submit">
-                            <i class="fe-search"></i>
-                        </button>
-                    </div>
+                    <a href="{{ route('home') }}" style="border-radius:20px;margin:10px;width:200px;" class="btn">Trở về trang người dùng</a>
                     <div class="dropdown-menu dropdown-lg" id="search-dropdown">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
@@ -254,7 +250,7 @@
                         // console.log(data);
                         // Generate HTML for each notification
                         let notificationHTML =
-                            ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item " id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}"> 
+                            ` <a href="/notifications/${data.id}/edit" class="dropdown-item notify-item " id="read-notification" data-id="${data.id}" style="background-color:${data.read_at === null ? '#EEEEEE' : ''}">
                                 <div class="notify-icon">
                                     <img src="${data.avata ? data.avata : "{{asset('fe/img/logos/no-image-user.jpeg')}}"}" id='avatar' class="img-fluid rounded-circle" alt="" />
                                 </div>
@@ -283,6 +279,6 @@
             });
         });
     });
-    
+
 </script>
 @endpush

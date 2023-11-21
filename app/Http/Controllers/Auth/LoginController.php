@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 class LoginController extends Controller
 {
     /*
@@ -46,6 +46,11 @@ class LoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    
     public function handleGoogleCallback()
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
@@ -61,16 +66,47 @@ class LoginController extends Controller
         // If not, create a new user record
         else {
             toastr()->success('Tạo tài khoản thành công!', 'Thành công');
+           
+          
             $user = User::create(
                 [
                     'email' => $googleUser->email,
                     'name' => $googleUser->name,
-                    'password' => 'Admin123',
+                    'password' => "A123".Str::random(8),
                     'avatar' => $googleUser->avatar,
                 ]
             );
             Auth::login($user);
         }
         return redirect()->intended('/');
+    }
+
+    public function handleFacebookCallback()
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $finduser = User::where('email', $user->email)->first();
+        
+            if($finduser){
+                Auth::login($finduser);
+                toastr()->success('Đăng nhập thành công!', 'Thành công');
+                return redirect()->intended('/');
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'facebook_id'=> $user->id,
+                    'password' => encrypt('123456789'),
+                    'avatar' => $user->avatar,
+                ]);
+        
+                Auth::login($newUser);
+        
+                return redirect()->intended('/');
+            }
+        
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }

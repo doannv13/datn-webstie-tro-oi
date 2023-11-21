@@ -49,22 +49,24 @@
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <div class="col-11">
+                                        <div class="">
                                             <label for="example-textarea" class="form-label">Ảnh</label>
                                             <input id="image" type="file" class="form-control" name="image"
                                                 accept="image/*">
                                         </div>
-                                        <div class="col-1">
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <div class="">
                                             @if ($model->image && asset($model->image))
                                                 <img id="image_preview" src="{{ asset($model->image) }}" alt=""
-                                                    width="100px" height="100px">
+                                                     width="100px" height="100px">
                                             @else
                                                 <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
-                                                    width="100px" height="100px">
+                                                     width="100px" height="100px">
                                             @endif
                                         </div>
                                         @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 

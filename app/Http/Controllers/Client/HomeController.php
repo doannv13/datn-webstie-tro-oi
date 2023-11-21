@@ -40,7 +40,6 @@ class HomeController extends Controller
             ->where('time_end', '>', Carbon::now())
             ->orderBy(DB::raw('FIELD(service_id, 1, 2, 3)'))
             ->inRandomOrder()
-            ->limit(6)
             ->get();
         // dd($room_post_vip);
         $room_post_new = RoomPost::latest('time_start')->where('status', 'accept')->limit(30)->paginate(6);
@@ -78,10 +77,10 @@ class HomeController extends Controller
             $model->room_post_id = $room_post_id;
             $model->save();
             $bm = Bookmark::where('user_id', $user_id)
-            ->whereHas('roomPost', function ($query) {
-                $query->where('status', 'accept');
-            })
-            ->count();
+                ->whereHas('roomPost', function ($query) {
+                    $query->where('status', 'accept');
+                })
+                ->count();
             return response()->json([
                 // 'data' => $request->all(),
                 'bm' => $bm
@@ -128,10 +127,10 @@ class HomeController extends Controller
             $model->delete();
 
             $bm = Bookmark::where('user_id', $user_id)
-            ->whereHas('roomPost', function ($query) {
-                $query->where('status', 'accept');
-            })
-            ->count();
+                ->whereHas('roomPost', function ($query) {
+                    $query->where('status', 'accept');
+                })
+                ->count();
             return response()->json([
                 // 'data' => $request->all(),
                 'bm' => $bm
@@ -149,10 +148,10 @@ class HomeController extends Controller
             $model->delete();
             $user_id = auth()->user()->id;
             $bm = Bookmark::where('user_id', $user_id)
-            ->whereHas('roomPost', function ($query) {
-                $query->where('status', 'accept');
-            })
-            ->count();
+                ->whereHas('roomPost', function ($query) {
+                    $query->where('status', 'accept');
+                })
+                ->count();
             return response()->json([
                 // 'data' => $request->all(),
                 'bm' => $bm
@@ -185,7 +184,7 @@ class HomeController extends Controller
             ->pluck('tags.*.name')
             ->flatten()
             ->unique()
-            ->all();
+            ->take(6);
 
         $query = RoomPost::query()
             ->with('categoryroom', 'district', 'tags')
@@ -283,17 +282,20 @@ class HomeController extends Controller
 
     }
 
-    function roomPostDetail(String $id)
+    public function roomPostDetail(String $slug)
     {
         $category_rooms = CategoryRoom::all()->where('status', 'active');
         $districts = District::distinct()->pluck('name');
         $search = request()->input('name_filter');
-        $room_postss = RoomPost::latest()->with('facilities')->paginate(10);
         $categories = CategoryRoom::withCount('roomPosts')
             ->having('room_posts_count', '>', 0)
             ->paginate(4);
         $posts = Post::latest()->paginate(5);
-        $roomposts = RoomPost::query()->with('facilities', 'surrounds')->findOrFail($id);
+
+        $roomposts = RoomPost::where('slug', $slug)
+            ->with('facilities', 'surrounds')
+            ->firstOrFail();
+
         if ($search != null) {
             $roomposts->where('name', 'like', '%' . $search . '%')
                 ->orWhereHas('tags', function ($query) use ($search) {
@@ -301,27 +303,22 @@ class HomeController extends Controller
                 });
         }
         $caterooms = RoomPost::query()->with('facilities', 'surrounds')
-            ->where('id', '!=', $id)
+            ->where('id', '!=', $roomposts->id)
             ->where('category_room_id', $roomposts->category_room_id)
             ->where('status', 'accept')
             ->get();
 
-
-        // $rooms = RoomPost::with(['facilities' => function ($query) {
-        //     $query->inRandomOrder()->take(6);
-        // }]);
-        $images = ImageRoom::query()->where('room_id', $id)->get();
+        $images = ImageRoom::query()->where('room_id', $roomposts->id)->get();
         $share_content = DETAIL_ROOM_URL;
-        $id_roompost = RoomPost::query()->findOrFail($id);
 
         $shareComponent = \Share::page(
-            $share_content . $id_roompost->id,
+            $share_content . $roomposts->id,
             'chia se fb cua quang phuc vip pro',
         )
             ->facebook()
             ->twitter()
             ->reddit();
         $tags = $roomposts->tags;
-        return view('client.room-post.detail', compact('search', 'tags', 'category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'room_postss', 'categories', 'posts', 'shareComponent'));
+        return view('client.room-post.detail', compact('search', 'tags', 'category_rooms', 'districts', 'roomposts', 'images', 'caterooms', 'categories', 'posts', 'shareComponent'));
     }
 }

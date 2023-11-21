@@ -56,7 +56,10 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="heading-rooms">
-                                        <h3 style="color:{{ $roomposts->service_id ? $roomposts->service->color : '' }}">{{ $roomposts->name }}</h3>
+
+                                        <h3 style="font-size:24px;text-transform: uppercase; color:{{ $roomposts->service_id ? $roomposts->service->color : '' }}">
+                                            {{ $roomposts->name }}</h3>
+
                                         <p>
                                             <i class="fas fa-map-marker-alt me-2"></i>{{ $roomposts->address_full }}
                                         </p>
@@ -92,7 +95,8 @@
                                                 <h1>Mô tả chi tiết</h1>
                                             </div>
                                             <!-- paragraph -->
-                                            <div class="mb-0" style="overflow-wrap: break-word;">{!! $roomposts->description !!}</div>
+                                            <div class="mb-0" style="overflow-wrap: break-word;">{!! $roomposts->description !!}
+                                            </div>
                                         </div>
                                         <!-- Rooms description end -->
 
@@ -173,146 +177,159 @@
 
                                         </div>
 
+
+
+
+
+
+
+
+
+
+
                                         <!-- Amenities end -->
                                         <!-- Similar room start -->
                                         {{-- <div class="similar-rooms "> --}}
                                         {{-- <div class="blog-section content-area comon-slick"> --}}
                                         <!-- Main title -->
-                                        <div class="main-title-2">
+                                        {{-- <div class="main-title-2">
                                             <h1>Phòng tương tự</h1>
-                                        </div>
-                                        <div class="row wow fadeInUp delay-04s">
+                                        </div> --}}
+                                        {{-- <div class="row wow fadeInUp delay-04s">
                                             @if (isset($caterooms))
                                                 @if (count($caterooms) > 0)
                                                     @foreach ($caterooms as $key => $value)
                                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                                             <div class="hotel-box" style="position: relative;"
-                                                                style="height:100%;">
-                                                                <?php
-                                                                $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
-                                                                $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
+                                                                style="height:100%;"> --}}
 
-                                                                if (Auth::check()) {
-                                                                    $user_id = auth()->user()->id;
-                                                                    $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
-                                                                        ->where('room_post_id', $value->id)
-                                                                        ->exists();
-                                                                }
-                                                                $pathD = $isBookmarked ? 'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z' : 'M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z';
-                                                                ?>
-                                                                <button
-                                                                    style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="2em"
-                                                                        class="{{ $isBookmarked ? 'unbookmark-button' : 'bookmark-button' }}"
-                                                                        data-id="{{ $value->id }}"
-                                                                        viewBox="0 0 384 512">
-                                                                        <style>
-                                                                            svg {
-                                                                                fill: #f4a460;
-                                                                            }
-                                                                        </style>
-                                                                        <path d="{{ $pathD }}">
-                                                                        </path>
-                                                                    </svg>
-                                                                </button>
-                                                                {{-- @endif --}}
-                                                                <div class="photo-thumbnail"
-                                                                    style="position: relative; height:50%;">
-                                                                    <div class="text-white fw-bolder fs-5"
-                                                                        style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
-                                                                        {{ number_format($value->price) }}
-                                                                        VND/Tháng
-                                                                    </div>
-                                                                    @if ($value->service_id != null)
-                                                                        @if ($value->service->id === 1)
-                                                                            <label
-                                                                                style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
-                                                                                UI", Roboto, "Helvetica Neue" ,
-                                                                                Arial, "Noto Sans" ,
-                                                                                sans-serif, "Apple Color Emoji"
-                                                                                , "Segoe UI Emoji" , "Segoe UI Symbol"
-                                                                                , "Noto Color Emoji" ;">Phòng
-                                                                                tốt</label>
-                                                                        @elseif ($value->service->id === 2)
-                                                                            <label
-                                                                                style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
-                                                                                UI", Roboto, "Helvetica Neue" ,
-                                                                                Arial, "Noto Sans" ,
-                                                                                sans-serif, "Apple Color Emoji"
-                                                                                , "Segoe UI Emoji" , "Segoe UI Symbol"
-                                                                                , "Noto Color Emoji" ;">Phòng
-                                                                                tốt</label>
-                                                                        @else
-                                                                            <label
-                                                                                style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
-                                                                                UI", Roboto, "Helvetica Neue" ,
-                                                                                Arial, "Noto Sans" ,
-                                                                                sans-serif, "Apple Color Emoji"
-                                                                                , "Segoe UI Emoji" , "Segoe UI Symbol"
-                                                                                , "Noto Color Emoji" ;">Phòng
-                                                                                tốt</label>
+                                        <div class="blog-section content-area comon-slick">
+                                            <div class="main-title-2">
+                                                <h1>Phòng tương tự</h1>
+                                            </div>
+                                            <div class="slick slider-2 row comon-slick-inner wow fadeInUp delay-04s">
+                                                @if (isset($caterooms))
+                                                    @if (count($caterooms) > 0)
+                                                        @foreach ($caterooms as $key => $value)
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                <div class="hotel-box" style="position: relative;"
+                                                                    style="height:100%;">
+                                                                    <?php
+                                                                    $user_id = null; // Khởi tạo $user_id bằng null nếu người dùng chưa đăng nhập
+                                                                    $isBookmarked = false; // Khởi tạo $isBookmarked bằng false nếu người dùng chưa đăng nhập
+
+                                                                    if (Auth::check()) {
+                                                                        $user_id = auth()->user()->id;
+                                                                        $isBookmarked = \App\Models\Bookmark::where('user_id', $user_id)
+                                                                            ->where('room_post_id', $value->id)
+                                                                            ->exists();
+                                                                    }
+                                                                    $pathD = $isBookmarked ? 'M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9-4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z' : 'M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z';
+                                                                    ?>
+                                                                    <button
+                                                                        style="position: absolute; top: 15px; right: 15px; z-index: 999; background: none; border: none">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            height="2em"
+                                                                            class="{{ $isBookmarked ? 'unbookmark-button' : 'bookmark-button' }}"
+                                                                            data-id="{{ $value->id }}"
+                                                                            viewBox="0 0 384 512">
+                                                                            <style>
+                                                                                svg {
+                                                                                    fill: #f4a460;
+                                                                                }
+                                                                            </style>
+                                                                            <path d="{{ $pathD }}">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </button>
+                                                                    {{-- @endif --}}
+                                                                    <div class="photo-thumbnail"
+                                                                        style="position: relative; height:50%;">
+                                                                        <div class="text-white fw-bolder fs-5"
+                                                                            style="position: absolute; bottom:10px ; left: 15px;z-index: 100;">
+                                                                            {{ number_format($value->price) }}
+                                                                            VND/Tháng
+                                                                        </div>
+                                                                        @if ($value->service_id != null)
+                                                                            @if ($value->service->id === 1)
+                                                                                <label
+                                                                                    style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, orange, red);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
+                                                                                    UI", Roboto, "Helvetica Neue" ,
+                                                                                    Arial, "Noto Sans" ,
+                                                                                    sans-serif, "Apple Color Emoji"
+                                                                                    , "Segoe UI Emoji" , "Segoe UI Symbol"
+                                                                                    , "Noto Color Emoji" ;">Phòng
+                                                                                    tốt</label>
+                                                                            @elseif ($value->service->id === 2)
+                                                                                <label
+                                                                                    style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, green, yellow);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
+                                                                                    UI", Roboto, "Helvetica Neue" ,
+                                                                                    Arial, "Noto Sans" ,
+                                                                                    sans-serif, "Apple Color Emoji"
+                                                                                    , "Segoe UI Emoji" , "Segoe UI Symbol"
+                                                                                    , "Noto Color Emoji" ;">Phòng
+                                                                                    tốt</label>
+                                                                            @else
+                                                                                <label
+                                                                                    style="text-align: center;color:white;font-weight: 800; background: linear-gradient(45deg, pink, blue);position: absolute;top:100px;left:-20px;width:200px;height:30px;z-index:50;padding:2px;border-radius:20%;transform: rotate(-40deg);transform-origin: 0 0;font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe
+                                                                                    UI", Roboto, "Helvetica Neue" ,
+                                                                                    Arial, "Noto Sans" ,
+                                                                                    sans-serif, "Apple Color Emoji"
+                                                                                    , "Segoe UI Emoji" , "Segoe UI Symbol"
+                                                                                    , "Noto Color Emoji" ;">Phòng
+                                                                                    tốt</label>
+                                                                            @endif
                                                                         @endif
-                                                                    @endif
-                                                                    <div class="photo">
-                                                                        <img src="{{ asset($value->image) }}"
-                                                                            alt="photo" class="img-fluid w-100"
-                                                                            style="height: 260px;">
-                                                                        <a
-                                                                            href="{{ route('room-post-detail', $value->id) }}">
-                                                                            <label class=""
-                                                                                style="cursor: pointer; font-size: 20px;"
-                                                                                for="">Xem Chi Tiết</label>
-                                                                        </a>
-                                                                    </div>
+                                                                        <div class="photo">
+                                                                            <img src="{{ asset($value->image) }}"
+                                                                                alt="photo"
+                                                                                class="img-slick img-fluid w-100"
+                                                                                style="height: 260px;">
+                                                                            <a
+                                                                                href="{{ route('room-post-detail', $value->slug) }}">
+                                                                                <label class=""
+                                                                                    style="cursor: pointer; font-size: 20px;"
+                                                                                    for="">Xem Chi Tiết</label>
+                                                                            </a>
+                                                                        </div>
 
-                                                                </div>
-                                                                <!-- Detail -->
-                                                                <div class="detail clearfix" style="height: 240px;">
-                                                                    <h3>
-                                                                        <a style="color:{{ $value->service_id ? $value->service->color : '' }}"
-                                                                            href="{{ route('room-post-detail', $value->id) }}">{{ $value->name }}</a>
-                                                                    </h3>
-                                                                    <p class="location">
-                                                                        <a
-                                                                            href="{{ route('room-post-detail', $value->id) }}">
-                                                                            <i class="fa-solid fa-location-dot fa-lg "
-                                                                                style="color: #f46b10;"></i>
-                                                                            {{ substr($value->address_full, 0, 50) }}
-                                                                        </a>
-                                                                    </p>
-                                                                    <div class="fecilities row">
-                                                                        <ul class="d-flex justify-content-between">
-                                                                            <p><span><i
-                                                                                        class="fas fa-expand me-2"></i></i>{{ $value->acreage }}
-                                                                                    m2</span>
-                                                                            </p>
-                                                                            <p><i
-                                                                                    class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
-                                                                            </p>
-                                                                        </ul>
+                                                                    </div>
+                                                                    <!-- Detail -->
+                                                                    <div class="detail clearfix" style="height: 240px;">
+                                                                        <h3>
+                                                                            <a style="text-transform: uppercase; font-size:16px;color:{{ $value->service_id ? $value->service->color : '' }}"
+                                                                                href="{{ route('room-post-detail', $value->slug) }}"> {!! strlen($value->name) > 50 ? substr(strip_tags($value->name), 0, 50) . '...' : $value->name !!}</a>
+                                                                        </h3>
+                                                                        <p class="location">
+                                                                            <a
+                                                                                href="{{ route('room-post-detail', $value->slug) }}">
+                                                                                <i class="fa-solid fa-location-dot fa-lg "
+                                                                                    style="color: #f46b10;"></i>
+                                                                                {{ substr($value->address_full, 0, 50) }}
+                                                                            </a>
+                                                                        </p>
+                                                                        <div class="fecilities row">
+                                                                            <ul class="d-flex justify-content-between">
+                                                                                <p><span><i
+                                                                                            class="fas fa-expand me-2"></i></i>{{ $value->acreage }}
+                                                                                        m2</span>
+                                                                                </p>
+                                                                                <p><i
+                                                                                        class="far fa-clock me-2"></i>{{ timeposts($value->created_at) }}
+                                                                                </p>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    @endforeach
-                                                    {{-- {{ $caterooms->links() }} --}}
+                                                        @endforeach
+                                                        {{-- {{ $caterooms->links() }} --}}
+                                                    @endif
                                                 @endif
-                                            @endif
+                                            </div>
 
                                         </div>
 
-                                        {{-- </div> --}}
-                                        {{-- <a class="carousel-control-prev" href="#profile-slideshow" role="button"
-                                                data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Previous</span>
-                                            </a>
-                                            <a class="carousel-control-next" href="#profile-slideshow" role="button"
-                                                data-bs-slide="next">
-                                                <span class="bg-dark carousel-control-next-icon"
-                                                    aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </a> --}}
 
                                         {{-- </div> --}}
 
@@ -469,4 +486,30 @@
             hiddenPhone.style.display = "inline"; // Hiển thị nội dung có lớp hidden-phone
         }
     </script>
+
+    <script>
+          // Khởi tạo Slider 2
+          $('.blog-section .slick').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            dots: true,
+            prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    </script>
+
+
 @endpush

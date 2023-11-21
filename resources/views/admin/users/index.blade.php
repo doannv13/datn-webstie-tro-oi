@@ -42,7 +42,15 @@
                                                     <img src="{{ asset('no_image.jpg') }}" alt="" style="width: 80px; height: 80px">
                                                 @endif
                                             </td>
-                                            <td class="tabledit-view-mode">{{ $value->role }}</td>
+                                            <td class="tabledit-view-mode">
+                                                @if($value->role == 'vendor')
+                                                    Nhà cung cấp
+                                                @elseif($value->role == 'admin')
+                                                    Quản trị viên
+                                                @else
+                                                    {{ $value->role }}
+                                                @endif
+                                            </td>
                                             <td class="">
                                                 <a href="{{ route('users.edit', $value->id) }}">
                                                     <button type="submit" class="btn btn-primary text-center my-1"
