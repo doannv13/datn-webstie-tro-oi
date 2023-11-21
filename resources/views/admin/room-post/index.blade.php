@@ -204,7 +204,7 @@
                     </div>
                     <div class="row my-3">
                         <div class="col-md-5 fw-bold">Mô tả:</div>
-                        <div class="col-md-7">{!! $value->description !!}</div>
+                        <div class="col-md-7" style="overflow-wrap: break-word;">{!! $value->description !!}</div>
                     </div>
                     <div class="row my-3">
                         <div class="col-md-5 fw-bold">Liên hệ:</div>
