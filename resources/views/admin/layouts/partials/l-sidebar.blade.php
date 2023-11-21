@@ -25,30 +25,6 @@
                     </a>
 
                 </li>
-<<<<<<< HEAD
-
-                <li>
-                    <a href="{{ asset('./be/#baocao') }}" data-bs-toggle="collapse">
-                        <i class="fe-folder-minus"></i>
-                        <span>Báo cáo</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="baocao">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{route('admin-report-revenue')}}">- Doanh thu</a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin-report-roompost')}}">- Tin đăng </a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin-report-post')}}">- Bài viết </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-=======
                 @if (Auth::user()->can('report-resource'))
                     <li>
                         <a href="{{ asset('./be/#baocao') }}" data-bs-toggle="collapse">
@@ -71,7 +47,6 @@
                         </div>
                     </li>
                 @endif
->>>>>>> dev
                 <li class="menu-title mt-2">Quản lý Phòng</li>
                 @if (Auth::user()->can('category-room-post-resource'))
                     <li>
