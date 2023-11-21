@@ -110,7 +110,7 @@
                                 <div class="col-xl-8 col-lg-7 col-md-7 col-sm-12">
                                     <div class="heading mt-2">
                                         <div class="clearfix">
-                                            <a href="{{ route('room-post-detail', $item->id) }}" class="">
+                                            <a href="{{ route('room-post-detail', $item->slug) }}" class="">
                                                 <h5
                                                     style="text-transform: uppercase;font-size: 16px;color:{{ $item->service_id && $item->time_end > $currentDateTime ? $item->service->color : '' }}">
                                                     {!! strlen($item->name) > 70 ? substr(strip_tags($item->name), 0, 70) . '...' : $item->name !!}</h5>

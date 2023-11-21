@@ -123,7 +123,7 @@
                                             <div class="photo">
                                                 <img src="{{ asset($value->image) }}" alt="photo" class="img-fluid w-100"
                                                     style="height: 260px;">
-                                                <a href="{{ route('room-post-detail', $value->id) }}">
+                                                <a href="{{ route('room-post-detail', $value->slug) }}">
                                                     <label class="" style="cursor: pointer; font-size: 20px;"
                                                         for="">Xem Chi Tiết</label>
                                                 </a>
@@ -134,11 +134,11 @@
                                         <div class="detail clearfix" style="height: 240px;">
                                             <h3>
                                                 <a style="color:{{ $value->service_id ? $value->service->color : '' }}; font-size: 16px; text-transform: uppercase;"
-                                                    href="{{ route('room-post-detail', $value->id) }}">
+                                                    href="{{ route('room-post-detail', $value->slug) }}">
                                                     {!! strlen($value->name) > 95 ? substr(strip_tags($value->name), 0, 95) . '...' : $value->name !!}</a>
                                             </h3>
                                             <p class="location">
-                                                <a href="{{ route('room-post-detail', $value->id) }}">
+                                                <a href="{{ route('room-post-detail', $value->slug) }}">
                                                     <i class="fa-solid fa-location-dot fa-lg " style="color: #f46b10;"></i>
                                                     {{ substr($value->address_full, 0, 50) }}
                                                 </a>
@@ -229,7 +229,7 @@
                                         <div class="photo">
                                             <img src="{{ asset($value->image) }}" alt="photo" class="img-fluid w-100"
                                                 style="height: 260px;">
-                                            <a href="{{ route('room-post-detail', $value->id) }}">
+                                            <a href="{{ route('room-post-detail', $value->slug) }}">
                                                 <label class="" style="cursor: pointer; font-size: 20px;"
                                                     for="">Xem Chi Tiết</label>
                                             </a>
@@ -240,11 +240,11 @@
                                     <div class="detail clearfix" style="height: 240px;">
                                         <h3>
                                             <a style="color:{{ $value->service_id ? $value->service->color : '' }};font-size: 16px; text-transform: uppercase;"
-                                                href="{{ route('room-post-detail', $value->id) }}">
+                                                href="{{ route('room-post-detail', $value->slug) }}">
                                                 {!! strlen($value->name) > 95 ? substr(strip_tags($value->name), 0, 95) . '...' : $value->name !!}</a>
                                         </h3>
                                         <p class="location">
-                                            <a href="{{ route('room-post-detail', $value->id) }}">
+                                            <a href="{{ route('room-post-detail', $value->slug) }}">
                                                 <i class="fa-solid fa-location-dot fa-lg " style="color: #f46b10;"></i>
                                                 {{ substr($value->address_full, 0, 50) }}
                                             </a>
@@ -478,7 +478,7 @@
                                                 </div>
                                                 <h3>
                                                     <a style="text-transform: uppercase; font-size:16px"
-                                                        href="{{ route('posts-detail', $value->id) }}">{{ substr($value->title, 0, 80) }}</a>
+                                                        href="{{ route('posts-detail', $value->slug) }}">{{ substr($value->title, 0, 80) }}</a>
                                                 </h3>
                                                 <p> {{ substr($value->metaDescription, 0, 100) }}</p>
                                             </div>
