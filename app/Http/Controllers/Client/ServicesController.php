@@ -105,7 +105,7 @@ class ServicesController extends Controller
                 $transcation->save();
                 Toastr::success('Mua gói dịch vụ thành công', 'Thành công');
                 $message="Mã tin ".$room_post->id." của bạn vừa mua gói ".$service->name;
-                $link_detail="room-post-detail/".$room_post->id;
+                $link_detail="tin-dang/".$room_post->slug;
                 $notification = Notification::create([
                     'message' => $message,
                     'user_id_send' => User::where('role', 'admin')->first()->id,

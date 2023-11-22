@@ -26,7 +26,7 @@ class PostController extends Controller
     }
 
 
-    function postDetail(String $id)
+    function postDetail(String $slug)
     {
         $room_posts = RoomPost::latest()->with('facilities')->paginate(10);
         $categories = CategoryRoom::withCount('roomPosts')
@@ -34,26 +34,23 @@ class PostController extends Controller
             ->paginate(4);
         $posts = Post::latest()->paginate(4);
 
-        $data = Post::query()->findOrFail($id);
-
-        $share_content=DETAIL_POST_URL;
-        $id_post=Post::query()->findOrFail($id);
-        $shareComponent = \Share::page(
-            $share_content.$id_post->id,
-            'chia se fb cua quang phuc vip pro',
-        )
-            ->facebook()
-            ->twitter()
-            ->reddit();
-
-        $data->increment('view');
-        $data = Post::with(['tags' => function ($query) {
+        // $data = Post::query()->findOrFail($id);
+        $data = Post::where('slug', $slug)->with(['tags' => function ($query) {
             $query->where('status', 'active');
-        }])->findOrFail($id);
+        }])->firstOrFail();
+        $data->increment('view');
+
+        $share_content = DETAIL_POST_URL;
+
+        $shareComponent = \Share::page(
+            $share_content . $data->id, // Use $data->id from the fetched post
+            'chia se fb cua quang phuc vip pro',
+        )->facebook()->twitter()->reddit();
+
 
         $postTags = $data->tags;
         // dd($postTags);
-        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts', 'postTags','shareComponent'));
+        return view('client.post.detail', compact('data', 'categories', 'posts', 'room_posts', 'postTags', 'shareComponent'));
     }
     /**
      * Show the form for creating a new resource.

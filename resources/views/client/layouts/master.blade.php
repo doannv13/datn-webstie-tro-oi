@@ -194,23 +194,6 @@
     <script src="{{ asset('be/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('be/assets/js/pages/form-fileuploads.init.js') }}"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{{ asset('fe/js/ie10-viewport-bug-workaround.js') }}"></script>
-    <!-- Custom javascript -->
-
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
-    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <script src="{{ asset('fe/js/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('fe/js/respond.min.js') }}"></script>
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <script src="{{ asset('fe/js/ie8-responsive-file-warning.js') }}"></script>
-    <script src="{{ asset('fe/js/ie-emulation-modes-warning.js') }}"></script>
-
 
     {{-- <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
     <!-- dselect -->

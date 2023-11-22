@@ -45,7 +45,7 @@
                                                 width="100px" height="100px">
                                         @else
                                             <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
-                                                width="100px" height="100px">
+                                                width="100px" height="100px"><br>
                                         @endif
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>

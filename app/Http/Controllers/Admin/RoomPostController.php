@@ -422,7 +422,7 @@ class RoomPostController extends Controller
         try {
             $room_post = RoomPost::find($request->room_post_id);
             $room_post->status = $request->status;
-            $room_post->time_start=Carbon::now();
+            $room_post->time_start = Carbon::now();
             $room_post->save();
             $user = User::findOrFail($room_post->user_id);
             if ($room_post->status === 'accept') {
@@ -434,8 +434,9 @@ class RoomPostController extends Controller
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
                 $message="Mã tin ".$room_post->id." của bạn đã được duyệt.";
-                $link_detail="room-post-detail/".$room_post->id;
+                $link_detail="tin-dang/".$room_post->slug;
                 sendNotification($link_detail,$room_post->user_id,$message);
+
             } elseif ($room_post->status === 'cancel') {
                 $history = new CancelHistory();
                 $history->reason = $request->reason;
@@ -444,16 +445,16 @@ class RoomPostController extends Controller
                 $content = [
                     'user' => $user->name,
                     'title' => 'Tin phòng của bạn đã bị từ chối',
-                    'description' => "Tin phòng $room_post->name không được thông qua với lý do: ".$request->reason
+                    'description' => "Tin phòng $room_post->name không được thông qua với lý do: " . $request->reason
                 ];
                 $mailTo = User::findOrFail($room_post->user_id);
                 event(new RoomPostNotificationEvent($mailTo, $content));
-                $message="Mã tin ".$room_post->id." của bạn đã bị từ chối vui lòng cập nhật lại tin đăng.";
-                $link_detail="room-posts/".$room_post->id."/edit";
-                sendNotification($link_detail,$room_post->user_id,$message);
+                $message = "Mã tin " . $room_post->id . " của bạn đã bị từ chối vui lòng cập nhật lại tin đăng.";
+                $link_detail = "room-posts/" . $room_post->id . "/edit";
+                sendNotification($link_detail, $room_post->user_id, $message);
             }
             $room_post->save();
-            return response()->json(['success' => 'Thay đổi trạng thái thành công','room_post_id'=>$request->room_post_id,'time_start'=>$room_post->time_start->format('Y-m-d H:i:s')]);
+            return response()->json(['success' => 'Thay đổi trạng thái thành công', 'room_post_id' => $request->room_post_id, 'time_start' => $room_post->time_start->format('Y-m-d H:i:s'), 'reason' => $request->reason]);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return response()->json(['error' => 'Thay đổi trạng thái thất bại']);

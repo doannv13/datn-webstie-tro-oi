@@ -625,36 +625,9 @@
         });
     });
 </script>
+
+
 @push('scripts')
-
-
-<script>
-    $(document).ready(function() {
-        // Bắt sự kiện khi giá trị của input:radio thay đổi
-        $('input[name="type-pay"]').change(function() {
-            // Lấy giá trị của input:radio đã chọn
-            var selectedValue = $('input[name="type-pay"]:checked').val();
-
-
-            // Ẩn tất cả các nút thanh toán trước khi thay đổi
-            $('#vnPayLink, #btn-pay').hide();
-
-            // Hiển thị nút tương ứng dựa trên giá trị đã chọn
-            if (selectedValue === '1') {
-                $('#btn-pay').show();
-            } else if (selectedValue === '3') {
-                $('#vnPayLink').show();
-            }
-        });
-
-        // Thiết lập giá trị mặc định cho input:radio
-        $('input[name="type-pay"][value="1"]').prop('checked', true);
-        // Kích hoạt sự kiện change ban đầu
-        $('input[name="type-pay"]').change();
-    });
-</script>
-
-
 <script>
     function notification() {
         var confirmation = confirm('Xác nhận thanh toán');
@@ -800,6 +773,35 @@
         });
     }
 </script>
+<script>
+    $(document).ready(function() {
+        // Bắt sự kiện khi giá trị của input:radio thay đổi
+        $('input[name="type-pay"]').change(function() {
+            // Lấy giá trị của input:radio đã chọn
+            var selectedValue = $('input[name="type-pay"]:checked').val();
+
+
+            // Ẩn tất cả các nút thanh toán trước khi thay đổi
+            $('#vnPayLink, #btn-pay').hide();
+
+            // Hiển thị nút tương ứng dựa trên giá trị đã chọn
+            if (selectedValue === '1') {
+                $('#btn-pay').show();
+            } else if (selectedValue === '3') {
+                $('#vnPayLink').show();
+            }
+        });
+
+        // Thiết lập giá trị mặc định cho input:radio
+        $('input[name="type-pay"][value="1"]').prop('checked', true);
+        // Kích hoạt sự kiện change ban đầu
+        $('input[name="type-pay"]').change();
+    });
+</script>
+
+
+
+
 <!-- Thêm id vào phần tử để dễ dàng cập nhật nội dung -->
 
 

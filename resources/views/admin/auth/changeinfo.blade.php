@@ -1,4 +1,4 @@
-@extends('admin.auth.index')
+@extends('admin.layouts.master')
 @section('title', 'Cập nhật thông tin')
 @section('content')
 <div class="row justify-content-center">
