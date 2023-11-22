@@ -113,12 +113,7 @@ class RoomPostController extends Controller
                 'zalo' => $request->zalo
             ]);
             $model->save();
-            $user = User::findOrFail($model->user_id);
-            $content = [
-                'user' => $user->name,
-                'title' => 'Cần xác nhận tin phòng mới',
-                'description' => "Người dùng " . auth()->user()->name . " vừa đăng 1 tin phòng với tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
-            ];
+
 
 
             if ($request->hasFile('image')) {
@@ -157,6 +152,11 @@ class RoomPostController extends Controller
                 }
             }
             $mailTo = User::where('role', 'admin')->first();
+            $content = [
+                'user' => $mailTo->name,
+                'title' => 'Cần xác nhận tin phòng mới',
+                'description' => "Người dùng " . auth()->user()->name . " vừa đăng 1 tin phòng với tiêu đề {$model->name} , xin mời bạn truy cập website và xác nhận phòng"
+            ];
             event(new RoomPostNotificationEvent($mailTo, $content));
             $message = "Mã tin " . $model->id . " vừa đăng cần được xác nhận ngay.";
             $link_detail = "admin-room-posts";
@@ -244,12 +244,6 @@ class RoomPostController extends Controller
                 $model->image = $request->old_imageroom;
             }
             $model->save();
-            $user = User::findOrFail($model->user_id);
-            $content = [
-                'user' => $user->name,
-                'title' => 'Cần xác nhận tin phòng vừa cập nhật',
-                'description' => "Người dùng " . auth()->user()->name . " vừa cập nhật phòng tin phòng có tiêu đề {$model->fullname} , xin mời bạn truy cập website và xác nhận phòng"
-            ];
 
             if (\request()->hasFile('imageroom') && $oldImg) {
                 delete_file($oldImg);
@@ -297,6 +291,11 @@ class RoomPostController extends Controller
                 $model->tags()->detach();
             }
             $mailTo = User::where('role', 'admin')->first();
+            $content = [
+                'user' => $mailTo->name,
+                'title' => 'Cần xác nhận tin phòng vừa cập nhật',
+                'description' => "Người dùng " . auth()->user()->name . " vừa cập nhật phòng tin phòng có tiêu đề {$model->name} , xin mời bạn truy cập website và xác nhận phòng"
+            ];
             event(new RoomPostNotificationEvent($mailTo, $content));
 
 
