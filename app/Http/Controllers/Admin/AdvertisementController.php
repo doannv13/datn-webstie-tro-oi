@@ -13,6 +13,10 @@ use App\Http\Requests\Admin\AdvertisementRequest;
 
 class AdvertisementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:advertisement-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -43,7 +47,7 @@ class AdvertisementController extends Controller
             }
             $data->save();
             Toastr::success('Thêm ảnh quảng cáo thành công', 'Thành công');
-            return to_route('advertisement.index');
+            return to_route('advertisements.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -92,7 +96,7 @@ class AdvertisementController extends Controller
             }
             Toastr::success('Cập nhật ảnh quảng cáo thành công', 'Thành công');
 
-            return to_route('advertisement.index')
+            return to_route('advertisements.index')
                 ->with('status', Response::HTTP_OK);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
@@ -113,7 +117,7 @@ class AdvertisementController extends Controller
             $data->delete();
             Toastr::success('Ảnh quảng cáo đã chuyển vào thùng rác', 'Thành công');
 
-            return to_route('advertisement.index');
+            return to_route('advertisements.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');

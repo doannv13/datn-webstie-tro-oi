@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Thùng rác
+    Thùng rác | Mã giảm giá
 @endsection
 @section('content')
     <!-- Start Content-->
@@ -9,10 +9,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <h2 class="mt-0">Thùng rác</h5>
+
                         <div class="responsive-table-plugin">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive" data-pattern="priority-columns">
-                                    <table id="tech-companies-1" class="table table-striped">
+                                    <div class="mb-2 d-flex gap-1 ">
+                                        <a class="btn btn-success" href="{{ route('coupons.index') }}">Danh sách</a>
+                                    </div>
+                                    <table id="tech-companies-1" class="table table-centered mb-0">
                                         <thead>
                                             <tr>
                                                 <th style="width:5%">STT</th>
@@ -23,8 +28,7 @@
                                                 <th data-priority="3">Trạng thái</th>
                                                 <th data-priority="6">Bắt đầu</th>
                                                 <th data-priority="6">Kết thúc</th>
-                                                <th><a class="btn btn-info" href="{{ route('coupon.index') }}">Danh sách</a>
-                                                </th>
+                                                <th>Thao tác</th>
 
                                             </tr>
                                         </thead>
@@ -36,20 +40,23 @@
                                                     <th>{{ $value->type }}</th>
                                                     <th>{{ $value->value }}</th>
                                                     <th>{{ $value->quantity }}</th>
-                                                    <th>{{ $value->description }}</th>
+                                                    <th>{!! $value->status == 'inactive'
+                                                        ? '<button class="btn btn-danger">Chưa kích hoạt</button>'
+                                                        : '<button class="btn btn-primary">Kích hoạt</button>' !!}
+                                                    </th>
                                                     <th>{{ $value->start_date }}</th>
                                                     <th>{{ $value->end_date }}</th>
-                                                    <th class="d-flex"><a href="{{ route('coupon.restore', $value->id) }}"
 
-                                                            class="btn btn-primary me-2"><i
-
+                                                    <th>
+                                                        <a href="{{ route('coupons-restore', $value->id) }}"
+                                                            class="btn btn-primary text-center my-1" style="width: 45px;"><i
                                                                 class="fa-solid fa-trash-arrow-up"></i></a>
-                                                        <form action="{{ route('coupon.permanently-delete', $value->id) }}"
+                                                        <form action="{{ route('coupons-permanently-delete', $value->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
                                                             <button onclick="return confirm('Bạn có muốn xoá')"
-                                                                class="btn btn-danger">
+                                                                class="btn btn-danger my-1" style="width: 45px;">
                                                                 <i class="fa-solid fa-delete-left text-light"></i>
                                                             </button>
                                                         </form>

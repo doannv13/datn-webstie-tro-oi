@@ -14,6 +14,10 @@ use Yoeunes\Toastr\Facades\Toastr;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:setting-resource', ['only' => ['index','update']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -62,31 +66,42 @@ class SettingController extends Controller
     {
         $data = Setting::query()->first();
         try {
-            $oldImg = $data->logo; // Lưu ảnh cũ
+            $oldLogo = $data->logo;
 
-            $data->fill(\request()->except('logo'));
+            $data->fill($request->except('logo','favicon'));
 
-            if (\request()->hasFile('logo')) {
-                $newImg = upload_file('settings', \request()->file('logo')); // Tải lên ảnh mới
-                $data->logo = $newImg;
+            if ($request->hasFile('logo')) {
+                $newLogo = upload_file('settings/logo', $request->file('logo'));
+                $data->logo = $newLogo;
             }
+
+            // upload favicon
+            $oldFavicon = $data->favicon;
+
+            if ($request->hasFile('favicon')) {
+                $newFavicon = upload_file('settings/favicon', $request->file('favicon'));
+                $data->favicon = $newFavicon;
+            }
+
 
             $data->save();
 
             // Kiểm tra nếu có ảnh mới và ảnh cũ tồn tại, thì xóa ảnh cũ
-            if (\request()->hasFile('logo') && $oldImg) {
-                delete_file($oldImg);
+            if ($request->hasFile('logo') && $oldLogo) {
+                delete_file($oldLogo);
             }
+            if ($request->hasFile('favicon') && $oldFavicon) {
+                delete_file($oldFavicon);
+            }
+
             Toastr::success('Cập nhật cài đặt thành công', 'Thành công');
 
-            return back()
-                ->with('status', Response::HTTP_OK);
+            return back();
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
             Toastr::success('Cập nhật cài đặt thất bại', 'Thất bại');
 
-            return back()
-                ->with('status', Response::HTTP_BAD_REQUEST);
+            return back();
         }
     }
 

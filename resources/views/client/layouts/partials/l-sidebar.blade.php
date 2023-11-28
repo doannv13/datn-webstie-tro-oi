@@ -1,34 +1,30 @@
 @extends('client.layouts.master')
 @section('content')
     <!-- Blog body start -->
-    <div class="blog-body content-area">
-        <div class="container-fluid">
+    <div class="blog-body">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-12 col-sm-12" style="max-height: 100%;">
                     <div class="sidebar" style="height: 100%;">
-                        <!-- Search box start -->
-                        <div class="sidebar-widget search-box">
-                            <form class="form-inline form-search" method="GET">
-                                <div class="form-group">
-                                    <label class="sr-only" for="textsearch3">Search</label>
-                                    <input type="text" class="form-control" id="textsearch3" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
+
                         <!-- Archives start -->
                         <div class="sidebar-widget archives">
                             <div class="main-title-2">
                                 <h1>Quản lý</h1>
                             </div>
                             <ul class="list-unstyled">
-                                <li><i class="fas fa-newspaper px-2"></i><a href="{{ route('room-post.index') }}">Quản lý
+                                <li class="{{ Request::is('room-posts/') ? 'active' : '' }}"><i
+                                        class="fas fa-newspaper px-2"></i><a href="{{ route('room-posts.index') }}">Quản lý
                                         tin đăng</a></li>
-                                <li><i class="fas fa-edit px-2"></i><a href="{{ route('room-post.create') }}">Đăng tin
+                                <li class="{{ Request::is('room-posts/create') ? 'active' : '' }}"><i
+                                        class="fas fa-edit px-2"></i><a href="{{ route('room-posts.create') }}">Đăng tin
                                         mới</a></li>
-                                <li><i class="fas fa-list-alt px-2"></i><a href="#">Lịch sử giao dịch</a></li>
-                                <li><i class="fas fa-store px-2"></i><a href="#">Dịch vụ</a></li>
-                                <li><i class="fas fa-store px-2"></i><a href="{{ route('room_deleted') }}">Thùng rác</a>
+                                <li class="{{ Request::is('points-history') ? 'active' : '' }}"><i class="fas fa-list-alt px-2"></i><a href="{{ route('points.history') }}">Lịch sử giao
+                                        dịch</a></li>
+                                <li class="{{ Request::is('services-room-posts') ? 'active' : '' }}"><i class="fas fa-store px-2"></i><a href="{{ route('services-room-posts.index') }}">Dịch
+                                        vụ</a></li>
+                                <li class="{{ Request::is('room-posts-deleted') ? 'active' : '' }}"><i class="fas fa-trash px-2"></i><a href="{{ route('room-posts-deleted') }}">Thùng
+                                        rác</a>
                                 </li>
                             </ul>
                         </div>
@@ -36,7 +32,9 @@
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-12 col-sm-12">
+                    {{-- <div class="container"> --}}
                     @yield('main')
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

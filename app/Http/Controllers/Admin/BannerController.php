@@ -14,6 +14,10 @@ use Illuminate\Http\Response;
 
 class BannerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:banner-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -44,7 +48,7 @@ class BannerController extends Controller
             }
             $data->save();
             Toastr::success('Thêm banner thành công', 'Thành công');
-            return to_route('banner.index');
+            return to_route('banners.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -93,7 +97,7 @@ class BannerController extends Controller
             }
             Toastr::success('Cập nhật banner thành công', 'Thành công');
 
-            return to_route('banner.index')
+            return to_route('banners.index')
                 ->with('status', Response::HTTP_OK);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
@@ -114,7 +118,7 @@ class BannerController extends Controller
             $data->delete();
             Toastr::success('Banner đã chuyển vào thùng rác', 'Thành công');
 
-            return to_route('banner.index');
+            return to_route('banners.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');

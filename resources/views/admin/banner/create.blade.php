@@ -12,7 +12,7 @@
                         <h3 class="my-2">Thêm banner</h3>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('banners.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('post')
                                     <div class="mb-3">
@@ -43,13 +43,13 @@
                                         <input id="image" type="file" class="form-control" name="image"
                                             accept="image/*"><br>
                                         <img id="image_preview" src="{{ asset('no_image.jpg') }}" alt=""
-                                            width="100px" height="100px">
+                                            width="100px" height="100px"><br>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <button class="btn btn-primary waves-effect waves-light">Thêm</button>
-                                    <a href="{{ route('banner.index') }}"
+                                    <a href="{{ route('banners.index') }}"
                                         class="btn btn-warning waves-effect text-light">Trở về</a>
                                 </form>
                             </div> <!-- end col -->
@@ -63,9 +63,6 @@
     </div> <!-- container -->
 @endsection
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('description');
     </script>

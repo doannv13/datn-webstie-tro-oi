@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Log;
 
 class CouponController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:coupon-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,7 +42,7 @@ class CouponController extends Controller
             $model->fill($request->all());
             $model->save();
             Toastr::success('Thêm mã giảm giá thành công', 'Thành công');
-            return to_route('coupon.index');
+            return to_route('coupons.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -73,7 +77,7 @@ class CouponController extends Controller
             $model->fill($request->all());
             $model->save();
             Toastr::success('Sửa mã giảm giá thành công', 'Thành công');
-            return to_route('coupon.index');
+            return to_route('coupons.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -129,6 +133,18 @@ class CouponController extends Controller
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
+        }
+    }
+    public function changeStatus(Request $request)
+    {
+        try {
+            $coupon = Coupon::find($request->coupon_id);
+            $coupon->status = $request->status;
+            $coupon->save();
+            return response()->json(['success' => 'Thay đổi trạng thái thành công']);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
         }
     }
 }

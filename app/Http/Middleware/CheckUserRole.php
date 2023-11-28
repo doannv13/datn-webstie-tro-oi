@@ -19,7 +19,8 @@ class CheckUserRole
         $user = Auth::user();
 
         if (!$user) {
-            return redirect('/login'); // Hoặc thực hiện xử lý tương tự nếu không có người dùng nào đăng nhập
+            toastr()->error('Bạn cần đăng nhập trước khi thực hiện','Chưa đăng nhập');
+            return redirect('/client-login'); // Hoặc thực hiện xử lý tương tự nếu không có người dùng nào đăng nhập
         }
 
         if (in_array($user->role, $roles)) {

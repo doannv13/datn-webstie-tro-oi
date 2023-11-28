@@ -10,8 +10,7 @@
                         </div>
                         <div class="newsletter-inner">
                             <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
+                                Website tìm kiếm phòng trọ hàng đầu Việt Nam.
                             </p>
                         </div>
                     </div>
@@ -70,17 +69,17 @@
                         <ul class="personal-info">
                             <li>
                                 <i class="fa fa-map-marker"></i>
-                                Address: 322 Mỹ Đình,
+                                Địa chỉ: {{ $global_setting ? $global_setting->address : '' }}
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                Email:<a href="mailto:sales@hotelempire.com"
-                                >trooi@gmail.com</a
-                                >
+                                Email: <a
+                                    href="mailto:{{ $global_setting ? $global_setting->email : '' }}">{{ $global_setting ? $global_setting->email : '' }}</a>
                             </li>
                             <li>
                                 <i class="fa fa-phone"></i>
-                                Phone: <a href="tel:+55-417-634-7071">+123456789</a>
+                                Điện thoại hỗ trợ: <a
+                                    href="tel:+{{ $global_setting ? $global_setting->support_phone : '' }}">{{ $global_setting ? $global_setting->support_phone : '' }}</a>
                             </li>
                         </ul>
                     </div>
@@ -99,34 +98,20 @@
                     </p>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="clearfix"></div>
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="twitter-bg"
-                            ><i class="fa fa-twitter"></i
-                                ></a>
-                        </li>
-                        <li>
-                            <a href="#" class="facebook-bg"
-                            ><i class="fa fa-facebook"></i
-                                ></a>
-                        </li>
-                        <li>
-                            <a href="#" class="rss-bg"><i class="fa fa-rss"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" class="google-bg"
-                            ><i class="fa fa-google-plus"></i
-                                ></a>
-                        </li>
-                        <li>
-                            <a href="#" class="linkedin-bg"
-                            ><i class="fa fa-linkedin"></i
-                                ></a>
-                        </li>
-                    </ul>
+                    <div class="clearfix pull-right">
+                        <div class="blog-share">
+
+                            {{-- <ul class="social-list">
+                                {!! $shareComponent !!}
+                            </ul> --}}
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+

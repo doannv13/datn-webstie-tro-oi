@@ -13,13 +13,17 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryPostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:category-post-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete','changeStatus']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = CategoryPost::query()->latest()->get();
-        return view('admin.categorypost.index',compact('data'));
+        $model = CategoryPost::query()->latest()->get();
+        return view('admin.category-post.index',compact('model'));
     }
 
     /**
@@ -27,7 +31,7 @@ class CategoryPostController extends Controller
      */
     public function create()
     {
-        return view('admin.categorypost.create');
+        return view('admin.category-post.create');
     }
 
     /**
@@ -44,7 +48,7 @@ class CategoryPostController extends Controller
             $model->fill($request->all());
             $model->save();
             Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categorypost.index');
+            return to_route('category-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
@@ -65,8 +69,8 @@ class CategoryPostController extends Controller
      */
     public function edit(string $id)
     {
-        $data = CategoryPost::query()->findOrFail($id);
-        return view('admin.categorypost.edit',compact('data'));
+        $model = CategoryPost::query()->findOrFail($id);
+        return view('admin.category-post.edit',compact('model'));
     }
 
     /**
@@ -76,7 +80,10 @@ class CategoryPostController extends Controller
     {
         try {
             $model = CategoryPost::query()->findOrFail($id);
-
+            if($model->id===1){
+                toastr()->error('Bạn không thể chỉnh sửa danh mục này!', 'Thao tác thất bại');
+                return redirect()->back();
+            }
             $slug = Str::slug($request->name);
             $model->slug = $slug;
 
@@ -84,79 +91,79 @@ class CategoryPostController extends Controller
             $model->save();
 
             Toastr::success('Thao tác thành công', 'Thành công');
-            return to_route('categorypost.index');
+            return to_route('category-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
         }
     }
-
     /**
      * Remove the specified resource from storage.
      */
-//    public function destroy(string $id)
-//    {
-//
-//        try {
-//            CategoryPost::query()->findOrFail($id)->delete();
-//
-//            return redirect()->back()->with('msg', ['success' => true, 'message' => 'Thao tác thành công ']);
-//        } catch (\Exception $exception) {
-//            Log::error($exception->getMessage());
-//            return back()->with('msg', ['success' => false, 'message' => 'Thao tác không thành công']);
-//        }
-//    }
-
-    public function destroy(CategoryPost $categorypost)
+    public function destroy(string $id)
     {
         try {
-            $categorypost->delete();
-            Toastr::success('Thao tác thành công', 'Thành công');
+            $model = CategoryPost::query()->findOrFail($id);
+            if($model->id===1){
+                toastr()->error('Bạn không thể xóa danh mục này!', 'Thao tác thất bại');
+                return redirect()->back();
+            }
+            $model->delete();
+            Toastr::success('Danh mục đã chuyển vào thùng rác', 'Thành công');
 
-            return redirect()->back();
+            return to_route('category-posts.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            Toastr::error('Thao tác đã được hủy', 'Hủy');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
         }
     }
 
-
-
     public function deleted()
     {
-        $data = CategoryPost::onlyTrashed()->get();
-        return view('admin.categorypost.delete', compact('data'));
+        $model = CategoryPost::query()->onlyTrashed()->get();
+        return view('admin.category-post.delete', compact('model'));
+    }
+
+    public function restore(string $id)
+    {
+        try {
+            $restore = CategoryPost::query()->onlyTrashed()->findOrFail($id);
+            $restore->restore();
+            Toastr::success('Khôi phục thành công', 'Thành công');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            Toastr::error('Khôi phục thất bại', 'Thất bại');
+            return back();
+        }
     }
 
     public function permanentlyDelete(String $id)
     {
         try {
-            $categorypost = CategoryPost::where('id', $id);
+            $categorypost = CategoryPost::query()->withTrashed()->findOrFail($id);
             $categorypost->forceDelete();
-            toastr()->success('Thao tác thành công');
-            return redirect()->back();
+            Toastr::success('Xoá thành công', 'Thành công');
+
+            return back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Thao tác không thành công');
+            Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
         }
     }
-
-    public function restore(String $id)
+    public function changeStatus(Request $request)
     {
-        $model = CategoryPost::query()->onlyTrashed()->findOrFail($id);
-        $model->restore();
-        $categorypost_deleted = CategoryPost::onlyTrashed()->get();
-        if (count($categorypost_deleted) == 0) {
-            Toastr::error('Thao tác không thành công', 'Không thành công');
-
-            return redirect()->route('categorypost.deleted');
-        } else {
-            Toastr::success('Thao tác thành công', 'Thành công');
-            return redirect()->route('categorypost.deleted');
+        try {
+            $categorypost = CategoryPost::find($request->categorypost_id);
+            $categorypost->status = $request->status;
+            $categorypost->save();
+            return response()->json(['success' => 'Thay đổi trạng thái thành công']);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return response()->json(['error' => 'Thay đổi trạng thái thất bại']);
         }
     }
-
 }

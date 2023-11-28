@@ -1,20 +1,21 @@
 @extends('admin.layouts.master')
+@section('title', 'Danh sách tiện ích')
 @section('content')
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách tiện ích</h5>
+                <h2 class="mt-0">Danh sách tiện ích</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-primary mb-2" href="{{ route('facilities-deleted') }}">Thùng rác</a>
                     <a class="btn btn-success mb-2" href="{{ route('facilities.create') }}">Thêm mới</a>
-                    <table id="tech-companies-1" class="table table-centered mb-0">
+                    <a class="btn btn-danger mb-2" href="{{ route('facilities-deleted') }}">Thùng rác</a>
+                    <table id="tech-companies-1" class="table table-centered mb-0 text-center">
                         <thead>
                             <tr>
                                 <th class="col-2">#</th>
                                 <th class="col-2">Tên tiện ích</th>
                                 <th class="col-2">Icon</th>
-                                <th class="col-4">Mô tả</th>
-                                <th class="col-2">Hành động</th>
+                                <th class="col-3">Mô tả</th>
+                                <th class="col-3">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,11 +23,8 @@
                                 <tr id="row_@item.ID">
                                     <td class="tabledit-view-mode">{{ $value->id }}</td>
                                     <td class="tabledit-view-mode">{{ $value->name }}</td>
-                                    <td class="tabledit-view-mode">
-                                        {{-- <img src="{{ $value->icon ? asset($value->icon): 'https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg' }}" alt="" style="width: 40px; height: 40px" id="image_preview"> --}}
-                                        <img src="{{ asset($value->icon) }}" style="width: 40px; height: 40px" />
-                                    </td>
-                                    <td class="tabledit-view-mode">{{ $value->description }}</td>
+                                    <td class="tabledit-view-mode"><i class="{{ $value->icon }}"></i></td>
+                                    <td class="tabledit-view-mode">{!! $value->description !!}</td>
                                     <td style="white-space: nowrap; width: 1%;">
 
                                         <a href="{{ route('facilities.edit', $value->id) }}">

@@ -20,6 +20,14 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        DB::table('category_posts')->insert([
+            'name' => 'uncategorized',
+            'status' => 'active',
+            'slug' => 'uncategorized',
+            'description' => 'Danh mục bài viết mặc định',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 
     /**

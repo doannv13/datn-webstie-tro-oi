@@ -22,23 +22,24 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:50',
+            'metaTitle' => 'required|max:50',
+            'title' => 'required|max:155',
             'image' => 'mimes:jpeg,png,jpg,gif|max:4096',
             'metaDescription' => 'required|max:255|min:5',
-            'description' => 'required|max:999|min:5',
-            'id_admin'=> 'required|numeric',
+            'description' => 'required|max:10000|min:5',
         ];
     }
 
     function messages(){
         return [
+            'metaTitle.required' => 'Trường không được bỏ trống',
             'title.required' => 'Trường không được bỏ trống',
             'description.required'  => 'Trường không được bỏ trống',
             'metaDescription.required'  => 'Trường không được bỏ trống',
-            'id_admin.required'  => 'Trường không được bỏ trống',
 
-            'title.max' => 'Phải dưới 50 ký tự',
-            'description.max' => 'Phải dưới 999 ký tự',
+            'metaTitle.max' => 'Phải dưới 50 ký tự',
+            'title.max' => 'Phải dưới 155 ký tự',
+            'description.max' => 'Phải dưới 10000 ký tự',
             'metaDescription.max' => 'Phải dưới 255 ký tự',
 
             'description.min' => 'Phải trên 5 ký tự',
@@ -46,8 +47,6 @@ class PostRequest extends FormRequest
 
             'image.mimes' => 'Phải là file ảnh JPEG, PNG, JPG, GIF',
             'image.size' => 'Dung lượng phải dưới 2Mb',
-
-            'id_admin.numeric' => 'Phải là số'
         ];
     }
 }

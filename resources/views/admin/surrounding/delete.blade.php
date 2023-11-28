@@ -1,9 +1,10 @@
 @extends('admin.layouts.master')
+@section('title', 'Thùng rác | Tiện ích xung quanh')
 @section('content')
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách thùng rác</h5>
+                <h2 class="mt-0">Danh sách thùng rác</h5>
                 <div class="table-responsive">
                     <a class="btn btn-primary mb-2" href="{{ route('surrounding.index') }}">Danh sách</a>
                     <table class="table table-centered mb-0" id="tech-companies-1">

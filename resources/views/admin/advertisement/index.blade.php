@@ -5,9 +5,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="mt-0">Danh sách ảnh quảng cáo</h5>
+                <h2 class="mt-0">Danh sách ảnh quảng cáo</h5>
                 <div class="table-responsive">
-                    <a class="btn btn-success mb-2" href="{{ route('advertisement.create') }}">Thêm mới</a>
+                    <a class="btn btn-success mb-2" href="{{ route('advertisements.create') }}">Thêm mới</a>
+                    <a class="btn btn-danger mb-2" href="{{ route('advertisements-deleted') }}">Thùng rác</a>
                     <table id="tech-companies-1" class="table table-centered mb-0">
                         <thead>
                             <tr>
@@ -41,14 +42,14 @@
                                             {{ $value->status == 'active' ? 'checked' : '' }}>
                                     </td>
                                     <td style="white-space: nowrap; width: 1%;">
-                                        <a href="{{ route('advertisement.edit', $value->id) }}">
+                                        <a href="{{ route('advertisements.edit', $value->id) }}">
                                             <button type="submit" class="btn btn-primary text-center my-1"
                                                 style="width: 45px;"> <!-- Đặt kích thước cố định là 100px -->
                                                 <i class="fa-solid fa-pen-to-square fs-4"></i>
                                             </button>
                                         </a>
 
-                                        <form action="{{ route('advertisement.destroy', $value->id) }}" method="POST">
+                                        <form action="{{ route('advertisements.destroy', $value->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger my-1" style="width: 45px;"
@@ -79,7 +80,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '{{ route('advertisement.status_change') }}',
+                    url: '{{ route('advertisements-status-change') }}',
                     data: {
                         'status': status,
                         'advertisement_id': advertisement_id

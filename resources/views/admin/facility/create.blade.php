@@ -1,66 +1,84 @@
 @extends('admin.layouts.master')
+@section('title', 'Thêm mới tiện ích')
 @section('content')
-
-<div class="account-pages mt-5 mb-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-6">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
                 <div class="card">
+                    <div class="card-body">
+                        <h3 class="my-2">Thêm mới tiện ích</h3>
+                        <div class="row">
+                            <div class="col-lg-12">
 
-                    <div class="card-body p-4">
+                                <form action="{{ route('facilities.store') }}" enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    @method('post')
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Tên tiện ích <span
+                                                class="text-danger">*</span></label>
+                                        <input class="form-control" name="name" type="text"
+                                            value="{{ old('name') }}" placeholder="Wifi">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="icon" class="form-label">Icon <span
+                                                class="text-danger">*</span></label>
+                                        <select name="icon" id="icon" class="form-select">
+                                            <option value="">Chọn icon</option>
+                                            <option value="fa-solid fa-wifi">Wifi</option>
+                                            <option value="fas fa-fan">Quạt</option>
+                                            <option value="fa-solid fa-bed">Giường</option>
+                                            <option value="fa-solid fa-temperature-full">Bình nóng lạnh</option>
+                                            <option value="fa-solid fa-snowflake">Điều hoà</option>
+                                            <option value="fa-solid fa-kitchen-set">Kệ bếp</option>
+                                            <option value="fa-solid fa-jug-detergent">Máy giặt</option>
+                                            <option value="far fa-snowflake">Tủ lạnh</option>
+                                            <option value="fa-solid fa-motorcycle">Bãi để xe</option>
+                                            <option value="fa-solid fa-camera">Camera an ninh</option>
+                                            <option value="fas fa-calendar-plus">Khác</option>
+                                        </select>
+                                        @error('icon')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Mô tả <span
+                                                class="text-danger">*</span></label>
+                                        <textarea name="description" id="description-facility" class="form-control" cols="30" rows="5">{{ old('description') }}</textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
 
-                        <div class="text-center mb-4">
-                            <h4 class="text-uppercase mt-0">Thêm mới</h4>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" type="submit"> Thêm mới </button>
+                                        <button class="btn btn-warning" type="submit"> <a
+                                                href="{{ route('facilities.index') }}" class="text-white">Trở về</a>
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div> <!-- end col -->
                         </div>
-
-                        <form action="{{ route('facilities.store') }}" enctype="multipart/form-data" method="POST">
-                            @csrf
-                            @method('post')
-                            <div class="mb-3">
-                                <label for="" class="form-label">Tên tiện ích</label>
-                                <input class="form-control" name="name" type="text" >
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-8">
-                                    <label for="" class="form-label">Icon</label>
-                                    <input type="file" name="icon" id="image" accept="image/*"
-                                    class="form-control" class="@error('image') is-invalid @enderror">   
-                                    {{-- @error('icon')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror                              --}}
-                                </div>
-                                <div class="col-4">
-                                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3" alt="" style="width: 70px; height: 70px" id="image_preview">
-                                </div>
-                                
-                            </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Mô tả</label>
-                                <textarea name="description" class="form-control" cols="30" rows="5"></textarea>
-                                @error('description')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            
-                            <div class="mb-3 text-center d-grid">
-                                <button class="btn btn-primary" type="submit"> Thêm mới </button>
-                            </div>
-                        </form>
-
+                        <!-- end row-->
                     </div> <!-- end card-body -->
-                </div>
-                <!-- end card -->
-
-               
-                <!-- end row -->
-
-            </div> <!-- end col -->
+                </div> <!-- end card -->
+            </div><!-- end col -->
         </div>
         <!-- end row -->
-    </div>
-</div>
-
+    </div> <!-- container -->
 @endsection
+@push('scripts')
+    <script>
+        CKEDITOR.replace('description-facility', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
+@endpush

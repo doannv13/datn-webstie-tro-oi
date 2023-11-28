@@ -23,15 +23,17 @@ class FacilityRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            // 'icon' => 'required',
+            'icon' => 'required',
+            // sửa
             'description' => 'required',
         ];
     }
 
     function messages(){
         return [
-            'name.required' => 'Tên bắt buộc nhập', 
-            'description.required'  => 'Mô tả bắt buộc nhập'
+            'name.required' => 'Tên bắt buộc nhập!', 
+            'icon.required' => 'Icon bắt buộc chọn!', 
+            'description.required'  => 'Mô tả bắt buộc nhập!'
         ]; 
     }
 }

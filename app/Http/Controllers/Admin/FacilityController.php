@@ -12,6 +12,10 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class FacilityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:facility-resource', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'deleted', 'restore', 'permanentlyDelete']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,19 +40,20 @@ class FacilityController extends Controller
     {
         try {
             $model = new Facility();
-            $model->fill($request->except('icon'));
-            if ($request->hasFile('icon')) {
-                $model->icon = upload_file(OBJECT_FACILITY, $request->file('icon'));
-            }else{
-                $model->icon = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT7TiLhYLLSXgfz-TPjFR50a7J_PzqFjXNm41zbdPbYUREBFKj3';
-            }
+            $model->fill($request->all());
+            $selectIcon = $request->input('icon');
+            $model->icon = $selectIcon;
             $model->save();
+            // dd($selectIcon);
+
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('facilities.index');
+
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             Toastr::error('Thao tác thất bại', 'Thất bại');
             return back();
+
         }
     }
 
@@ -67,6 +72,8 @@ class FacilityController extends Controller
     {
         $data = Facility::query()->findOrFail($id);
         return view('admin.facility.edit', compact('data'));
+        // return view('client.payment-status.notification-pay', compact('data'));
+
     }
 
     /**
@@ -77,17 +84,12 @@ class FacilityController extends Controller
     {
         try {
             $data = Facility::query()->findOrFail($id);
-            $data->fill(\request()->except('icon'));
-            $oldImg = $data->icon;
-            if (\request()->hasFile('icon')) {
-                $data->icon = upload_file(OBJECT_FACILITY, \request()->file('icon'));
+            $iconValue = $data->select_facility;
+            $data->fill(\request()->all());
+            if (empty($data->icon)) {
+                $data->icon = $iconValue;
             }
             $data->save();
-
-            if(\request()->hasFile('icon') && $oldImg){
-                delete_file($oldImg);
-            }
-
             Toastr::success('Thao tác thành công', 'Thành công');
 
             return to_route('facilities.index');
@@ -107,7 +109,6 @@ class FacilityController extends Controller
         try {
             $data = Facility::query()->findOrFail($id);
             $data->delete();
-            // delete_file($data->icon);
             Toastr::success('Thao tác thành công', 'Thành công');
             return to_route('facilities.index');
         } catch (\Exception $exception) {
@@ -134,11 +135,7 @@ class FacilityController extends Controller
     {
         try {
             $facility = Facility::where('id', $id);
-            // $oldImg = $facility->icon;
             $facility->forceDelete();
-            // if($oldImg){
-            //     delete_file($oldImg);
-            // }
             Toastr::success('Thao tác thành công', 'Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {

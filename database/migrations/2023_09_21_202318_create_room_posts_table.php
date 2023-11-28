@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('room_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->integer('price');
             $table->string('address');
             $table->string('address_full');
@@ -21,23 +22,27 @@ return new class extends Migration
             $table->integer('empty_room');
             $table->text('description');
             $table->string('image');
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->enum('status', ['pendding', 'accept', 'cancel'])->default('pendding');
             $table->enum('managing', ['yes', 'no'])->default('no');
             $table->integer('ward_id');
             $table->integer('district_id');
             $table->integer('city_id');
             $table->string('fullname');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
-            $table->integer('zalo')->nullable();
+            $table->string('zalo')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('category_room_id');
             $table->foreign('category_room_id')->references('id')->on('category_rooms')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->dateTime('time_end')->nullable();
+            $table->dateTime('time_start')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+        Schema::table('room_posts', function (Blueprint $table) {
+            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 

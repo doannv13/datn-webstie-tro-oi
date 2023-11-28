@@ -14,14 +14,20 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
+            $table->string('metaTitle');
             $table->string('image');
             $table->text('description');
             $table->longText('metaDescription');
             $table->string('slug');
             $table->enum('status',['active','inactive'])->default('inactive');
-            $table->string('id_admin');
+            $table->unsignedInteger('view')->default(0);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('category_post_id');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_post_id')->references('id')->on('category_posts');
+
         });
     }
 
