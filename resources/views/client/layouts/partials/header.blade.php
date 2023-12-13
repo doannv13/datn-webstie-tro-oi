@@ -533,15 +533,6 @@
                                     <img src="{{ asset('fe/img/pay/image_2.png') }}"
                                         style="max-width: 24px; max-height: 24px;">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" value="4" name="type-pay">
-                                    <label class="form-check-label fw-semibold">
-                                        Thanh toán Momo
-                                    </label>
-                                    <img src="{{ asset('fe/img/pay/image_2.png') }}"
-                                        style="max-width: 24px; max-height: 24px;">
-                                </div>
-
                             </div>
 
                             @if (auth()->user())
@@ -551,24 +542,11 @@
                                     <input type="hidden" id="old_total_amount_input" name="old_total_amount_input"
                                         value="">
                                     <input type="hidden" id="coupon_id1" name="coupon_id1" value="">
-                                    <input type="text" hidden id="point_persent_vnpay" name="point_persent_vnpay">
-                                    @csrf
+                                    <input type="text" hidden id="point_persent_vnpay"
+                                        name="point_persent_vnpay">@csrf
                                     <button type="submit" id="vnPayLink" name="redirect"
                                         class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
                                         style="background-color:  #FCAF17; display: none;">Thanh Toán VNPay</button>
-                                </form>
-
-                                <form action="{{ route('momo-payment') }}" method="post">
-                                @csrf
-                                <input type="hidden" id="total_amount_input_momo" name="total_amount_input_momo"
-                                    value="">
-                                <input type="hidden" id="old_total_amount_input_momo"
-                                    name="old_total_amount_input_momo" value="">
-                                <input type="hidden" id="coupon_id_momo" name="coupon_id_momo" value="">
-                                <input type="hidden" id="point_persent_momo" name="point_persent_momo">
-                                <button type="submit" id="momoLink" name="payUrl"
-                                    class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
-                                    style="background-color:  #FCAF17; display: none;">Thanh Toán Momo</button>
                                 </form>
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle-1"
                                     id="btn-pay" class="btn text-white mt-4 fw-semibold px-4 py-2 fs-5 text"
@@ -576,7 +554,6 @@
                             @else
                                 <label for="" class="text-danger">Vui lòng đăng nhập</label>
                             @endif
-
                         </div>
 
                     </div>
@@ -783,7 +760,6 @@
         const input_price = document.getElementById('input-price');
         const total_amount = document.getElementById('total_amount');
         const total_amount_input = document.getElementById('total_amount_input');
-        const total_amount_input_momo = document.getElementById('total_amount_input_momo');
         const sale = document.getElementById('sale');
         const sale_price = document.getElementById('sale-price');
         const discount_amount = document.getElementById('discount_amount'); //Giá trị giảm trong db coupon
@@ -792,7 +768,6 @@
         const status_coupon = document.getElementById('status_coupon'); //Trạng thái
         const discount_message = document.getElementById('discount-message'); //Trạng thái
         const coupon_id1 = document.getElementById('coupon_id1'); // coupon_id1 của thanh toán vnpay
-        const coupon_id_momo = document.getElementById('coupon_id_momo'); // coupon_id1 của thanh toán vnpay
         const coupon_id = document.getElementById('coupon_id'); // coupon_id của thanh toán online
 
 
@@ -805,14 +780,8 @@
         if (document.getElementById('total_amount_input').value === ('')) {
             document.getElementById('total_amount_input').value = ('20000');
         }
-        if (document.getElementById('total_amount_input_momo').value === ('')) {
-            document.getElementById('total_amount_input_momo').value = ('20000');
-        }
         if (document.getElementById('old_total_amount_input').value === ('')) {
             document.getElementById('old_total_amount_input').value = ('20000');
-        }
-        if (document.getElementById('old_total_amount_input_momo').value === ('')) {
-            document.getElementById('old_total_amount_input_momo').value = ('20000');
         }
         if (document.getElementById('total_amount1').innerText == ('')) {
             document.getElementById('total_amount1').innerText = ('20.000'.replace(/,/g, "").toLocaleString());
@@ -828,9 +797,6 @@
         }
         if (document.getElementById('point_persent_vnpay').value == ('')) {
             document.getElementById('point_persent_vnpay').value = 21;
-        }
-        if (document.getElementById('point_persent_momo').value == ('')) {
-            document.getElementById('point_persent_momo').value = 21;
         }
 
 
@@ -850,19 +816,14 @@
                         .toLocaleString();
                     document.getElementById('total_point').value = input_price.value;
                     document.getElementById('price_promotion').value = input_price.value;
-                    document.getElementById('total_amount').innerText = input_price.value;
+                    document.getElementById('total_amount').innerText = input_price.value
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('total_amount_input_momo').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('old_total_amount_input_momo').value = input_price.value.replace(/,/g,
-                        "");
                     document.getElementById('total_amount1').innerText = input_price.value;
                     document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.05 /
-                        1000).toLocaleString();
+                        1000).toLocaleString()
                     document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") *
-                        1.05 / 1000).toLocaleString();
-                    document.getElementById('point_persent_momo').value = (input_price.value.replace(/,/g, "") *
-                        1.05 / 1000).toLocaleString();
+                        1.05 / 1000).toLocaleString()
                 } else if (300000 <= input_price.value.replace(/,/g, "") && input_price.value.replace(/,/g, "") <
                     1000000) {
                     sale.innerText = "+7%";
@@ -872,19 +833,14 @@
                     document.getElementById('price_promotion').value = input_price.value;
                     document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.07 / 1000)
                         .toLocaleString();
-                    document.getElementById('total_amount').innerText = input_price.value;
+                    document.getElementById('total_amount').innerText = input_price.value
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('total_amount_input_momo').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('old_total_amount_input_momo').value = input_price.value.replace(/,/g,
-                        "");
-                    document.getElementById('total_amount1').innerText = input_price.value;
+                    document.getElementById('total_amount1').innerText = input_price.value
                     document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.07 /
-                        1000).toLocaleString();
+                        1000).toLocaleString()
                     document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") *
-                        1.07 / 1000).toLocaleString();
-                    document.getElementById('point_persent_momo').value = (input_price.value.replace(/,/g, "") *
-                        1.07 / 1000).toLocaleString();
+                        1.07 / 1000).toLocaleString()
                 } else if (1000000 <= input_price.value.replace(/,/g, "")) {
                     sale.innerText = "+10%";
                     sale_price.innerText = (input_price.value.replace(/,/g, "") * 0.0001).toLocaleString()
@@ -894,19 +850,14 @@
                     document.getElementById('price_promotion').value = input_price.value;
                     document.getElementById('total').innerText = (input_price.value.replace(/,/g, "") * 1.1 / 1000)
                         .toLocaleString();
-                    document.getElementById('total_amount').innerText = input_price.value;
+                    document.getElementById('total_amount').innerText = input_price.value
                     document.getElementById('total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('total_amount_input_momo').value = input_price.value.replace(/,/g, "");
                     document.getElementById('old_total_amount_input').value = input_price.value.replace(/,/g, "");
-                    document.getElementById('old_total_amount_input_momo').value = input_price.value.replace(/,/g,
-                        "");
-                    document.getElementById('total_amount1').innerText = input_price.value;
+                    document.getElementById('total_amount1').innerText = input_price.value
                     document.getElementById('point_persent').value = (input_price.value.replace(/,/g, "") * 1.1 /
-                        1000).toLocaleString();
+                        1000).toLocaleString()
                     document.getElementById('point_persent_vnpay').value = (input_price.value.replace(/,/g, "") *
-                        1.1 / 1000).toLocaleString();
-                    document.getElementById('point_persent_momo').value = (input_price.value.replace(/,/g, "") *
-                        1.1 / 1000).toLocaleString();
+                        1.1 / 1000).toLocaleString()
                 }
             });
         }
@@ -918,16 +869,15 @@
                 // Lấy giá trị của input:radio đã chọn
                 var selectedValue = $('input[name="type-pay"]:checked').val();
 
+
                 // Ẩn tất cả các nút thanh toán trước khi thay đổi
-                $('#vnPayLink, #btn-pay, #momoLink').hide();
+                $('#vnPayLink, #btn-pay').hide();
 
                 // Hiển thị nút tương ứng dựa trên giá trị đã chọn
                 if (selectedValue === '1') {
                     $('#btn-pay').show();
                 } else if (selectedValue === '3') {
                     $('#vnPayLink').show();
-                } else if (selectedValue === '4') {
-                    $('#momoLink').show();
                 }
             });
 
@@ -980,9 +930,7 @@
                 var discountCode = $("#discount-code").val();
                 var input_price = document.getElementById('input-price');
                 var total_amount_input = document.getElementById('total_amount_input');
-                var total_amount_input_momo = document.getElementById('total_amount_input_momo');
                 var old_total_amount_input = document.getElementById('old_total_amount_input');
-                var old_total_amount_input_momo = document.getElementById('old_total_amount_input_momo');
 
 
                 $.ajax({
@@ -1000,7 +948,6 @@
                         $("#type_discount").html(response.type_discount);
                         $("#status_coupon").html(response.status_coupon);
                         $("#coupon_id1").val(response.coupon_id);
-                        $("#coupon_id_momo").val(response.coupon_id);
                         $("#coupon_id").val(response.coupon_id);
                         $("#coupon_quantity").html(response.coupon_quantity);
 
@@ -1023,22 +970,13 @@
                                 discount_amount_sale).toLocaleString();
                             total_amount_input.value = (input_price.value.replace(/,/g, "") -
                                 discount_amount_sale);
-                            total_amount_input_momo.value = (input_price.value.replace(/,/g,
-                                "") -
-                                discount_amount_sale);
                             old_total_amount_input.value = input_price.value.replace(/,/g, "");
-                            old_total_amount_input_momo.value = input_price.value.replace(/,/g,
-                                "");
                             document.getElementById('total_amount').innerText = total_amount;
                             document.getElementById('total_amount1').innerText = total_amount;
                             document.getElementById('total_point').value =
                                 old_total_amount_input.value;
-                            document.getElementById('total_point').value =
-                                old_total_amount_input_momo.value;
                             document.getElementById('price_promotion').value =
                                 total_amount_input.value;
-                            document.getElementById('price_promotion').value =
-                                total_amount_input_momo.value;
 
 
                         }
@@ -1059,22 +997,13 @@
                                 discount_amount_sale), 0).toLocaleString();
                             total_amount_input.value = Math.max((input_price.value.replace(/,/g,
                                 "") - discount_amount_sale), 0);
-                            total_amount_input_momo.value = Math.max((input_price.value.replace(
-                                /,/g,
-                                "") - discount_amount_sale), 0);
                             old_total_amount_input.value = input_price.value.replace(/,/g, "");
-                            old_total_amount_input_momo.value = input_price.value.replace(/,/g,
-                                "");
                             document.getElementById('total_amount').innerText = total_amount;
                             document.getElementById('total_amount1').innerText = total_amount;
                             document.getElementById('total_point').value =
                                 old_total_amount_input.value;
-                            document.getElementById('total_point').value =
-                                old_total_amount_input_momo.value;
                             document.getElementById('price_promotion').value =
                                 total_amount_input.value;
-                            document.getElementById('price_promotion').value =
-                                total_amount_input_momo.value;
 
 
                         }
@@ -1092,12 +1021,7 @@
                                 .toLocaleString();
                             total_amount_input.value = (input_price.value.replace(/,/g, "") -
                                 0);
-                            total_amount_input_momo.value = (input_price.value.replace(/,/g,
-                                "") -
-                                0);
                             old_total_amount_input.value = (input_price.value.replace(/,/g,
-                                "") - 0);
-                            old_total_amount_input_momo.value = (input_price.value.replace(/,/g,
                                 "") - 0);
                             document.getElementById('total_amount').innerText =
                                 total_amount_value;
@@ -1105,12 +1029,8 @@
                                 total_amount_value;
                             document.getElementById('total_point').value =
                                 old_total_amount_input.value;
-                            document.getElementById('total_point').value =
-                                old_total_amount_input_momo.value;
                             document.getElementById('price_promotion').value =
                                 total_amount_input.value;
-                            document.getElementById('price_promotion').value =
-                                total_amount_input_momo.value;
                             document.getElementById('discount_amount_sale').innerText =
                                 discount_amount_sale;
                         }

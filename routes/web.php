@@ -31,7 +31,6 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportRevenueController;
 use App\Http\Controllers\Admin\ReportRoomPostControler;
 use App\Http\Controllers\Client\PaymentVNPayController;
-use App\Http\Controllers\Client\PaymentMomoController;
 use App\Http\Controllers\Client\TransactionController;
 use App\Http\Controllers\HomeController as ControllersHomeController;
 use App\Http\Controllers\Client\NotificationController;
@@ -112,10 +111,6 @@ Route::delete('unbookmarkbm/{id}', [HomeController::class, 'unBookmarkbm'])->nam
 Route::post('vnpay-payment', [PaymentVNPayController::class, 'payment_vnpay'])->name('vnpay-payment');
 Route::get('vnpay-return', [PaymentVNPayController::class, 'return_vnpay'])->name('vnpay-return');
 
-
-// Thanh toan momo
-Route::post('momo-payment', [PaymentMomoController::class, 'payment_momo'])->name('momo-payment');
-Route::get('momo-return', [PaymentMomoController::class, 'return_momo'])->name('momo-return');
 
 //thong bao
 Route::get('notification-all', function () {

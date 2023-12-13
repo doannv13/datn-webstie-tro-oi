@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th class="col-0.5">#</th>
+                            <th class="col-0.5">Mã giao dịch</th>
                             <th class="col-1.5">Người nạp</th>
                             <th class="col-1">Số tiền gốc</th>
                             <th class="col-1.5">Số tiền thanh toán</th>
@@ -28,6 +29,7 @@
                         @foreach ($data as $key => $value)
                         <tr id="row_{{ $value->ID }}">
                             <td class="tabledit-view-mode">{{ $key +1 }}</td>
+                            <td class="tabledit-view-mode">{{ $value->vnpay_code ? $value->vnpay_code : "--"  }}</td>
                             <td class="tabledit-view-mode">{!! substr($value->user->name, 0, 20) !!}</td>
                             <td class="tabledit-view-mode">{{ number_format((float) $value->point, 0, '.', ',') }} VND</td>
                             <td class="tabledit-view-mode">{{ number_format((float) $value->price_promotion, 0, '.', ',') }} VND</td>
