@@ -18,8 +18,9 @@ return new class extends Migration
             $table->integer('point');
             $table->integer('point_persent')->nullable();
             $table->integer('price_promotion')->nullable();
+            $table->integer('vnpay_code')->nullable();
             $table->integer('coupon_id')->nullable();
-            $table->enum('payment_method', ['transfer', 'vnpay', 'momo'])->nullable();
+            $table->enum('payment_method', ['transfer', 'vnpay'])->nullable();
             $table->enum('action', ['import', 'export']);
             $table->string('verification')->nullable();
             $table->enum('status', ['pending', 'accept', 'cancel'])->default('pending');

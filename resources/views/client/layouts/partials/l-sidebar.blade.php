@@ -19,11 +19,13 @@
                                 <li class="{{ Request::is('room-posts/create') ? 'active' : '' }}"><i
                                         class="fas fa-edit px-2"></i><a href="{{ route('room-posts.create') }}">Đăng tin
                                         mới</a></li>
-                                <li class="{{ Request::is('points-history') ? 'active' : '' }}"><i class="fas fa-list-alt px-2"></i><a href="{{ route('points.history') }}">Lịch sử giao
+                                <li class="{{ Request::is('points-history') ? 'active' : '' }}"><i
+                                        class="fas fa-list-alt px-2"></i><a href="{{ route('points.history') }}">Lịch sử
+                                        giao
                                         dịch</a></li>
-                                <li class="{{ Request::is('services-room-posts') ? 'active' : '' }}"><i class="fas fa-store px-2"></i><a href="{{ route('services-room-posts.index') }}">Dịch
-                                        vụ</a></li>
-                                <li class="{{ Request::is('room-posts-deleted') ? 'active' : '' }}"><i class="fas fa-trash px-2"></i><a href="{{ route('room-posts-deleted') }}">Thùng
+                              
+                                <li class="{{ Request::is('room-posts-deleted') ? 'active' : '' }}"><i
+                                        class="fas fa-trash px-2"></i><a href="{{ route('room-posts-deleted') }}">Thùng
                                         rác</a>
                                 </li>
                             </ul>

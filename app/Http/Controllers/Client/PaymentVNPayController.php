@@ -116,6 +116,7 @@ class PaymentVNPayController extends Controller
                 if ($vnp_ResponseCode == '00') {
                     $transaction->status = 'accept';
                     $transaction->verification = "trooi_vnpay_" . $_GET['vnp_TxnRef'];
+                    $transaction->vnpay_code = $_GET['vnp_TransactionNo'];
                     $transaction->save();
                     $user = User::findOrFail($transaction->user_id);
                     $user->point += $transaction->point_persent;
