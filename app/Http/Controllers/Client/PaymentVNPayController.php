@@ -49,6 +49,7 @@ class PaymentVNPayController extends Controller
             $vnp_Locale = 'vn';
             // $vnp_BankCode = $_POST['bank_code'];
             $vnp_BankCode = 'NCB';
+            $vnp_BankCode = '';
             $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
             //Add Params of 2.0.1 Version
             // $vnp_ExpireDate = $_POST['txtexpire'];
